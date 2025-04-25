@@ -1,0 +1,43 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Braun-Inspired Design System
+
+This project follows design principles inspired by Dieter Rams' work at Braun:
+
+## Core Principles
+- "Less, but better"
+- Focus on functionality and clarity
+- Eliminate unnecessary elements
+- Use consistent patterns and components
+
+## Design Reference
+Refer to our comprehensive design document for detailed specifications:
+
+@design.md
+
+## Typography
+- Use JetBrains Mono as the primary font
+- Follow the mathematical type scale (1.2 ratio)
+- Maintain proper hierarchy through weight not size
+- Line heights: 1.5 for body, 1.2 for headings
+
+## Spacing
+- Base unit: 8px
+- All spacing should be multiples of the base unit
+- Maintain consistent vertical rhythm
+- Use the 12-column grid system with 24px gutters
+
+## Colors
+- Primary: Off-white (#f6f6f6), Charcoal black (#1a1a1a), Accent pink (#FF187C)
+- Secondary: Light gray (#e0e0e0), Mid gray (#888888), Dark gray (#333333)
+- Use colors purposefully and minimally
+
+## UI Components
+Always use the shadcn/ui component library and follow these guidelines:
+- Buttons should be simple rectangles with clear purpose
+- Cards should have clean backgrounds with minimal decoration
+- Navigation should be unobtrusive yet accessible
+- Controls should be minimal with high contrast
