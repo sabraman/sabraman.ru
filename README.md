@@ -1,29 +1,38 @@
-# Create T3 App
+# sabraman.ru
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+My personal website showcasing my work as a creative designer and developer. Features an interactive portfolio, case studies of recent projects.
 
-## What's next? How do I make an app with this?
+## Project overview
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+This repository contains the source code for my portfolio website. Built with Next.js and a focus on clean typography and minimal design.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Stack
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+Core technologies:
+- Next.js 15 / React 19
+- Tailwind CSS 4 
+- shadcn/ui components
+- TypeScript
 
-## Learn More
+Additional tools:
+- Zustand for state management
+- Framer Motion for animations
+- React Hook Form + Zod for forms
+- pnpm for package management
+- Biome for code quality
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Local development
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+```bash
+# Install dependencies
+pnpm install
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+# Start development server
+pnpm dev
 
-## How do I deploy this?
+# Build for production
+pnpm build
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+# Run production build locally
+pnpm start
+```
