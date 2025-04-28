@@ -7,7 +7,7 @@ export function TestMotion() {
     <motion.div
       animate={{ x: 100 }}
       transition={{ duration: 1 }}
-      className="w-20 h-20 bg-blue-500"
+      className="h-20 w-20 bg-blue-500"
     />
   );
 } 

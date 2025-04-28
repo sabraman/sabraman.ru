@@ -15,21 +15,21 @@ const WorkExperience = ({ title, company, period, location, achievements }: Work
             <CardHeader className="pb-2">
                 <div className="flex flex-col space-y-1">
                     <div className="flex items-center justify-between">
-                        <h3 className="text-xl font-medium text-[#1a1a1a]">{company}</h3>
+                        <h3 className="font-medium text-[#1a1a1a] text-xl">{company}</h3>
                         <Badge variant="outline" className="font-mono text-xs">
                             {period}
                         </Badge>
                     </div>
                     <div className="flex items-center justify-between">
-                        <p className="font-mono text-sm text-[#888888]">{title}</p>
-                        <span className="text-xs text-[#888888]">{location}</span>
+                        <p className="font-mono text-[#888888] text-sm">{title}</p>
+                        <span className="text-[#888888] text-xs">{location}</span>
                     </div>
                 </div>
             </CardHeader>
             <CardContent>
                 <ul className="list-inside space-y-2">
                     {achievements.map((achievement, index) => (
-                        <li key={index} className="text-sm leading-relaxed text-[#333333]">
+                        <li key={index} className="text-[#333333] text-sm leading-relaxed">
                             {achievement}
                         </li>
                     ))}

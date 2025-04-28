@@ -65,7 +65,7 @@ export default function ContactPage() {
   return (
     <div className="bg-background">
       {/* Contact Hero Section */}
-      <section className="pt-24 pb-16 relative overflow-hidden">
+      <section className="relative overflow-hidden pt-24 pb-16">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 100 }}
@@ -74,32 +74,32 @@ export default function ContactPage() {
             className="mb-16 overflow-hidden"
           >
             <h1 
-              className="text-5xl md:text-6xl xl:text-7xl uppercase font-extrabold tracking-tight text-center"
+              className="text-center font-extrabold text-5xl uppercase tracking-tight md:text-6xl xl:text-7xl"
               style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 800` }}
             >
-              <span className="relative z-0 mr-4 md:mr-8 inline-block">
-                <span className="absolute -inset-1 bg-accent blur-sm opacity-50" />
+              <span className="relative z-0 mr-4 inline-block md:mr-8">
+                <span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
                 GET
               </span>
               IN TOUCH
             </h1>
-            <p className="text-xl text-muted-foreground text-center mt-6 max-w-2xl mx-auto">
+            <p className="mx-auto mt-6 max-w-2xl text-center text-muted-foreground text-xl">
               Let's collaborate on your next project. Fill out the form below or reach out through any of the channels listed.
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 lg:grid-cols-2">
             {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-card rounded-xl border p-8 shadow-lg">
-                <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 rounded-xl border bg-card p-8 shadow-lg">
+                <h3 className="mb-6 font-bold text-2xl">Send a Message</h3>
                 
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">Name</label>
+                  <label htmlFor="name" className="font-medium text-sm">Name</label>
                   <Input
                     id="name"
                     {...register("name")}
@@ -107,12 +107,12 @@ export default function ContactPage() {
                     className={errors.name ? "border-destructive" : ""}
                   />
                   {errors.name && (
-                    <p className="text-sm text-destructive">{errors.name.message}</p>
+                    <p className="text-destructive text-sm">{errors.name.message}</p>
                   )}
                 </div>
                 
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">Email</label>
+                  <label htmlFor="email" className="font-medium text-sm">Email</label>
                   <Input
                     id="email"
                     type="email"
@@ -121,12 +121,12 @@ export default function ContactPage() {
                     className={errors.email ? "border-destructive" : ""}
                   />
                   {errors.email && (
-                    <p className="text-sm text-destructive">{errors.email.message}</p>
+                    <p className="text-destructive text-sm">{errors.email.message}</p>
                   )}
                 </div>
                 
                 <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium">Message</label>
+                  <label htmlFor="message" className="font-medium text-sm">Message</label>
                   <Textarea
                     id="message"
                     {...register("message")}
@@ -135,14 +135,14 @@ export default function ContactPage() {
                     className={errors.message ? "border-destructive" : ""}
                   />
                   {errors.message && (
-                    <p className="text-sm text-destructive">{errors.message.message}</p>
+                    <p className="text-destructive text-sm">{errors.message.message}</p>
                   )}
                 </div>
                 
                 <Button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full group"
+                  className="group w-full"
                 >
                   <span>Send Message</span>
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -157,64 +157,64 @@ export default function ContactPage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="space-y-8"
             >
-              <div className="bg-card rounded-xl border p-8 shadow-lg">
-                <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+              <div className="rounded-xl border bg-card p-8 shadow-lg">
+                <h3 className="mb-6 font-bold text-2xl">Contact Information</h3>
                 
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
-                    <div className="bg-accent/10 text-accent p-3 rounded-full">
+                    <div className="rounded-full bg-accent/10 p-3 text-accent">
                       <Mail className="h-6 w-6" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Email</p>
+                      <p className="text-muted-foreground text-sm">Email</p>
                       <a href="mailto:sabraman@ya.ru" className="font-medium hover:text-accent">sabraman@ya.ru</a>
                     </div>
                   </div>
                   
                   <div className="flex items-center gap-4">
-                    <div className="bg-accent/10 text-accent p-3 rounded-full">
+                    <div className="rounded-full bg-accent/10 p-3 text-accent">
                       <TelegramIcon className="h-6 w-6" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Telegram</p>
+                      <p className="text-muted-foreground text-sm">Telegram</p>
                       <a href="https://t.me/sabraman" className="font-medium hover:text-accent">@sabraman</a>
                     </div>
                   </div>
                   
                   <div className="flex items-center gap-4">
-                    <div className="bg-accent/10 text-accent p-3 rounded-full">
+                    <div className="rounded-full bg-accent/10 p-3 text-accent">
                       <VKIcon className="h-6 w-6" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">VK</p>
+                      <p className="text-muted-foreground text-sm">VK</p>
                       <a href="https://vk.com/sabraman" className="font-medium hover:text-accent">sabraman</a>
                     </div>
                   </div>
                   
                   <div className="flex items-center gap-4">
-                    <div className="bg-accent/10 text-accent p-3 rounded-full">
+                    <div className="rounded-full bg-accent/10 p-3 text-accent">
                       <Github className="h-6 w-6" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">GitHub</p>
+                      <p className="text-muted-foreground text-sm">GitHub</p>
                       <a href="https://github.com/sabraman" className="font-medium hover:text-accent">sabraman</a>
                     </div>
                   </div>
                   
                   <div className="flex items-center gap-4">
-                    <div className="bg-accent/10 text-accent p-3 rounded-full">
+                    <div className="rounded-full bg-accent/10 p-3 text-accent">
                       <Instagram className="h-6 w-6" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Instagram</p>
+                      <p className="text-muted-foreground text-sm">Instagram</p>
                       <a href="https://instagram.com/sabraman" className="font-medium hover:text-accent">sabraman</a>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-card rounded-xl border p-8 shadow-lg">
-                <h3 className="text-2xl font-bold mb-6">Location</h3>
+              <div className="rounded-xl border bg-card p-8 shadow-lg">
+                <h3 className="mb-6 font-bold text-2xl">Location</h3>
                 <p className="text-muted-foreground">
                   Saint Petersburg, Russia
                 </p>
@@ -228,7 +228,7 @@ export default function ContactPage() {
       </section>
       
       {/* Visual element - abstract background */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div className="-z-10 pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background opacity-90" />
         
         {Array.from({ length: 5 }).map((_, i) => (

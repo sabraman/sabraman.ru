@@ -62,12 +62,12 @@ export function SmoothMarquee() {
 
   return (
     <div 
-      className="w-full border-b overflow-hidden whitespace-nowrap py-1 group transition-all duration-500"
+      className="group w-full overflow-hidden whitespace-nowrap border-b py-1 transition-all duration-500"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <Link href="/" className="block">
-        <div className={`marquee-container inline-block ${isHovered ? "invert bg-background" : ""}`} 
+        <div className={`marquee-container inline-block ${isHovered ? "bg-background invert" : ""}`} 
              style={{ transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" }}>
           <motion.div
             className="marquee-content inline-flex"

@@ -86,7 +86,7 @@ export default function VaparshopPage() {
   return (
     <div ref={containerRef} className="bg-background">
       {/* Hero Section with Parallax */}
-      <div className="h-screen relative overflow-hidden flex items-center justify-center">
+      <div className="relative flex h-screen items-center justify-center overflow-hidden">
         {/* Background gradient animation */}
         <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-background to-background" />
         
@@ -124,7 +124,7 @@ export default function VaparshopPage() {
         {/* Header Content */}
         <motion.div
           ref={headerRef}
-          className="container relative z-10 px-4 flex flex-col items-center text-center"
+          className="container relative z-10 flex flex-col items-center px-4 text-center"
           style={{ 
             opacity: headerOpacity,
             scale: headerScale,
@@ -137,24 +137,24 @@ export default function VaparshopPage() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="flex flex-col items-center"
           >
-            <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-sm rounded-full">CASE STUDY</Badge>
+            <Badge variant="secondary" className="mb-6 rounded-full px-4 py-1.5 text-sm">CASE STUDY</Badge>
             
             <h1 
-              className="text-5xl md:text-8xl font-extrabold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent"
+              className="mb-8 bg-gradient-to-r from-primary to-accent bg-clip-text font-extrabold text-5xl text-transparent md:text-8xl"
               style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
             >
               VAPARSHOP
             </h1>
             
-            <p className="text-xl md:text-3xl max-w-2xl mb-12 text-muted-foreground">
+            <p className="mb-12 max-w-2xl text-muted-foreground text-xl md:text-3xl">
               Designing and developing digital tools to revolutionize retail operations
             </p>
             
-            <div className="flex gap-4 md:gap-6 flex-wrap justify-center">
-              <Badge className="px-3 py-1.5 text-base bg-accent text-accent-foreground">Telegram Bots</Badge>
-              <Badge className="px-3 py-1.5 text-base bg-primary/20 text-primary">Web Applications</Badge>
-              <Badge className="px-3 py-1.5 text-base bg-primary/20 text-primary">Automation</Badge>
-              <Badge className="px-3 py-1.5 text-base bg-primary/20 text-primary">UI/UX Design</Badge>
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+              <Badge className="bg-accent px-3 py-1.5 text-accent-foreground text-base">Telegram Bots</Badge>
+              <Badge className="bg-primary/20 px-3 py-1.5 text-base text-primary">Web Applications</Badge>
+              <Badge className="bg-primary/20 px-3 py-1.5 text-base text-primary">Automation</Badge>
+              <Badge className="bg-primary/20 px-3 py-1.5 text-base text-primary">UI/UX Design</Badge>
             </div>
           </motion.div>
         </motion.div>
@@ -163,16 +163,16 @@ export default function VaparshopPage() {
       {/* Overview Section */}
       <section className="py-20 md:py-32">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
             <motion.div 
-              className="lg:col-span-5 lg:sticky top-20 self-start"
+              className="top-20 self-start lg:sticky lg:col-span-5"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true }}
             >
               <h2 
-                className="text-3xl md:text-4xl font-bold mb-8"
+                className="mb-8 font-bold text-3xl md:text-4xl"
                 style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 800, 'wdth' 900` }}
               >
                 PROJECT OVERVIEW
@@ -180,17 +180,17 @@ export default function VaparshopPage() {
               
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-xl font-medium text-muted-foreground mb-2">TIMELINE</h3>
+                  <h3 className="mb-2 font-medium text-muted-foreground text-xl">TIMELINE</h3>
                   <p className="text-2xl">June 2024 - Present</p>
                 </div>
                 
                 <div>
-                  <h3 className="text-xl font-medium text-muted-foreground mb-2">ROLE</h3>
+                  <h3 className="mb-2 font-medium text-muted-foreground text-xl">ROLE</h3>
                   <p className="text-2xl">Designer & Junior Developer</p>
                 </div>
                 
                 <div>
-                  <h3 className="text-xl font-medium text-muted-foreground mb-2">DELIVERABLES</h3>
+                  <h3 className="mb-2 font-medium text-muted-foreground text-xl">DELIVERABLES</h3>
                   <ul className="space-y-2 text-xl">
                     <li className="flex items-center gap-2">
                       <MessageSquare className="h-5 w-5 text-accent" />
@@ -221,54 +221,54 @@ export default function VaparshopPage() {
               viewport={{ once: true }}
             >
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="text-xl md:text-2xl leading-relaxed mb-8">
+                <p className="mb-8 text-xl leading-relaxed md:text-2xl">
                   VAPARSHOP needed to optimize internal operations and enhance customer engagement across multiple retail locations. The challenge was to create digital tools that would streamline workflows, improve data management, and provide a better experience for both staff and customers.
                 </p>
                 
-                <h3 className="text-2xl font-bold mb-4">The Challenge</h3>
-                <p className="text-lg md:text-xl text-muted-foreground mb-8">
+                <h3 className="mb-4 font-bold text-2xl">The Challenge</h3>
+                <p className="mb-8 text-lg text-muted-foreground md:text-xl">
                   The retail chain was struggling with manual processes that consumed valuable time and resources. Store managers needed a way to efficiently generate price tags, process customer loyalty cards, and automate daily reporting from across multiple communication channels.
                 </p>
                 
-                <h3 className="text-2xl font-bold mb-4">The Approach</h3>
-                <p className="text-lg md:text-xl text-muted-foreground mb-8">
+                <h3 className="mb-4 font-bold text-2xl">The Approach</h3>
+                <p className="mb-8 text-lg text-muted-foreground md:text-xl">
                   I designed and developed a suite of digital tools that addressed specific operational challenges:
                 </p>
                 
-                <ul className="space-y-6 mb-8">
+                <ul className="mb-8 space-y-6">
                   <li className="flex gap-4">
-                    <div className="flex-shrink-0 h-10 w-10 bg-accent/10 text-accent rounded-full flex items-center justify-center">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
                       <MessageSquare className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-semibold">Telegram Bots</h4>
+                      <h4 className="font-semibold text-xl">Telegram Bots</h4>
                       <p className="text-muted-foreground">Automated data conversion and reporting between WhatsApp and Telegram, reducing manual work and improving accuracy.</p>
                     </div>
                   </li>
                   
                   <li className="flex gap-4">
-                    <div className="flex-shrink-0 h-10 w-10 bg-accent/10 text-accent rounded-full flex items-center justify-center">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
                       <Code className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-semibold">Web Applications</h4>
+                      <h4 className="font-semibold text-xl">Web Applications</h4>
                       <p className="text-muted-foreground">Created a Price Tag Generator to automate the creation of standardized price displays across all stores.</p>
                     </div>
                   </li>
                   
                   <li className="flex gap-4">
-                    <div className="flex-shrink-0 h-10 w-10 bg-accent/10 text-accent rounded-full flex items-center justify-center">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
                       <Tablet className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="text-xl font-semibold">Telegram Mini App</h4>
+                      <h4 className="font-semibold text-xl">Telegram Mini App</h4>
                       <p className="text-muted-foreground">Developed a comprehensive application integrating with GetMeBack API for loyalty card management and advanced reporting.</p>
                     </div>
                   </li>
                 </ul>
                 
-                <h3 className="text-2xl font-bold mb-4">The Results</h3>
-                <p className="text-lg md:text-xl text-muted-foreground">
+                <h3 className="mb-4 font-bold text-2xl">The Results</h3>
+                <p className="text-lg text-muted-foreground md:text-xl">
                   The implementation of these tools significantly improved operational efficiency, reducing manual work hours by approximately 70% and increasing customer satisfaction through faster service and enhanced loyalty management.
                 </p>
               </div>
@@ -278,7 +278,7 @@ export default function VaparshopPage() {
       </section>
       
       {/* Technologies Section */}
-      <section className="py-20 bg-primary/5">
+      <section className="bg-primary/5 py-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -288,17 +288,17 @@ export default function VaparshopPage() {
             className="mb-16 text-center"
           >
             <h2 
-              className="text-3xl md:text-5xl font-bold mb-6"
+              className="mb-6 font-bold text-3xl md:text-5xl"
               style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 800, 'wdth' 900` }}
             >
               TECHNOLOGIES USED
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="mx-auto max-w-3xl text-muted-foreground text-xl">
               Advanced, modern stacks were employed to ensure performance, scalability, and maintainability
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
             {[
               { name: "Next.js", icon: "/icons/nextjs.svg", delay: 0 },
               { name: "React", icon: "/icons/react.svg", delay: 0.1 },
@@ -313,15 +313,15 @@ export default function VaparshopPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: tech.delay }}
                 viewport={{ once: true }}
-                className="flex flex-col items-center bg-card p-6 rounded-lg border shadow-sm"
+                className="flex flex-col items-center rounded-lg border bg-card p-6 shadow-sm"
               >
-                <div className="h-20 w-20 flex items-center justify-center mb-4">
+                <div className="mb-4 flex h-20 w-20 items-center justify-center">
                   {/* Placeholder for technology icons */}
-                  <div className="h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center">
-                    <span className="text-2xl font-bold">{tech.name.charAt(0)}</span>
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                    <span className="font-bold text-2xl">{tech.name.charAt(0)}</span>
                   </div>
                 </div>
-                <h3 className="text-lg font-medium">{tech.name}</h3>
+                <h3 className="font-medium text-lg">{tech.name}</h3>
               </motion.div>
             ))}
           </div>
@@ -339,17 +339,17 @@ export default function VaparshopPage() {
             className="mb-16"
           >
             <h2 
-              className="text-3xl md:text-5xl font-bold mb-6"
+              className="mb-6 font-bold text-3xl md:text-5xl"
               style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 800, 'wdth' 900` }}
             >
               PROJECT SHOWCASE
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-muted-foreground text-xl">
               Explore the key components developed for VAPARSHOP
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
@@ -357,27 +357,27 @@ export default function VaparshopPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="relative rounded-xl overflow-hidden group"
+                className="group relative overflow-hidden rounded-xl"
                 onMouseEnter={() => setHoveredProject(project.id)}
                 onMouseLeave={() => setHoveredProject(null)}
               >
-                <div className="aspect-video relative bg-primary/20 overflow-hidden">
+                <div className="relative aspect-video overflow-hidden bg-primary/20">
                   {/* Image placeholder - in a real project, use actual project images */}
                   <div className="absolute inset-0 flex items-center justify-center bg-card">
-                    <div className="text-4xl font-bold text-primary/40">{project.title}</div>
+                    <div className="font-bold text-4xl text-primary/40">{project.title}</div>
                   </div>
                   
                   {/* Hover overlay */}
                   <motion.div 
-                    className="absolute inset-0 bg-accent/80 flex items-center justify-center p-8"
+                    className="absolute inset-0 flex items-center justify-center bg-accent/80 p-8"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: hoveredProject === project.id ? 1 : 0 }}
                     transition={{ duration: 0.3 }}
                   >
                     <div className="text-center text-accent-foreground">
-                      <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
+                      <h3 className="mb-4 font-bold text-2xl">{project.title}</h3>
                       <p className="mb-6">{project.description}</p>
-                      <div className="flex flex-wrap gap-2 justify-center">
+                      <div className="flex flex-wrap justify-center gap-2">
                         {project.tags.map(tag => (
                           <Badge key={tag} variant="secondary" className="bg-white/20 text-white">
                             {tag}
@@ -389,7 +389,7 @@ export default function VaparshopPage() {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold mb-2 group-hover:text-accent transition-colors">
+                  <h3 className="mb-2 font-bold text-2xl transition-colors group-hover:text-accent">
                     {project.title}
                   </h3>
                   <p className="text-muted-foreground">{project.description}</p>
@@ -401,7 +401,7 @@ export default function VaparshopPage() {
       </section>
       
       {/* Process Section with Horizontal Scroll (simplified for this example) */}
-      <section className="py-20 bg-card border-y">
+      <section className="border-y bg-card py-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -411,17 +411,17 @@ export default function VaparshopPage() {
             className="mb-16"
           >
             <h2 
-              className="text-3xl md:text-5xl font-bold mb-6"
+              className="mb-6 font-bold text-3xl md:text-5xl"
               style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 800, 'wdth' 900` }}
             >
               DEVELOPMENT PROCESS
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-muted-foreground text-xl">
               A methodical approach from concept to deployment
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
             {[
               { 
                 phase: "Research & Analysis", 
@@ -450,10 +450,10 @@ export default function VaparshopPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: phase.delay }}
                 viewport={{ once: true }}
-                className="bg-background p-8 rounded-xl border"
+                className="rounded-xl border bg-background p-8"
               >
-                <div className="text-4xl font-bold text-accent/30 mb-4">0{index + 1}</div>
-                <h3 className="text-xl font-bold mb-4">{phase.phase}</h3>
+                <div className="mb-4 font-bold text-4xl text-accent/30">0{index + 1}</div>
+                <h3 className="mb-4 font-bold text-xl">{phase.phase}</h3>
                 <p className="text-muted-foreground">{phase.description}</p>
               </motion.div>
             ))}
@@ -469,38 +469,38 @@ export default function VaparshopPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
+            className="mx-auto max-w-3xl text-center"
           >
             <h2 
-              className="text-3xl md:text-5xl font-bold mb-8"
+              className="mb-8 font-bold text-3xl md:text-5xl"
               style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 800, 'wdth' 900` }}
             >
               INTERESTED IN WORKING TOGETHER?
             </h2>
-            <p className="text-xl text-muted-foreground mb-12">
+            <p className="mb-12 text-muted-foreground text-xl">
               Let's create digital solutions that transform your business operations and enhance customer experiences.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Button 
                 size="lg"
-                className="rounded-full group text-base px-8 py-6 font-medium"
+                className="group rounded-full px-8 py-6 font-medium text-base"
                 asChild
               >
                 <Link href="/contact">
                   <span>GET IN TOUCH</span>
-                  <ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-[-4px] group-hover:translate-x-[4px]" />
+                  <ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-[4px] group-hover:translate-y-[-4px]" />
                 </Link>
               </Button>
               
               <Button 
                 variant="outline" 
                 size="lg"
-                className="rounded-full group text-base px-8 py-6 font-medium"
+                className="group rounded-full px-8 py-6 font-medium text-base"
                 asChild
               >
                 <Link href="/">
-                  <ArrowLeft className="mr-2 h-5 w-5 transition-transform group-hover:-translate-x-1" />
+                  <ArrowLeft className="group-hover:-translate-x-1 mr-2 h-5 w-5 transition-transform" />
                   <span>BACK TO HOME</span>
                 </Link>
               </Button>

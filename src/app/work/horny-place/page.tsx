@@ -100,7 +100,7 @@ export default function HornyPlacePage() {
     >
       {/* Custom cursor effect - purely decorative */}
       <motion.div 
-        className="fixed w-12 h-12 rounded-full bg-accent/30 mix-blend-multiply pointer-events-none z-50 hidden md:block"
+        className="pointer-events-none fixed z-50 hidden h-12 w-12 rounded-full bg-accent/30 mix-blend-multiply md:block"
         animate={{
           x: cursorPosition.x - 24,
           y: cursorPosition.y - 24,
@@ -115,7 +115,7 @@ export default function HornyPlacePage() {
       />
       
       {/* Hero section with parallax */}
-      <section className="h-screen relative overflow-hidden flex items-center justify-center">
+      <section className="relative flex h-screen items-center justify-center overflow-hidden">
         {/* Background Elements */}
         <motion.div 
           className="absolute inset-0 z-0"
@@ -128,7 +128,7 @@ export default function HornyPlacePage() {
             {Array.from({ length: 10 }).map((_, i) => (
               <motion.div
                 key={`geo-bg-${i}-${Math.random().toString(36).substring(2, 7)}`}
-                className="absolute bg-accent/10 rounded-full"
+                className="absolute rounded-full bg-accent/10"
                 style={{
                   width: `${Math.random() * 500 + 200}px`,
                   height: `${Math.random() * 500 + 200}px`,
@@ -163,33 +163,33 @@ export default function HornyPlacePage() {
             className="max-w-4xl"
           >
             <Badge 
-              className="mb-6 px-4 py-1.5 rounded-full text-accent bg-accent/10 hover:bg-accent/20"
+              className="mb-6 rounded-full bg-accent/10 px-4 py-1.5 text-accent hover:bg-accent/20"
             >
               BRAND CASE STUDY
             </Badge>
             
             <h1 
-              className="text-6xl md:text-9xl font-black mb-8 tracking-tighter"
+              className="mb-8 font-black text-6xl tracking-tighter md:text-9xl"
               style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
             >
               <span className="text-accent">HORNY</span> PLACE
             </h1>
             
-            <p className="text-xl md:text-3xl text-muted-foreground mb-12 max-w-2xl">
+            <p className="mb-12 max-w-2xl text-muted-foreground text-xl md:text-3xl">
               Creating a bold and distinctive brand identity for a contemporary retail chain
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <Badge className="px-4 py-1.5 text-lg bg-accent/10 text-accent hover:bg-accent/20">
+              <Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
                 Branding
               </Badge>
-              <Badge className="px-4 py-1.5 text-lg bg-accent/10 text-accent hover:bg-accent/20">
+              <Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
                 Print Design
               </Badge>
-              <Badge className="px-4 py-1.5 text-lg bg-accent/10 text-accent hover:bg-accent/20">
+              <Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
                 Web Development
               </Badge>
-              <Badge className="px-4 py-1.5 text-lg bg-accent/10 text-accent hover:bg-accent/20">
+              <Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
                 Retail Experience
               </Badge>
             </div>
@@ -198,9 +198,9 @@ export default function HornyPlacePage() {
       </section>
       
       {/* Project Introduction */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-background via-accent/5 to-background">
+      <section className="bg-gradient-to-b from-background via-accent/5 to-background py-20 md:py-32">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
             <motion.div 
               className="lg:col-span-6"
               initial={{ opacity: 0, x: -50 }}
@@ -209,48 +209,48 @@ export default function HornyPlacePage() {
               viewport={{ once: true }}
             >
               <h2 
-                className="text-4xl md:text-6xl font-bold mb-8"
+                className="mb-8 font-bold text-4xl md:text-6xl"
                 style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 900, 'wdth' 900` }}
               >
                 BRAND IDENTITY WITH PURPOSE
               </h2>
               
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="text-xl md:text-2xl mb-8">
+                <p className="mb-8 text-xl md:text-2xl">
                   HORNY PLACE required a distinctive visual identity that would resonate with its audience while standing out in the competitive retail landscape.
                 </p>
                 
-                <p className="text-lg md:text-xl text-muted-foreground mb-8">
+                <p className="mb-8 text-lg text-muted-foreground md:text-xl">
                   The challenge was to create a brand that felt contemporary and edgy, yet accessible and cohesive across multiple touchpoints - from physical retail environments to digital platforms.
                 </p>
                 
-                <div className="flex flex-col space-y-6 mt-12">
+                <div className="mt-12 flex flex-col space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10">
                       <Paintbrush className="h-6 w-6 text-accent" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold">Visual Design</h3>
+                      <h3 className="font-bold text-xl">Visual Design</h3>
                       <p className="text-muted-foreground">Creating a consistent visual language</p>
                     </div>
                   </div>
                   
                   <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10">
                       <Store className="h-6 w-6 text-accent" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold">Retail Experience</h3>
+                      <h3 className="font-bold text-xl">Retail Experience</h3>
                       <p className="text-muted-foreground">Designing immersive brand environments</p>
                     </div>
                   </div>
                   
                   <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10">
                       <Layout className="h-6 w-6 text-accent" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold">Digital Platforms</h3>
+                      <h3 className="font-bold text-xl">Digital Platforms</h3>
                       <p className="text-muted-foreground">Building branded online experiences</p>
                     </div>
                   </div>
@@ -265,11 +265,11 @@ export default function HornyPlacePage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="relative aspect-square rounded-2xl overflow-hidden bg-card border shadow-xl">
+              <div className="relative aspect-square overflow-hidden rounded-2xl border bg-card shadow-xl">
                 {/* Placeholder for brand mood board */}
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/30 to-primary/10 flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent/30 to-primary/10">
                   <h3 
-                    className="text-4xl md:text-6xl font-black text-accent/20"
+                    className="font-black text-4xl text-accent/20 md:text-6xl"
                     style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
                   >
                     HORNY PLACE
@@ -291,21 +291,21 @@ export default function HornyPlacePage() {
             viewport={{ once: true }}
             className="mb-16 max-w-3xl"
           >
-            <Badge className="mb-6 px-4 py-1.5 rounded-full bg-accent text-accent-foreground">PROCESS</Badge>
+            <Badge className="mb-6 rounded-full bg-accent px-4 py-1.5 text-accent-foreground">PROCESS</Badge>
             <h2 
-              className="text-3xl md:text-5xl font-bold mb-6"
+              className="mb-6 font-bold text-3xl md:text-5xl"
               style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 900, 'wdth' 900` }}
             >
               DESIGN JOURNEY
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-muted-foreground text-xl">
               From initial concept to a comprehensive brand ecosystem spanning physical and digital touchpoints
             </p>
           </motion.div>
           
-          <div className="space-y-32 relative">
+          <div className="relative space-y-32">
             {/* Timeline line */}
-            <div className="absolute left-[calc(50%-1px)] w-0.5 h-full bg-border hidden md:block" />
+            <div className="absolute left-[calc(50%-1px)] hidden h-full w-0.5 bg-border md:block" />
             
             {/* Timeline items */}
             {[
@@ -340,7 +340,7 @@ export default function HornyPlacePage() {
             ].map((item, index) => (
               <motion.div 
                 key={item.phase}
-                className={`relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center ${
+                className={`relative grid grid-cols-1 items-center gap-8 md:grid-cols-2 ${
                   item.position === "right" ? "md:text-right" : ""
                 }`}
                 initial={{ opacity: 0, y: 50 }}
@@ -349,21 +349,21 @@ export default function HornyPlacePage() {
                 viewport={{ once: true, margin: "-100px" }}
               >
                 {/* Timeline indicator dot */}
-                <div className="absolute left-1/2 top-0 -translate-x-1/2 w-6 h-6 rounded-full bg-accent hidden md:block" />
+                <div className="-translate-x-1/2 absolute top-0 left-1/2 hidden h-6 w-6 rounded-full bg-accent md:block" />
                 
                 <div className={`${item.position === "right" ? "md:order-2" : ""}`}>
-                  <div className="bg-card border rounded-xl p-8 shadow-lg">
-                    <div className="h-12 w-12 mb-6 rounded-full bg-accent/10 flex items-center justify-center text-accent">
+                  <div className="rounded-xl border bg-card p-8 shadow-lg">
+                    <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent">
                       {item.icon}
                     </div>
-                    <h3 className="text-2xl font-bold mb-4">{item.phase}</h3>
+                    <h3 className="mb-4 font-bold text-2xl">{item.phase}</h3>
                     <p className="text-muted-foreground">{item.description}</p>
                   </div>
                 </div>
                 
                 <div className={`${item.position === "right" ? "md:order-1" : ""}`}>
-                  <div className="h-40 md:h-60 rounded-xl bg-primary/5 border flex items-center justify-center">
-                    <div className="text-2xl font-bold text-primary/30">Phase {index + 1}</div>
+                  <div className="flex h-40 items-center justify-center rounded-xl border bg-primary/5 md:h-60">
+                    <div className="font-bold text-2xl text-primary/30">Phase {index + 1}</div>
                   </div>
                 </div>
               </motion.div>
@@ -373,11 +373,11 @@ export default function HornyPlacePage() {
       </section>
       
       {/* Case Studies Carousel */}
-      <section className="py-20 md:py-32 bg-card relative overflow-hidden border-y">
+      <section className="relative overflow-hidden border-y bg-card py-20 md:py-32">
         {/* Dynamic background */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="pointer-events-none absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-background to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-background to-transparent" />
+          <div className="absolute right-0 bottom-0 left-0 h-1/3 bg-gradient-to-t from-background to-transparent" />
           
           {Array.from({ length: 3 }).map((_, i) => (
             <motion.div
@@ -404,7 +404,7 @@ export default function HornyPlacePage() {
           ))}
         </div>
       
-        <div className="container mx-auto px-4 relative">
+        <div className="container relative mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -413,12 +413,12 @@ export default function HornyPlacePage() {
             className="mb-16 text-center"
           >
             <h2 
-              className="text-3xl md:text-5xl font-bold mb-6"
+              className="mb-6 font-bold text-3xl md:text-5xl"
               style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 900, 'wdth' 900` }}
             >
               KEY ELEMENTS
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="mx-auto max-w-2xl text-muted-foreground text-xl">
               Exploring the different components created for the HORNY PLACE brand
             </p>
           </motion.div>
@@ -426,12 +426,12 @@ export default function HornyPlacePage() {
           <div className="flex flex-col space-y-12">
             {/* Navigation tabs */}
             <div className="flex justify-center">
-              <div className="inline-flex bg-background border rounded-full p-1.5">
+              <div className="inline-flex rounded-full border bg-background p-1.5">
                 {caseStudies.map((study, index) => (
                   <button
                     key={study.id}
                     type="button"
-                    className={`px-6 py-2.5 text-sm font-medium rounded-full transition-all ${
+                    className={`rounded-full px-6 py-2.5 font-medium text-sm transition-all ${
                       currentView === index 
                         ? "bg-accent text-accent-foreground shadow-sm" 
                         : "hover:bg-accent/10"
@@ -445,7 +445,7 @@ export default function HornyPlacePage() {
             </div>
             
             {/* Case study view */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`case-image-${currentView}`}
@@ -453,11 +453,11 @@ export default function HornyPlacePage() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.5 }}
-                  className="relative aspect-video rounded-xl overflow-hidden shadow-lg"
+                  className="relative aspect-video overflow-hidden rounded-xl shadow-lg"
                 >
                   {/* Image placeholder - in a real project use actual images */}
-                  <div className="absolute inset-0 bg-accent/10 flex items-center justify-center">
-                    <span className="text-2xl font-bold text-accent/40">
+                  <div className="absolute inset-0 flex items-center justify-center bg-accent/10">
+                    <span className="font-bold text-2xl text-accent/40">
                       {caseStudies[currentView]?.title || "Case Study"}
                     </span>
                   </div>
@@ -470,22 +470,22 @@ export default function HornyPlacePage() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Badge className="mb-6 px-4 py-1.5 rounded-full text-accent bg-accent/10 hover:bg-accent/20">
+                  <Badge className="mb-6 rounded-full bg-accent/10 px-4 py-1.5 text-accent hover:bg-accent/20">
                     {caseStudies[currentView]?.title || "Case Study"}
                   </Badge>
                   
                   <h3 
-                    className="text-3xl font-bold mb-6"
+                    className="mb-6 font-bold text-3xl"
                     style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 800, 'wdth' 900` }}
                   >
                     {caseStudies[currentView]?.title.toUpperCase() || "CASE STUDY"}
                   </h3>
                   
-                  <p className="text-lg text-muted-foreground mb-8">
+                  <p className="mb-8 text-lg text-muted-foreground">
                     {caseStudies[currentView]?.description || "Case study description"}
                   </p>
                   
-                  <div className="flex flex-wrap gap-3 mb-8">
+                  <div className="mb-8 flex flex-wrap gap-3">
                     {caseStudies[currentView]?.skills.map(skill => (
                       <Badge key={skill} className="bg-accent/10 text-accent hover:bg-accent/20">
                         {skill}
@@ -499,7 +499,7 @@ export default function HornyPlacePage() {
                       className="group"
                       onClick={() => setCurrentView((currentView - 1 + caseStudies.length) % caseStudies.length)}
                     >
-                      <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                      <ArrowLeft className="group-hover:-translate-x-1 mr-2 h-4 w-4 transition-transform" />
                       Previous
                     </Button>
                     
@@ -526,21 +526,21 @@ export default function HornyPlacePage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="max-w-3xl mb-16"
+            className="mb-16 max-w-3xl"
           >
-            <Badge className="mb-6 px-4 py-1.5 rounded-full bg-accent text-accent-foreground">RESULTS</Badge>
+            <Badge className="mb-6 rounded-full bg-accent px-4 py-1.5 text-accent-foreground">RESULTS</Badge>
             <h2 
-              className="text-3xl md:text-5xl font-bold mb-6"
+              className="mb-6 font-bold text-3xl md:text-5xl"
               style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 900, 'wdth' 900` }}
             >
               PROJECT OUTCOMES
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-muted-foreground text-xl">
               The impact of the brand identity and implementation across different touchpoints
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {[
               {
                 title: "Brand Recognition",
@@ -564,10 +564,10 @@ export default function HornyPlacePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: result.delay }}
                 viewport={{ once: true }}
-                className="bg-card border rounded-xl p-8 shadow-md"
+                className="rounded-xl border bg-card p-8 shadow-md"
               >
-                <div className="text-4xl font-bold text-accent mb-6">0{index + 1}</div>
-                <h3 className="text-2xl font-bold mb-4">{result.title}</h3>
+                <div className="mb-6 font-bold text-4xl text-accent">0{index + 1}</div>
+                <h3 className="mb-4 font-bold text-2xl">{result.title}</h3>
                 <p className="text-muted-foreground">{result.description}</p>
               </motion.div>
             ))}
@@ -576,45 +576,45 @@ export default function HornyPlacePage() {
       </section>
       
       {/* CTA Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-background via-accent/5 to-background">
+      <section className="bg-gradient-to-b from-background via-accent/5 to-background py-20 md:py-32">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
+            className="mx-auto max-w-3xl text-center"
           >
             <h2 
-              className="text-3xl md:text-5xl font-bold mb-8"
+              className="mb-8 font-bold text-3xl md:text-5xl"
               style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 900, 'wdth' 900` }}
             >
               READY TO CREATE YOUR BRAND?
             </h2>
-            <p className="text-xl text-muted-foreground mb-12">
+            <p className="mb-12 text-muted-foreground text-xl">
               Let's work together to develop a distinctive brand identity that resonates with your audience and stands out in the market.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Button 
                 size="lg"
-                className="rounded-full group text-base px-8 py-6 font-medium bg-accent text-accent-foreground hover:bg-accent/90"
+                className="group rounded-full bg-accent px-8 py-6 font-medium text-accent-foreground text-base hover:bg-accent/90"
                 asChild
               >
                 <Link href="/contact">
                   <span>START A PROJECT</span>
-                  <ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-[-4px] group-hover:translate-x-[4px]" />
+                  <ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-[4px] group-hover:translate-y-[-4px]" />
                 </Link>
               </Button>
               
               <Button 
                 variant="outline" 
                 size="lg"
-                className="rounded-full group text-base px-8 py-6 font-medium"
+                className="group rounded-full px-8 py-6 font-medium text-base"
                 asChild
               >
                 <Link href="/">
-                  <ArrowLeft className="mr-2 h-5 w-5 transition-transform group-hover:-translate-x-1" />
+                  <ArrowLeft className="group-hover:-translate-x-1 mr-2 h-5 w-5 transition-transform" />
                   <span>BACK TO HOME</span>
                 </Link>
               </Button>

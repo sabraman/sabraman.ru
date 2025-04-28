@@ -28,7 +28,7 @@ export function ThemeToggle() {
                 >
                     <span className="text-muted-foreground">Theme</span>
                 </Label>
-                <div className="bg-foreground w-8 h-4 rounded-full" />
+                <div className="h-4 w-8 rounded-full bg-foreground" />
                 <div className="h-2 w-2 rounded-full bg-input"></div>
             </div>
         );

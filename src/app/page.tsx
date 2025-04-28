@@ -61,22 +61,22 @@ function WorkExperienceItem({
 			whileInView={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay }}
 			viewport={{ once: true }}
-			className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12"
+			className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-12"
 		>
-			<div className="lg:col-span-4 relative">
+			<div className="relative lg:col-span-4">
 				<div className="sticky top-32">
-					<div className="flex items-center gap-6 mb-6">
-						<div className="flex-shrink-0 bg-primary text-primary-foreground h-16 w-16 md:h-24 md:w-24 rounded-full flex items-center justify-center text-2xl md:text-4xl font-extrabold">
+					<div className="mb-6 flex items-center gap-6">
+						<div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-primary font-extrabold text-2xl text-primary-foreground md:h-24 md:w-24 md:text-4xl">
 							{logo}
 						</div>
 						<div>
-							<h3 className="text-3xl md:text-4xl font-extrabold">{company}</h3>
-							<p className="text-xl text-muted-foreground">{period}</p>
+							<h3 className="font-extrabold text-3xl md:text-4xl">{company}</h3>
+							<p className="text-muted-foreground text-xl">{period}</p>
 						</div>
 					</div>
 					<div>
-						<h4 className="text-2xl font-bold mb-2">{title}</h4>
-						<p className="text-xl text-muted-foreground">{location}</p>
+						<h4 className="mb-2 font-bold text-2xl">{title}</h4>
+						<p className="text-muted-foreground text-xl">{location}</p>
 					</div>
 				</div>
 			</div>
@@ -99,7 +99,7 @@ function WorkExperienceItem({
 										delay: 0.1 * index 
 									}}
 									viewport={{ once: true }}
-									className="text-xl md:text-2xl leading-relaxed pl-6 relative before:content-[''] before:absolute before:left-0 before:top-[14px] before:w-3 before:h-3 before:rounded-full before:bg-accent"
+									className="relative pl-6 text-xl leading-relaxed before:absolute before:top-[14px] before:left-0 before:h-3 before:w-3 before:rounded-full before:bg-accent before:content-[''] md:text-2xl"
 								>
 									{achievement.split(/\*\*(.*?)\*\*/g).map((part, i) => {
 										// Even indices are regular text, odd indices are bold text
@@ -124,7 +124,7 @@ function WorkExperienceItem({
 									delay: 0.1 * index 
 								}}
 								viewport={{ once: true }}
-								className="text-xl md:text-2xl leading-relaxed pl-6 relative before:content-[''] before:absolute before:left-0 before:top-[14px] before:w-3 before:h-3 before:rounded-full before:bg-accent"
+								className="relative pl-6 text-xl leading-relaxed before:absolute before:top-[14px] before:left-0 before:h-3 before:w-3 before:rounded-full before:bg-accent before:content-[''] md:text-2xl"
 							>
 								{achievement}
 							</motion.li>
@@ -139,20 +139,20 @@ function WorkExperienceItem({
 // Project card component
 function ProjectCard({ title, description, tags, href }: { title: string; description: string; tags: string[]; href: string }) {
 	return (
-		<Card className="overflow-hidden group">
+		<Card className="group overflow-hidden">
 			<Link href={href} className="block p-6">
-				<div className="flex flex-col h-full">
+				<div className="flex h-full flex-col">
 					<h3 
-						className="text-2xl mb-3 group-hover:text-accent transition-colors duration-300"
+						className="mb-3 text-2xl transition-colors duration-300 group-hover:text-accent"
 						style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 700, 'wdth' 900` }}
 					>
 						{title}
-						<span className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
-							<ArrowUpRight className="h-5 w-5 inline" />
+						<span className="group-hover:-translate-y-1 ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">
+							<ArrowUpRight className="inline h-5 w-5" />
 						</span>
 					</h3>
 					
-					<p className="text-muted-foreground mb-6">{description}</p>
+					<p className="mb-6 text-muted-foreground">{description}</p>
 					
 					<div className="mt-auto flex flex-wrap gap-2">
 						{tags.map(tag => (
@@ -305,9 +305,9 @@ export default function HomePage() {
 	return (
 		<div ref={containerRef} className="relative">
 			{/* Hero Section with name animation */}
-			<section className="h-screen relative flex flex-col justify-center items-center overflow-hidden">
+			<section className="relative flex h-screen flex-col items-center justify-center overflow-hidden">
 				<motion.div 
-					className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center"
+					className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center"
 					style={{ 
 						scale: textScale,
 						opacity: textOpacity,
@@ -325,7 +325,7 @@ export default function HomePage() {
 							}}
 						>
 							<h1 
-								className="text-[8vw] md:text-[6vw] lg:text-[5vw] xl:text-[4vw] leading-none font-extrabold mb-8 tracking-tight"
+								className="mb-8 font-extrabold text-[8vw] leading-none tracking-tight md:text-[6vw] lg:text-[5vw] xl:text-[4vw]"
 								style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
 							>
 								{displayName}
@@ -340,10 +340,10 @@ export default function HomePage() {
 								ease: [0.22, 1, 0.36, 1],
 								delay: 0.4
 							}}
-							className="text-[5vw] md:text-[4vw] lg:text-[3vw] xl:text-[2.5vw] leading-tight mb-10 text-muted-foreground"
+							className="mb-10 text-[5vw] text-muted-foreground leading-tight md:text-[4vw] lg:text-[3vw] xl:text-[2.5vw]"
 						>
 							CREATIVE DESIGNER &<br/>
-							<span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-sky-300">
+							<span className="bg-gradient-to-r from-accent to-sky-300 bg-clip-text text-transparent">
 								EARLY-STAGE DEVELOPER
 							</span>
 						</motion.h2>
@@ -356,11 +356,11 @@ export default function HomePage() {
 								ease: [0.22, 1, 0.36, 1],
 								delay: 0.7
 							}}
-							className="flex flex-col md:flex-row gap-4 justify-center"
+							className="flex flex-col justify-center gap-4 md:flex-row"
 						>
 							<Button 
 								size="lg"
-								className="rounded-full group text-base px-8 py-6 font-medium"
+								className="group rounded-full px-8 py-6 font-medium text-base"
 								asChild
 							>
 								<a href="/DANYA_YUDIN_CV.md" download>
@@ -372,7 +372,7 @@ export default function HomePage() {
 							<Button 
 								variant="outline" 
 								size="lg"
-								className="rounded-full group text-base px-8 py-6 font-medium cursor-pointer"
+								className="group cursor-pointer rounded-full px-8 py-6 font-medium text-base"
 								onClick={() => {
 									// Scroll to contact section
 									const contactSection = document.getElementById('contact-section');
@@ -389,7 +389,7 @@ export default function HomePage() {
 				</motion.div>
 				
 				<motion.div 
-					className="absolute inset-0 flex items-center justify-center z-0"
+					className="absolute inset-0 z-0 flex items-center justify-center"
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ duration: 1, delay: 1 }}
@@ -399,7 +399,7 @@ export default function HomePage() {
 					/>
 					
 					<motion.div 
-						className="w-[150vw] h-[150vh] absolute" 
+						className="absolute h-[150vh] w-[150vw]" 
 						animate={{ 
 							rotate: 360,
 						}} 
@@ -412,20 +412,20 @@ export default function HomePage() {
 						{/* Abstract background pattern */}
 						<div className="absolute h-full w-full rounded-full border-[1px] border-foreground/5" style={{ top: "10%", left: "10%" }} />
 						<div className="absolute h-[90%] w-[90%] rounded-full border-[1px] border-foreground/5" style={{ top: "5%", left: "5%" }} />
-						<div className="absolute w-[80%] h-[80%] rounded-full border-[1px] border-foreground/10" style={{ top: "10%", left: "10%" }} />
-						<div className="absolute w-[70%] h-[70%] rounded-full border-[1px] border-foreground/10" style={{ top: "15%", left: "15%" }} />
-						<div className="absolute w-[60%] h-[60%] rounded-full border-[1px] border-foreground/15" style={{ top: "20%", left: "20%" }} />
-						<div className="absolute w-[50%] h-[50%] rounded-full border-[1px] border-foreground/15" style={{ top: "25%", left: "25%" }} />
-						<div className="absolute w-[40%] h-[40%] rounded-full border-[1px] border-foreground/20" style={{ top: "30%", left: "30%" }} />
-						<div className="absolute w-[30%] h-[30%] rounded-full border-[1px] border-primary/50" style={{ top: "35%", left: "35%" }} />
-						<div className="absolute w-[20%] h-[20%] rounded-full border-[1px] border-primary" style={{ top: "40%", left: "40%" }} />
-						<div className="absolute w-[10%] h-[10%] rounded-full border-[1px] border-accent" style={{ top: "45%", left: "45%" }} />
+						<div className="absolute h-[80%] w-[80%] rounded-full border-[1px] border-foreground/10" style={{ top: "10%", left: "10%" }} />
+						<div className="absolute h-[70%] w-[70%] rounded-full border-[1px] border-foreground/10" style={{ top: "15%", left: "15%" }} />
+						<div className="absolute h-[60%] w-[60%] rounded-full border-[1px] border-foreground/15" style={{ top: "20%", left: "20%" }} />
+						<div className="absolute h-[50%] w-[50%] rounded-full border-[1px] border-foreground/15" style={{ top: "25%", left: "25%" }} />
+						<div className="absolute h-[40%] w-[40%] rounded-full border-[1px] border-foreground/20" style={{ top: "30%", left: "30%" }} />
+						<div className="absolute h-[30%] w-[30%] rounded-full border-[1px] border-primary/50" style={{ top: "35%", left: "35%" }} />
+						<div className="absolute h-[20%] w-[20%] rounded-full border-[1px] border-primary" style={{ top: "40%", left: "40%" }} />
+						<div className="absolute h-[10%] w-[10%] rounded-full border-[1px] border-accent" style={{ top: "45%", left: "45%" }} />
 					</motion.div>
 				</motion.div>
 			</section>
 
 			{/* About Section with glitch effect */}
-			<section className="min-h-screen bg-secondary/5 relative py-32" id="about">
+			<section className="relative min-h-screen bg-secondary/5 py-32" id="about">
 				<div className="container mx-auto px-4">
 					<motion.div
 						initial={{ opacity: 0, y: 100 }}
@@ -435,17 +435,17 @@ export default function HomePage() {
 						className="mb-20 overflow-hidden"
 					>
 						<h2 
-							className="text-7xl md:text-7xl xl:text-[12rem] uppercase font-extrabold tracking-tight"
+							className="font-extrabold text-7xl uppercase tracking-tight md:text-7xl xl:text-[12rem]"
 							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
 						>
-							WHO<span className="relative z-0 ml-4 md:ml-8 xl:ml-12 inline-block">
-								<span className="absolute -inset-1 bg-accent blur-sm opacity-50" />
+							WHO<span className="relative z-0 ml-4 inline-block md:ml-8 xl:ml-12">
+								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
 								I AM
 							</span>
 						</h2>
 					</motion.div>
 					
-					<div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+					<div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
 						<motion.div 
 							className="lg:col-span-2"
 							initial={{ opacity: 0, y: 50 }}
@@ -454,33 +454,33 @@ export default function HomePage() {
 							viewport={{ once: true }}
 						>
 							<div className="prose prose-xl dark:prose-invert max-w-none">
-								<p className="text-2xl lg:text-3xl leading-relaxed mb-8">
+								<p className="mb-8 text-2xl leading-relaxed lg:text-3xl">
 									Creative Designer and Early-Stage Developer with extensive hands-on experience in visual design, branding, and application development.
 								</p>
 								
-								<p className="text-xl lg:text-2xl leading-relaxed text-muted-foreground">
+								<p className="text-muted-foreground text-xl leading-relaxed lg:text-2xl">
 									I have a proven track record of transforming concepts into visually appealing and functional digital products. My passion lies in integrating design and technology to deliver intuitive user experiences.
 								</p>
 								
-								<div className="flex flex-wrap gap-6 mt-12">
+								<div className="mt-12 flex flex-wrap gap-6">
 									<div className="flex items-center gap-2">
 										<TelegramIcon className="h-6 w-6 text-primary" />
-										<Link href="https://t.me/sabraman" className="text-xl hover:text-accent transition-colors">@sabraman</Link>
+										<Link href="https://t.me/sabraman" className="text-xl transition-colors hover:text-accent">@sabraman</Link>
 									</div>
 									
 									<div className="flex items-center gap-2">
 										<Github className="h-6 w-6 text-primary" />
-										<Link href="https://github.com/sabraman" className="text-xl hover:text-accent transition-colors">sabraman</Link>
+										<Link href="https://github.com/sabraman" className="text-xl transition-colors hover:text-accent">sabraman</Link>
 									</div>
 									
 									<div className="flex items-center gap-2">
 										<Instagram className="h-6 w-6 text-primary" />
-										<Link href="https://instagram.com/sabraman" className="text-xl hover:text-accent transition-colors">sabraman</Link>
+										<Link href="https://instagram.com/sabraman" className="text-xl transition-colors hover:text-accent">sabraman</Link>
 									</div>
 									
 									<div className="flex items-center gap-2">
 										<X className="h-6 w-6 text-primary" />
-										<Link href="https://x.com/1sabraman" className="text-xl hover:text-accent transition-colors">1sabraman</Link>
+										<Link href="https://x.com/1sabraman" className="text-xl transition-colors hover:text-accent">1sabraman</Link>
 									</div>
 								</div>
 							</div>
@@ -493,42 +493,42 @@ export default function HomePage() {
 							viewport={{ once: true }}
 							className="flex flex-col gap-8"
 						>
-							<div className="p-6 bg-card rounded-xl border shadow-lg backdrop-blur-sm">
-								<h3 className="text-2xl font-bold mb-4">EXPERTISE AREAS</h3>
+							<div className="rounded-xl border bg-card p-6 shadow-lg backdrop-blur-sm">
+								<h3 className="mb-4 font-bold text-2xl">EXPERTISE AREAS</h3>
 								<ul className="space-y-4">
 									<li className="flex items-start gap-3">
-										<Paintbrush className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
+										<Paintbrush className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" />
 										<div>
-											<h4 className="text-xl font-semibold">Visual Design</h4>
+											<h4 className="font-semibold text-xl">Visual Design</h4>
 											<p className="text-muted-foreground">Creating engaging visual experiences across different mediums</p>
 										</div>
 									</li>
 									<li className="flex items-start gap-3">
-										<Code className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
+										<Code className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" />
 										<div>
-											<h4 className="text-xl font-semibold">Application Development</h4>
+											<h4 className="font-semibold text-xl">Application Development</h4>
 											<p className="text-muted-foreground">Building functional web apps and Telegram bots</p>
 										</div>
 									</li>
 									<li className="flex items-start gap-3">
-										<LineChart className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
+										<LineChart className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" />
 										<div>
-											<h4 className="text-xl font-semibold">Branding</h4>
+											<h4 className="font-semibold text-xl">Branding</h4>
 											<p className="text-muted-foreground">Crafting comprehensive brand identities and guidelines</p>
 										</div>
 									</li>
 								</ul>
 							</div>
 							
-							<div className="p-6 bg-card rounded-xl border shadow-lg backdrop-blur-sm">
-								<h3 className="text-2xl font-bold mb-4">TECH STACK</h3>
+							<div className="rounded-xl border bg-card p-6 shadow-lg backdrop-blur-sm">
+								<h3 className="mb-4 font-bold text-2xl">TECH STACK</h3>
 								<div className="flex flex-wrap gap-2">
-									<Badge className="bg-accent/10 hover:bg-accent/20 text-accent px-4 py-2 text-base rounded-md">Next.js</Badge>
-									<Badge className="bg-accent/10 hover:bg-accent/20 text-accent px-4 py-2 text-base rounded-md">React</Badge>
-									<Badge className="bg-accent/10 hover:bg-accent/20 text-accent px-4 py-2 text-base rounded-md">TypeScript</Badge>
-									<Badge className="bg-accent/10 hover:bg-accent/20 text-accent px-4 py-2 text-base rounded-md">Telegram API</Badge>
-									<Badge className="bg-accent/10 hover:bg-accent/20 text-accent px-4 py-2 text-base rounded-md">Figma</Badge>
-									<Badge className="bg-accent/10 hover:bg-accent/20 text-accent px-4 py-2 text-base rounded-md">UI/UX</Badge>
+									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">Next.js</Badge>
+									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">React</Badge>
+									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">TypeScript</Badge>
+									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">Telegram API</Badge>
+									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">Figma</Badge>
+									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">UI/UX</Badge>
 								</div>
 							</div>
 						</motion.div>
@@ -537,7 +537,7 @@ export default function HomePage() {
 			</section>
 
 			{/* Experience Section - Dynamic, Staggered */}
-			<section className="min-h-screen relative py-32" id="experience">
+			<section className="relative min-h-screen py-32" id="experience">
 				<div className="container mx-auto px-4">
 					<motion.div
 						initial={{ opacity: 0, y: 100 }}
@@ -547,11 +547,11 @@ export default function HomePage() {
 						className="mb-20 overflow-hidden"
 					>
 						<h2 
-							className="text-4xl md:text-7xl xl:text-[9rem] uppercase font-extrabold tracking-tight"
+							className="font-extrabold text-4xl uppercase tracking-tight md:text-7xl xl:text-[9rem]"
 							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
 						>
-							<span className="relative z-0 mr-4 md:mr-8 xl:mr-12 inline-block">
-								<span className="absolute -inset-1 bg-sky-400 blur-sm opacity-50" />
+							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
+								<span className="-inset-1 absolute bg-sky-400 opacity-50 blur-sm" />
 								WORK
 							</span>
 							EXPERIENCE
@@ -627,7 +627,7 @@ export default function HomePage() {
 			</section>
 
 			{/* Projects Section */}
-			<section className="py-32 bg-primary/5" id="projects">
+			<section className="bg-primary/5 py-32" id="projects">
 				<div className="container mx-auto px-4">
 					<motion.div
 						initial={{ opacity: 0, y: 100 }}
@@ -637,18 +637,18 @@ export default function HomePage() {
 						className="mb-20 overflow-hidden"
 					>
 						<h2 
-							className="text-7xl md:text-8xl xl:text-[15rem] uppercase font-extrabold tracking-tight"
+							className="font-extrabold text-7xl uppercase tracking-tight md:text-8xl xl:text-[15rem]"
 							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 800` }}
 						>
-							<span className="relative z-0 mr-4 md:mr-8 xl:mr-12 inline-block">
-								<span className="absolute -inset-1 bg-accent blur-sm opacity-50" />
+							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
+								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
 								MY
 							</span>
 							WORK
 						</h2>
 					</motion.div>
 					
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+					<div className="grid grid-cols-1 gap-10 md:grid-cols-2">
 						<motion.div
 							initial={{ opacity: 0, y: 50 }}
 							whileInView={{ opacity: 1, y: 0 }}
@@ -683,7 +683,7 @@ export default function HomePage() {
 			</section>
 
 			{/* Contact Section */}
-			<section id="contact-section" className="relative py-24 overflow-hidden">
+			<section id="contact-section" className="relative overflow-hidden py-24">
 				<div className="container mx-auto px-4">
 					<motion.div
 						initial={{ opacity: 0, y: 100 }}
@@ -693,18 +693,18 @@ export default function HomePage() {
 						className="mb-16 overflow-hidden"
 					>
 						<h2 
-							className="text-7xl md:text-8xl xl:text-[15rem] uppercase font-extrabold tracking-tight"
+							className="font-extrabold text-7xl uppercase tracking-tight md:text-8xl xl:text-[15rem]"
 							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 800` }}
 						>
-							<span className="relative z-0 mr-4 md:mr-8 xl:mr-12 inline-block">
-								<span className="absolute -inset-1 bg-accent blur-sm opacity-50" />
+							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
+								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
 								GET
 							</span>
 							IN TOUCH
 						</h2>
 					</motion.div>
 					
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+					<div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
 						{/* Contact Form */}
 						<motion.div
 							initial={{ opacity: 0, y: 40 }}
@@ -712,11 +712,11 @@ export default function HomePage() {
 							transition={{ duration: 0.6, delay: 0.2 }}
 							viewport={{ once: true }}
 						>
-							<form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-card rounded-xl border p-8 shadow-lg">
-								<h3 className="text-2xl font-bold mb-6">Send a Message</h3>
+							<form onSubmit={handleSubmit(onSubmit)} className="space-y-6 rounded-xl border bg-card p-8 shadow-lg">
+								<h3 className="mb-6 font-bold text-2xl">Send a Message</h3>
 								
 								<div className="space-y-2">
-									<label htmlFor="name" className="text-sm font-medium">Name</label>
+									<label htmlFor="name" className="font-medium text-sm">Name</label>
 									<Input
 										id="name"
 										{...register("name")}
@@ -724,12 +724,12 @@ export default function HomePage() {
 										className={errors.name ? "border-destructive" : ""}
 									/>
 									{errors.name && (
-										<p className="text-sm text-destructive">{errors.name.message}</p>
+										<p className="text-destructive text-sm">{errors.name.message}</p>
 									)}
 								</div>
 								
 								<div className="space-y-2">
-									<label htmlFor="email" className="text-sm font-medium">Email</label>
+									<label htmlFor="email" className="font-medium text-sm">Email</label>
 									<Input
 										id="email"
 										type="email"
@@ -738,12 +738,12 @@ export default function HomePage() {
 										className={errors.email ? "border-destructive" : ""}
 									/>
 									{errors.email && (
-										<p className="text-sm text-destructive">{errors.email.message}</p>
+										<p className="text-destructive text-sm">{errors.email.message}</p>
 									)}
 								</div>
 								
 								<div className="space-y-2">
-									<label htmlFor="message" className="text-sm font-medium">Message</label>
+									<label htmlFor="message" className="font-medium text-sm">Message</label>
 									<Textarea
 										id="message"
 										{...register("message")}
@@ -752,14 +752,14 @@ export default function HomePage() {
 										className={errors.message ? "border-destructive" : ""}
 									/>
 									{errors.message && (
-										<p className="text-sm text-destructive">{errors.message.message}</p>
+										<p className="text-destructive text-sm">{errors.message.message}</p>
 									)}
 								</div>
 								
 								<Button 
 									type="submit" 
 									disabled={isSubmitting}
-									className="w-full group"
+									className="group w-full"
 								>
 									<span>Send Message</span>
 									<ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -775,54 +775,54 @@ export default function HomePage() {
 							viewport={{ once: true }}
 							className="space-y-8"
 						>
-							<div className="bg-card rounded-xl border p-8 shadow-lg">
-								<h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+							<div className="rounded-xl border bg-card p-8 shadow-lg">
+								<h3 className="mb-6 font-bold text-2xl">Contact Information</h3>
 								
 								<div className="space-y-4">
 									<div className="flex items-center gap-4">
-										<div className="bg-accent/10 text-accent p-3 rounded-full">
+										<div className="rounded-full bg-accent/10 p-3 text-accent">
 											<TelegramIcon className="h-6 w-6" />
 										</div>
 										<div>
-											<p className="text-sm text-muted-foreground">Telegram</p>
+											<p className="text-muted-foreground text-sm">Telegram</p>
 											<a href="https://t.me/sabraman" className="font-medium hover:text-accent">@sabraman</a>
 										</div>
 									</div>
 									
 									<div className="flex items-center gap-4">
-										<div className="bg-accent/10 text-accent p-3 rounded-full">
+										<div className="rounded-full bg-accent/10 p-3 text-accent">
 											<VKIcon className="h-6 w-6" />
 										</div>
 										<div>
-											<p className="text-sm text-muted-foreground">VK</p>
+											<p className="text-muted-foreground text-sm">VK</p>
 											<a href="https://vk.com/sabraman" className="font-medium hover:text-accent">sabraman</a>
 										</div>
 									</div>
 									
 									<div className="flex items-center gap-4">
-										<div className="bg-accent/10 text-accent p-3 rounded-full">
+										<div className="rounded-full bg-accent/10 p-3 text-accent">
 											<Github className="h-6 w-6" />
 										</div>
 										<div>
-											<p className="text-sm text-muted-foreground">GitHub</p>
+											<p className="text-muted-foreground text-sm">GitHub</p>
 											<a href="https://github.com/sabraman" className="font-medium hover:text-accent">sabraman</a>
 										</div>
 									</div>
 									
 									<div className="flex items-center gap-4">
-										<div className="bg-accent/10 text-accent p-3 rounded-full">
+										<div className="rounded-full bg-accent/10 p-3 text-accent">
 											<Instagram className="h-6 w-6" />
 										</div>
 										<div>
-											<p className="text-sm text-muted-foreground">Instagram</p>
+											<p className="text-muted-foreground text-sm">Instagram</p>
 											<a href="https://instagram.com/sabraman" className="font-medium hover:text-accent">sabraman</a>
 										</div>
 									</div>
 					</div>
 				</div>
 
-							<div className="bg-card rounded-xl border p-8 shadow-lg">
-								<h3 className="text-2xl font-bold mb-6">Location</h3>
+							<div className="rounded-xl border bg-card p-8 shadow-lg">
+								<h3 className="mb-6 font-bold text-2xl">Location</h3>
 								<p className="text-muted-foreground">
 									Saint Petersburg, Russia
 								</p>
@@ -836,39 +836,39 @@ export default function HomePage() {
 			</section>
 
 			{/* Footer */}
-			<footer className="py-12 border-t">
+			<footer className="border-t py-12">
 				<div className="container mx-auto px-4">
-					<div className="flex flex-col md:flex-row justify-between items-center">
+					<div className="flex flex-col items-center justify-between md:flex-row">
 						<p className="mb-4 md:mb-0">&copy; {new Date().getFullYear()} Danya Yudin</p>
 						
 					<div className="flex gap-6">
 							<Link 
 								href="https://t.me/sabraman" 
-								className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
 							Telegram
 						</Link>
 							<Link 
 								href="https://github.com/sabraman" 
-								className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
 							GitHub
 						</Link>
 							<Link 
 								href="https://instagram.com/sabraman" 
-								className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
 							Instagram
 						</Link>
 							<Link 
 								href="https://x.com/1sabraman" 
-								className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
 							X
 						</Link>
 							<Link 
 								href="https://vk.com/sabraman" 
-								className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
 							VK
 						</Link>

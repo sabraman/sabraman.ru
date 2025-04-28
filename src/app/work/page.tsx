@@ -3,7 +3,7 @@ import WorkExperience from "../../components/WorkExperience"
 export default function WorkPage() {
     return (
         <main className="container mx-auto max-w-4xl px-4 py-16">
-            <h1 className="mb-12 font-mono text-4xl font-bold text-foreground">Work Experience</h1>
+            <h1 className="mb-12 font-bold font-mono text-4xl text-foreground">Work Experience</h1>
 
             <WorkExperience
                 company="VAPARSHOP"
