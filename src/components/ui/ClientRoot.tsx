@@ -9,9 +9,9 @@ export function ClientRoot({ children }: { children: React.ReactNode }) {
 
     // Re-enable the state change based on intro finishing
     useEffect(() => {
-        // Optional: Set a maximum time for the intro, e.g., if animation fails
-        // const timer = setTimeout(() => setShowIntro(false), 5000);
-        // return () => clearTimeout(timer);
+        // Максимальное время для отображения интро - 5 секунд
+        const timer = setTimeout(() => setShowIntro(false), 5000);
+        return () => clearTimeout(timer);
     }, []);
 
     return (

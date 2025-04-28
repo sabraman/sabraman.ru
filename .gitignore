@@ -48,6 +48,8 @@ yarn-error.log*
 # Cursor IDE specific
 .cursor/
 
+# Trae IDE
+.trae/
 # Project specific files
 resume.md
 design.md

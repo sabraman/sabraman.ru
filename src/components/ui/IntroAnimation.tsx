@@ -20,7 +20,7 @@ export function IntroAnimation() {
             style={{
                 fontFamily: 'Heading Now Variable',
                 fontVariationSettings: `'wght' 100, 'wdth' 100`,
-                fontSize: 'clamp(2.5rem, 8vw, 7rem)',
+                fontSize: 'clmp(2.5rem, 8vw, 7rem)',
                 fontWeight: 100,
                 letterSpacing: '-0.04em',
                 lineHeight: 1.05,

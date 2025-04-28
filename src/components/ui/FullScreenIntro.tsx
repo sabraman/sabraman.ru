@@ -32,14 +32,15 @@ export function FullScreenIntro({ onFinish }: { onFinish?: () => void }) {
                 layoutId="sabraman-title" // Add the layoutId here
                 initial={{
                     fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
-                    fontSize: '100vh',
+                    fontSize: 'min(100vh, 80vw)', // Min size
+
                     // scale: 1,
                 }}
                 animate={controls}
                 style={{
                     fontFamily: 'Heading Now Variable',
                     fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
-                    fontSize: '100vh', // Keep initial size large
+                    fontSize: 'min(100vh, 80vw)', // Min size
                     fontWeight: 1000,
                     lineHeight: 1,
                     textAlign: 'center',
