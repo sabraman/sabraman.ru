@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Badge } from "~/components/ui/badge";
 import { Card } from "~/components/ui/card";
 import Link from "next/link";
+import { IntroAnimation } from "~/components/ui/IntroAnimation";
 
 export default function HomePage() {
 	const { theme } = useTheme();
@@ -24,9 +25,7 @@ export default function HomePage() {
 			{/* Hero Section */}
 			<section className="flex min-h-[80vh] flex-col items-left justify-center px-4">
 				<div className="relative flex flex-col items-center gap-6 text-left">
-					<h1 className="font-mono text-6xl font-bold tracking-tight text-foreground">
-						Danya Yudin
-					</h1>
+					{/* <IntroAnimation /> */}
 					<p className="max-w-[42rem] text-lg text-muted-foreground text-left">
 						Creative Designer and Early-Stage Developer crafting minimal, functional, and intuitive digital experiences
 					</p>

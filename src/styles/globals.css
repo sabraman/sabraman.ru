@@ -2,6 +2,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Heading Now Variable";
+  src: url("/HeadingNowVariable-Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-stretch: 100% 1000%;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

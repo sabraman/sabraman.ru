@@ -1,4 +1,5 @@
 import "~/styles/globals.css";
+import { motion } from "framer-motion";
 
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
@@ -6,6 +7,7 @@ import { cn } from "~/lib/utils";
 import { ThemeProvider } from "~/components/ThemeProvider";
 import { ThemeToggle } from "~/components/ui/theme-toggle";
 import Link from "next/link";
+import { ClientRoot } from "~/components/ui/ClientRoot";
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
@@ -34,29 +36,31 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={jetbrainsMono.className}>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<header className="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-sm">
-						<nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
-							<Link href="/" className="text-lg font-medium">
-								SABRAMAN
-							</Link>
-							<div className="flex items-center gap-6">
-								<Link href="/work" className="text-sm text-muted-foreground hover:text-foreground">
-									Work
+				<ClientRoot>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<header className="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-sm">
+							<nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
+								<Link href="/" className="text-lg font-medium">
+									<motion.span layoutId="sabraman-title">SABRAMAN</motion.span>
 								</Link>
-								<ThemeToggle />
-							</div>
-						</nav>
-					</header>
-					<main className="pt-16">
-						{children}
-					</main>
-				</ThemeProvider>
+								<div className="flex items-center gap-6">
+									<Link href="/work" className="text-sm text-muted-foreground hover:text-foreground">
+										Work
+									</Link>
+									<ThemeToggle />
+								</div>
+							</nav>
+						</header>
+						<main className="pt-16">
+							{children}
+						</main>
+					</ThemeProvider>
+				</ClientRoot>
 			</body>
 		</html>
 	);
