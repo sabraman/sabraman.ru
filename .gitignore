@@ -54,3 +54,4 @@ yarn-error.log*
 resume.md
 design.md
 rules.json
+.cursorignore
