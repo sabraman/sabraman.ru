@@ -3,60 +3,46 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Badge } from "~/components/ui/badge";
-import { Input } from "~/components/ui/input";
-import { Textarea } from "~/components/ui/textarea";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import Contact from "~/components/Contact";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
-import { 
-	ArrowUpRight, 
-	ArrowRight, 
-	Download, 
+import { Toaster } from "~/components/ui/sonner";
+import {
+	ArrowUpRight,
+	ArrowRight,
+	Download,
 	ExternalLink,
 	Code,
 	Paintbrush,
 	LineChart,
-	MessageSquare,
 	Github,
 	Linkedin,
 	Instagram,
 	X,
 	Mail,
-	UserCircle2
 } from "lucide-react";
 
-// Contact form validation schema
-const formSchema = z.object({
-	name: z.string().min(2, "Name must be at least 2 characters"),
-	email: z.string().email("Please enter a valid email"),
-	message: z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type FormData = z.infer<typeof formSchema>;
-
 // Work Experience Item Component with staggered animations
-function WorkExperienceItem({ 
-	company, 
-	title, 
-	period, 
-	location, 
-	logo, 
+function WorkExperienceItem({
+	company,
+	title,
+	period,
+	location,
+	logo,
 	achievements,
 	delay
-}: { 
-	company: string; 
-	title: string; 
-	period: string; 
-	location: string; 
+}: {
+	company: string;
+	title: string;
+	period: string;
+	location: string;
 	logo: string;
 	achievements: string[];
 	delay: number;
 }) {
 	return (
-		<motion.div 
+		<motion.div
 			initial={{ opacity: 0, y: 100 }}
 			whileInView={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay }}
@@ -80,23 +66,23 @@ function WorkExperienceItem({
 					</div>
 				</div>
 			</div>
-			
+
 			<div className="lg:col-span-8">
 				<ul className="space-y-6">
 					{achievements.map((achievement, index) => {
 						const uniqueKey = `${company}-achievement-${index}-${achievement.substring(0, 10).replace(/\s+/g, '')}`;
-						
+
 						// Check if achievement has bold text (marked with ** **)
 						if (achievement.includes('**')) {
 							return (
-								<motion.li 
+								<motion.li
 									key={uniqueKey}
 									initial={{ opacity: 0, x: 50 }}
 									whileInView={{ opacity: 1, x: 0 }}
-									transition={{ 
-										duration: 0.5, 
-										ease: [0.22, 1, 0.36, 1], 
-										delay: 0.1 * index 
+									transition={{
+										duration: 0.5,
+										ease: [0.22, 1, 0.36, 1],
+										delay: 0.1 * index
 									}}
 									viewport={{ once: true }}
 									className="relative pl-6 text-xl leading-relaxed before:absolute before:top-[14px] before:left-0 before:h-3 before:w-3 before:rounded-full before:bg-accent before:content-[''] md:text-2xl"
@@ -114,14 +100,14 @@ function WorkExperienceItem({
 						}
 
 						return (
-							<motion.li 
+							<motion.li
 								key={uniqueKey}
 								initial={{ opacity: 0, x: 50 }}
 								whileInView={{ opacity: 1, x: 0 }}
-								transition={{ 
-									duration: 0.5, 
-									ease: [0.22, 1, 0.36, 1], 
-									delay: 0.1 * index 
+								transition={{
+									duration: 0.5,
+									ease: [0.22, 1, 0.36, 1],
+									delay: 0.1 * index
 								}}
 								viewport={{ once: true }}
 								className="relative pl-6 text-xl leading-relaxed before:absolute before:top-[14px] before:left-0 before:h-3 before:w-3 before:rounded-full before:bg-accent before:content-[''] md:text-2xl"
@@ -142,7 +128,7 @@ function ProjectCard({ title, description, tags, href }: { title: string; descri
 		<Card className="group overflow-hidden">
 			<Link href={href} className="block p-6">
 				<div className="flex h-full flex-col">
-					<h3 
+					<h3
 						className="mb-3 text-2xl transition-colors duration-300 group-hover:text-accent"
 						style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 700, 'wdth' 900` }}
 					>
@@ -151,9 +137,9 @@ function ProjectCard({ title, description, tags, href }: { title: string; descri
 							<ArrowUpRight className="inline h-5 w-5" />
 						</span>
 					</h3>
-					
+
 					<p className="mb-6 text-muted-foreground">{description}</p>
-					
+
 					<div className="mt-auto flex flex-wrap gap-2">
 						{tags.map(tag => (
 							<Badge key={tag} variant="secondary" className="rounded-full px-3 py-1">
@@ -187,101 +173,60 @@ const VKIcon: React.FC<IconProps> = ({ className }) => (
 export default function HomePage() {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
-	
-	// Contact form setup
-	const { 
-		register, 
-		handleSubmit, 
-		formState: { errors, isSubmitting } 
-	} = useForm<FormData>({
-		resolver: zodResolver(formSchema),
-	});
 
-	// Contact form submission handler
-	const onSubmit = async (data: FormData) => {
-		console.log(data);
-		await new Promise(resolve => setTimeout(resolve, 1000));
-		alert("Message sent! (demo)");
-	};
-	
-	// Contact info
-	const contactInfo = [
-		{
-			id: "email",
-			icon: <Mail className="h-5 w-5" />,
-			title: "Email",
-			value: "sabraman@ya.ru",
-			link: "mailto:sabraman@ya.ru",
-		},
-		{
-			id: "telegram",
-			icon: <MessageSquare className="h-5 w-5" />,
-			title: "Telegram",
-			value: "@sabraman",
-			link: "https://t.me/sabraman",
-		},
-		{
-			id: "github",
-			icon: <Github className="h-5 w-5" />,
-			title: "GitHub",
-			value: "sabraman",
-			link: "https://github.com/sabraman",
-		},
-		{
-			id: "linkedin",
-			icon: <Linkedin className="h-5 w-5" />,
-			title: "LinkedIn",
-			value: "Danya Yudin",
-			link: "https://linkedin.com/in/sabra-man",
-		},
-	];
-	
 	// Setup scroll animations
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
 		offset: ["start start", "end end"]
 	});
-	
+
 	const textScale = useTransform(scrollYProgress, [0, 0.1], [1, 1.5]);
 	const textOpacity = useTransform(scrollYProgress, [0.05, 0.1, 0.15], [1, 0, 0]);
 	const textY = useTransform(scrollYProgress, [0, 0.1], ["0%", "-50%"]);
-	
+
+	// Define logo animations
+	const logoY = useTransform(scrollYProgress, [0, 0.5], [0, -200]);
+	const logoRotate = useTransform(scrollYProgress, [0, 0.5], [0, 15]);
+
 	// Random letter animation setup
 	const originalName = "DANYA YUDIN";
 	const [displayName, setDisplayName] = useState(originalName);
-	
+
 	useEffect(() => {
 		setIsMounted(true);
-		
-		// Function to randomize a single character
-		const randomChar = () => {
-			const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			return chars.charAt(Math.floor(Math.random() * chars.length));
+
+		// Fixed set of characters for scrambling - no randomness
+		const scrambleChars = "BCDEFGHJKLMNPQRSTVWXYZ";
+
+		// Function to get a character from the scramble set based on position
+		const getScrambleChar = (position: number) => {
+			return scrambleChars[position % scrambleChars.length];
 		};
-		
+
 		// Function to create a scrambled version of the name
 		const scrambleName = (progress: number) => {
 			const targetLength = originalName.length;
 			let result = "";
-			
+
 			for (let i = 0; i < targetLength; i++) {
 				if (i < progress * targetLength) {
 					result += originalName[i];
 				} else if (originalName[i] === " ") {
 					result += " ";
 				} else {
-					result += randomChar();
+					// Use a deterministic character based on position
+					result += getScrambleChar(i);
 				}
 			}
-			
+
 			return result;
 		};
-		
+
 		// Animation loop for name scrambling
 		let frame = 0;
 		let progress = 0;
 		const totalFrames = 20;
-		
+
 		const animate = () => {
 			if (progress < 1) {
 				frame++;
@@ -290,25 +235,179 @@ export default function HomePage() {
 				requestAnimationFrame(animate);
 			}
 		};
-		
+
 		const timeout = setTimeout(() => {
 			animate();
 		}, 500);
-		
+
 		return () => clearTimeout(timeout);
 	}, []);
-	
+
 	if (!isMounted) {
 		return null;
 	}
 
+	// Create the particles array outside of the render
+	const particles = Array.from({ length: 15 }).map((_, index) => ({
+		key: index,
+		initialX: `${Math.random() * 100}%`,
+		initialY: `${Math.random() * 100}%`,
+		targetX: `${Math.random() * 100}%`,
+		targetY: `${Math.random() * 100}%`,
+		initialOpacity: Math.random() * 0.4 + 0.2,
+		midOpacity: Math.random() * 0.7 + 0.3,
+		duration: Math.random() * 15 + 10,
+		blurAmount: Math.random() * 2,
+		glowSize: Math.random() * 8 + 2,
+		glowIntensity: Math.random() * 3 + 1,
+		scale: Math.random() * 0.8 + 0.2
+	}));
+
 	return (
 		<div ref={containerRef} className="relative">
+			<Toaster />
 			{/* Hero Section with name animation */}
-			<section className="relative flex h-screen flex-col items-center justify-center overflow-hidden">
-				<motion.div 
-					className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center"
-					style={{ 
+			<section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
+				{/* Interactive logo animation */}
+				<div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+					{/* Base background effects */}
+					<div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background opacity-95" />
+
+					{/* Digital matrix effect overlay */}
+					<div className="absolute inset-0 opacity-5">
+						{Array.from({ length: 20 }).map((_, i) => (
+							<div
+								key={i}
+								className="absolute text-accent/70 font-mono text-xs"
+								style={{
+									left: `${Math.random() * 100}%`,
+									top: `${Math.random() * 100}%`,
+									opacity: Math.random() * 0.7 + 0.3,
+									transform: `scale(${Math.random() * 0.5 + 0.5})`,
+								}}
+							>
+								{Math.random() > 0.5 ? '1' : '0'}
+							</div>
+						))}
+					</div>
+
+					{/* Interactive logo animation container - allows mouse interaction */}
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						transition={{ duration: 1, delay: 0.5 }}
+						className="relative w-full h-full flex items-center justify-center"
+						style={{ perspective: 1000 }}
+					>
+						{/* 3D Interactive logo container */}
+						<motion.div
+							className="w-[80vh] h-[80vh] max-w-[800px] max-h-[800px] relative"
+							initial={{ rotateY: 0, rotateX: 0 }}
+							animate={{ rotateY: [0, 5, -5, 0], rotateX: [0, -5, 5, 0] }}
+							transition={{
+								repeat: Infinity,
+								duration: 20,
+								ease: "linear",
+								delay: 0.7
+							}}
+							style={{
+								transformStyle: "preserve-3d",
+								y: logoY,
+							}}
+						>
+							{/* Interactive logo container */}
+							<motion.div
+								className="w-full h-full relative cursor-pointer"
+								whileHover={{ scale: 1.05 }}
+								transition={{ type: "spring", stiffness: 400, damping: 10 }}
+							>
+								{/* Main logo SVG with animation */}
+								<motion.svg
+									width="100%"
+									height="100%"
+									viewBox="0 0 1106 1057"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+									className="absolute inset-0"
+									style={{ filter: "drop-shadow(0 0 10px rgba(120, 120, 250, 0.3))" }}
+								>
+									<motion.path
+										d="M861.369 247.228C861.333 247.353 861.307 247.481 861.261 247.604C859.745 251.632 849.864 263.106 846.718 267.154L753.594 387.119C743.695 399.893 734.093 413.073 723.875 425.598C722.562 427.213 720.881 428.772 718.881 429.546C716.653 430.402 714.04 429.336 711.921 428.638C704.881 426.322 697.988 423.362 691.082 420.698L651.906 405.611L534.427 360.602C545.858 356.025 601.362 338.802 605.729 335.035C606.49 327.907 583.263 258.01 579.257 247.097C559.698 193.807 520.081 115.298 463.736 90.5882C440.364 80.3359 410.784 80.8487 386.638 89.503C350.339 104.693 326.467 141.137 309.025 173.841C304.669 182.005 301.006 193.251 294.943 200.095C301.777 180.307 308.826 160.956 319.033 142.447C337.081 109.726 364.647 80.401 402.202 68.9848C411.406 66.1872 420.725 64.6062 430.285 63.789C440.123 62.9481 450.194 63.2456 460.058 63.101C474.419 62.8583 488.778 62.5148 503.136 62.0705L562.821 60.5274C579.94 60.1498 597.226 59.4249 614.212 61.5247C616.153 61.7582 618.086 62.034 620.012 62.3523C621.938 62.6705 623.855 63.0309 625.763 63.4334C627.67 63.836 629.566 64.2803 631.451 64.7664C633.336 65.2525 635.207 65.7797 637.066 66.3481C638.924 66.9167 640.767 67.5259 642.596 68.1756C644.423 68.8254 646.234 69.5151 648.028 70.2447C649.823 70.9746 651.598 71.7435 653.354 72.5516C655.11 73.3596 656.845 74.2062 658.56 75.0912C705.829 99.3213 745.984 162.183 765.542 208.712C774.168 229.231 780.306 250.595 786.793 271.837L837.542 254.837C845.075 252.311 853.599 248.522 861.369 247.228Z"
+										stroke="currentColor"
+										strokeWidth="4"
+										strokeLinecap="round"
+										fill="transparent"
+										initial={{ pathLength: 0, opacity: 0 }}
+										animate={{ pathLength: 1, opacity: 1 }}
+										transition={{ duration: 2, delay: 1, ease: "easeInOut" }}
+									/>
+									<motion.path
+										d="M66.109 398.261L254.566 406.441C259.134 406.637 294.045 407.339 295.758 409.432C298.711 413.045 354.226 585.454 358.513 603.17C337.141 588.239 316.046 572.896 294.554 558.123C279.134 580.824 262.88 602.984 248.834 626.511C218.877 676.687 184.858 755.549 197.342 813.929C203.414 842.333 222.318 870.719 247.73 886.303C279.493 905.784 321.407 905.361 357.863 900.547C368.161 899.185 378.681 896.143 388.983 895.563C341.847 911.871 291.7 920.412 245.157 899.091C243.438 898.295 241.738 897.463 240.056 896.598C238.374 895.732 236.713 894.831 235.071 893.895C233.43 892.961 231.81 891.994 230.212 890.992C228.615 889.991 227.04 888.957 225.489 887.889C223.939 886.824 222.412 885.727 220.909 884.596C219.409 883.467 217.932 882.308 216.48 881.119C215.031 879.929 213.609 878.709 212.214 877.46C210.818 876.211 209.452 874.933 208.114 873.626C198.237 864.073 190.116 853.049 181.694 842.32L151.831 804.562L113.342 756.379C104.751 745.626 95.7392 734.999 88.2052 723.512C86.3256 720.674 84.5391 717.783 82.8454 714.838C81.1491 711.895 79.5481 708.902 78.0424 705.859C76.534 702.817 75.124 699.733 73.8122 696.605C72.5005 693.477 71.2874 690.314 70.173 687.115C69.2498 684.457 68.2996 681.708 67.6804 678.958L67.2567 679.106L64.6251 668.455L65.0606 668.442C51.8859 607.669 81.534 522.688 116.094 471.285C121.761 462.998 127.511 454.765 133.342 446.585L66.109 398.261ZM65.0606 668.442L64.6251 668.455L67.2567 679.106L67.6804 678.958C66.8922 675.437 65.942 671.939 65.0606 668.442Z"
+										stroke="currentColor"
+										strokeWidth="4"
+										strokeLinecap="round"
+										fill="transparent"
+										initial={{ pathLength: 0, opacity: 0 }}
+										animate={{ pathLength: 1, opacity: 1 }}
+										transition={{ duration: 2, delay: 1.3, ease: "easeInOut" }}
+									/>
+									<motion.path
+										d="M1045.62 548.718L1046.48 552.204C1046.59 555.81 1047.62 559.597 1048.11 563.197C1048.36 565.048 1048.57 566.906 1048.72 568.769C1048.87 570.633 1048.97 572.499 1049.02 574.368C1049.06 576.237 1049.06 578.108 1049 579.98C1048.94 581.852 1048.83 583.723 1048.67 585.592C1048.51 587.278 1048.31 588.96 1048.08 590.64C1047.84 592.321 1047.57 593.996 1047.27 595.665C1046.96 597.335 1046.62 598.998 1046.24 600.653C1045.86 602.312 1045.45 603.962 1045 605.604C1044.55 607.246 1044.07 608.88 1043.55 610.505C1043.03 612.127 1042.47 613.739 1041.88 615.341C1041.29 616.943 1040.67 618.534 1040.01 620.112C1039.35 621.691 1038.66 623.257 1037.93 624.81C1032.29 637.109 1024.72 648.699 1017.75 660.354L986.15 713.324L953.685 768.283C945.526 782.159 937.747 796.281 928.065 809.265C925.553 812.638 922.937 815.935 920.216 819.156C917.496 822.379 914.676 825.519 911.756 828.573C908.838 831.631 905.825 834.6 902.719 837.48C899.613 840.361 896.419 843.147 893.137 845.838C890.939 847.623 888.708 849.368 886.445 851.074C884.182 852.783 881.888 854.449 879.562 856.073C877.237 857.699 874.882 859.285 872.498 860.828C870.113 862.372 867.701 863.874 865.262 865.334C862.822 866.794 860.356 868.21 857.864 869.583C855.371 870.956 852.854 872.283 850.312 873.564C847.771 874.849 845.207 876.089 842.621 877.284C840.034 878.476 837.426 879.624 834.797 880.726C780.087 904.109 698.019 916.86 638.89 917.975C614.974 918.422 591.597 916.729 567.833 915.04C561.649 944.021 555.403 973.043 548.724 1001.93L445.433 821.472C440.42 812.703 435.115 803.99 430.427 795.06C429.525 793.339 427.697 790.329 427.988 788.408C428.854 786.779 430.084 785.697 431.497 784.509C444.672 773.432 458.364 762.85 471.764 752.027L600.017 648.33C608.482 641.478 616.827 633.916 625.869 627.82L608.222 709.857C707.333 716.645 813.688 720.861 909.966 690.486C931.982 683.537 953.744 675.02 973.045 662.356C1001.47 643.706 1024.95 614.661 1031.66 581.803C1039.91 541.468 1011.41 499.636 985.465 470.9C981.631 466.566 977.64 462.37 973.492 458.312C969.192 454.051 964.399 449.86 960.951 444.91L960.508 444.267C966.612 447.674 972.471 452.699 977.91 457.018C1001.38 475.667 1022.16 497.031 1035.75 523.562C1039.88 531.628 1042.02 540.107 1045.46 548.364L1045.62 548.718Z"
+										stroke="currentColor"
+										strokeWidth="4"
+										strokeLinecap="round"
+										fill="transparent"
+										initial={{ pathLength: 0, opacity: 0 }}
+										animate={{ pathLength: 1, opacity: 1 }}
+										transition={{ duration: 2, delay: 1.6, ease: "easeInOut" }}
+									/>
+								</motion.svg>
+
+								{/* High-tech scan effect */}
+								<motion.div
+									className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/10 to-transparent opacity-30"
+									animate={{
+										top: ["-100%", "200%"],
+									}}
+									transition={{
+										repeat: Infinity,
+										duration: 3,
+										ease: "linear",
+										repeatDelay: 1,
+										delay: 2
+									}}
+									style={{ height: "30%" }}
+								/>
+
+								{/* High-tech glitching effects */}
+								<motion.div
+									className="absolute inset-0"
+									animate={{ opacity: [0, 0.3, 0, 0.2, 0] }}
+									transition={{
+										repeat: Infinity,
+										duration: 5,
+										repeatDelay: 10,
+										delay: 2.5
+									}}
+								>
+									<div
+										className="absolute inset-0 bg-accent/20 mix-blend-overlay"
+										style={{ clipPath: "polygon(0 0, 100% 0, 100% 10%, 0 10%)", transform: "translateY(30%)" }}
+									/>
+									<div
+										className="absolute inset-0 bg-accent/20 mix-blend-overlay"
+										style={{ clipPath: "polygon(0 0, 100% 0, 100% 5%, 0 5%)", transform: "translateY(50%)" }}
+									/>
+								</motion.div>
+							</motion.div>
+						</motion.div>
+					</motion.div>
+				</div>
+
+				{/* Text content */}
+				<motion.div
+					className="relative z-10 flex flex-col items-center justify-center text-center"
+					style={{
 						scale: textScale,
 						opacity: textOpacity,
 						y: textY,
@@ -318,61 +417,67 @@ export default function HomePage() {
 						<motion.div
 							initial={{ opacity: 0, y: 100 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ 
-								duration: 0.8, 
+							transition={{
+								duration: 0.8,
 								ease: [0.22, 1, 0.36, 1],
-								delay: 0.2
+								delay: 1.5
 							}}
 						>
-							<h1 
+							<h1
 								className="mb-8 font-extrabold text-[8vw] leading-none tracking-tight md:text-[6vw] lg:text-[5vw] xl:text-[4vw]"
 								style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
 							>
 								{displayName}
 							</h1>
 						</motion.div>
-						
+
 						<motion.h2
 							initial={{ opacity: 0, y: 50 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ 
-								duration: 0.8, 
+							transition={{
+								duration: 0.8,
 								ease: [0.22, 1, 0.36, 1],
-								delay: 0.4
+								delay: 1.8
 							}}
 							className="mb-10 text-[5vw] text-muted-foreground leading-tight md:text-[4vw] lg:text-[3vw] xl:text-[2.5vw]"
 						>
-							CREATIVE DESIGNER &<br/>
+							CREATIVE DESIGNER &<br />
 							<span className="bg-gradient-to-r from-accent to-sky-300 bg-clip-text text-transparent">
 								EARLY-STAGE DEVELOPER
 							</span>
 						</motion.h2>
-						
+
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ 
-								duration: 0.6, 
+							transition={{
+								duration: 0.6,
 								ease: [0.22, 1, 0.36, 1],
-								delay: 0.7
+								delay: 2.1
 							}}
 							className="flex flex-col justify-center gap-4 md:flex-row"
 						>
-							<Button 
+							<Button
 								size="lg"
-								className="group rounded-full px-8 py-6 font-medium text-base"
+								className="group relative rounded-full px-8 py-6 font-medium text-base overflow-hidden"
 								asChild
 							>
 								<a href="/DANYA_YUDIN_CV.md" download>
-									<span>DOWNLOAD RESUME</span>
-									<Download className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+									<span className="relative z-10">DOWNLOAD RESUME</span>
+									<Download className="relative z-10 ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+									<motion.span
+										className="absolute inset-0 bg-accent"
+										initial={{ x: "-100%", opacity: 0 }}
+										whileHover={{ x: 0, opacity: 1 }}
+										transition={{ duration: 0.3, ease: "easeInOut" }}
+									/>
 								</a>
-						</Button>
-							
-							<Button 
-								variant="outline" 
+							</Button>
+
+							<Button
+								variant="outline"
 								size="lg"
-								className="group cursor-pointer rounded-full px-8 py-6 font-medium text-base"
+								className="group relative cursor-pointer rounded-full px-8 py-6 font-medium text-base overflow-hidden"
 								onClick={() => {
 									// Scroll to contact section
 									const contactSection = document.getElementById('contact-section');
@@ -381,46 +486,17 @@ export default function HomePage() {
 									}
 								}}
 							>
-								<span>GET IN TOUCH</span>
-								<ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-						</Button>
+								<span className="relative z-10">GET IN TOUCH</span>
+								<ArrowRight className="relative z-10 ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+								<motion.span
+									className="absolute inset-0 bg-accent/10"
+									initial={{ scale: 0, opacity: 0 }}
+									whileHover={{ scale: 1, opacity: 1 }}
+									transition={{ duration: 0.3, ease: "easeInOut" }}
+								/>
+							</Button>
 						</motion.div>
 					</div>
-				</motion.div>
-				
-				<motion.div 
-					className="absolute inset-0 z-0 flex items-center justify-center"
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 1, delay: 1 }}
-				>
-					<div 
-						className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background opacity-95"
-					/>
-					
-					<motion.div 
-						className="absolute h-[150vh] w-[150vw]" 
-						animate={{ 
-							rotate: 360,
-						}} 
-						transition={{ 
-							duration: 180, 
-							ease: "linear", 
-							repeat: Number.POSITIVE_INFINITY 
-						}}
-					>
-						{/* Abstract background pattern */}
-						<div className="absolute h-full w-full rounded-full border-[1px] border-foreground/5" style={{ top: "10%", left: "10%" }} />
-						<div className="absolute h-[90%] w-[90%] rounded-full border-[1px] border-foreground/5" style={{ top: "5%", left: "5%" }} />
-						<div className="absolute h-[80%] w-[80%] rounded-full border-[1px] border-foreground/10" style={{ top: "10%", left: "10%" }} />
-						<div className="absolute h-[70%] w-[70%] rounded-full border-[1px] border-foreground/10" style={{ top: "15%", left: "15%" }} />
-						<div className="absolute h-[60%] w-[60%] rounded-full border-[1px] border-foreground/15" style={{ top: "20%", left: "20%" }} />
-						<div className="absolute h-[50%] w-[50%] rounded-full border-[1px] border-foreground/15" style={{ top: "25%", left: "25%" }} />
-						<div className="absolute h-[40%] w-[40%] rounded-full border-[1px] border-foreground/20" style={{ top: "30%", left: "30%" }} />
-						<div className="absolute h-[30%] w-[30%] rounded-full border-[1px] border-primary/50" style={{ top: "35%", left: "35%" }} />
-						<div className="absolute h-[20%] w-[20%] rounded-full border-[1px] border-primary" style={{ top: "40%", left: "40%" }} />
-						<div className="absolute h-[10%] w-[10%] rounded-full border-[1px] border-accent" style={{ top: "45%", left: "45%" }} />
-					</motion.div>
 				</motion.div>
 			</section>
 
@@ -434,19 +510,19 @@ export default function HomePage() {
 						viewport={{ once: true }}
 						className="mb-20 overflow-hidden"
 					>
-						<h2 
+						<h2
 							className="font-extrabold text-7xl uppercase tracking-tight md:text-7xl xl:text-[12rem]"
 							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
 						>
-							WHO<span className="relative z-0 ml-4 inline-block md:ml-8 xl:ml-12">
+							<span className="relative z-0 ml-4 inline-block md:ml-8 xl:ml-12">
 								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
 								I AM
 							</span>
 						</h2>
 					</motion.div>
-					
+
 					<div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
-						<motion.div 
+						<motion.div
 							className="lg:col-span-2"
 							initial={{ opacity: 0, y: 50 }}
 							whileInView={{ opacity: 1, y: 0 }}
@@ -457,27 +533,27 @@ export default function HomePage() {
 								<p className="mb-8 text-2xl leading-relaxed lg:text-3xl">
 									Creative Designer and Early-Stage Developer with extensive hands-on experience in visual design, branding, and application development.
 								</p>
-								
+
 								<p className="text-muted-foreground text-xl leading-relaxed lg:text-2xl">
 									I have a proven track record of transforming concepts into visually appealing and functional digital products. My passion lies in integrating design and technology to deliver intuitive user experiences.
 								</p>
-								
+
 								<div className="mt-12 flex flex-wrap gap-6">
 									<div className="flex items-center gap-2">
 										<TelegramIcon className="h-6 w-6 text-primary" />
 										<Link href="https://t.me/sabraman" className="text-xl transition-colors hover:text-accent">@sabraman</Link>
 									</div>
-									
+
 									<div className="flex items-center gap-2">
 										<Github className="h-6 w-6 text-primary" />
 										<Link href="https://github.com/sabraman" className="text-xl transition-colors hover:text-accent">sabraman</Link>
 									</div>
-									
+
 									<div className="flex items-center gap-2">
 										<Instagram className="h-6 w-6 text-primary" />
 										<Link href="https://instagram.com/sabraman" className="text-xl transition-colors hover:text-accent">sabraman</Link>
 									</div>
-									
+
 									<div className="flex items-center gap-2">
 										<X className="h-6 w-6 text-primary" />
 										<Link href="https://x.com/1sabraman" className="text-xl transition-colors hover:text-accent">1sabraman</Link>
@@ -485,7 +561,7 @@ export default function HomePage() {
 								</div>
 							</div>
 						</motion.div>
-						
+
 						<motion.div
 							initial={{ opacity: 0, y: 50 }}
 							whileInView={{ opacity: 1, y: 0 }}
@@ -519,16 +595,170 @@ export default function HomePage() {
 									</li>
 								</ul>
 							</div>
-							
-							<div className="rounded-xl border bg-card p-6 shadow-lg backdrop-blur-sm">
-								<h3 className="mb-4 font-bold text-2xl">TECH STACK</h3>
-								<div className="flex flex-wrap gap-2">
-									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">Next.js</Badge>
-									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">React</Badge>
-									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">TypeScript</Badge>
-									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">Telegram API</Badge>
-									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">Figma</Badge>
-									<Badge className="rounded-md bg-accent/10 px-4 py-2 text-accent text-base hover:bg-accent/20">UI/UX</Badge>
+						</motion.div>
+					</div>
+				</div>
+			</section>
+
+			{/* Projects Section */}
+			<section className="relative bg-primary/5 py-32 overflow-hidden" id="projects">
+				{/* Background decoration elements */}
+				<div className="absolute inset-0 w-full h-full -z-10 overflow-hidden">
+					<div className="absolute top-[5%] left-[10%] w-[30rem] h-[30rem] rounded-full bg-accent/5 blur-[100px] animate-pulse" style={{ animationDuration: '10s' }}></div>
+					<div className="absolute bottom-[10%] right-[15%] w-[25rem] h-[25rem] rounded-full bg-primary/5 blur-[100px] animate-pulse" style={{ animationDuration: '15s' }}></div>
+
+					<div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-5"></div>
+
+					<div className="absolute top-[30%] left-[50%] w-1 h-1 rounded-full bg-accent shadow-[0_0_40px_12px_rgba(120,120,250,0.3)] animate-ping" style={{ animationDuration: '3s' }}></div>
+					<div className="absolute top-[70%] left-[20%] w-1 h-1 rounded-full bg-primary shadow-[0_0_40px_12px_rgba(100,200,250,0.2)] animate-ping" style={{ animationDuration: '4s' }}></div>
+				</div>
+
+				<div className="container mx-auto px-4">
+					<motion.div
+						initial={{ opacity: 0, y: 100 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+						viewport={{ once: true }}
+						className="mb-20 overflow-hidden"
+					>
+						<h2
+							className="font-extrabold text-7xl uppercase tracking-tight md:text-8xl xl:text-[15rem]"
+							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 800` }}
+						>
+							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
+								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
+								MY
+							</span>
+							WORK
+						</h2>
+
+						<motion.p
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.6, delay: 0.3 }}
+							viewport={{ once: true }}
+							className="max-w-2xl text-xl text-muted-foreground mt-8 relative ml-1"
+						>
+							Selected projects showcasing my approach to design and development.
+							<span className="absolute -bottom-3 left-0 w-24 h-[2px] bg-gradient-to-r from-accent to-transparent"></span>
+						</motion.p>
+					</motion.div>
+
+					<div className="relative grid grid-cols-1 gap-14 md:grid-cols-12">
+						{/* VAPARSHOP - spans 7 columns */}
+						<motion.div
+							initial={{ opacity: 0, y: 50 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0 }}
+							viewport={{ once: true }}
+							className="md:col-span-7 h-full"
+						>
+							<Link href="/work/vaparshop" className="block h-full">
+								<div className="group relative overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:shadow-accent/5 hover:shadow-2xl hover:border-accent/20 h-full">
+									{/* Image overlay with grain texture */}
+									<div className="absolute inset-0 bg-[url('/vaparshop-bg.jpg')] bg-cover bg-center opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20"></div>
+									<div className="absolute inset-0 bg-[url('/noise.png')] opacity-5"></div>
+
+									{/* Content */}
+									<div className="relative p-8 md:p-10 h-full flex flex-col">
+										<div className="flex justify-between gap-4">
+
+											<h3 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text transition-colors duration-500 group-hover:from-accent group-hover:to-foreground">
+												VAPARSHOP
+												<span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 ml-1">
+													<ArrowUpRight className="inline h-6 w-6 opacity-70" />
+												</span>
+											</h3>
+											<div className="mb-4">
+												<Badge className="rounded-full px-3 py-1 text-xs font-medium bg-accent/10 text-accent transition-colors duration-300 group-hover:bg-accent/20">FEATURED</Badge>
+											</div>
+										</div>
+
+										<p className="text-xl text-muted-foreground mb-6 transition-colors duration-500 group-hover:text-foreground/90">
+											Telegram bots and web applications improving operational efficiency
+										</p>
+
+										<div className="mt-auto">
+											<div className="flex flex-wrap gap-2 mb-6">
+												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">Next.js</Badge>
+												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">Bot API</Badge>
+												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">tRPC</Badge>
+											</div>
+
+											<div className="inline-flex items-center font-medium text-foreground/90 group-hover:text-accent transition-colors duration-300">
+												View Project
+												<ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</Link>
+						</motion.div>
+
+						{/* HORNY PLACE - spans 5 columns */}
+						<motion.div
+							initial={{ opacity: 0, y: 50 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+							viewport={{ once: true }}
+							className="md:col-span-5 h-full"
+						>
+							<Link href="/work/horny-place" className="block h-full">
+								<div className="group relative overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:shadow-accent/5 hover:shadow-2xl hover:border-accent/20 h-full">
+									{/* Image overlay with grain texture */}
+									<div className="absolute inset-0 bg-[url('/horny-place-bg.jpg')] bg-cover bg-center opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20"></div>
+									<div className="absolute inset-0 bg-[url('/noise.png')] opacity-5"></div>
+
+									{/* Content */}
+									<div className="relative p-8 md:p-10 h-full flex flex-col">
+										<h3 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text transition-colors duration-500 group-hover:from-accent group-hover:to-foreground">
+											HORNY PLACE
+											<span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 ml-1">
+												<ArrowUpRight className="inline h-6 w-6 opacity-70" />
+											</span>
+										</h3>
+
+										<p className="text-xl text-muted-foreground mb-6 transition-colors duration-500 group-hover:text-foreground/90">
+											Comprehensive branding and interactive web solutions
+										</p>
+
+										<div className="mt-auto">
+											<div className="flex flex-wrap gap-2 mb-6">
+												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">Branding</Badge>
+												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">UI/UX</Badge>
+												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">React</Badge>
+											</div>
+
+											<div className="inline-flex items-center font-medium text-foreground/90 group-hover:text-accent transition-colors duration-300">
+												View Project
+												<ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</Link>
+						</motion.div>
+
+						{/* "More Coming Soon" element - spans 12 columns */}
+						<motion.div
+							initial={{ opacity: 0, y: 50 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+							viewport={{ once: true }}
+							className="md:col-span-12"
+						>
+							<div className="group relative overflow-hidden rounded-3xl border border-dashed border-muted-foreground/30 p-10 flex flex-col items-center justify-center h-40 transition-all duration-500 hover:border-accent/30">
+								<div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-50"></div>
+								<p className="text-xl text-muted-foreground transition-colors duration-300 group-hover:text-foreground">More projects coming soon</p>
+								<div className="mt-2">
+									<span className="inline-flex items-center justify-center gap-2">
+										<span className="animate-ping absolute h-1.5 w-1.5 rounded-full bg-accent opacity-75"></span>
+										<span className="relative h-1.5 w-1.5 rounded-full bg-accent"></span>
+										<span className="animate-ping absolute h-1.5 w-1.5 rounded-full bg-accent opacity-75" style={{ animationDelay: '0.5s' }}></span>
+										<span className="relative h-1.5 w-1.5 rounded-full bg-accent"></span>
+										<span className="animate-ping absolute h-1.5 w-1.5 rounded-full bg-accent opacity-75" style={{ animationDelay: '1s' }}></span>
+										<span className="relative h-1.5 w-1.5 rounded-full bg-accent"></span>
+									</span>
 								</div>
 							</div>
 						</motion.div>
@@ -546,7 +776,7 @@ export default function HomePage() {
 						viewport={{ once: true }}
 						className="mb-20 overflow-hidden"
 					>
-						<h2 
+						<h2
 							className="font-extrabold text-4xl uppercase tracking-tight md:text-7xl xl:text-[9rem]"
 							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
 						>
@@ -557,10 +787,10 @@ export default function HomePage() {
 							EXPERIENCE
 						</h2>
 					</motion.div>
-					
+
 					<div className="space-y-40">
 						{/* VAPARSHOP */}
-						<WorkExperienceItem 
+						<WorkExperienceItem
 							company="VAPARSHOP"
 							title="Designer & Junior Developer"
 							period="June 2024 – Present"
@@ -576,9 +806,9 @@ export default function HomePage() {
 								"Building a Telegram Mini App integrated with GetMeBack API"
 							]}
 						/>
-						
+
 						{/* HORNY PLACE */}
-						<WorkExperienceItem 
+						<WorkExperienceItem
 							company="HORNY PLACE"
 							title="Visual Designer & Developer"
 							period="October 2022 – May 2024"
@@ -594,9 +824,9 @@ export default function HomePage() {
 								"Designed clothing items, including \"Languages\" hoodie for Horny Vape"
 							]}
 						/>
-						
+
 						{/* ELYSIUM */}
-						<WorkExperienceItem 
+						<WorkExperienceItem
 							company="ELYSIUM"
 							title="Visual Merchandising & Sales Specialist"
 							period="September 2020 – September 2022"
@@ -608,9 +838,9 @@ export default function HomePage() {
 								"Developed engaging training materials and presentations for onboarding new staff"
 							]}
 						/>
-						
+
 						{/* VAPE CLUB */}
-						<WorkExperienceItem 
+						<WorkExperienceItem
 							company="VAPE CLUB"
 							title="Visual Merchandiser & Sales Manager"
 							period="February 2019 – August 2020"
@@ -626,62 +856,6 @@ export default function HomePage() {
 				</div>
 			</section>
 
-			{/* Projects Section */}
-			<section className="bg-primary/5 py-32" id="projects">
-				<div className="container mx-auto px-4">
-					<motion.div
-						initial={{ opacity: 0, y: 100 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-						viewport={{ once: true }}
-						className="mb-20 overflow-hidden"
-					>
-						<h2 
-							className="font-extrabold text-7xl uppercase tracking-tight md:text-8xl xl:text-[15rem]"
-							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 800` }}
-						>
-							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
-								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
-								MY
-							</span>
-							WORK
-						</h2>
-					</motion.div>
-					
-					<div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-						<motion.div
-							initial={{ opacity: 0, y: 50 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0 }}
-							viewport={{ once: true }}
-						>
-							<ProjectCard 
-								title="VAPARSHOP" 
-								description="Telegram bots and web applications improving operational efficiency"
-								tags={["Next.js", "Bot API", "tRPC"]}
-								href="/work/vaparshop"
-							/>
-						</motion.div>
-						
-						<motion.div
-							initial={{ opacity: 0, y: 50 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-							viewport={{ once: true }}
-						>
-							<ProjectCard 
-								title="HORNY PLACE" 
-								description="Comprehensive branding and interactive web solutions"
-								tags={["Branding", "UI/UX", "React"]}
-								href="/work/horny-place"
-							/>
-						</motion.div>
-						
-						
-					</div>
-				</div>
-			</section>
-
 			{/* Contact Section */}
 			<section id="contact-section" className="relative overflow-hidden py-24">
 				<div className="container mx-auto px-4">
@@ -692,7 +866,7 @@ export default function HomePage() {
 						viewport={{ once: true }}
 						className="mb-16 overflow-hidden"
 					>
-						<h2 
+						<h2
 							className="font-extrabold text-7xl uppercase tracking-tight md:text-8xl xl:text-[15rem]"
 							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 800` }}
 						>
@@ -703,175 +877,114 @@ export default function HomePage() {
 							IN TOUCH
 						</h2>
 					</motion.div>
-					
-					<div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-						{/* Contact Form */}
-						<motion.div
-							initial={{ opacity: 0, y: 40 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, delay: 0.2 }}
-							viewport={{ once: true }}
-						>
-							<form onSubmit={handleSubmit(onSubmit)} className="space-y-6 rounded-xl border bg-card p-8 shadow-lg">
-								<h3 className="mb-6 font-bold text-2xl">Send a Message</h3>
-								
-								<div className="space-y-2">
-									<label htmlFor="name" className="font-medium text-sm">Name</label>
-									<Input
-										id="name"
-										{...register("name")}
-										placeholder="Your name"
-										className={errors.name ? "border-destructive" : ""}
-									/>
-									{errors.name && (
-										<p className="text-destructive text-sm">{errors.name.message}</p>
-									)}
-								</div>
-								
-								<div className="space-y-2">
-									<label htmlFor="email" className="font-medium text-sm">Email</label>
-									<Input
-										id="email"
-										type="email"
-										{...register("email")}
-										placeholder="Your email address"
-										className={errors.email ? "border-destructive" : ""}
-									/>
-									{errors.email && (
-										<p className="text-destructive text-sm">{errors.email.message}</p>
-									)}
-								</div>
-								
-								<div className="space-y-2">
-									<label htmlFor="message" className="font-medium text-sm">Message</label>
-									<Textarea
-										id="message"
-										{...register("message")}
-										placeholder="Tell me about your project or idea"
-										rows={5}
-										className={errors.message ? "border-destructive" : ""}
-									/>
-									{errors.message && (
-										<p className="text-destructive text-sm">{errors.message.message}</p>
-									)}
-								</div>
-								
-								<Button 
-									type="submit" 
-									disabled={isSubmitting}
-									className="group w-full"
-								>
-									<span>Send Message</span>
-									<ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-								</Button>
-							</form>
-						</motion.div>
-						
-						{/* Contact Info */}
-						<motion.div
-							initial={{ opacity: 0, y: 40 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, delay: 0.4 }}
-							viewport={{ once: true }}
-							className="space-y-8"
-						>
-							<div className="rounded-xl border bg-card p-8 shadow-lg">
-								<h3 className="mb-6 font-bold text-2xl">Contact Information</h3>
-								
-								<div className="space-y-4">
-									<div className="flex items-center gap-4">
-										<div className="rounded-full bg-accent/10 p-3 text-accent">
-											<TelegramIcon className="h-6 w-6" />
-										</div>
-										<div>
-											<p className="text-muted-foreground text-sm">Telegram</p>
-											<a href="https://t.me/sabraman" className="font-medium hover:text-accent">@sabraman</a>
-										</div>
-									</div>
-									
-									<div className="flex items-center gap-4">
-										<div className="rounded-full bg-accent/10 p-3 text-accent">
-											<VKIcon className="h-6 w-6" />
-										</div>
-										<div>
-											<p className="text-muted-foreground text-sm">VK</p>
-											<a href="https://vk.com/sabraman" className="font-medium hover:text-accent">sabraman</a>
-										</div>
-									</div>
-									
-									<div className="flex items-center gap-4">
-										<div className="rounded-full bg-accent/10 p-3 text-accent">
-											<Github className="h-6 w-6" />
-										</div>
-										<div>
-											<p className="text-muted-foreground text-sm">GitHub</p>
-											<a href="https://github.com/sabraman" className="font-medium hover:text-accent">sabraman</a>
-										</div>
-									</div>
-									
-									<div className="flex items-center gap-4">
-										<div className="rounded-full bg-accent/10 p-3 text-accent">
-											<Instagram className="h-6 w-6" />
-										</div>
-										<div>
-											<p className="text-muted-foreground text-sm">Instagram</p>
-											<a href="https://instagram.com/sabraman" className="font-medium hover:text-accent">sabraman</a>
-										</div>
-									</div>
-					</div>
-				</div>
 
-							<div className="rounded-xl border bg-card p-8 shadow-lg">
-								<h3 className="mb-6 font-bold text-2xl">Location</h3>
-								<p className="text-muted-foreground">
-									Saint Petersburg, Russia
-								</p>
-								<p className="mt-2 text-muted-foreground">
-									Available for remote work worldwide. Open to video meetings at your convenience.
-								</p>
-							</div>
-						</motion.div>
-					</div>
+					<Contact />
 				</div>
 			</section>
+
+			{/* Visual element - abstract background for contact section */}
+			<div className="-z-10 pointer-events-none absolute inset-0 overflow-hidden" style={{ top: "80vh" }}>
+				<div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background opacity-90" />
+
+				<motion.div
+					className="absolute rounded-full bg-accent/5"
+					style={{
+						width: "400px",
+						height: "400px",
+						left: "20%",
+						top: "60%",
+						filter: "blur(100px)",
+					}}
+					animate={{
+						x: [0, 20],
+						y: [0, -20],
+					}}
+					transition={{
+						duration: 20,
+						repeat: Number.POSITIVE_INFINITY,
+						repeatType: 'reverse',
+						ease: 'easeInOut',
+					}}
+				/>
+				<motion.div
+					className="absolute rounded-full bg-accent/5"
+					style={{
+						width: "600px",
+						height: "500px",
+						left: "60%",
+						top: "40%",
+						filter: "blur(100px)",
+					}}
+					animate={{
+						x: [0, -30],
+						y: [0, 30],
+					}}
+					transition={{
+						duration: 25,
+						repeat: Number.POSITIVE_INFINITY,
+						repeatType: 'reverse',
+						ease: 'easeInOut',
+					}}
+				/>
+				<motion.div
+					className="absolute rounded-full bg-primary/5"
+					style={{
+						width: "300px",
+						height: "300px",
+						left: "70%",
+						top: "70%",
+						filter: "blur(100px)",
+					}}
+					animate={{
+						x: [0, -20],
+						y: [0, -10],
+					}}
+					transition={{
+						duration: 15,
+						repeat: Number.POSITIVE_INFINITY,
+						repeatType: 'reverse',
+						ease: 'easeInOut',
+					}}
+				/>
+			</div>
 
 			{/* Footer */}
 			<footer className="border-t py-12">
 				<div className="container mx-auto px-4">
 					<div className="flex flex-col items-center justify-between md:flex-row">
 						<p className="mb-4 md:mb-0">&copy; {new Date().getFullYear()} Danya Yudin</p>
-						
-					<div className="flex gap-6">
-							<Link 
-								href="https://t.me/sabraman" 
+
+						<div className="flex gap-6">
+							<Link
+								href="https://t.me/sabraman"
 								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
-							Telegram
-						</Link>
-							<Link 
-								href="https://github.com/sabraman" 
+								Telegram
+							</Link>
+							<Link
+								href="https://github.com/sabraman"
 								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
-							GitHub
-						</Link>
-							<Link 
-								href="https://instagram.com/sabraman" 
+								GitHub
+							</Link>
+							<Link
+								href="https://instagram.com/sabraman"
 								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
-							Instagram
-						</Link>
-							<Link 
-								href="https://x.com/1sabraman" 
+								Instagram
+							</Link>
+							<Link
+								href="https://x.com/1sabraman"
 								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
-							X
-						</Link>
-							<Link 
-								href="https://vk.com/sabraman" 
+								X
+							</Link>
+							<Link
+								href="https://vk.com/sabraman"
 								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
-							VK
-						</Link>
+								VK
+							</Link>
 						</div>
 					</div>
 				</div>
