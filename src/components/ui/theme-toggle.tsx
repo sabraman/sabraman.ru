@@ -2,55 +2,61 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Switch } from "./switch";
 import { Label } from "./label";
+import { Switch } from "./switch";
 
 export function ThemeToggle() {
-    const { setTheme, theme } = useTheme();
-    const [mounted, setMounted] = useState(false);
+	const { setTheme, theme } = useTheme();
+	const [mounted, setMounted] = useState(false);
 
-    // Only show theme toggle with proper state after client-side hydration
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+	// Only show theme toggle with proper state after client-side hydration
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
-    // Handle theme toggle
-    const handleToggle = (checked: boolean) => {
-        setTheme(checked ? "dark" : "light");
-    };
+	// Handle theme toggle
+	const handleToggle = (checked: boolean) => {
+		setTheme(checked ? "dark" : "light");
+	};
 
-    if (!mounted) {
-        return (
-            <div className="flex items-center gap-2">
-                <Label
-                    htmlFor="theme-mode"
-                    className="text-muted-foreground tracking-tight"
-                >
-                    <span className="text-muted-foreground">Theme</span>
-                </Label>
-                <div className="h-4 w-8 rounded-full bg-foreground" />
-                <div className="h-2 w-2 rounded-full bg-input"></div>
-            </div>
-        );
-    }
+	if (!mounted) {
+		return (
+			<div className="flex items-center gap-2">
+				<Label
+					htmlFor="theme-mode"
+					className="text-muted-foreground tracking-tight"
+				>
+					<span className="text-muted-foreground">Theme</span>
+				</Label>
+				<div className="h-4 w-8 rounded-full bg-foreground" />
+				<div className="h-2 w-2 rounded-full bg-input" />
+			</div>
+		);
+	}
 
-    return (
-        <div className="flex items-center gap-2">
-            <Label
-                htmlFor="theme-mode"
-                className="text-muted-foreground tracking-tight"
-            >
-                <span className={theme === "dark" ? "text-foreground" : "text-muted-foreground"}>
-                    Theme: {theme}
-                </span>
-            </Label>
-            <Switch
-                id="theme-mode"
-                checked={theme === "dark"}
-                onCheckedChange={handleToggle}
-                className="bg-foreground"
-            />
-            <div className={`h-2 w-2 rounded-full ${theme === "dark" ? "bg-accent" : "bg-input"}`}></div>
-        </div>
-    );
+	return (
+		<div className="flex items-center gap-2">
+			<Label
+				htmlFor="theme-mode"
+				className="text-muted-foreground tracking-tight"
+			>
+				<span
+					className={
+						theme === "dark" ? "text-foreground" : "text-muted-foreground"
+					}
+				>
+					Theme: {theme}
+				</span>
+			</Label>
+			<Switch
+				id="theme-mode"
+				checked={theme === "dark"}
+				onCheckedChange={handleToggle}
+				className="bg-foreground"
+			/>
+			<div
+				className={`h-2 w-2 rounded-full ${theme === "dark" ? "bg-accent" : "bg-input"}`}
+			/>
+		</div>
+	);
 }

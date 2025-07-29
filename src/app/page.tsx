@@ -1,27 +1,28 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import { Badge } from "~/components/ui/badge";
-import Contact from "~/components/Contact";
+import {
+	ArrowRight,
+	ArrowUpRight,
+	Code,
+	Download,
+	ExternalLink,
+	Github,
+	Instagram,
+	LineChart,
+	Linkedin,
+	Mail,
+	Paintbrush,
+	X,
+} from "lucide-react";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import Contact from "~/components/Contact";
+import { SEOKeywords } from "~/components/SEOKeywords";
+import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Toaster } from "~/components/ui/sonner";
-import {
-	ArrowUpRight,
-	ArrowRight,
-	Download,
-	ExternalLink,
-	Code,
-	Paintbrush,
-	LineChart,
-	Github,
-	Linkedin,
-	Instagram,
-	X,
-	Mail,
-} from "lucide-react";
 
 // Work Experience Item Component with staggered animations
 function WorkExperienceItem({
@@ -31,7 +32,7 @@ function WorkExperienceItem({
 	location,
 	logo,
 	achievements,
-	delay
+	delay,
 }: {
 	company: string;
 	title: string;
@@ -70,10 +71,10 @@ function WorkExperienceItem({
 			<div className="lg:col-span-8">
 				<ul className="space-y-6">
 					{achievements.map((achievement, index) => {
-						const uniqueKey = `${company}-achievement-${index}-${achievement.substring(0, 10).replace(/\s+/g, '')}`;
+						const uniqueKey = `${company}-achievement-${index}-${achievement.substring(0, 10).replace(/\s+/g, "")}`;
 
 						// Check if achievement has bold text (marked with ** **)
-						if (achievement.includes('**')) {
+						if (achievement.includes("**")) {
 							return (
 								<motion.li
 									key={uniqueKey}
@@ -82,7 +83,7 @@ function WorkExperienceItem({
 									transition={{
 										duration: 0.5,
 										ease: [0.22, 1, 0.36, 1],
-										delay: 0.1 * index
+										delay: 0.1 * index,
 									}}
 									viewport={{ once: true }}
 									className="relative pl-6 text-xl leading-relaxed before:absolute before:top-[14px] before:left-0 before:h-3 before:w-3 before:rounded-full before:bg-accent before:content-[''] md:text-2xl"
@@ -90,9 +91,16 @@ function WorkExperienceItem({
 									{achievement.split(/\*\*(.*?)\*\*/g).map((part, i) => {
 										// Even indices are regular text, odd indices are bold text
 										return i % 2 === 0 ? (
-											<span key={`regular-${i}-${part.substring(0, 5)}`}>{part}</span>
+											<span key={`regular-${i}-${part.substring(0, 5)}`}>
+												{part}
+											</span>
 										) : (
-											<strong key={`bold-${i}-${part.substring(0, 5)}`} className="text-accent">{part}</strong>
+											<strong
+												key={`bold-${i}-${part.substring(0, 5)}`}
+												className="text-accent"
+											>
+												{part}
+											</strong>
 										);
 									})}
 								</motion.li>
@@ -107,7 +115,7 @@ function WorkExperienceItem({
 								transition={{
 									duration: 0.5,
 									ease: [0.22, 1, 0.36, 1],
-									delay: 0.1 * index
+									delay: 0.1 * index,
 								}}
 								viewport={{ once: true }}
 								className="relative pl-6 text-xl leading-relaxed before:absolute before:top-[14px] before:left-0 before:h-3 before:w-3 before:rounded-full before:bg-accent before:content-[''] md:text-2xl"
@@ -123,14 +131,22 @@ function WorkExperienceItem({
 }
 
 // Project card component
-function ProjectCard({ title, description, tags, href }: { title: string; description: string; tags: string[]; href: string }) {
+function ProjectCard({
+	title,
+	description,
+	tags,
+	href,
+}: { title: string; description: string; tags: string[]; href: string }) {
 	return (
 		<Card className="group overflow-hidden">
 			<Link href={href} className="block p-6">
 				<div className="flex h-full flex-col">
 					<h3
 						className="mb-3 text-2xl transition-colors duration-300 group-hover:text-accent"
-						style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 700, 'wdth' 900` }}
+						style={{
+							fontFamily: "Heading Now Variable",
+							fontVariationSettings: `'wght' 700, 'wdth' 900`,
+						}}
 					>
 						{title}
 						<span className="group-hover:-translate-y-1 ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">
@@ -141,8 +157,12 @@ function ProjectCard({ title, description, tags, href }: { title: string; descri
 					<p className="mb-6 text-muted-foreground">{description}</p>
 
 					<div className="mt-auto flex flex-wrap gap-2">
-						{tags.map(tag => (
-							<Badge key={tag} variant="secondary" className="rounded-full px-3 py-1">
+						{tags.map((tag) => (
+							<Badge
+								key={tag}
+								variant="secondary"
+								className="rounded-full px-3 py-1"
+							>
 								{tag}
 							</Badge>
 						))}
@@ -159,13 +179,33 @@ interface IconProps {
 }
 
 const TelegramIcon: React.FC<IconProps> = ({ className }) => (
-	<svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+	<svg
+		stroke="currentColor"
+		fill="currentColor"
+		strokeWidth="0"
+		viewBox="0 0 24 24"
+		height="1em"
+		width="1em"
+		className={className}
+		xmlns="http://www.w3.org/2000/svg"
+		aria-hidden="true"
+	>
 		<path d="M17.0943 7.14643C17.6874 6.93123 17.9818 6.85378 18.1449 6.82608C18.1461 6.87823 18.1449 6.92051 18.1422 6.94825C17.9096 9.39217 16.8906 15.4048 16.3672 18.2026C16.2447 18.8578 16.1507 19.1697 15.5179 18.798C15.1014 18.5532 14.7245 18.2452 14.3207 17.9805C12.9961 17.1121 11.1 15.8189 11.2557 15.8967C9.95162 15.0373 10.4975 14.5111 11.2255 13.8093C11.3434 13.6957 11.466 13.5775 11.5863 13.4525C11.64 13.3967 11.9027 13.1524 12.2731 12.8081C13.4612 11.7035 15.7571 9.56903 15.8151 9.32202C15.8246 9.2815 15.8334 9.13045 15.7436 9.05068C15.6539 8.97092 15.5215 8.9982 15.4259 9.01989C15.2904 9.05064 13.1326 10.4769 8.95243 13.2986C8.33994 13.7192 7.78517 13.9242 7.28811 13.9134L7.29256 13.9156C6.63781 13.6847 5.9849 13.4859 5.32855 13.286C4.89736 13.1546 4.46469 13.0228 4.02904 12.8812C3.92249 12.8466 3.81853 12.8137 3.72083 12.783C8.24781 10.8109 11.263 9.51243 12.7739 8.884C14.9684 7.97124 16.2701 7.44551 17.0943 7.14643ZM19.5169 5.21806C19.2635 5.01244 18.985 4.91807 18.7915 4.87185C18.5917 4.82412 18.4018 4.80876 18.2578 4.8113C17.7814 4.81969 17.2697 4.95518 16.4121 5.26637C15.5373 5.58382 14.193 6.12763 12.0058 7.03736C10.4638 7.67874 7.39388 9.00115 2.80365 11.001C2.40046 11.1622 2.03086 11.3451 1.73884 11.5619C1.46919 11.7622 1.09173 12.1205 1.02268 12.6714C0.970519 13.0874 1.09182 13.4714 1.33782 13.7738C1.55198 14.037 1.82635 14.1969 2.03529 14.2981C2.34545 14.4483 2.76276 14.5791 3.12952 14.6941C3.70264 14.8737 4.27444 15.0572 4.84879 15.233C6.62691 15.7773 8.09066 16.2253 9.7012 17.2866C10.8825 18.0651 12.041 18.8775 13.2243 19.6531C13.6559 19.936 14.0593 20.2607 14.5049 20.5224C14.9916 20.8084 15.6104 21.0692 16.3636 20.9998C17.5019 20.8951 18.0941 19.8479 18.3331 18.5703C18.8552 15.7796 19.8909 9.68351 20.1332 7.13774C20.1648 6.80544 20.1278 6.433 20.097 6.25318C20.0653 6.068 19.9684 5.58448 19.5169 5.21806Z" />
 	</svg>
 );
 
 const VKIcon: React.FC<IconProps> = ({ className }) => (
-	<svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 576 512" height="1em" width="1em" className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+	<svg
+		stroke="currentColor"
+		fill="currentColor"
+		strokeWidth="0"
+		viewBox="0 0 576 512"
+		height="1em"
+		width="1em"
+		className={className}
+		xmlns="http://www.w3.org/2000/svg"
+		aria-hidden="true"
+	>
 		<path d="M545 117.7c3.7-12.5 0-21.7-17.8-21.7h-58.9c-15 0-21.9 7.9-25.6 16.7 0 0-30 73.1-72.4 120.5-13.7 13.7-20 18.1-27.5 18.1-3.7 0-9.4-4.4-9.4-16.9V117.7c0-15-4.2-21.7-16.6-21.7h-92.6c-9.4 0-15 7-15 13.5 0 14.2 21.2 17.5 23.4 57.5v86.8c0 19-3.4 22.5-10.9 22.5-20 0-68.6-73.4-97.4-157.4-5.8-16.3-11.5-22.9-26.6-22.9H38.8c-16.8 0-20.2 7.9-20.2 16.7 0 15.6 20 93.1 93.1 195.5C160.4 378.1 229 416 291.4 416c37.5 0 42.1-8.4 42.1-22.9 0-66.8-3.4-73.1 15.4-73.1 8.7 0 23.7 4.4 58.7 38.1 40 40 46.6 57.9 69 57.9h58.9c16.8 0 25.3-8.4 20.4-25-11.2-34.9-86.9-106.7-90.3-111.5-8.7-11.2-6.2-16.2 0-26.2.1-.1 72-101.3 79.4-135.6z" />
 	</svg>
 );
@@ -177,11 +217,15 @@ export default function HomePage() {
 	// Setup scroll animations
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
-		offset: ["start start", "end end"]
+		offset: ["start start", "end end"],
 	});
 
 	const textScale = useTransform(scrollYProgress, [0, 0.1], [1, 1.5]);
-	const textOpacity = useTransform(scrollYProgress, [0.05, 0.1, 0.15], [1, 0, 0]);
+	const textOpacity = useTransform(
+		scrollYProgress,
+		[0.05, 0.1, 0.15],
+		[1, 0, 0],
+	);
 	const textY = useTransform(scrollYProgress, [0, 0.1], ["0%", "-50%"]);
 
 	// Define logo animations
@@ -260,25 +304,47 @@ export default function HomePage() {
 		blurAmount: Math.random() * 2,
 		glowSize: Math.random() * 8 + 2,
 		glowIntensity: Math.random() * 3 + 1,
-		scale: Math.random() * 0.8 + 0.2
+		scale: Math.random() * 0.8 + 0.2,
 	}));
 
 	return (
 		<div ref={containerRef} className="relative">
+			<SEOKeywords />
 			<Toaster />
 			{/* Hero Section with name animation */}
 			<section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
 				{/* Interactive logo animation */}
-				<div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+				<div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
 					{/* Base background effects */}
 					<div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background opacity-95" />
 
 					{/* Digital matrix effect overlay */}
 					<div className="absolute inset-0 opacity-5">
-						{Array.from({ length: 20 }).map((_, i) => (
+						{[
+							"matrix-1",
+							"matrix-2",
+							"matrix-3",
+							"matrix-4",
+							"matrix-5",
+							"matrix-6",
+							"matrix-7",
+							"matrix-8",
+							"matrix-9",
+							"matrix-10",
+							"matrix-11",
+							"matrix-12",
+							"matrix-13",
+							"matrix-14",
+							"matrix-15",
+							"matrix-16",
+							"matrix-17",
+							"matrix-18",
+							"matrix-19",
+							"matrix-20",
+						].map((id) => (
 							<div
-								key={i}
-								className="absolute text-accent/70 font-mono text-xs"
+								key={id}
+								className="absolute font-mono text-accent/70 text-xs"
 								style={{
 									left: `${Math.random() * 100}%`,
 									top: `${Math.random() * 100}%`,
@@ -286,7 +352,7 @@ export default function HomePage() {
 									transform: `scale(${Math.random() * 0.5 + 0.5})`,
 								}}
 							>
-								{Math.random() > 0.5 ? '1' : '0'}
+								{Math.random() > 0.5 ? "1" : "0"}
 							</div>
 						))}
 					</div>
@@ -296,19 +362,19 @@ export default function HomePage() {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ duration: 1, delay: 0.5 }}
-						className="relative w-full h-full flex items-center justify-center"
+						className="relative flex h-full w-full items-center justify-center"
 						style={{ perspective: 1000 }}
 					>
 						{/* 3D Interactive logo container */}
 						<motion.div
-							className="w-[80vh] h-[80vh] max-w-[800px] max-h-[800px] relative"
+							className="relative h-[80vh] max-h-[800px] w-[80vh] max-w-[800px]"
 							initial={{ rotateY: 0, rotateX: 0 }}
 							animate={{ rotateY: [0, 5, -5, 0], rotateX: [0, -5, 5, 0] }}
 							transition={{
-								repeat: Infinity,
+								repeat: Number.POSITIVE_INFINITY,
 								duration: 20,
 								ease: "linear",
-								delay: 0.7
+								delay: 0.7,
 							}}
 							style={{
 								transformStyle: "preserve-3d",
@@ -317,7 +383,7 @@ export default function HomePage() {
 						>
 							{/* Interactive logo container */}
 							<motion.div
-								className="w-full h-full relative cursor-pointer"
+								className="relative h-full w-full cursor-pointer"
 								whileHover={{ scale: 1.05 }}
 								transition={{ type: "spring", stiffness: 400, damping: 10 }}
 							>
@@ -329,8 +395,13 @@ export default function HomePage() {
 									fill="none"
 									xmlns="http://www.w3.org/2000/svg"
 									className="absolute inset-0"
-									style={{ filter: "drop-shadow(0 0 10px rgba(120, 120, 250, 0.3))" }}
+									style={{
+										filter: "drop-shadow(0 0 10px rgba(120, 120, 250, 0.3))",
+									}}
+									role="img"
+									aria-label="Логотип Sabraman"
 								>
+									<title>Логотип Sabraman</title>
 									<motion.path
 										d="M861.369 247.228C861.333 247.353 861.307 247.481 861.261 247.604C859.745 251.632 849.864 263.106 846.718 267.154L753.594 387.119C743.695 399.893 734.093 413.073 723.875 425.598C722.562 427.213 720.881 428.772 718.881 429.546C716.653 430.402 714.04 429.336 711.921 428.638C704.881 426.322 697.988 423.362 691.082 420.698L651.906 405.611L534.427 360.602C545.858 356.025 601.362 338.802 605.729 335.035C606.49 327.907 583.263 258.01 579.257 247.097C559.698 193.807 520.081 115.298 463.736 90.5882C440.364 80.3359 410.784 80.8487 386.638 89.503C350.339 104.693 326.467 141.137 309.025 173.841C304.669 182.005 301.006 193.251 294.943 200.095C301.777 180.307 308.826 160.956 319.033 142.447C337.081 109.726 364.647 80.401 402.202 68.9848C411.406 66.1872 420.725 64.6062 430.285 63.789C440.123 62.9481 450.194 63.2456 460.058 63.101C474.419 62.8583 488.778 62.5148 503.136 62.0705L562.821 60.5274C579.94 60.1498 597.226 59.4249 614.212 61.5247C616.153 61.7582 618.086 62.034 620.012 62.3523C621.938 62.6705 623.855 63.0309 625.763 63.4334C627.67 63.836 629.566 64.2803 631.451 64.7664C633.336 65.2525 635.207 65.7797 637.066 66.3481C638.924 66.9167 640.767 67.5259 642.596 68.1756C644.423 68.8254 646.234 69.5151 648.028 70.2447C649.823 70.9746 651.598 71.7435 653.354 72.5516C655.11 73.3596 656.845 74.2062 658.56 75.0912C705.829 99.3213 745.984 162.183 765.542 208.712C774.168 229.231 780.306 250.595 786.793 271.837L837.542 254.837C845.075 252.311 853.599 248.522 861.369 247.228Z"
 										stroke="currentColor"
@@ -370,11 +441,11 @@ export default function HomePage() {
 										top: ["-100%", "200%"],
 									}}
 									transition={{
-										repeat: Infinity,
+										repeat: Number.POSITIVE_INFINITY,
 										duration: 3,
 										ease: "linear",
 										repeatDelay: 1,
-										delay: 2
+										delay: 2,
 									}}
 									style={{ height: "30%" }}
 								/>
@@ -384,19 +455,25 @@ export default function HomePage() {
 									className="absolute inset-0"
 									animate={{ opacity: [0, 0.3, 0, 0.2, 0] }}
 									transition={{
-										repeat: Infinity,
+										repeat: Number.POSITIVE_INFINITY,
 										duration: 5,
 										repeatDelay: 10,
-										delay: 2.5
+										delay: 2.5,
 									}}
 								>
 									<div
 										className="absolute inset-0 bg-accent/20 mix-blend-overlay"
-										style={{ clipPath: "polygon(0 0, 100% 0, 100% 10%, 0 10%)", transform: "translateY(30%)" }}
+										style={{
+											clipPath: "polygon(0 0, 100% 0, 100% 10%, 0 10%)",
+											transform: "translateY(30%)",
+										}}
 									/>
 									<div
 										className="absolute inset-0 bg-accent/20 mix-blend-overlay"
-										style={{ clipPath: "polygon(0 0, 100% 0, 100% 5%, 0 5%)", transform: "translateY(50%)" }}
+										style={{
+											clipPath: "polygon(0 0, 100% 0, 100% 5%, 0 5%)",
+											transform: "translateY(50%)",
+										}}
 									/>
 								</motion.div>
 							</motion.div>
@@ -420,15 +497,30 @@ export default function HomePage() {
 							transition={{
 								duration: 0.8,
 								ease: [0.22, 1, 0.36, 1],
-								delay: 1.5
+								delay: 1.5,
 							}}
 						>
 							<h1
 								className="mb-8 font-extrabold text-[8vw] leading-none tracking-tight md:text-[6vw] lg:text-[5vw] xl:text-[4vw]"
-								style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
+								style={{
+									fontFamily: "Heading Now Variable",
+									fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
+								}}
 							>
 								{displayName}
 							</h1>
+							{/* SEO-optimized subtitle with target keywords */}
+							<div className="sr-only">
+								<h2>
+									Sabraman - Danya Yudin (Даня Юдин) - Creative Designer &
+									Developer
+								</h2>
+								<p>
+									Картон - Creative Designer and Early-Stage Developer
+									specializing in visual design, branding, and application
+									development
+								</p>
+							</div>
 						</motion.div>
 
 						<motion.h2
@@ -437,7 +529,7 @@ export default function HomePage() {
 							transition={{
 								duration: 0.8,
 								ease: [0.22, 1, 0.36, 1],
-								delay: 1.8
+								delay: 1.8,
 							}}
 							className="mb-10 text-[5vw] text-muted-foreground leading-tight md:text-[4vw] lg:text-[3vw] xl:text-[2.5vw]"
 						>
@@ -453,13 +545,13 @@ export default function HomePage() {
 							transition={{
 								duration: 0.6,
 								ease: [0.22, 1, 0.36, 1],
-								delay: 2.1
+								delay: 2.1,
 							}}
 							className="flex flex-col justify-center gap-4 md:flex-row"
 						>
 							<Button
 								size="lg"
-								className="group relative rounded-full px-8 py-6 font-medium text-base overflow-hidden"
+								className="group relative overflow-hidden rounded-full px-8 py-6 font-medium text-base"
 								asChild
 							>
 								<a href="/DANYA_YUDIN_CV.md" download>
@@ -477,12 +569,13 @@ export default function HomePage() {
 							<Button
 								variant="outline"
 								size="lg"
-								className="group relative cursor-pointer rounded-full px-8 py-6 font-medium text-base overflow-hidden"
+								className="group relative cursor-pointer overflow-hidden rounded-full px-8 py-6 font-medium text-base"
 								onClick={() => {
 									// Scroll to contact section
-									const contactSection = document.getElementById('contact-section');
+									const contactSection =
+										document.getElementById("contact-section");
 									if (contactSection) {
-										contactSection.scrollIntoView({ behavior: 'smooth' });
+										contactSection.scrollIntoView({ behavior: "smooth" });
 									}
 								}}
 							>
@@ -501,7 +594,10 @@ export default function HomePage() {
 			</section>
 
 			{/* About Section with glitch effect */}
-			<section className="relative min-h-screen bg-secondary/5 py-32" id="about">
+			<section
+				className="relative min-h-screen bg-secondary/5 py-32"
+				id="about"
+			>
 				<div className="container mx-auto px-4">
 					<motion.div
 						initial={{ opacity: 0, y: 100 }}
@@ -512,7 +608,10 @@ export default function HomePage() {
 					>
 						<h2
 							className="font-extrabold text-7xl uppercase tracking-tight md:text-7xl xl:text-[12rem]"
-							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
+							style={{
+								fontFamily: "Heading Now Variable",
+								fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
+							}}
 						>
 							<span className="relative z-0 ml-4 inline-block md:ml-8 xl:ml-12">
 								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
@@ -531,32 +630,60 @@ export default function HomePage() {
 						>
 							<div className="prose prose-xl dark:prose-invert max-w-none">
 								<p className="mb-8 text-2xl leading-relaxed lg:text-3xl">
-									Creative Designer and Early-Stage Developer with extensive hands-on experience in visual design, branding, and application development.
+									Creative Designer and Early-Stage Developer with extensive
+									hands-on experience in visual design, branding, and
+									application development. <strong>Sabraman</strong> - Danya
+									Yudin (Даня Юдин) specializes in creating innovative digital
+									solutions.
 								</p>
 
 								<p className="text-muted-foreground text-xl leading-relaxed lg:text-2xl">
-									I have a proven track record of transforming concepts into visually appealing and functional digital products. My passion lies in integrating design and technology to deliver intuitive user experiences.
+									I have a proven track record of transforming concepts into
+									visually appealing and functional digital products. My passion
+									lies in integrating design and technology to deliver intuitive
+									user experiences. Known as <strong>Картон</strong> in creative
+									circles, I bring unique perspectives to every project.
 								</p>
 
 								<div className="mt-12 flex flex-wrap gap-6">
 									<div className="flex items-center gap-2">
 										<TelegramIcon className="h-6 w-6 text-primary" />
-										<Link href="https://t.me/sabraman" className="text-xl transition-colors hover:text-accent">@sabraman</Link>
+										<Link
+											href="https://t.me/sabraman"
+											className="text-xl transition-colors hover:text-accent"
+										>
+											@sabraman
+										</Link>
 									</div>
 
 									<div className="flex items-center gap-2">
 										<Github className="h-6 w-6 text-primary" />
-										<Link href="https://github.com/sabraman" className="text-xl transition-colors hover:text-accent">sabraman</Link>
+										<Link
+											href="https://github.com/sabraman"
+											className="text-xl transition-colors hover:text-accent"
+										>
+											sabraman
+										</Link>
 									</div>
 
 									<div className="flex items-center gap-2">
 										<Instagram className="h-6 w-6 text-primary" />
-										<Link href="https://instagram.com/sabraman" className="text-xl transition-colors hover:text-accent">sabraman</Link>
+										<Link
+											href="https://instagram.com/sabraman"
+											className="text-xl transition-colors hover:text-accent"
+										>
+											sabraman
+										</Link>
 									</div>
 
 									<div className="flex items-center gap-2">
 										<X className="h-6 w-6 text-primary" />
-										<Link href="https://x.com/1sabraman" className="text-xl transition-colors hover:text-accent">1sabraman</Link>
+										<Link
+											href="https://x.com/1sabraman"
+											className="text-xl transition-colors hover:text-accent"
+										>
+											1sabraman
+										</Link>
 									</div>
 								</div>
 							</div>
@@ -565,7 +692,11 @@ export default function HomePage() {
 						<motion.div
 							initial={{ opacity: 0, y: 50 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+							transition={{
+								duration: 0.6,
+								ease: [0.22, 1, 0.36, 1],
+								delay: 0.2,
+							}}
 							viewport={{ once: true }}
 							className="flex flex-col gap-8"
 						>
@@ -576,21 +707,30 @@ export default function HomePage() {
 										<Paintbrush className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" />
 										<div>
 											<h4 className="font-semibold text-xl">Visual Design</h4>
-											<p className="text-muted-foreground">Creating engaging visual experiences across different mediums</p>
+											<p className="text-muted-foreground">
+												Creating engaging visual experiences across different
+												mediums
+											</p>
 										</div>
 									</li>
 									<li className="flex items-start gap-3">
 										<Code className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" />
 										<div>
-											<h4 className="font-semibold text-xl">Application Development</h4>
-											<p className="text-muted-foreground">Building functional web apps and Telegram bots</p>
+											<h4 className="font-semibold text-xl">
+												Application Development
+											</h4>
+											<p className="text-muted-foreground">
+												Building functional web apps and Telegram bots
+											</p>
 										</div>
 									</li>
 									<li className="flex items-start gap-3">
 										<LineChart className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" />
 										<div>
 											<h4 className="font-semibold text-xl">Branding</h4>
-											<p className="text-muted-foreground">Crafting comprehensive brand identities and guidelines</p>
+											<p className="text-muted-foreground">
+												Crafting comprehensive brand identities and guidelines
+											</p>
 										</div>
 									</li>
 								</ul>
@@ -601,16 +741,31 @@ export default function HomePage() {
 			</section>
 
 			{/* Projects Section */}
-			<section className="relative bg-primary/5 py-32 overflow-hidden" id="projects">
+			<section
+				className="relative overflow-hidden bg-primary/5 py-32"
+				id="projects"
+			>
 				{/* Background decoration elements */}
-				<div className="absolute inset-0 w-full h-full -z-10 overflow-hidden">
-					<div className="absolute top-[5%] left-[10%] w-[30rem] h-[30rem] rounded-full bg-accent/5 blur-[100px] animate-pulse" style={{ animationDuration: '10s' }}></div>
-					<div className="absolute bottom-[10%] right-[15%] w-[25rem] h-[25rem] rounded-full bg-primary/5 blur-[100px] animate-pulse" style={{ animationDuration: '15s' }}></div>
+				<div className="-z-10 absolute inset-0 h-full w-full overflow-hidden">
+					<div
+						className="absolute top-[5%] left-[10%] h-[30rem] w-[30rem] animate-pulse rounded-full bg-accent/5 blur-[100px]"
+						style={{ animationDuration: "10s" }}
+					/>
+					<div
+						className="absolute right-[15%] bottom-[10%] h-[25rem] w-[25rem] animate-pulse rounded-full bg-primary/5 blur-[100px]"
+						style={{ animationDuration: "15s" }}
+					/>
 
-					<div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-5"></div>
+					<div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-5" />
 
-					<div className="absolute top-[30%] left-[50%] w-1 h-1 rounded-full bg-accent shadow-[0_0_40px_12px_rgba(120,120,250,0.3)] animate-ping" style={{ animationDuration: '3s' }}></div>
-					<div className="absolute top-[70%] left-[20%] w-1 h-1 rounded-full bg-primary shadow-[0_0_40px_12px_rgba(100,200,250,0.2)] animate-ping" style={{ animationDuration: '4s' }}></div>
+					<div
+						className="absolute top-[30%] left-[50%] h-1 w-1 animate-ping rounded-full bg-accent shadow-[0_0_40px_12px_rgba(120,120,250,0.3)]"
+						style={{ animationDuration: "3s" }}
+					/>
+					<div
+						className="absolute top-[70%] left-[20%] h-1 w-1 animate-ping rounded-full bg-primary shadow-[0_0_40px_12px_rgba(100,200,250,0.2)]"
+						style={{ animationDuration: "4s" }}
+					/>
 				</div>
 
 				<div className="container mx-auto px-4">
@@ -623,7 +778,10 @@ export default function HomePage() {
 					>
 						<h2
 							className="font-extrabold text-7xl uppercase tracking-tight md:text-8xl xl:text-[15rem]"
-							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 800` }}
+							style={{
+								fontFamily: "Heading Now Variable",
+								fontVariationSettings: `'wght' 1000, 'wdth' 800`,
+							}}
 						>
 							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
 								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
@@ -637,10 +795,11 @@ export default function HomePage() {
 							whileInView={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.6, delay: 0.3 }}
 							viewport={{ once: true }}
-							className="max-w-2xl text-xl text-muted-foreground mt-8 relative ml-1"
+							className="relative mt-8 ml-1 max-w-2xl text-muted-foreground text-xl"
 						>
-							Selected projects showcasing my approach to design and development.
-							<span className="absolute -bottom-3 left-0 w-24 h-[2px] bg-gradient-to-r from-accent to-transparent"></span>
+							Selected projects showcasing my approach to design and
+							development.
+							<span className="-bottom-3 absolute left-0 h-[2px] w-24 bg-gradient-to-r from-accent to-transparent" />
 						</motion.p>
 					</motion.div>
 
@@ -651,41 +810,49 @@ export default function HomePage() {
 							whileInView={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0 }}
 							viewport={{ once: true }}
-							className="md:col-span-7 h-full"
+							className="h-full md:col-span-7"
 						>
 							<Link href="/work/vaparshop" className="block h-full">
-								<div className="group relative overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:shadow-accent/5 hover:shadow-2xl hover:border-accent/20 h-full">
+								<div className="group relative h-full overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5">
 									{/* Image overlay with grain texture */}
-									<div className="absolute inset-0 bg-[url('/vaparshop-bg.jpg')] bg-cover bg-center opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20"></div>
-									<div className="absolute inset-0 bg-[url('/noise.png')] opacity-5"></div>
+									<div className="absolute inset-0 bg-[url('/vaparshop-bg.jpg')] bg-center bg-cover opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20" />
+									<div className="absolute inset-0 bg-[url('/noise.png')] opacity-5" />
 
 									{/* Content */}
-									<div className="relative p-8 md:p-10 h-full flex flex-col">
+									<div className="relative flex h-full flex-col p-8 md:p-10">
 										<div className="flex justify-between gap-4">
-
-											<h3 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text transition-colors duration-500 group-hover:from-accent group-hover:to-foreground">
+											<h3 className="mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text font-bold text-3xl transition-colors duration-500 group-hover:from-accent group-hover:to-foreground md:text-4xl">
 												VAPARSHOP
-												<span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 ml-1">
+												<span className="group-hover:-translate-y-1 ml-1 inline-block transition-transform duration-500 ease-out group-hover:translate-x-1">
 													<ArrowUpRight className="inline h-6 w-6 opacity-70" />
 												</span>
 											</h3>
 											<div className="mb-4">
-												<Badge className="rounded-full px-3 py-1 text-xs font-medium bg-accent/10 text-accent transition-colors duration-300 group-hover:bg-accent/20">FEATURED</Badge>
+												<Badge className="rounded-full bg-accent/10 px-3 py-1 font-medium text-accent text-xs transition-colors duration-300 group-hover:bg-accent/20">
+													FEATURED
+												</Badge>
 											</div>
 										</div>
 
-										<p className="text-xl text-muted-foreground mb-6 transition-colors duration-500 group-hover:text-foreground/90">
-											Telegram bots and web applications improving operational efficiency
+										<p className="mb-6 text-muted-foreground text-xl transition-colors duration-500 group-hover:text-foreground/90">
+											Telegram bots and web applications improving operational
+											efficiency
 										</p>
 
 										<div className="mt-auto">
-											<div className="flex flex-wrap gap-2 mb-6">
-												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">Next.js</Badge>
-												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">Bot API</Badge>
-												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">tRPC</Badge>
+											<div className="mb-6 flex flex-wrap gap-2">
+												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
+													Next.js
+												</Badge>
+												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
+													Bot API
+												</Badge>
+												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
+													tRPC
+												</Badge>
 											</div>
 
-											<div className="inline-flex items-center font-medium text-foreground/90 group-hover:text-accent transition-colors duration-300">
+											<div className="inline-flex items-center font-medium text-foreground/90 transition-colors duration-300 group-hover:text-accent">
 												View Project
 												<ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
 											</div>
@@ -699,37 +866,47 @@ export default function HomePage() {
 						<motion.div
 							initial={{ opacity: 0, y: 50 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+							transition={{
+								duration: 0.7,
+								ease: [0.22, 1, 0.36, 1],
+								delay: 0.15,
+							}}
 							viewport={{ once: true }}
-							className="md:col-span-5 h-full"
+							className="h-full md:col-span-5"
 						>
 							<Link href="/work/horny-place" className="block h-full">
-								<div className="group relative overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:shadow-accent/5 hover:shadow-2xl hover:border-accent/20 h-full">
+								<div className="group relative h-full overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5">
 									{/* Image overlay with grain texture */}
-									<div className="absolute inset-0 bg-[url('/horny-place-bg.jpg')] bg-cover bg-center opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20"></div>
-									<div className="absolute inset-0 bg-[url('/noise.png')] opacity-5"></div>
+									<div className="absolute inset-0 bg-[url('/horny-place-bg.jpg')] bg-center bg-cover opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20" />
+									<div className="absolute inset-0 bg-[url('/noise.png')] opacity-5" />
 
 									{/* Content */}
-									<div className="relative p-8 md:p-10 h-full flex flex-col">
-										<h3 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text transition-colors duration-500 group-hover:from-accent group-hover:to-foreground">
+									<div className="relative flex h-full flex-col p-8 md:p-10">
+										<h3 className="mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text font-bold text-3xl transition-colors duration-500 group-hover:from-accent group-hover:to-foreground md:text-4xl">
 											HORNY PLACE
-											<span className="inline-block transition-transform duration-500 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 ml-1">
+											<span className="group-hover:-translate-y-1 ml-1 inline-block transition-transform duration-500 ease-out group-hover:translate-x-1">
 												<ArrowUpRight className="inline h-6 w-6 opacity-70" />
 											</span>
 										</h3>
 
-										<p className="text-xl text-muted-foreground mb-6 transition-colors duration-500 group-hover:text-foreground/90">
+										<p className="mb-6 text-muted-foreground text-xl transition-colors duration-500 group-hover:text-foreground/90">
 											Comprehensive branding and interactive web solutions
 										</p>
 
 										<div className="mt-auto">
-											<div className="flex flex-wrap gap-2 mb-6">
-												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">Branding</Badge>
-												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">UI/UX</Badge>
-												<Badge className="rounded-full px-3 py-1 bg-primary/10 text-primary/90 transition-all duration-300 hover:scale-110">React</Badge>
+											<div className="mb-6 flex flex-wrap gap-2">
+												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
+													Branding
+												</Badge>
+												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
+													UI/UX
+												</Badge>
+												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
+													React
+												</Badge>
 											</div>
 
-											<div className="inline-flex items-center font-medium text-foreground/90 group-hover:text-accent transition-colors duration-300">
+											<div className="inline-flex items-center font-medium text-foreground/90 transition-colors duration-300 group-hover:text-accent">
 												View Project
 												<ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
 											</div>
@@ -743,21 +920,33 @@ export default function HomePage() {
 						<motion.div
 							initial={{ opacity: 0, y: 50 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+							transition={{
+								duration: 0.7,
+								ease: [0.22, 1, 0.36, 1],
+								delay: 0.3,
+							}}
 							viewport={{ once: true }}
 							className="md:col-span-12"
 						>
-							<div className="group relative overflow-hidden rounded-3xl border border-dashed border-muted-foreground/30 p-10 flex flex-col items-center justify-center h-40 transition-all duration-500 hover:border-accent/30">
-								<div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-50"></div>
-								<p className="text-xl text-muted-foreground transition-colors duration-300 group-hover:text-foreground">More projects coming soon</p>
+							<div className="group relative flex h-40 flex-col items-center justify-center overflow-hidden rounded-3xl border border-muted-foreground/30 border-dashed p-10 transition-all duration-500 hover:border-accent/30">
+								<div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-50" />
+								<p className="text-muted-foreground text-xl transition-colors duration-300 group-hover:text-foreground">
+									More projects coming soon
+								</p>
 								<div className="mt-2">
 									<span className="inline-flex items-center justify-center gap-2">
-										<span className="animate-ping absolute h-1.5 w-1.5 rounded-full bg-accent opacity-75"></span>
-										<span className="relative h-1.5 w-1.5 rounded-full bg-accent"></span>
-										<span className="animate-ping absolute h-1.5 w-1.5 rounded-full bg-accent opacity-75" style={{ animationDelay: '0.5s' }}></span>
-										<span className="relative h-1.5 w-1.5 rounded-full bg-accent"></span>
-										<span className="animate-ping absolute h-1.5 w-1.5 rounded-full bg-accent opacity-75" style={{ animationDelay: '1s' }}></span>
-										<span className="relative h-1.5 w-1.5 rounded-full bg-accent"></span>
+										<span className="absolute h-1.5 w-1.5 animate-ping rounded-full bg-accent opacity-75" />
+										<span className="relative h-1.5 w-1.5 rounded-full bg-accent" />
+										<span
+											className="absolute h-1.5 w-1.5 animate-ping rounded-full bg-accent opacity-75"
+											style={{ animationDelay: "0.5s" }}
+										/>
+										<span className="relative h-1.5 w-1.5 rounded-full bg-accent" />
+										<span
+											className="absolute h-1.5 w-1.5 animate-ping rounded-full bg-accent opacity-75"
+											style={{ animationDelay: "1s" }}
+										/>
+										<span className="relative h-1.5 w-1.5 rounded-full bg-accent" />
 									</span>
 								</div>
 							</div>
@@ -778,7 +967,10 @@ export default function HomePage() {
 					>
 						<h2
 							className="font-extrabold text-4xl uppercase tracking-tight md:text-7xl xl:text-[9rem]"
-							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 1000` }}
+							style={{
+								fontFamily: "Heading Now Variable",
+								fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
+							}}
 						>
 							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
 								<span className="-inset-1 absolute bg-sky-400 opacity-50 blur-sm" />
@@ -803,7 +995,7 @@ export default function HomePage() {
 								"Created branded Telegram Emoji Pack to enhance brand recognition",
 								"Redesigned corporate presentations, reinforcing the unique visual identity",
 								"Developed a Taplink alternative using Next.js, including blogs, location points, and interactive widgets",
-								"Building a Telegram Mini App integrated with GetMeBack API"
+								"Building a Telegram Mini App integrated with GetMeBack API",
 							]}
 						/>
 
@@ -821,7 +1013,7 @@ export default function HomePage() {
 								"Revamped visual branding elements, including QR-codes and YouTube thumbnails",
 								"Built a stylish and interactive Taplink alternative using Next.js",
 								"Authored a comprehensive brand book to ensure visual consistency",
-								"Designed clothing items, including \"Languages\" hoodie for Horny Vape"
+								'Designed clothing items, including "Languages" hoodie for Horny Vape',
 							]}
 						/>
 
@@ -835,7 +1027,7 @@ export default function HomePage() {
 							delay={0.4}
 							achievements={[
 								"Enhanced in-store visual merchandising to improve customer experience",
-								"Developed engaging training materials and presentations for onboarding new staff"
+								"Developed engaging training materials and presentations for onboarding new staff",
 							]}
 						/>
 
@@ -849,7 +1041,7 @@ export default function HomePage() {
 							delay={0.6}
 							achievements={[
 								"Maintained attractive and engaging visual store layouts",
-								"Leveraged trend analysis to optimize product placement"
+								"Leveraged trend analysis to optimize product placement",
 							]}
 						/>
 					</div>
@@ -868,7 +1060,10 @@ export default function HomePage() {
 					>
 						<h2
 							className="font-extrabold text-7xl uppercase tracking-tight md:text-8xl xl:text-[15rem]"
-							style={{ fontFamily: 'Heading Now Variable', fontVariationSettings: `'wght' 1000, 'wdth' 800` }}
+							style={{
+								fontFamily: "Heading Now Variable",
+								fontVariationSettings: `'wght' 1000, 'wdth' 800`,
+							}}
 						>
 							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
 								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
@@ -883,7 +1078,10 @@ export default function HomePage() {
 			</section>
 
 			{/* Visual element - abstract background for contact section */}
-			<div className="-z-10 pointer-events-none absolute inset-0 overflow-hidden" style={{ top: "80vh" }}>
+			<div
+				className="-z-10 pointer-events-none absolute inset-0 overflow-hidden"
+				style={{ top: "80vh" }}
+			>
 				<div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background opacity-90" />
 
 				<motion.div
@@ -902,8 +1100,8 @@ export default function HomePage() {
 					transition={{
 						duration: 20,
 						repeat: Number.POSITIVE_INFINITY,
-						repeatType: 'reverse',
-						ease: 'easeInOut',
+						repeatType: "reverse",
+						ease: "easeInOut",
 					}}
 				/>
 				<motion.div
@@ -922,8 +1120,8 @@ export default function HomePage() {
 					transition={{
 						duration: 25,
 						repeat: Number.POSITIVE_INFINITY,
-						repeatType: 'reverse',
-						ease: 'easeInOut',
+						repeatType: "reverse",
+						ease: "easeInOut",
 					}}
 				/>
 				<motion.div
@@ -942,8 +1140,8 @@ export default function HomePage() {
 					transition={{
 						duration: 15,
 						repeat: Number.POSITIVE_INFINITY,
-						repeatType: 'reverse',
-						ease: 'easeInOut',
+						repeatType: "reverse",
+						ease: "easeInOut",
 					}}
 				/>
 			</div>
@@ -952,7 +1150,9 @@ export default function HomePage() {
 			<footer className="border-t py-12">
 				<div className="container mx-auto px-4">
 					<div className="flex flex-col items-center justify-between md:flex-row">
-						<p className="mb-4 md:mb-0">&copy; {new Date().getFullYear()} Danya Yudin</p>
+						<p className="mb-4 md:mb-0">
+							&copy; {new Date().getFullYear()} Danya Yudin
+						</p>
 
 						<div className="flex gap-6">
 							<Link
