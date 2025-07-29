@@ -17,6 +17,7 @@ import {
 	Smartphone,
 	Tablet,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,6 +26,8 @@ import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 
 export default function VaparshopPage() {
+	const t = useTranslations("work");
+
 	// Refs for scroll animations
 	const containerRef = useRef<HTMLDivElement>(null);
 	const headerRef = useRef<HTMLDivElement>(null);
@@ -57,39 +60,72 @@ export default function VaparshopPage() {
 		return null;
 	}
 
+	// Get achievements as an array
+	const achievements = [
+		t("vaparshop.achievements.0"),
+		t("vaparshop.achievements.1"),
+		t("vaparshop.achievements.2"),
+		t("vaparshop.achievements.3"),
+		t("vaparshop.achievements.4"),
+		t("vaparshop.achievements.5"),
+	];
+
+	// Get tech stack as an array
+	const techStack = [
+		t("vaparshop.techStack.0"),
+		t("vaparshop.techStack.1"),
+		t("vaparshop.techStack.2"),
+		t("vaparshop.techStack.3"),
+		t("vaparshop.techStack.4"),
+		t("vaparshop.techStack.5"),
+	];
+
 	// Project details for the scrolling gallery
 	const projects = [
 		{
 			id: 1,
-			title: "VaparWaToTgBot",
-			description:
-				"Telegram bot that streamlines WhatsApp-to-Telegram data conversion and automates daily reporting.",
+			title: t("vaparshop.projects.vaparWaToTgBot.title"),
+			description: t("vaparshop.projects.vaparWaToTgBot.description"),
 			image: "/work/vaparshop/bot1.jpg",
-			tags: ["Telegram API", "Node.js", "Data Automation"],
+			tags: [
+				t("vaparshop.projects.vaparWaToTgBot.tags.0"),
+				t("vaparshop.projects.vaparWaToTgBot.tags.1"),
+				t("vaparshop.projects.vaparWaToTgBot.tags.2"),
+			],
 		},
 		{
 			id: 2,
-			title: "VaparScannerBot",
-			description:
-				"Enhances customer interaction by simplifying the use of GetMeBack cards without app installation.",
+			title: t("vaparshop.projects.vaparScannerBot.title"),
+			description: t("vaparshop.projects.vaparScannerBot.description"),
 			image: "/work/vaparshop/bot2.jpg",
-			tags: ["Telegram API", "Customer Experience", "GetMeBack Integration"],
+			tags: [
+				t("vaparshop.projects.vaparScannerBot.tags.0"),
+				t("vaparshop.projects.vaparScannerBot.tags.1"),
+				t("vaparshop.projects.vaparScannerBot.tags.2"),
+			],
 		},
 		{
 			id: 3,
-			title: "Price Tag Generator",
-			description:
-				"Custom web application to automate the creation of price tags, boosting operational productivity.",
+			title: t("vaparshop.projects.priceTagGenerator.title"),
+			description: t("vaparshop.projects.priceTagGenerator.description"),
 			image: "/work/vaparshop/price-tag.jpg",
-			tags: ["Next.js", "Automation", "UI/UX Design"],
+			tags: [
+				t("vaparshop.projects.priceTagGenerator.tags.0"),
+				t("vaparshop.projects.priceTagGenerator.tags.1"),
+				t("vaparshop.projects.priceTagGenerator.tags.2"),
+			],
 		},
 		{
 			id: 4,
-			title: "Telegram Mini App",
-			description:
-				"Advanced mini app with QR scanning capabilities, phone-based searches, and detailed reporting.",
+			title: t("vaparshop.projects.telegramMiniApp.title"),
+			description: t("vaparshop.projects.telegramMiniApp.description"),
 			image: "/work/vaparshop/mini-app.jpg",
-			tags: ["Next.js", "Telegram Mini App API", "React", "tRPC"],
+			tags: [
+				t("vaparshop.projects.telegramMiniApp.tags.0"),
+				t("vaparshop.projects.telegramMiniApp.tags.1"),
+				t("vaparshop.projects.telegramMiniApp.tags.2"),
+				t("vaparshop.projects.telegramMiniApp.tags.3"),
+			],
 		},
 	];
 
@@ -161,12 +197,11 @@ export default function VaparshopPage() {
 								fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
 							}}
 						>
-							VAPARSHOP
+							{t("vaparshop.title")}
 						</h1>
 
 						<p className="mb-12 max-w-2xl text-muted-foreground text-xl md:text-3xl">
-							Designing and developing digital tools to revolutionize retail
-							operations
+							{t("vaparshop.description")}
 						</p>
 
 						<div className="flex flex-wrap justify-center gap-4 md:gap-6">
@@ -213,14 +248,14 @@ export default function VaparshopPage() {
 									<h3 className="mb-2 font-medium text-muted-foreground text-xl">
 										TIMELINE
 									</h3>
-									<p className="text-2xl">June 2024 - Present</p>
+									<p className="text-2xl">{t("vaparshop.period")}</p>
 								</div>
 
 								<div>
 									<h3 className="mb-2 font-medium text-muted-foreground text-xl">
 										ROLE
 									</h3>
-									<p className="text-2xl">Designer & Junior Developer</p>
+									<p className="text-2xl">{t("vaparshop.subtitle")}</p>
 								</div>
 
 								<div>
@@ -258,26 +293,21 @@ export default function VaparshopPage() {
 						>
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<p className="mb-8 text-xl leading-relaxed md:text-2xl">
-									VAPARSHOP needed to optimize internal operations and enhance
-									customer engagement across multiple retail locations. The
-									challenge was to create digital tools that would streamline
-									workflows, improve data management, and provide a better
-									experience for both staff and customers.
+									{t("vaparshop.solutionText")}
 								</p>
 
-								<h3 className="mb-4 font-bold text-2xl">The Challenge</h3>
+								<h3 className="mb-4 font-bold text-2xl">
+									{t("vaparshop.challenge")}
+								</h3>
 								<p className="mb-8 text-lg text-muted-foreground md:text-xl">
-									The retail chain was struggling with manual processes that
-									consumed valuable time and resources. Store managers needed a
-									way to efficiently generate price tags, process customer
-									loyalty cards, and automate daily reporting from across
-									multiple communication channels.
+									{t("vaparshop.challengeText")}
 								</p>
 
-								<h3 className="mb-4 font-bold text-2xl">The Approach</h3>
+								<h3 className="mb-4 font-bold text-2xl">
+									{t("vaparshop.solution")}
+								</h3>
 								<p className="mb-8 text-lg text-muted-foreground md:text-xl">
-									I designed and developed a suite of digital tools that
-									addressed specific operational challenges:
+									{t("vaparshop.solutionText")}
 								</p>
 
 								<ul className="mb-8 space-y-6">
@@ -327,13 +357,19 @@ export default function VaparshopPage() {
 									</li>
 								</ul>
 
-								<h3 className="mb-4 font-bold text-2xl">The Results</h3>
-								<p className="text-lg text-muted-foreground md:text-xl">
-									The implementation of these tools significantly improved
-									operational efficiency, reducing manual work hours by
-									approximately 70% and increasing customer satisfaction through
-									faster service and enhanced loyalty management.
-								</p>
+								<h3 className="mb-4 font-bold text-2xl">
+									{t("vaparshop.results")}
+								</h3>
+								<div className="space-y-4">
+									{achievements.map((achievement, index) => (
+										<p
+											key={`achievement-${achievement.substring(0, 20).replace(/\s+/g, "")}`}
+											className="text-lg text-muted-foreground md:text-xl"
+										>
+											• {achievement}
+										</p>
+									))}
+								</div>
 							</div>
 						</motion.div>
 					</div>
@@ -357,11 +393,10 @@ export default function VaparshopPage() {
 								fontVariationSettings: `'wght' 800, 'wdth' 900`,
 							}}
 						>
-							TECHNOLOGIES USED
+							{t("vaparshop.technologies")}
 						</h2>
 						<p className="mx-auto max-w-3xl text-muted-foreground text-xl">
-							Advanced, modern stacks were employed to ensure performance,
-							scalability, and maintainability
+							{techStack.join(", ")}
 						</p>
 					</motion.div>
 
@@ -373,7 +408,7 @@ export default function VaparshopPage() {
 							{ name: "tRPC", icon: "/icons/trpc.svg", delay: 0.3 },
 							{ name: "Telegram API", icon: "/icons/telegram.svg", delay: 0.4 },
 							{ name: "Node.js", icon: "/icons/nodejs.svg", delay: 0.5 },
-						].map((tech, index) => (
+						].map((tech) => (
 							<motion.div
 								key={tech.name}
 								initial={{ opacity: 0, y: 30 }}
@@ -414,10 +449,10 @@ export default function VaparshopPage() {
 								fontVariationSettings: `'wght' 800, 'wdth' 900`,
 							}}
 						>
-							PROJECT SHOWCASE
+							{t("vaparshop.showcase.title")}
 						</h2>
 						<p className="text-muted-foreground text-xl">
-							Explore the key components developed for VAPARSHOP
+							{t("vaparshop.showcase.description")}
 						</p>
 					</motion.div>
 
@@ -497,37 +532,37 @@ export default function VaparshopPage() {
 								fontVariationSettings: `'wght' 800, 'wdth' 900`,
 							}}
 						>
-							DEVELOPMENT PROCESS
+							{t("vaparshop.process.title")}
 						</h2>
 						<p className="text-muted-foreground text-xl">
-							A methodical approach from concept to deployment
+							{t("vaparshop.process.description")}
 						</p>
 					</motion.div>
 
 					<div className="grid grid-cols-1 gap-6 md:grid-cols-4">
 						{[
 							{
-								phase: "Research & Analysis",
-								description:
-									"Understanding business needs and user requirements through stakeholder interviews and workflow analysis.",
+								phase: t("vaparshop.process.phases.research.title"),
+								description: t("vaparshop.process.phases.research.description"),
 								delay: 0,
 							},
 							{
-								phase: "Design & Prototyping",
-								description:
-									"Creating intuitive interfaces and interaction patterns, validated through user testing.",
+								phase: t("vaparshop.process.phases.design.title"),
+								description: t("vaparshop.process.phases.design.description"),
 								delay: 0.1,
 							},
 							{
-								phase: "Development",
-								description:
-									"Building robust solutions using Next.js, React, and Telegram API with a focus on performance.",
+								phase: t("vaparshop.process.phases.development.title"),
+								description: t(
+									"vaparshop.process.phases.development.description",
+								),
 								delay: 0.2,
 							},
 							{
-								phase: "Deployment & Feedback",
-								description:
-									"Implementing solutions with continuous improvement based on real-world usage and feedback.",
+								phase: t("vaparshop.process.phases.deployment.title"),
+								description: t(
+									"vaparshop.process.phases.deployment.description",
+								),
 								delay: 0.3,
 							},
 						].map((phase, index) => (
@@ -567,11 +602,10 @@ export default function VaparshopPage() {
 								fontVariationSettings: `'wght' 800, 'wdth' 900`,
 							}}
 						>
-							INTERESTED IN WORKING TOGETHER?
+							{t("vaparshop.cta.title")}
 						</h2>
 						<p className="mb-12 text-muted-foreground text-xl">
-							Let's create digital solutions that transform your business
-							operations and enhance customer experiences.
+							{t("vaparshop.cta.description")}
 						</p>
 
 						<div className="flex flex-col justify-center gap-4 sm:flex-row">
@@ -581,7 +615,7 @@ export default function VaparshopPage() {
 								asChild
 							>
 								<Link href="/contact">
-									<span>GET IN TOUCH</span>
+									<span>{t("vaparshop.cta.getInTouch")}</span>
 									<ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-[4px] group-hover:translate-y-[-4px]" />
 								</Link>
 							</Button>
@@ -594,7 +628,7 @@ export default function VaparshopPage() {
 							>
 								<Link href="/">
 									<ArrowLeft className="group-hover:-translate-x-1 mr-2 h-5 w-5 transition-transform" />
-									<span>BACK TO HOME</span>
+									<span>{t("vaparshop.cta.backToHome")}</span>
 								</Link>
 							</Button>
 						</div>

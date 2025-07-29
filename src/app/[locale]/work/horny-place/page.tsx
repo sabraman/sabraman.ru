@@ -16,6 +16,7 @@ import {
 	Paintbrush,
 	Store,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -24,35 +25,22 @@ import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 
 export default function HornyPlacePage() {
+	const t = useTranslations("work.hornyPlace.page");
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
 	const [currentView, setCurrentView] = useState(0);
-	const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 	const router = useRouter();
 
-	// Scroll animations
+	// Optimized scroll animations (reduced complexity)
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
 		offset: ["start start", "end end"],
 	});
 
-	const smoothProgress = useSpring(scrollYProgress, {
-		damping: 50,
-		stiffness: 400,
-	});
-
-	// Transform values for parallax
-	const bgY = useTransform(smoothProgress, [0, 1], ["0%", "30%"]);
-	const textY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
-	const opacity = useTransform(smoothProgress, [0, 0.1, 0.2], [1, 1, 0]);
-
-	// Handle mouse move for interactive elements
-	const handleMouseMove = (e: React.MouseEvent) => {
-		setCursorPosition({
-			x: e.clientX,
-			y: e.clientY,
-		});
-	};
+	// Simplified transforms for better performance
+	const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+	const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+	const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
 	useEffect(() => {
 		setIsMounted(true);
@@ -70,91 +58,58 @@ export default function HornyPlacePage() {
 	const caseStudies = [
 		{
 			id: 1,
-			title: "Exterior Signage",
-			description:
-				"Distinctive exterior signage designs created for retail locations including Lermo, Vaska, and Kuzi.",
+			title: t("caseStudies.signage.title"),
+			description: t("caseStudies.signage.description"),
 			image: "/work/horny-place/signage.jpg",
-			skills: ["3D Design", "Visual Identity", "Brand Expression"],
+			skills: [
+				t("skills.3dDesign"),
+				t("skills.visualIdentity"),
+				t("skills.brandExpression"),
+			],
 		},
 		{
 			id: 2,
-			title: "Promotional Materials",
-			description:
-				"Window stickers, flyers, posters, and event tickets designed with a cohesive brand aesthetic.",
+			title: t("caseStudies.promotional.title"),
+			description: t("caseStudies.promotional.description"),
 			image: "/work/horny-place/branded-items.jpg",
-			skills: ["Print Design", "Marketing", "Brand Consistency"],
+			skills: [
+				t("skills.printDesign"),
+				t("skills.marketing"),
+				t("skills.brandConsistency"),
+			],
 		},
 		{
 			id: 3,
-			title: "Web Application",
-			description:
-				"Interactive Taplink alternative built with Next.js featuring event integrations with Ticketscloud.",
+			title: t("caseStudies.webApp.title"),
+			description: t("caseStudies.webApp.description"),
 			image: "/work/horny-place/web-app.jpg",
-			skills: ["Next.js", "Web Development", "UI/UX Design"],
+			skills: ["Next.js", t("skills.webDevelopment"), t("skills.uiuxDesign")],
 		},
 		{
 			id: 4,
-			title: "Brand Book",
-			description:
-				"Comprehensive brand guidelines ensuring visual consistency across digital and physical media.",
+			title: t("caseStudies.brandBook.title"),
+			description: t("caseStudies.brandBook.description"),
 			image: "/work/horny-place/brand-book.jpg",
-			skills: ["Brand Strategy", "Style Guide", "Design Systems"],
+			skills: [
+				t("skills.brandStrategy"),
+				t("skills.styleGuide"),
+				t("skills.designSystems"),
+			],
 		},
 	];
 
 	return (
-		<div
-			ref={containerRef}
-			className="bg-background"
-			onMouseMove={handleMouseMove}
-		>
-			{/* Custom cursor effect - purely decorative */}
-			<motion.div
-				className="pointer-events-none fixed z-50 hidden h-12 w-12 rounded-full bg-accent/30 mix-blend-multiply md:block"
-				animate={{
-					x: cursorPosition.x - 24,
-					y: cursorPosition.y - 24,
-					scale: 1.2,
-					opacity: 0.5,
-				}}
-				transition={{
-					x: { duration: 0.2, ease: "easeOut" },
-					y: { duration: 0.2, ease: "easeOut" },
-					opacity: { duration: 0.2 },
-				}}
-			/>
-
-			{/* Hero section with parallax */}
+		<div ref={containerRef} className="bg-background">
+			{/* Hero section with optimized background */}
 			<section className="relative flex h-screen items-center justify-center overflow-hidden">
-				{/* Background Elements */}
+				{/* Simplified Background Elements */}
 				<motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
-					<div className="absolute inset-0 bg-gradient-to-b from-accent/20 via-background to-background" />
+					<div className="absolute inset-0 bg-gradient-to-b from-accent/10 via-background to-background" />
 
-					{/* Geometric background elements */}
+					{/* Static decorative elements (no animation for better performance) */}
 					<div className="absolute inset-0 overflow-hidden">
-						{Array.from({ length: 10 }).map((_, i) => (
-							<motion.div
-								key={`geo-bg-${i}-${Math.random().toString(36).substring(2, 7)}`}
-								className="absolute rounded-full bg-accent/10"
-								style={{
-									width: `${Math.random() * 500 + 200}px`,
-									height: `${Math.random() * 500 + 200}px`,
-									left: `${Math.random() * 100}%`,
-									top: `${Math.random() * 100}%`,
-									filter: "blur(100px)",
-								}}
-								animate={{
-									x: [0, Math.random() * 50 - 25],
-									y: [0, Math.random() * 50 - 25],
-								}}
-								transition={{
-									duration: 8,
-									repeat: Number.POSITIVE_INFINITY,
-									repeatType: "reverse",
-									ease: "easeInOut",
-								}}
-							/>
-						))}
+						<div className="absolute top-[20%] left-[10%] h-[300px] w-[300px] rounded-full bg-accent/20 opacity-20 blur-[80px]" />
+						<div className="absolute top-[60%] right-[15%] h-[400px] w-[400px] rounded-full bg-primary/15 opacity-15 blur-[100px]" />
 					</div>
 				</motion.div>
 
@@ -170,7 +125,7 @@ export default function HornyPlacePage() {
 						className="max-w-4xl"
 					>
 						<Badge className="mb-6 rounded-full bg-accent/10 px-4 py-1.5 text-accent hover:bg-accent/20">
-							BRAND CASE STUDY
+							{t("badge")}
 						</Badge>
 
 						<h1
@@ -184,22 +139,21 @@ export default function HornyPlacePage() {
 						</h1>
 
 						<p className="mb-12 max-w-2xl text-muted-foreground text-xl md:text-3xl">
-							Creating a bold and distinctive brand identity for a contemporary
-							retail chain
+							{t("heroDescription")}
 						</p>
 
 						<div className="flex flex-wrap gap-4">
 							<Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
-								Branding
+								{t("heroSkills.branding")}
 							</Badge>
 							<Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
-								Print Design
+								{t("heroSkills.printDesign")}
 							</Badge>
 							<Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
-								Web Development
+								{t("heroSkills.webDevelopment")}
 							</Badge>
 							<Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
-								Retail Experience
+								{t("skills.retailExperience")}
 							</Badge>
 						</div>
 					</motion.div>
@@ -224,20 +178,16 @@ export default function HornyPlacePage() {
 									fontVariationSettings: `'wght' 900, 'wdth' 900`,
 								}}
 							>
-								BRAND IDENTITY WITH PURPOSE
+								{t("sections.brandIdentity")}
 							</h2>
 
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<p className="mb-8 text-xl md:text-2xl">
-									HORNY PLACE required a distinctive visual identity that would
-									resonate with its audience while standing out in the
-									competitive retail landscape.
+									{t("sections.brandDescription")}
 								</p>
 
 								<p className="mb-8 text-lg text-muted-foreground md:text-xl">
-									The challenge was to create a brand that felt contemporary and
-									edgy, yet accessible and cohesive across multiple touchpoints
-									- from physical retail environments to digital platforms.
+									{t("sections.brandChallenge")}
 								</p>
 
 								<div className="mt-12 flex flex-col space-y-6">
@@ -246,9 +196,11 @@ export default function HornyPlacePage() {
 											<Paintbrush className="h-6 w-6 text-accent" />
 										</div>
 										<div>
-											<h3 className="font-bold text-xl">Visual Design</h3>
+											<h3 className="font-bold text-xl">
+												{t("sections.visualDesign.title")}
+											</h3>
 											<p className="text-muted-foreground">
-												Creating a consistent visual language
+												{t("sections.visualDesign.description")}
 											</p>
 										</div>
 									</div>
@@ -258,9 +210,11 @@ export default function HornyPlacePage() {
 											<Store className="h-6 w-6 text-accent" />
 										</div>
 										<div>
-											<h3 className="font-bold text-xl">Retail Experience</h3>
+											<h3 className="font-bold text-xl">
+												{t("sections.retailExperience.title")}
+											</h3>
 											<p className="text-muted-foreground">
-												Designing immersive brand environments
+												{t("sections.retailExperience.description")}
 											</p>
 										</div>
 									</div>
@@ -270,9 +224,11 @@ export default function HornyPlacePage() {
 											<Layout className="h-6 w-6 text-accent" />
 										</div>
 										<div>
-											<h3 className="font-bold text-xl">Digital Platforms</h3>
+											<h3 className="font-bold text-xl">
+												{t("sections.digitalPlatforms.title")}
+											</h3>
 											<p className="text-muted-foreground">
-												Building branded online experiences
+												{t("sections.digitalPlatforms.description")}
 											</p>
 										</div>
 									</div>
@@ -326,11 +282,10 @@ export default function HornyPlacePage() {
 								fontVariationSettings: `'wght' 900, 'wdth' 900`,
 							}}
 						>
-							DESIGN JOURNEY
+							{t("designJourney.title")}
 						</h2>
 						<p className="text-muted-foreground text-xl">
-							From initial concept to a comprehensive brand ecosystem spanning
-							physical and digital touchpoints
+							{t("designJourney.description")}
 						</p>
 					</motion.div>
 
@@ -341,33 +296,29 @@ export default function HornyPlacePage() {
 						{/* Timeline items */}
 						{[
 							{
-								phase: "Discovery & Strategy",
-								description:
-									"Researching the market, defining brand positioning, and establishing core brand attributes.",
+								phase: t("phases.discovery.title"),
+								description: t("phases.discovery.description"),
 								icon: <BookOpen className="h-6 w-6" />,
 								position: "left",
 								delay: 0,
 							},
 							{
-								phase: "Visual Identity",
-								description:
-									"Designing the logo, color palette, typography, and core visual elements to express the brand.",
+								phase: t("phases.visualIdentity.title"),
+								description: t("phases.visualIdentity.description"),
 								icon: <Paintbrush className="h-6 w-6" />,
 								position: "right",
 								delay: 0.1,
 							},
 							{
-								phase: "Brand Applications",
-								description:
-									"Creating exterior signage, promotional materials, and retail experience touchpoints.",
+								phase: t("phases.brandApplications.title"),
+								description: t("phases.brandApplications.description"),
 								icon: <Store className="h-6 w-6" />,
 								position: "left",
 								delay: 0.2,
 							},
 							{
-								phase: "Digital Experience",
-								description:
-									"Developing the web application with Ticketscloud integration and social media presence.",
+								phase: t("phases.digitalExperience.title"),
+								description: t("phases.digitalExperience.description"),
 								icon: <Layout className="h-6 w-6" />,
 								position: "right",
 								delay: 0.3,
@@ -403,7 +354,7 @@ export default function HornyPlacePage() {
 								>
 									<div className="flex h-40 items-center justify-center rounded-xl border bg-primary/5 md:h-60">
 										<div className="font-bold text-2xl text-primary/30">
-											Phase {index + 1}
+											{t("phases.phase")} {index + 1}
 										</div>
 									</div>
 								</div>
@@ -460,11 +411,10 @@ export default function HornyPlacePage() {
 								fontVariationSettings: `'wght' 900, 'wdth' 900`,
 							}}
 						>
-							KEY ELEMENTS
+							{t("keyElements.title")}
 						</h2>
 						<p className="mx-auto max-w-2xl text-muted-foreground text-xl">
-							Exploring the different components created for the HORNY PLACE
-							brand
+							{t("keyElements.description")}
 						</p>
 					</motion.div>
 
@@ -558,7 +508,7 @@ export default function HornyPlacePage() {
 											}
 										>
 											<ArrowLeft className="group-hover:-translate-x-1 mr-2 h-4 w-4 transition-transform" />
-											Previous
+											{t("navigation.previous")}
 										</Button>
 
 										<Button
@@ -567,7 +517,7 @@ export default function HornyPlacePage() {
 												setCurrentView((currentView + 1) % caseStudies.length)
 											}
 										>
-											Next
+											{t("navigation.next")}
 											<ArrowLeft className="ml-2 h-4 w-4 rotate-180 transition-transform group-hover:translate-x-1" />
 										</Button>
 									</div>
@@ -598,32 +548,28 @@ export default function HornyPlacePage() {
 								fontVariationSettings: `'wght' 900, 'wdth' 900`,
 							}}
 						>
-							PROJECT OUTCOMES
+							{t("projectOutcomes.title")}
 						</h2>
 						<p className="text-muted-foreground text-xl">
-							The impact of the brand identity and implementation across
-							different touchpoints
+							{t("projectOutcomes.description")}
 						</p>
 					</motion.div>
 
 					<div className="grid grid-cols-1 gap-8 md:grid-cols-3">
 						{[
 							{
-								title: "Brand Recognition",
-								description:
-									"Increased brand recognition and recall among target audience by 65%",
+								title: t("outcomes.brandRecognition.title"),
+								description: t("outcomes.brandRecognition.description"),
 								delay: 0,
 							},
 							{
-								title: "Customer Engagement",
-								description:
-									"40% increase in customer engagement via the new digital platforms",
+								title: t("outcomes.customerEngagement.title"),
+								description: t("outcomes.customerEngagement.description"),
 								delay: 0.1,
 							},
 							{
-								title: "Retail Presence",
-								description:
-									"Distinctive retail environments that enhanced the overall customer experience",
+								title: t("outcomes.retailPresence.title"),
+								description: t("outcomes.retailPresence.description"),
 								delay: 0.2,
 							},
 						].map((result, index) => (
@@ -663,11 +609,10 @@ export default function HornyPlacePage() {
 								fontVariationSettings: `'wght' 900, 'wdth' 900`,
 							}}
 						>
-							READY TO CREATE YOUR BRAND?
+							{t("cta.title")}
 						</h2>
 						<p className="mb-12 text-muted-foreground text-xl">
-							Let's work together to develop a distinctive brand identity that
-							resonates with your audience and stands out in the market.
+							{t("cta.description")}
 						</p>
 
 						<div className="flex flex-col justify-center gap-4 sm:flex-row">
@@ -677,7 +622,7 @@ export default function HornyPlacePage() {
 								asChild
 							>
 								<Link href="/contact">
-									<span>START A PROJECT</span>
+									<span>{t("cta.startProject")}</span>
 									<ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-[4px] group-hover:translate-y-[-4px]" />
 								</Link>
 							</Button>
@@ -690,7 +635,7 @@ export default function HornyPlacePage() {
 							>
 								<Link href="/">
 									<ArrowLeft className="group-hover:-translate-x-1 mr-2 h-5 w-5 transition-transform" />
-									<span>BACK TO HOME</span>
+									<span>{t("cta.backToHome")}</span>
 								</Link>
 							</Button>
 						</div>

@@ -12,6 +12,7 @@ import {
 	MessageSquareText,
 	User,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -79,6 +80,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export default function Contact() {
+	const t = useTranslations();
 	const [formStatus, setFormStatus] = useState<
 		"idle" | "submitting" | "success" | "error"
 	>("idle");
@@ -111,7 +113,7 @@ export default function Contact() {
 			}
 
 			setFormStatus("success");
-			toast.success("Message sent successfully!", {
+			toast.success(t("contact.form.success"), {
 				position: "top-center",
 				duration: 4000,
 			});
@@ -123,7 +125,7 @@ export default function Contact() {
 			}, 3000);
 		} catch (error) {
 			setFormStatus("error");
-			toast.error("Failed to send message. Please try again.", {
+			toast.error(t("contact.form.error"), {
 				position: "top-center",
 				duration: 4000,
 			});
@@ -162,7 +164,7 @@ export default function Contact() {
 									transition={{ duration: 0.5 }}
 									className="mb-8 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text font-bold text-2xl"
 								>
-									Send a Message
+									{t("contact.form.title")}
 								</motion.h3>
 
 								<Form {...form}>
@@ -184,8 +186,10 @@ export default function Contact() {
 															<FormControl>
 																<div className="space-y-1">
 																	<InputWithIcon
-																		label="Name"
-																		placeholder="Your name"
+																		label={t("contact.form.name")}
+																		placeholder={t(
+																			"contact.form.namePlaceholder",
+																		)}
 																		type="text"
 																		icon={<User className="h-4 w-4" />}
 																		{...field}
@@ -211,8 +215,10 @@ export default function Contact() {
 															<FormControl>
 																<div className="space-y-1">
 																	<InputWithIcon
-																		label="Email"
-																		placeholder="Your email address"
+																		label={t("contact.form.email")}
+																		placeholder={t(
+																			"contact.form.emailPlaceholder",
+																		)}
 																		type="email"
 																		icon={<Mail className="h-4 w-4" />}
 																		{...field}
@@ -239,8 +245,10 @@ export default function Contact() {
 															<FormControl>
 																<div className="flex h-full flex-col space-y-1">
 																	<InputWithIcon
-																		label="Message"
-																		placeholder="Tell me about your project or idea"
+																		label={t("contact.form.message")}
+																		placeholder={t(
+																			"contact.form.messagePlaceholder",
+																		)}
 																		type="text"
 																		icon={
 																			<MessageSquareText className="h-4 w-4" />
@@ -284,16 +292,16 @@ export default function Contact() {
 													{formStatus === "submitting" ? (
 														<>
 															<Loader2 className="h-5 w-5 animate-spin" />
-															<span>Sending...</span>
+															<span>{t("contact.form.sending")}</span>
 														</>
 													) : formStatus === "success" ? (
 														<>
 															<CheckCircle2 className="h-5 w-5" />
-															<span>Message Sent!</span>
+															<span>{t("contact.form.success")}</span>
 														</>
 													) : (
 														<>
-															<span>Send Message</span>
+															<span>{t("contact.form.submit")}</span>
 															<ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
 														</>
 													)}
@@ -325,7 +333,7 @@ export default function Contact() {
 
 									<div className="relative m-[1px] rounded-[calc(1.5rem-1px)] bg-card/95 p-8 backdrop-blur-md md:p-10">
 										<h3 className="mb-8 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text font-bold text-2xl">
-											Contact Information
+											{t("contact.direct.title")}
 										</h3>
 
 										<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -342,7 +350,9 @@ export default function Contact() {
 													<Mail className="h-6 w-6" />
 												</div>
 												<div>
-													<p className="text-muted-foreground text-sm">Email</p>
+													<p className="text-muted-foreground text-sm">
+														{t("contact.direct.email")}
+													</p>
 													<a
 														href="mailto:sabraman@ya.ru"
 														className="font-medium transition-colors duration-300 hover:text-accent"
@@ -366,7 +376,7 @@ export default function Contact() {
 												</div>
 												<div>
 													<p className="text-muted-foreground text-sm">
-														Telegram
+														{t("contact.direct.telegram")}
 													</p>
 													<a
 														href="https://t.me/sabraman"
@@ -414,7 +424,7 @@ export default function Contact() {
 												</div>
 												<div>
 													<p className="text-muted-foreground text-sm">
-														GitHub
+														{t("contact.direct.github")}
 													</p>
 													<a
 														href="https://github.com/sabraman"
@@ -439,7 +449,7 @@ export default function Contact() {
 												</div>
 												<div>
 													<p className="text-muted-foreground text-sm">
-														Instagram
+														{t("contact.direct.instagram")}
 													</p>
 													<a
 														href="https://instagram.com/sabraman"
@@ -467,12 +477,11 @@ export default function Contact() {
 
 									<div className="relative m-[1px] flex h-full flex-col rounded-[calc(1.5rem-1px)] bg-card/95 p-8 backdrop-blur-md">
 										<h3 className="mb-4 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text font-bold text-2xl">
-											Saint Petersburg
+											{t("contact.location.title")}
 										</h3>
 										<div className="flex flex-1 items-center">
 											<p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
-												Working from the beautiful city of Saint Petersburg,
-												Russia
+												{t("contact.location.description")}
 											</p>
 										</div>
 									</div>
@@ -492,12 +501,11 @@ export default function Contact() {
 
 									<div className="relative m-[1px] flex h-full flex-col rounded-[calc(1.5rem-1px)] bg-card/95 p-8 backdrop-blur-md">
 										<h3 className="mb-4 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text font-bold text-2xl">
-											Remote Work
+											{t("contact.remote.title")}
 										</h3>
 										<div className="flex flex-1 items-center">
 											<p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
-												Available worldwide. Open to video meetings at your
-												convenience.
+												{t("contact.remote.description")}
 											</p>
 										</div>
 									</div>

@@ -1,0 +1,383 @@
+{
+	"navigation": {
+		"home": "Home",
+		"work": "Work",
+		"contact": "Contact"
+	},
+	"hero": {
+		"title": "DANYA YUDIN",
+		"subtitle": "CREATIVE DESIGNER &",
+		"subtitleHighlight": "EARLY-STAGE DEVELOPER",
+		"downloadResume": "DOWNLOAD RESUME",
+		"getInTouch": "GET IN TOUCH"
+	},
+	"about": {
+		"title": "I AM",
+		"description1": "Creative Designer and Early-Stage Developer with extensive hands-on experience in visual design, branding, and application development. <sabraman>Sabraman</sabraman> - Danya Yudin (Даня Юдин) specializes in creating innovative digital solutions.",
+		"description2": "I have a proven track record of transforming concepts into visually appealing and functional digital products. My passion lies in integrating design and technology to deliver intuitive user experiences. Known as <karton>Karton</karton> in creative circles, I bring unique perspectives to every project.",
+		"expertiseAreas": "EXPERTISE AREAS",
+		"visualDesign": {
+			"title": "Visual Design",
+			"description": "Creating engaging visual experiences across different mediums"
+		},
+		"appDevelopment": {
+			"title": "Application Development",
+			"description": "Building functional web apps and Telegram bots"
+		},
+		"branding": {
+			"title": "Branding",
+			"description": "Crafting comprehensive brand identities and guidelines"
+		}
+	},
+	"projects": {
+		"title": "MY",
+		"titleSecond": "WORK",
+		"description": "Selected projects showcasing my approach to design and development.",
+		"vaparshop": {
+			"title": "VAPARSHOP",
+			"description": "Telegram bots and web applications improving operational efficiency",
+			"viewProject": "View Project"
+		},
+		"hornyPlace": {
+			"title": "HORNY PLACE",
+			"description": "Comprehensive branding and interactive web solutions",
+			"viewProject": "View Project"
+		},
+		"moreComingSoon": "More projects coming soon"
+	},
+	"experience": {
+		"title": "WORK",
+		"titleSecond": "EXPERIENCE",
+		"vaparshop": {
+			"title": "Designer & Junior Developer",
+			"period": "June 2024 – Present",
+			"location": "Saint Petersburg",
+			"achievements": {
+				"0": "Developed Telegram bots significantly improving internal operational efficiency",
+				"1": "Designed and developed a custom Price Tag Generator web application to automate manual tasks",
+				"2": "Created branded Telegram Emoji Pack to enhance brand recognition",
+				"3": "Redesigned corporate presentations, reinforcing the unique visual identity",
+				"4": "Developed a Taplink alternative using Next.js, including blogs, location points, and interactive widgets",
+				"5": "Building a Telegram Mini App integrated with GetMeBack API"
+			}
+		},
+		"hornyPlace": {
+			"title": "Visual Designer & Developer",
+			"period": "October 2022 – May 2024",
+			"location": "Saint Petersburg",
+			"achievements": {
+				"0": "Created various exterior signage designs for retail locations",
+				"1": "Developed promotional materials, including window stickers, flyers, posters",
+				"2": "Revamped visual branding elements, including QR-codes and YouTube thumbnails",
+				"3": "Built a stylish and interactive Taplink alternative using Next.js",
+				"4": "Authored a comprehensive brand book to ensure visual consistency",
+				"5": "Designed clothing items, including \"Languages\" hoodie for Horny Vape"
+			}
+		},
+		"elysium": {
+			"title": "Visual Merchandising & Sales Specialist",
+			"period": "September 2020 – September 2022",
+			"location": "Saint Petersburg",
+			"achievements": {
+				"0": "Enhanced in-store visual merchandising to improve customer experience",
+				"1": "Developed engaging training materials and presentations for onboarding new staff"
+			}
+		},
+		"vapeClub": {
+			"title": "Visual Merchandiser & Sales Manager",
+			"period": "February 2019 – August 2020",
+			"location": "Saint Petersburg",
+			"achievements": {
+				"0": "Maintained attractive and engaging visual store layouts",
+				"1": "Leveraged trend analysis to optimize product placement"
+			}
+		}
+	},
+	"contact": {
+		"title": "GET",
+		"titleSecond": "IN TOUCH",
+		"description": "Let's collaborate on your next project. Fill out the form below or reach out through any of the channels listed.",
+		"form": {
+			"title": "Send a Message",
+			"name": "Your Name",
+			"namePlaceholder": "Enter your name",
+			"email": "Your Email",
+			"emailPlaceholder": "Enter your email",
+			"message": "Message",
+			"messagePlaceholder": "Tell me about your project...",
+			"submit": "Send Message",
+			"sending": "Sending...",
+			"success": "Message sent successfully!",
+			"error": "Error sending message. Please try again."
+		},
+		"direct": {
+			"title": "Or reach me directly:",
+			"telegram": "Telegram",
+			"email": "Email",
+			"github": "GitHub",
+			"instagram": "Instagram"
+		},
+		"location": {
+			"title": "Saint Petersburg",
+			"description": "Working from the beautiful city of Saint Petersburg, Russia"
+		},
+		"remote": {
+			"title": "Remote Work",
+			"description": "Available worldwide. Open to video meetings at your convenience"
+		}
+	},
+	"work": {
+		"vaparshop": {
+			"title": "VAPARSHOP",
+			"subtitle": "Designer & Junior Developer",
+			"period": "June 2024 – Present",
+			"description": "Leading design and development initiatives for a growing vape retail company in Saint Petersburg.",
+			"challenge": "The Challenge",
+			"challengeText": "VAPARSHOP needed to modernize their operations and improve efficiency across multiple business processes while maintaining their unique brand identity.",
+			"solution": "The Solution",
+			"solutionText": "I developed a comprehensive suite of digital solutions including Telegram bots, web applications, and branding materials that significantly improved operational efficiency.",
+			"results": "Results",
+			"achievements": {
+				"0": "Developed Telegram bots that improved internal operational efficiency by 40%",
+				"1": "Created a custom Price Tag Generator web application",
+				"2": "Designed branded Telegram Emoji Pack for enhanced brand recognition",
+				"3": "Redesigned corporate presentations with unique visual identity",
+				"4": "Built a comprehensive Taplink alternative using Next.js",
+				"5": "Currently developing Telegram Mini App with GetMeBack API integration"
+			},
+			"technologies": "Technologies Used",
+			"techStack": {
+				"0": "Next.js",
+				"1": "TypeScript",
+				"2": "Telegram Bot API",
+				"3": "Node.js",
+				"4": "PostgreSQL",
+				"5": "Figma"
+			},
+			"showcase": {
+				"title": "PROJECT SHOWCASE",
+				"description": "Explore the key components developed for VAPARSHOP"
+			},
+			"process": {
+				"title": "DEVELOPMENT PROCESS",
+				"description": "A methodical approach from concept to deployment",
+				"phases": {
+					"research": {
+						"title": "Research & Analysis",
+						"description": "Understanding business needs and user requirements through stakeholder interviews and workflow analysis."
+					},
+					"design": {
+						"title": "Design & Prototyping",
+						"description": "Creating intuitive interfaces and interaction patterns, validated through user testing."
+					},
+					"development": {
+						"title": "Development",
+						"description": "Building robust solutions using Next.js, React, and Telegram API with a focus on performance."
+					},
+					"deployment": {
+						"title": "Deployment & Feedback",
+						"description": "Implementing solutions with continuous improvement based on real-world usage and feedback."
+					}
+				}
+			},
+			"cta": {
+				"title": "INTERESTED IN WORKING TOGETHER?",
+				"description": "Let's create digital solutions that transform your business operations and enhance customer experiences.",
+				"getInTouch": "GET IN TOUCH",
+				"backToHome": "BACK TO HOME"
+			},
+			"projects": {
+				"vaparWaToTgBot": {
+					"title": "VaparWaToTgBot",
+					"description": "Telegram bot that streamlines WhatsApp-to-Telegram data conversion and automates daily reporting.",
+					"tags": {
+						"0": "Telegram API",
+						"1": "Node.js",
+						"2": "Data Automation"
+					}
+				},
+				"vaparScannerBot": {
+					"title": "VaparScannerBot",
+					"description": "Enhances customer interaction by simplifying the use of GetMeBack cards without app installation.",
+					"tags": {
+						"0": "Telegram API",
+						"1": "Customer Experience",
+						"2": "GetMeBack Integration"
+					}
+				},
+				"priceTagGenerator": {
+					"title": "Price Tag Generator",
+					"description": "Custom web application to automate the creation of price tags, boosting operational productivity.",
+					"tags": {
+						"0": "Next.js",
+						"1": "Automation",
+						"2": "UI/UX Design"
+					}
+				},
+				"telegramMiniApp": {
+					"title": "Telegram Mini App",
+					"description": "Advanced mini app with QR scanning capabilities, phone-based searches, and detailed reporting.",
+					"tags": {
+						"0": "Next.js",
+						"1": "Telegram Mini App API",
+						"2": "React",
+						"3": "tRPC"
+					}
+				}
+			}
+		},
+		"hornyPlace": {
+			"title": "HORNY PLACE",
+			"subtitle": "Visual Designer & Developer",
+			"period": "October 2022 – May 2024",
+			"description": "Comprehensive visual design and development for an innovative vape retail brand.",
+			"challenge": "The Challenge",
+			"challengeText": "Horny Place needed a complete visual identity overhaul and digital presence that would stand out in a competitive market.",
+			"solution": "The Solution",
+			"solutionText": "I created a comprehensive brand identity system and developed various digital solutions including signage, promotional materials, and web applications.",
+			"results": "Results",
+			"achievements": {
+				"0": "Created various exterior signage designs for retail locations",
+				"1": "Developed comprehensive promotional materials",
+				"2": "Revamped visual branding elements including QR-codes and YouTube thumbnails",
+				"3": "Built an interactive Taplink alternative using Next.js",
+				"4": "Authored a comprehensive brand book for visual consistency",
+				"5": "Designed branded clothing items including the 'Languages' hoodie"
+			},
+			"technologies": "Technologies Used",
+			"techStack": {
+				"0": "Next.js",
+				"1": "React",
+				"2": "Figma",
+				"3": "Adobe Creative Suite",
+				"4": "JavaScript"
+			},
+			"page": {
+				"badge": "BRAND CASE STUDY",
+				"heroDescription": "Creating a bold and distinctive brand identity for a contemporary retail chain",
+				"heroSkills": {
+					"branding": "Branding",
+					"printDesign": "Print Design",
+					"webDevelopment": "Web Development"
+				},
+				"caseStudies": {
+					"signage": {
+						"title": "Exterior Signage",
+						"description": "Distinctive exterior signage designs created for retail locations including Lermo, Vaska, and Kuzi."
+					},
+					"promotional": {
+						"title": "Promotional Materials",
+						"description": "Window stickers, flyers, posters, and event tickets designed with a cohesive brand aesthetic."
+					},
+					"webApp": {
+						"title": "Web Application",
+						"description": "Interactive Taplink alternative built with Next.js featuring event integrations with Ticketscloud."
+					},
+					"brandBook": {
+						"title": "Brand Book",
+						"description": "Comprehensive brand guidelines ensuring visual consistency across digital and physical media."
+					}
+				},
+				"skills": {
+					"3dDesign": "3D Design",
+					"visualIdentity": "Visual Identity",
+					"brandExpression": "Brand Expression",
+					"printDesign": "Print Design",
+					"marketing": "Marketing",
+					"brandConsistency": "Brand Consistency",
+					"webDevelopment": "Web Development",
+					"uiuxDesign": "UI/UX Design",
+					"brandStrategy": "Brand Strategy",
+					"styleGuide": "Style Guide",
+					"designSystems": "Design Systems",
+					"retailExperience": "Retail Experience"
+				},
+				"sections": {
+					"brandIdentity": "BRAND IDENTITY WITH PURPOSE",
+					"brandDescription": "HORNY PLACE required a distinctive visual identity that would resonate with its audience while standing out in the competitive retail landscape.",
+					"brandChallenge": "The challenge was to create a brand that felt contemporary and edgy, yet accessible and cohesive across multiple touchpoints - from physical retail environments to digital platforms.",
+					"visualDesign": {
+						"title": "Visual Design",
+						"description": "Creating a consistent visual language"
+					},
+					"retailExperience": {
+						"title": "Retail Experience",
+						"description": "Designing immersive brand environments"
+					},
+					"digitalPlatforms": {
+						"title": "Digital Platforms",
+						"description": "Building branded online experiences"
+					}
+				},
+				"designJourney": {
+					"title": "DESIGN JOURNEY",
+					"description": "From initial concept to a comprehensive brand ecosystem spanning physical and digital touchpoints"
+				},
+				"keyElements": {
+					"title": "KEY ELEMENTS",
+					"description": "Exploring the different components created for the HORNY PLACE brand"
+				},
+				"projectOutcomes": {
+					"title": "PROJECT OUTCOMES",
+					"description": "The impact of the brand identity and implementation across different touchpoints"
+				},
+				"outcomes": {
+					"brandRecognition": {
+						"number": "01",
+						"title": "Brand Recognition",
+						"description": "Increased brand recognition and recall among target audience by 65%"
+					},
+					"customerEngagement": {
+						"number": "02",
+						"title": "Customer Engagement",
+						"description": "40% increase"
+					},
+					"retailPresence": {
+						"number": "03",
+						"title": "Retail Presence",
+						"description": "Distinctive retail environments that enhanced the overall customer experience"
+					}
+				},
+				"cta": {
+					"title": "READY TO CREATE YOUR BRAND?",
+					"description": "Let's work together to develop a distinctive brand identity that resonates with your audience and stands out in the market.",
+					"startProject": "START A PROJECT",
+					"backToHome": "BACK TO HOME"
+				},
+				"navigation": {
+					"previous": "Previous",
+					"next": "Next"
+				},
+				"phases": {
+					"phase": "Phase",
+					"discovery": {
+						"title": "Discovery & Strategy",
+						"description": "Researching the market, defining brand positioning, and establishing core brand attributes."
+					},
+					"visualIdentity": {
+						"title": "Visual Identity",
+						"description": "Designing the logo, color palette, typography, and core visual elements to express the brand."
+					},
+					"brandApplications": {
+						"title": "Brand Applications",
+						"description": "Creating exterior signage, promotional materials, and retail experience touchpoints."
+					},
+					"digitalExperience": {
+						"title": "Digital Experience",
+						"description": "Developing the web application with Ticketscloud integration and social media presence."
+					}
+				}
+			}
+		}
+	},
+	"footer": {
+		"copyright": "© {year} Danya Yudin",
+		"links": {
+			"telegram": "Telegram",
+			"github": "GitHub",
+			"instagram": "Instagram",
+			"x": "X",
+			"vk": "VK"
+		}
+	}
+}

@@ -56,7 +56,16 @@ design.md
 rules.json
 .cursorignore
 
+# SEO files
 yandex_9f4476abe564070b.html
+google9a037a0cda852d94.html
 
 # Temporary files
 temp/
+
+# claude files
+.claude/
+CLAUDE.md
+
+
+.gitignore

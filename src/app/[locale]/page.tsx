@@ -15,10 +15,12 @@ import {
 	Paintbrush,
 	X,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Contact from "~/components/Contact";
 import { SEOKeywords } from "~/components/SEOKeywords";
+import { AwwwardsHero } from "~/components/ui/AwwwardsHero";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
@@ -211,6 +213,7 @@ const VKIcon: React.FC<IconProps> = ({ className }) => (
 );
 
 export default function HomePage() {
+	const t = useTranslations();
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
 
@@ -233,7 +236,7 @@ export default function HomePage() {
 	const logoRotate = useTransform(scrollYProgress, [0, 0.5], [0, 15]);
 
 	// Random letter animation setup
-	const originalName = "DANYA YUDIN";
+	const originalName = t("hero.title");
 	const [displayName, setDisplayName] = useState(originalName);
 
 	useEffect(() => {
@@ -285,11 +288,40 @@ export default function HomePage() {
 		}, 500);
 
 		return () => clearTimeout(timeout);
-	}, []);
+	}, [originalName]);
 
 	if (!isMounted) {
 		return null;
 	}
+
+	// Get achievements as arrays for each company
+	const vaparshopAchievements = [
+		t("experience.vaparshop.achievements.0"),
+		t("experience.vaparshop.achievements.1"),
+		t("experience.vaparshop.achievements.2"),
+		t("experience.vaparshop.achievements.3"),
+		t("experience.vaparshop.achievements.4"),
+		t("experience.vaparshop.achievements.5"),
+	];
+
+	const hornyPlaceAchievements = [
+		t("experience.hornyPlace.achievements.0"),
+		t("experience.hornyPlace.achievements.1"),
+		t("experience.hornyPlace.achievements.2"),
+		t("experience.hornyPlace.achievements.3"),
+		t("experience.hornyPlace.achievements.4"),
+		t("experience.hornyPlace.achievements.5"),
+	];
+
+	const elysiumAchievements = [
+		t("experience.elysium.achievements.0"),
+		t("experience.elysium.achievements.1"),
+	];
+
+	const vapeClubAchievements = [
+		t("experience.vapeClub.achievements.0"),
+		t("experience.vapeClub.achievements.1"),
+	];
 
 	// Create the particles array outside of the render
 	const particles = Array.from({ length: 15 }).map((_, index) => ({
@@ -311,287 +343,165 @@ export default function HomePage() {
 		<div ref={containerRef} className="relative">
 			<SEOKeywords />
 			<Toaster />
-			{/* Hero Section with name animation */}
-			<section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
-				{/* Interactive logo animation */}
-				<div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
-					{/* Base background effects */}
-					<div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background opacity-95" />
+			{/* Award-winning Hero Section */}
+			<AwwwardsHero>
+				{/* Background Logo - Centered behind title, draws itself after intro */}
+				<motion.svg
+					width="900"
+					height="900"
+					viewBox="0 0 1106 1057"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+					className="-translate-x-1/2 -translate-y-1/2 -ml-12 pointer-events-none absolute top-1/2 left-1/2 z-1 flex scale-[2] items-center justify-center"
+					initial={{ scale: 0.8, opacity: 0 }}
+					animate={{ scale: 1, opacity: 0.4 }}
+					transition={{ duration: 1.5, delay: 2.5 }}
+					role="img"
+					aria-label="Логотип Sabraman"
+					// style={{
+					// 	position: "absolute",
+					// 	top: "-70%",
+					// 	left: "0%",
+					// 	transform: "translate(-50%, -50%)",
+					// 	zIndex: 1,
+					// }}
+				>
+					<title>Логотип Sabraman</title>
+					{/* First path - draws after intro */}
+					<motion.path
+						d="M861.369 247.228C861.333 247.353 861.307 247.481 861.261 247.604C859.745 251.632 849.864 263.106 846.718 267.154L753.594 387.119C743.695 399.893 734.093 413.073 723.875 425.598C722.562 427.213 720.881 428.772 718.881 429.546C716.653 430.402 714.04 429.336 711.921 428.638C704.881 426.322 697.988 423.362 691.082 420.698L651.906 405.611L534.427 360.602C545.858 356.025 601.362 338.802 605.729 335.035C606.49 327.907 583.263 258.01 579.257 247.097C559.698 193.807 520.081 115.298 463.736 90.5882C440.364 80.3359 410.784 80.8487 386.638 89.503C350.339 104.693 326.467 141.137 309.025 173.841C304.669 182.005 301.006 193.251 294.943 200.095C301.777 180.307 308.826 160.956 319.033 142.447C337.081 109.726 364.647 80.401 402.202 68.9848C411.406 66.1872 420.725 64.6062 430.285 63.789C440.123 62.9481 450.194 63.2456 460.058 63.101C474.419 62.8583 488.778 62.5148 503.136 62.0705L562.821 60.5274C579.94 60.1498 597.226 59.4249 614.212 61.5247C616.153 61.7582 618.086 62.034 620.012 62.3523C621.938 62.6705 623.855 63.0309 625.763 63.4334C627.67 63.836 629.566 64.2803 631.451 64.7664C633.336 65.2525 635.207 65.7797 637.066 66.3481C638.924 66.9167 640.767 67.5259 642.596 68.1756C644.423 68.8254 646.234 69.5151 648.028 70.2447C649.823 70.9746 651.598 71.7435 653.354 72.5516C655.11 73.3596 656.845 74.2062 658.56 75.0912C705.829 99.3213 745.984 162.183 765.542 208.712C774.168 229.231 780.306 250.595 786.793 271.837L837.542 254.837C845.075 252.311 853.599 248.522 861.369 247.228Z"
+						stroke="currentColor"
+						strokeWidth="2"
+						strokeLinecap="round"
+						fill="transparent"
+						initial={{ pathLength: 0, opacity: 0 }}
+						animate={{ pathLength: 1, opacity: 1 }}
+						transition={{ duration: 3, delay: 2.8, ease: "easeInOut" }}
+					/>
+					{/* Second path - draws after first */}
+					<motion.path
+						d="M66.109 398.261L254.566 406.441C259.134 406.637 294.045 407.339 295.758 409.432C298.711 413.045 354.226 585.454 358.513 603.17C337.141 588.239 316.046 572.896 294.554 558.123C279.134 580.824 262.88 602.984 248.834 626.511C218.877 676.687 184.858 755.549 197.342 813.929C203.414 842.333 222.318 870.719 247.73 886.303C279.493 905.784 321.407 905.361 357.863 900.547C368.161 899.185 378.681 896.143 388.983 895.563C341.847 911.871 291.7 920.412 245.157 899.091C243.438 898.295 241.738 897.463 240.056 896.598C238.374 895.732 236.713 894.831 235.071 893.895C233.43 892.961 231.81 891.994 230.212 890.992C228.615 889.991 227.04 888.957 225.489 887.889C223.939 886.824 222.412 885.727 220.909 884.596C219.409 883.467 217.932 882.308 216.48 881.119C215.031 879.929 213.609 878.709 212.214 877.46C210.818 876.211 209.452 874.933 208.114 873.626C198.237 864.073 190.116 853.049 181.694 842.32L151.831 804.562L113.342 756.379C104.751 745.626 95.7392 734.999 88.2052 723.512C86.3256 720.674 84.5391 717.783 82.8454 714.838C81.1491 711.895 79.5481 708.902 78.0424 705.859C76.534 702.817 75.124 699.733 73.8122 696.605C72.5005 693.477 71.2874 690.314 70.173 687.115C69.2498 684.457 68.2996 681.708 67.6804 678.958L67.2567 679.106L64.6251 668.455L65.0606 668.442C51.8859 607.669 81.534 522.688 116.094 471.285C121.761 462.998 127.511 454.765 133.342 446.585L66.109 398.261ZM65.0606 668.442L64.6251 668.455L67.2567 679.106L67.6804 678.958C66.8922 675.437 65.942 671.939 65.0606 668.442Z"
+						stroke="currentColor"
+						strokeWidth="2"
+						strokeLinecap="round"
+						fill="transparent"
+						initial={{ pathLength: 0, opacity: 0 }}
+						animate={{ pathLength: 1, opacity: 1 }}
+						transition={{ duration: 3, delay: 4.5, ease: "easeInOut" }}
+					/>
+					{/* Third path - draws last */}
+					<motion.path
+						d="M1045.62 548.718L1046.48 552.204C1046.59 555.81 1047.62 559.597 1048.11 563.197C1048.36 565.048 1048.57 566.906 1048.72 568.769C1048.87 570.633 1048.97 572.499 1049.02 574.368C1049.06 576.237 1049.06 578.108 1049 579.98C1048.94 581.852 1048.83 583.723 1048.67 585.592C1048.51 587.278 1048.31 588.96 1048.08 590.64C1047.84 592.321 1047.57 593.996 1047.27 595.665C1046.96 597.335 1046.62 598.998 1046.24 600.653C1045.86 602.312 1045.45 603.962 1045 605.604C1044.55 607.246 1044.07 608.88 1043.55 610.505C1043.03 612.127 1042.47 613.739 1041.88 615.341C1041.29 616.943 1040.67 618.534 1040.01 620.112C1039.35 621.691 1038.66 623.257 1037.93 624.81C1032.29 637.109 1024.72 648.699 1017.75 660.354L986.15 713.324L953.685 768.283C945.526 782.159 937.747 796.281 928.065 809.265C925.553 812.638 922.937 815.935 920.216 819.156C917.496 822.379 914.676 825.519 911.756 828.573C908.838 831.631 905.825 834.6 902.719 837.48C899.613 840.361 896.419 843.147 893.137 845.838C890.939 847.623 888.708 849.368 886.445 851.074C884.182 852.783 881.888 854.449 879.562 856.073C877.237 857.699 874.882 859.285 872.498 860.828C870.113 862.372 867.701 863.874 865.262 865.334C862.822 866.794 860.356 868.21 857.864 869.583C855.371 870.956 852.854 872.283 850.312 873.564C847.771 874.849 845.207 876.089 842.621 877.284C840.034 878.476 837.426 879.624 834.797 880.726C780.087 904.109 698.019 916.86 638.89 917.975C614.974 918.422 591.597 916.729 567.833 915.04C561.649 944.021 555.403 973.043 548.724 1001.93L445.433 821.472C440.42 812.703 435.115 803.99 430.427 795.06C429.525 793.339 427.697 790.329 427.988 788.408C428.854 786.779 430.084 785.697 431.497 784.509C444.672 773.432 458.364 762.85 471.764 752.027L600.017 648.33C608.482 641.478 616.827 633.916 625.869 627.82L608.222 709.857C707.333 716.645 813.688 720.861 909.966 690.486C931.982 683.537 953.744 675.02 973.045 662.356C1001.47 643.706 1024.95 614.661 1031.66 581.803C1039.91 541.468 1011.41 499.636 985.465 470.9C981.631 466.566 977.64 462.37 973.492 458.312C969.192 454.051 964.399 449.86 960.951 444.91L960.508 444.267C966.612 447.674 972.471 452.699 977.91 457.018C1001.38 475.667 1022.16 497.031 1035.75 523.562C1039.88 531.628 1042.02 540.107 1045.46 548.364L1045.62 548.718Z"
+						stroke="currentColor"
+						strokeWidth="2"
+						strokeLinecap="round"
+						fill="transparent"
+						initial={{ pathLength: 0, opacity: 0 }}
+						animate={{ pathLength: 1, opacity: 1 }}
+						transition={{ duration: 3, delay: 6.2, ease: "easeInOut" }}
+					/>
+				</motion.svg>
 
-					{/* Digital matrix effect overlay */}
-					<div className="absolute inset-0 opacity-5">
-						{[
-							"matrix-1",
-							"matrix-2",
-							"matrix-3",
-							"matrix-4",
-							"matrix-5",
-							"matrix-6",
-							"matrix-7",
-							"matrix-8",
-							"matrix-9",
-							"matrix-10",
-							"matrix-11",
-							"matrix-12",
-							"matrix-13",
-							"matrix-14",
-							"matrix-15",
-							"matrix-16",
-							"matrix-17",
-							"matrix-18",
-							"matrix-19",
-							"matrix-20",
-						].map((id) => (
-							<div
-								key={id}
-								className="absolute font-mono text-accent/70 text-xs"
-								style={{
-									left: `${Math.random() * 100}%`,
-									top: `${Math.random() * 100}%`,
-									opacity: Math.random() * 0.7 + 0.3,
-									transform: `scale(${Math.random() * 0.5 + 0.5})`,
-								}}
-							>
-								{Math.random() > 0.5 ? "1" : "0"}
-							</div>
-						))}
+				{/* Main text content - in front of logo */}
+				<div className="relative z-20">
+					<motion.h1
+						initial={{ opacity: 0, y: 100 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{
+							duration: 0.8,
+							ease: [0.22, 1, 0.36, 1],
+							delay: 0.5,
+						}}
+						className="mb-8 font-extrabold text-[8vw] leading-none tracking-tight md:text-[6vw] lg:text-[5vw] xl:text-[4vw]"
+						style={{
+							fontFamily: "Heading Now Variable",
+							fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
+						}}
+					>
+						{displayName}
+					</motion.h1>
+					{/* SEO-optimized subtitle with target keywords */}
+					<div className="sr-only">
+						<h2>
+							Sabraman - Danya Yudin (Даня Юдин) - Creative Designer & Developer
+						</h2>
+						<p>
+							Картон - Creative Designer and Early-Stage Developer specializing
+							in visual design, branding, and application development
+						</p>
 					</div>
 
-					{/* Interactive logo animation container - allows mouse interaction */}
-					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ duration: 1, delay: 0.5 }}
-						className="relative flex h-full w-full items-center justify-center"
-						style={{ perspective: 1000 }}
+					<motion.h2
+						initial={{ opacity: 0, y: 50 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{
+							duration: 0.8,
+							ease: [0.22, 1, 0.36, 1],
+							delay: 1.8,
+						}}
+						className="mb-10 text-[5vw] text-muted-foreground leading-tight md:text-[4vw] lg:text-[3vw] xl:text-[2.5vw]"
 					>
-						{/* 3D Interactive logo container */}
-						<motion.div
-							className="relative h-[80vh] max-h-[800px] w-[80vh] max-w-[800px]"
-							initial={{ rotateY: 0, rotateX: 0 }}
-							animate={{ rotateY: [0, 5, -5, 0], rotateX: [0, -5, 5, 0] }}
-							transition={{
-								repeat: Number.POSITIVE_INFINITY,
-								duration: 20,
-								ease: "linear",
-								delay: 0.7,
-							}}
-							style={{
-								transformStyle: "preserve-3d",
-								y: logoY,
-							}}
+						{t("hero.subtitle")}
+						<br />
+						<span className="bg-gradient-to-r from-accent to-sky-300 bg-clip-text text-transparent">
+							{t("hero.subtitleHighlight")}
+						</span>
+					</motion.h2>
+
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{
+							duration: 0.6,
+							ease: [0.22, 1, 0.36, 1],
+							delay: 2.1,
+						}}
+						className="flex flex-col justify-center gap-4 md:flex-row"
+					>
+						<Button
+							size="lg"
+							className="group relative overflow-hidden rounded-full px-8 py-6 font-medium text-base"
+							asChild
 						>
-							{/* Interactive logo container */}
-							<motion.div
-								className="relative h-full w-full cursor-pointer"
-								whileHover={{ scale: 1.05 }}
-								transition={{ type: "spring", stiffness: 400, damping: 10 }}
-							>
-								{/* Main logo SVG with animation */}
-								<motion.svg
-									width="100%"
-									height="100%"
-									viewBox="0 0 1106 1057"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-									className="absolute inset-0"
-									style={{
-										filter: "drop-shadow(0 0 10px rgba(120, 120, 250, 0.3))",
-									}}
-									role="img"
-									aria-label="Логотип Sabraman"
-								>
-									<title>Логотип Sabraman</title>
-									<motion.path
-										d="M861.369 247.228C861.333 247.353 861.307 247.481 861.261 247.604C859.745 251.632 849.864 263.106 846.718 267.154L753.594 387.119C743.695 399.893 734.093 413.073 723.875 425.598C722.562 427.213 720.881 428.772 718.881 429.546C716.653 430.402 714.04 429.336 711.921 428.638C704.881 426.322 697.988 423.362 691.082 420.698L651.906 405.611L534.427 360.602C545.858 356.025 601.362 338.802 605.729 335.035C606.49 327.907 583.263 258.01 579.257 247.097C559.698 193.807 520.081 115.298 463.736 90.5882C440.364 80.3359 410.784 80.8487 386.638 89.503C350.339 104.693 326.467 141.137 309.025 173.841C304.669 182.005 301.006 193.251 294.943 200.095C301.777 180.307 308.826 160.956 319.033 142.447C337.081 109.726 364.647 80.401 402.202 68.9848C411.406 66.1872 420.725 64.6062 430.285 63.789C440.123 62.9481 450.194 63.2456 460.058 63.101C474.419 62.8583 488.778 62.5148 503.136 62.0705L562.821 60.5274C579.94 60.1498 597.226 59.4249 614.212 61.5247C616.153 61.7582 618.086 62.034 620.012 62.3523C621.938 62.6705 623.855 63.0309 625.763 63.4334C627.67 63.836 629.566 64.2803 631.451 64.7664C633.336 65.2525 635.207 65.7797 637.066 66.3481C638.924 66.9167 640.767 67.5259 642.596 68.1756C644.423 68.8254 646.234 69.5151 648.028 70.2447C649.823 70.9746 651.598 71.7435 653.354 72.5516C655.11 73.3596 656.845 74.2062 658.56 75.0912C705.829 99.3213 745.984 162.183 765.542 208.712C774.168 229.231 780.306 250.595 786.793 271.837L837.542 254.837C845.075 252.311 853.599 248.522 861.369 247.228Z"
-										stroke="currentColor"
-										strokeWidth="4"
-										strokeLinecap="round"
-										fill="transparent"
-										initial={{ pathLength: 0, opacity: 0 }}
-										animate={{ pathLength: 1, opacity: 1 }}
-										transition={{ duration: 2, delay: 1, ease: "easeInOut" }}
-									/>
-									<motion.path
-										d="M66.109 398.261L254.566 406.441C259.134 406.637 294.045 407.339 295.758 409.432C298.711 413.045 354.226 585.454 358.513 603.17C337.141 588.239 316.046 572.896 294.554 558.123C279.134 580.824 262.88 602.984 248.834 626.511C218.877 676.687 184.858 755.549 197.342 813.929C203.414 842.333 222.318 870.719 247.73 886.303C279.493 905.784 321.407 905.361 357.863 900.547C368.161 899.185 378.681 896.143 388.983 895.563C341.847 911.871 291.7 920.412 245.157 899.091C243.438 898.295 241.738 897.463 240.056 896.598C238.374 895.732 236.713 894.831 235.071 893.895C233.43 892.961 231.81 891.994 230.212 890.992C228.615 889.991 227.04 888.957 225.489 887.889C223.939 886.824 222.412 885.727 220.909 884.596C219.409 883.467 217.932 882.308 216.48 881.119C215.031 879.929 213.609 878.709 212.214 877.46C210.818 876.211 209.452 874.933 208.114 873.626C198.237 864.073 190.116 853.049 181.694 842.32L151.831 804.562L113.342 756.379C104.751 745.626 95.7392 734.999 88.2052 723.512C86.3256 720.674 84.5391 717.783 82.8454 714.838C81.1491 711.895 79.5481 708.902 78.0424 705.859C76.534 702.817 75.124 699.733 73.8122 696.605C72.5005 693.477 71.2874 690.314 70.173 687.115C69.2498 684.457 68.2996 681.708 67.6804 678.958L67.2567 679.106L64.6251 668.455L65.0606 668.442C51.8859 607.669 81.534 522.688 116.094 471.285C121.761 462.998 127.511 454.765 133.342 446.585L66.109 398.261ZM65.0606 668.442L64.6251 668.455L67.2567 679.106L67.6804 678.958C66.8922 675.437 65.942 671.939 65.0606 668.442Z"
-										stroke="currentColor"
-										strokeWidth="4"
-										strokeLinecap="round"
-										fill="transparent"
-										initial={{ pathLength: 0, opacity: 0 }}
-										animate={{ pathLength: 1, opacity: 1 }}
-										transition={{ duration: 2, delay: 1.3, ease: "easeInOut" }}
-									/>
-									<motion.path
-										d="M1045.62 548.718L1046.48 552.204C1046.59 555.81 1047.62 559.597 1048.11 563.197C1048.36 565.048 1048.57 566.906 1048.72 568.769C1048.87 570.633 1048.97 572.499 1049.02 574.368C1049.06 576.237 1049.06 578.108 1049 579.98C1048.94 581.852 1048.83 583.723 1048.67 585.592C1048.51 587.278 1048.31 588.96 1048.08 590.64C1047.84 592.321 1047.57 593.996 1047.27 595.665C1046.96 597.335 1046.62 598.998 1046.24 600.653C1045.86 602.312 1045.45 603.962 1045 605.604C1044.55 607.246 1044.07 608.88 1043.55 610.505C1043.03 612.127 1042.47 613.739 1041.88 615.341C1041.29 616.943 1040.67 618.534 1040.01 620.112C1039.35 621.691 1038.66 623.257 1037.93 624.81C1032.29 637.109 1024.72 648.699 1017.75 660.354L986.15 713.324L953.685 768.283C945.526 782.159 937.747 796.281 928.065 809.265C925.553 812.638 922.937 815.935 920.216 819.156C917.496 822.379 914.676 825.519 911.756 828.573C908.838 831.631 905.825 834.6 902.719 837.48C899.613 840.361 896.419 843.147 893.137 845.838C890.939 847.623 888.708 849.368 886.445 851.074C884.182 852.783 881.888 854.449 879.562 856.073C877.237 857.699 874.882 859.285 872.498 860.828C870.113 862.372 867.701 863.874 865.262 865.334C862.822 866.794 860.356 868.21 857.864 869.583C855.371 870.956 852.854 872.283 850.312 873.564C847.771 874.849 845.207 876.089 842.621 877.284C840.034 878.476 837.426 879.624 834.797 880.726C780.087 904.109 698.019 916.86 638.89 917.975C614.974 918.422 591.597 916.729 567.833 915.04C561.649 944.021 555.403 973.043 548.724 1001.93L445.433 821.472C440.42 812.703 435.115 803.99 430.427 795.06C429.525 793.339 427.697 790.329 427.988 788.408C428.854 786.779 430.084 785.697 431.497 784.509C444.672 773.432 458.364 762.85 471.764 752.027L600.017 648.33C608.482 641.478 616.827 633.916 625.869 627.82L608.222 709.857C707.333 716.645 813.688 720.861 909.966 690.486C931.982 683.537 953.744 675.02 973.045 662.356C1001.47 643.706 1024.95 614.661 1031.66 581.803C1039.91 541.468 1011.41 499.636 985.465 470.9C981.631 466.566 977.64 462.37 973.492 458.312C969.192 454.051 964.399 449.86 960.951 444.91L960.508 444.267C966.612 447.674 972.471 452.699 977.91 457.018C1001.38 475.667 1022.16 497.031 1035.75 523.562C1039.88 531.628 1042.02 540.107 1045.46 548.364L1045.62 548.718Z"
-										stroke="currentColor"
-										strokeWidth="4"
-										strokeLinecap="round"
-										fill="transparent"
-										initial={{ pathLength: 0, opacity: 0 }}
-										animate={{ pathLength: 1, opacity: 1 }}
-										transition={{ duration: 2, delay: 1.6, ease: "easeInOut" }}
-									/>
-								</motion.svg>
-
-								{/* High-tech scan effect */}
-								<motion.div
-									className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/10 to-transparent opacity-30"
-									animate={{
-										top: ["-100%", "200%"],
-									}}
-									transition={{
-										repeat: Number.POSITIVE_INFINITY,
-										duration: 3,
-										ease: "linear",
-										repeatDelay: 1,
-										delay: 2,
-									}}
-									style={{ height: "30%" }}
-								/>
-
-								{/* High-tech glitching effects */}
-								<motion.div
-									className="absolute inset-0"
-									animate={{ opacity: [0, 0.3, 0, 0.2, 0] }}
-									transition={{
-										repeat: Number.POSITIVE_INFINITY,
-										duration: 5,
-										repeatDelay: 10,
-										delay: 2.5,
-									}}
-								>
-									<div
-										className="absolute inset-0 bg-accent/20 mix-blend-overlay"
-										style={{
-											clipPath: "polygon(0 0, 100% 0, 100% 10%, 0 10%)",
-											transform: "translateY(30%)",
-										}}
-									/>
-									<div
-										className="absolute inset-0 bg-accent/20 mix-blend-overlay"
-										style={{
-											clipPath: "polygon(0 0, 100% 0, 100% 5%, 0 5%)",
-											transform: "translateY(50%)",
-										}}
-									/>
-								</motion.div>
-							</motion.div>
-						</motion.div>
-					</motion.div>
-				</div>
-
-				{/* Text content */}
-				<motion.div
-					className="relative z-10 flex flex-col items-center justify-center text-center"
-					style={{
-						scale: textScale,
-						opacity: textOpacity,
-						y: textY,
-					}}
-				>
-					<div className="max-w-7xl px-4">
-						<motion.div
-							initial={{ opacity: 0, y: 100 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{
-								duration: 0.8,
-								ease: [0.22, 1, 0.36, 1],
-								delay: 1.5,
-							}}
-						>
-							<h1
-								className="mb-8 font-extrabold text-[8vw] leading-none tracking-tight md:text-[6vw] lg:text-[5vw] xl:text-[4vw]"
-								style={{
-									fontFamily: "Heading Now Variable",
-									fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
-								}}
-							>
-								{displayName}
-							</h1>
-							{/* SEO-optimized subtitle with target keywords */}
-							<div className="sr-only">
-								<h2>
-									Sabraman - Danya Yudin (Даня Юдин) - Creative Designer &
-									Developer
-								</h2>
-								<p>
-									Картон - Creative Designer and Early-Stage Developer
-									specializing in visual design, branding, and application
-									development
-								</p>
-							</div>
-						</motion.div>
-
-						<motion.h2
-							initial={{ opacity: 0, y: 50 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{
-								duration: 0.8,
-								ease: [0.22, 1, 0.36, 1],
-								delay: 1.8,
-							}}
-							className="mb-10 text-[5vw] text-muted-foreground leading-tight md:text-[4vw] lg:text-[3vw] xl:text-[2.5vw]"
-						>
-							CREATIVE DESIGNER &<br />
-							<span className="bg-gradient-to-r from-accent to-sky-300 bg-clip-text text-transparent">
-								EARLY-STAGE DEVELOPER
-							</span>
-						</motion.h2>
-
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{
-								duration: 0.6,
-								ease: [0.22, 1, 0.36, 1],
-								delay: 2.1,
-							}}
-							className="flex flex-col justify-center gap-4 md:flex-row"
-						>
-							<Button
-								size="lg"
-								className="group relative overflow-hidden rounded-full px-8 py-6 font-medium text-base"
-								asChild
-							>
-								<a href="/DANYA_YUDIN_CV.md" download>
-									<span className="relative z-10">DOWNLOAD RESUME</span>
-									<Download className="relative z-10 ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
-									<motion.span
-										className="absolute inset-0 bg-accent"
-										initial={{ x: "-100%", opacity: 0 }}
-										whileHover={{ x: 0, opacity: 1 }}
-										transition={{ duration: 0.3, ease: "easeInOut" }}
-									/>
-								</a>
-							</Button>
-
-							<Button
-								variant="outline"
-								size="lg"
-								className="group relative cursor-pointer overflow-hidden rounded-full px-8 py-6 font-medium text-base"
-								onClick={() => {
-									// Scroll to contact section
-									const contactSection =
-										document.getElementById("contact-section");
-									if (contactSection) {
-										contactSection.scrollIntoView({ behavior: "smooth" });
-									}
-								}}
-							>
-								<span className="relative z-10">GET IN TOUCH</span>
-								<ArrowRight className="relative z-10 ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+							<a href="/DANYA_YUDIN_CV.md" download>
+								<span className="relative z-10">
+									{t("hero.downloadResume")}
+								</span>
+								<Download className="relative z-10 ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
 								<motion.span
-									className="absolute inset-0 bg-accent/10"
-									initial={{ scale: 0, opacity: 0 }}
-									whileHover={{ scale: 1, opacity: 1 }}
+									className="absolute inset-0 bg-accent"
+									initial={{ x: "-100%", opacity: 0 }}
+									whileHover={{ x: 0, opacity: 1 }}
 									transition={{ duration: 0.3, ease: "easeInOut" }}
 								/>
-							</Button>
-						</motion.div>
-					</div>
-				</motion.div>
-			</section>
+							</a>
+						</Button>
+
+						<Button
+							variant="outline"
+							size="lg"
+							className="group relative cursor-pointer overflow-hidden rounded-full px-8 py-6 font-medium text-base"
+							onClick={() => {
+								// Scroll to contact section
+								const contactSection =
+									document.getElementById("contact-section");
+								if (contactSection) {
+									contactSection.scrollIntoView({ behavior: "smooth" });
+								}
+							}}
+						>
+							<span className="relative z-10">{t("hero.getInTouch")}</span>
+							<ArrowRight className="relative z-10 ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+							<motion.span
+								className="absolute inset-0 bg-accent/10"
+								initial={{ scale: 0, opacity: 0 }}
+								whileHover={{ scale: 1, opacity: 1 }}
+								transition={{ duration: 0.3, ease: "easeInOut" }}
+							/>
+						</Button>
+					</motion.div>
+				</div>
+			</AwwwardsHero>
 
 			{/* About Section with glitch effect */}
 			<section
@@ -607,7 +517,7 @@ export default function HomePage() {
 						className="mb-20 overflow-hidden"
 					>
 						<h2
-							className="font-extrabold text-7xl uppercase tracking-tight md:text-7xl xl:text-[12rem]"
+							className="font-extrabold text-6xl uppercase tracking-tight md:text-6xl xl:text-[12rem]"
 							style={{
 								fontFamily: "Heading Now Variable",
 								fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
@@ -615,7 +525,7 @@ export default function HomePage() {
 						>
 							<span className="relative z-0 ml-4 inline-block md:ml-8 xl:ml-12">
 								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
-								I AM
+								{t("about.title")}
 							</span>
 						</h2>
 					</motion.div>
@@ -630,19 +540,15 @@ export default function HomePage() {
 						>
 							<div className="prose prose-xl dark:prose-invert max-w-none">
 								<p className="mb-8 text-2xl leading-relaxed lg:text-3xl">
-									Creative Designer and Early-Stage Developer with extensive
-									hands-on experience in visual design, branding, and
-									application development. <strong>Sabraman</strong> - Danya
-									Yudin (Даня Юдин) specializes in creating innovative digital
-									solutions.
+									{t.rich("about.description1", {
+										sabraman: (chunks) => <strong>{chunks}</strong>,
+									})}
 								</p>
 
 								<p className="text-muted-foreground text-xl leading-relaxed lg:text-2xl">
-									I have a proven track record of transforming concepts into
-									visually appealing and functional digital products. My passion
-									lies in integrating design and technology to deliver intuitive
-									user experiences. Known as <strong>Картон</strong> in creative
-									circles, I bring unique perspectives to every project.
+									{t.rich("about.description2", {
+										karton: (chunks) => <strong>{chunks}</strong>,
+									})}
 								</p>
 
 								<div className="mt-12 flex flex-wrap gap-6">
@@ -701,15 +607,18 @@ export default function HomePage() {
 							className="flex flex-col gap-8"
 						>
 							<div className="rounded-xl border bg-card p-6 shadow-lg backdrop-blur-sm">
-								<h3 className="mb-4 font-bold text-2xl">EXPERTISE AREAS</h3>
+								<h3 className="mb-4 font-bold text-2xl">
+									{t("about.expertiseAreas")}
+								</h3>
 								<ul className="space-y-4">
 									<li className="flex items-start gap-3">
 										<Paintbrush className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" />
 										<div>
-											<h4 className="font-semibold text-xl">Visual Design</h4>
+											<h4 className="font-semibold text-xl">
+												{t("about.visualDesign.title")}
+											</h4>
 											<p className="text-muted-foreground">
-												Creating engaging visual experiences across different
-												mediums
+												{t("about.visualDesign.description")}
 											</p>
 										</div>
 									</li>
@@ -717,19 +626,21 @@ export default function HomePage() {
 										<Code className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" />
 										<div>
 											<h4 className="font-semibold text-xl">
-												Application Development
+												{t("about.appDevelopment.title")}
 											</h4>
 											<p className="text-muted-foreground">
-												Building functional web apps and Telegram bots
+												{t("about.appDevelopment.description")}
 											</p>
 										</div>
 									</li>
 									<li className="flex items-start gap-3">
 										<LineChart className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" />
 										<div>
-											<h4 className="font-semibold text-xl">Branding</h4>
+											<h4 className="font-semibold text-xl">
+												{t("about.branding.title")}
+											</h4>
 											<p className="text-muted-foreground">
-												Crafting comprehensive brand identities and guidelines
+												{t("about.branding.description")}
 											</p>
 										</div>
 									</li>
@@ -739,8 +650,6 @@ export default function HomePage() {
 					</div>
 				</div>
 			</section>
-
-			{/* Projects Section */}
 			<section
 				className="relative overflow-hidden bg-primary/5 py-32"
 				id="projects"
@@ -785,9 +694,9 @@ export default function HomePage() {
 						>
 							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
 								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
-								MY
+								{t("projects.title")}
 							</span>
-							WORK
+							{t("projects.titleSecond")}
 						</h2>
 
 						<motion.p
@@ -797,8 +706,7 @@ export default function HomePage() {
 							viewport={{ once: true }}
 							className="relative mt-8 ml-1 max-w-2xl text-muted-foreground text-xl"
 						>
-							Selected projects showcasing my approach to design and
-							development.
+							{t("projects.description")}
 							<span className="-bottom-3 absolute left-0 h-[2px] w-24 bg-gradient-to-r from-accent to-transparent" />
 						</motion.p>
 					</motion.div>
@@ -835,8 +743,7 @@ export default function HomePage() {
 										</div>
 
 										<p className="mb-6 text-muted-foreground text-xl transition-colors duration-500 group-hover:text-foreground/90">
-											Telegram bots and web applications improving operational
-											efficiency
+											{t("projects.vaparshop.description")}
 										</p>
 
 										<div className="mt-auto">
@@ -853,7 +760,7 @@ export default function HomePage() {
 											</div>
 
 											<div className="inline-flex items-center font-medium text-foreground/90 transition-colors duration-300 group-hover:text-accent">
-												View Project
+												{t("projects.vaparshop.viewProject")}
 												<ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
 											</div>
 										</div>
@@ -890,7 +797,7 @@ export default function HomePage() {
 										</h3>
 
 										<p className="mb-6 text-muted-foreground text-xl transition-colors duration-500 group-hover:text-foreground/90">
-											Comprehensive branding and interactive web solutions
+											{t("projects.hornyPlace.description")}
 										</p>
 
 										<div className="mt-auto">
@@ -907,7 +814,7 @@ export default function HomePage() {
 											</div>
 
 											<div className="inline-flex items-center font-medium text-foreground/90 transition-colors duration-300 group-hover:text-accent">
-												View Project
+												{t("projects.hornyPlace.viewProject")}
 												<ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
 											</div>
 										</div>
@@ -931,7 +838,7 @@ export default function HomePage() {
 							<div className="group relative flex h-40 flex-col items-center justify-center overflow-hidden rounded-3xl border border-muted-foreground/30 border-dashed p-10 transition-all duration-500 hover:border-accent/30">
 								<div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-50" />
 								<p className="text-muted-foreground text-xl transition-colors duration-300 group-hover:text-foreground">
-									More projects coming soon
+									{t("projects.moreComingSoon")}
 								</p>
 								<div className="mt-2">
 									<span className="inline-flex items-center justify-center gap-2">
@@ -954,8 +861,6 @@ export default function HomePage() {
 					</div>
 				</div>
 			</section>
-
-			{/* Experience Section - Dynamic, Staggered */}
 			<section className="relative min-h-screen py-32" id="experience">
 				<div className="container mx-auto px-4">
 					<motion.div
@@ -974,81 +879,59 @@ export default function HomePage() {
 						>
 							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
 								<span className="-inset-1 absolute bg-sky-400 opacity-50 blur-sm" />
-								WORK
+								{t("experience.title")}
 							</span>
-							EXPERIENCE
+							{t("experience.titleSecond")}
 						</h2>
 					</motion.div>
 
 					<div className="space-y-40">
 						{/* VAPARSHOP */}
 						<WorkExperienceItem
-							company="VAPARSHOP"
-							title="Designer & Junior Developer"
-							period="June 2024 – Present"
-							location="Saint Petersburg"
+							company={t("experience.vaparshop.title")}
+							title={t("experience.vaparshop.title")}
+							period={t("experience.vaparshop.period")}
+							location={t("experience.vaparshop.location")}
 							logo="V"
 							delay={0}
-							achievements={[
-								"Developed Telegram bots significantly improving internal operational efficiency",
-								"Designed and developed a custom Price Tag Generator web application to automate manual tasks",
-								"Created branded Telegram Emoji Pack to enhance brand recognition",
-								"Redesigned corporate presentations, reinforcing the unique visual identity",
-								"Developed a Taplink alternative using Next.js, including blogs, location points, and interactive widgets",
-								"Building a Telegram Mini App integrated with GetMeBack API",
-							]}
+							achievements={vaparshopAchievements}
 						/>
 
 						{/* HORNY PLACE */}
 						<WorkExperienceItem
 							company="HORNY PLACE"
-							title="Visual Designer & Developer"
-							period="October 2022 – May 2024"
-							location="Saint Petersburg"
+							title={t("experience.hornyPlace.title")}
+							period={t("experience.hornyPlace.period")}
+							location={t("experience.hornyPlace.location")}
 							logo="H"
 							delay={0.2}
-							achievements={[
-								"Created various exterior signage designs for retail locations",
-								"Developed promotional materials, including window stickers, flyers, posters",
-								"Revamped visual branding elements, including QR-codes and YouTube thumbnails",
-								"Built a stylish and interactive Taplink alternative using Next.js",
-								"Authored a comprehensive brand book to ensure visual consistency",
-								'Designed clothing items, including "Languages" hoodie for Horny Vape',
-							]}
+							achievements={hornyPlaceAchievements}
 						/>
 
 						{/* ELYSIUM */}
 						<WorkExperienceItem
 							company="ELYSIUM"
-							title="Visual Merchandising & Sales Specialist"
-							period="September 2020 – September 2022"
-							location="Saint Petersburg"
+							title={t("experience.elysium.title")}
+							period={t("experience.elysium.period")}
+							location={t("experience.elysium.location")}
 							logo="E"
 							delay={0.4}
-							achievements={[
-								"Enhanced in-store visual merchandising to improve customer experience",
-								"Developed engaging training materials and presentations for onboarding new staff",
-							]}
+							achievements={elysiumAchievements}
 						/>
 
 						{/* VAPE CLUB */}
 						<WorkExperienceItem
 							company="VAPE CLUB"
-							title="Visual Merchandiser & Sales Manager"
-							period="February 2019 – August 2020"
-							location="Saint Petersburg"
+							title={t("experience.vapeClub.title")}
+							period={t("experience.vapeClub.period")}
+							location={t("experience.vapeClub.location")}
 							logo="VC"
 							delay={0.6}
-							achievements={[
-								"Maintained attractive and engaging visual store layouts",
-								"Leveraged trend analysis to optimize product placement",
-							]}
+							achievements={vapeClubAchievements}
 						/>
 					</div>
 				</div>
 			</section>
-
-			{/* Contact Section */}
 			<section id="contact-section" className="relative overflow-hidden py-24">
 				<div className="container mx-auto px-4">
 					<motion.div
@@ -1059,7 +942,7 @@ export default function HomePage() {
 						className="mb-16 overflow-hidden"
 					>
 						<h2
-							className="font-extrabold text-7xl uppercase tracking-tight md:text-8xl xl:text-[15rem]"
+							className="font-extrabold text-5xl uppercase tracking-tight md:text-8xl xl:text-[12rem]"
 							style={{
 								fontFamily: "Heading Now Variable",
 								fontVariationSettings: `'wght' 1000, 'wdth' 800`,
@@ -1067,17 +950,15 @@ export default function HomePage() {
 						>
 							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
 								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
-								GET
+								{t("contact.title")}
 							</span>
-							IN TOUCH
+							{t("contact.titleSecond")}
 						</h2>
 					</motion.div>
 
 					<Contact />
 				</div>
 			</section>
-
-			{/* Visual element - abstract background for contact section */}
 			<div
 				className="-z-10 pointer-events-none absolute inset-0 overflow-hidden"
 				style={{ top: "80vh" }}
@@ -1145,13 +1026,11 @@ export default function HomePage() {
 					}}
 				/>
 			</div>
-
-			{/* Footer */}
 			<footer className="border-t py-12">
 				<div className="container mx-auto px-4">
 					<div className="flex flex-col items-center justify-between md:flex-row">
 						<p className="mb-4 md:mb-0">
-							&copy; {new Date().getFullYear()} Danya Yudin
+							{t("footer.copyright", { year: new Date().getFullYear() })}
 						</p>
 
 						<div className="flex gap-6">
@@ -1159,31 +1038,31 @@ export default function HomePage() {
 								href="https://t.me/sabraman"
 								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
-								Telegram
+								{t("footer.links.telegram")}
 							</Link>
 							<Link
 								href="https://github.com/sabraman"
 								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
-								GitHub
+								{t("footer.links.github")}
 							</Link>
 							<Link
 								href="https://instagram.com/sabraman"
 								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
-								Instagram
+								{t("footer.links.instagram")}
 							</Link>
 							<Link
 								href="https://x.com/1sabraman"
 								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
-								X
+								{t("footer.links.x")}
 							</Link>
 							<Link
 								href="https://vk.com/sabraman"
 								className="text-muted-foreground text-sm transition-colors duration-300 hover:text-foreground"
 							>
-								VK
+								{t("footer.links.vk")}
 							</Link>
 						</div>
 					</div>

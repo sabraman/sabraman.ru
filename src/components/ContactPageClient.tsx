@@ -1,9 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import Contact from "~/components/Contact";
 
 export default function ContactPageClient() {
+	const t = useTranslations();
+
 	return (
 		<div className="relative">
 			<section className="py-24">
@@ -23,13 +26,12 @@ export default function ContactPageClient() {
 						>
 							<span className="relative z-0 mr-4 inline-block md:mr-8">
 								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
-								GET
+								{t("contact.title")}
 							</span>
-							IN TOUCH
+							{t("contact.titleSecond")}
 						</h1>
 						<p className="mx-auto mt-6 max-w-2xl text-center text-muted-foreground text-xl">
-							Let's collaborate on your next project. Fill out the form below or
-							reach out through any of the channels listed.
+							{t("contact.description")}
 						</p>
 					</motion.div>
 
