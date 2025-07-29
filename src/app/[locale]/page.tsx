@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Contact from "~/components/Contact";
 import { SEOKeywords } from "~/components/SEOKeywords";
@@ -26,13 +27,68 @@ import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Toaster } from "~/components/ui/sonner";
 
+// Company Logo Component
+function CompanyLogo({ company }: { company: string }) {
+	const getLogoProps = () => {
+		switch (company) {
+			case "VAPARSHOP":
+				return {
+					src: "/Vaparshop-logo.png",
+					alt: "Vaparshop Logo",
+					className: "h-full w-full object-contain"
+				};
+			case "HORNY PLACE":
+				return {
+					src: "/Hornyplace-logo.png",
+					alt: "Horny Place Logo",
+					className: "h-full w-full object-contain"
+				};
+			case "ELYSIUM":
+				return {
+					src: "/Elysium-logo.png",
+					alt: "Elysium Logo",
+					className: "h-full w-full object-contain"
+				};
+			case "VAPE CLUB":
+				return {
+					src: "/Vapeclub-logo.png",
+					alt: "Vape Club Logo",
+					className: "h-full w-full object-contain"
+				};
+			default:
+				return null;
+		}
+	};
+
+	const logoProps = getLogoProps();
+
+	// If no logo is found, render a fallback with the first letter of the company
+	if (!logoProps) {
+		return (
+			<div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-primary font-extrabold text-2xl text-primary-foreground md:h-24 md:w-24 md:text-4xl">
+				{company.charAt(0)}
+			</div>
+		);
+	}
+
+	return (
+		<div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-white p-2 md:h-24 md:w-24">
+			<Image
+				{...logoProps}
+				width={96}
+				height={96}
+				className="h-full w-full object-contain"
+			/>
+		</div>
+	);
+}
+
 // Work Experience Item Component with staggered animations
 function WorkExperienceItem({
 	company,
 	title,
 	period,
 	location,
-	logo,
 	achievements,
 	delay,
 }: {
@@ -40,7 +96,6 @@ function WorkExperienceItem({
 	title: string;
 	period: string;
 	location: string;
-	logo: string;
 	achievements: string[];
 	delay: number;
 }) {
@@ -55,9 +110,7 @@ function WorkExperienceItem({
 			<div className="relative lg:col-span-4">
 				<div className="sticky top-32">
 					<div className="mb-6 flex items-center gap-6">
-						<div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-primary font-extrabold text-2xl text-primary-foreground md:h-24 md:w-24 md:text-4xl">
-							{logo}
-						</div>
+						<CompanyLogo company={company} />
 						<div>
 							<h3 className="font-extrabold text-3xl md:text-4xl">{company}</h3>
 							<p className="text-muted-foreground text-xl">{period}</p>
@@ -888,13 +941,12 @@ export default function HomePage() {
 					<div className="space-y-40">
 						{/* VAPARSHOP */}
 						<WorkExperienceItem
-							company={t("experience.vaparshop.title")}
+							company="VAPARSHOP"
 							title={t("experience.vaparshop.title")}
 							period={t("experience.vaparshop.period")}
 							location={t("experience.vaparshop.location")}
-							logo="V"
-							delay={0}
 							achievements={vaparshopAchievements}
+							delay={0}
 						/>
 
 						{/* HORNY PLACE */}
@@ -903,9 +955,8 @@ export default function HomePage() {
 							title={t("experience.hornyPlace.title")}
 							period={t("experience.hornyPlace.period")}
 							location={t("experience.hornyPlace.location")}
-							logo="H"
-							delay={0.2}
 							achievements={hornyPlaceAchievements}
+							delay={0.2}
 						/>
 
 						{/* ELYSIUM */}
@@ -914,9 +965,8 @@ export default function HomePage() {
 							title={t("experience.elysium.title")}
 							period={t("experience.elysium.period")}
 							location={t("experience.elysium.location")}
-							logo="E"
-							delay={0.4}
 							achievements={elysiumAchievements}
+							delay={0.4}
 						/>
 
 						{/* VAPE CLUB */}
@@ -925,9 +975,8 @@ export default function HomePage() {
 							title={t("experience.vapeClub.title")}
 							period={t("experience.vapeClub.period")}
 							location={t("experience.vapeClub.location")}
-							logo="VC"
-							delay={0.6}
 							achievements={vapeClubAchievements}
+							delay={0.6}
 						/>
 					</div>
 				</div>
