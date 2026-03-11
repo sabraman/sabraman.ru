@@ -1,0 +1,20 @@
+{
+	"$schema": "https://ui.shadcn.com/schema/registry.json",
+	"name": "sabraman",
+	"homepage": "https://sabraman.ru",
+	"items": [
+		{
+			"name": "ios-wheel-picker",
+			"type": "registry:block",
+			"title": "iOS 6 Wheel Picker",
+			"description": "Legacy iOS 6 style wheel picker component built on top of @ncdai/react-wheel-picker.",
+			"dependencies": ["@ncdai/react-wheel-picker"],
+			"files": [
+				{
+					"path": "registry/default/ios-wheel-picker/ios-wheel-picker.tsx",
+					"type": "registry:component"
+				}
+			]
+		}
+	]
+}
