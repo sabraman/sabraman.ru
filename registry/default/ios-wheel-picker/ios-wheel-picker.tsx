@@ -10,31 +10,48 @@ type WheelPickerValue = WheelPickerPrimitive.WheelPickerValue;
 type WheelPickerOption<T extends WheelPickerValue = string> =
 	WheelPickerPrimitive.WheelPickerOption<T>;
 
+const FRAME_HEIGHT = 216;
+const FRAME_PADDING_Y = 10;
+const PICKER_ROW_HEIGHT = 44;
+const PICKER_VISIBLE_COUNT = 16;
+const PICKER_ANGLE = (360 / PICKER_VISIBLE_COUNT) * (Math.PI / 180);
+const PICKER_HEIGHT = Math.round(
+	(PICKER_ROW_HEIGHT / Math.tan(PICKER_ANGLE)) * 2 + PICKER_ROW_HEIGHT * 0.25,
+);
+// `@ncdai/react-wheel-picker` centers a 223px cylinder inside our 196px viewport.
+const PICKER_OFFSET_Y =
+	(PICKER_HEIGHT - (FRAME_HEIGHT - FRAME_PADDING_Y * 2)) / 2;
+
 interface IosPickerContainerProps {
 	children: React.ReactNode;
 	className?: string;
+	frameWidth?: number | string;
 	width?: number | string;
 }
 
 export function IosPickerContainer({
 	children,
 	className,
+	frameWidth = 320,
 	width = 176,
 }: IosPickerContainerProps) {
 	return (
 		<div
+			data-ios-picker-root=""
 			className={cn(
 				"relative isolate flex h-[216px] flex-col items-center justify-center bg-[#20212f] px-[12px] py-[10px]",
 				className,
 			)}
+			style={{ width: frameWidth }}
 		>
 			<div
-				className="relative z-[2] flex min-h-px min-w-px items-start overflow-clip rounded-[5px] bg-black shadow-[0px_1px_0.5px_0px_rgba(255,255,255,0.2)]"
+				data-ios-picker-content=""
+				className="relative z-[2] flex min-h-px min-w-px flex-[1_0_0] items-start overflow-clip rounded-[5px] bg-black shadow-[0px_1px_0.5px_0px_rgba(255,255,255,0.2)]"
 				style={{ width }}
 			>
 				<div
-					className="pointer-events-none absolute right-0 left-0 z-[4] h-[44px] -translate-y-1/2 shadow-[0px_3px_5px_0px_rgba(0,0,0,0.3)]"
-					style={{ top: "calc(50% + 13.5px)" }}
+					data-ios-picker-gloss=""
+					className="pointer-events-none absolute top-1/2 right-0 left-0 z-[4] h-[44px] -translate-y-1/2 shadow-[0px_3px_5px_0px_rgba(0,0,0,0.3)]"
 				>
 					<div aria-hidden="true" className="absolute inset-0">
 						<div className="absolute inset-0 bg-[rgba(85,92,153,0.5)] mix-blend-multiply" />
@@ -95,13 +112,14 @@ export function IosPickerColumn<T extends string | number>({
 		<div
 			data-ios-picker-column=""
 			className={cn(
-				"relative h-[216px] shrink-0 overflow-clip bg-[#fcfcfc]",
+				"relative h-full shrink-0 overflow-clip bg-[#fcfcfc]",
 				className,
 			)}
 			style={
 				{
 					width,
 					zIndex,
+					"--ios-picker-offset-y": `-${PICKER_OFFSET_Y}px`,
 					"--ios-picker-column-padding-x": `${padX}px`,
 				} as React.CSSProperties
 			}
@@ -128,12 +146,16 @@ export function IosPickerColumn<T extends string | number>({
 					}}
 					infinite={infinite}
 					onValueChange={onValueChange}
-					optionItemHeight={44}
+					optionItemHeight={PICKER_ROW_HEIGHT}
 					options={options}
 					value={value}
-					visibleCount={16}
+					visibleCount={PICKER_VISIBLE_COUNT}
 				/>
 				<style>{`
+          [data-ios-picker-column] [data-rwp] {
+            transform: translateY(var(--ios-picker-offset-y));
+          }
+
           [data-ios-picker-column] [data-rwp-item] {
             padding-left: var(--ios-picker-column-padding-x);
             padding-right: var(--ios-picker-column-padding-x);

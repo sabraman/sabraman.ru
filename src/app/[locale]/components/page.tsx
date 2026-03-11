@@ -49,8 +49,9 @@ export default function ComponentsShowcasePage() {
 					</div>
 
 					<IosPickerContainer
+						frameWidth={320}
 						width={176}
-						className="rounded-[8px] shadow-[0px_4px_10px_0px_rgba(0,0,0,0.5)] ring-1 ring-[#111]"
+						className="shadow-[0px_16px_34px_0px_rgba(0,0,0,0.35)]"
 					>
 						<IosPickerColumn
 							align="right"
