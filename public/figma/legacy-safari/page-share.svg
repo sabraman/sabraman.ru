@@ -1,0 +1,6 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Shape">
+<path d="M15 0L23 6.5L15 13V9C10.83 9 7.15674 10.5066 5.0061 12.7933C5.00208 12.6959 5 12.5981 5 12.5C5 7.94128 9.43323 4.2207 15 4.00946V0Z" fill="var(--fill-0, white)"/>
+<path d="M0 4H8.15997C7.22767 4.5637 6.38389 5.23527 5.66141 6H2V16H17V13.9519L19 12.3269V18H0V4Z" fill="var(--fill-0, white)"/>
+</g>
+</svg>
