@@ -7,11 +7,28 @@
 			"name": "ios-wheel-picker",
 			"type": "registry:block",
 			"title": "iOS 6 Wheel Picker",
+			"docs": "https://sabraman.ru/components/ios-wheel-picker",
 			"description": "Legacy iOS 6 style wheel picker component built on top of @ncdai/react-wheel-picker.",
 			"dependencies": ["@ncdai/react-wheel-picker"],
 			"files": [
 				{
 					"path": "registry/default/ios-wheel-picker/ios-wheel-picker.tsx",
+					"target": "components/ios-wheel-picker.tsx",
+					"type": "registry:component"
+				}
+			]
+		},
+		{
+			"name": "ios-switch",
+			"type": "registry:ui",
+			"title": "Legacy iOS Switch",
+			"docs": "https://sabraman.ru/components/ios-switch",
+			"description": "Legacy iOS toggle switch built on top of @radix-ui/react-switch.",
+			"dependencies": ["@radix-ui/react-switch"],
+			"files": [
+				{
+					"path": "registry/default/ios-switch/ios-switch.tsx",
+					"target": "components/ios-switch.tsx",
 					"type": "registry:component"
 				}
 			]

@@ -32,22 +32,22 @@ interface IosPickerContainerProps {
 export function IosPickerContainer({
 	children,
 	className,
-	frameWidth = 320,
-	width = 176,
+	frameWidth = "100%",
+	width = "100%",
 }: IosPickerContainerProps) {
 	return (
 		<div
 			data-ios-picker-root=""
 			className={cn(
-				"relative isolate flex h-[216px] flex-col items-center justify-center bg-[#20212f] px-[12px] py-[10px]",
+				"relative isolate flex h-[216px] w-full max-w-[320px] flex-col items-center justify-center bg-[#20212f] px-[12px] py-[10px] rounded-xl",
 				className,
 			)}
-			style={{ width: frameWidth }}
+			style={frameWidth !== "100%" ? { width: frameWidth } : undefined}
 		>
 			<div
 				data-ios-picker-content=""
-				className="relative z-[2] flex min-h-px min-w-px flex-[1_0_0] items-start overflow-clip rounded-[5px] bg-black shadow-[0px_1px_0.5px_0px_rgba(255,255,255,0.2)]"
-				style={{ width }}
+				className="relative z-[2] flex min-h-px min-w-px w-full max-w-full flex-1 items-start overflow-clip rounded-[5px] bg-[#fcfcfc] shadow-[0px_1px_0.5px_0px_rgba(255,255,255,0.2)]"
+				style={width !== "100%" ? { width } : undefined}
 			>
 				<div
 					data-ios-picker-gloss=""
@@ -105,14 +105,15 @@ export function IosPickerColumn<T extends string | number>({
 	options,
 	padX = 15,
 	value,
-	width = 60,
+	width,
 	zIndex,
 }: IosPickerColumnProps<T>) {
 	return (
 		<div
 			data-ios-picker-column=""
 			className={cn(
-				"relative h-full shrink-0 overflow-clip bg-[#fcfcfc]",
+				"relative h-full overflow-clip bg-[#fcfcfc]",
+				width === undefined ? "flex-1 flex-shrink" : "shrink-0",
 				className,
 			)}
 			style={
@@ -128,7 +129,7 @@ export function IosPickerColumn<T extends string | number>({
 				<WheelPickerPrimitive.WheelPicker
 					classNames={{
 						highlightItem: cn(
-							"flex h-[44px] items-center font-['Helvetica_Neue:Bold',sans-serif] font-bold text-black",
+							"flex h-[44px] w-full items-center font-['Helvetica_Neue:Bold',sans-serif] font-bold text-black whitespace-nowrap",
 							align === "center" && "justify-center",
 							align === "left" && "justify-start text-left",
 							align === "right" && "justify-end text-right",
@@ -137,7 +138,7 @@ export function IosPickerColumn<T extends string | number>({
 						highlightWrapper:
 							"h-[44px] border-transparent bg-[rgba(252,252,252,0.92)] ring-0",
 						optionItem: cn(
-							"flex h-[44px] items-center font-['Helvetica_Neue:Bold',sans-serif] font-bold text-[#666]",
+							"flex h-[44px] w-full items-center font-['Helvetica_Neue:Bold',sans-serif] font-bold text-[#666] whitespace-nowrap",
 							align === "center" && "justify-center",
 							align === "left" && "justify-start text-left",
 							align === "right" && "justify-end text-right",
