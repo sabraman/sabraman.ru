@@ -9,11 +9,27 @@
 			"title": "iOS 6 Wheel Picker",
 			"docs": "https://sabraman.ru/components/ios-wheel-picker",
 			"description": "Legacy iOS 6 style wheel picker component built on top of @ncdai/react-wheel-picker.",
-			"dependencies": ["@ncdai/react-wheel-picker"],
+			"dependencies": [
+				"@ncdai/react-wheel-picker"
+			],
 			"files": [
 				{
 					"path": "registry/default/ios-wheel-picker/ios-wheel-picker.tsx",
 					"target": "components/ios-wheel-picker.tsx",
+					"type": "registry:component"
+				}
+			]
+		},
+		{
+			"name": "ios-clock",
+			"type": "registry:ui",
+			"title": "Legacy iOS Clock",
+			"docs": "https://sabraman.ru/components/ios-clock",
+			"description": "Working iOS 6 analog clock icon with live hour, minute, and red seconds hands in day and night variants.",
+			"files": [
+				{
+					"path": "registry/default/ios-clock/ios-clock.tsx",
+					"target": "components/ios-clock.tsx",
 					"type": "registry:component"
 				}
 			]
@@ -24,11 +40,57 @@
 			"title": "Legacy iOS Switch",
 			"docs": "https://sabraman.ru/components/ios-switch",
 			"description": "Legacy iOS toggle switch built on top of @radix-ui/react-switch.",
-			"dependencies": ["@radix-ui/react-switch"],
+			"dependencies": [
+				"@radix-ui/react-switch"
+			],
 			"files": [
 				{
 					"path": "registry/default/ios-switch/ios-switch.tsx",
 					"target": "components/ios-switch.tsx",
+					"type": "registry:component"
+				}
+			]
+		},
+		{
+			"name": "ios-slider",
+			"type": "registry:ui",
+			"title": "Legacy iOS Slider",
+			"docs": "https://sabraman.ru/components/ios-slider",
+			"description": "Glossy iOS 6 slider control with a raised metallic thumb and silver-blue track.",
+			"dependencies": [
+				"@radix-ui/react-slider"
+			],
+			"files": [
+				{
+					"path": "registry/default/ios-slider/ios-slider.tsx",
+					"target": "components/ios-slider.tsx",
+					"type": "registry:component"
+				}
+			]
+		},
+		{
+			"name": "ios-code-block-command",
+			"type": "registry:ui",
+			"title": "iOS 6 Code Block Command",
+			"docs": "https://sabraman.ru/components/ios-code-block-command",
+			"description": "Skeuomorphic iOS 6 command block with package-manager tabs and clipboard support.",
+			"dependencies": [
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/default/ios-code-block-command/ios-code-block-command.tsx",
+					"target": "components/ios-code-block-command.tsx",
+					"type": "registry:component"
+				},
+				{
+					"path": "registry/default/ios-bar-button/ios-bar-button.tsx",
+					"target": "components/ios-bar-button.tsx",
+					"type": "registry:component"
+				},
+				{
+					"path": "registry/default/ios-segmented-control/ios-segmented-control.tsx",
+					"target": "components/ios-segmented-control.tsx",
 					"type": "registry:component"
 				}
 			]

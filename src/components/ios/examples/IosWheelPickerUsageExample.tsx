@@ -14,7 +14,7 @@ const frameworkOptions = [
 	{ label: "Svelte", value: "svelte" },
 ];
 
-export function IosBasicPickerDemo() {
+export function IosWheelPickerUsageExample() {
 	const [value, setValue] = useState("react");
 
 	return (

@@ -9,9 +9,15 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 /** @type {import("next").NextConfig} */
 const config = {
+	reactCompiler: true,
+	cacheComponents: true,
+	transpilePackages: ["next-mdx-remote"],
+
 	// SEO and Performance optimizations
 	experimental: {
-		webpackMemoryOptimizations: true,
+		webpackMemoryOptimizations: false,
+		viewTransition: true,
+		turbopackFileSystemCacheForBuild: true,
 		optimizePackageImports: ["framer-motion", "lucide-react"],
 	},
 
@@ -34,7 +40,7 @@ const config = {
 					},
 					{
 						key: "X-Frame-Options",
-						value: "DENY",
+						value: "SAMEORIGIN",
 					},
 					{
 						key: "X-XSS-Protection",
@@ -53,9 +59,44 @@ const config = {
 	async redirects() {
 		return [
 			{
+				source: "/en",
+				destination: "/",
+				permanent: true,
+			},
+			{
+				source: "/en/:path*",
+				destination: "/:path*",
+				permanent: true,
+			},
+			{
 				source: "/home",
 				destination: "/",
 				permanent: true,
+			},
+			{
+				source:
+					"/work/:slug(vaparshop|horny-place|smo-tg-miniapp|smoky-market-loyalty-miniapp|plonq-ai-search|esperansa-mini-app|smbro|arch-taplink|vape-me-fast|price-tag-printer|psp-book-reader|florist-quiz|schrute-farm)",
+				destination: "/:slug",
+				permanent: true,
+			},
+			{
+				source:
+					"/ru/work/:slug(vaparshop|horny-place|smo-tg-miniapp|smoky-market-loyalty-miniapp|plonq-ai-search|esperansa-mini-app|smbro|arch-taplink|vape-me-fast|price-tag-printer|psp-book-reader|florist-quiz|schrute-farm)",
+				destination: "/ru/:slug",
+				permanent: true,
+			},
+		];
+	},
+
+	async rewrites() {
+		return [
+			{
+				source: "/components/:slug.mdx",
+				destination: "/api/component-docs/:slug",
+			},
+			{
+				source: "/ru/components/:slug.mdx",
+				destination: "/api/component-docs/:slug",
 			},
 		];
 	},

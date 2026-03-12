@@ -22,7 +22,7 @@ const PICKER_HEIGHT = Math.round(
 const PICKER_OFFSET_Y =
 	(PICKER_HEIGHT - (FRAME_HEIGHT - FRAME_PADDING_Y * 2)) / 2;
 
-interface IosPickerContainerProps {
+export interface IosPickerContainerProps {
 	children: React.ReactNode;
 	className?: string;
 	frameWidth?: number | string;
@@ -39,14 +39,14 @@ export function IosPickerContainer({
 		<div
 			data-ios-picker-root=""
 			className={cn(
-				"relative isolate flex h-[216px] w-full max-w-[320px] flex-col items-center justify-center bg-[#20212f] px-[12px] py-[10px] rounded-xl",
+				"relative isolate flex h-[216px] w-full max-w-[320px] flex-col items-center justify-center rounded-xl bg-[#20212f] px-[12px] py-[10px]",
 				className,
 			)}
 			style={frameWidth !== "100%" ? { width: frameWidth } : undefined}
 		>
 			<div
 				data-ios-picker-content=""
-				className="relative z-[2] flex min-h-px min-w-px w-full max-w-full flex-1 items-start overflow-clip rounded-[5px] bg-[#fcfcfc] shadow-[0px_1px_0.5px_0px_rgba(255,255,255,0.2)]"
+				className="relative z-[2] flex min-h-px w-full min-w-px max-w-full flex-1 items-start overflow-clip rounded-[5px] bg-[#fcfcfc] shadow-[0px_1px_0.5px_0px_rgba(255,255,255,0.2)]"
 				style={width !== "100%" ? { width } : undefined}
 			>
 				<div
@@ -129,7 +129,7 @@ export function IosPickerColumn<T extends string | number>({
 				<WheelPickerPrimitive.WheelPicker
 					classNames={{
 						highlightItem: cn(
-							"flex h-[44px] w-full items-center font-['Helvetica_Neue:Bold',sans-serif] font-bold text-black whitespace-nowrap",
+							"flex h-[44px] w-full items-center whitespace-nowrap font-['Helvetica_Neue:Bold',sans-serif] font-bold text-black",
 							align === "center" && "justify-center",
 							align === "left" && "justify-start text-left",
 							align === "right" && "justify-end text-right",
@@ -138,7 +138,7 @@ export function IosPickerColumn<T extends string | number>({
 						highlightWrapper:
 							"h-[44px] border-transparent bg-[rgba(252,252,252,0.92)] ring-0",
 						optionItem: cn(
-							"flex h-[44px] w-full items-center font-['Helvetica_Neue:Bold',sans-serif] font-bold text-[#666] whitespace-nowrap",
+							"flex h-[44px] w-full items-center whitespace-nowrap font-['Helvetica_Neue:Bold',sans-serif] font-bold text-[#666]",
 							align === "center" && "justify-center",
 							align === "left" && "justify-start text-left",
 							align === "right" && "justify-end text-right",

@@ -2,7 +2,9 @@
 
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight, ExternalLink } from "lucide-react";
-
+import { IosCodeBlockCommandDemo } from "~/components/ios/IosCodeBlockCommandDemo";
+import { IosSliderRow } from "~/components/ios/IosSliderDemo";
+import { IosClock } from "~/components/ios-clock";
 import { IosSwitch } from "~/components/ios-switch";
 import type { Locale } from "~/i18n";
 import { Link } from "~/i18n/navigation";
@@ -11,6 +13,21 @@ import {
 	IOS_WHEEL_PICKER_URLS,
 } from "./component-pages-content";
 import { IosWheelPickerDemo } from "./IosWheelPickerDemo";
+import {
+	getIosClockHubPath,
+	IOS_CLOCK_DOCS_COPY,
+	IOS_CLOCK_URLS,
+} from "./ios-clock-content";
+import {
+	getIosCodeBlockCommandHubPath,
+	IOS_CODE_BLOCK_COMMAND_DOCS_COPY,
+	IOS_CODE_BLOCK_COMMAND_URLS,
+} from "./ios-code-block-command-content";
+import {
+	getIosSliderHubPath,
+	IOS_SLIDER_DOCS_COPY,
+	IOS_SLIDER_URLS,
+} from "./ios-slider-content";
 import {
 	getIosSwitchHubPath,
 	IOS_SWITCH_DOCS_COPY,
@@ -107,26 +124,36 @@ function AppleTeaser({ locale }: { locale: Locale }) {
 			<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-[0.03]" />
 
 			<div
-				className="relative z-10 space-y-8"
+				className="relative z-10 flex h-full flex-col gap-10 lg:flex-row lg:items-center lg:justify-between"
 				style={{
 					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
 				}}
 			>
-				<div className="space-y-4 text-center">
-					<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
-						Time / Date Input
-					</p>
-					<h2 className="font-medium text-5xl text-[#1a2333] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl">
-						iOS 6 Wheel Picker
-					</h2>
-					<p className="mx-auto max-w-sm font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
-						A flawless recreation of the classic iPhone rotary slot machine
-						picker. Complete with deep inset gradients and infinite snapping
-						loops.
-					</p>
+				<div className="flex min-w-0 flex-1 flex-col items-center gap-8 text-center lg:items-start lg:text-left">
+					<div className="space-y-4">
+						<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
+							Time / Date Input
+						</p>
+						<h2 className="font-medium text-5xl text-[#1a2333] leading-[0.92] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl xl:text-[72px]">
+							iOS 6 Wheel Picker
+						</h2>
+						<p className="mx-auto max-w-[34rem] font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] lg:mx-0">
+							A flawless recreation of the classic iPhone rotary slot machine
+							picker. Complete with deep inset gradients and infinite snapping
+							loops.
+						</p>
+					</div>
+
+					<Link
+						className="inline-flex items-center gap-3 rounded-full border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[linear-gradient(180deg,#4e5b75,#212b40)] px-8 py-4 font-bold text-[14px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all hover:brightness-110 active:scale-95 active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.4)]"
+						href={href}
+					>
+						View docs
+						<ArrowRight className="h-4 w-4" />
+					</Link>
 				</div>
 
-				<div className="flex flex-col items-center gap-6">
+				<div className="flex w-full justify-center lg:w-auto lg:justify-end">
 					<motion.div
 						whileHover={{ scale: 1.05, rotateX: 5 }}
 						style={{ perspective: 1000 }}
@@ -141,14 +168,82 @@ function AppleTeaser({ locale }: { locale: Locale }) {
 							/>
 						</div>
 					</motion.div>
+				</div>
+			</div>
+		</motion.article>
+	);
+}
 
-					<Link
-						className="inline-flex items-center gap-3 rounded-full border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[linear-gradient(180deg,#4e5b75,#212b40)] px-8 py-4 font-bold text-[14px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all hover:brightness-110 active:scale-95 active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.4)]"
-						href={href}
-					>
-						View docs
-						<ArrowRight className="h-4 w-4" />
-					</Link>
+function IosClockTeaser({ locale: _locale }: { locale: Locale }) {
+	const href = getIosClockHubPath();
+
+	return (
+		<motion.article
+			variants={cardVariants}
+			initial="hidden"
+			whileInView="visible"
+			viewport={{ once: true, margin: "-100px" }}
+			whileHover={{ scale: 1.01 }}
+			className="group relative h-full overflow-hidden rounded-[38px] border-[rgba(0,0,0,0.65)] border-[rgba(255,255,255,0.55)] border-t border-b bg-[linear-gradient(180deg,#d8dee7_0%,#9ba7ba_100%)] p-8 shadow-[0_30px_60px_rgba(10,20,35,0.28),inset_0_1px_3px_rgba(255,255,255,0.9)]"
+		>
+			<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-[0.03]" />
+
+			<div
+				className="relative z-10 flex h-full flex-col gap-10 lg:flex-row lg:items-center lg:justify-between"
+				style={{
+					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+				}}
+			>
+				<div className="flex min-w-0 flex-1 flex-col items-center gap-8 text-center lg:items-start lg:text-left">
+					<div className="space-y-4">
+						<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
+							Utilities / Timekeeping
+						</p>
+						<h2 className="font-medium text-5xl text-[#1a2333] leading-[0.92] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl xl:text-[72px]">
+							{IOS_CLOCK_DOCS_COPY.title}
+						</h2>
+						<p className="mx-auto max-w-[34rem] font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] lg:mx-0">
+							A live analog clock icon with the original iOS 6 day and night
+							skins, including the red seconds hand and polished glass cap.
+						</p>
+					</div>
+
+					<div className="flex flex-wrap justify-center gap-3 lg:justify-start">
+						<Link
+							className="inline-flex items-center gap-3 rounded-full border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[linear-gradient(180deg,#4e5b75,#212b40)] px-8 py-4 font-bold text-[14px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all hover:brightness-110 active:scale-[0.95] active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.4)]"
+							href={href}
+						>
+							View docs
+							<ArrowRight className="h-4 w-4" />
+						</Link>
+						<a
+							className="inline-flex items-center gap-2 rounded-full border border-[#4f6179]/35 bg-[#eef3fb]/70 px-5 py-3 font-semibold text-[#1a2333] text-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] transition hover:bg-white/80"
+							href={IOS_CLOCK_URLS.direct}
+							rel="noreferrer"
+							target="_blank"
+						>
+							Item JSON
+							<ExternalLink className="h-4 w-4" />
+						</a>
+					</div>
+				</div>
+
+				<div className="flex w-full justify-center lg:w-auto lg:justify-end">
+					<div className="relative w-full max-w-[360px] rounded-[30px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.16)] border-t border-b bg-[linear-gradient(180deg,#3a465d_0%,#182034_100%)] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(0,0,0,0.5)]">
+						<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[30px] bg-gradient-to-b from-white/10 to-transparent" />
+						<div className="relative flex items-center justify-center gap-6">
+							<IosClock
+								aria-label="Legacy iOS day clock preview"
+								size={86}
+								variant="day"
+							/>
+							<IosClock
+								aria-label="Legacy iOS night clock preview"
+								size={86}
+								variant="night"
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</motion.article>
@@ -170,41 +265,26 @@ function IosSwitchTeaser({ locale: _locale }: { locale: Locale }) {
 			<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-[0.03]" />
 
 			<div
-				className="relative z-10 flex h-full flex-col justify-between gap-8"
+				className="relative z-10 flex h-full flex-col gap-10 lg:flex-row lg:items-center lg:justify-between"
 				style={{
 					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
 				}}
 			>
-				<div className="space-y-4 text-center">
-					<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
-						Controls / Toggles
-					</p>
-					<h2 className="font-medium text-5xl text-[#1a2333] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl">
-						{IOS_SWITCH_DOCS_COPY.title}
-					</h2>
-					<p className="mx-auto max-w-md font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
-						Classic glossy track, bevelled thumb, and the exact ON / OFF label
-						layout from the legacy iPhone UI kit.
-					</p>
-				</div>
-
-				<div className="flex flex-col items-center gap-6">
-					<div className="relative rounded-[30px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.16)] border-t border-b bg-[linear-gradient(180deg,#3a465d_0%,#182034_100%)] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(0,0,0,0.5)]">
-						<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[30px] bg-gradient-to-b from-white/10 to-transparent" />
-						<div className="relative flex flex-col items-center gap-5">
-							<IosSwitch
-								aria-label="Legacy iOS switch off preview"
-								className="pointer-events-none"
-							/>
-							<IosSwitch
-								aria-label="Legacy iOS switch on preview"
-								checked={true}
-								className="pointer-events-none"
-							/>
-						</div>
+				<div className="flex min-w-0 flex-1 flex-col items-center gap-8 text-center lg:items-start lg:text-left">
+					<div className="space-y-4">
+						<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
+							Controls / Toggles
+						</p>
+						<h2 className="font-medium text-5xl text-[#1a2333] leading-[0.92] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl xl:text-[72px]">
+							{IOS_SWITCH_DOCS_COPY.title}
+						</h2>
+						<p className="mx-auto max-w-[34rem] font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] lg:mx-0">
+							Classic glossy track, bevelled thumb, and the exact ON / OFF label
+							layout from the legacy iPhone UI kit.
+						</p>
 					</div>
 
-					<div className="flex flex-wrap justify-center gap-3">
+					<div className="flex flex-wrap justify-center gap-3 lg:justify-start">
 						<Link
 							className="inline-flex items-center gap-3 rounded-full border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[linear-gradient(180deg,#4e5b75,#212b40)] px-8 py-4 font-bold text-[14px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all hover:brightness-110 active:scale-95 active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.4)]"
 							href={href}
@@ -221,6 +301,166 @@ function IosSwitchTeaser({ locale: _locale }: { locale: Locale }) {
 							Item JSON
 							<ExternalLink className="h-4 w-4" />
 						</a>
+					</div>
+				</div>
+
+				<div className="flex w-full justify-center lg:w-auto lg:justify-end">
+					<div className="relative rounded-[30px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.16)] border-t border-b bg-[linear-gradient(180deg,#3a465d_0%,#182034_100%)] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(0,0,0,0.5)]">
+						<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[30px] bg-gradient-to-b from-white/10 to-transparent" />
+						<div className="relative flex flex-col items-center gap-5">
+							<IosSwitch
+								aria-label="Legacy iOS switch off preview"
+								className="pointer-events-none"
+							/>
+							<IosSwitch
+								aria-label="Legacy iOS switch on preview"
+								checked={true}
+								className="pointer-events-none"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</motion.article>
+	);
+}
+
+function IosCodeBlockCommandTeaser({ locale: _locale }: { locale: Locale }) {
+	const href = getIosCodeBlockCommandHubPath();
+
+	return (
+		<motion.article
+			variants={cardVariants}
+			initial="hidden"
+			whileInView="visible"
+			viewport={{ once: true, margin: "-100px" }}
+			whileHover={{ scale: 1.01 }}
+			className="group relative h-full overflow-hidden rounded-[38px] border-[rgba(0,0,0,0.7)] border-[rgba(255,255,255,0.55)] border-t border-b bg-[linear-gradient(180deg,#d4dbe4_0%,#8f9aab_100%)] p-8 shadow-[0_30px_60px_rgba(10,20,35,0.28),inset_0_1px_3px_rgba(255,255,255,0.9)]"
+		>
+			<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-[0.03]" />
+
+			<div
+				className="relative z-10 flex h-full flex-col gap-10 lg:flex-row lg:items-center lg:justify-between"
+				style={{
+					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+				}}
+			>
+				<div className="flex min-w-0 flex-1 flex-col items-center gap-8 text-center lg:items-start lg:text-left">
+					<div className="space-y-4">
+						<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
+							Developer / Install UI
+						</p>
+						<h2 className="font-medium text-5xl text-[#1a2333] leading-[0.92] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl xl:text-[72px]">
+							{IOS_CODE_BLOCK_COMMAND_DOCS_COPY.title}
+						</h2>
+						<p className="mx-auto max-w-[34rem] font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] lg:mx-0">
+							An iOS 6 re-skin of the package-manager command switcher, with a
+							glossy segmented control, metallic copy button, and terminal
+							glass.
+						</p>
+					</div>
+
+					<div className="flex flex-wrap justify-center gap-3 lg:justify-start">
+						<Link
+							className="inline-flex items-center gap-3 rounded-full border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[linear-gradient(180deg,#4e5b75,#212b40)] px-8 py-4 font-bold text-[14px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all hover:brightness-110 active:scale-95 active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.4)]"
+							href={href}
+						>
+							View docs
+							<ArrowRight className="h-4 w-4" />
+						</Link>
+						<a
+							className="inline-flex items-center gap-2 rounded-full border border-[#4f6179]/35 bg-[#eef3fb]/70 px-5 py-3 font-semibold text-[#1a2333] text-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] transition hover:bg-white/80"
+							href={IOS_CODE_BLOCK_COMMAND_URLS.direct}
+							rel="noreferrer"
+							target="_blank"
+						>
+							Item JSON
+							<ExternalLink className="h-4 w-4" />
+						</a>
+					</div>
+				</div>
+
+				<div className="flex w-full justify-center lg:w-auto lg:justify-end">
+					<div className="relative w-full max-w-[420px] rounded-[30px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.16)] border-t border-b bg-[linear-gradient(180deg,#3a465d_0%,#182034_100%)] p-6 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(0,0,0,0.5)]">
+						<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[30px] bg-gradient-to-b from-white/10 to-transparent" />
+						<IosCodeBlockCommandDemo className="mx-auto scale-[0.94]" />
+					</div>
+				</div>
+			</div>
+		</motion.article>
+	);
+}
+
+function IosSliderTeaser({ locale: _locale }: { locale: Locale }) {
+	const href = getIosSliderHubPath();
+
+	return (
+		<motion.article
+			variants={cardVariants}
+			initial="hidden"
+			whileInView="visible"
+			viewport={{ once: true, margin: "-100px" }}
+			whileHover={{ scale: 1.01 }}
+			className="group relative h-full overflow-hidden rounded-[38px] border-[rgba(0,0,0,0.65)] border-[rgba(255,255,255,0.55)] border-t border-b bg-[linear-gradient(180deg,#d8dee7_0%,#9ba7ba_100%)] p-8 shadow-[0_30px_60px_rgba(10,20,35,0.28),inset_0_1px_3px_rgba(255,255,255,0.9)]"
+		>
+			<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-[0.03]" />
+
+			<div
+				className="relative z-10 flex h-full flex-col gap-10 lg:flex-row lg:items-center lg:justify-between"
+				style={{
+					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+				}}
+			>
+				<div className="flex min-w-0 flex-1 flex-col items-center gap-8 text-center lg:items-start lg:text-left">
+					<div className="space-y-4">
+						<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
+							Audio / Value Control
+						</p>
+						<h2 className="font-medium text-5xl text-[#1a2333] leading-[0.92] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl xl:text-[72px]">
+							{IOS_SLIDER_DOCS_COPY.title}
+						</h2>
+						<p className="mx-auto max-w-[34rem] font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] lg:mx-0">
+							The classic silver track, blue fill, metallic thumb, and white
+							settings-row chrome from the iOS 6 volume control.
+						</p>
+					</div>
+
+					<div className="flex flex-wrap justify-center gap-3 lg:justify-start">
+						<Link
+							className="inline-flex items-center gap-3 rounded-full border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[linear-gradient(180deg,#4e5b75,#212b40)] px-8 py-4 font-bold text-[14px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all hover:brightness-110 active:scale-95 active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.4)]"
+							href={href}
+						>
+							View docs
+							<ArrowRight className="h-4 w-4" />
+						</Link>
+						<a
+							className="inline-flex items-center gap-2 rounded-full border border-[#4f6179]/35 bg-[#eef3fb]/70 px-5 py-3 font-semibold text-[#1a2333] text-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] transition hover:bg-white/80"
+							href={IOS_SLIDER_URLS.direct}
+							rel="noreferrer"
+							target="_blank"
+						>
+							Item JSON
+							<ExternalLink className="h-4 w-4" />
+						</a>
+					</div>
+				</div>
+
+				<div className="flex w-full justify-center lg:w-auto lg:justify-end">
+					<div className="relative w-full max-w-[388px] rounded-[30px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.16)] border-t border-b bg-[linear-gradient(180deg,#3a465d_0%,#182034_100%)] p-6 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(0,0,0,0.5)]">
+						<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[30px] bg-gradient-to-b from-white/10 to-transparent" />
+						<div className="relative rounded-[18px] border border-[#7a8392] bg-[linear-gradient(180deg,#d6dbe3_0%,#c6ccd7_100%)] p-[6px] shadow-[0_10px_22px_rgba(0,0,0,0.24),inset_0_1px_0_rgba(255,255,255,0.55)]">
+							<div className="overflow-hidden rounded-[12px] border border-[#aeb4c0] bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.95)]">
+								<IosSliderRow
+									ariaLabel="Legacy iOS slider preview at 16 percent"
+									value={16}
+								/>
+								<IosSliderRow
+									ariaLabel="Legacy iOS slider preview at 72 percent"
+									value={72}
+									withDivider={false}
+								/>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -245,12 +485,21 @@ function ComponentsChooserHub({ locale }: { locale: Locale }) {
 			<div className="relative mx-auto flex w-full max-w-[1400px] flex-col gap-10 px-6 py-12 md:px-12 md:py-20 lg:gap-14">
 				<HubHeader />
 
-				<div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+				<div className="grid gap-8 xl:gap-10">
 					<div>
 						<AppleTeaser locale={locale} />
 					</div>
 					<div>
+						<IosClockTeaser locale={locale} />
+					</div>
+					<div>
 						<IosSwitchTeaser locale={locale} />
+					</div>
+					<div>
+						<IosSliderTeaser locale={locale} />
+					</div>
+					<div>
+						<IosCodeBlockCommandTeaser locale={locale} />
 					</div>
 				</div>
 			</div>
