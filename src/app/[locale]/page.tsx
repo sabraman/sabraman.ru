@@ -779,7 +779,7 @@ export default function HomePage() {
 							viewport={{ once: true }}
 							className="h-full md:col-span-7"
 						>
-							<Link href="/work/vaparshop" className="block h-full">
+							<Link href="/vaparshop" className="block h-full">
 								<div className="group relative h-full overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5">
 									{/* Image overlay with grain texture */}
 									<div className="absolute inset-0 bg-[url('/Vaparshop-logo.png')] bg-center bg-contain bg-no-repeat opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20" />
@@ -840,7 +840,7 @@ export default function HomePage() {
 							viewport={{ once: true }}
 							className="h-full md:col-span-5"
 						>
-							<Link href="/work/horny-place" className="block h-full">
+							<Link href="/horny-place" className="block h-full">
 								<div className="group relative h-full overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5">
 									{/* Image overlay with grain texture */}
 									<div className="absolute inset-0 bg-[url('/Hornyplace-logo.png')] bg-center bg-contain bg-no-repeat opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20" />

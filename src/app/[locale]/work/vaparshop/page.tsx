@@ -1,94 +1,11 @@
-import type { Metadata } from "next";
-import { cacheLife } from "next/cache";
-import { getTranslations } from "next-intl/server";
-import VaparshopPageClient from "~/components/work/VaparshopPageClient";
+import { permanentRedirect } from "next/navigation";
 
-async function getVaparshopJsonLd(locale: string) {
-	"use cache";
-	cacheLife("days");
-
-	const isRussian = locale === "ru";
-	const pagePath = isRussian ? "/ru/work/vaparshop" : "/work/vaparshop";
-
-	return {
-		"@context": "https://schema.org",
-		"@type": "CreativeWork",
-		name: "VAPARSHOP Case Study",
-		url: `https://sabraman.ru${pagePath}`,
-		inLanguage: locale,
-		author: {
-			"@type": "Person",
-			name: "Danya Yudin",
-			url: "https://sabraman.ru",
-		},
-		about: [
-			"Telegram Bot Development",
-			"Web Application Development",
-			"Automation",
-			"UI/UX Design",
-		],
-		publisher: {
-			"@type": "Person",
-			name: "Danya Yudin",
-		},
-	};
-}
-
-export async function generateMetadata({
-	params,
-}: {
-	params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-	const { locale } = await params;
-	const t = await getTranslations({ locale, namespace: "work" });
-	const isRussian = locale === "ru";
-	const path = isRussian ? "/ru/work/vaparshop" : "/work/vaparshop";
-	const title = `${t("vaparshop.title")} - ${t("vaparshop.subtitle")} - Sabraman`;
-	const description = t("vaparshop.description");
-
-	return {
-		title,
-		description,
-		alternates: {
-			canonical: path,
-			languages: {
-				en: "/work/vaparshop",
-				ru: "/ru/work/vaparshop",
-				"x-default": "/work/vaparshop",
-			},
-		},
-		openGraph: {
-			title,
-			description,
-			url: `https://sabraman.ru${path}`,
-			siteName: "Sabraman - Danya Yudin Portfolio",
-			locale: isRussian ? "ru_RU" : "en_US",
-			type: "article",
-		},
-		twitter: {
-			card: "summary_large_image",
-			title,
-			description,
-			images: ["/api/og"],
-		},
-	};
-}
-
-export default async function VaparshopPage({
+export default async function LegacyVaparshopPage({
 	params,
 }: {
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
-	const jsonLd = await getVaparshopJsonLd(locale);
 
-	return (
-		<>
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-			/>
-			<VaparshopPageClient />
-		</>
-	);
+	permanentRedirect(locale === "ru" ? "/ru/vaparshop" : "/vaparshop");
 }
