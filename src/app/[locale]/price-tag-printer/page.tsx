@@ -1,27 +1,34 @@
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import { getTranslations } from "next-intl/server";
-import HornyPlacePageClient from "~/components/work/HornyPlacePageClient";
+import PriceTagPrinterPageClient from "~/components/work/PriceTagPrinterPageClient";
 
-async function getHornyPlaceJsonLd(locale: string) {
+async function getPriceTagPrinterJsonLd(locale: string) {
 	"use cache";
 	cacheLife("days");
 
 	const isRussian = locale === "ru";
-	const pagePath = isRussian ? "/ru/work/horny-place" : "/work/horny-place";
+	const pagePath = isRussian ? "/ru/price-tag-printer" : "/price-tag-printer";
 
 	return {
 		"@context": "https://schema.org",
-		"@type": "CreativeWork",
-		name: "HORNY PLACE Case Study",
+		"@type": "SoftwareApplication",
+		name: "Price Tag Printer Case Study",
 		url: `https://sabraman.ru${pagePath}`,
 		inLanguage: locale,
+		applicationCategory: "BusinessApplication",
+		operatingSystem: "Web",
 		author: {
 			"@type": "Person",
 			name: "Danya Yudin",
 			url: "https://sabraman.ru",
 		},
-		about: ["Brand Identity", "Visual Design", "Web Development", "Retail UX"],
+		about: [
+			"Next.js Development",
+			"Retail Automation",
+			"PDF Generation",
+			"UI/UX Design",
+		],
 		publisher: {
 			"@type": "Person",
 			name: "Danya Yudin",
@@ -37,9 +44,9 @@ export async function generateMetadata({
 	const { locale } = await params;
 	const t = await getTranslations({ locale, namespace: "work" });
 	const isRussian = locale === "ru";
-	const path = isRussian ? "/ru/work/horny-place" : "/work/horny-place";
-	const title = `${t("hornyPlace.title")} - ${t("hornyPlace.subtitle")} - Sabraman`;
-	const description = t("hornyPlace.description");
+	const path = isRussian ? "/ru/price-tag-printer" : "/price-tag-printer";
+	const title = `${t("priceTagPrinter.title")} - ${t("priceTagPrinter.subtitle")} - Sabraman`;
+	const description = t("priceTagPrinter.description");
 
 	return {
 		title,
@@ -47,9 +54,9 @@ export async function generateMetadata({
 		alternates: {
 			canonical: path,
 			languages: {
-				en: "/work/horny-place",
-				ru: "/ru/work/horny-place",
-				"x-default": "/work/horny-place",
+				en: "/price-tag-printer",
+				ru: "/ru/price-tag-printer",
+				"x-default": "/price-tag-printer",
 			},
 		},
 		openGraph: {
@@ -69,13 +76,13 @@ export async function generateMetadata({
 	};
 }
 
-export default async function HornyPlacePage({
+export default async function PriceTagPrinterRoutePage({
 	params,
 }: {
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
-	const jsonLd = await getHornyPlaceJsonLd(locale);
+	const jsonLd = await getPriceTagPrinterJsonLd(locale);
 
 	return (
 		<>
@@ -83,7 +90,7 @@ export default async function HornyPlacePage({
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 			/>
-			<HornyPlacePageClient />
+			<PriceTagPrinterPageClient />
 		</>
 	);
 }

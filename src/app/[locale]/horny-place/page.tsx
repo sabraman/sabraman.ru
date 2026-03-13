@@ -8,7 +8,7 @@ async function getHornyPlaceJsonLd(locale: string) {
 	cacheLife("days");
 
 	const isRussian = locale === "ru";
-	const pagePath = isRussian ? "/ru/work/horny-place" : "/work/horny-place";
+	const pagePath = isRussian ? "/ru/horny-place" : "/horny-place";
 
 	return {
 		"@context": "https://schema.org",
@@ -37,7 +37,7 @@ export async function generateMetadata({
 	const { locale } = await params;
 	const t = await getTranslations({ locale, namespace: "work" });
 	const isRussian = locale === "ru";
-	const path = isRussian ? "/ru/work/horny-place" : "/work/horny-place";
+	const path = isRussian ? "/ru/horny-place" : "/horny-place";
 	const title = `${t("hornyPlace.title")} - ${t("hornyPlace.subtitle")} - Sabraman`;
 	const description = t("hornyPlace.description");
 
@@ -47,9 +47,9 @@ export async function generateMetadata({
 		alternates: {
 			canonical: path,
 			languages: {
-				en: "/work/horny-place",
-				ru: "/ru/work/horny-place",
-				"x-default": "/work/horny-place",
+				en: "/horny-place",
+				ru: "/ru/horny-place",
+				"x-default": "/horny-place",
 			},
 		},
 		openGraph: {

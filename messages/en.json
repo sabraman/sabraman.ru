@@ -38,7 +38,7 @@
 			"description": "Telegram bots and web applications improving operational efficiency",
 			"viewProject": "View Project"
 		},
-		"hornyPlace": {
+			"hornyPlace": {
 			"title": "HORNY PLACE",
 			"description": "Comprehensive branding and interactive web solutions",
 			"viewProject": "View Project"
@@ -366,6 +366,78 @@
 						"title": "Digital Experience",
 						"description": "Developing the web application with Ticketscloud integration and social media presence."
 					}
+				}
+			},
+			"priceTagPrinter": {
+				"title": "PRICE TAG PRINTER",
+				"subtitle": "Full-Stack Engineer",
+				"period": "January 2024 – Present",
+				"description": "Started as a pet project for a former employer, evolving into a production-ready API-first SaaS used by multiple retail companies.",
+				"challenge": "The Origin",
+				"challengeText": "Initially built to solve a specific problem at a company I worked for, where retail branches needed a scalable and error-free way to generate perfectly formatted price tags.",
+				"solution": "The Evolution",
+				"solutionText": "After leaving the company, I continued developing the project into a standalone product. Today, it's a robust API-first Next.js application with a custom theme engine, Zustand state management, and headless PDF rendering—adopted by multiple businesses.",
+				"contextAndChallenge": "Context & Challenge",
+				"roleHeading": "Role",
+				"timelineHeading": "Timeline",
+				"impactHeading": "Impact",
+				"impactValue": "API-First",
+				"impactText": "Fully automated generation pipeline natively supporting LLMs, Multi-Tier Pricing, and Headless PDFs.",
+				"keyDeliverables": "Key Deliverables",
+				"results": "Results",
+				"achievements": {
+					"0": "Built a comprehensive REST API (`/api/generate-pdf`, `/api/themes`) with strictly typed OpenAPI documentation.",
+					"1": "Engineered a Multi-Tier Pricing Engine supporting complex volume-based pricing discounts.",
+					"2": "Created 17 pre-configured unified themes managed via a custom CVA (Class Variance Authority) component architecture.",
+					"3": "Implemented a resilient data ingestion pipeline supporting XLSX parsing, Google Sheets APIs, and Clipboard imports.",
+					"4": "Architected a scalable Zustand store with advanced history tracking (undo/redo) and persistence middleware.",
+					"5": "Integrated an LLM pipeline to assist in generating natural language product descriptions directly on the tags.",
+					"6": "Delivered a rock-solid UI using Shadcn, optimized edit tables, and real-time canvas preview systems.",
+					"7": "Ensured enterprise-grade stability via Jest Unit Testing and structured Error Boundaries."
+				},
+				"technologies": "Technologies",
+				"technologiesSubtitle": "Strictly typed, edge-ready, and highly isolated responsibilities.",
+				"techStack": {
+					"0": "Next.js 15 (App Router)",
+					"1": "React 19",
+					"2": "OpenAPI / REST",
+					"3": "Zustand + Immer",
+					"4": "Puppeteer",
+					"5": "Tailwind + Shadcn",
+					"6": "Jest",
+					"7": "LLM Integration"
+				},
+				"showcase": {
+					"title": "SYSTEM HIGHLIGHTS",
+					"description": "Explore the advanced architecture and interfaces"
+				},
+				"process": {
+					"title": "ENGINEERING PROCESS",
+					"description": "A technical breakdown of the development phases",
+					"phases": {
+						"architecture": {
+							"title": "Architecture Design",
+							"description": "Separating the frontend builders, state mutations, and backend worker endpoints for isolation."
+						},
+						"stateManagement": {
+							"title": "State Management",
+							"description": "Implementing Zustand and Immer for complex, nested data mutations without performance drops."
+						},
+						"rendering": {
+							"title": "PDF Rendering Engine",
+							"description": "Integrating Puppeteer into Next.js Serverless functions to guarantee print consistencies."
+						},
+						"delivery": {
+							"title": "Deployment & Polish",
+							"description": "Adding strict Zod validations and Framer Motion micro-interactions for a premium feel."
+						}
+					}
+				},
+				"cta": {
+					"title": "WANT TO BUILD POWERFUL TOOLS?",
+					"description": "Let's automate your operational workflows with high-performance web applications.",
+					"getInTouch": "GET IN TOUCH",
+					"backToHome": "BACK TO HOME"
 				}
 			}
 		}
