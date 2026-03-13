@@ -112,6 +112,7 @@
 		},
 		"direct": {
 			"title": "Or reach me directly:",
+			"downloadResume": "Download Resume",
 			"telegram": "Telegram",
 			"email": "Email",
 			"github": "GitHub",

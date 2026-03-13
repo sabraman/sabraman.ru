@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import {
 	ArrowRight,
 	CheckCircle2,
+	Download,
 	Github,
 	Instagram,
 	Loader2,
@@ -12,26 +13,21 @@ import {
 	MessageSquareText,
 	User,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import InputWithIcon from "~/components/input-with-icon";
-import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import {
 	Form,
 	FormControl,
 	FormField,
 	FormItem,
-	FormLabel,
 	FormMessage,
 } from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import { Toaster } from "~/components/ui/sonner";
-import { Textarea } from "~/components/ui/textarea";
+import { getResumeAsset } from "~/lib/resume";
 
 // Custom icons
 interface IconProps {
@@ -81,6 +77,8 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function Contact() {
 	const t = useTranslations();
+	const locale = useLocale();
+	const resume = getResumeAsset(locale);
 	const [formStatus, setFormStatus] = useState<
 		"idle" | "submitting" | "success" | "error"
 	>("idle");
@@ -123,7 +121,7 @@ export default function Contact() {
 			setTimeout(() => {
 				setFormStatus("idle");
 			}, 3000);
-		} catch (error) {
+		} catch (_error) {
 			setFormStatus("error");
 			toast.error(t("contact.form.error"), {
 				position: "top-center",
@@ -139,7 +137,6 @@ export default function Contact() {
 
 	return (
 		<div className="relative">
-			<Toaster />
 			<div className="mx-auto max-w-8xl">
 				<div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
 					{/* Contact Form - taking 7/12 columns */}
@@ -150,8 +147,8 @@ export default function Contact() {
 						className="relative lg:col-span-7"
 					>
 						{/* Decorative elements */}
-						<div className="-right-20 -top-12 absolute h-40 w-40 rounded-full bg-primary/5 blur-3xl" />
-						<div className="-left-20 -bottom-12 absolute h-40 w-40 rounded-full bg-accent/5 blur-3xl" />
+						<div className="absolute -top-12 -right-20 h-40 w-40 rounded-full bg-primary/5 blur-3xl" />
+						<div className="absolute -bottom-12 -left-20 h-40 w-40 rounded-full bg-accent/5 blur-3xl" />
 
 						<div className="group relative h-full overflow-hidden rounded-3xl backdrop-blur-sm">
 							{/* Fancy border */}
@@ -308,7 +305,7 @@ export default function Contact() {
 												</span>
 
 												{/* Animated background effect */}
-												<span className="-z-10 absolute inset-0 bg-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+												<span className="absolute inset-0 -z-10 bg-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 											</Button>
 										</motion.div>
 									</form>
@@ -332,9 +329,21 @@ export default function Contact() {
 									<div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/40 via-accent/20 to-background/0 opacity-30 transition-opacity duration-500 group-hover:opacity-50" />
 
 									<div className="relative m-[1px] rounded-[calc(1.5rem-1px)] bg-card/95 p-8 backdrop-blur-md md:p-10">
-										<h3 className="mb-8 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text font-bold text-2xl">
-											{t("contact.direct.title")}
-										</h3>
+										<div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+											<h3 className="bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text font-bold text-2xl">
+												{t("contact.direct.title")}
+											</h3>
+											<Button
+												asChild
+												className="h-11 rounded-xl px-5"
+												size="sm"
+											>
+												<a href={resume.href} download={resume.downloadName}>
+													{t("contact.direct.downloadResume")}
+													<Download className="ml-2 h-4 w-4" />
+												</a>
+											</Button>
+										</div>
 
 										<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 											<motion.div

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
 import ContactPageClient from "~/components/ContactPageClient";
 
 export async function generateMetadata({
@@ -8,8 +7,8 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const t = await getTranslations({ locale });
 	const isRussian = locale === "ru";
+	const path = isRussian ? "/ru/contact" : "/contact";
 
 	const title = isRussian
 		? "Контакты - Даня Юдин - Sabraman"
@@ -32,10 +31,27 @@ export async function generateMetadata({
 			"telegram bot developer",
 			"web designer contact",
 		],
+		alternates: {
+			canonical: path,
+			languages: {
+				en: "/contact",
+				ru: "/ru/contact",
+				"x-default": "/contact",
+			},
+		},
 		openGraph: {
 			title,
 			description,
-			url: `https://sabraman.ru${locale === "en" ? "" : `/${locale}`}/contact`,
+			url: `https://sabraman.ru${path}`,
+			siteName: "Sabraman - Danya Yudin Portfolio",
+			locale: isRussian ? "ru_RU" : "en_US",
+			type: "website",
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+			images: ["/api/og"],
 		},
 	};
 }

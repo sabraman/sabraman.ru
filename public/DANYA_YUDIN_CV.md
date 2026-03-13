@@ -1,9 +1,17 @@
 **Danya Yudin**\
-Saint Petersburg, Russia | [sabraman@ya.ru](mailto:sabraman@ya.ru) | tg: sabraman, inst: sabraman, x: 1sabraman, vk: sabraman, github: sabraman
+**Full-stack / Frontend Developer (Next.js / React / TypeScript)**\
+Saint Petersburg, Russia | sabraman@ya.ru | Telegram: @sabraman | GitHub: github.com/sabraman | Portfolio: sabraman.ru/work
 
 ### Profile
 
-Creative Designer and Early-Stage Developer with extensive hands-on experience in visual design, branding, and application development. Proven track record of transforming concepts into visually appealing and functional digital products. Passionate about integrating design and technology to deliver intuitive user experiences.
+Frontend / full-stack developer with a strong product and design background. I mostly work with **Next.js, React, TypeScript, and Node.js** and usually take a product from interface work to integrations, admin flows, reporting, and release. The work I know best is Telegram mini apps and bots, internal tools, AI-powered search, and PDF / print workflows.
+
+### Key Skills
+
+- **Next.js, React, TypeScript, Node.js**
+- **Telegram Mini Apps, Telegram Bots, REST API integrations**
+- **Admin panels, internal tools, reporting workflows**
+- **AI search, Tailwind CSS, product UI, Figma**
 
 ---
 
@@ -12,35 +20,31 @@ Creative Designer and Early-Stage Developer with extensive hands-on experience i
 **VAPARSHOP | Designer & Junior Developer**\
 _June 2024 – Present | Saint Petersburg_
 
-- Developed Telegram bots significantly improving internal operational efficiency:
-  - **VaparWaToTgBot**: Streamlines WhatsApp-to-Telegram data conversion and daily reporting.
-  - **VaparScannerBot**: Enhances customer interaction by simplifying the use of GetMeBack cards without app installation; automates sales conversion reports.
-- Designed and developed a custom **Price Tag Generator** web application to automate manual tasks, boosting productivity.
-- Created branded **Telegram Emoji Pack** to enhance brand recognition and improve audience engagement.
-- Redesigned corporate presentations, reinforcing the unique visual identity of the company.
-- Developed a Taplink alternative using Next.js, including blogs, location points, and interactive widgets.
-- Currently developing a Telegram Mini App (Next.js) integrated with GetMeBack API:
-  - Features include QR scanning, phone-based searches, shift management, detailed reporting, and an integrated mini LMS.
+- Build internal tools and Telegram products for day-to-day retail operations.
+- Shipped **Price Tag Generator** to automate price tag generation and print export.
+- Built Telegram bots for reporting, operational workflows, and sales conversion tracking.
+- Developed a Taplink alternative in **Next.js** with blog modules, location pages, and interactive widgets.
+- Currently building a **Telegram Mini App** in Next.js with GetMeBack API integration, QR scanning, phone search, shift tracking, reporting, and a built-in mini LMS.
 
 **HORNY PLACE | Visual Designer & Developer**\
 _October 2022 – May 2024 | Saint Petersburg_
 
-- Created various exterior signage designs for retail locations (Lermo, Vaska, Kuzi).
-- Developed promotional materials, including window stickers, flyers, posters, and event tickets.
-- Revamped visual branding elements, including QR-codes and YouTube thumbnails.
-- Designed corporate presentations for internal and external stakeholders (Franchise promotions, GVE).
-- Independently developed a stylish and interactive Taplink alternative (Next.js) featuring event integrations with Ticketscloud.
-- Authored a comprehensive **brand book** to ensure visual consistency across digital and physical media.
-- Designed clothing items, including "Languages" hoodie for Horny Vape.
+- Developed a **Next.js** Taplink alternative with **Ticketscloud** event integration.
+- Worked on digital and offline brand touchpoints: signage, promo materials, presentation assets, and lightweight web surfaces.
+- Organized the brand book and reusable visual materials.
 
-**ELYSIUM | Visual Merchandising & Sales Specialist**\
-_September 2020 – September 2022_
+---
 
-- Enhanced in-store visual merchandising to improve customer experience.
-- Developed engaging training materials and presentations for onboarding new staff.
+### Selected Projects
 
-**VAPE CLUB | Visual Merchandiser & Sales Manager**\
-_February 2019 – August 2020_
+**Price Tag Printer | Full-Stack Retail Tool**\
+- Built a Next.js tool for generating price tags from Excel and Google Sheets with bulk editing and export to PDF and HTML.
 
-- Maintained attractive and engaging visual store layouts.
-- Leveraged trend analysis to optimize product placement.
+**SMO TG Miniapp | Telegram Commerce**\
+- Shipped a Telegram mini app for retail and wholesale ordering with role-based flows and MoySklad integration.
+
+**PLONQ AI Search | AI Product Discovery**\
+- Built AI-assisted product search using hybrid semantic and keyword retrieval with similarity-based recommendations.
+
+**PSP Book Reader | Native Reader for Sony PSP**\
+- Developed a native EPUB reader in **C/C++** and **SDL2** with caching, chapter navigation, and power-aware performance tuning.

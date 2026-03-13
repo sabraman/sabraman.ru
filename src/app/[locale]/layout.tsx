@@ -9,6 +9,7 @@ import { ThemeProvider } from "~/components/ThemeProvider";
 import { ClientRoot } from "~/components/ui/ClientRoot";
 import { SmoothMarquee } from "~/components/ui/SmoothMarquee";
 import { LanguageSwitcher } from "~/components/ui/language-switcher";
+import { Toaster } from "~/components/ui/sonner";
 import { ThemeToggle } from "~/components/ui/theme-toggle";
 import { routing } from "~/i18n/routing";
 
@@ -344,6 +345,7 @@ export default async function RootLayout({
 							<SmoothMarquee />
 
 							<main>{children}</main>
+							<Toaster />
 						</ThemeProvider>
 					</ClientRoot>
 				</NextIntlClientProvider>

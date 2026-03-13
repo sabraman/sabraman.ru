@@ -112,6 +112,7 @@
 		},
 		"direct": {
 			"title": "Или сразу в мессенджер:",
+			"downloadResume": "Скачать резюме",
 			"telegram": "Telegram",
 			"email": "Email",
 			"github": "GitHub",
