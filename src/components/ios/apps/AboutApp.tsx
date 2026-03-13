@@ -638,7 +638,7 @@ export default function AboutApp() {
 	const [screen, setScreen] = useState<Screen>("list");
 	const [selectedAccount, setSelectedAccount] = useState<AccountId>("all");
 	const [selectedNoteId, setSelectedNoteId] = useState<string>(
-		INITIAL_NOTES[0].id,
+		INITIAL_NOTES[0]?.id ?? "",
 	);
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
 	const [searchQuery, setSearchQuery] = useState("");
@@ -748,6 +748,9 @@ export default function AboutApp() {
 			(note) => note.id === selectedNote.id,
 		);
 		const nextNote = accountNotes[(currentIndex + 1) % accountNotes.length];
+		if (!nextNote) {
+			return;
+		}
 		setSelectedNoteId(nextNote.id);
 	};
 

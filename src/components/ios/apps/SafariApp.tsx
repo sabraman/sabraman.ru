@@ -1358,6 +1358,14 @@ function PreviewThumbnail({
 	);
 }
 
+function getActiveHistoryEntry(tab: BrowserTab | null) {
+	if (!tab) {
+		return null;
+	}
+
+	return tab.history[tab.historyIndex] ?? tab.history[0] ?? null;
+}
+
 export default function SafariApp() {
 	const locale = resolveLocale(useLocale());
 	const copy = COPY[locale];
@@ -1456,8 +1464,7 @@ export default function SafariApp() {
 
 	const activeTab =
 		tabs.find((tab) => tab.id === activeTabId) ?? tabs[0] ?? null;
-	const currentEntry =
-		activeTab !== null ? activeTab.history[activeTab.historyIndex] : null;
+	const currentEntry = getActiveHistoryEntry(activeTab);
 	const currentCanGoBack =
 		activeTab !== null ? activeTab.historyIndex > 0 : false;
 	const currentCanGoForward =
@@ -1577,7 +1584,7 @@ export default function SafariApp() {
 					.split("-")
 					.map((segment) =>
 						segment.length > 0
-							? `${segment[0].toUpperCase()}${segment.slice(1)}`
+							? `${segment.charAt(0).toUpperCase()}${segment.slice(1)}`
 							: segment,
 					)
 					.join(" ");
@@ -1925,7 +1932,10 @@ export default function SafariApp() {
 			const nextUrl = toStoredUrl(iframeWindow.location.href);
 			const nextTitle =
 				iframeWindow.document.title.trim() || inferEntryTitle(nextUrl);
-			const activeHistoryEntry = activeTab.history[activeTab.historyIndex];
+			const activeHistoryEntry = getActiveHistoryEntry(activeTab);
+			if (!activeHistoryEntry) {
+				return;
+			}
 			const currentComparableUrl = normalizeComparableUrl(
 				activeHistoryEntry.url,
 			);
@@ -2145,7 +2155,11 @@ export default function SafariApp() {
 					<div className="absolute inset-x-0 top-[116px] bottom-[86px] overflow-x-auto px-[64px]">
 						<div className="flex h-full items-start gap-10">
 							{tabs.map((tab) => {
-								const previewEntry = tab.history[tab.historyIndex];
+								const previewEntry =
+									tab.history[tab.historyIndex] ?? tab.history[0] ?? null;
+								if (!previewEntry) {
+									return null;
+								}
 								const isActive = tab.id === activeTabId;
 
 								return (
@@ -2195,29 +2209,37 @@ export default function SafariApp() {
 					</div>
 
 					<div className="absolute inset-x-0 bottom-[65px] flex justify-center gap-[10px]">
-						{tabs.map((tab) => (
-							<button
-								key={`${tab.id}-dot`}
-								type="button"
-								onClick={() => setActiveTabId(tab.id)}
-								className="flex h-[6px] w-[6px] items-center justify-center"
-								aria-label={`Show ${tab.history[tab.historyIndex].title}`}
-							>
-								<Image
-									alt=""
-									aria-hidden
-									src={
-										tab.id === activeTabId
-											? SAFARI_ASSETS.tabsDotActive
-											: SAFARI_ASSETS.tabsDot
-									}
-									width={6}
-									height={6}
-									className="h-[6px] w-[6px] max-w-none"
-									unoptimized
-								/>
-							</button>
-						))}
+						{tabs.map((tab) => {
+							const previewEntry =
+								tab.history[tab.historyIndex] ?? tab.history[0] ?? null;
+							if (!previewEntry) {
+								return null;
+							}
+
+							return (
+								<button
+									key={`${tab.id}-dot`}
+									type="button"
+									onClick={() => setActiveTabId(tab.id)}
+									className="flex h-[6px] w-[6px] items-center justify-center"
+									aria-label={`Show ${previewEntry.title}`}
+								>
+									<Image
+										alt=""
+										aria-hidden
+										src={
+											tab.id === activeTabId
+												? SAFARI_ASSETS.tabsDotActive
+												: SAFARI_ASSETS.tabsDot
+										}
+										width={6}
+										height={6}
+										className="h-[6px] w-[6px] max-w-none"
+										unoptimized
+									/>
+								</button>
+							);
+						})}
 					</div>
 				</div>
 
@@ -2619,7 +2641,10 @@ export default function SafariApp() {
 			typeof payload.title === "string" && payload.title.trim().length > 0
 				? payload.title.trim()
 				: inferEntryTitle(nextUrl);
-		const activeHistoryEntry = activeTab.history[activeTab.historyIndex];
+		const activeHistoryEntry = getActiveHistoryEntry(activeTab);
+		if (!activeHistoryEntry) {
+			return;
+		}
 		const currentComparableUrl = normalizeComparableUrl(activeHistoryEntry.url);
 		const nextComparableUrl = normalizeComparableUrl(nextUrl);
 

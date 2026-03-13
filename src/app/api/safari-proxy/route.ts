@@ -19,7 +19,9 @@ function isBlockedHostname(hostname: string) {
 	}
 
 	if (isIP(normalized) === 4) {
-		const [first, second] = normalized.split(".").map(Number);
+		const [first = Number.NaN, second = Number.NaN] = normalized
+			.split(".")
+			.map(Number);
 		if (
 			first === 10 ||
 			first === 127 ||

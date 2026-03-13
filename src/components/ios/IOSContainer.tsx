@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useLocale } from "next-intl";
-import { useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { PROJECT_BY_SLUG } from "~/data/projects";
 import AboutApp from "./apps/AboutApp";
 import CameraApp from "./apps/CameraApp";
@@ -110,7 +110,12 @@ const APP_DEFINITIONS = {
 } as const;
 
 type AppDefinitionId = keyof typeof APP_DEFINITIONS;
-type AppChromeDefinition = (typeof APP_DEFINITIONS)[AppDefinitionId];
+type AppChromeDefinition = {
+	title: Record<"en" | "ru", string>;
+	render: () => ReactNode;
+	statusBarVariant: "opaque" | "translucent";
+	useSystemChrome: boolean;
+};
 
 function isRegisteredApp(appId: string): appId is AppDefinitionId {
 	return Object.hasOwn(APP_DEFINITIONS, appId);
