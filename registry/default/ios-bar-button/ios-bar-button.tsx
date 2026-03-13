@@ -5,16 +5,19 @@ import * as React from "react";
 import { cn } from "~/lib/utils";
 
 type IosBarButtonVariant = "default" | "accent" | "destructive";
-type IosBarButtonLayout = "text" | "icon" | "text-icon";
+type IosBarButtonLayout = "text" | "icon" | "text-icon" | "backward";
 
-const BAR_BUTTON_BACKGROUND: Record<IosBarButtonVariant, string> = {
-	accent:
-		"linear-gradient(180deg, rgb(147, 181, 246) 0%, rgb(103, 144, 225) 33%, rgb(60, 113, 218) 67%, rgb(37, 98, 217) 100%)",
-	default:
-		"linear-gradient(180deg, rgb(162, 178, 201) 0%, rgb(121, 142, 172) 33%, rgb(80, 109, 148) 67%, rgb(64, 95, 138) 100%)",
-	destructive:
-		"linear-gradient(180deg, rgb(219, 139, 146) 0%, rgb(195, 98, 106) 33%, rgb(178, 48, 59) 67%, rgb(176, 26, 39) 100%)",
+const BAR_BUTTON_GRADIENT_STOPS: Record<IosBarButtonVariant, string[]> = {
+	accent: ["#93B5F6", "#6790E1", "#3C71DA", "#2562D9"],
+	default: ["#A2B2C9", "#798EAC", "#506D94", "#405F8A"],
+	destructive: ["#DB8B92", "#C3626A", "#B2303B", "#B01A27"],
 };
+
+function getBarButtonBackground(variant: IosBarButtonVariant) {
+	const [start, second, third, end] = BAR_BUTTON_GRADIENT_STOPS[variant];
+
+	return `linear-gradient(180deg, ${start} 0%, ${second} 33%, ${third} 67%, ${end} 100%)`;
+}
 
 export interface IosBarButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -31,7 +34,7 @@ const IosBarButton = React.forwardRef<HTMLButtonElement, IosBarButtonProps>(
 			className,
 			icon,
 			label,
-			layout = icon ? (label ? "text-icon" : "icon") : "text",
+			layout,
 			style,
 			trailingIcon,
 			type = "button",
@@ -40,20 +43,82 @@ const IosBarButton = React.forwardRef<HTMLButtonElement, IosBarButtonProps>(
 		},
 		ref,
 	) => {
+		const backgroundImage = getBarButtonBackground(variant);
+		const resolvedLayout =
+			layout ??
+			(icon || trailingIcon ? (label ? "text-icon" : "icon") : "text");
+		const labelNode = label ? (
+			<div className="relative z-[1] flex min-w-[32px] shrink-0 flex-col justify-center whitespace-nowrap text-center font-bold text-[12px] text-white leading-[0] [text-shadow:0px_-1px_0px_rgba(0,0,0,0.4)]">
+				<p className="leading-[normal]">{label}</p>
+			</div>
+		) : null;
+
+		if (resolvedLayout === "backward") {
+			return (
+				<button
+					ref={ref}
+					className={cn(
+						"relative inline-flex h-[29px] items-center justify-center pr-[8px] pl-[18px] outline-none transition-transform duration-150 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50",
+						className,
+					)}
+					style={{
+						...style,
+						fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+					}}
+					type={type}
+					{...props}
+				>
+					<span
+						aria-hidden="true"
+						className="absolute inset-y-0 left-0 w-[18px] bg-white shadow-[0_0.5px_0.5px_rgba(255,255,255,0.4),0_1px_1.5px_rgba(0,0,0,0.2)] [clip-path:polygon(0_50%,100%_0,100%_100%)]"
+					/>
+					<span
+						aria-hidden="true"
+						className="absolute inset-y-[1px] left-[1px] w-[16px] [clip-path:polygon(0_50%,100%_0,100%_100%)]"
+						style={{ backgroundImage }}
+					/>
+					<span
+						aria-hidden="true"
+						className="absolute inset-y-0 right-0 left-[10px] rounded-r-[5px] bg-white shadow-[0_0.5px_0.5px_rgba(255,255,255,0.4),0_1px_1.5px_rgba(0,0,0,0.2)]"
+					/>
+					<span
+						aria-hidden="true"
+						className="absolute inset-y-[1px] right-[1px] left-[11px] rounded-r-[4px]"
+						style={{ backgroundImage }}
+					/>
+					<span
+						aria-hidden="true"
+						className="absolute top-[1px] right-[1px] left-[11px] h-[11px] rounded-tr-[4px] bg-gradient-to-b from-white/32 via-white/10 to-transparent"
+					/>
+					<span
+						aria-hidden="true"
+						className="absolute top-[1px] left-[1px] h-[11px] w-[16px] bg-gradient-to-b from-white/16 to-transparent [clip-path:polygon(0_50%,100%_0,100%_100%)]"
+					/>
+					<span className="relative z-[1] flex h-full items-center justify-center">
+						{labelNode}
+					</span>
+					<span
+						aria-hidden="true"
+						className="pointer-events-none absolute inset-x-[14px] bottom-0 h-px bg-black/18"
+					/>
+				</button>
+			);
+		}
+
 		return (
 			<button
 				ref={ref}
 				className={cn(
 					"relative inline-flex h-[29px] items-center justify-center overflow-hidden rounded-[5px] shadow-[0px_0.5px_0.5px_0px_rgba(255,255,255,0.4)] outline-none transition-transform duration-150 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50",
-					layout === "text" && "min-w-[52px] px-[10px]",
-					layout === "icon" && "min-w-[33px] px-[6px]",
-					layout === "text-icon" &&
+					resolvedLayout === "text" && "min-w-[52px] px-[10px]",
+					resolvedLayout === "icon" && "min-w-[33px] px-[6px]",
+					resolvedLayout === "text-icon" &&
 						"min-w-[50px] gap-[5px] pr-[15px] pl-[10px]",
 					className,
 				)}
 				style={{
 					...style,
-					backgroundImage: BAR_BUTTON_BACKGROUND[variant],
+					backgroundImage,
 					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
 				}}
 				type={type}
@@ -64,11 +129,7 @@ const IosBarButton = React.forwardRef<HTMLButtonElement, IosBarButtonProps>(
 						{icon}
 					</span>
 				) : null}
-				{label ? (
-					<span className="relative z-[1] min-w-[32px] whitespace-nowrap text-center font-bold text-[12px] text-white [text-shadow:0px_-1px_0px_rgba(0,0,0,0.4)]">
-						{label}
-					</span>
-				) : null}
+				{labelNode}
 				{trailingIcon ? (
 					<span className="relative z-[1] flex shrink-0 items-center justify-center text-white [filter:drop-shadow(0px_-1px_0px_rgba(0,0,0,0.4))] [&_svg]:size-[12px]">
 						{trailingIcon}

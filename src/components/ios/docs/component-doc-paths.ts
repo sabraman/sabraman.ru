@@ -1,5 +1,7 @@
 export const COMPONENT_DOC_SLUGS = [
 	"ios-wheel-picker",
+	"ios-alert-dialog",
+	"ios-bar-button",
 	"ios-clock",
 	"ios-switch",
 	"ios-slider",

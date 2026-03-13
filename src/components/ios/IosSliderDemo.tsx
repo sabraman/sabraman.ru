@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useState } from "react";
 
 import { IosSlider } from "~/components/ios-slider";
@@ -7,29 +8,54 @@ import { cn } from "~/lib/utils";
 
 interface IosSliderDemoProps {
 	className?: string;
+	compact?: boolean;
 }
 
 interface IosSliderRowProps {
 	ariaLabel: string;
 	className?: string;
+	leftAccessory: ReactNode;
+	max?: number;
+	min?: number;
 	onValueChange?: (value: number) => void;
+	rightAccessory: ReactNode;
+	title: string;
 	value: number;
+	valueLabel: string;
 	withDivider?: boolean;
 }
 
-const PRESET_VALUES = [14, 42] as const;
+function formatBalance(value: number) {
+	const roundedValue = Math.round(value);
+
+	if (roundedValue === 0) {
+		return "Center";
+	}
+
+	if (roundedValue < 0) {
+		return `L ${Math.abs(roundedValue)}`;
+	}
+
+	return `R ${roundedValue}`;
+}
 
 export function IosSliderRow({
 	ariaLabel,
 	className,
+	leftAccessory,
+	max = 100,
+	min = 0,
 	onValueChange,
+	rightAccessory,
+	title,
 	value,
+	valueLabel,
 	withDivider = true,
 }: IosSliderRowProps) {
 	return (
 		<div
 			className={cn(
-				"flex h-[44px] w-full items-center gap-[5px] bg-[linear-gradient(180deg,#fcfcfc_0%,#f1f1f1_100%)] px-[10px] shadow-[inset_0_1px_0_rgba(255,255,255,0.95)]",
+				"flex w-full flex-col gap-3 bg-[linear-gradient(180deg,#fcfcfc_0%,#f1f1f1_100%)] px-3 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.95)]",
 				withDivider && "border-black/12 border-b",
 				className,
 			)}
@@ -37,52 +63,96 @@ export function IosSliderRow({
 				fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
 			}}
 		>
-			<div className="flex size-[30px] shrink-0 items-center justify-center text-[#8b8b8b] drop-shadow-[0_1px_0_rgba(255,255,255,0.55)]">
-				<SpeakerIcon variant="low" />
+			<div className="flex items-center justify-between gap-3">
+				<span className="font-bold text-[#5a6781] text-[11px] uppercase tracking-[0.28em]">
+					{title}
+				</span>
+				<span className="font-mono text-[#7e8ba3] text-[12px]">
+					{valueLabel}
+				</span>
 			</div>
-			<IosSlider
-				aria-label={ariaLabel}
-				className="min-w-0 flex-1"
-				onValueChange={onValueChange}
-				value={value}
-			/>
-			<div className="flex size-[30px] shrink-0 items-center justify-center text-[#8b8b8b] drop-shadow-[0_1px_0_rgba(255,255,255,0.55)]">
-				<SpeakerIcon variant="high" />
+
+			<div className="flex items-center gap-[7px]">
+				<div className="flex size-[30px] shrink-0 items-center justify-center text-[#8b8b8b] drop-shadow-[0_1px_0_rgba(255,255,255,0.55)]">
+					{leftAccessory}
+				</div>
+				<IosSlider
+					aria-label={ariaLabel}
+					className="min-w-0 flex-1"
+					max={max}
+					min={min}
+					onValueChange={onValueChange}
+					value={value}
+				/>
+				<div className="flex size-[30px] shrink-0 items-center justify-center text-[#8b8b8b] drop-shadow-[0_1px_0_rgba(255,255,255,0.55)]">
+					{rightAccessory}
+				</div>
 			</div>
 		</div>
 	);
 }
 
-export function IosSliderDemo({ className }: IosSliderDemoProps) {
-	const [value, setValue] = useState(68);
+export function IosSliderDemo({
+	className,
+	compact = false,
+}: IosSliderDemoProps) {
+	const [ringer, setRinger] = useState(68);
+	const [brightness, setBrightness] = useState(44);
+	const [balance, setBalance] = useState(12);
 
 	return (
-		<div className={cn("flex w-full max-w-[476px] flex-col gap-5", className)}>
-			<div className="relative overflow-hidden rounded-[28px] border-[rgba(0,0,0,0.78)] border-[rgba(255,255,255,0.18)] border-t border-b bg-[linear-gradient(180deg,#3b465d_0%,#182034_100%)] p-5 shadow-[0_24px_40px_rgba(0,0,0,0.35),inset_0_2px_4px_rgba(0,0,0,0.5)]">
-				<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[28px] bg-gradient-to-b from-white/10 to-transparent" />
-				<div className="relative rounded-[18px] border border-[#7a8392] bg-[linear-gradient(180deg,#d6dbe3_0%,#c6ccd7_100%)] p-[6px] shadow-[0_10px_22px_rgba(0,0,0,0.24),inset_0_1px_0_rgba(255,255,255,0.55)]">
-					<div className="overflow-hidden rounded-[12px] border border-[#aeb4c0] bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.95)]">
-						{PRESET_VALUES.map((presetValue) => (
-							<IosSliderRow
-								ariaLabel={`Legacy iOS slider preview at ${presetValue} percent`}
-								key={presetValue}
-								value={presetValue}
-							/>
-						))}
-						<IosSliderRow
-							ariaLabel="Interactive legacy iOS slider"
-							onValueChange={setValue}
-							value={value}
-							withDivider={false}
-						/>
-					</div>
+		<div className={cn("flex w-full justify-center", className)}>
+			<div
+				className={cn(
+					"relative w-full rounded-[18px] border border-[#7a8392] bg-[linear-gradient(180deg,#d6dbe3_0%,#c6ccd7_100%)] p-[6px] shadow-[0_10px_22px_rgba(0,0,0,0.24),inset_0_1px_0_rgba(255,255,255,0.55)]",
+					compact ? "max-w-[430px]" : "max-w-[476px]",
+				)}
+			>
+				<div className="overflow-hidden rounded-[12px] border border-[#aeb4c0] bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.95)]">
+					<IosSliderRow
+						ariaLabel="Interactive legacy iOS ringer slider"
+						className={compact ? "gap-2.5 px-2.5 py-2.5" : undefined}
+						leftAccessory={<SpeakerIcon variant="low" />}
+						onValueChange={setRinger}
+						rightAccessory={<SpeakerIcon variant="high" />}
+						title="Ringer"
+						value={ringer}
+						valueLabel={`${Math.round(ringer)}%`}
+					/>
+					<IosSliderRow
+						ariaLabel="Interactive legacy iOS brightness slider"
+						className={compact ? "gap-2.5 px-2.5 py-2.5" : undefined}
+						leftAccessory={<SunIcon variant="low" />}
+						onValueChange={setBrightness}
+						rightAccessory={<SunIcon variant="high" />}
+						title="Brightness"
+						value={brightness}
+						valueLabel={`${Math.round(brightness)}%`}
+					/>
+					<IosSliderRow
+						ariaLabel="Interactive legacy iOS balance slider"
+						className={compact ? "gap-2.5 px-2.5 py-2.5" : undefined}
+						leftAccessory={<DirectionBadge>L</DirectionBadge>}
+						max={50}
+						min={-50}
+						onValueChange={setBalance}
+						rightAccessory={<DirectionBadge>R</DirectionBadge>}
+						title="Balance"
+						value={balance}
+						valueLabel={formatBalance(balance)}
+						withDivider={false}
+					/>
 				</div>
 			</div>
-
-			<p className="text-center font-medium text-[#8b9bb4] text-sm uppercase tracking-[0.08em]">
-				Interactive value: {Math.round(value)}%
-			</p>
 		</div>
+	);
+}
+
+function DirectionBadge({ children }: { children: ReactNode }) {
+	return (
+		<span className="inline-flex size-[24px] items-center justify-center rounded-full border border-[#8b8b8b] bg-[linear-gradient(180deg,#fbfbfb_0%,#dddddd_100%)] font-bold text-[#7d8495] text-[11px] shadow-[inset_0_1px_0_rgba(255,255,255,0.85),0_1px_1px_rgba(0,0,0,0.08)]">
+			{children}
+		</span>
 	);
 }
 
@@ -114,6 +184,41 @@ function SpeakerIcon({ variant }: { variant: "high" | "low" }) {
 					/>
 				</>
 			) : null}
+		</svg>
+	);
+}
+
+function SunIcon({ variant }: { variant: "high" | "low" }) {
+	return (
+		<svg
+			aria-hidden="true"
+			className="h-[19px] w-[19px]"
+			fill="none"
+			viewBox="0 0 20 20"
+		>
+			<circle
+				cx="10"
+				cy="10"
+				fill="currentColor"
+				fillOpacity={variant === "high" ? 0.32 : 0.18}
+				r={variant === "high" ? 4.1 : 3.2}
+				stroke="currentColor"
+				strokeWidth="1.1"
+			/>
+			<g stroke="currentColor" strokeLinecap="round" strokeWidth="1.2">
+				<path d="M10 1.8V4.1" />
+				<path d="M10 15.9V18.2" />
+				<path d="M1.8 10H4.1" />
+				<path d="M15.9 10H18.2" />
+				<path d="M4 4L5.65 5.65" />
+				<path d="M14.35 14.35L16 16" />
+				{variant === "high" ? (
+					<>
+						<path d="M14.35 5.65L16 4" />
+						<path d="M4 16L5.65 14.35" />
+					</>
+				) : null}
+			</g>
 		</svg>
 	);
 }

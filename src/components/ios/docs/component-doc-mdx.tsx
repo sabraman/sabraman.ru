@@ -1,5 +1,6 @@
 import type { MDXRemoteProps } from "next-mdx-remote/rsc";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { Children, isValidElement, type ReactNode } from "react";
 import remarkGfm from "remark-gfm";
 import {
 	IosDocCodeBlock,
@@ -8,17 +9,14 @@ import {
 import {
 	type ComponentDocPreviewName,
 	getComponentDocConfig,
-	getComponentDocPreview,
 } from "~/components/ios/docs/component-doc-config";
+import { slugifyComponentDocHeading } from "~/components/ios/docs/component-doc-headings";
 import {
 	type ComponentDocSlug,
 	resolveComponentDocSlug,
 } from "~/components/ios/docs/component-doc-paths";
-import {
-	getCodeLanguage,
-	getCodeTitle,
-	readRepoFileForDocs,
-} from "~/components/ios/docs/component-doc-source";
+import { ComponentDocShowcase } from "~/components/ios/docs/component-doc-showcase";
+import { readRepoFileForDocs } from "~/components/ios/docs/component-doc-source";
 import { getComponentTypeTable } from "~/components/ios/docs/component-doc-type-table";
 import { IosInstallCommand } from "~/components/ios/IosInstallCommand";
 import { cn } from "~/lib/utils";
@@ -80,26 +78,28 @@ function getMdxComponents(
 			/>
 		),
 		ComponentPreview: ({ name }: { name: ComponentDocPreviewName }) => (
-			<ComponentDocPreview name={name} />
+			<ComponentDocShowcase name={name} />
 		),
 		ComponentSource: ({ src, title }: { src: string; title?: string }) => (
 			<ComponentDocSource src={src} title={title} />
 		),
 		h2: ({ className, ...props }) => (
-			<h2
+			<ComponentDocHeading
 				className={cn(
-					"pt-2 font-medium text-3xl text-white tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]",
+					"pt-2 font-semibold text-3xl text-white tracking-tight",
 					className,
 				)}
+				level="h2"
 				{...props}
 			/>
 		),
 		h3: ({ className, ...props }) => (
-			<h3
+			<ComponentDocHeading
 				className={cn(
 					"font-medium text-white text-xl tracking-tight",
 					className,
 				)}
+				level="h3"
 				{...props}
 			/>
 		),
@@ -207,33 +207,66 @@ function ComponentDocInstallCommand({
 	component: ComponentDocSlug;
 }) {
 	return (
-		<IosInstallCommand {...getComponentDocConfig(component).installCommands} />
-	);
-}
-
-function ComponentDocSource({ src, title }: { src: string; title?: string }) {
-	return (
-		<IosDocCodeBlock
-			code={readRepoFileForDocs(src).trimEnd()}
-			language={getCodeLanguage(src)}
-			title={getCodeTitle(src, title)}
+		<IosInstallCommand
+			{...getComponentDocConfig(component).installCommands}
+			className="max-w-none"
 		/>
 	);
 }
 
-function ComponentDocPreview({ name }: { name: ComponentDocPreviewName }) {
-	const preview = getComponentDocPreview(name);
+function ComponentDocHeading({
+	children,
+	className,
+	level,
+	...props
+}: {
+	children?: ReactNode;
+	className?: string;
+	level: "h2" | "h3";
+}) {
+	const id = slugifyComponentDocHeading(getTextFromNode(children));
+
+	if (level === "h2") {
+		return (
+			<h2 className={className} id={id} {...props}>
+				{children}
+			</h2>
+		);
+	}
 
 	return (
-		<div className="space-y-6">
-			<div className="relative overflow-hidden rounded-[24px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.2)] border-t border-b bg-[#1a212d] p-10 shadow-[0_20px_40px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(255,255,255,0.05)]">
-				<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-leather.png')] opacity-10 mix-blend-overlay" />
-				<div className="relative flex justify-center">{preview.render()}</div>
-			</div>
-
-			<ComponentDocSource src={preview.sourcePath} title={preview.title} />
-		</div>
+		<h3 className={className} id={id} {...props}>
+			{children}
+		</h3>
 	);
+}
+
+function getTextFromNode(node: ReactNode): string {
+	return Children.toArray(node)
+		.map((child) => {
+			if (typeof child === "string" || typeof child === "number") {
+				return String(child);
+			}
+
+			if (isValidElement(child)) {
+				return getTextFromNode(
+					(child.props as { children?: ReactNode }).children,
+				);
+			}
+
+			return "";
+		})
+		.join(" ");
+}
+
+function ComponentDocSource({
+	src,
+	title: _title,
+}: {
+	src: string;
+	title?: string;
+}) {
+	return <IosDocCodeBlock code={readRepoFileForDocs(src).trimEnd()} />;
 }
 
 function ComponentDocAutoTypeTable({

@@ -4,25 +4,20 @@ import { CheckIcon, CopyIcon } from "lucide-react";
 import * as React from "react";
 
 import { IosBarButton } from "~/components/ios-bar-button";
+import { ScrollFadeEffect } from "~/components/scroll-fade-effect/scroll-fade-effect";
 import { cn } from "~/lib/utils";
 
 const COPY_STATE_RESET_MS = 1800;
+const CODE_BLOCK_MAX_HEIGHT = "22rem";
 
 type CopyState = "idle" | "done" | "error";
 
 interface IosDocCodeBlockProps {
 	className?: string;
 	code: string;
-	language?: string;
-	title?: string;
 }
 
-export function IosDocCodeBlock({
-	className,
-	code,
-	language,
-	title,
-}: IosDocCodeBlockProps) {
+export function IosDocCodeBlock({ className, code }: IosDocCodeBlockProps) {
 	const [copyState, setCopyState] = React.useState<CopyState>("idle");
 
 	React.useEffect(() => {
@@ -51,43 +46,32 @@ export function IosDocCodeBlock({
 	return (
 		<div
 			className={cn(
-				"relative overflow-hidden rounded-[16px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[#1a212d] shadow-[0_10px_30px_rgba(0,0,0,0.5),inset_0_2px_10px_rgba(0,0,0,0.8)]",
+				"relative overflow-hidden bg-[linear-gradient(180deg,rgba(26,34,49,0.98)_0%,rgba(10,15,24,1)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]",
 				className,
 			)}
 		>
-			<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-leather.png')] opacity-10 mix-blend-overlay" />
+			<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(50,86,146,0.16),transparent_48%),linear-gradient(90deg,transparent_0%,rgba(34,72,128,0.16)_35%,rgba(34,72,128,0.16)_65%,transparent_100%)]" />
 
-			<div className="relative flex items-center justify-between gap-3 border-white/10 border-b px-4 py-3">
-				<div className="min-w-0 space-y-1">
-					{title ? (
-						<p className="truncate font-medium text-[#dbeaff] text-sm">
-							{title}
-						</p>
-					) : null}
-					{language ? (
-						<p className="font-medium text-[#7da9ff] text-[11px] uppercase tracking-[0.16em]">
-							{language}
-						</p>
-					) : null}
-				</div>
+			<IosBarButton
+				aria-label="Copy code block"
+				className="absolute top-5 right-5 z-10 shrink-0"
+				icon={
+					copyState === "done" ? <CheckIcon strokeWidth={3} /> : <CopyIcon />
+				}
+				layout="icon"
+				onClick={handleCopy}
+				variant={copyState === "error" ? "destructive" : "default"}
+			/>
 
-				<IosBarButton
-					aria-label="Copy code block"
-					className="shrink-0"
-					icon={
-						copyState === "done" ? <CheckIcon strokeWidth={3} /> : <CopyIcon />
-					}
-					layout="icon"
-					onClick={handleCopy}
-					variant={copyState === "error" ? "destructive" : "default"}
-				/>
-			</div>
-
-			<div className="relative px-6 py-5">
-				<pre className="overflow-x-auto whitespace-pre font-mono text-[#a5d6ff] text-[13px] leading-relaxed">
+			<ScrollFadeEffect
+				className="relative px-6 py-6 pr-20"
+				orientation="vertical"
+				style={{ maxHeight: CODE_BLOCK_MAX_HEIGHT }}
+			>
+				<pre className="min-w-max overflow-x-auto whitespace-pre font-mono text-[#c8ddff] text-[14px] leading-[1.65]">
 					<code>{code}</code>
 				</pre>
-			</div>
+			</ScrollFadeEffect>
 		</div>
 	);
 }
@@ -96,18 +80,10 @@ export function IosDocPre({
 	children,
 	className,
 }: React.ComponentProps<"pre">) {
-	const codeElement = React.Children.toArray(children)[0];
-	const language =
-		React.isValidElement<{ className?: string }>(codeElement) &&
-		typeof codeElement.props.className === "string"
-			? codeElement.props.className.replace(/^language-/, "")
-			: undefined;
-
 	return (
 		<IosDocCodeBlock
 			className={className}
 			code={extractText(children).trimEnd()}
-			language={language}
 		/>
 	);
 }

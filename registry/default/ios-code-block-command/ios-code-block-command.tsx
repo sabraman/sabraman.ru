@@ -8,6 +8,7 @@ import { IosSegmentedControl } from "../ios-segmented-control/ios-segmented-cont
 
 const PACKAGE_MANAGERS = ["bun", "npm", "pnpm", "yarn"] as const;
 const STORAGE_KEY = "sabraman-ios-code-block-command-package-manager";
+const STORAGE_EVENT = "sabraman-ios-code-block-command-package-manager-change";
 const COPY_STATE_RESET_MS = 1800;
 
 export type PackageManager = (typeof PACKAGE_MANAGERS)[number];
@@ -16,9 +17,93 @@ type CopyState = "idle" | "done" | "error";
 
 type PackageManagerCommands = Partial<Record<PackageManager, string>>;
 
+function readStoredPackageManager() {
+	try {
+		const storedPackageManager = window.localStorage.getItem(STORAGE_KEY);
+
+		if (
+			storedPackageManager &&
+			PACKAGE_MANAGERS.includes(storedPackageManager as PackageManager)
+		) {
+			return storedPackageManager as PackageManager;
+		}
+	} catch {}
+
+	return null;
+}
+
+export function usePreferredPackageManager(
+	initialPackageManager: PackageManager = "bun",
+) {
+	const [preferredPackageManager, setPreferredPackageManagerState] =
+		React.useState<PackageManager>(initialPackageManager);
+
+	React.useEffect(() => {
+		setPreferredPackageManagerState(
+			readStoredPackageManager() ?? initialPackageManager,
+		);
+	}, [initialPackageManager]);
+
+	React.useEffect(() => {
+		function syncPackageManager(nextPackageManager?: string | null) {
+			if (
+				nextPackageManager &&
+				PACKAGE_MANAGERS.includes(nextPackageManager as PackageManager)
+			) {
+				setPreferredPackageManagerState(nextPackageManager as PackageManager);
+				return;
+			}
+
+			setPreferredPackageManagerState(
+				readStoredPackageManager() ?? initialPackageManager,
+			);
+		}
+
+		function handleStorage(event: StorageEvent) {
+			if (event.key === STORAGE_KEY) {
+				syncPackageManager(event.newValue);
+			}
+		}
+
+		function handlePackageManagerChange(event: Event) {
+			syncPackageManager(
+				(event as CustomEvent<string | null | undefined>).detail ?? null,
+			);
+		}
+
+		window.addEventListener("storage", handleStorage);
+		window.addEventListener(STORAGE_EVENT, handlePackageManagerChange);
+
+		return () => {
+			window.removeEventListener("storage", handleStorage);
+			window.removeEventListener(STORAGE_EVENT, handlePackageManagerChange);
+		};
+	}, [initialPackageManager]);
+
+	const setPreferredPackageManager = React.useCallback(
+		(nextPackageManager: PackageManager) => {
+			setPreferredPackageManagerState(nextPackageManager);
+
+			try {
+				window.localStorage.setItem(STORAGE_KEY, nextPackageManager);
+			} catch {}
+
+			window.dispatchEvent(
+				new CustomEvent(STORAGE_EVENT, {
+					detail: nextPackageManager,
+				}),
+			);
+		},
+		[],
+	);
+
+	return [preferredPackageManager, setPreferredPackageManager] as const;
+}
+
 export interface IosCodeBlockCommandProps
 	extends React.HTMLAttributes<HTMLDivElement> {
 	bun?: string;
+	headerActions?: React.ReactNode;
 	initialPackageManager?: PackageManager;
 	npm?: string;
 	onCopyError?: (error: Error) => void;
@@ -33,6 +118,7 @@ export interface IosCodeBlockCommandProps
 export function IosCodeBlockCommand({
 	bun,
 	className,
+	headerActions,
 	initialPackageManager,
 	npm,
 	onCopyError,
@@ -63,42 +149,28 @@ export function IosCodeBlockCommand({
 	const fallbackPackageManager =
 		availablePackageManagers[0] ?? initialPackageManager ?? "bun";
 
-	const [packageManager, setPackageManager] = React.useState<PackageManager>(
-		fallbackPackageManager,
-	);
+	const [preferredPackageManager, setPreferredPackageManager] =
+		usePreferredPackageManager(fallbackPackageManager);
 	const [copyState, setCopyState] = React.useState<CopyState>("idle");
+	const packageManager = availablePackageManagers.includes(
+		preferredPackageManager,
+	)
+		? preferredPackageManager
+		: fallbackPackageManager;
 
 	React.useEffect(() => {
-		try {
-			const storedPackageManager = window.localStorage.getItem(STORAGE_KEY);
-
-			if (
-				storedPackageManager &&
-				availablePackageManagers.includes(
-					storedPackageManager as PackageManager,
-				)
-			) {
-				setPackageManager(storedPackageManager as PackageManager);
-				return;
-			}
-		} catch { }
-
 		if (
-			initialPackageManager &&
-			availablePackageManagers.includes(initialPackageManager)
+			availablePackageManagers.length &&
+			!availablePackageManagers.includes(preferredPackageManager)
 		) {
-			setPackageManager(initialPackageManager);
-			return;
+			setPreferredPackageManager(fallbackPackageManager);
 		}
-
-		setPackageManager(fallbackPackageManager);
-	}, [availablePackageManagers, fallbackPackageManager, initialPackageManager]);
-
-	React.useEffect(() => {
-		try {
-			window.localStorage.setItem(STORAGE_KEY, packageManager);
-		} catch { }
-	}, [packageManager]);
+	}, [
+		availablePackageManagers,
+		fallbackPackageManager,
+		preferredPackageManager,
+		setPreferredPackageManager,
+	]);
 
 	React.useEffect(() => {
 		if (copyState === "idle") {
@@ -174,28 +246,31 @@ export function IosCodeBlockCommand({
 								value: manager,
 							}))}
 							onValueChange={(nextPackageManager) => {
-								setPackageManager(nextPackageManager);
+								setPreferredPackageManager(nextPackageManager);
 							}}
 							value={packageManager}
 						/>
 					</div>
 
-					<IosBarButton
-						aria-label="Copy command"
-						className="shrink-0"
-						disabled={!activeCommand}
-						icon={
-							copyState === "done" ? (
-								<CheckIcon strokeWidth={3} />
-							) : copyState === "error" ? (
-								<CircleXIcon />
-							) : (
-								<CopyIcon />
-							)
-						}
-						layout="icon"
-						onClick={handleCopy}
-					/>
+					<div className="flex items-center gap-2">
+						{headerActions}
+						<IosBarButton
+							aria-label="Copy command"
+							className="shrink-0"
+							disabled={!activeCommand}
+							icon={
+								copyState === "done" ? (
+									<CheckIcon strokeWidth={3} />
+								) : copyState === "error" ? (
+									<CircleXIcon />
+								) : (
+									<CopyIcon />
+								)
+							}
+							layout="icon"
+							onClick={handleCopy}
+						/>
+					</div>
 				</div>
 
 				<div
@@ -227,7 +302,7 @@ export function IosCodeBlockCommand({
 	);
 }
 
-function PackageManagerIcon({
+export function PackageManagerIcon({
 	packageManager,
 }: {
 	packageManager: PackageManager;

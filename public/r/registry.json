@@ -9,9 +9,7 @@
 			"title": "iOS 6 Wheel Picker",
 			"docs": "https://sabraman.ru/components/ios-wheel-picker",
 			"description": "Legacy iOS 6 style wheel picker component built on top of @ncdai/react-wheel-picker.",
-			"dependencies": [
-				"@ncdai/react-wheel-picker"
-			],
+			"dependencies": ["@ncdai/react-wheel-picker"],
 			"files": [
 				{
 					"path": "registry/default/ios-wheel-picker/ios-wheel-picker.tsx",
@@ -40,9 +38,7 @@
 			"title": "Legacy iOS Switch",
 			"docs": "https://sabraman.ru/components/ios-switch",
 			"description": "Legacy iOS toggle switch built on top of @radix-ui/react-switch.",
-			"dependencies": [
-				"@radix-ui/react-switch"
-			],
+			"dependencies": ["@radix-ui/react-switch"],
 			"files": [
 				{
 					"path": "registry/default/ios-switch/ios-switch.tsx",
@@ -57,9 +53,7 @@
 			"title": "Legacy iOS Slider",
 			"docs": "https://sabraman.ru/components/ios-slider",
 			"description": "Glossy iOS 6 slider control with a raised metallic thumb and silver-blue track.",
-			"dependencies": [
-				"@radix-ui/react-slider"
-			],
+			"dependencies": ["@radix-ui/react-slider"],
 			"files": [
 				{
 					"path": "registry/default/ios-slider/ios-slider.tsx",
@@ -74,9 +68,7 @@
 			"title": "iOS 6 Code Block Command",
 			"docs": "https://sabraman.ru/components/ios-code-block-command",
 			"description": "Skeuomorphic iOS 6 command block with package-manager tabs and clipboard support.",
-			"dependencies": [
-				"lucide-react"
-			],
+			"dependencies": ["lucide-react"],
 			"files": [
 				{
 					"path": "registry/default/ios-code-block-command/ios-code-block-command.tsx",
@@ -91,6 +83,40 @@
 				{
 					"path": "registry/default/ios-segmented-control/ios-segmented-control.tsx",
 					"target": "components/ios-segmented-control.tsx",
+					"type": "registry:component"
+				}
+			]
+		},
+		{
+			"name": "ios-alert-dialog",
+			"type": "registry:ui",
+			"title": "iOS 6 Alert Dialog",
+			"docs": "https://sabraman.ru/components/ios-alert-dialog",
+			"description": "Muted navy iOS 6 alert dialog with a silver gloss cap, white keyline, and classic confirmation buttons.",
+			"dependencies": ["@radix-ui/react-dialog", "lucide-react"],
+			"files": [
+				{
+					"path": "registry/default/ios-alert-dialog/ios-alert-dialog.tsx",
+					"target": "components/ios-alert-dialog.tsx",
+					"type": "registry:component"
+				},
+				{
+					"path": "registry/default/ui/dialog.tsx",
+					"target": "components/ui/dialog.tsx",
+					"type": "registry:component"
+				}
+			]
+		},
+		{
+			"name": "ios-bar-button",
+			"type": "registry:ui",
+			"title": "iOS 6 Bar Button",
+			"docs": "https://sabraman.ru/components/ios-bar-button",
+			"description": "Classic iOS 6 navigation bar button with text, icon, text-icon, backward, accent, and destructive variants.",
+			"files": [
+				{
+					"path": "registry/default/ios-bar-button/ios-bar-button.tsx",
+					"target": "components/ios-bar-button.tsx",
 					"type": "registry:component"
 				}
 			]

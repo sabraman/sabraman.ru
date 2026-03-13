@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon, ChevronDownIcon, CopyIcon } from "lucide-react";
+import { CheckIcon, CopyIcon } from "lucide-react";
 import Image from "next/image";
 import * as React from "react";
 
@@ -92,9 +92,8 @@ export function IosComponentPageToolbar({
 				<div className="relative flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
 					<div className="flex shrink-0 items-center">
 						<IosBarButton
-							icon={<ChevronDownIcon className="rotate-90" strokeWidth={3} />}
 							label="Components"
-							layout="text-icon"
+							layout="backward"
 							onClick={() => {
 								router.push("/components");
 							}}

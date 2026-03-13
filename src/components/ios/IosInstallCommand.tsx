@@ -25,6 +25,7 @@ export function IosInstallCommand({
 		<div className={cn("w-full max-w-[560px]", className)}>
 			<IosCodeBlockCommand
 				bun={bun}
+				className="w-full"
 				initialPackageManager={initialPackageManager}
 				npm={npm}
 				pnpm={pnpm}

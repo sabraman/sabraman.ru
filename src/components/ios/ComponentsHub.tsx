@@ -1,18 +1,51 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, ExternalLink } from "lucide-react";
-import { IosCodeBlockCommandDemo } from "~/components/ios/IosCodeBlockCommandDemo";
-import { IosSliderRow } from "~/components/ios/IosSliderDemo";
+import {
+	CheckIcon,
+	CircleXIcon,
+	CopyIcon,
+	ExternalLink,
+	PlusIcon,
+} from "lucide-react";
+import { motion as motionCore } from "motion/react";
+import type { ReactNode } from "react";
+import * as React from "react";
+import { IosAlertDialogDemo } from "~/components/ios/IosAlertDialogDemo";
+import { IosBarButtonDemo } from "~/components/ios/IosBarButtonDemo";
+import { IosBarButton } from "~/components/ios-bar-button";
 import { IosClock } from "~/components/ios-clock";
-import { IosSwitch } from "~/components/ios-switch";
+import {
+	PackageManagerIcon,
+	usePreferredPackageManager,
+} from "~/components/ios-code-block-command";
+import {
+	IosSegmentedControl,
+	type IosSegmentedControlItem,
+} from "~/components/ios-segmented-control";
+import { TextFlip } from "~/components/text-flip/text-flip";
 import type { Locale } from "~/i18n";
-import { Link } from "~/i18n/navigation";
+import { useRouter } from "~/i18n/navigation";
+import { cn } from "~/lib/utils";
 import {
 	getIosWheelPickerHubPath,
 	IOS_WHEEL_PICKER_URLS,
 } from "./component-pages-content";
+import { IosCodeBlockCommandDemo } from "./IosCodeBlockCommandDemo";
+import { IosRegistryAddDialog } from "./IosRegistryAddDialog";
+import { IosSliderDemo } from "./IosSliderDemo";
+import { IosSwitchDemo } from "./IosSwitchDemo";
 import { IosWheelPickerDemo } from "./IosWheelPickerDemo";
+import {
+	getIosAlertDialogHubPath,
+	IOS_ALERT_DIALOG_DOCS_COPY,
+	IOS_ALERT_DIALOG_URLS,
+} from "./ios-alert-dialog-content";
+import {
+	getIosBarButtonHubPath,
+	IOS_BAR_BUTTON_DOCS_COPY,
+	IOS_BAR_BUTTON_URLS,
+} from "./ios-bar-button-content";
 import {
 	getIosClockHubPath,
 	IOS_CLOCK_DOCS_COPY,
@@ -34,475 +67,493 @@ import {
 	IOS_SWITCH_URLS,
 } from "./ios-switch-content";
 
-function HubHeader() {
-	return (
-		<motion.header
-			initial={{ opacity: 0, y: -40 }}
-			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-			className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#060b14]/60 p-8 shadow-[0_40px_100px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-3xl md:p-12"
-		>
-			<motion.div
-				animate={{
-					backgroundPosition: ["0% 0%", "100% 100%"],
-				}}
-				transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-				className="pointer-events-none absolute inset-0 opacity-40 mix-blend-screen"
-				style={{
-					backgroundImage:
-						"radial-gradient(circle at 50% 50%, rgba(98,142,255,0.15), transparent 50%), radial-gradient(circle at 100% 0%, rgba(135,115,255,0.15), transparent 50%)",
-					backgroundSize: "200% 200%",
-				}}
-			/>
-			<div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)]" />
+const PACKAGE_MANAGERS = ["bun", "npm", "pnpm", "yarn"] as const;
+const COPY_STATE_RESET_MS = 1800;
 
-			<div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-				<div className="max-w-4xl space-y-5">
-					<motion.div
-						initial={{ opacity: 0, x: -20 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ delay: 0.2 }}
-						className="inline-flex rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.05)] px-4 py-1.5 font-semibold text-[#8ca8e8] text-[11px] uppercase tracking-[0.34em]"
-					>
-						UI Elements
-					</motion.div>
-					<h1 className="max-w-4xl bg-gradient-to-br from-white via-white to-white/50 bg-clip-text font-medium text-5xl text-transparent tracking-tight md:text-7xl">
-						Handcrafted React Components.
-					</h1>
-					<p className="max-w-3xl text-[#8b9bb4] text-lg leading-relaxed md:text-xl">
-						A collection of highly polished, incredibly detailed skeuomorphic
-						interfaces.
-					</p>
-				</div>
+type PackageManager = (typeof PACKAGE_MANAGERS)[number];
+type CopyState = "idle" | "done" | "error";
 
-				<div className="flex flex-wrap gap-4">
-					<motion.a
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-						className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 font-medium text-white shadow-[inset_0_1px_rgba(255,255,255,0.2)] backdrop-blur-md transition hover:bg-white/20"
-						href={IOS_WHEEL_PICKER_URLS.direct}
-						rel="noreferrer"
-						target="_blank"
-					>
-						Registry item
-						<ExternalLink className="h-4 w-4" />
-					</motion.a>
-					<motion.a
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-						className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-medium text-black shadow-[0_0_20px_rgba(255,255,255,0.3)] transition hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
-						href={IOS_WHEEL_PICKER_URLS.registry}
-						rel="noreferrer"
-						target="_blank"
-					>
-						Registry index
-						<ExternalLink className="h-4 w-4" />
-					</motion.a>
-				</div>
-			</div>
-		</motion.header>
-	);
-}
-
-const cardVariants: Variants = {
-	hidden: { opacity: 0, y: 40 },
-	visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+const revealVariants: Variants = {
+	hidden: { opacity: 0, y: 28 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.72, ease: [0.16, 1, 0.3, 1] },
+	},
 };
 
-function AppleTeaser({ locale }: { locale: Locale }) {
-	const href = getIosWheelPickerHubPath(locale);
+const flipVariants = {
+	animate: { filter: "blur(0px)", opacity: 1, y: 0 },
+	exit: { filter: "blur(4px)", opacity: 0, y: 10 },
+	initial: { filter: "blur(4px)", opacity: 0, y: -10 },
+} as const;
+
+const IOS_SANS_STYLE = {
+	fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+} as const;
+
+const HERO_SEGMENT_ITEMS: IosSegmentedControlItem<PackageManager>[] =
+	PACKAGE_MANAGERS.map((packageManager) => ({
+		label: packageManager,
+		value: packageManager,
+		width: packageManager === "pnpm" ? 58 : 52,
+	}));
+
+type ShowcaseItem = {
+	alias: string;
+	description: string;
+	href: string;
+	itemUrl: string;
+	preview: ReactNode;
+	title: string;
+};
+
+type HeroInstallItem = Pick<ShowcaseItem, "alias">;
+
+function getAliasInstallPrefix(packageManager: PackageManager) {
+	switch (packageManager) {
+		case "pnpm":
+			return "pnpm dlx shadcn@latest add @sabraman/";
+		case "yarn":
+			return "yarn dlx shadcn@latest add @sabraman/";
+		case "npm":
+			return "npx shadcn@latest add @sabraman/";
+		default:
+			return "bunx --bun shadcn@latest add @sabraman/";
+	}
+}
+
+function getAliasInstallCommand(
+	packageManager: PackageManager,
+	componentAlias: string,
+) {
+	return `${getAliasInstallPrefix(packageManager)}${componentAlias}`;
+}
+
+function HeroInstallSurface({
+	items,
+	onAddRegistry,
+}: {
+	items: HeroInstallItem[];
+	onAddRegistry: () => void;
+}) {
+	const [packageManager, setPackageManager] = usePreferredPackageManager("bun");
+	const [activeIndex, setActiveIndex] = React.useState(0);
+	const [copyState, setCopyState] = React.useState<CopyState>("idle");
+
+	const activeItem = items[activeIndex] ?? items[0];
+	const activeAlias = activeItem?.alias ?? "ios-wheel-picker";
+
+	const activeCommand = React.useMemo(() => {
+		return getAliasInstallCommand(packageManager, activeAlias);
+	}, [activeAlias, packageManager]);
+
+	React.useEffect(() => {
+		if (copyState === "idle") {
+			return;
+		}
+
+		const timeout = window.setTimeout(() => {
+			setCopyState("idle");
+		}, COPY_STATE_RESET_MS);
+
+		return () => {
+			window.clearTimeout(timeout);
+		};
+	}, [copyState]);
+
+	async function handleCopy() {
+		try {
+			await navigator.clipboard.writeText(activeCommand);
+			setCopyState("done");
+		} catch {
+			setCopyState("error");
+		}
+	}
 
 	return (
-		<motion.article
-			variants={cardVariants}
-			initial="hidden"
-			whileInView="visible"
-			viewport={{ once: true, margin: "-100px" }}
-			whileHover={{ scale: 1.01 }}
-			className="group relative h-full overflow-hidden rounded-[38px] border-[rgba(0,0,0,0.6)] border-[rgba(255,255,255,0.6)] border-t border-b bg-[linear-gradient(180deg,#dbe3ec_0%,#a8b3c4_100%)] p-8 shadow-[0_30px_60px_rgba(10,20,35,0.3),inset_0_1px_3px_rgba(255,255,255,1)]"
-		>
-			<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-[0.03]" />
+		<div className="rounded-[24px] border-[rgba(0,0,0,0.72)] border-[rgba(255,255,255,0.65)] border-t border-b bg-[linear-gradient(180deg,#dbe3ec_0%,#aab5c7_100%)] p-[5px] shadow-[0_30px_60px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.96)]">
+			<div className="relative overflow-hidden rounded-[18px] border-[rgba(0,0,0,0.82)] border-[rgba(255,255,255,0.16)] border-t border-b bg-[linear-gradient(180deg,#4c586e_0%,#1b2537_100%)] shadow-[0_18px_32px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.12)]">
+				<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
 
-			<div
-				className="relative z-10 flex h-full flex-col gap-10 lg:flex-row lg:items-center lg:justify-between"
-				style={{
-					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
-				}}
-			>
-				<div className="flex min-w-0 flex-1 flex-col items-center gap-8 text-center lg:items-start lg:text-left">
-					<div className="space-y-4">
-						<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
-							Time / Date Input
-						</p>
-						<h2 className="font-medium text-5xl text-[#1a2333] leading-[0.92] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl xl:text-[72px]">
-							iOS 6 Wheel Picker
-						</h2>
-						<p className="mx-auto max-w-[34rem] font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] lg:mx-0">
-							A flawless recreation of the classic iPhone rotary slot machine
-							picker. Complete with deep inset gradients and infinite snapping
-							loops.
-						</p>
+				<div className="relative flex flex-col gap-4 border-black/35 border-b px-4 py-4 shadow-[0_1px_0_rgba(255,255,255,0.08)] md:flex-row md:items-center md:justify-between">
+					<div className="flex items-center gap-3">
+						<div className="flex w-[20px] shrink-0 items-center text-[#dbeaff] [filter:drop-shadow(0px_-1px_0px_rgba(0,0,0,0.45))] [&_svg]:size-[18px]">
+							<PackageManagerIcon packageManager={packageManager} />
+						</div>
+						<IosSegmentedControl
+							items={HERO_SEGMENT_ITEMS}
+							onValueChange={setPackageManager}
+							value={packageManager}
+						/>
 					</div>
 
-					<Link
-						className="inline-flex items-center gap-3 rounded-full border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[linear-gradient(180deg,#4e5b75,#212b40)] px-8 py-4 font-bold text-[14px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all hover:brightness-110 active:scale-95 active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.4)]"
-						href={href}
+					<div className="flex items-center gap-2 self-end md:self-auto">
+						<IosBarButton
+							icon={<PlusIcon />}
+							label="Add"
+							layout="text-icon"
+							onClick={onAddRegistry}
+						/>
+						<IosBarButton
+							aria-label="Copy install command"
+							icon={
+								copyState === "done" ? (
+									<CheckIcon strokeWidth={3} />
+								) : copyState === "error" ? (
+									<CircleXIcon />
+								) : (
+									<CopyIcon />
+								)
+							}
+							layout="icon"
+							onClick={handleCopy}
+						/>
+					</div>
+				</div>
+
+				<div className="relative overflow-hidden bg-[linear-gradient(180deg,#131922_0%,#070a10_100%)] px-5 py-6 md:px-6 md:py-7">
+					<div
+						aria-hidden="true"
+						className="pointer-events-none absolute inset-0 opacity-[0.18]"
+						style={{
+							backgroundImage:
+								"repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 2px, transparent 2px, transparent 12px)",
+						}}
+					/>
+					<div className="pointer-events-none absolute inset-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),inset_0_18px_30px_rgba(255,255,255,0.03),inset_0_-28px_40px_rgba(0,0,0,0.52)]" />
+
+					<div className="relative z-[1] overflow-x-auto">
+						<code className="flex min-w-max flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[#e8edf8] text-[clamp(1.1rem,2vw,1.7rem)] leading-[1.45]">
+							<span className="select-none text-[#8895b2]">$</span>
+							<span className="whitespace-pre">
+								{getAliasInstallPrefix(packageManager)}
+							</span>
+							<TextFlip
+								as={motionCore.span}
+								className="whitespace-pre text-[#6b7388]"
+								interval={2.2}
+								onIndexChange={setActiveIndex}
+								transition={{ duration: 0.22, ease: "easeOut" }}
+								variants={flipVariants}
+							>
+								{items.map((item) => (
+									<span key={item.alias}>{item.alias}</span>
+								))}
+							</TextFlip>
+						</code>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+function GridRail() {
+	return <div className="hidden border-white/8 border-r md:block" />;
+}
+
+function HubHeader({
+	items,
+	onAddRegistry,
+}: {
+	items: HeroInstallItem[];
+	onAddRegistry: () => void;
+}) {
+	return (
+		<header className="border-white/8 border-y">
+			<div className="grid md:grid-cols-[68px_minmax(0,1fr)]">
+				<GridRail />
+				<div className="px-5 py-6 md:px-8 md:py-7">
+					<h1
+						className="font-bold text-[clamp(2.9rem,7vw,4.8rem)] text-white tracking-[-0.06em]"
+						style={IOS_SANS_STYLE}
 					>
-						View docs
-						<ArrowRight className="h-4 w-4" />
-					</Link>
-				</div>
-
-				<div className="flex w-full justify-center lg:w-auto lg:justify-end">
-					<motion.div
-						whileHover={{ scale: 1.05, rotateX: 5 }}
-						style={{ perspective: 1000 }}
-					>
-						<div className="relative rounded-[32px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.15)] border-t border-b bg-[linear-gradient(180deg,#3b465c,#192135)] p-5 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(0,0,0,0.5)]">
-							<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[32px] bg-gradient-to-b from-white/10 to-transparent" />
-							<IosWheelPickerDemo
-								className="mx-auto origin-top scale-[0.85]"
-								frameWidth={270}
-								showReadout={false}
-								width={156}
-							/>
-						</div>
-					</motion.div>
+						Components
+					</h1>
 				</div>
 			</div>
-		</motion.article>
+
+			<div className="grid border-white/8 border-t md:grid-cols-[68px_minmax(0,1fr)]">
+				<GridRail />
+				<div className="px-5 py-5 md:px-8 md:py-6">
+					<p className="max-w-4xl font-mono text-[#9aa3b8] text-[clamp(1rem,2.6vw,1.15rem)] leading-relaxed">
+						A collection of reusable iOS 6 skeuomorphic components. Trusted
+						registry for shadcn/ui.
+					</p>
+				</div>
+			</div>
+
+			<div className="grid border-white/8 border-t md:grid-cols-[68px_minmax(0,1fr)]">
+				<GridRail />
+				<div className="px-5 py-5 md:px-8 md:py-8">
+					<HeroInstallSurface items={items} onAddRegistry={onAddRegistry} />
+				</div>
+			</div>
+		</header>
 	);
 }
 
-function IosClockTeaser({ locale: _locale }: { locale: Locale }) {
-	const href = getIosClockHubPath();
-
+function PreviewStage({
+	children,
+	className,
+}: {
+	children: ReactNode;
+	className?: string;
+}) {
 	return (
-		<motion.article
-			variants={cardVariants}
-			initial="hidden"
-			whileInView="visible"
-			viewport={{ once: true, margin: "-100px" }}
-			whileHover={{ scale: 1.01 }}
-			className="group relative h-full overflow-hidden rounded-[38px] border-[rgba(0,0,0,0.65)] border-[rgba(255,255,255,0.55)] border-t border-b bg-[linear-gradient(180deg,#d8dee7_0%,#9ba7ba_100%)] p-8 shadow-[0_30px_60px_rgba(10,20,35,0.28),inset_0_1px_3px_rgba(255,255,255,0.9)]"
+		<div
+			className={cn(
+				"relative flex min-h-[220px] w-full items-center justify-center px-4 py-6 sm:px-8 sm:py-8",
+				className,
+			)}
 		>
-			<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-[0.03]" />
-
-			<div
-				className="relative z-10 flex h-full flex-col gap-10 lg:flex-row lg:items-center lg:justify-between"
-				style={{
-					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
-				}}
-			>
-				<div className="flex min-w-0 flex-1 flex-col items-center gap-8 text-center lg:items-start lg:text-left">
-					<div className="space-y-4">
-						<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
-							Utilities / Timekeeping
-						</p>
-						<h2 className="font-medium text-5xl text-[#1a2333] leading-[0.92] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl xl:text-[72px]">
-							{IOS_CLOCK_DOCS_COPY.title}
-						</h2>
-						<p className="mx-auto max-w-[34rem] font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] lg:mx-0">
-							A live analog clock icon with the original iOS 6 day and night
-							skins, including the red seconds hand and polished glass cap.
-						</p>
-					</div>
-
-					<div className="flex flex-wrap justify-center gap-3 lg:justify-start">
-						<Link
-							className="inline-flex items-center gap-3 rounded-full border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[linear-gradient(180deg,#4e5b75,#212b40)] px-8 py-4 font-bold text-[14px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all hover:brightness-110 active:scale-[0.95] active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.4)]"
-							href={href}
-						>
-							View docs
-							<ArrowRight className="h-4 w-4" />
-						</Link>
-						<a
-							className="inline-flex items-center gap-2 rounded-full border border-[#4f6179]/35 bg-[#eef3fb]/70 px-5 py-3 font-semibold text-[#1a2333] text-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] transition hover:bg-white/80"
-							href={IOS_CLOCK_URLS.direct}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Item JSON
-							<ExternalLink className="h-4 w-4" />
-						</a>
-					</div>
-				</div>
-
-				<div className="flex w-full justify-center lg:w-auto lg:justify-end">
-					<div className="relative w-full max-w-[360px] rounded-[30px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.16)] border-t border-b bg-[linear-gradient(180deg,#3a465d_0%,#182034_100%)] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(0,0,0,0.5)]">
-						<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[30px] bg-gradient-to-b from-white/10 to-transparent" />
-						<div className="relative flex items-center justify-center gap-6">
-							<IosClock
-								aria-label="Legacy iOS day clock preview"
-								size={86}
-								variant="day"
-							/>
-							<IosClock
-								aria-label="Legacy iOS night clock preview"
-								size={86}
-								variant="night"
-							/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</motion.article>
+			<div className="pointer-events-none absolute bottom-6 left-1/2 h-16 w-[70%] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0)_72%)] blur-3xl" />
+			<div className="relative w-full">{children}</div>
+		</div>
 	);
 }
 
-function IosSwitchTeaser({ locale: _locale }: { locale: Locale }) {
-	const href = getIosSwitchHubPath();
-
+function WheelPickerPreview() {
 	return (
-		<motion.article
-			variants={cardVariants}
-			initial="hidden"
-			whileInView="visible"
-			viewport={{ once: true, margin: "-100px" }}
-			whileHover={{ scale: 1.01 }}
-			className="group relative h-full overflow-hidden rounded-[38px] border-[rgba(0,0,0,0.65)] border-[rgba(255,255,255,0.55)] border-t border-b bg-[linear-gradient(180deg,#d8dee7_0%,#9ba7ba_100%)] p-8 shadow-[0_30px_60px_rgba(10,20,35,0.28),inset_0_1px_3px_rgba(255,255,255,0.9)]"
-		>
-			<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-[0.03]" />
-
-			<div
-				className="relative z-10 flex h-full flex-col gap-10 lg:flex-row lg:items-center lg:justify-between"
-				style={{
-					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
-				}}
-			>
-				<div className="flex min-w-0 flex-1 flex-col items-center gap-8 text-center lg:items-start lg:text-left">
-					<div className="space-y-4">
-						<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
-							Controls / Toggles
-						</p>
-						<h2 className="font-medium text-5xl text-[#1a2333] leading-[0.92] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl xl:text-[72px]">
-							{IOS_SWITCH_DOCS_COPY.title}
-						</h2>
-						<p className="mx-auto max-w-[34rem] font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] lg:mx-0">
-							Classic glossy track, bevelled thumb, and the exact ON / OFF label
-							layout from the legacy iPhone UI kit.
-						</p>
-					</div>
-
-					<div className="flex flex-wrap justify-center gap-3 lg:justify-start">
-						<Link
-							className="inline-flex items-center gap-3 rounded-full border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[linear-gradient(180deg,#4e5b75,#212b40)] px-8 py-4 font-bold text-[14px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all hover:brightness-110 active:scale-95 active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.4)]"
-							href={href}
-						>
-							View docs
-							<ArrowRight className="h-4 w-4" />
-						</Link>
-						<a
-							className="inline-flex items-center gap-2 rounded-full border border-[#4f6179]/35 bg-[#eef3fb]/70 px-5 py-3 font-semibold text-[#1a2333] text-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] transition hover:bg-white/80"
-							href={IOS_SWITCH_URLS.direct}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Item JSON
-							<ExternalLink className="h-4 w-4" />
-						</a>
-					</div>
-				</div>
-
-				<div className="flex w-full justify-center lg:w-auto lg:justify-end">
-					<div className="relative rounded-[30px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.16)] border-t border-b bg-[linear-gradient(180deg,#3a465d_0%,#182034_100%)] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(0,0,0,0.5)]">
-						<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[30px] bg-gradient-to-b from-white/10 to-transparent" />
-						<div className="relative flex flex-col items-center gap-5">
-							<IosSwitch
-								aria-label="Legacy iOS switch off preview"
-								className="pointer-events-none"
-							/>
-							<IosSwitch
-								aria-label="Legacy iOS switch on preview"
-								checked={true}
-								className="pointer-events-none"
-							/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</motion.article>
+		<PreviewStage className="min-h-[330px]">
+			<IosWheelPickerDemo
+				className="mx-auto origin-top scale-[0.86] sm:scale-[0.94]"
+				frameWidth={300}
+				showReadout={false}
+				width={170}
+			/>
+		</PreviewStage>
 	);
 }
 
-function IosCodeBlockCommandTeaser({ locale: _locale }: { locale: Locale }) {
-	const href = getIosCodeBlockCommandHubPath();
-
+function ClockPreview() {
 	return (
-		<motion.article
-			variants={cardVariants}
-			initial="hidden"
-			whileInView="visible"
-			viewport={{ once: true, margin: "-100px" }}
-			whileHover={{ scale: 1.01 }}
-			className="group relative h-full overflow-hidden rounded-[38px] border-[rgba(0,0,0,0.7)] border-[rgba(255,255,255,0.55)] border-t border-b bg-[linear-gradient(180deg,#d4dbe4_0%,#8f9aab_100%)] p-8 shadow-[0_30px_60px_rgba(10,20,35,0.28),inset_0_1px_3px_rgba(255,255,255,0.9)]"
-		>
-			<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-[0.03]" />
-
-			<div
-				className="relative z-10 flex h-full flex-col gap-10 lg:flex-row lg:items-center lg:justify-between"
-				style={{
-					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
-				}}
-			>
-				<div className="flex min-w-0 flex-1 flex-col items-center gap-8 text-center lg:items-start lg:text-left">
-					<div className="space-y-4">
-						<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
-							Developer / Install UI
-						</p>
-						<h2 className="font-medium text-5xl text-[#1a2333] leading-[0.92] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl xl:text-[72px]">
-							{IOS_CODE_BLOCK_COMMAND_DOCS_COPY.title}
-						</h2>
-						<p className="mx-auto max-w-[34rem] font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] lg:mx-0">
-							An iOS 6 re-skin of the package-manager command switcher, with a
-							glossy segmented control, metallic copy button, and terminal
-							glass.
-						</p>
-					</div>
-
-					<div className="flex flex-wrap justify-center gap-3 lg:justify-start">
-						<Link
-							className="inline-flex items-center gap-3 rounded-full border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[linear-gradient(180deg,#4e5b75,#212b40)] px-8 py-4 font-bold text-[14px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all hover:brightness-110 active:scale-95 active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.4)]"
-							href={href}
-						>
-							View docs
-							<ArrowRight className="h-4 w-4" />
-						</Link>
-						<a
-							className="inline-flex items-center gap-2 rounded-full border border-[#4f6179]/35 bg-[#eef3fb]/70 px-5 py-3 font-semibold text-[#1a2333] text-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] transition hover:bg-white/80"
-							href={IOS_CODE_BLOCK_COMMAND_URLS.direct}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Item JSON
-							<ExternalLink className="h-4 w-4" />
-						</a>
-					</div>
+		<PreviewStage>
+			<div className="flex flex-wrap items-center justify-center gap-8 sm:gap-10">
+				<div className="flex flex-col items-center gap-3">
+					<IosClock
+						aria-label="Legacy iOS day clock preview"
+						size={88}
+						variant="day"
+					/>
+					<p className="font-mono text-[#8d97af] text-[11px] uppercase tracking-[0.24em]">
+						Day
+					</p>
 				</div>
-
-				<div className="flex w-full justify-center lg:w-auto lg:justify-end">
-					<div className="relative w-full max-w-[420px] rounded-[30px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.16)] border-t border-b bg-[linear-gradient(180deg,#3a465d_0%,#182034_100%)] p-6 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(0,0,0,0.5)]">
-						<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[30px] bg-gradient-to-b from-white/10 to-transparent" />
-						<IosCodeBlockCommandDemo className="mx-auto scale-[0.94]" />
-					</div>
+				<div className="flex flex-col items-center gap-3">
+					<IosClock
+						aria-label="Legacy iOS night clock preview"
+						size={88}
+						variant="night"
+					/>
+					<p className="font-mono text-[#8d97af] text-[11px] uppercase tracking-[0.24em]">
+						Night
+					</p>
 				</div>
 			</div>
-		</motion.article>
+		</PreviewStage>
 	);
 }
 
-function IosSliderTeaser({ locale: _locale }: { locale: Locale }) {
-	const href = getIosSliderHubPath();
+function AlertDialogPreview() {
+	return (
+		<PreviewStage className="min-h-[240px]">
+			<IosAlertDialogDemo
+				className="mx-auto w-full max-w-[420px]"
+				compact={true}
+			/>
+		</PreviewStage>
+	);
+}
+
+function BarButtonPreview() {
+	return (
+		<PreviewStage className="min-h-[250px]">
+			<IosBarButtonDemo className="mx-auto max-w-[520px]" />
+		</PreviewStage>
+	);
+}
+
+function SwitchPreview() {
+	return (
+		<PreviewStage className="min-h-[210px]">
+			<IosSwitchDemo className="mx-auto max-w-[320px]" compact={true} />
+		</PreviewStage>
+	);
+}
+
+function SliderPreview() {
+	return (
+		<PreviewStage className="min-h-[300px]">
+			<IosSliderDemo className="mx-auto max-w-[430px]" compact={true} />
+		</PreviewStage>
+	);
+}
+
+function CodeBlockPreview() {
+	return (
+		<PreviewStage className="min-h-[290px]">
+			<div className="mx-auto w-full max-w-[460px]">
+				<IosCodeBlockCommandDemo className="mx-auto" />
+			</div>
+		</PreviewStage>
+	);
+}
+
+function ComponentSection({
+	description,
+	href,
+	itemUrl,
+	preview,
+	title,
+}: ShowcaseItem) {
+	const router = useRouter();
 
 	return (
-		<motion.article
-			variants={cardVariants}
+		<motion.section
 			initial="hidden"
-			whileInView="visible"
+			variants={revealVariants}
 			viewport={{ once: true, margin: "-100px" }}
-			whileHover={{ scale: 1.01 }}
-			className="group relative h-full overflow-hidden rounded-[38px] border-[rgba(0,0,0,0.65)] border-[rgba(255,255,255,0.55)] border-t border-b bg-[linear-gradient(180deg,#d8dee7_0%,#9ba7ba_100%)] p-8 shadow-[0_30px_60px_rgba(10,20,35,0.28),inset_0_1px_3px_rgba(255,255,255,0.9)]"
+			whileInView="visible"
+			className="grid gap-8 border-white/8 border-b px-5 py-10 md:px-8 md:py-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(320px,1.08fr)] lg:items-center lg:gap-16"
 		>
-			<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-[0.03]" />
+			<div className="space-y-5">
+				<h2
+					className="font-bold text-4xl text-white tracking-[-0.05em] md:text-5xl"
+					style={IOS_SANS_STYLE}
+				>
+					{title}
+				</h2>
+				<p className="max-w-xl font-mono text-[#8f98ae] text-[15px] leading-relaxed">
+					{description}
+				</p>
 
-			<div
-				className="relative z-10 flex h-full flex-col gap-10 lg:flex-row lg:items-center lg:justify-between"
-				style={{
-					fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
-				}}
-			>
-				<div className="flex min-w-0 flex-1 flex-col items-center gap-8 text-center lg:items-start lg:text-left">
-					<div className="space-y-4">
-						<p className="font-bold text-[#5c6981] text-[10px] uppercase tracking-[0.35em] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]">
-							Audio / Value Control
-						</p>
-						<h2 className="font-medium text-5xl text-[#1a2333] leading-[0.92] tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl xl:text-[72px]">
-							{IOS_SLIDER_DOCS_COPY.title}
-						</h2>
-						<p className="mx-auto max-w-[34rem] font-medium text-[#4a5875] text-[15px] leading-relaxed drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] lg:mx-0">
-							The classic silver track, blue fill, metallic thumb, and white
-							settings-row chrome from the iOS 6 volume control.
-						</p>
-					</div>
-
-					<div className="flex flex-wrap justify-center gap-3 lg:justify-start">
-						<Link
-							className="inline-flex items-center gap-3 rounded-full border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.1)] border-t border-b bg-[linear-gradient(180deg,#4e5b75,#212b40)] px-8 py-4 font-bold text-[14px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all hover:brightness-110 active:scale-95 active:shadow-[inset_0_2px_5px_rgba(0,0,0,0.4)]"
-							href={href}
-						>
-							View docs
-							<ArrowRight className="h-4 w-4" />
-						</Link>
-						<a
-							className="inline-flex items-center gap-2 rounded-full border border-[#4f6179]/35 bg-[#eef3fb]/70 px-5 py-3 font-semibold text-[#1a2333] text-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] transition hover:bg-white/80"
-							href={IOS_SLIDER_URLS.direct}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Item JSON
-							<ExternalLink className="h-4 w-4" />
-						</a>
-					</div>
-				</div>
-
-				<div className="flex w-full justify-center lg:w-auto lg:justify-end">
-					<div className="relative w-full max-w-[388px] rounded-[30px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.16)] border-t border-b bg-[linear-gradient(180deg,#3a465d_0%,#182034_100%)] p-6 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(0,0,0,0.5)]">
-						<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[30px] bg-gradient-to-b from-white/10 to-transparent" />
-						<div className="relative rounded-[18px] border border-[#7a8392] bg-[linear-gradient(180deg,#d6dbe3_0%,#c6ccd7_100%)] p-[6px] shadow-[0_10px_22px_rgba(0,0,0,0.24),inset_0_1px_0_rgba(255,255,255,0.55)]">
-							<div className="overflow-hidden rounded-[12px] border border-[#aeb4c0] bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.95)]">
-								<IosSliderRow
-									ariaLabel="Legacy iOS slider preview at 16 percent"
-									value={16}
-								/>
-								<IosSliderRow
-									ariaLabel="Legacy iOS slider preview at 72 percent"
-									value={72}
-									withDivider={false}
-								/>
-							</div>
-						</div>
-					</div>
+				<div className="flex flex-wrap items-center gap-3">
+					<IosBarButton
+						label="View docs"
+						trailingIcon={<ExternalLink />}
+						onClick={() => {
+							router.push(href);
+						}}
+					></IosBarButton>
+					<IosBarButton
+						label="Item JSON"
+						trailingIcon={<ExternalLink />}
+						onClick={() => {
+							window.open(itemUrl, "_blank", "noopener,noreferrer");
+						}}
+					></IosBarButton>
 				</div>
 			</div>
-		</motion.article>
+
+			<div>{preview}</div>
+		</motion.section>
 	);
 }
 
 function ComponentsChooserHub({ locale }: { locale: Locale }) {
+	const [isRegistryDialogOpen, setIsRegistryDialogOpen] = React.useState(false);
+	const showcases: ShowcaseItem[] = [
+		{
+			alias: "ios-wheel-picker",
+			description:
+				"A faithful time picker recreation with deep inset gradients, crisp dividers, and the original mechanical snap.",
+			href: getIosWheelPickerHubPath(locale),
+			itemUrl: IOS_WHEEL_PICKER_URLS.direct,
+			preview: <WheelPickerPreview />,
+			title: "iOS 6 Wheel Picker",
+		},
+		{
+			alias: "ios-alert-dialog",
+			description: IOS_ALERT_DIALOG_DOCS_COPY.summary,
+			href: getIosAlertDialogHubPath(),
+			itemUrl: IOS_ALERT_DIALOG_URLS.direct,
+			preview: <AlertDialogPreview />,
+			title: IOS_ALERT_DIALOG_DOCS_COPY.title,
+		},
+		{
+			alias: "ios-bar-button",
+			description: IOS_BAR_BUTTON_DOCS_COPY.summary,
+			href: getIosBarButtonHubPath(),
+			itemUrl: IOS_BAR_BUTTON_URLS.direct,
+			preview: <BarButtonPreview />,
+			title: IOS_BAR_BUTTON_DOCS_COPY.title,
+		},
+		{
+			alias: "ios-clock",
+			description: IOS_CLOCK_DOCS_COPY.summary,
+			href: getIosClockHubPath(),
+			itemUrl: IOS_CLOCK_URLS.direct,
+			preview: <ClockPreview />,
+			title: IOS_CLOCK_DOCS_COPY.title,
+		},
+		{
+			alias: "ios-switch",
+			description: IOS_SWITCH_DOCS_COPY.summary,
+			href: getIosSwitchHubPath(),
+			itemUrl: IOS_SWITCH_URLS.direct,
+			preview: <SwitchPreview />,
+			title: IOS_SWITCH_DOCS_COPY.title,
+		},
+		{
+			alias: "ios-slider",
+			description: IOS_SLIDER_DOCS_COPY.summary,
+			href: getIosSliderHubPath(),
+			itemUrl: IOS_SLIDER_URLS.direct,
+			preview: <SliderPreview />,
+			title: IOS_SLIDER_DOCS_COPY.title,
+		},
+		{
+			alias: "ios-code-block-command",
+			description: IOS_CODE_BLOCK_COMMAND_DOCS_COPY.summary,
+			href: getIosCodeBlockCommandHubPath(),
+			itemUrl: IOS_CODE_BLOCK_COMMAND_URLS.direct,
+			preview: <CodeBlockPreview />,
+			title: IOS_CODE_BLOCK_COMMAND_DOCS_COPY.title,
+		},
+	];
+
 	return (
-		<main className="relative min-h-screen bg-[#111419] text-white selection:bg-white/20">
-			{/* Dramatic dark background elements */}
+		<main className="relative min-h-screen overflow-hidden bg-[#03050a] text-white selection:bg-white/14">
 			<div
-				className="pointer-events-none absolute inset-0 bg-[#161a22] opacity-80"
+				className="pointer-events-none absolute inset-0 opacity-90"
 				style={{
 					backgroundImage:
-						"repeating-linear-gradient(45deg, #11141a 25%, transparent 25%, transparent 75%, #11141a 75%, #11141a), repeating-linear-gradient(45deg, #11141a 25%, #161a22 25%, #161a22 75%, #11141a 75%, #11141a)",
-					backgroundPosition: "0 0, 10px 10px",
-					backgroundSize: "20px 20px",
+						"linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)",
+					backgroundSize: "64px 64px",
 				}}
 			/>
+			<div
+				className="pointer-events-none absolute inset-0 opacity-[0.08]"
+				style={{
+					backgroundImage:
+						"repeating-linear-gradient(135deg, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 2px, transparent 2px, transparent 14px)",
+					maskImage:
+						"linear-gradient(to bottom, transparent 0%, black 18%, black 78%, transparent 100%)",
+				}}
+			/>
+			<div className="pointer-events-none absolute top-0 left-0 h-full w-16 bg-gradient-to-r from-[#07101c] to-transparent opacity-60" />
 
-			<div className="relative mx-auto flex w-full max-w-[1400px] flex-col gap-10 px-6 py-12 md:px-12 md:py-20 lg:gap-14">
-				<HubHeader />
+			<div className="relative mx-auto flex w-full max-w-[1600px] flex-col px-0 py-8 md:py-10">
+				<HubHeader
+					items={showcases}
+					onAddRegistry={() => {
+						setIsRegistryDialogOpen(true);
+					}}
+				/>
 
-				<div className="grid gap-8 xl:gap-10">
-					<div>
-						<AppleTeaser locale={locale} />
-					</div>
-					<div>
-						<IosClockTeaser locale={locale} />
-					</div>
-					<div>
-						<IosSwitchTeaser locale={locale} />
-					</div>
-					<div>
-						<IosSliderTeaser locale={locale} />
-					</div>
-					<div>
-						<IosCodeBlockCommandTeaser locale={locale} />
-					</div>
+				<div className="border-white/8 border-x md:mx-[68px]">
+					{showcases.map((showcase) => (
+						<ComponentSection {...showcase} key={showcase.alias} />
+					))}
 				</div>
 			</div>
+
+			<IosRegistryAddDialog
+				onOpenChange={setIsRegistryDialogOpen}
+				open={isRegistryDialogOpen}
+			/>
 		</main>
 	);
 }

@@ -1,14 +1,16 @@
-import { ExternalLink } from "lucide-react";
+import { ChevronDownIcon, ListIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { IOS_COMPONENT_PAGE_SHELL_CLASSNAME } from "~/components/ios/component-page-layout";
 import { getComponentDocConfig } from "~/components/ios/docs/component-doc-config";
+import { slugifyComponentDocHeading } from "~/components/ios/docs/component-doc-headings";
 import { ComponentDocMdx } from "~/components/ios/docs/component-doc-mdx";
 import {
 	getComponentDocMarkdownUrl,
 	getComponentDocPath,
 } from "~/components/ios/docs/component-doc-paths";
+import { ComponentDocShowcase } from "~/components/ios/docs/component-doc-showcase";
 import {
 	getAllComponentDocs,
 	getComponentDocBySlug,
@@ -73,6 +75,7 @@ export default async function ComponentDocPage({
 
 	const config = getComponentDocConfig(doc.slug);
 	const neighbours = getComponentDocNeighbours(doc.slug);
+	const sections = extractComponentDocSections(doc.content);
 
 	return (
 		<main className="relative min-h-screen bg-[#111419] pb-32 text-white selection:bg-white/20">
@@ -81,7 +84,7 @@ export default async function ComponentDocPage({
 				style={PAGE_BACKGROUND_STYLE}
 			/>
 
-			<div className={IOS_COMPONENT_PAGE_SHELL_CLASSNAME}>
+			<div className={`${IOS_COMPONENT_PAGE_SHELL_CLASSNAME} gap-10`}>
 				<IosComponentPageToolbar
 					markdownUrl={getComponentDocMarkdownUrl(doc.slug, locale)}
 					nextHref={
@@ -97,48 +100,66 @@ export default async function ComponentDocPage({
 					title={doc.frontmatter.title}
 				/>
 
-				<header className="space-y-6">
-					<div className="inline-flex rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.05)] px-4 py-1.5 font-semibold text-[#8ca8e8] text-[11px] uppercase tracking-[0.34em] shadow-[inset_0_1px_rgba(255,255,255,0.1)]">
-						{doc.frontmatter.kicker}
+				<section className="border-white/8 border-y">
+					<div className="px-2 py-6 md:px-0">
+						<h1 className="font-semibold text-[clamp(3rem,6vw,4.3rem)] text-white tracking-[-0.05em]">
+							{doc.frontmatter.title}
+						</h1>
 					</div>
-					<h1 className="font-medium text-5xl text-white tracking-tight drop-shadow-[0_1px_0_rgba(255,255,255,0.8)] md:text-6xl">
-						{doc.frontmatter.title}
-					</h1>
-					<p className="max-w-2xl text-[#8b9bb4] text-lg leading-relaxed">
-						{doc.frontmatter.description}
-					</p>
 
-					<div className="flex flex-wrap gap-4 pt-4">
-						<a
-							className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 font-medium text-sm text-white shadow-[inset_0_1px_rgba(255,255,255,0.2)] backdrop-blur-md transition hover:bg-white/20"
-							href={config.registryDirectUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Registry item
-							<ExternalLink className="h-4 w-4" />
-						</a>
-						<a
-							className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-medium text-black text-sm shadow-[0_0_20px_rgba(255,255,255,0.3)] transition hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
-							href={config.registryIndexUrl}
-							rel="noreferrer"
-							target="_blank"
-						>
-							Registry index
-							<ExternalLink className="h-4 w-4" />
-						</a>
+					<div className="border-white/8 border-t px-2 py-8 md:px-0">
+						<p className="max-w-4xl text-[#9aa3b8] text-[clamp(1.15rem,2.2vw,1.45rem)] leading-relaxed">
+							{doc.frontmatter.description}
+						</p>
 					</div>
-				</header>
-
-				<section className="relative overflow-hidden rounded-[38px] border-[rgba(0,0,0,0.6)] border-[rgba(255,255,255,0.6)] border-t border-b bg-[linear-gradient(180deg,#dbe3ec_0%,#a8b3c4_100%)] p-8 shadow-[0_30px_60px_rgba(10,20,35,0.3),inset_0_1px_3px_rgba(255,255,255,1)] md:p-16">
-					<div className="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-[0.03]" />
-					{config.renderHeroPreview()}
 				</section>
 
-				<article className="pt-10 [&>*+*]:mt-8">
+				{sections.length ? (
+					<details className="group overflow-hidden rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(30,32,39,0.94)_0%,rgba(18,20,25,0.98)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+						<summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-white">
+							<span className="flex items-center gap-3">
+								<ListIcon className="size-5 text-[#c8ccd8]" />
+								<span className="font-semibold text-[1.65rem] tracking-[-0.03em]">
+									On this page
+								</span>
+							</span>
+							<ChevronDownIcon className="size-5 text-[#9aa3b8] transition group-open:rotate-180" />
+						</summary>
+
+						<div className="border-white/8 border-t px-6 py-5">
+							<nav className="grid gap-3 sm:grid-cols-2">
+								{sections.map((section) => (
+									<a
+										className="text-[#aeb7ca] text-lg transition hover:text-white"
+										href={`#${section.id}`}
+										key={section.id}
+									>
+										{section.title}
+									</a>
+								))}
+							</nav>
+						</div>
+					</details>
+				) : null}
+
+				<ComponentDocShowcase name={config.featuredPreview} />
+
+				<article className="[&>*+*]:mt-8">
 					<ComponentDocMdx code={doc.content} slug={doc.slug} />
 				</article>
 			</div>
 		</main>
 	);
+}
+
+function extractComponentDocSections(content: string) {
+	return content
+		.split("\n")
+		.filter((line) => line.startsWith("## "))
+		.map((line) => line.replace(/^##\s+/, "").trim())
+		.filter(Boolean)
+		.map((title) => ({
+			id: slugifyComponentDocHeading(title),
+			title,
+		}));
 }

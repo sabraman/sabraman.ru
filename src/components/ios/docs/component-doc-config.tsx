@@ -7,11 +7,21 @@ import type { ComponentDocSlug } from "~/components/ios/docs/component-doc-paths
 import { IosBasicPickerDemo } from "~/components/ios/examples/IosBasicPickerDemo";
 import { IosHookFormDemo } from "~/components/ios/examples/IosHookFormDemo";
 import { IosTimePickerExample } from "~/components/ios/examples/IosTimePickerExample";
+import { IosAlertDialogDemo } from "~/components/ios/IosAlertDialogDemo";
+import { IosBarButtonDemo } from "~/components/ios/IosBarButtonDemo";
 import { IosClockDemo } from "~/components/ios/IosClockDemo";
 import { IosCodeBlockCommandDemo } from "~/components/ios/IosCodeBlockCommandDemo";
 import { IosSliderDemo } from "~/components/ios/IosSliderDemo";
 import { IosSwitchDemo } from "~/components/ios/IosSwitchDemo";
 import { IosWheelPickerDemo } from "~/components/ios/IosWheelPickerDemo";
+import {
+	IOS_ALERT_DIALOG_INSTALL_COMMANDS,
+	IOS_ALERT_DIALOG_URLS,
+} from "~/components/ios/ios-alert-dialog-content";
+import {
+	IOS_BAR_BUTTON_INSTALL_COMMANDS,
+	IOS_BAR_BUTTON_URLS,
+} from "~/components/ios/ios-bar-button-content";
 import {
 	IOS_CLOCK_INSTALL_COMMANDS,
 	IOS_CLOCK_URLS,
@@ -34,6 +44,7 @@ import { IosSwitch } from "~/components/ios-switch";
 type InstallCommandSet = Partial<Record<PackageManager, string>>;
 
 export interface ComponentDocConfig {
+	featuredPreview: ComponentDocPreviewName;
 	installCommands: InstallCommandSet;
 	registryDirectUrl: string;
 	registryIndexUrl: string;
@@ -41,7 +52,30 @@ export interface ComponentDocConfig {
 }
 
 export const COMPONENT_DOC_CONFIG = {
+	"ios-alert-dialog": {
+		featuredPreview: "ios-alert-dialog-demo",
+		installCommands: IOS_ALERT_DIALOG_INSTALL_COMMANDS,
+		registryDirectUrl: IOS_ALERT_DIALOG_URLS.direct,
+		registryIndexUrl: IOS_ALERT_DIALOG_URLS.registry,
+		renderHeroPreview: () => (
+			<div className="relative flex justify-center">
+				<IosAlertDialogDemo />
+			</div>
+		),
+	},
+	"ios-bar-button": {
+		featuredPreview: "ios-bar-button-demo",
+		installCommands: IOS_BAR_BUTTON_INSTALL_COMMANDS,
+		registryDirectUrl: IOS_BAR_BUTTON_URLS.direct,
+		registryIndexUrl: IOS_BAR_BUTTON_URLS.registry,
+		renderHeroPreview: () => (
+			<div className="relative flex justify-center">
+				<IosBarButtonDemo />
+			</div>
+		),
+	},
 	"ios-code-block-command": {
+		featuredPreview: "ios-code-block-command-demo",
 		installCommands: IOS_CODE_BLOCK_COMMAND_INSTALL_COMMANDS,
 		registryDirectUrl: IOS_CODE_BLOCK_COMMAND_URLS.direct,
 		registryIndexUrl: IOS_CODE_BLOCK_COMMAND_URLS.registry,
@@ -52,6 +86,7 @@ export const COMPONENT_DOC_CONFIG = {
 		),
 	},
 	"ios-clock": {
+		featuredPreview: "ios-clock-demo",
 		installCommands: IOS_CLOCK_INSTALL_COMMANDS,
 		registryDirectUrl: IOS_CLOCK_URLS.direct,
 		registryIndexUrl: IOS_CLOCK_URLS.registry,
@@ -62,6 +97,7 @@ export const COMPONENT_DOC_CONFIG = {
 		),
 	},
 	"ios-slider": {
+		featuredPreview: "ios-slider-demo",
 		installCommands: IOS_SLIDER_INSTALL_COMMANDS,
 		registryDirectUrl: IOS_SLIDER_URLS.direct,
 		registryIndexUrl: IOS_SLIDER_URLS.registry,
@@ -72,6 +108,7 @@ export const COMPONENT_DOC_CONFIG = {
 		),
 	},
 	"ios-switch": {
+		featuredPreview: "ios-switch-demo",
 		installCommands: IOS_SWITCH_INSTALL_COMMANDS,
 		registryDirectUrl: IOS_SWITCH_URLS.direct,
 		registryIndexUrl: IOS_SWITCH_URLS.registry,
@@ -82,6 +119,7 @@ export const COMPONENT_DOC_CONFIG = {
 		),
 	},
 	"ios-wheel-picker": {
+		featuredPreview: "ios-wheel-picker-multiple",
 		installCommands: IOS_WHEEL_PICKER_INSTALL_COMMANDS,
 		registryDirectUrl: IOS_WHEEL_PICKER_URLS.direct,
 		registryIndexUrl: IOS_WHEEL_PICKER_URLS.registry,
@@ -102,6 +140,8 @@ export const COMPONENT_DOC_CONFIG = {
 } satisfies Record<ComponentDocSlug, ComponentDocConfig>;
 
 export type ComponentDocPreviewName =
+	| "ios-alert-dialog-demo"
+	| "ios-bar-button-demo"
 	| "ios-code-block-command-demo"
 	| "ios-clock-demo"
 	| "ios-slider-demo"
@@ -117,6 +157,16 @@ interface ComponentDocPreviewConfig {
 }
 
 const COMPONENT_DOC_PREVIEWS = {
+	"ios-alert-dialog-demo": {
+		render: () => <IosAlertDialogDemo />,
+		sourcePath: "src/components/ios/IosAlertDialogDemo.tsx",
+		title: "components/ios-alert-dialog-demo.tsx",
+	},
+	"ios-bar-button-demo": {
+		render: () => <IosBarButtonDemo />,
+		sourcePath: "src/components/ios/IosBarButtonDemo.tsx",
+		title: "components/ios-bar-button-demo.tsx",
+	},
 	"ios-code-block-command-demo": {
 		render: () => <IosCodeBlockCommandDemo />,
 		sourcePath: "src/components/ios/IosCodeBlockCommandDemo.tsx",
