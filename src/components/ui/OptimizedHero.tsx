@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
 // Optimized particle system for background
@@ -94,10 +94,16 @@ export function OptimizedHero({
 }: OptimizedHeroProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
+	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
+
+	const setContainerRef = useCallback((node: HTMLDivElement | null) => {
+		containerRef.current = node;
+		setHasHydratedTarget(Boolean(node));
+	}, []);
 
 	// Optimized scroll animations
 	const { scrollYProgress } = useScroll({
-		target: containerRef,
+		target: isMounted && hasHydratedTarget ? containerRef : undefined,
 		offset: ["start start", "end end"],
 	});
 
@@ -115,7 +121,7 @@ export function OptimizedHero({
 
 	return (
 		<section
-			ref={containerRef}
+			ref={setContainerRef}
 			className={`relative flex min-h-screen flex-col items-center justify-center overflow-hidden ${className}`}
 		>
 			{/* Optimized Three.js background */}

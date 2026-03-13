@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
 // Optimized fluid particle system with instanced rendering
@@ -227,10 +227,16 @@ interface AwwwardsHeroProps {
 export function AwwwardsHero({ children, className = "" }: AwwwardsHeroProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
+	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
+
+	const setContainerRef = useCallback((node: HTMLDivElement | null) => {
+		containerRef.current = node;
+		setHasHydratedTarget(Boolean(node));
+	}, []);
 
 	// Advanced scroll animations with spring physics
 	const { scrollYProgress } = useScroll({
-		target: containerRef,
+		target: isMounted && hasHydratedTarget ? containerRef : undefined,
 		offset: ["start start", "end start"],
 	});
 
@@ -259,7 +265,7 @@ export function AwwwardsHero({ children, className = "" }: AwwwardsHeroProps) {
 
 	return (
 		<section
-			ref={containerRef}
+			ref={setContainerRef}
 			className={`relative flex min-h-screen flex-col items-center justify-center overflow-hidden ${className}`}
 			style={{ perspective: "1000px" }}
 		>

@@ -18,7 +18,7 @@ import {
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Contact from "~/components/Contact";
 import { SEOKeywords } from "~/components/SEOKeywords";
 import { AwwwardsHero } from "~/components/ui/AwwwardsHero";
@@ -269,10 +269,16 @@ export default function HomePage() {
 	const t = useTranslations();
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
+	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
+
+	const setContainerRef = useCallback((node: HTMLDivElement | null) => {
+		containerRef.current = node;
+		setHasHydratedTarget(Boolean(node));
+	}, []);
 
 	// Setup scroll animations
 	const { scrollYProgress } = useScroll({
-		target: containerRef,
+		target: isMounted && hasHydratedTarget ? containerRef : undefined,
 		offset: ["start start", "end end"],
 	});
 
@@ -393,7 +399,7 @@ export default function HomePage() {
 	}));
 
 	return (
-		<div ref={containerRef} className="relative">
+		<div ref={setContainerRef} className="relative">
 			<SEOKeywords />
 			<Toaster />
 			{/* Award-winning Hero Section */}
@@ -776,7 +782,7 @@ export default function HomePage() {
 							<Link href="/work/vaparshop" className="block h-full">
 								<div className="group relative h-full overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5">
 									{/* Image overlay with grain texture */}
-									<div className="absolute inset-0 bg-[url('/vaparshop-bg.jpg')] bg-center bg-cover opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20" />
+									<div className="absolute inset-0 bg-[url('/Vaparshop-logo.png')] bg-center bg-contain bg-no-repeat opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20" />
 									<div className="absolute inset-0 bg-[url('/noise.png')] opacity-5" />
 
 									{/* Content */}
@@ -837,7 +843,7 @@ export default function HomePage() {
 							<Link href="/work/horny-place" className="block h-full">
 								<div className="group relative h-full overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5">
 									{/* Image overlay with grain texture */}
-									<div className="absolute inset-0 bg-[url('/horny-place-bg.jpg')] bg-center bg-cover opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20" />
+									<div className="absolute inset-0 bg-[url('/Hornyplace-logo.png')] bg-center bg-contain bg-no-repeat opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20" />
 									<div className="absolute inset-0 bg-[url('/noise.png')] opacity-5" />
 
 									{/* Content */}

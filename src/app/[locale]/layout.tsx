@@ -183,7 +183,7 @@ export async function generateMetadata({
 				url: "/apple-touch-icon-180x180.png",
 			},
 		],
-		manifest: "/manifest.webmanifest",
+		manifest: "/site.webmanifest",
 	};
 }
 

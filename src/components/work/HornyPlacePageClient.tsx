@@ -11,7 +11,7 @@ import {
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 
@@ -19,11 +19,17 @@ export default function HornyPlacePage() {
 	const t = useTranslations("work.hornyPlace.page");
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
+	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
 	const [currentView, setCurrentView] = useState(0);
+
+	const setContainerRef = useCallback((node: HTMLDivElement | null) => {
+		containerRef.current = node;
+		setHasHydratedTarget(Boolean(node));
+	}, []);
 
 	// Optimized scroll animations (reduced complexity)
 	const { scrollYProgress } = useScroll({
-		target: isMounted ? containerRef : undefined,
+		target: isMounted && hasHydratedTarget ? containerRef : undefined,
 		offset: ["start start", "end end"],
 	});
 
@@ -89,7 +95,7 @@ export default function HornyPlacePage() {
 	];
 
 	return (
-		<div ref={containerRef} className="bg-background">
+		<div ref={setContainerRef} className="bg-background">
 			{/* Hero section with optimized background */}
 			<section className="relative flex h-screen items-center justify-center overflow-hidden">
 				{/* Simplified Background Elements */}

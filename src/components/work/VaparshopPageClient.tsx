@@ -19,7 +19,7 @@ import {
 } from "motion/react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	SiNextdotjs,
 	SiNodedotjs,
@@ -37,11 +37,17 @@ export default function VaparshopPage() {
 	// Refs for scroll animations
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
+	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
 	const prefersReducedMotion = useReducedMotion();
+
+	const setContainerRef = useCallback((node: HTMLDivElement | null) => {
+		containerRef.current = node;
+		setHasHydratedTarget(Boolean(node));
+	}, []);
 
 	// Scroll animations
 	const { scrollYProgress } = useScroll({
-		target: isMounted ? containerRef : undefined,
+		target: isMounted && hasHydratedTarget ? containerRef : undefined,
 		offset: ["start start", "end end"],
 	});
 
@@ -149,7 +155,7 @@ export default function VaparshopPage() {
 	];
 
 	return (
-		<div ref={containerRef} className="bg-background">
+		<div ref={setContainerRef} className="bg-background">
 			{/* Hero Section with Parallax */}
 			<div className="relative flex h-screen items-center justify-center overflow-hidden">
 				{/* Background gradient animation */}
