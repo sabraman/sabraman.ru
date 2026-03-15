@@ -2,7 +2,7 @@
 
 import type { Transition, Variants } from "motion/react";
 import { AnimatePresence, motion } from "motion/react";
-import { Children, useEffect, useState } from "react";
+import { Children, useEffect, useEffectEvent, useRef, useState } from "react";
 
 import { cn } from "~/lib/utils";
 
@@ -55,18 +55,41 @@ export function TextFlip({
 	const [currentIndex, setCurrentIndex] = useState(0);
 
 	const items = Children.toArray(children);
+	const itemCount = items.length;
+	const hasCommittedIndexChange = useRef(false);
+	const notifyIndexChange = useEffectEvent((index: number) => {
+		onIndexChange?.(index);
+	});
 
 	useEffect(() => {
+		if (!itemCount) {
+			setCurrentIndex(0);
+			return;
+		}
+
+		setCurrentIndex((prev) => (prev >= itemCount ? 0 : prev));
+	}, [itemCount]);
+
+	useEffect(() => {
+		if (itemCount <= 1) {
+			return;
+		}
+
 		const timer = setInterval(() => {
-			setCurrentIndex((prev) => {
-				const next = (prev + 1) % items.length;
-				onIndexChange?.(next);
-				return next;
-			});
+			setCurrentIndex((prev) => (prev + 1) % itemCount);
 		}, interval * 1000);
 
 		return () => clearInterval(timer);
-	}, [items.length, interval, onIndexChange]);
+	}, [itemCount, interval]);
+
+	useEffect(() => {
+		if (!hasCommittedIndexChange.current) {
+			hasCommittedIndexChange.current = true;
+			return;
+		}
+
+		notifyIndexChange(currentIndex);
+	}, [currentIndex]);
 
 	return (
 		<AnimatePresence mode="wait" initial={false}>

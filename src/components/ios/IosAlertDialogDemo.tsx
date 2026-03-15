@@ -56,32 +56,24 @@ export function IosAlertDialogDemo({
 	compact = false,
 }: IosAlertDialogDemoProps) {
 	return (
-		<div className={cn("flex w-full justify-center", className)}>
+		<div className="flex w-full justify-center">
 			<div
 				className={cn(
-					"relative w-full overflow-hidden rounded-[26px] border-[rgba(0,0,0,0.75)] border-[rgba(255,255,255,0.2)] border-t border-b bg-[linear-gradient(180deg,#354158_0%,#161f34_100%)] shadow-[0_24px_40px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.12)]",
-					compact ? "max-w-[420px] px-4 py-4" : "max-w-[520px] px-5 py-5",
+					"flex w-full flex-wrap items-center justify-center",
+					compact ? "max-w-[420px] gap-3" : "max-w-[520px] gap-4",
+					className,
 				)}
 			>
-				<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[26px] bg-gradient-to-b from-white/10 to-transparent" />
-
-				<div
-					className={cn(
-						"relative flex flex-wrap items-center justify-center",
-						compact ? "gap-3" : "gap-4",
-					)}
-				>
-					{ALERT_DIALOG_EXAMPLES.map((example) => (
-						<IosAlertDialogExampleTrigger
-							compact={compact}
-							description={example.description}
-							key={example.variant}
-							title={example.title}
-							triggerLabel={example.triggerLabel}
-							variant={example.variant}
-						/>
-					))}
-				</div>
+				{ALERT_DIALOG_EXAMPLES.map((example) => (
+					<IosAlertDialogExampleTrigger
+						compact={compact}
+						description={example.description}
+						key={example.variant}
+						title={example.title}
+						triggerLabel={example.triggerLabel}
+						variant={example.variant}
+					/>
+				))}
 			</div>
 		</div>
 	);

@@ -24,8 +24,8 @@ export default function ContactPageClient() {
 								fontVariationSettings: `'wght' 1000, 'wdth' 800`,
 							}}
 						>
-							<span className="relative z-0 mr-4 inline-block md:mr-8">
-								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
+							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-10">
+								<span className="absolute -inset-1 bg-accent opacity-50 blur-sm" />
 								{t("contact.title")}
 							</span>
 							{t("contact.titleSecond")}
@@ -40,7 +40,7 @@ export default function ContactPageClient() {
 			</section>
 
 			{/* Visual element - abstract background */}
-			<div className="-z-10 pointer-events-none fixed inset-0 overflow-hidden">
+			<div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
 				<div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background opacity-90" />
 				<motion.div
 					className="absolute rounded-full bg-accent/5"

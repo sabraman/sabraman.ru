@@ -32,13 +32,13 @@
 	"projects": {
 		"title": "MY",
 		"titleSecond": "WORK",
-		"description": "Selected projects showcasing my approach to design and development.",
+		"description": "Featured case studies plus a live slice of the full work archive.",
 		"vaparshop": {
 			"title": "VAPARSHOP",
 			"description": "Telegram bots and web applications improving operational efficiency",
 			"viewProject": "View Project"
 		},
-			"hornyPlace": {
+		"hornyPlace": {
 			"title": "HORNY PLACE",
 			"description": "Comprehensive branding and interactive web solutions",
 			"viewProject": "View Project"

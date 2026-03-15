@@ -44,6 +44,7 @@ const IosBarButton = React.forwardRef<HTMLButtonElement, IosBarButtonProps>(
 		ref,
 	) => {
 		const backgroundImage = getBarButtonBackground(variant);
+		const svgId = React.useId().replace(/:/g, "");
 		const resolvedLayout =
 			layout ??
 			(icon || trailingIcon ? (label ? "text-icon" : "icon") : "text");
@@ -54,11 +55,15 @@ const IosBarButton = React.forwardRef<HTMLButtonElement, IosBarButtonProps>(
 		) : null;
 
 		if (resolvedLayout === "backward") {
+			const [start, second, third, end] = BAR_BUTTON_GRADIENT_STOPS[variant];
+			const innerPath =
+				"M15 0.5 H94.5 Q99.5 0.5 99.5 5.5 V23.5 Q99.5 28.5 94.5 28.5 H15 Q11.2 28.5 8.4 25.3 L1.4 16.9 Q0.5 15.8 0.5 14.5 Q0.5 13.2 1.4 12.1 L8.4 3.7 Q11.2 0.5 15 0.5 Z";
+
 			return (
 				<button
 					ref={ref}
 					className={cn(
-						"relative inline-flex h-[29px] items-center justify-center pr-[8px] pl-[18px] outline-none transition-transform duration-150 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50",
+						"relative inline-flex h-[29px] min-w-[56px] items-center justify-center pr-[10px] pl-[22px] outline-none transition-transform duration-150 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50",
 						className,
 					)}
 					style={{
@@ -68,39 +73,63 @@ const IosBarButton = React.forwardRef<HTMLButtonElement, IosBarButtonProps>(
 					type={type}
 					{...props}
 				>
-					<span
+					<svg
 						aria-hidden="true"
-						className="absolute inset-y-0 left-0 w-[18px] bg-white shadow-[0_0.5px_0.5px_rgba(255,255,255,0.4),0_1px_1.5px_rgba(0,0,0,0.2)] [clip-path:polygon(0_50%,100%_0,100%_100%)]"
-					/>
-					<span
-						aria-hidden="true"
-						className="absolute inset-y-[1px] left-[1px] w-[16px] [clip-path:polygon(0_50%,100%_0,100%_100%)]"
-						style={{ backgroundImage }}
-					/>
-					<span
-						aria-hidden="true"
-						className="absolute inset-y-0 right-0 left-[10px] rounded-r-[5px] bg-white shadow-[0_0.5px_0.5px_rgba(255,255,255,0.4),0_1px_1.5px_rgba(0,0,0,0.2)]"
-					/>
-					<span
-						aria-hidden="true"
-						className="absolute inset-y-[1px] right-[1px] left-[11px] rounded-r-[4px]"
-						style={{ backgroundImage }}
-					/>
-					<span
-						aria-hidden="true"
-						className="absolute top-[1px] right-[1px] left-[11px] h-[11px] rounded-tr-[4px] bg-gradient-to-b from-white/32 via-white/10 to-transparent"
-					/>
-					<span
-						aria-hidden="true"
-						className="absolute top-[1px] left-[1px] h-[11px] w-[16px] bg-gradient-to-b from-white/16 to-transparent [clip-path:polygon(0_50%,100%_0,100%_100%)]"
-					/>
+						className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+						preserveAspectRatio="none"
+						viewBox="0 0 100 29"
+					>
+						<defs>
+							<linearGradient
+								id={`${svgId}-fill`}
+								gradientUnits="userSpaceOnUse"
+								x1="0"
+								x2="0"
+								y1="0"
+								y2="29"
+							>
+								<stop offset="0%" stopColor={start} />
+								<stop offset="33%" stopColor={second} />
+								<stop offset="67%" stopColor={third} />
+								<stop offset="100%" stopColor={end} />
+							</linearGradient>
+							<filter
+								id={`${svgId}-shadow`}
+								colorInterpolationFilters="sRGB"
+								height="160%"
+								width="140%"
+								x="-18%"
+								y="-20%"
+							>
+								<feDropShadow
+									dx="0"
+									dy="1"
+									floodColor="rgba(0,0,0,0.28)"
+									stdDeviation="0.9"
+								/>
+							</filter>
+						</defs>
+
+						<g filter={`url(#${svgId}-shadow)`}>
+							<path d={innerPath} fill={`url(#${svgId}-fill)`} />
+							<path
+								d={innerPath}
+								fill="none"
+								stroke="rgba(0,0,0,0.62)"
+								strokeWidth="1"
+							/>
+							<path
+								d={innerPath}
+								fill="none"
+								stroke="rgba(255,255,255,0.1)"
+								strokeWidth="0.7"
+								transform="translate(0,-0.35)"
+							/>
+						</g>
+					</svg>
 					<span className="relative z-[1] flex h-full items-center justify-center">
 						{labelNode}
 					</span>
-					<span
-						aria-hidden="true"
-						className="pointer-events-none absolute inset-x-[14px] bottom-0 h-px bg-black/18"
-					/>
 				</button>
 			);
 		}

@@ -68,8 +68,8 @@ export function ProjectCatalogSection() {
 							fontVariationSettings: `'wght' 1000, 'wdth' 840`,
 						}}
 					>
-						<span className="relative mr-3 inline-block md:mr-5 xl:mr-8">
-							<span className="absolute -inset-1 bg-accent/50 blur-sm" />
+						<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-10">
+							<span className="absolute -inset-1 bg-accent opacity-50 blur-sm" />
 							{labels.title}
 						</span>
 						{labels.titleSecond}

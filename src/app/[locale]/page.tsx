@@ -15,16 +15,15 @@ import {
 	Paintbrush,
 	X,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Contact from "~/components/Contact";
+import { HomeWorkSection } from "~/components/projects/HomeWorkSection";
 import { SEOKeywords } from "~/components/SEOKeywords";
 import { AwwwardsHero } from "~/components/ui/AwwwardsHero";
-import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
-import { Card } from "~/components/ui/card";
 import { Toaster } from "~/components/ui/sonner";
 
 // Company Logo Component
@@ -35,25 +34,25 @@ function CompanyLogo({ company }: { company: string }) {
 				return {
 					src: "/Vaparshop-logo.png",
 					alt: "Vaparshop Logo",
-					className: "h-full w-full object-contain"
+					className: "h-full w-full object-contain",
 				};
 			case "HORNY PLACE":
 				return {
 					src: "/Hornyplace-logo.png",
 					alt: "Horny Place Logo",
-					className: "h-full w-full object-contain"
+					className: "h-full w-full object-contain",
 				};
 			case "ELYSIUM":
 				return {
 					src: "/Elysium-logo.png",
 					alt: "Elysium Logo",
-					className: "h-full w-full object-contain"
+					className: "h-full w-full object-contain",
 				};
 			case "VAPE CLUB":
 				return {
 					src: "/Vapeclub-logo.png",
 					alt: "Vape Club Logo",
-					className: "h-full w-full object-contain"
+					className: "h-full w-full object-contain",
 				};
 			default:
 				return null;
@@ -182,49 +181,6 @@ function WorkExperienceItem({
 				</ul>
 			</div>
 		</motion.div>
-	);
-}
-
-// Project card component
-function ProjectCard({
-	title,
-	description,
-	tags,
-	href,
-}: { title: string; description: string; tags: string[]; href: string }) {
-	return (
-		<Card className="group overflow-hidden">
-			<Link href={href} className="block p-6">
-				<div className="flex h-full flex-col">
-					<h3
-						className="mb-3 text-2xl transition-colors duration-300 group-hover:text-accent"
-						style={{
-							fontFamily: "Heading Now Variable",
-							fontVariationSettings: `'wght' 700, 'wdth' 900`,
-						}}
-					>
-						{title}
-						<span className="group-hover:-translate-y-1 ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">
-							<ArrowUpRight className="inline h-5 w-5" />
-						</span>
-					</h3>
-
-					<p className="mb-6 text-muted-foreground">{description}</p>
-
-					<div className="mt-auto flex flex-wrap gap-2">
-						{tags.map((tag) => (
-							<Badge
-								key={tag}
-								variant="secondary"
-								className="rounded-full px-3 py-1"
-							>
-								{tag}
-							</Badge>
-						))}
-					</div>
-				</div>
-			</Link>
-		</Card>
 	);
 }
 
@@ -411,7 +367,7 @@ export default function HomePage() {
 					viewBox="0 0 1106 1057"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
-					className="-translate-x-1/2 -translate-y-1/2 -ml-12 pointer-events-none absolute top-1/2 left-1/2 z-1 flex scale-[2] items-center justify-center"
+					className="pointer-events-none absolute top-1/2 left-1/2 z-1 -ml-12 flex -translate-x-1/2 -translate-y-1/2 scale-[2] items-center justify-center"
 					initial={{ scale: 0.8, opacity: 0 }}
 					animate={{ scale: 1, opacity: 0.4 }}
 					transition={{ duration: 1.5, delay: 2.5 }}
@@ -583,7 +539,7 @@ export default function HomePage() {
 							}}
 						>
 							<span className="relative z-0 ml-4 inline-block md:ml-8 xl:ml-12">
-								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
+								<span className="absolute -inset-1 bg-accent opacity-50 blur-sm" />
 								{t("about.title")}
 							</span>
 						</h2>
@@ -709,217 +665,7 @@ export default function HomePage() {
 					</div>
 				</div>
 			</section>
-			<section
-				className="relative overflow-hidden bg-primary/5 py-32"
-				id="projects"
-			>
-				{/* Background decoration elements */}
-				<div className="-z-10 absolute inset-0 h-full w-full overflow-hidden">
-					<div
-						className="absolute top-[5%] left-[10%] h-[30rem] w-[30rem] animate-pulse rounded-full bg-accent/5 blur-[100px]"
-						style={{ animationDuration: "10s" }}
-					/>
-					<div
-						className="absolute right-[15%] bottom-[10%] h-[25rem] w-[25rem] animate-pulse rounded-full bg-primary/5 blur-[100px]"
-						style={{ animationDuration: "15s" }}
-					/>
-
-					<div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-5" />
-
-					<div
-						className="absolute top-[30%] left-[50%] h-1 w-1 animate-ping rounded-full bg-accent shadow-[0_0_40px_12px_rgba(120,120,250,0.3)]"
-						style={{ animationDuration: "3s" }}
-					/>
-					<div
-						className="absolute top-[70%] left-[20%] h-1 w-1 animate-ping rounded-full bg-primary shadow-[0_0_40px_12px_rgba(100,200,250,0.2)]"
-						style={{ animationDuration: "4s" }}
-					/>
-				</div>
-
-				<div className="container mx-auto px-4">
-					<motion.div
-						initial={{ opacity: 0, y: 100 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-						viewport={{ once: true }}
-						className="mb-20 overflow-hidden"
-					>
-						<h2
-							className="font-extrabold text-7xl uppercase tracking-tight md:text-8xl xl:text-[15rem]"
-							style={{
-								fontFamily: "Heading Now Variable",
-								fontVariationSettings: `'wght' 1000, 'wdth' 800`,
-							}}
-						>
-							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
-								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
-								{t("projects.title")}
-							</span>
-							{t("projects.titleSecond")}
-						</h2>
-
-						<motion.p
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, delay: 0.3 }}
-							viewport={{ once: true }}
-							className="relative mt-8 ml-1 max-w-2xl text-muted-foreground text-xl"
-						>
-							{t("projects.description")}
-							<span className="-bottom-3 absolute left-0 h-[2px] w-24 bg-gradient-to-r from-accent to-transparent" />
-						</motion.p>
-					</motion.div>
-
-					<div className="relative grid grid-cols-1 gap-14 md:grid-cols-12">
-						{/* VAPARSHOP - spans 7 columns */}
-						<motion.div
-							initial={{ opacity: 0, y: 50 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0 }}
-							viewport={{ once: true }}
-							className="h-full md:col-span-7"
-						>
-							<Link href="/vaparshop" className="block h-full">
-								<div className="group relative h-full overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5">
-									{/* Image overlay with grain texture */}
-									<div className="absolute inset-0 bg-[url('/Vaparshop-logo.png')] bg-center bg-contain bg-no-repeat opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20" />
-									<div className="absolute inset-0 bg-[url('/noise.png')] opacity-5" />
-
-									{/* Content */}
-									<div className="relative flex h-full flex-col p-8 md:p-10">
-										<div className="flex justify-between gap-4">
-											<h3 className="mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text font-bold text-3xl transition-colors duration-500 group-hover:from-accent group-hover:to-foreground md:text-4xl">
-												VAPARSHOP
-												<span className="group-hover:-translate-y-1 ml-1 inline-block transition-transform duration-500 ease-out group-hover:translate-x-1">
-													<ArrowUpRight className="inline h-6 w-6 opacity-70" />
-												</span>
-											</h3>
-											<div className="mb-4">
-												<Badge className="rounded-full bg-accent/10 px-3 py-1 font-medium text-accent text-xs transition-colors duration-300 group-hover:bg-accent/20">
-													FEATURED
-												</Badge>
-											</div>
-										</div>
-
-										<p className="mb-6 text-muted-foreground text-xl transition-colors duration-500 group-hover:text-foreground/90">
-											{t("projects.vaparshop.description")}
-										</p>
-
-										<div className="mt-auto">
-											<div className="mb-6 flex flex-wrap gap-2">
-												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
-													Next.js
-												</Badge>
-												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
-													Bot API
-												</Badge>
-												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
-													tRPC
-												</Badge>
-											</div>
-
-											<div className="inline-flex items-center font-medium text-foreground/90 transition-colors duration-300 group-hover:text-accent">
-												{t("projects.vaparshop.viewProject")}
-												<ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-											</div>
-										</div>
-									</div>
-								</div>
-							</Link>
-						</motion.div>
-
-						{/* HORNY PLACE - spans 5 columns */}
-						<motion.div
-							initial={{ opacity: 0, y: 50 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							transition={{
-								duration: 0.7,
-								ease: [0.22, 1, 0.36, 1],
-								delay: 0.15,
-							}}
-							viewport={{ once: true }}
-							className="h-full md:col-span-5"
-						>
-							<Link href="/horny-place" className="block h-full">
-								<div className="group relative h-full overflow-hidden rounded-3xl border border-primary/10 shadow-lg transition-all duration-500 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5">
-									{/* Image overlay with grain texture */}
-									<div className="absolute inset-0 bg-[url('/Hornyplace-logo.png')] bg-center bg-contain bg-no-repeat opacity-10 mix-blend-overlay transition-opacity duration-700 group-hover:opacity-20" />
-									<div className="absolute inset-0 bg-[url('/noise.png')] opacity-5" />
-
-									{/* Content */}
-									<div className="relative flex h-full flex-col p-8 md:p-10">
-										<h3 className="mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text font-bold text-3xl transition-colors duration-500 group-hover:from-accent group-hover:to-foreground md:text-4xl">
-											HORNY PLACE
-											<span className="group-hover:-translate-y-1 ml-1 inline-block transition-transform duration-500 ease-out group-hover:translate-x-1">
-												<ArrowUpRight className="inline h-6 w-6 opacity-70" />
-											</span>
-										</h3>
-
-										<p className="mb-6 text-muted-foreground text-xl transition-colors duration-500 group-hover:text-foreground/90">
-											{t("projects.hornyPlace.description")}
-										</p>
-
-										<div className="mt-auto">
-											<div className="mb-6 flex flex-wrap gap-2">
-												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
-													Branding
-												</Badge>
-												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
-													UI/UX
-												</Badge>
-												<Badge className="rounded-full bg-primary/10 px-3 py-1 text-primary/90 transition-all duration-300 hover:scale-110">
-													React
-												</Badge>
-											</div>
-
-											<div className="inline-flex items-center font-medium text-foreground/90 transition-colors duration-300 group-hover:text-accent">
-												{t("projects.hornyPlace.viewProject")}
-												<ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-											</div>
-										</div>
-									</div>
-								</div>
-							</Link>
-						</motion.div>
-
-						{/* "More Coming Soon" element - spans 12 columns */}
-						<motion.div
-							initial={{ opacity: 0, y: 50 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							transition={{
-								duration: 0.7,
-								ease: [0.22, 1, 0.36, 1],
-								delay: 0.3,
-							}}
-							viewport={{ once: true }}
-							className="md:col-span-12"
-						>
-							<div className="group relative flex h-40 flex-col items-center justify-center overflow-hidden rounded-3xl border border-muted-foreground/30 border-dashed p-10 transition-all duration-500 hover:border-accent/30">
-								<div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-50" />
-								<p className="text-muted-foreground text-xl transition-colors duration-300 group-hover:text-foreground">
-									{t("projects.moreComingSoon")}
-								</p>
-								<div className="mt-2">
-									<span className="inline-flex items-center justify-center gap-2">
-										<span className="absolute h-1.5 w-1.5 animate-ping rounded-full bg-accent opacity-75" />
-										<span className="relative h-1.5 w-1.5 rounded-full bg-accent" />
-										<span
-											className="absolute h-1.5 w-1.5 animate-ping rounded-full bg-accent opacity-75"
-											style={{ animationDelay: "0.5s" }}
-										/>
-										<span className="relative h-1.5 w-1.5 rounded-full bg-accent" />
-										<span
-											className="absolute h-1.5 w-1.5 animate-ping rounded-full bg-accent opacity-75"
-											style={{ animationDelay: "1s" }}
-										/>
-										<span className="relative h-1.5 w-1.5 rounded-full bg-accent" />
-									</span>
-								</div>
-							</div>
-						</motion.div>
-					</div>
-				</div>
-			</section>
+			<HomeWorkSection />
 			<section className="relative min-h-screen py-32" id="experience">
 				<div className="container mx-auto px-4">
 					<motion.div
@@ -937,7 +683,7 @@ export default function HomePage() {
 							}}
 						>
 							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
-								<span className="-inset-1 absolute bg-sky-400 opacity-50 blur-sm" />
+								<span className="absolute -inset-1 bg-accent opacity-50 blur-sm" />
 								{t("experience.title")}
 							</span>
 							{t("experience.titleSecond")}
@@ -1004,7 +750,7 @@ export default function HomePage() {
 							}}
 						>
 							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-12">
-								<span className="-inset-1 absolute bg-accent opacity-50 blur-sm" />
+								<span className="absolute -inset-1 bg-accent opacity-50 blur-sm" />
 								{t("contact.title")}
 							</span>
 							{t("contact.titleSecond")}
@@ -1015,7 +761,7 @@ export default function HomePage() {
 				</div>
 			</section>
 			<div
-				className="-z-10 pointer-events-none absolute inset-0 overflow-hidden"
+				className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
 				style={{ top: "80vh" }}
 			>
 				<div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background opacity-90" />

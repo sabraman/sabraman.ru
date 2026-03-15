@@ -32,13 +32,13 @@
 	"projects": {
 		"title": "МОИ",
 		"titleSecond": "РАБОТЫ",
-		"description": "Несколько проектов, где можно посмотреть, как я подхожу к дизайну и разработке.",
+		"description": "Ключевые кейсы и живая выборка из полного архива работ.",
 		"vaparshop": {
 			"title": "VAPARSHOP",
 			"description": "Telegram-боты и веб-приложения для автоматизации бизнес-процессов",
 			"viewProject": "Смотреть проект"
 		},
-			"hornyPlace": {
+		"hornyPlace": {
 			"title": "HORNY PLACE",
 			"description": "Полный брендинг и интерактивный сайт для вейп-бренда",
 			"viewProject": "Смотреть проект"

@@ -1,14 +1,14 @@
 import "~/styles/globals.css";
 import type { Metadata, Viewport } from "next";
+import { JetBrains_Mono } from "next/font/google";
+import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
-import { JetBrains_Mono } from "next/font/google";
-import Link from "next/link";
-import { notFound } from "next/navigation";
 import { ThemeProvider } from "~/components/ThemeProvider";
 import { ClientRoot } from "~/components/ui/ClientRoot";
-import { SmoothMarquee } from "~/components/ui/SmoothMarquee";
+import { FloatingDock } from "~/components/ui/FloatingDock";
 import { LanguageSwitcher } from "~/components/ui/language-switcher";
+import { SmoothMarquee } from "~/components/ui/SmoothMarquee";
 import { Toaster } from "~/components/ui/sonner";
 import { ThemeToggle } from "~/components/ui/theme-toggle";
 import { routing } from "~/i18n/routing";
@@ -344,7 +344,8 @@ export default async function RootLayout({
 							{/* Используем SmoothMarquee вместо CSS-анимации */}
 							<SmoothMarquee />
 
-							<main>{children}</main>
+							<main className="pb-24">{children}</main>
+							<FloatingDock />
 							<Toaster />
 						</ThemeProvider>
 					</ClientRoot>

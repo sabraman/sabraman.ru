@@ -133,7 +133,10 @@
 		@apply bg-background text-foreground font-mono antialiased;
 	}
 	html {
-		font-feature-settings: "liga" 1, "calt" 1, "ss01" 1;
+		font-feature-settings:
+			"liga" 1,
+			"calt" 1,
+			"ss01" 1;
 	}
 }
 
