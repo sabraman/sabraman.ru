@@ -3,6 +3,7 @@ export const COMPONENT_DOC_SLUGS = [
 	"legacy-alert-dialog",
 	"legacy-bar-button",
 	"legacy-clock",
+	"legacy-notification",
 	"legacy-switch",
 	"legacy-slider",
 	"legacy-code-block-command",

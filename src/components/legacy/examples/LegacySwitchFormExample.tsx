@@ -2,9 +2,9 @@
 
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 import { LegacyBarButton } from "~/components/legacy-bar-button";
+import { showLegacyNotification } from "~/components/legacy-notification";
 import { LegacySwitch } from "~/components/legacy-switch";
 import {
 	Form,
@@ -26,10 +26,14 @@ export function LegacySwitchFormExample() {
 	});
 
 	const onSubmit: SubmitHandler<SwitchFormValues> = (values) => {
-		toast("Preferences updated", {
-			description: values.notifications
+		showLegacyNotification({
+			body: values.notifications
 				? "Push notifications are enabled."
 				: "Push notifications are disabled.",
+			showIcon: false,
+			subtitle: "Notifications",
+			time: "now",
+			title: "Preferences Updated",
 		});
 	};
 

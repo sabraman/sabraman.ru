@@ -155,10 +155,10 @@ export const LEGACY_WHEEL_PICKER_FORM_SNIPPET = `"use client"
 import { zodResolver } from "@hookform/resolvers/zod"
 import type { SubmitHandler } from "react-hook-form"
 import { useForm } from "react-hook-form"
-import { toast } from "sonner"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
+import { showLegacyNotification } from "@/components/legacy-notification"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { LegacyPickerColumn, LegacyPickerContainer } from "@/components/legacy-wheel-picker"
 
@@ -182,8 +182,16 @@ export function LegacyHookFormDemo() {
   })
 
   const onSubmit: SubmitHandler<FormSchema> = (values) => {
-    toast("Settings Saved", {
-      description: \`Framework set to \${formOptions.find((o) => o.value === values.framework)?.label}\`,
+    const selectedFramework = formOptions.find(
+      (option) => option.value === values.framework,
+    )?.label
+
+    showLegacyNotification({
+      body: "Selection synced with the form state.",
+      showIcon: false,
+      subtitle: selectedFramework ?? "Framework",
+      time: "now",
+      title: "Settings Saved",
     });
   }
 

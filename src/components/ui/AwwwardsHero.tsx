@@ -224,14 +224,39 @@ interface AwwwardsHeroProps {
 	className?: string;
 }
 
+function StaticHeroBackdrop() {
+	return (
+		<div
+			className="-z-10 absolute inset-0 overflow-hidden"
+			aria-hidden="true"
+		>
+			<div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(120,120,250,0.18),transparent_30%),radial-gradient(circle_at_75%_30%,rgba(100,255,218,0.14),transparent_28%),radial-gradient(circle_at_50%_75%,rgba(120,120,250,0.12),transparent_32%)]" />
+			<div className="absolute inset-0 opacity-50 [background-image:linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:72px_72px]" />
+			<div className="absolute inset-x-0 bottom-[-10%] h-[45%] bg-[radial-gradient(circle_at_center,rgba(120,120,250,0.14),transparent_65%)] blur-3xl" />
+		</div>
+	);
+}
+
 export function AwwwardsHero({ children, className = "" }: AwwwardsHeroProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 	const [isMounted, setIsMounted] = useState(false);
 	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
+	const [isSafariBrowser, setIsSafariBrowser] = useState(false);
+	const [hasWebglContextLoss, setHasWebglContextLoss] = useState(false);
 
 	const setContainerRef = useCallback((node: HTMLDivElement | null) => {
 		containerRef.current = node;
 		setHasHydratedTarget(Boolean(node));
+	}, []);
+
+	const handleContextLoss = useCallback((event: Event) => {
+		event.preventDefault();
+		setHasWebglContextLoss(true);
+	}, []);
+
+	const handleContextRestore = useCallback(() => {
+		setHasWebglContextLoss(false);
 	}, []);
 
 	// Advanced scroll animations with spring physics
@@ -257,11 +282,35 @@ export function AwwwardsHero({ children, className = "" }: AwwwardsHeroProps) {
 
 	useEffect(() => {
 		setIsMounted(true);
+
+		const userAgent = window.navigator.userAgent;
+		const isSafari =
+			/Safari/i.test(userAgent) &&
+			!/(Chrome|Chromium|CriOS|Edg|OPR|Firefox|FxiOS)/i.test(userAgent);
+
+		setIsSafariBrowser(isSafari);
 	}, []);
+
+	useEffect(() => {
+		const canvas = canvasRef.current;
+		if (!canvas) {
+			return;
+		}
+
+		canvas.addEventListener("webglcontextlost", handleContextLoss);
+		canvas.addEventListener("webglcontextrestored", handleContextRestore);
+
+		return () => {
+			canvas.removeEventListener("webglcontextlost", handleContextLoss);
+			canvas.removeEventListener("webglcontextrestored", handleContextRestore);
+		};
+	}, [handleContextLoss, handleContextRestore, isSafariBrowser]);
 
 	if (!isMounted) {
 		return null;
 	}
+
+	const shouldRenderCanvas = !isSafariBrowser;
 
 	return (
 		<section
@@ -269,20 +318,32 @@ export function AwwwardsHero({ children, className = "" }: AwwwardsHeroProps) {
 			className={`relative flex min-h-screen flex-col items-center justify-center overflow-hidden ${className}`}
 			style={{ perspective: "1000px" }}
 		>
+			<StaticHeroBackdrop />
+
 			{/* Advanced Three.js Background */}
-			<div className="-z-10 absolute inset-0">
-				<Canvas
-					dpr={[1, 2]}
-					performance={{ min: 0.5 }}
-					camera={{ position: [0, 0, 5], fov: 75 }}
-					style={{ background: "transparent" }}
-				>
-					<Suspense fallback={null}>
-						<Scene />
-						<AdaptivePerformance />
-					</Suspense>
-				</Canvas>
-			</div>
+			{shouldRenderCanvas ? (
+				<div className="-z-10 absolute inset-0">
+					<Canvas
+						dpr={[1, 1.5]}
+						performance={{ min: 0.5 }}
+						camera={{ position: [0, 0, 5], fov: 75 }}
+						gl={{ alpha: true, antialias: false, powerPreference: "default" }}
+						onCreated={({ gl }) => {
+							canvasRef.current = gl.domElement;
+						}}
+						style={{
+							background: "transparent",
+							opacity: hasWebglContextLoss ? 0 : 1,
+							transition: "opacity 0.3s ease",
+						}}
+					>
+						<Suspense fallback={null}>
+							<Scene />
+							<AdaptivePerformance />
+						</Suspense>
+					</Canvas>
+				</div>
+			) : null}
 
 			{/* Gradient overlays for depth */}
 			<div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/80 to-background/95" />

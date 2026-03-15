@@ -2,9 +2,9 @@
 
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 import { LegacyBarButton } from "~/components/legacy-bar-button";
+import { showLegacyNotification } from "~/components/legacy-notification";
 import { LegacySlider } from "~/components/legacy-slider";
 import {
 	Form,
@@ -26,8 +26,12 @@ export function LegacySliderFormExample() {
 	});
 
 	const onSubmit: SubmitHandler<SliderFormValues> = (values) => {
-		toast("Display updated", {
-			description: `Brightness set to ${Math.round(values.brightness)}%.`,
+		showLegacyNotification({
+			body: `Brightness set to ${Math.round(values.brightness)}%.`,
+			showIcon: false,
+			subtitle: "Display",
+			time: "now",
+			title: "Display Updated",
 		});
 	};
 

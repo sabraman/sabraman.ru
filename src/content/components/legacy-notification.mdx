@@ -1,0 +1,73 @@
+---
+title: "Legacy Notification"
+description: "Use this for lock-screen style Sonner toasts and static notification cards that need the original glossy legacy chrome."
+kicker: "Registry component"
+order: 8
+updatedAt: "2026-03-16"
+---
+
+## Why Use It
+
+- Best for high-visibility alerts, inbox pings, and lock-screen style confirmations that should feel native to early iPhone UI.
+- Ships with a small Sonner helper, which means the toast path is ready as soon as your app already has the shadcn toaster mounted.
+- The component itself stays presentational, so you can also render it directly inside settings screens, message lists, or mock lock screens.
+
+## Installation
+
+Install the notification component, then keep using your existing shadcn Sonner setup.
+
+<InstallCommand component="legacy-notification" />
+
+## Quick Start
+
+Trigger the lock-screen toast with the exported helper.
+
+<ComponentSource
+  src="src/components/legacy/examples/LegacyNotificationUsageExample.tsx"
+  title="components/legacy-notification-usage-example.tsx"
+/>
+
+## Examples
+
+<ComponentPreview
+  description="Push the design through Sonner with the helper instead of styling a custom toast by hand."
+  name="legacy-notification-toast"
+  size="compact"
+  title="Sonner Trigger"
+/>
+
+<ComponentPreview
+  description="Render the same lock-screen card directly when you need a static example instead of a live toast."
+  name="legacy-notification-demo"
+  size="compact"
+  title="Static Card"
+/>
+
+<ComponentPreview
+  description="Swap the icon content and message copy while keeping the same glossy lock-screen shell."
+  name="legacy-notification-custom-icon"
+  size="compact"
+  title="Custom Icon"
+/>
+
+<ComponentPreview
+  description="Hide the icon slot when the notification should read as pure text instead of an app alert."
+  name="legacy-notification-no-icon"
+  size="compact"
+  title="No Icon"
+/>
+
+## API Reference
+
+`LegacyNotificationProps` extends `React.HTMLAttributes<HTMLDivElement>` and adds `title`, `subtitle`, `body`, `time`, `showIcon`, and the visibility toggles for the subtitle and body lines.
+
+<AutoTypeTable
+  path="registry/default/legacy-notification/legacy-notification.tsx"
+  name="LegacyNotificationProps"
+/>
+
+## Notes
+
+- `showLegacyNotification` defaults to `top-center`, `unstyled: true`, and a 4.2 second duration so the Sonner output matches the lock-screen composition by default.
+- The default icon shell is intentionally generic, but you can pass any React node through `icon` when the product needs a branded glyph.
+- Set `showIcon={false}` when the layout should collapse into a pure text notification without the glossy app icon badge.

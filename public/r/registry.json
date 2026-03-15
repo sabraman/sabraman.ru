@@ -33,6 +33,21 @@
 			]
 		},
 		{
+			"name": "legacy-notification",
+			"type": "registry:ui",
+			"title": "Legacy Notification",
+			"docs": "https://sabraman.ru/components/legacy-notification",
+			"description": "Sonner-powered lock-screen notification toast with glossy legacy iOS chrome.",
+			"dependencies": ["sonner"],
+			"files": [
+				{
+					"path": "registry/default/legacy-notification/legacy-notification.tsx",
+					"target": "components/legacy-notification.tsx",
+					"type": "registry:component"
+				}
+			]
+		},
+		{
 			"name": "legacy-switch",
 			"type": "registry:ui",
 			"title": "Legacy Switch",

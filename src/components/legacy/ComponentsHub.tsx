@@ -13,6 +13,7 @@ import type { ReactNode } from "react";
 import * as React from "react";
 import { LegacyAlertDialogDemo } from "~/components/legacy/LegacyAlertDialogDemo";
 import { LegacyBarButtonDemo } from "~/components/legacy/LegacyBarButtonDemo";
+import { LegacyNotificationDemo } from "~/components/legacy/LegacyNotificationDemo";
 import { LegacyBarButton } from "~/components/legacy-bar-button";
 import { LegacyClock } from "~/components/legacy-clock";
 import {
@@ -50,6 +51,10 @@ import {
 	getLegacyCodeBlockCommandHubPath,
 	LEGACY_CODE_BLOCK_COMMAND_DOCS_COPY,
 } from "./legacy-code-block-command-content";
+import {
+	getLegacyNotificationHubPath,
+	LEGACY_NOTIFICATION_DOCS_COPY,
+} from "./legacy-notification-content";
 import {
 	getLegacySliderHubPath,
 	LEGACY_SLIDER_DOCS_COPY,
@@ -333,6 +338,16 @@ function ClockPreview() {
 	);
 }
 
+function NotificationPreview() {
+	return (
+		<PreviewStage className="min-h-[240px]">
+			<div className="w-full max-w-[320px] lg:ml-auto">
+				<LegacyNotificationDemo />
+			</div>
+		</PreviewStage>
+	);
+}
+
 function AlertDialogPreview() {
 	return (
 		<PreviewStage className="min-h-[220px]">
@@ -458,6 +473,13 @@ function ComponentsChooserHub({ locale }: { locale: Locale }) {
 			href: getLegacyClockHubPath(),
 			preview: <ClockPreview />,
 			title: LEGACY_CLOCK_DOCS_COPY.title,
+		},
+		{
+			alias: "legacy-notification",
+			description: LEGACY_NOTIFICATION_DOCS_COPY.summary,
+			href: getLegacyNotificationHubPath(),
+			preview: <NotificationPreview />,
+			title: LEGACY_NOTIFICATION_DOCS_COPY.title,
 		},
 		{
 			alias: "legacy-switch",

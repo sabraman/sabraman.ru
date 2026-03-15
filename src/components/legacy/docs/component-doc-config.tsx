@@ -22,6 +22,9 @@ import { LegacyCodeBlockCommandHeaderActionExample } from "~/components/legacy/e
 import { LegacyCodeBlockCommandInitialManagerExample } from "~/components/legacy/examples/LegacyCodeBlockCommandInitialManagerExample";
 import { LegacyCodeBlockCommandUsageExample } from "~/components/legacy/examples/LegacyCodeBlockCommandUsageExample";
 import { LegacyHookFormDemo } from "~/components/legacy/examples/LegacyHookFormDemo";
+import { LegacyNotificationCustomIconExample } from "~/components/legacy/examples/LegacyNotificationCustomIconExample";
+import { LegacyNotificationNoIconExample } from "~/components/legacy/examples/LegacyNotificationNoIconExample";
+import { LegacyNotificationUsageExample } from "~/components/legacy/examples/LegacyNotificationUsageExample";
 import { LegacySliderFormExample } from "~/components/legacy/examples/LegacySliderFormExample";
 import { LegacySliderSignedRangeExample } from "~/components/legacy/examples/LegacySliderSignedRangeExample";
 import { LegacySliderSingleExample } from "~/components/legacy/examples/LegacySliderSingleExample";
@@ -36,6 +39,7 @@ import { LegacyAlertDialogDemo } from "~/components/legacy/LegacyAlertDialogDemo
 import { LegacyBarButtonDemo } from "~/components/legacy/LegacyBarButtonDemo";
 import { LegacyClockDemo } from "~/components/legacy/LegacyClockDemo";
 import { LegacyCodeBlockCommandDemo } from "~/components/legacy/LegacyCodeBlockCommandDemo";
+import { LegacyNotificationDemo } from "~/components/legacy/LegacyNotificationDemo";
 import { LegacySliderDemo } from "~/components/legacy/LegacySliderDemo";
 import { LegacySwitchDemo } from "~/components/legacy/LegacySwitchDemo";
 import { LegacyWheelPickerDemo } from "~/components/legacy/LegacyWheelPickerDemo";
@@ -55,6 +59,10 @@ import {
 	LEGACY_CODE_BLOCK_COMMAND_INSTALL_COMMANDS,
 	LEGACY_CODE_BLOCK_COMMAND_URLS,
 } from "~/components/legacy/legacy-code-block-command-content";
+import {
+	LEGACY_NOTIFICATION_INSTALL_COMMANDS,
+	LEGACY_NOTIFICATION_URLS,
+} from "~/components/legacy/legacy-notification-content";
 import {
 	LEGACY_SLIDER_INSTALL_COMMANDS,
 	LEGACY_SLIDER_URLS,
@@ -121,6 +129,22 @@ export const COMPONENT_DOC_CONFIG = {
 			</div>
 		),
 	},
+	"legacy-notification": {
+		featuredPreview: "legacy-notification-demo",
+		installCommands: LEGACY_NOTIFICATION_INSTALL_COMMANDS,
+		registryDirectUrl: LEGACY_NOTIFICATION_URLS.direct,
+		registryIndexUrl: LEGACY_NOTIFICATION_URLS.registry,
+		renderHeroPreview: () => (
+			<div className="flex flex-col items-center justify-center gap-6">
+				<div className="relative w-full max-w-[372px] rounded-[30px] border-[rgba(0,0,0,0.8)] border-[rgba(255,255,255,0.14)] border-t border-b bg-[linear-gradient(180deg,#3b465c_0%,#192135_100%)] p-6 shadow-[0_20px_40px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(0,0,0,0.5)]">
+					<div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[30px] bg-gradient-to-b from-white/10 to-transparent" />
+					<div className="relative">
+						<LegacyNotificationDemo />
+					</div>
+				</div>
+			</div>
+		),
+	},
 	"legacy-slider": {
 		featuredPreview: "legacy-slider-demo",
 		installCommands: LEGACY_SLIDER_INSTALL_COMMANDS,
@@ -180,6 +204,10 @@ export type ComponentDocPreviewName =
 	| "legacy-clock-live"
 	| "legacy-clock-sizes"
 	| "legacy-clock-status"
+	| "legacy-notification-custom-icon"
+	| "legacy-notification-demo"
+	| "legacy-notification-no-icon"
+	| "legacy-notification-toast"
 	| "legacy-code-block-command-demo"
 	| "legacy-code-block-command-explicit"
 	| "legacy-code-block-command-header-actions"
@@ -304,6 +332,30 @@ const COMPONENT_DOC_PREVIEWS: Record<
 		sourcePath:
 			"src/components/legacy/examples/LegacyClockStatusRowExample.tsx",
 		viewportClassName: "items-start justify-start",
+	},
+	"legacy-notification-custom-icon": {
+		codeTitle: "components/legacy-notification-custom-icon-example.tsx",
+		render: () => <LegacyNotificationCustomIconExample />,
+		sourcePath:
+			"src/components/legacy/examples/LegacyNotificationCustomIconExample.tsx",
+	},
+	"legacy-notification-demo": {
+		codeTitle: "components/legacy-notification-demo.tsx",
+		render: () => <LegacyNotificationDemo />,
+		sourcePath: "src/components/legacy/LegacyNotificationDemo.tsx",
+	},
+	"legacy-notification-no-icon": {
+		codeTitle: "components/legacy-notification-no-icon-example.tsx",
+		render: () => <LegacyNotificationNoIconExample />,
+		sourcePath:
+			"src/components/legacy/examples/LegacyNotificationNoIconExample.tsx",
+	},
+	"legacy-notification-toast": {
+		codeTitle: "components/legacy-notification-usage-example.tsx",
+		render: () => <LegacyNotificationUsageExample />,
+		sourcePath:
+			"src/components/legacy/examples/LegacyNotificationUsageExample.tsx",
+		viewportClassName: "items-start justify-center",
 	},
 	"legacy-code-block-command-demo": {
 		codeTitle: "components/legacy-code-block-command-demo.tsx",
