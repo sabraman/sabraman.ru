@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getComponentDocPath } from "~/components/ios/docs/component-doc-paths";
-import { getAllComponentDocs } from "~/components/ios/docs/component-documents";
+import { getComponentDocPath } from "~/components/legacy/docs/component-doc-paths";
+import { getAllComponentDocs } from "~/components/legacy/docs/component-documents";
 import {
 	getCaseStudyPath,
 	getProjectBySlug,

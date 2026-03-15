@@ -1,0 +1,74 @@
+---
+title: "Legacy Code Block Command"
+description: "Use this for install snippets and command surfaces that need package-manager switching built in."
+kicker: "Registry component"
+order: 4
+updatedAt: "2026-03-15"
+---
+
+## Why Use It
+
+- Best for docs pages, install cards, and setup steps where users switch between Bun, npm, pnpm, and Yarn.
+- Accepts either explicit commands per package manager or a converted npm command from one helper.
+- Persists the selected package manager, which keeps repeated install surfaces aligned across a session.
+- Supports extra header actions, so the command block can carry a docs link or secondary CTA without extra layout work.
+
+## Installation
+
+Install the component directly. It is self-contained and does not need extra tabs or helper primitives.
+
+<InstallCommand component="legacy-code-block-command" />
+
+## Quick Start
+
+For most docs pages, start with `convertNpmCommand` and let the helper generate every package-manager variant.
+
+<ComponentSource
+  src="src/components/legacy/examples/LegacyCodeBlockCommandUsageExample.tsx"
+  title="components/legacy-code-block-command-usage-example.tsx"
+/>
+
+## Examples
+
+<ComponentPreview
+  description="Generate Bun, npm, pnpm, and Yarn commands from one npm-style install line."
+  name="legacy-code-block-command-usage"
+  size="compact"
+  title="Convert One Install Command"
+/>
+
+<ComponentPreview
+  description="Pass explicit commands when each package manager needs a different install path."
+  name="legacy-code-block-command-explicit"
+  size="compact"
+  title="Explicit Commands"
+/>
+
+<ComponentPreview
+  description="Use `headerActions` to attach a secondary button without rebuilding the shell."
+  name="legacy-code-block-command-header-actions"
+  size="compact"
+  title="Header Actions"
+/>
+
+<ComponentPreview
+  description="Set the default package manager when a page should open on pnpm, Bun, or another preferred tab."
+  name="legacy-code-block-command-initial-manager"
+  size="compact"
+  title="Custom Initial Package Manager"
+/>
+
+## API Reference
+
+`LegacyCodeBlockCommandProps` covers the command values plus three behavior hooks: `initialPackageManager`, `headerActions`, and the copy success or error callbacks.
+
+<AutoTypeTable
+  path="registry/default/legacy-code-block-command/legacy-code-block-command.tsx"
+  name="LegacyCodeBlockCommandProps"
+/>
+
+## Notes
+
+- `convertNpmCommand` is the fastest path when your docs already store one npm command string.
+- The selected package manager is synced through local storage, so multiple command blocks stay aligned.
+- Use `onCopySuccess` and `onCopyError` when the page needs analytics or toast feedback around copy actions.

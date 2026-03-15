@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import IOSContainer from "~/components/ios/IOSContainer";
+import IOSContainer from "~/components/legacy/IOSContainer";
 
 export async function generateMetadata({
 	params,

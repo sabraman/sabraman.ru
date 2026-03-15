@@ -1,0 +1,74 @@
+---
+title: "Legacy Switch"
+description: "Use this for settings toggles and labeled preference rows that need classic legacy chrome."
+kicker: "Registry component"
+order: 2
+updatedAt: "2026-03-15"
+---
+
+## Why Use It
+
+- Best for binary settings such as notifications, assistive features, and device preferences.
+- Uses the Radix switch state model, so controlled and uncontrolled usage both stay straightforward.
+- Keeps the original glossy shell, thumb, and inline ON or OFF labels without extra styling work.
+- Fits well inside form fields and settings rows because the component is already compact and self-contained.
+
+## Installation
+
+Install the switch directly, then pair it with labels or helper text in your own settings layout.
+
+<InstallCommand component="legacy-switch" />
+
+## Quick Start
+
+Start with a single controlled switch and a plain text status label.
+
+<ComponentSource
+  src="src/components/legacy/examples/LegacySwitchUsageExample.tsx"
+  title="components/legacy-switch-usage-example.tsx"
+/>
+
+## Examples
+
+<ComponentPreview
+  description="A basic controlled toggle for the default notifications-style pattern."
+  name="legacy-switch-basic"
+  size="compact"
+  title="Controlled Toggle"
+/>
+
+<ComponentPreview
+  description="Pair the switch with a title and helper copy inside a settings row."
+  name="legacy-switch-settings-row"
+  size="compact"
+  title="Settings Row"
+/>
+
+<ComponentPreview
+  description="Render disabled on and off states when a setting is locked or unavailable."
+  name="legacy-switch-disabled"
+  size="compact"
+  title="Disabled States"
+/>
+
+<ComponentPreview
+  description="Use the switch inside form state when the toggle is part of a larger preferences form."
+  name="legacy-switch-form"
+  size="compact"
+  title="Form-Controlled Switch"
+/>
+
+## API Reference
+
+`LegacySwitchProps` extends the Radix switch root and adds `onLabel` and `offLabel` for the inline text rendered inside the glossy shell.
+
+<AutoTypeTable
+  path="registry/default/legacy-switch/legacy-switch.tsx"
+  name="LegacySwitchProps"
+/>
+
+## Notes
+
+- Use `checked` and `onCheckedChange` for controlled state, or `defaultChecked` for an uncontrolled toggle.
+- `onLabel` and `offLabel` default to `ON` and `OFF`, but you can replace them when a product needs custom wording.
+- Disabled switches keep the same chrome, which helps locked settings stay visually consistent with active ones.

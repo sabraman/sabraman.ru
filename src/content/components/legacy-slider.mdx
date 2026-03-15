@@ -1,0 +1,74 @@
+---
+title: "Legacy Slider"
+description: "Use this for settings, media controls, and signed numeric adjustments with legacy chrome."
+kicker: "Registry component"
+order: 3
+updatedAt: "2026-03-15"
+---
+
+## Why Use It
+
+- Best for volume, brightness, balance, and other single-value controls.
+- Keeps the interaction model of Radix Slider while exposing a simpler single-number API.
+- Works well inside compact settings rows, control racks, and form-driven preference panels.
+- Supports signed ranges, so the same component can handle centering and left or right offsets.
+
+## Installation
+
+Install the slider directly, then layer your labels and readouts around the component.
+
+<InstallCommand component="legacy-slider" />
+
+## Quick Start
+
+Start with one labeled slider and a value readout. That pattern covers most settings surfaces.
+
+<ComponentSource
+  src="src/components/legacy/examples/LegacySliderSingleExample.tsx"
+  title="components/legacy-slider-single-example.tsx"
+/>
+
+## Examples
+
+<ComponentPreview
+  description="A basic single slider with a value label for the default settings pattern."
+  name="legacy-slider-single"
+  size="compact"
+  title="Single Slider"
+/>
+
+<ComponentPreview
+  description="Group several sliders into a control rack for audio or device settings."
+  name="legacy-slider-rack"
+  size="compact"
+  title="Control Rack"
+/>
+
+<ComponentPreview
+  description="Use `min` and `max` to model a centered range such as stereo balance."
+  name="legacy-slider-signed"
+  size="compact"
+  title="Signed Range"
+/>
+
+<ComponentPreview
+  description="Wire the slider into form state when the value should submit with the rest of a settings form."
+  name="legacy-slider-form"
+  size="compact"
+  title="Form-Controlled Slider"
+/>
+
+## API Reference
+
+`LegacySliderProps` wraps Radix Slider but replaces the array-based value API with a single number for `value`, `defaultValue`, `onValueChange`, and `onValueCommit`.
+
+<AutoTypeTable
+  path="registry/default/legacy-slider/legacy-slider.tsx"
+  name="LegacySliderProps"
+/>
+
+## Notes
+
+- `value` and `defaultValue` take a single number rather than the array shape from Radix.
+- `min` defaults to `0` and `max` defaults to `100`, so signed ranges need both props set explicitly.
+- Use `onValueCommit` when you only want to persist after the thumb is released.

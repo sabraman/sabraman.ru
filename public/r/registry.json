@@ -4,100 +4,100 @@
 	"homepage": "https://sabraman.ru",
 	"items": [
 		{
-			"name": "ios-wheel-picker",
+			"name": "legacy-wheel-picker",
 			"type": "registry:block",
-			"title": "iOS 6 Wheel Picker",
-			"docs": "https://sabraman.ru/components/ios-wheel-picker",
-			"description": "Legacy iOS 6 style wheel picker component built on top of @ncdai/react-wheel-picker.",
+			"title": "Legacy Wheel Picker",
+			"docs": "https://sabraman.ru/components/legacy-wheel-picker",
+			"description": "Legacy wheel picker component built on top of @ncdai/react-wheel-picker.",
 			"dependencies": ["@ncdai/react-wheel-picker"],
 			"files": [
 				{
-					"path": "registry/default/ios-wheel-picker/ios-wheel-picker.tsx",
-					"target": "components/ios-wheel-picker.tsx",
+					"path": "registry/default/legacy-wheel-picker/legacy-wheel-picker.tsx",
+					"target": "components/legacy-wheel-picker.tsx",
 					"type": "registry:component"
 				}
 			]
 		},
 		{
-			"name": "ios-clock",
+			"name": "legacy-clock",
 			"type": "registry:ui",
-			"title": "Legacy iOS Clock",
-			"docs": "https://sabraman.ru/components/ios-clock",
-			"description": "Working iOS 6 analog clock icon with live hour, minute, and red seconds hands in day and night variants.",
+			"title": "Legacy Clock",
+			"docs": "https://sabraman.ru/components/legacy-clock",
+			"description": "Working analog clock icon with live hour, minute, and red seconds hands in day and night variants.",
 			"files": [
 				{
-					"path": "registry/default/ios-clock/ios-clock.tsx",
-					"target": "components/ios-clock.tsx",
+					"path": "registry/default/legacy-clock/legacy-clock.tsx",
+					"target": "components/legacy-clock.tsx",
 					"type": "registry:component"
 				}
 			]
 		},
 		{
-			"name": "ios-switch",
+			"name": "legacy-switch",
 			"type": "registry:ui",
-			"title": "Legacy iOS Switch",
-			"docs": "https://sabraman.ru/components/ios-switch",
-			"description": "Legacy iOS toggle switch built on top of @radix-ui/react-switch.",
+			"title": "Legacy Switch",
+			"docs": "https://sabraman.ru/components/legacy-switch",
+			"description": "Legacy toggle switch built on top of @radix-ui/react-switch.",
 			"dependencies": ["@radix-ui/react-switch"],
 			"files": [
 				{
-					"path": "registry/default/ios-switch/ios-switch.tsx",
-					"target": "components/ios-switch.tsx",
+					"path": "registry/default/legacy-switch/legacy-switch.tsx",
+					"target": "components/legacy-switch.tsx",
 					"type": "registry:component"
 				}
 			]
 		},
 		{
-			"name": "ios-slider",
+			"name": "legacy-slider",
 			"type": "registry:ui",
-			"title": "Legacy iOS Slider",
-			"docs": "https://sabraman.ru/components/ios-slider",
-			"description": "Glossy iOS 6 slider control with a raised metallic thumb and silver-blue track.",
+			"title": "Legacy Slider",
+			"docs": "https://sabraman.ru/components/legacy-slider",
+			"description": "Glossy legacy slider control with a raised metallic thumb and silver-blue track.",
 			"dependencies": ["@radix-ui/react-slider"],
 			"files": [
 				{
-					"path": "registry/default/ios-slider/ios-slider.tsx",
-					"target": "components/ios-slider.tsx",
+					"path": "registry/default/legacy-slider/legacy-slider.tsx",
+					"target": "components/legacy-slider.tsx",
 					"type": "registry:component"
 				}
 			]
 		},
 		{
-			"name": "ios-code-block-command",
+			"name": "legacy-code-block-command",
 			"type": "registry:ui",
-			"title": "iOS 6 Code Block Command",
-			"docs": "https://sabraman.ru/components/ios-code-block-command",
-			"description": "Skeuomorphic iOS 6 command block with package-manager tabs and clipboard support.",
+			"title": "Legacy Code Block Command",
+			"docs": "https://sabraman.ru/components/legacy-code-block-command",
+			"description": "Skeuomorphic legacy command block with package-manager tabs and clipboard support.",
 			"dependencies": ["lucide-react"],
 			"files": [
 				{
-					"path": "registry/default/ios-code-block-command/ios-code-block-command.tsx",
-					"target": "components/ios-code-block-command.tsx",
+					"path": "registry/default/legacy-code-block-command/legacy-code-block-command.tsx",
+					"target": "components/legacy-code-block-command.tsx",
 					"type": "registry:component"
 				},
 				{
-					"path": "registry/default/ios-bar-button/ios-bar-button.tsx",
-					"target": "components/ios-bar-button.tsx",
+					"path": "registry/default/legacy-bar-button/legacy-bar-button.tsx",
+					"target": "components/legacy-bar-button.tsx",
 					"type": "registry:component"
 				},
 				{
-					"path": "registry/default/ios-segmented-control/ios-segmented-control.tsx",
-					"target": "components/ios-segmented-control.tsx",
+					"path": "registry/default/legacy-segmented-control/legacy-segmented-control.tsx",
+					"target": "components/legacy-segmented-control.tsx",
 					"type": "registry:component"
 				}
 			]
 		},
 		{
-			"name": "ios-alert-dialog",
+			"name": "legacy-alert-dialog",
 			"type": "registry:ui",
-			"title": "iOS 6 Alert Dialog",
-			"docs": "https://sabraman.ru/components/ios-alert-dialog",
-			"description": "Muted navy iOS 6 alert dialog with a silver gloss cap, white keyline, and classic confirmation buttons.",
+			"title": "Legacy Alert Dialog",
+			"docs": "https://sabraman.ru/components/legacy-alert-dialog",
+			"description": "Muted navy legacy alert dialog with a silver gloss cap, white keyline, and classic confirmation buttons.",
 			"dependencies": ["@radix-ui/react-dialog", "lucide-react"],
 			"files": [
 				{
-					"path": "registry/default/ios-alert-dialog/ios-alert-dialog.tsx",
-					"target": "components/ios-alert-dialog.tsx",
+					"path": "registry/default/legacy-alert-dialog/legacy-alert-dialog.tsx",
+					"target": "components/legacy-alert-dialog.tsx",
 					"type": "registry:component"
 				},
 				{
@@ -108,15 +108,15 @@
 			]
 		},
 		{
-			"name": "ios-bar-button",
+			"name": "legacy-bar-button",
 			"type": "registry:ui",
-			"title": "iOS 6 Bar Button",
-			"docs": "https://sabraman.ru/components/ios-bar-button",
-			"description": "Classic iOS 6 navigation bar button with text, icon, text-icon, backward, accent, and destructive variants.",
+			"title": "Legacy Bar Button",
+			"docs": "https://sabraman.ru/components/legacy-bar-button",
+			"description": "Classic legacy navigation bar button with text, icon, text-icon, backward, accent, and destructive variants.",
 			"files": [
 				{
-					"path": "registry/default/ios-bar-button/ios-bar-button.tsx",
-					"target": "components/ios-bar-button.tsx",
+					"path": "registry/default/legacy-bar-button/legacy-bar-button.tsx",
+					"target": "components/legacy-bar-button.tsx",
 					"type": "registry:component"
 				}
 			]

@@ -219,7 +219,7 @@ export default async function RootLayout({
 	const messages = await getMessages();
 
 	return (
-		<html lang={locale} suppressHydrationWarning>
+		<html lang={locale} className="dark" suppressHydrationWarning>
 			<head>
 				{/* Structured Data for Person */}
 				<script
@@ -316,8 +316,9 @@ export default async function RootLayout({
 					<ClientRoot>
 						<ThemeProvider
 							attribute="class"
-							defaultTheme="system"
-							enableSystem
+							defaultTheme="dark"
+							forcedTheme="dark"
+							enableSystem={false}
 							disableTransitionOnChange
 						>
 							{/* Additional favicon meta tags */}

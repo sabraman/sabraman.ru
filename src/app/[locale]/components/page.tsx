@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { ComponentsHub } from "~/components/ios/ComponentsHub";
-import { getLocale } from "~/components/ios/component-pages-content";
+import { ComponentsHub } from "~/components/legacy/ComponentsHub";
+import { getLocale } from "~/components/legacy/component-pages-content";
 
 export async function generateMetadata({
 	params,

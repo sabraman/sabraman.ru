@@ -1,0 +1,155 @@
+"use client";
+
+import {
+	LegacyAlertDialog,
+	LegacyAlertDialogButton,
+	LegacyAlertDialogClose,
+	LegacyAlertDialogContent,
+	LegacyAlertDialogDescription,
+	LegacyAlertDialogFooter,
+	LegacyAlertDialogHeader,
+	LegacyAlertDialogTitle,
+	LegacyAlertDialogTrigger,
+} from "~/components/legacy-alert-dialog";
+import { cn } from "~/lib/utils";
+
+interface LegacyAlertDialogDemoProps {
+	className?: string;
+	compact?: boolean;
+}
+
+type AlertDialogVariant = "message" | "horizontal" | "vertical";
+
+type AlertDialogExample = {
+	description: string;
+	title: string;
+	triggerLabel: string;
+	variant: AlertDialogVariant;
+};
+
+const ALERT_DIALOG_EXAMPLES: AlertDialogExample[] = [
+	{
+		description:
+			"A simple notice with a title and message, without action buttons.",
+		title: "Message",
+		triggerLabel: "Message",
+		variant: "message",
+	},
+	{
+		description:
+			"A confirmation alert with one default action and one primary action.",
+		title: "Horizontal",
+		triggerLabel: "Horizontal",
+		variant: "horizontal",
+	},
+	{
+		description:
+			"A stacked alert with full-width actions for more emphatic decisions.",
+		title: "Vertical",
+		triggerLabel: "Vertical",
+		variant: "vertical",
+	},
+] as const;
+
+export function LegacyAlertDialogDemo({
+	className,
+	compact = false,
+}: LegacyAlertDialogDemoProps) {
+	return (
+		<div className="flex w-full justify-center">
+			<div
+				className={cn(
+					"flex w-full flex-wrap items-center justify-center",
+					compact ? "max-w-[420px] gap-3" : "max-w-[520px] gap-4",
+					className,
+				)}
+			>
+				{ALERT_DIALOG_EXAMPLES.map((example) => (
+					<LegacyAlertDialogExampleTrigger
+						compact={compact}
+						description={example.description}
+						key={example.variant}
+						title={example.title}
+						triggerLabel={example.triggerLabel}
+						variant={example.variant}
+					/>
+				))}
+			</div>
+		</div>
+	);
+}
+
+function LegacyAlertDialogExampleTrigger({
+	compact,
+	description,
+	title,
+	triggerLabel,
+	variant,
+}: AlertDialogExample & {
+	compact: boolean;
+}) {
+	return (
+		<LegacyAlertDialog>
+			<LegacyAlertDialogTrigger asChild>
+				<LegacyAlertDialogButton
+					className={cn("min-w-[108px]", compact ? "px-[10px]" : "px-[12px]")}
+				>
+					{triggerLabel}
+				</LegacyAlertDialogButton>
+			</LegacyAlertDialogTrigger>
+
+			<LegacyAlertDialogContent>
+				<LegacyAlertDialogHeader>
+					<LegacyAlertDialogTitle>{title}</LegacyAlertDialogTitle>
+					<LegacyAlertDialogDescription>
+						{description}
+					</LegacyAlertDialogDescription>
+				</LegacyAlertDialogHeader>
+
+				{variant === "horizontal" ? (
+					<LegacyAlertDialogFooter>
+						<LegacyAlertDialogClose asChild>
+							<LegacyAlertDialogButton className="min-w-0 flex-1">
+								Default
+							</LegacyAlertDialogButton>
+						</LegacyAlertDialogClose>
+						<LegacyAlertDialogClose asChild>
+							<LegacyAlertDialogButton
+								className="min-w-0 flex-1"
+								variant="primary"
+							>
+								Primary
+							</LegacyAlertDialogButton>
+						</LegacyAlertDialogClose>
+					</LegacyAlertDialogFooter>
+				) : null}
+
+				{variant === "vertical" ? (
+					<LegacyAlertDialogFooter className="flex-col sm:flex-col sm:justify-start">
+						<LegacyAlertDialogClose asChild>
+							<LegacyAlertDialogButton
+								className="w-full min-w-0"
+								variant="primary"
+							>
+								Primary
+							</LegacyAlertDialogButton>
+						</LegacyAlertDialogClose>
+						<LegacyAlertDialogClose asChild>
+							<LegacyAlertDialogButton
+								className="w-full min-w-0"
+								variant="primary"
+							>
+								Primary
+							</LegacyAlertDialogButton>
+						</LegacyAlertDialogClose>
+						<LegacyAlertDialogClose asChild>
+							<LegacyAlertDialogButton className="w-full min-w-0">
+								Default
+							</LegacyAlertDialogButton>
+						</LegacyAlertDialogClose>
+					</LegacyAlertDialogFooter>
+				) : null}
+			</LegacyAlertDialogContent>
+		</LegacyAlertDialog>
+	);
+}

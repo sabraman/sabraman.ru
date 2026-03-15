@@ -1,0 +1,74 @@
+---
+title: "Legacy Bar Button"
+description: "Use this for toolbar actions, back navigation, and compact calls to action inside legacy-style chrome."
+kicker: "Registry component"
+order: 7
+updatedAt: "2026-03-15"
+---
+
+## Why Use It
+
+- Best for navigation bars, action rows, and other tight spaces where a full button component feels too heavy.
+- Supports text, icon, text-icon, and backward layouts from one API.
+- Includes default, accent, and destructive gradients so you can keep hierarchy without swapping components.
+- Works well as a shared action primitive inside toolbars, install surfaces, and inline app controls.
+
+## Installation
+
+Install the standalone button when you want the navigation chrome without pulling in larger composed controls.
+
+<InstallCommand component="legacy-bar-button" />
+
+## Quick Start
+
+The mixed layout example is the fastest way to see how text, icon, and accent variants fit together.
+
+<ComponentSource
+  src="src/components/legacy/examples/LegacyBarButtonUsageExample.tsx"
+  title="components/legacy-bar-button-usage-example.tsx"
+/>
+
+## Examples
+
+<ComponentPreview
+  description="Mix backward, icon, text-icon, accent, and destructive buttons in one action row."
+  name="legacy-bar-button-usage"
+  size="compact"
+  title="Mixed Layouts"
+/>
+
+<ComponentPreview
+  description="Use the backward layout and compact icon buttons inside a faux navigation bar."
+  name="legacy-bar-button-toolbar"
+  size="compact"
+  title="Toolbar Navigation"
+/>
+
+<ComponentPreview
+  description="Accent variants work well for confirm, share, or route-style actions."
+  name="legacy-bar-button-accent"
+  size="compact"
+  title="Accent Actions"
+/>
+
+<ComponentPreview
+  description="Destructive variants keep compact controls visually separate from neutral actions."
+  name="legacy-bar-button-destructive"
+  size="compact"
+  title="Destructive Actions"
+/>
+
+## API Reference
+
+`LegacyBarButtonProps` covers the layout, icon, label, trailing icon, and visual variant. Most consumers only need to choose the layout and pass the icon content they want to render.
+
+<AutoTypeTable
+  path="registry/default/legacy-bar-button/legacy-bar-button.tsx"
+  name="LegacyBarButtonProps"
+/>
+
+## Notes
+
+- Leave `layout` undefined if you want the component to infer the correct mode from `label`, `icon`, and `trailingIcon`.
+- Use `backward` for navigation affordances and `text-icon` for action buttons that need a stronger label.
+- Accent and destructive treatments only change the chrome, so the component keeps the same button semantics and event model.

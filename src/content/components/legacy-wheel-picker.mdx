@@ -1,0 +1,83 @@
+---
+title: "Legacy Wheel Picker"
+description: "Use this for time pickers, counters, and finite option selectors with legacy chrome."
+kicker: "Registry block"
+order: 1
+updatedAt: "2026-03-15"
+---
+
+## Why Use It
+
+- Best for time pickers, numeric selectors, unit choosers, and any slot-machine style control.
+- Exposes the container shell and the wheel column separately, so you can compose one column or several.
+- Preserves the glossy selected row and shell framing while leaving option data and column layout in your control.
+- Supports both infinite looping and finite lists with disabled options.
+
+## Installation
+
+Install the registry block, then compose the shell and one or more columns in your own picker layout.
+
+<InstallCommand component="legacy-wheel-picker" />
+
+## Quick Start
+
+Start with one centered column. It is the simplest pattern and the right base for most finite selectors.
+
+<ComponentSource
+  src="src/components/legacy/examples/LegacyBasicPickerDemo.tsx"
+  title="components/legacy-wheel-picker-basic.tsx"
+/>
+
+## Examples
+
+<ComponentPreview
+  description="A single-column framework picker for the default copy-first setup."
+  name="legacy-wheel-picker-basic"
+  size="compact"
+  title="Single Column"
+/>
+
+<ComponentPreview
+  description="A three-column time picker with mixed widths and a finite meridiem column."
+  name="legacy-wheel-picker-time"
+  size="compact"
+  title="Three-Column Time Picker"
+/>
+
+<ComponentPreview
+  description="A finite list with a disabled option for cases where the picker should stop at the ends."
+  name="legacy-wheel-picker-finite"
+  size="compact"
+  title="Finite Options"
+/>
+
+<ComponentPreview
+  description="A wheel picker wired into React Hook Form so the selected value submits with the rest of the form."
+  name="legacy-wheel-picker-form"
+  size="compact"
+  title="React Hook Form"
+/>
+
+## API Reference
+
+`LegacyPickerContainerProps` controls the shell width and frame. `LegacyPickerColumnProps` controls the option list, alignment, and whether the wheel loops infinitely.
+
+### `LegacyPickerContainerProps`
+
+<AutoTypeTable
+  path="registry/default/legacy-wheel-picker/legacy-wheel-picker.tsx"
+  name="LegacyPickerContainerProps"
+/>
+
+### `LegacyPickerColumnProps`
+
+<AutoTypeTable
+  path="registry/default/legacy-wheel-picker/legacy-wheel-picker.tsx"
+  name="LegacyPickerColumnProps"
+/>
+
+## Notes
+
+- Use `infinite={false}` when the list should stop at the ends or include disabled options that should remain visible.
+- `padX`, `fontSize`, and `align` are the main controls for matching the wheel to your content density.
+- Multi-column layouts are just flex children inside `LegacyPickerContainer`, so separators and custom widths live in your own markup.

@@ -65,15 +65,11 @@ export function FloatingDock() {
 		>
 			<motion.div
 				className="pointer-events-auto relative"
-				initial={{ opacity: 0, y: 18, scale: 0.96 }}
+				initial={false}
 				animate={{
-					opacity: 1,
 					y: [0, -3, 0],
-					scale: 1,
 				}}
 				transition={{
-					opacity: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
-					scale: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
 					y: {
 						duration: 5.5,
 						ease: "easeInOut",
@@ -104,11 +100,11 @@ export function FloatingDock() {
 							<Link
 								key={item.href}
 								href={item.href}
+								scroll={false}
 								className="group relative"
 								aria-current={isActive ? "page" : undefined}
 							>
 								<motion.span
-									layout
 									whileHover={{ y: -2, scale: 1.02 }}
 									whileTap={{ y: 0, scale: 0.98 }}
 									className={cn(

@@ -2,21 +2,21 @@ import { ChevronDownIcon, ListIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import { IOS_COMPONENT_PAGE_SHELL_CLASSNAME } from "~/components/ios/component-page-layout";
-import { getComponentDocConfig } from "~/components/ios/docs/component-doc-config";
-import { slugifyComponentDocHeading } from "~/components/ios/docs/component-doc-headings";
-import { ComponentDocMdx } from "~/components/ios/docs/component-doc-mdx";
+import { LEGACY_COMPONENT_PAGE_SHELL_CLASSNAME } from "~/components/legacy/component-page-layout";
+import { getComponentDocConfig } from "~/components/legacy/docs/component-doc-config";
+import { slugifyComponentDocHeading } from "~/components/legacy/docs/component-doc-headings";
+import { ComponentDocMdx } from "~/components/legacy/docs/component-doc-mdx";
 import {
 	getComponentDocMarkdownUrl,
 	getComponentDocPath,
-} from "~/components/ios/docs/component-doc-paths";
-import { ComponentDocShowcase } from "~/components/ios/docs/component-doc-showcase";
+} from "~/components/legacy/docs/component-doc-paths";
+import { ComponentDocShowcase } from "~/components/legacy/docs/component-doc-showcase";
 import {
 	getAllComponentDocs,
 	getComponentDocBySlug,
 	getComponentDocNeighbours,
-} from "~/components/ios/docs/component-documents";
-import { IosComponentPageToolbar } from "~/components/ios/IosComponentPageToolbar";
+} from "~/components/legacy/docs/component-documents";
+import { LegacyComponentPageToolbar } from "~/components/legacy/LegacyComponentPageToolbar";
 
 const PAGE_BACKGROUND_STYLE = {
 	backgroundImage:
@@ -84,8 +84,8 @@ export default async function ComponentDocPage({
 				style={PAGE_BACKGROUND_STYLE}
 			/>
 
-			<div className={`${IOS_COMPONENT_PAGE_SHELL_CLASSNAME} gap-10`}>
-				<IosComponentPageToolbar
+			<div className={`${LEGACY_COMPONENT_PAGE_SHELL_CLASSNAME} gap-10`}>
+				<LegacyComponentPageToolbar
 					markdownUrl={getComponentDocMarkdownUrl(doc.slug, locale)}
 					nextHref={
 						neighbours.next

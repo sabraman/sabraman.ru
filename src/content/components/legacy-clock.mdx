@@ -1,0 +1,74 @@
+---
+title: "Legacy Clock"
+description: "Use this for live analog time displays, launcher icons, and decorative status surfaces."
+kicker: "Registry component"
+order: 5
+updatedAt: "2026-03-15"
+---
+
+## Why Use It
+
+- Best for app icons, dashboards, and status rows where a static clock icon would feel flat.
+- Defaults to live local time, so the component updates itself without extra state wiring.
+- Supports fixed snapshots for previews, screenshots, and seeded mock data.
+- Includes both day and night variants, which makes it easy to reuse across different chrome treatments.
+
+## Installation
+
+Install the component directly, then drop it anywhere you need a live or fixed clock face.
+
+<InstallCommand component="legacy-clock" />
+
+## Quick Start
+
+Start with the live day and night variants to cover the most common icon and status use cases.
+
+<ComponentSource
+  src="src/components/legacy/examples/LegacyClockUsageExample.tsx"
+  title="components/legacy-clock-usage-example.tsx"
+/>
+
+## Examples
+
+<ComponentPreview
+  description="Use the default live mode for day and night clocks that stay in sync with local time."
+  name="legacy-clock-live"
+  size="compact"
+  title="Live Day and Night"
+/>
+
+<ComponentPreview
+  description="Pass a fixed `date` when you need repeatable screenshots or stable seeded demos."
+  name="legacy-clock-fixed"
+  size="compact"
+  title="Fixed Snapshot"
+/>
+
+<ComponentPreview
+  description="Scale the same component up or down for icons, cards, and larger ornamental treatments."
+  name="legacy-clock-sizes"
+  size="compact"
+  title="Size Variations"
+/>
+
+<ComponentPreview
+  description="The same clock can sit inside a small status or launcher row without extra wrappers."
+  name="legacy-clock-status"
+  size="compact"
+  title="Status Row"
+/>
+
+## API Reference
+
+`LegacyClockProps` mostly controls time source and presentation. The main decisions are whether the clock should stay live, whether to show seconds, and how large the frame should render.
+
+<AutoTypeTable
+  path="registry/default/legacy-clock/legacy-clock.tsx"
+  name="LegacyClockProps"
+/>
+
+## Notes
+
+- `live` defaults to `true`, but passing `date` or setting `live={false}` gives you a stable snapshot.
+- `showSeconds={false}` is useful when you want a quieter icon or a fixed mock without a ticking hand.
+- `size` scales the entire asset treatment, so you do not need custom SVG math for different contexts.

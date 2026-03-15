@@ -1,0 +1,79 @@
+---
+title: "Legacy Alert Dialog"
+description: "Use this for confirmations, warnings, and high-attention decisions that need classic legacy chrome."
+kicker: "Registry component"
+order: 6
+updatedAt: "2026-03-15"
+---
+
+## Why Use It
+
+- Best for destructive actions, permission prompts, and blocking notices.
+- Ships as composable dialog pieces, so you can build message-only, two-button, or stacked action layouts from the same API.
+- Keeps the glossy panel and button treatment without forcing a custom dialog state model.
+- Works well when you want the alert itself to carry the visual weight instead of the trigger button.
+
+## Installation
+
+Install the component and the supporting dialog primitive from one registry item.
+
+<InstallCommand component="legacy-alert-dialog" />
+
+## Quick Start
+
+Start with a standard confirm and cancel flow, then branch into alternate layouts if the action needs more context.
+
+<ComponentSource
+  src="src/components/legacy/examples/LegacyAlertDialogConfirmExample.tsx"
+  title="components/legacy-alert-dialog-confirm-example.tsx"
+/>
+
+## Examples
+
+<ComponentPreview
+  description="A simple confirm or cancel layout for the default destructive flow."
+  name="legacy-alert-dialog-confirm"
+  size="compact"
+  title="Confirm and Cancel"
+/>
+
+<ComponentPreview
+  description="A notice-only alert that relies on the close button instead of footer actions."
+  name="legacy-alert-dialog-message"
+  size="compact"
+  title="Message Only"
+/>
+
+<ComponentPreview
+  description="A destructive trigger paired with stronger action wording inside the dialog."
+  name="legacy-alert-dialog-destructive"
+  size="compact"
+  title="Destructive Confirmation"
+/>
+
+<ComponentPreview
+  description="A stacked footer for flows that need multiple next steps instead of one primary decision."
+  name="legacy-alert-dialog-stacked"
+  size="compact"
+  title="Stacked Actions"
+/>
+
+## API Reference
+
+`LegacyAlertDialogContentProps` controls the panel shell and layout. `LegacyAlertDialogButtonProps` covers the glossy action buttons used in triggers and footers.
+
+<AutoTypeTable
+  path="registry/default/legacy-alert-dialog/legacy-alert-dialog.tsx"
+  name="LegacyAlertDialogContentProps"
+/>
+
+<AutoTypeTable
+  path="registry/default/legacy-alert-dialog/legacy-alert-dialog.tsx"
+  name="LegacyAlertDialogButtonProps"
+/>
+
+## Notes
+
+- Use `showCloseButton` when the alert should dismiss without dedicating space to footer actions.
+- The trigger, content, header, and footer exports can be composed around either controlled or uncontrolled dialog state.
+- `LegacyAlertDialogButton` exposes `default` and `primary` variants, so the action hierarchy stays consistent across layouts.

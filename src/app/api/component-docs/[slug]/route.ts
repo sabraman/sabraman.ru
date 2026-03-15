@@ -1,8 +1,8 @@
-import { renderComponentDocMarkdown } from "~/components/ios/docs/component-doc-markdown";
+import { renderComponentDocMarkdown } from "~/components/legacy/docs/component-doc-markdown";
 import {
 	getAllComponentDocs,
 	getComponentDocBySlug,
-} from "~/components/ios/docs/component-documents";
+} from "~/components/legacy/docs/component-documents";
 
 const CACHE_CONTROL = "public, s-maxage=3600, stale-while-revalidate=86400";
 
