@@ -54,6 +54,76 @@
 
 :root {
 	--radius: 0.625rem;
+	--legacy-components-hub-bg:
+		radial-gradient(
+			1200px 700px at 12% -6%,
+			rgba(255, 255, 255, 0.18) 0%,
+			rgba(255, 255, 255, 0.08) 24%,
+			transparent 64%
+		),
+		linear-gradient(
+			180deg,
+			rgba(98, 111, 124, 0.82) 0%,
+			rgba(77, 89, 102, 0.84) 40%,
+			rgba(59, 70, 82, 0.9) 100%
+		),
+		url("/figma/legacy-home/folder-fabric.png");
+	--legacy-components-hub-overlay:
+		radial-gradient(
+			900px 420px at 50% 26%,
+			rgba(223, 231, 242, 0.08) 0%,
+			transparent 68%
+		),
+		linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.08) 0%,
+			rgba(255, 255, 255, 0.02) 10%,
+			transparent 28%,
+			transparent 72%,
+			rgba(0, 0, 0, 0.18) 100%
+		);
+	--legacy-components-doc-bg:
+		radial-gradient(
+			860px 380px at 50% 0%,
+			rgba(198, 210, 227, 0.1) 0%,
+			transparent 70%
+		),
+		linear-gradient(
+			180deg,
+			rgba(22, 27, 34, 0.82) 0%,
+			rgba(15, 19, 26, 0.88) 48%,
+			rgba(12, 16, 22, 0.94) 100%
+		),
+		url("/figma/legacy-home/folder-fabric.png");
+	--legacy-components-doc-overlay:
+		radial-gradient(
+			1200px 420px at 50% 15%,
+			rgba(255, 255, 255, 0.035) 0%,
+			transparent 72%
+		),
+		linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.04) 0%,
+			rgba(255, 255, 255, 0.012) 11%,
+			transparent 28%
+		);
+	--legacy-components-vignette:
+		linear-gradient(
+			90deg,
+			rgba(7, 11, 16, 0.42) 0%,
+			rgba(7, 11, 16, 0.1) 14%,
+			rgba(7, 11, 16, 0) 24%,
+			rgba(7, 11, 16, 0) 76%,
+			rgba(7, 11, 16, 0.1) 86%,
+			rgba(7, 11, 16, 0.42) 100%
+		),
+		linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.045) 0%,
+			transparent 16%,
+			transparent 72%,
+			rgba(0, 0, 0, 0.28) 100%
+		);
 	--background: oklch(1 0 0); /* White */
 	--foreground: oklch(0.141 0.005 285.823); /* Zinc 950 */
 	--card: oklch(1 0 0); /* White */
@@ -179,4 +249,58 @@
 	filter: invert(1);
 	transition: filter 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 	will-change: filter;
+}
+
+@layer utilities {
+	.legacy-components-hub-backdrop {
+		background-color: #4b5763;
+		background-image: var(--legacy-components-hub-bg);
+		background-position:
+			center top,
+			top left;
+		background-repeat: no-repeat, no-repeat, repeat;
+		background-size:
+			auto,
+			auto,
+			256px 256px;
+	}
+
+	.legacy-components-hub-overlay {
+		background-image: var(--legacy-components-hub-overlay);
+		background-position:
+			center top,
+			center;
+		background-repeat: no-repeat, no-repeat;
+		background-size: auto, auto;
+	}
+
+	.legacy-components-doc-backdrop {
+		background-color: #0d1117;
+		background-image: var(--legacy-components-doc-bg);
+		background-position:
+			center top,
+			center,
+			top left;
+		background-repeat: no-repeat, no-repeat, repeat;
+		background-size:
+			auto,
+			auto,
+			256px 256px;
+	}
+
+	.legacy-components-doc-overlay {
+		background-image: var(--legacy-components-doc-overlay);
+		background-position:
+			center top,
+			center top;
+		background-repeat: no-repeat, no-repeat;
+		background-size: auto, auto;
+	}
+
+	.legacy-components-backdrop-vignette {
+		background-image: var(--legacy-components-vignette);
+		background-position: center, center;
+		background-repeat: no-repeat, no-repeat;
+		background-size: auto, auto;
+	}
 }

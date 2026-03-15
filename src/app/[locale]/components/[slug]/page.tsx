@@ -18,13 +18,6 @@ import {
 } from "~/components/legacy/docs/component-documents";
 import { LegacyComponentPageToolbar } from "~/components/legacy/LegacyComponentPageToolbar";
 
-const PAGE_BACKGROUND_STYLE = {
-	backgroundImage:
-		"repeating-linear-gradient(45deg, #11141a 25%, transparent 25%, transparent 75%, #11141a 75%, #11141a), repeating-linear-gradient(45deg, #11141a 25%, #161a22 25%, #161a22 75%, #11141a 75%, #11141a)",
-	backgroundPosition: "0 0, 10px 10px",
-	backgroundSize: "20px 20px",
-} as const;
-
 export function generateStaticParams() {
 	return getAllComponentDocs().map((doc) => ({
 		slug: doc.slug,
@@ -78,13 +71,14 @@ export default async function ComponentDocPage({
 	const sections = extractComponentDocSections(doc.content);
 
 	return (
-		<main className="relative min-h-screen bg-[#111419] pb-32 text-white selection:bg-white/20">
-			<div
-				className="pointer-events-none absolute inset-0 bg-[#161a22] opacity-80"
-				style={PAGE_BACKGROUND_STYLE}
-			/>
+		<main className="relative min-h-screen overflow-hidden bg-[#0d1117] pb-32 text-white selection:bg-white/20">
+			<div className="legacy-components-doc-backdrop pointer-events-none absolute inset-0" />
+			<div className="legacy-components-doc-overlay pointer-events-none absolute inset-0 opacity-90" />
+			<div className="legacy-components-backdrop-vignette pointer-events-none absolute inset-0 opacity-90" />
 
-			<div className={`${LEGACY_COMPONENT_PAGE_SHELL_CLASSNAME} gap-10`}>
+			<div
+				className={`${LEGACY_COMPONENT_PAGE_SHELL_CLASSNAME} relative z-[1] gap-10`}
+			>
 				<LegacyComponentPageToolbar
 					markdownUrl={getComponentDocMarkdownUrl(doc.slug, locale)}
 					nextHref={
