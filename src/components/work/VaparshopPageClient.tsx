@@ -155,7 +155,7 @@ export default function VaparshopPage() {
 	];
 
 	return (
-		<div ref={setContainerRef} className="bg-background">
+		<div ref={setContainerRef} className="relative bg-background">
 			{/* Hero Section with Parallax */}
 			<div className="relative flex h-screen items-center justify-center overflow-hidden">
 				{/* Background gradient animation */}

@@ -7,7 +7,7 @@
 	src: url("/HeadingNowVariable-Regular.ttf") format("truetype");
 	font-weight: 100 900;
 	font-stretch: 100% 1000%;
-	font-display: swap;
+	font-display: block;
 }
 
 @custom-variant dark (&:is(.dark *));

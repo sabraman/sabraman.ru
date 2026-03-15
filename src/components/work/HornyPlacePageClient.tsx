@@ -95,7 +95,7 @@ export default function HornyPlacePage() {
 	];
 
 	return (
-		<div ref={setContainerRef} className="bg-background">
+		<div ref={setContainerRef} className="relative bg-background">
 			{/* Hero section with optimized background */}
 			<section className="relative flex h-screen items-center justify-center overflow-hidden">
 				{/* Simplified Background Elements */}

@@ -1,10 +1,43 @@
 import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function FullScreenIntro({ onFinish }: { onFinish?: () => void }) {
 	const controls = useAnimation();
+	const [isFontReady, setIsFontReady] = useState(false);
 
 	useEffect(() => {
+		let isCancelled = false;
+
+		const waitForIntroFont = async () => {
+			if (typeof document === "undefined" || !("fonts" in document)) {
+				if (!isCancelled) {
+					setIsFontReady(true);
+				}
+				return;
+			}
+
+			try {
+				await document.fonts.load('1em "Heading Now Variable"');
+				await document.fonts.ready;
+			} finally {
+				if (!isCancelled) {
+					setIsFontReady(true);
+				}
+			}
+		};
+
+		waitForIntroFont();
+
+		return () => {
+			isCancelled = true;
+		};
+	}, []);
+
+	useEffect(() => {
+		if (!isFontReady) {
+			return;
+		}
+
 		controls
 			.start({
 				fontVariationSettings: `'wght' 1000, 'wdth' 100`,
@@ -25,17 +58,16 @@ export function FullScreenIntro({ onFinish }: { onFinish?: () => void }) {
 					setTimeout(() => onFinish(), 300);
 				}
 			});
-	}, [controls, onFinish]);
+	}, [controls, isFontReady, onFinish]);
 
 	return (
 		<motion.div
 			// Use exit animation for a smoother transition out if needed
 			// exit={{ opacity: 0, transition: { duration: 0.5 } }}
-			className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
+			className="fixed inset-0 z-[9999] flex items-center justify-center bg-background relative"
 			style={{ width: "100vw", height: "100vh" }}
 		>
 			<motion.h1
-				layoutId="sabraman-title" // Add the layoutId here
 				initial={{
 					fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
 					fontSize: "min(100vh, 80vw)", // Min size
@@ -52,6 +84,7 @@ export function FullScreenIntro({ onFinish }: { onFinish?: () => void }) {
 					textAlign: "center",
 					margin: 0,
 					color: "var(--foreground)",
+					visibility: isFontReady ? "visible" : "hidden",
 					willChange: "transform, font-variation-settings",
 				}}
 			>

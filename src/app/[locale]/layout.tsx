@@ -206,6 +206,7 @@ export default async function RootLayout({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
+	const isProduction = process.env.NODE_ENV === "production";
 
 	// Ensure that the incoming `locale` is valid
 	if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
@@ -221,6 +222,13 @@ export default async function RootLayout({
 	return (
 		<html lang={locale} className="dark" suppressHydrationWarning>
 			<head>
+				<link
+					rel="preload"
+					href="/HeadingNowVariable-Regular.ttf"
+					as="font"
+					type="font/ttf"
+					crossOrigin="anonymous"
+				/>
 				{/* Structured Data for Person */}
 				<script
 					type="application/ld+json"
@@ -285,31 +293,35 @@ export default async function RootLayout({
 						}),
 					}}
 				/>
-				{/* Yandex.Metrika counter */}
-				<script
-					type="text/javascript"
-					dangerouslySetInnerHTML={{
-						__html: `
-							(function(m,e,t,r,i,k,a){
-								m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-								m[i].l=1*new Date();
-								for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-								k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-							})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103523450', 'ym');
+				{isProduction ? (
+					<>
+						{/* Yandex.Metrika counter */}
+						<script
+							type="text/javascript"
+							dangerouslySetInnerHTML={{
+								__html: `
+									(function(m,e,t,r,i,k,a){
+										m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+										m[i].l=1*new Date();
+										for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+										k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+									})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103523450', 'ym');
 
-							ym(103523450, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
-						`,
-					}}
-				/>
-				<noscript>
-					<div>
-						<img
-							src="https://mc.yandex.ru/watch/103523450"
-							style={{ position: "absolute", left: "-9999px" }}
-							alt=""
+									ym(103523450, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+								`,
+							}}
 						/>
-					</div>
-				</noscript>
+						<noscript>
+							<div>
+								<img
+									src="https://mc.yandex.ru/watch/103523450"
+									style={{ position: "absolute", left: "-9999px" }}
+									alt=""
+								/>
+							</div>
+						</noscript>
+					</>
+				) : null}
 			</head>
 			<body className={jetbrainsMono.className}>
 				<NextIntlClientProvider messages={messages}>
