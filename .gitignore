@@ -62,6 +62,7 @@ google9a037a0cda852d94.html
 
 # Temporary files
 temp/
+tmp/
 
 # claude files
 .claude/

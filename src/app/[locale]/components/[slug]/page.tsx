@@ -37,10 +37,13 @@ export async function generateMetadata({
 	}
 
 	const localizedPath = getComponentDocPath(doc.slug, locale);
+	const isRussian = locale === "ru";
+	const title = doc.frontmatter.title;
+	const description = doc.frontmatter.description;
 
 	return {
-		title: doc.frontmatter.title,
-		description: doc.frontmatter.description,
+		title,
+		description,
 		alternates: {
 			canonical: localizedPath,
 			languages: {
@@ -48,6 +51,19 @@ export async function generateMetadata({
 				ru: getComponentDocPath(doc.slug, "ru"),
 				"x-default": getComponentDocPath(doc.slug, "en"),
 			},
+		},
+		openGraph: {
+			title,
+			description,
+			url: `https://sabraman.ru${localizedPath}`,
+			siteName: "Sabraman - Danya Yudin Portfolio",
+			locale: isRussian ? "ru_RU" : "en_US",
+			type: "article",
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
 		},
 	};
 }

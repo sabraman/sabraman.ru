@@ -10,11 +10,13 @@ export async function generateMetadata({
 	const { locale } = await params;
 	const isRussian = locale === "ru";
 	const path = isRussian ? "/ru/components" : "/components";
+	const title = "Components";
+	const description =
+		"A collection of reusable legacy skeuomorphic components.";
 
 	return {
-		title: "Components Gallery",
-		description:
-			"A collection of premium skeuomorphic UI components for React.",
+		title,
+		description,
 		alternates: {
 			canonical: path,
 			languages: {
@@ -22,6 +24,19 @@ export async function generateMetadata({
 				ru: "/ru/components",
 				"x-default": "/components",
 			},
+		},
+		openGraph: {
+			title,
+			description,
+			url: `https://sabraman.ru${path}`,
+			siteName: "Sabraman - Danya Yudin Portfolio",
+			locale: isRussian ? "ru_RU" : "en_US",
+			type: "website",
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
 		},
 	};
 }

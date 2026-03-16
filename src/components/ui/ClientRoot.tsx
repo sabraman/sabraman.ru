@@ -3,6 +3,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { getConsoleFunction, setConsoleFunction } from "three";
+import { usePathname } from "~/i18n/navigation";
 import { FullScreenIntro } from "./FullScreenIntro";
 
 const CLOCK_DEPRECATION_MESSAGE =
@@ -55,19 +56,26 @@ if (typeof window !== "undefined" && !hasPatchedThreeConsole) {
 }
 
 export function ClientRoot({ children }: { children: React.ReactNode }) {
+	const pathname = usePathname();
+	const isOgPreviewRoute = pathname.includes("/og-preview");
 	const [showIntro, setShowIntro] = useState(true);
 	const initialScrollYRef = useRef(0);
 	const hasCapturedScrollRef = useRef(false);
 
 	// Re-enable the state change based on intro finishing
 	useEffect(() => {
+		if (isOgPreviewRoute) {
+			setShowIntro(false);
+			return;
+		}
+
 		// Максимальное время для отображения интро - 5 секунд
 		const timer = setTimeout(() => setShowIntro(false), 5000);
 		return () => clearTimeout(timer);
-	}, []);
+	}, [isOgPreviewRoute]);
 
 	useLayoutEffect(() => {
-		if (typeof window === "undefined") {
+		if (typeof window === "undefined" || isOgPreviewRoute) {
 			return;
 		}
 
@@ -100,16 +108,24 @@ export function ClientRoot({ children }: { children: React.ReactNode }) {
 			body.style.overflow = previousBodyOverflow;
 			documentElement.style.overflow = previousHtmlOverflow;
 		};
-	}, [showIntro]);
+	}, [isOgPreviewRoute, showIntro]);
 
 	return (
 		<>
-			<AnimatePresence>
-				{showIntro && <FullScreenIntro onFinish={() => setShowIntro(false)} />}
-			</AnimatePresence>
+			{isOgPreviewRoute ? null : (
+				<AnimatePresence>
+					{showIntro && (
+						<FullScreenIntro onFinish={() => setShowIntro(false)} />
+					)}
+				</AnimatePresence>
+			)}
 			{/* The main content fades in, controlled by opacity */}
 			<div
-				style={{ opacity: showIntro ? 0 : 1, transition: "opacity 0.6s 0.3s" }}
+				style={
+					isOgPreviewRoute
+						? undefined
+						: { opacity: showIntro ? 0 : 1, transition: "opacity 0.6s 0.3s" }
+				}
 			>
 				{children}
 			</div>
