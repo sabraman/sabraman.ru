@@ -4,7 +4,8 @@ Saint Petersburg, Russia | sabraman@ya.ru | Telegram: @sabraman | GitHub: github
 
 ### Profile
 
-Frontend / full-stack developer with a strong product and design background. I mostly work with **Next.js, React, TypeScript, and Node.js** and usually take a product from interface work to integrations, admin flows, reporting, and release. The work I know best is Telegram mini apps and bots, internal tools, AI-powered search, and PDF / print workflows.
+Frontend / full-stack developer with a strong product, UI, and brand design background. I came into frontend through visual design, so I care about typography, composition, motion, and product feel as much as implementation. I mostly work with **Next.js, React, TypeScript, and Node.js** and usually take a product from interface work to integrations, admin flows, reporting, and release. The work I know best is Telegram mini apps and bots, internal tools, AI-powered search, and PDF / print workflows.
+Currently freelancing and open to new product, frontend, and Telegram Mini App work.
 
 ### Key Skills
 
@@ -17,14 +18,14 @@ Frontend / full-stack developer with a strong product and design background. I m
 
 ### Work Experience
 
-**VAPARSHOP | Designer & Junior Developer**\
-_June 2024 – Present | Saint Petersburg_
+**VAPARSHOP | Designer & Developer**\
+_June 2024 – March 2025 | Saint Petersburg_
 
 - Build internal tools and Telegram products for day-to-day retail operations.
 - Shipped **Price Tag Generator** to automate price tag generation and print export.
 - Built Telegram bots for reporting, operational workflows, and sales conversion tracking.
 - Developed a Taplink alternative in **Next.js** with blog modules, location pages, and interactive widgets.
-- Currently building a **Telegram Mini App** in Next.js with GetMeBack API integration, QR scanning, phone search, shift tracking, reporting, and a built-in mini LMS.
+- Built a **Telegram Mini App** in Next.js with GetMeBack API integration, QR scanning, phone search, shift tracking, reporting, and a built-in mini LMS.
 
 **HORNY PLACE | Visual Designer & Developer**\
 _October 2022 – May 2024 | Saint Petersburg_

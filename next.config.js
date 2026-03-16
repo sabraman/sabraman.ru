@@ -64,14 +64,34 @@ const config = {
 				permanent: true,
 			},
 			{
+				source: "/esperansa-mini-app",
+				destination: "/flower-mini-app",
+				permanent: true,
+			},
+			{
+				source: "/ru/esperansa-mini-app",
+				destination: "/ru/flower-mini-app",
+				permanent: true,
+			},
+			{
+				source: "/work/esperansa-mini-app",
+				destination: "/flower-mini-app",
+				permanent: true,
+			},
+			{
+				source: "/ru/work/esperansa-mini-app",
+				destination: "/ru/flower-mini-app",
+				permanent: true,
+			},
+			{
 				source:
-					"/work/:slug(vaparshop|horny-place|smo-tg-miniapp|smoky-market-loyalty-miniapp|plonq-ai-search|esperansa-mini-app|smbro|arch-taplink|vape-me-fast|price-tag-printer|psp-book-reader|florist-quiz|schrute-farm)",
+					"/work/:slug(vaparshop|horny-place|smo-tg-miniapp|smoky-market-loyalty-miniapp|plonq-ai-search|flower-mini-app|smbro|arch-taplink|vape-me-fast|price-tag-printer|psp-book-reader|florist-quiz|schrute-farm)",
 				destination: "/:slug",
 				permanent: true,
 			},
 			{
 				source:
-					"/ru/work/:slug(vaparshop|horny-place|smo-tg-miniapp|smoky-market-loyalty-miniapp|plonq-ai-search|esperansa-mini-app|smbro|arch-taplink|vape-me-fast|price-tag-printer|psp-book-reader|florist-quiz|schrute-farm)",
+					"/ru/work/:slug(vaparshop|horny-place|smo-tg-miniapp|smoky-market-loyalty-miniapp|plonq-ai-search|flower-mini-app|smbro|arch-taplink|vape-me-fast|price-tag-printer|psp-book-reader|florist-quiz|schrute-farm)",
 				destination: "/ru/:slug",
 				permanent: true,
 			},

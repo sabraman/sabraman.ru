@@ -42,12 +42,12 @@ const PROJECT_ICON_META: Record<ProjectSlug, ProjectAppIconMeta> = {
 		symbol: "AR",
 		motif: "cards",
 	},
-	"esperansa-mini-app": {
+	"flower-mini-app": {
 		accentFrom: "#5ea6d8",
 		accentTo: "#204f85",
 		glow: "#d8f2ff",
-		badge: "LAB",
-		symbol: "E",
+		badge: "FLWR",
+		symbol: "FM",
 		motif: "spark",
 	},
 	"florist-quiz": {

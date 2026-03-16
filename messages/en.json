@@ -7,14 +7,17 @@
 	"hero": {
 		"title": "DANYA YUDIN",
 		"subtitle": "CREATIVE DESIGNER &",
-		"subtitleHighlight": "EARLY-STAGE DEVELOPER",
+		"subtitleHighlight": "FRONTEND DEVELOPER",
 		"downloadResume": "DOWNLOAD RESUME",
+		"downloadPdf": "Download PDF",
+		"downloadMarkdown": "Download Markdown",
+		"resumeFormats": "Resume Formats",
 		"getInTouch": "GET IN TOUCH"
 	},
 	"about": {
 		"title": "I AM",
-		"description1": "Creative Designer and Early-Stage Developer with extensive hands-on experience in visual design, branding, and application development. <sabraman>Sabraman</sabraman> - Danya Yudin (Даня Юдин) specializes in creating innovative digital solutions.",
-		"description2": "I have a proven track record of transforming concepts into visually appealing and functional digital products. My passion lies in integrating design and technology to deliver intuitive user experiences. Known as <karton>Karton</karton> in creative circles, I bring unique perspectives to every project.",
+		"description1": "Design-led frontend and product developer with deep hands-on experience in visual design, branding, and interface systems. <sabraman>Sabraman</sabraman> - Danya Yudin (Даня Юдин) builds digital products that feel considered both visually and technically.",
+		"description2": "I came into frontend through design, so I care about typography, composition, motion, and brand consistency as much as implementation. I take projects from visual direction and interface design to frontend architecture, integrations, and release. Known as <karton>Karton</karton> in creative circles, I bring both aesthetic judgment and shipping discipline to the work.",
 		"expertiseAreas": "EXPERTISE AREAS",
 		"visualDesign": {
 			"title": "Visual Design",
@@ -49,16 +52,16 @@
 		"title": "WORK",
 		"titleSecond": "EXPERIENCE",
 		"vaparshop": {
-			"title": "Designer & Junior Developer",
-			"period": "June 2024 – Present",
+			"title": "Designer & Developer",
+			"period": "June 2024 – March 2025",
 			"location": "Saint Petersburg",
 			"achievements": {
-				"0": "Developed Telegram bots significantly improving internal operational efficiency",
-				"1": "Designed and developed a custom Price Tag Generator web application to automate manual tasks",
+				"0": "Developed Telegram bots that significantly improved internal operational efficiency",
+				"1": "Designed and developed a custom Price Tag Generator web application to automate manual work",
 				"2": "Created branded Telegram Emoji Pack to enhance brand recognition",
 				"3": "Redesigned corporate presentations, reinforcing the unique visual identity",
 				"4": "Developed a Taplink alternative using Next.js, including blogs, location points, and interactive widgets",
-				"5": "Building a Telegram Mini App integrated with GetMeBack API"
+				"5": "Built a Telegram Mini App integrated with GetMeBack API, QR scanning, phone search, shift tracking, reporting, and a mini LMS"
 			}
 		},
 		"hornyPlace": {
@@ -130,9 +133,9 @@
 	"work": {
 		"vaparshop": {
 			"title": "VAPARSHOP",
-			"subtitle": "Designer & Junior Developer",
-			"period": "June 2024 – Present",
-			"description": "Leading design and development initiatives for a growing vape retail company in Saint Petersburg.",
+			"subtitle": "Designer & Developer",
+			"period": "June 2024 – March 2025",
+			"description": "Led design and development initiatives for a growing vape retail company in Saint Petersburg.",
 			"challenge": "The Challenge",
 			"challengeText": "VAPARSHOP needed to modernize their operations and improve efficiency across multiple business processes while maintaining their unique brand identity.",
 			"solution": "The Solution",
@@ -144,7 +147,7 @@
 				"2": "Designed branded Telegram Emoji Pack for enhanced brand recognition",
 				"3": "Redesigned corporate presentations with unique visual identity",
 				"4": "Built a comprehensive Taplink alternative using Next.js",
-				"5": "Currently developing Telegram Mini App with GetMeBack API integration"
+				"5": "Built a Telegram Mini App with GetMeBack API integration, QR scanning, phone search, shift tracking, reporting, and a mini LMS"
 			},
 			"technologies": "Technologies Used",
 			"techStack": {

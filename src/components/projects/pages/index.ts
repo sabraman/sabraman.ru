@@ -21,7 +21,7 @@ export const PROJECT_PAGE_COMPONENTS: Record<
 	ProjectPageComponent
 > = {
 	"arch-taplink": ArchTaplinkPage,
-	"esperansa-mini-app": EsperansaMiniAppPage,
+	"flower-mini-app": EsperansaMiniAppPage,
 	"florist-quiz": FloristQuizPage,
 	"horny-place": HornyPlacePage,
 	"plonq-ai-search": PlonqAiSearchPage,

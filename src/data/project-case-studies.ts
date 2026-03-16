@@ -792,27 +792,27 @@ export const PROJECT_CASE_STUDIES: Record<ProjectSlug, ProjectCaseStudy> = {
 			),
 		},
 	},
-	"esperansa-mini-app": {
-		slug: "esperansa-mini-app",
-		projectId: "esperansa-mini-app",
-		visibility: PROJECT_BY_SLUG["esperansa-mini-app"].visibility,
-		status: PROJECT_BY_SLUG["esperansa-mini-app"].status,
+	"flower-mini-app": {
+		slug: "flower-mini-app",
+		projectId: "flower-mini-app",
+		visibility: PROJECT_BY_SLUG["flower-mini-app"].visibility,
+		status: PROJECT_BY_SLUG["flower-mini-app"].status,
 		hero: {
-			badge: p("Foundation Project", "Проект-основа"),
+			badge: p("Retail Operations Mini App", "Mini App для операционки"),
 			summary: p(
-				"A Telegram Mini App scaffold built for secure auth, maintainable growth, and fast feature delivery.",
-				"Каркас Telegram Mini App, построенный для безопасной авторизации, поддерживаемого роста и быстрой поставки функций.",
+				"A Telegram Mini App for flower write-off tracking across retail locations, with role-based access, fast daily flows, and built-in reporting.",
+				"Telegram Mini App для учета списаний цветов по торговым точкам: с ролями, быстрыми ежедневными сценариями и встроенной отчетностью.",
 			),
 		},
 		sections: [
 			section("context", p("Problem and context", "Контекст и задача"), [
 				p(
-					"Early product stages often fail due to weak foundations: rushed auth handling, fragmented scripts, and unclear integration boundaries.",
-					"На ранних этапах продукты часто ломаются из-за слабой базы: спешной авторизации, разрозненных скриптов и неясных границ интеграций.",
+					"Flower retail teams needed a lightweight way to record write-offs per location without falling back to chats, spreadsheets, and manual recounting.",
+					"Команде цветочного ритейла нужен был легкий способ учитывать списания по точкам без возврата к чатам, таблицам и ручным пересчетам.",
 				),
 				p(
-					"The objective was to create a robust base that could absorb new modules without architectural debt spikes.",
-					"Целью было создать устойчивую основу, способную принимать новые модули без резкого роста архитектурного долга.",
+					"The goal was not a demo shell, but an operational product that staff could use daily while owners still had clean reporting visibility.",
+					"Целью был не демонстрационный каркас, а рабочий продукт для ежедневного использования персоналом и прозрачной отчетности для владельца.",
 				),
 			]),
 			section(
@@ -820,51 +820,47 @@ export const PROJECT_CASE_STUDIES: Record<ProjectSlug, ProjectCaseStudy> = {
 				p("Architecture and implementation", "Архитектура и реализация"),
 				[
 					p(
-						"The scaffold centers on verified Telegram init-data handling, consistent server hooks, and shared utility contracts.",
-						"Каркас строится вокруг проверяемой обработки Telegram init-data, согласованных server-хуков и общих утилитарных контрактов.",
+						"The app uses server-side Telegram init-data verification in Convex, token-hashed sessions, and explicit role boundaries for owner, admin, and staff users.",
+						"Приложение использует серверную проверку Telegram init-data в Convex, сессии с хэшированием токена и явные ролевые границы для owner, admin и staff.",
 					),
 					p(
-						"Bot delivery modes (webhook and polling) were prepared as interchangeable operational paths.",
-						"Режимы доставки бота (webhook и polling) подготовлены как взаимозаменяемые операционные сценарии.",
+						"Write-off events are stored as append-only records, while daily totals are pre-aggregated to keep owner-level reports fast.",
+						"Списания хранятся как append-only события, а дневные итоги агрегируются отдельно, чтобы отчеты на уровне владельца работали быстро.",
 					),
 				],
 			),
-			section(
-				"features",
-				p("Current feature baseline", "Текущий функциональный baseline"),
-				[
-					p(
-						"The baseline includes auth utilities, Telegram native button hooks, data-layer wiring, and script infrastructure for developer workflows.",
-						"В baseline входят auth-утилиты, хуки нативных Telegram-кнопок, связка с data-слоем и скриптовая инфраструктура для разработческого процесса.",
-					),
-					p(
-						"The project is intentionally minimal in UI complexity to keep the next expansion phase clean.",
-						"Проект намеренно минимален по UI-сложности, чтобы следующий этап развития оставался чистым.",
-					),
-				],
-			),
+			section("features", p("Feature set", "Набор функций"), [
+				p(
+					"The Today screen supports search, one-tap `+1` write-offs, optimistic UI, haptic feedback, and undo for the last action within a 60-second window.",
+					"Экран «Сегодня» поддерживает поиск, списание в один тап (`+1`), optimistic UI, haptic feedback и отмену последнего действия в окне 60 секунд.",
+				),
+				p(
+					"Point invite links, date-based history, day/period reports, and CSV export turn the product into a real operating surface rather than a starter MVP.",
+					"Инвайты по точкам, история по датам, отчеты за день и период, а также CSV-экспорт превращают проект в рабочий продукт, а не в стартовый MVP-шаблон.",
+				),
+			]),
 			section(
 				"tooling",
 				p("Tooling and integrations", "Инструменты и интеграции"),
 				[
 					p(
-						"Next.js and Convex form the core runtime pair, with security-oriented auth utilities defining trust boundaries.",
-						"Next.js и Convex формируют базовую runtime-связку, а security-ориентированные auth-утилиты задают границы доверия.",
+						"Next.js 16, Convex, and Telegram Mini App tooling form the main stack, with shadcn/ui and Tailwind v4 used for the interface layer.",
+						"Основной стек собран на Next.js 16, Convex и tooling для Telegram Mini Apps, а интерфейсный слой построен на shadcn/ui и Tailwind v4.",
 					),
 					p(
-						"Scaffold scripts are treated as product accelerators rather than temporary hacks.",
-						"Скрипты каркаса рассматриваются как ускорители продукта, а не временные «костыли».",
+						"Automated checks cover init-data validation, permissions, invite limits, undo logic, and CSV reporting paths.",
+						"Автоматические проверки покрывают валидацию init-data, права доступа, лимиты инвайтов, undo-логику и сценарии CSV-отчетов.",
 					),
 				],
 			),
 			section("outcome", p("Outcome and readiness", "Результат и готовность"), [
 				p(
-					"The project is in active development, but it already provides a clean and secure platform for feature growth.",
-					"Проект находится в активной разработке, но уже дает чистую и безопасную платформу для наращивания функциональности.",
+					"The project is still evolving, but it has already crossed the line from scaffold to usable operations product.",
+					"Проект все еще развивается, но уже вышел за пределы каркаса и стал полноценным рабочим инструментом.",
 				),
 				p(
-					"Delivery risk is reduced because foundation concerns were addressed before high-surface feature work.",
-					"Риск поставки снижен, потому что фундаментальные вопросы закрыты до выхода в широкую функциональность.",
+					"Core daily flows, access control, and reporting are already shaped around real point-level usage instead of placeholder functionality.",
+					"Ключевые ежедневные сценарии, контроль доступа и отчетность уже собраны вокруг реальной работы точек, а не вокруг заглушек.",
 				),
 			]),
 			section(
@@ -872,71 +868,74 @@ export const PROJECT_CASE_STUDIES: Record<ProjectSlug, ProjectCaseStudy> = {
 				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
 				[
 					p(
-						"Strong foundation-first strategy delays visual polish in early milestones but prevents fragile product scaling.",
-						"Стратегия foundation-first отодвигает визуальную «полировку» на ранних этапах, но предотвращает хрупкое масштабирование продукта.",
+						"Telegram-first ergonomics keep the workflow fast on phones, but they also constrain information density and navigation depth.",
+						"Telegram-first эргономика делает сценарии быстрыми на телефоне, но ограничивает плотность информации и глубину навигации.",
 					),
 					p(
-						"Scaffold discipline requires saying no to fast but unsafe shortcuts.",
-						"Дисциплина каркаса требует отказываться от быстрых, но небезопасных shortcuts.",
+						"Auditability and export requirements add data-model discipline, but that tradeoff makes the product safer for day-to-day retail use.",
+						"Требования к аудиту и экспорту усложняют модель данных, но именно этот компромисс делает продукт надежнее для ежедневной розничной работы.",
 					),
 				],
 			),
 		],
 		faq: [
 			{
-				question: p("Is this project live?", "Проект уже в продакшне?"),
+				question: p(
+					"What does the app handle today?",
+					"Что приложение умеет уже сейчас?",
+				),
 				answer: p(
-					"No, it is currently in development and focused on foundational reliability.",
-					"Нет, проект в разработке и сфокусирован на надежности базового слоя.",
+					"Daily flower write-offs, date-based history, point invite access, role-aware permissions, owner reports, and CSV export.",
+					"Ежедневные списания цветов, история по датам, доступ по инвайтам точек, ролевые права, отчеты владельца и CSV-экспорт.",
 				),
 			},
 			{
 				question: p(
-					"What is the main value right now?",
-					"В чем главная ценность на текущем этапе?",
+					"How is access controlled?",
+					"Как устроен контроль доступа?",
 				),
 				answer: p(
-					"A secure and maintainable base that allows faster future feature shipping.",
-					"Безопасная и поддерживаемая база, которая ускоряет будущую поставку функций.",
+					"Through Telegram-authenticated sessions in Convex plus explicit owner, admin, and staff role boundaries tied to store locations.",
+					"Через Telegram-аутентифицированные сессии в Convex и явные роли owner, admin и staff, привязанные к торговым точкам.",
 				),
 			},
 			{
 				question: p(
-					"Why invest in auth and scripts early?",
-					"Почему так рано вкладываться в auth и скрипты?",
+					"Why is this no longer just a scaffold?",
+					"Почему это уже не просто каркас?",
 				),
 				answer: p(
-					"Because failures there are expensive once product surface area expands.",
-					"Потому что ошибки в этих зонах становятся дорогими при расширении продуктовой поверхности.",
+					"Because the app already contains production-shaped daily flows, reporting, exports, invite mechanics, and tested permission logic.",
+					"Потому что в приложении уже есть ежедневные рабочие сценарии, отчетность, экспорт, механика инвайтов и протестированная логика прав доступа.",
 				),
 			},
 		],
 		seo: {
 			title: p(
-				"Esperansa Mini App Case Study - Telegram Foundation Architecture",
-				"Кейс Esperansa Mini App - Архитектура Telegram-основы",
+				"Flower Mini App Case Study - Telegram Retail Operations",
+				"Кейс Flower Mini App - Telegram-инструмент для цветочного ритейла",
 			),
 			description: p(
-				"Case study of a Telegram Mini App foundation: secure init-data auth, Convex integration, and scalable architecture for future modules.",
-				"Кейс каркаса Telegram Mini App: безопасная init-data авторизация, интеграция Convex и масштабируемая архитектура под будущие модули.",
+				"Case study of a Telegram Mini App for flower write-offs, role-based retail workflows, owner reporting, and CSV export built with Next.js and Convex.",
+				"Кейс Telegram Mini App для списаний цветов, ролевых retail-сценариев, отчетности владельца и CSV-экспорта на Next.js и Convex.",
 			),
 			keywords: {
 				en: [
-					"telegram mini app scaffold",
-					"secure telegram auth",
-					"convex mini app architecture",
-					"foundation case study",
+					"flower mini app case study",
+					"telegram retail operations",
+					"convex telegram app",
+					"flower writeoff reporting",
 				],
 				ru: [
-					"каркас telegram mini app",
-					"безопасная telegram авторизация",
-					"архитектура mini app на convex",
-					"foundation кейс",
+					"flower mini app кейс",
+					"telegram для цветочного ритейла",
+					"списания цветов mini app",
+					"отчеты и csv экспорт",
 				],
 			},
 			ogSubtitle: p(
-				"Security-first scaffold for Telegram product growth",
-				"Security-first каркас для роста Telegram-продукта",
+				"Telegram write-off tracking and reporting for flower retail",
+				"Telegram-учет списаний и отчетность для цветочного ритейла",
 			),
 		},
 	},

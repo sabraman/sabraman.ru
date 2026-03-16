@@ -1,30 +1,37 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
 	ArrowRight,
-	ArrowUpRight,
+	ChevronDown,
 	Code,
 	Download,
-	ExternalLink,
+	FileText,
 	Github,
 	Instagram,
 	LineChart,
-	Linkedin,
-	Mail,
 	Paintbrush,
 	X,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Contact from "~/components/Contact";
 import { HomeWorkSection } from "~/components/projects/HomeWorkSection";
 import { SEOKeywords } from "~/components/SEOKeywords";
 import { AwwwardsHero } from "~/components/ui/AwwwardsHero";
 import { Button } from "~/components/ui/button";
+import { ButtonGroup } from "~/components/ui/button-group";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
 import { Toaster } from "~/components/ui/sonner";
+import { getResumeAsset } from "~/lib/resume";
 
 // Company Logo Component
 function CompanyLogo({ company }: { company: string }) {
@@ -205,50 +212,17 @@ const TelegramIcon: React.FC<IconProps> = ({ className }) => (
 	</svg>
 );
 
-const VKIcon: React.FC<IconProps> = ({ className }) => (
-	<svg
-		stroke="currentColor"
-		fill="currentColor"
-		strokeWidth="0"
-		viewBox="0 0 576 512"
-		height="1em"
-		width="1em"
-		className={className}
-		xmlns="http://www.w3.org/2000/svg"
-		aria-hidden="true"
-	>
-		<path d="M545 117.7c3.7-12.5 0-21.7-17.8-21.7h-58.9c-15 0-21.9 7.9-25.6 16.7 0 0-30 73.1-72.4 120.5-13.7 13.7-20 18.1-27.5 18.1-3.7 0-9.4-4.4-9.4-16.9V117.7c0-15-4.2-21.7-16.6-21.7h-92.6c-9.4 0-15 7-15 13.5 0 14.2 21.2 17.5 23.4 57.5v86.8c0 19-3.4 22.5-10.9 22.5-20 0-68.6-73.4-97.4-157.4-5.8-16.3-11.5-22.9-26.6-22.9H38.8c-16.8 0-20.2 7.9-20.2 16.7 0 15.6 20 93.1 93.1 195.5C160.4 378.1 229 416 291.4 416c37.5 0 42.1-8.4 42.1-22.9 0-66.8-3.4-73.1 15.4-73.1 8.7 0 23.7 4.4 58.7 38.1 40 40 46.6 57.9 69 57.9h58.9c16.8 0 25.3-8.4 20.4-25-11.2-34.9-86.9-106.7-90.3-111.5-8.7-11.2-6.2-16.2 0-26.2.1-.1 72-101.3 79.4-135.6z" />
-	</svg>
-);
-
 export default function HomePage() {
 	const t = useTranslations();
+	const locale = useLocale();
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
-	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
+	const pdfResume = getResumeAsset(locale);
+	const markdownResume = getResumeAsset(locale, "markdown");
 
 	const setContainerRef = useCallback((node: HTMLDivElement | null) => {
 		containerRef.current = node;
-		setHasHydratedTarget(Boolean(node));
 	}, []);
-
-	// Setup scroll animations
-	const { scrollYProgress } = useScroll({
-		target: isMounted && hasHydratedTarget ? containerRef : undefined,
-		offset: ["start start", "end end"],
-	});
-
-	const textScale = useTransform(scrollYProgress, [0, 0.1], [1, 1.5]);
-	const textOpacity = useTransform(
-		scrollYProgress,
-		[0.05, 0.1, 0.15],
-		[1, 0, 0],
-	);
-	const textY = useTransform(scrollYProgress, [0, 0.1], ["0%", "-50%"]);
-
-	// Define logo animations
-	const logoY = useTransform(scrollYProgress, [0, 0.5], [0, -200]);
-	const logoRotate = useTransform(scrollYProgress, [0, 0.5], [0, 15]);
 
 	// Random letter animation setup
 	const originalName = t("hero.title");
@@ -338,22 +312,6 @@ export default function HomePage() {
 		t("experience.vapeClub.achievements.1"),
 	];
 
-	// Create the particles array outside of the render
-	const particles = Array.from({ length: 15 }).map((_, index) => ({
-		key: index,
-		initialX: `${Math.random() * 100}%`,
-		initialY: `${Math.random() * 100}%`,
-		targetX: `${Math.random() * 100}%`,
-		targetY: `${Math.random() * 100}%`,
-		initialOpacity: Math.random() * 0.4 + 0.2,
-		midOpacity: Math.random() * 0.7 + 0.3,
-		duration: Math.random() * 15 + 10,
-		blurAmount: Math.random() * 2,
-		glowSize: Math.random() * 8 + 2,
-		glowIntensity: Math.random() * 3 + 1,
-		scale: Math.random() * 0.8 + 0.2,
-	}));
-
 	return (
 		<div ref={setContainerRef} className="relative">
 			<SEOKeywords />
@@ -441,8 +399,8 @@ export default function HomePage() {
 							Sabraman - Danya Yudin (Даня Юдин) - Creative Designer & Developer
 						</h2>
 						<p>
-							Картон - Creative Designer and Early-Stage Developer specializing
-							in visual design, branding, and application development
+							Картон - Creative Designer and Frontend Developer with a strong
+							background in visual design, branding, and application development
 						</p>
 					</div>
 
@@ -458,7 +416,7 @@ export default function HomePage() {
 					>
 						{t("hero.subtitle")}
 						<br />
-						<span className="bg-gradient-to-r from-accent to-sky-300 bg-clip-text text-transparent">
+						<span className="bg-[linear-gradient(92deg,#e9e8f1_0%,#cbc9da_52%,#aaa6c0_100%)] bg-clip-text text-transparent drop-shadow-[0_0_18px_rgba(194,190,214,0.12)]">
 							{t("hero.subtitleHighlight")}
 						</span>
 					</motion.h2>
@@ -473,29 +431,75 @@ export default function HomePage() {
 						}}
 						className="flex flex-col justify-center gap-4 md:flex-row"
 					>
-						<Button
-							size="lg"
-							className="group relative overflow-hidden rounded-full px-8 py-6 font-medium text-base"
-							asChild
-						>
-							<a href="/DANYA_YUDIN_CV.md" download>
-								<span className="relative z-10">
-									{t("hero.downloadResume")}
-								</span>
-								<Download className="relative z-10 ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
-								<motion.span
-									className="absolute inset-0 bg-accent"
-									initial={{ x: "-100%", opacity: 0 }}
-									whileHover={{ x: 0, opacity: 1 }}
-									transition={{ duration: 0.3, ease: "easeInOut" }}
-								/>
-							</a>
-						</Button>
+						<ButtonGroup className="w-fit max-w-full overflow-hidden rounded-[2rem] border border-white/15 bg-zinc-100/92 text-zinc-950 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+							<Button
+								size={null}
+								variant={null}
+								className="h-16 justify-center gap-4 rounded-none bg-transparent px-6 font-medium text-[0.95rem] text-zinc-950 uppercase tracking-[0.08em] hover:bg-black/[0.035] hover:text-zinc-950 focus-visible:ring-white/50 focus-visible:ring-offset-0 md:px-7"
+								asChild
+							>
+								<a href={pdfResume.href} download={pdfResume.downloadName}>
+									<span
+										style={{
+											fontFamily: "Heading Now Variable",
+											fontVariationSettings: `'wght' 780, 'wdth' 450`,
+										}}
+									>
+										{t("hero.downloadResume")}
+									</span>
+									<Download className="size-6" strokeWidth={2.2} />
+								</a>
+							</Button>
+
+							<DropdownMenu>
+								<DropdownMenuTrigger asChild>
+									<Button
+										size={null}
+										variant={null}
+										className="h-16 w-[4.5rem] rounded-none border-black/10 border-l bg-transparent px-0 text-zinc-950 hover:bg-black/[0.035] hover:text-zinc-950 focus-visible:ring-white/50 focus-visible:ring-offset-0"
+										aria-label={t("hero.resumeFormats")}
+									>
+										<ChevronDown className="size-6" strokeWidth={2.4} />
+									</Button>
+								</DropdownMenuTrigger>
+								<DropdownMenuContent
+									align="end"
+									className="w-56 rounded-2xl border-white/10 bg-zinc-950/96 p-1.5 text-zinc-50 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-xl"
+								>
+									<DropdownMenuGroup>
+										<DropdownMenuItem
+											asChild
+											className="rounded-xl px-3 py-2.5"
+										>
+											<a
+												href={pdfResume.href}
+												download={pdfResume.downloadName}
+											>
+												<Download />
+												{t("hero.downloadPdf")}
+											</a>
+										</DropdownMenuItem>
+										<DropdownMenuItem
+											asChild
+											className="rounded-xl px-3 py-2.5"
+										>
+											<a
+												href={markdownResume.href}
+												download={markdownResume.downloadName}
+											>
+												<FileText />
+												{t("hero.downloadMarkdown")}
+											</a>
+										</DropdownMenuItem>
+									</DropdownMenuGroup>
+								</DropdownMenuContent>
+							</DropdownMenu>
+						</ButtonGroup>
 
 						<Button
-							variant="outline"
-							size="lg"
-							className="group relative cursor-pointer overflow-hidden rounded-full px-8 py-6 font-medium text-base"
+							size={null}
+							variant={null}
+							className="group relative h-16 cursor-pointer overflow-hidden rounded-[2rem] border border-white/10 bg-black/92 px-10 text-zinc-50 hover:bg-black hover:text-zinc-50 focus-visible:ring-white/50 focus-visible:ring-offset-0"
 							onClick={() => {
 								// Scroll to contact section
 								const contactSection =
@@ -505,8 +509,16 @@ export default function HomePage() {
 								}
 							}}
 						>
-							<span className="relative z-10">{t("hero.getInTouch")}</span>
-							<ArrowRight className="relative z-10 ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+							<span
+								className="relative z-10 uppercase tracking-[0.08em]"
+								style={{
+									fontFamily: "Heading Now Variable",
+									fontVariationSettings: `'wght' 780, 'wdth' 450`,
+								}}
+							>
+								{t("hero.getInTouch")}
+							</span>
+							<ArrowRight className="relative z-10 ml-3 size-6 transition-transform group-hover:translate-x-1" />
 							<motion.span
 								className="absolute inset-0 bg-accent/10"
 								initial={{ scale: 0, opacity: 0 }}
@@ -691,7 +703,6 @@ export default function HomePage() {
 					</motion.div>
 
 					<div className="space-y-40">
-						{/* VAPARSHOP */}
 						<WorkExperienceItem
 							company="VAPARSHOP"
 							title={t("experience.vaparshop.title")}

@@ -15,8 +15,8 @@ export async function generateMetadata({
 		: "Contact - Danya Yudin (Даня Юдин) - Sabraman";
 
 	const description = isRussian
-		? "Свяжитесь с Даня Юдин - Sabraman. Креативный дизайнер и разработчик на раннем этапе, доступный для проектов в области визуального дизайна, брендинга и разработки приложений."
-		: "Get in touch with Danya Yudin (Даня Юдин) - Sabraman. Creative Designer and Early-Stage Developer available for projects in visual design, branding, and application development.";
+		? "Свяжитесь с Даня Юдин - Sabraman. Design-led frontend и product developer, доступный для проектов в области визуального дизайна, брендинга и разработки интерфейсов."
+		: "Get in touch with Danya Yudin (Даня Юдин) - Sabraman. Design-led frontend and product developer available for projects in visual design, branding, and interface development.";
 
 	return {
 		title,

@@ -11,7 +11,7 @@ export function SEOKeywords() {
 			name: "Danya Yudin",
 			alternateName: ["Даня Юдин", "Sabraman", "Картон"],
 			description:
-				"Creative Designer and Early-Stage Developer known as Sabraman and Картон",
+				"Creative Designer and Frontend Developer known as Sabraman and Картон",
 			url: "https://sabraman.ru",
 			sameAs: [
 				"https://t.me/sabraman",
@@ -20,7 +20,7 @@ export function SEOKeywords() {
 				"https://x.com/1sabraman",
 				"https://vk.com/sabraman",
 			],
-			jobTitle: "Creative Designer & Early-Stage Developer",
+			jobTitle: "Creative Designer & Frontend Developer",
 			knowsAbout: [
 				"Visual Design",
 				"Branding",
@@ -51,31 +51,31 @@ export function SEOKeywords() {
 			<h1>
 				Sabraman - Danya Yudin (Даня Юдин) - Creative Designer & Developer
 			</h1>
-			<h2>Картон - Creative Designer and Early-Stage Developer</h2>
+			<h2>Картон - Creative Designer and Frontend Developer</h2>
 			<h3>Даня Юдин - Sabraman - Картон - Portfolio</h3>
 
 			<p>
 				Sabraman, also known as Danya Yudin (Даня Юдин) and Картон, is a
-				Creative Designer and Early-Stage Developer specializing in visual
-				design, branding, and application development. Based in Saint
-				Petersburg, Russia, Sabraman creates innovative digital solutions
-				including Telegram bots, web applications, and UI/UX designs.
+				Creative Designer and Frontend Developer with a strong background in
+				visual design, branding, and application development. Based in Saint
+				Petersburg, Russia, Sabraman creates digital solutions including
+				Telegram bots, web applications, UI systems, and brand-led interfaces.
 			</p>
 			<p>
 				Картон (Sabraman) - Danya Yudin (Даня Юдин) - Creative Designer and
-				Early-Stage Developer with expertise in visual design, branding, and
+				Frontend Developer with expertise in visual design, branding, and
 				application development. Specializing in Telegram bots, web
 				applications, and UI/UX design in Saint Petersburg, Russia.
 			</p>
 			<p>
 				Даня Юдин (Danya Yudin) - Sabraman - Картон - Creative Designer and
-				Early-Stage Developer. Expert in visual design, branding, and
-				application development. Creating innovative digital solutions including
-				Telegram bots and web applications in Saint Petersburg, Russia.
+				Frontend Developer. Expert in visual design, branding, and application
+				development. Creating digital solutions including Telegram bots and web
+				applications in Saint Petersburg, Russia.
 			</p>
 			<p>
 				Картон (Sabraman) - Danya Yudin (Даня Юдин) - Creative Designer and
-				Early-Stage Developer. Specializing in visual design, branding, and
+				Frontend Developer. Specializing in visual design, branding, and
 				application development. Expert in Telegram bots, web applications, and
 				UI/UX design based in Saint Petersburg, Russia.
 			</p>
@@ -85,8 +85,8 @@ export function SEOKeywords() {
 				<h4>Sabraman Portfolio - Danya Yudin (Даня Юдин)</h4>
 				<p>
 					Sabraman portfolio showcases the work of Danya Yudin (Даня Юдин), also
-					known as Картон, a creative designer and early-stage developer from
-					Saint Petersburg, Russia. Specializing in visual design, branding, and
+					known as Картон, a creative designer and frontend developer from Saint
+					Petersburg, Russia. Specializing in visual design, branding, and
 					application development.
 				</p>
 

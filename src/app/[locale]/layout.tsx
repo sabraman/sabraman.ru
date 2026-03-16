@@ -28,11 +28,11 @@ export async function generateMetadata({
 	const isRussian = locale === "ru";
 	const title = isRussian
 		? "Даня Юдин - Sabraman | Креативный дизайнер и разработчик"
-		: "Danya Yudin (Даня Юдин) - Sabraman | Creative Designer & Developer";
+		: "Danya Yudin (Даня Юдин) - Sabraman | Creative Designer & Frontend Developer";
 
 	const description = isRussian
-		? "Даня Юдин - Sabraman. Креативный дизайнер и разработчик на раннем этапе, специализирующийся на визуальном дизайне, брендинге и разработке приложений. Эксперт в Telegram-ботах, веб-приложениях и UI/UX дизайне. Базируется в Санкт-Петербурге, Россия."
-		: "Danya Yudin (Даня Юдин) - Sabraman. Creative Designer and Early-Stage Developer specializing in visual design, branding, and application development. Expert in Telegram bots, web applications, and UI/UX design. Based in Saint Petersburg, Russia.";
+		? "Даня Юдин - Sabraman. Design-led frontend и product developer с сильной базой в визуальном дизайне, брендинге и разработке интерфейсов. Эксперт в Telegram-ботах, веб-приложениях и UI/UX дизайне. Базируется в Санкт-Петербурге, Россия."
+		: "Danya Yudin (Даня Юдин) - Sabraman. Design-led frontend and product developer with a strong background in visual design, branding, and interface development. Expert in Telegram bots, web applications, and UI/UX design. Based in Saint Petersburg, Russia.";
 
 	return {
 		title: {
@@ -247,11 +247,7 @@ export default async function RootLayout({
 								"https://x.com/1sabraman",
 								"https://vk.com/sabraman",
 							],
-							jobTitle: "Creative Designer & Early-Stage Developer",
-							worksFor: {
-								"@type": "Organization",
-								name: "VAPARSHOP",
-							},
+							jobTitle: "Creative Designer & Frontend Developer",
 							address: {
 								"@type": "PostalAddress",
 								addressLocality: "Saint Petersburg",
@@ -280,7 +276,7 @@ export default async function RootLayout({
 							name: "Sabraman - Danya Yudin Portfolio",
 							url: "https://sabraman.ru",
 							description:
-								"Portfolio website of Danya Yudin (Даня Юдин), a Creative Designer and Early-Stage Developer",
+								"Portfolio website of Danya Yudin (Даня Юдин), a creative designer and frontend developer",
 							author: {
 								"@type": "Person",
 								name: "Danya Yudin",

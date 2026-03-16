@@ -9,7 +9,7 @@ export type ProjectSlug =
 	| "smo-tg-miniapp"
 	| "smoky-market-loyalty-miniapp"
 	| "plonq-ai-search"
-	| "esperansa-mini-app"
+	| "flower-mini-app"
 	| "smbro"
 	| "arch-taplink"
 	| "vape-me-fast"
@@ -218,22 +218,28 @@ export const PROJECTS: ProjectItem[] = [
 		],
 	},
 	{
-		id: "esperansa-mini-app",
-		slug: "esperansa-mini-app",
+		id: "flower-mini-app",
+		slug: "flower-mini-app",
 		repo: "esperansa-mini-app",
 		visibility: "private",
 		category: "mini_apps",
 		isFeaturedWork: false,
-		title: "Esperansa Mini App",
+		title: "Flower Mini App",
 		short: {
-			en: "Telegram Mini App foundation prepared for fast feature expansion.",
-			ru: "Базовый каркас Telegram Mini App для быстрого развития функционала.",
+			en: "Telegram Mini App for flower write-off tracking, staff actions, and reporting across store locations.",
+			ru: "Telegram Mini App для списания цветов, работы команды и отчетности по торговым точкам.",
 		},
 		details: {
-			en: "Secure init-data auth utilities, Convex integration, bot webhook/polling scripts, and Telegram native button hooks.",
-			ru: "Утилиты безопасной Telegram-авторизации, интеграция Convex, webhook/polling для бота и хуки нативных Telegram-кнопок.",
+			en: "Role-based flower operations app with Telegram auth, point invites, daily write-off flows, owner reports, and CSV export.",
+			ru: "Ролевое mini-app решение для цветочного ритейла: Telegram-авторизация, инвайты по точкам, списания, отчеты владельца и CSV-экспорт.",
 		},
-		tags: ["Scaffold", "Telegram", "Convex", "Next.js"],
+		tags: [
+			"Telegram Mini App",
+			"Convex",
+			"Reports",
+			"CSV Export",
+			"Role-Based Access",
+		],
 		status: "in_development",
 		links: [],
 	},

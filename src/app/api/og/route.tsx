@@ -30,7 +30,7 @@ export async function GET(request: Request) {
 		const hasSubtitle = searchParams.has("subtitle");
 		const subtitle = hasSubtitle
 			? searchParams.get("subtitle")?.slice(0, 200)
-			: "Creative Designer & Early-Stage Developer";
+			: "Creative Designer & Frontend Developer";
 
 		// Define accent color and website URL
 		const accentColor = "#ff197c";

@@ -1,8 +1,13 @@
-export function getResumeAsset(locale: string) {
+export function getResumeAsset(
+	locale: string,
+	format: "pdf" | "markdown" = "pdf",
+) {
 	const isRussian = locale === "ru";
+	const extension = format === "markdown" ? "md" : "pdf";
+	const baseName = isRussian ? "DANYA_YUDIN_CV_RU" : "DANYA_YUDIN_CV";
 
 	return {
-		href: isRussian ? "/DANYA_YUDIN_CV_RU.pdf" : "/DANYA_YUDIN_CV.pdf",
-		downloadName: isRussian ? "DANYA_YUDIN_CV_RU.pdf" : "DANYA_YUDIN_CV.pdf",
+		href: `/${baseName}.${extension}`,
+		downloadName: `${baseName}.${extension}`,
 	};
 }

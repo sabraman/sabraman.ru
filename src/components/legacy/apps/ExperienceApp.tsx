@@ -12,8 +12,8 @@ import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
 const COPY = {
 	en: {
-		headline: "Creative Designer & Developer",
-		subline: "Design systems, Telegram products, and operational tooling.",
+		headline: "Creative Designer & Frontend Developer",
+		subline: "Design systems, Telegram products, and design-led frontend work.",
 		years: "6+ years",
 		location: "Saint Petersburg, Russia",
 		summaryTitle: "Highlights",
@@ -51,8 +51,8 @@ const EXPERIENCES = {
 	en: [
 		{
 			company: "VAPARSHOP",
-			role: "Designer & Junior Developer",
-			period: "Jun 2024 - Present",
+			role: "Designer & Developer",
+			period: "Jun 2024 - Mar 2025",
 			location: "Saint Petersburg",
 			details:
 				"Telegram bots, mini app flows, price-tag tooling, brand assets, and internal automation for retail operations.",
@@ -85,8 +85,8 @@ const EXPERIENCES = {
 	ru: [
 		{
 			company: "VAPARSHOP",
-			role: "Дизайнер и Junior Developer",
-			period: "июнь 2024 - сейчас",
+			role: "Дизайнер и разработчик",
+			period: "июнь 2024 - март 2025",
 			location: "Санкт-Петербург",
 			details:
 				"Telegram-боты, mini app, генератор ценников, бренд-материалы и внутренняя автоматизация для ритейла.",
