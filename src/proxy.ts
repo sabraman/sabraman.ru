@@ -5,5 +5,5 @@ export default createMiddleware(routing);
 
 export const config = {
 	// Match only internationalized pathnames
-	matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
+	matcher: "/((?!api|trpc|_next|_vercel|opengraph-image|.*\\..*).*)",
 };

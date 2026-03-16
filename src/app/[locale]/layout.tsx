@@ -83,7 +83,7 @@ export async function generateMetadata({
 			siteName: "Sabraman - Danya Yudin Portfolio",
 			images: [
 				{
-					url: "/api/og",
+					url: "/opengraph-image",
 					width: 1200,
 					height: 630,
 					alt: "Danya Yudin - Sabraman Portfolio",
@@ -94,7 +94,7 @@ export async function generateMetadata({
 			card: "summary_large_image",
 			title,
 			description,
-			images: ["/api/og"],
+			images: ["/opengraph-image"],
 			creator: "@1sabraman",
 		},
 		robots: {
