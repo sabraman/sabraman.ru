@@ -26,7 +26,7 @@ export async function generateMetadata({
 	const config = getVariantBySlug(variant);
 
 	if (!config) {
-		return {};
+		notFound();
 	}
 
 	const title =
