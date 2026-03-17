@@ -6,7 +6,6 @@ import {
 } from "~/lib/seo/og-image";
 import { createProjectSocialImageResponse } from "~/lib/seo/project-og";
 
-export const runtime = "nodejs";
 export const alt = "Project case study social preview";
 export const size = PORTFOLIO_SOCIAL_IMAGE_SIZE;
 export const contentType = PORTFOLIO_SOCIAL_IMAGE_CONTENT_TYPE;

@@ -4,7 +4,6 @@ import {
 	PORTFOLIO_SOCIAL_IMAGE_SIZE,
 } from "~/lib/seo/og-image";
 
-export const runtime = "nodejs";
 export const alt = "iPhone portfolio social preview";
 export const size = PORTFOLIO_SOCIAL_IMAGE_SIZE;
 export const contentType = PORTFOLIO_SOCIAL_IMAGE_CONTENT_TYPE;

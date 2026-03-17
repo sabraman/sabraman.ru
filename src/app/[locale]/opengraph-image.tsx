@@ -7,7 +7,6 @@ import {
 export const alt = "Sabraman social preview";
 export const size = PORTFOLIO_SOCIAL_IMAGE_SIZE;
 export const contentType = PORTFOLIO_SOCIAL_IMAGE_CONTENT_TYPE;
-export const runtime = "nodejs";
 
 export default async function OpenGraphImage({
 	params,

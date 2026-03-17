@@ -1,7 +1,5 @@
 import { createPortfolioOgImageResponse } from "~/lib/seo/og-image";
 
-export const runtime = "nodejs";
-
 export async function GET(request: Request) {
 	try {
 		const { searchParams } = new URL(request.url);

@@ -5,7 +5,6 @@ import {
 	SOCIAL_IMAGE_SIZE,
 } from "~/components/legacy/docs/static-social-image";
 
-export const runtime = "nodejs";
 export const alt = "Component social preview";
 export const size = SOCIAL_IMAGE_SIZE;
 export const contentType = SOCIAL_IMAGE_CONTENT_TYPE;
