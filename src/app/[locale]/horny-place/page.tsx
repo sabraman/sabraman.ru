@@ -1,29 +1,12 @@
 import type { Metadata } from "next";
-import { cacheLife } from "next/cache";
-import {
-	getHornyPlacePageCopy,
-	getWorkCaseStudyMeta,
-} from "~/components/work/get-work-copy";
+import { getHornyPlacePageCopy } from "~/components/work/get-work-copy";
 import HornyPlacePageClient from "~/components/work/HornyPlacePageClient";
 import { resolveSupportedLocale } from "~/i18n/types";
+import {
+	getCaseStudyJsonLd,
+	getCaseStudyMetadata,
+} from "~/lib/projects/case-study-seo";
 import { JsonLd } from "~/lib/seo/json-ld";
-import { buildIndexableMetadata } from "~/lib/seo/metadata";
-import { createCreativeWorkJsonLd } from "~/lib/seo/structured-data";
-
-async function getHornyPlaceJsonLd(locale: string) {
-	"use cache";
-	cacheLife("days");
-
-	const isRussian = locale === "ru";
-	const pagePath = isRussian ? "/ru/horny-place" : "/horny-place";
-
-	return createCreativeWorkJsonLd({
-		locale: resolveSupportedLocale(locale),
-		name: "HORNY PLACE Case Study",
-		path: pagePath,
-		about: ["Brand Identity", "Visual Design", "Web Development", "Retail UX"],
-	});
-}
 
 export async function generateMetadata({
 	params,
@@ -32,16 +15,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { locale } = await params;
 	const resolvedLocale = resolveSupportedLocale(locale);
-	const meta = await getWorkCaseStudyMeta(resolvedLocale, "horny-place");
-
-	return buildIndexableMetadata({
-		locale: resolvedLocale,
-		pathEn: "/horny-place",
-		routeId: "hornyPlace",
-		title: meta.title,
-		description: meta.description,
-		openGraphType: "article",
+	const metadata = await getCaseStudyMetadata(resolvedLocale, "horny-place", {
+		routeKind: "dedicated",
 	});
+
+	if (!metadata) {
+		throw new Error("Missing SEO metadata for horny-place.");
+	}
+
+	return metadata;
 }
 
 export default async function HornyPlacePage({
@@ -51,12 +33,16 @@ export default async function HornyPlacePage({
 }) {
 	const { locale } = await params;
 	const resolvedLocale = resolveSupportedLocale(locale);
-	const jsonLd = await getHornyPlaceJsonLd(locale);
-	const copy = await getHornyPlacePageCopy(resolvedLocale);
+	const [jsonLd, copy] = await Promise.all([
+		getCaseStudyJsonLd(resolvedLocale, "horny-place", {
+			routeKind: "dedicated",
+		}),
+		getHornyPlacePageCopy(resolvedLocale),
+	]);
 
 	return (
 		<>
-			<JsonLd data={jsonLd} id="horny-place-json-ld" />
+			{jsonLd ? <JsonLd data={jsonLd} id="horny-place-json-ld" /> : null}
 			<HornyPlacePageClient locale={resolvedLocale} copy={copy} />
 		</>
 	);

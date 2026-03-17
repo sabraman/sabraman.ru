@@ -14,6 +14,7 @@ const DOCS_DIRECTORY = path.join(process.cwd(), "src/content/components");
 const componentDocFrontmatterSchema = z.object({
 	description: z.string().min(1),
 	kicker: z.string().min(1),
+	keywords: z.array(z.string().min(1)).min(1),
 	order: z.number().int().nonnegative(),
 	title: z.string().min(1),
 	updatedAt: z

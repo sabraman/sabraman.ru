@@ -20,6 +20,12 @@ import {
 	createPersonJsonLd,
 	createWebsiteJsonLd,
 } from "~/lib/seo/structured-data";
+import {
+	SITE_OWNER_NAME,
+	SITE_TITLE,
+	SITE_URL,
+	SITE_URL_OBJECT,
+} from "~/lib/site-config";
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
@@ -69,10 +75,10 @@ export async function generateMetadata({
 			"next.js developer",
 			"react developer",
 		],
-		authors: [{ name: "Danya Yudin", url: "https://sabraman.ru" }],
-		creator: "Danya Yudin",
-		publisher: "Danya Yudin",
-		applicationName: "Sabraman - Danya Yudin Portfolio",
+		authors: [{ name: SITE_OWNER_NAME, url: SITE_URL }],
+		creator: SITE_OWNER_NAME,
+		publisher: SITE_OWNER_NAME,
+		applicationName: SITE_TITLE,
 		appleWebApp: {
 			capable: true,
 			statusBarStyle: "default",
@@ -83,7 +89,7 @@ export async function generateMetadata({
 			address: false,
 			telephone: false,
 		},
-		metadataBase: new URL("https://sabraman.ru"),
+		metadataBase: SITE_URL_OBJECT,
 		alternates: buildLocalizedAlternates("/", resolvedLocale),
 		openGraph: {
 			type: "website",
@@ -91,7 +97,7 @@ export async function generateMetadata({
 			url: getLocalizedAbsoluteUrl(resolvedLocale, "/"),
 			title,
 			description,
-			siteName: "Sabraman - Danya Yudin Portfolio",
+			siteName: SITE_TITLE,
 			images: [
 				{
 					url: socialImagePath,

@@ -1,19 +1,16 @@
 import type { MetadataRoute } from "next";
-import { getComponentDocPath } from "~/components/legacy/docs/component-doc-paths";
-import { getAllComponentDocs } from "~/components/legacy/docs/component-documents";
-import { getCaseStudyPath, PROJECTS } from "~/data/projects";
 import type { SupportedLocale } from "~/i18n/types";
 import {
-	getProjectPublicRouteId,
-	getPublicRoutePolicy,
-	type PublicRouteId,
-} from "~/lib/seo/public-route-policy";
+	getAllIndexableContentEntries,
+	getCaseStudyIndexableContentEntries,
+	getComponentDocIndexableContentEntries,
+	getLlmsPreferredContentEntries,
+	getStaticIndexableContentEntries,
+} from "~/lib/seo/content-registry";
+import { SUPPORTED_LOCALES, toAbsoluteSiteUrl } from "~/lib/site-config";
 
-export const SITE_URL = "https://sabraman.ru";
-export const SITE_LOCALES = [
-	"en",
-	"ru",
-] as const satisfies readonly SupportedLocale[];
+export { SITE_URL } from "~/lib/site-config";
+export const SITE_LOCALES = SUPPORTED_LOCALES as readonly SupportedLocale[];
 
 export type SiteLocale = (typeof SITE_LOCALES)[number];
 export type SitemapFrequency = NonNullable<
@@ -23,96 +20,49 @@ export type SitemapFrequency = NonNullable<
 export type IndexableRoute = {
 	path: string;
 	changeFrequency: SitemapFrequency;
+	lastModified?: string;
 	priority: number;
 };
 
-type StaticDiscoverableRoute = IndexableRoute & {
-	id: PublicRouteId;
-};
-
-const STATIC_DISCOVERABLE_ROUTES: StaticDiscoverableRoute[] = [
-	{
-		id: "home",
-		path: "/",
-		changeFrequency: "weekly",
-		priority: 1,
-	},
-	{
-		id: "work",
-		path: "/work",
-		changeFrequency: "weekly",
-		priority: 0.95,
-	},
-	{
-		id: "services",
-		path: "/services",
-		changeFrequency: "monthly",
-		priority: 0.85,
-	},
-	{
-		id: "components",
-		path: "/components",
-		changeFrequency: "weekly",
-		priority: 0.8,
-	},
-	{
-		id: "iphone",
-		path: "/iphone",
-		changeFrequency: "monthly",
-		priority: 0.65,
-	},
-	{
-		id: "contact",
-		path: "/contact",
-		changeFrequency: "monthly",
-		priority: 0.7,
-	},
-];
-
 export function toSiteUrl(path: string) {
-	return `${SITE_URL}${path}`;
+	return toAbsoluteSiteUrl(path);
+}
+
+function mapEntryToRoute(
+	entry: ReturnType<typeof getAllIndexableContentEntries>[number],
+): IndexableRoute {
+	return {
+		changeFrequency: entry.changeFrequency,
+		...(entry.updatedAt ? { lastModified: entry.updatedAt } : {}),
+		path: entry.pathEn,
+		priority: entry.priority,
+	};
 }
 
 export function getStaticIndexableRoutes() {
-	return STATIC_DISCOVERABLE_ROUTES.filter(
-		(route) => getPublicRoutePolicy(route.id).includeInSitemap,
-	).map(({ id: _id, ...route }) => route);
+	return getStaticIndexableContentEntries()
+		.filter((entry) => entry.includeInSitemap)
+		.map(mapEntryToRoute);
 }
 
 export function getCaseStudyIndexableRoutes(): IndexableRoute[] {
-	return PROJECTS.filter(
-		(project) =>
-			getPublicRoutePolicy(getProjectPublicRouteId(project.slug))
-				.includeInSitemap,
-	).map((project) => ({
-		path: getCaseStudyPath("en", project.slug),
-		changeFrequency: project.isFeaturedWork ? "weekly" : "monthly",
-		priority: project.isFeaturedWork ? 0.9 : 0.75,
-	}));
+	return getCaseStudyIndexableContentEntries()
+		.filter((entry) => entry.includeInSitemap)
+		.map(mapEntryToRoute);
 }
 
 export function getComponentDocIndexableRoutes(): IndexableRoute[] {
-	if (!getPublicRoutePolicy("componentDoc").includeInSitemap) {
-		return [];
-	}
-
-	return getAllComponentDocs().map((doc) => ({
-		path: getComponentDocPath(doc.slug, "en"),
-		changeFrequency: "monthly",
-		priority: 0.72,
-	}));
+	return getComponentDocIndexableContentEntries()
+		.filter((entry) => entry.includeInSitemap)
+		.map(mapEntryToRoute);
 }
 
 export function getLlmsPreferredRoutes() {
-	return STATIC_DISCOVERABLE_ROUTES.filter(
-		(route) => getPublicRoutePolicy(route.id).includeInLlms,
-	).map((route) => route.path);
+	return getLlmsPreferredContentEntries().map((entry) => entry.pathEn);
 }
 
 export function getAllIndexableRoutes() {
-	return [
-		...getStaticIndexableRoutes(),
-		...getCaseStudyIndexableRoutes(),
-		...getComponentDocIndexableRoutes(),
-	];
+	return getAllIndexableContentEntries()
+		.filter((entry) => entry.includeInSitemap)
+		.map(mapEntryToRoute);
 }

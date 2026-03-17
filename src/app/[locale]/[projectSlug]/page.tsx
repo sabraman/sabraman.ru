@@ -26,38 +26,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { locale, projectSlug } = await params;
 	const lang = resolveSupportedLocale(locale);
-	const record = await getResolvedCaseStudyRecord(projectSlug);
-
-	if (!record) {
-		return {
-			title: "Project not found",
-			robots: {
-				index: false,
-				follow: false,
-			},
-		};
-	}
-
-	if (record.routeKind !== "generic") {
-		return {
-			title: "Project moved",
-			robots: {
-				index: false,
-				follow: false,
-			},
-		};
-	}
-
-	const metadata = await getCaseStudyMetadata(lang, projectSlug);
+	const metadata = await getCaseStudyMetadata(lang, projectSlug, {
+		routeKind: "generic",
+	});
 
 	if (!metadata) {
-		return {
-			title: "Project not found",
-			robots: {
-				index: false,
-				follow: false,
-			},
-		};
+		notFound();
 	}
 
 	return metadata;
@@ -84,7 +58,7 @@ export default async function ProjectCaseStudyPage({
 
 	const [relatedProjects, jsonLd] = await Promise.all([
 		getRelatedProjectsForSlug(record.slug),
-		getCaseStudyJsonLd(lang, record.slug),
+		getCaseStudyJsonLd(lang, record.slug, { routeKind: "generic" }),
 	]);
 
 	if (!jsonLd) {

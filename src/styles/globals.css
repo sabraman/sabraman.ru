@@ -238,12 +238,6 @@
 	animation-play-state: paused;
 }
 
-/* Slow down animation on hover without pausing it completely */
-.hover\:slow-animation:hover {
-	animation-duration: 150s !important; /* Original speed is 50s, this is 3x slower */
-	transition: animation-duration 0.5s ease;
-}
-
 /* Invert effect */
 .group:hover .group-hover\:invert {
 	filter: invert(1);

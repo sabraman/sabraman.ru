@@ -3,13 +3,12 @@ import type { ComponentDocSlug } from "~/components/legacy/docs/component-doc-pa
 import type { ProjectSlug } from "~/data/projects";
 import { getLocalizedPathname } from "~/i18n/locale-paths";
 import type { SupportedLocale } from "~/i18n/types";
+import { SITE_TITLE, toAbsoluteSiteUrl } from "~/lib/site-config";
 import {
 	getPublicRoutePolicy,
 	type PublicRouteId,
 	type PublicRouteSocialImageKind,
 } from "./public-route-policy";
-
-const SITE_NAME = "Sabraman - Danya Yudin Portfolio";
 
 type SocialImageSlug = ComponentDocSlug | ProjectSlug;
 
@@ -46,7 +45,7 @@ export function getLocalizedAbsoluteUrl(
 	locale: SupportedLocale,
 	pathEn: string,
 ) {
-	return `https://sabraman.ru${getLocalizedPathname(locale, pathEn)}`;
+	return toAbsoluteSiteUrl(getLocalizedPathname(locale, pathEn));
 }
 
 export function getLocalizedSocialImagePath(
@@ -122,7 +121,7 @@ export function buildIndexableMetadata({
 			title,
 			description,
 			url: getLocalizedAbsoluteUrl(locale, pathEn),
-			siteName: SITE_NAME,
+			siteName: SITE_TITLE,
 			locale: getOpenGraphLocale(locale),
 			type: openGraphType,
 			...(socialImagePath ? { images: [socialImagePath] } : {}),

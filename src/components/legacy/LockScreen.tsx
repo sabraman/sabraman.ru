@@ -1,6 +1,8 @@
 "use client";
 
 import { animate, motion, useMotionValue } from "motion/react";
+import Image from "next/image";
+import type { ImgHTMLAttributes } from "react";
 import { ShimmeringText } from "~/components/shimmering-text/shimmering-text";
 import {
 	SlideToUnlock,
@@ -17,6 +19,20 @@ import {
 } from "./ui/legacy-status-data";
 
 const CAMERA_LIFT_OPEN_THRESHOLD = -18;
+
+type LockScreenChromeImageProps = ImgHTMLAttributes<HTMLImageElement> & {
+	src: string;
+};
+
+function LockScreenChromeImage({
+	alt = "",
+	...props
+}: LockScreenChromeImageProps) {
+	return (
+		// biome-ignore lint/performance/noImgElement: tiny lock-screen chrome SVGs rely on raw intrinsic rendering to preserve the original iOS alignment.
+		<img alt={alt} aria-hidden="true" {...props} />
+	);
+}
 
 function LockScreenStatusBar({ batteryLevel }: { batteryLevel: number }) {
 	return (
@@ -69,9 +85,12 @@ export default function LockScreen({
 			transition={{ duration: 0.3 }}
 			className="absolute inset-0 z-10 overflow-hidden bg-black"
 		>
-			<img
+			<Image
 				alt=""
 				src="/figma/ios-lock-screen/wallpaper.png"
+				fill
+				priority
+				sizes="100vw"
 				className="pointer-events-none absolute inset-0 size-full object-cover"
 			/>
 			<div className="absolute right-0 bottom-0 left-0 h-[220px] bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.8))]" />
@@ -101,51 +120,51 @@ export default function LockScreen({
 				<div className="absolute top-0 right-0 left-0 h-[48px] bg-[linear-gradient(180deg,rgba(255,255,255,0.25),rgba(255,255,255,0.1))]" />
 
 				<div className="absolute top-[22px] right-[68px] left-[20px] h-[52px] rounded-[13px] border border-[#333435] bg-[linear-gradient(180deg,#070808,#292929)]">
-						<SlideToUnlock
-							onUnlock={onUnlock}
-							handleWidth={58}
-							className="h-full w-full overflow-hidden rounded-[13px] border-0 bg-transparent p-[3px] shadow-none ring-0"
-						>
-							<SlideToUnlockTrack className="relative h-full w-full overflow-hidden rounded-[10px]">
-								<div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#070808,#292929)]" />
-								<SlideToUnlockText
-									className="pointer-events-none absolute inset-y-0 right-0 left-[58px] z-0 flex items-center justify-center pb-[2px] pl-0 text-center"
-									style={{ marginLeft: 0 }}
-								>
-									{({ isDragging }) => (
-										<ShimmeringText
-											text="slide to unlock"
-											isStopped={isDragging}
-											duration={2.4}
-											className="font-normal text-[26px] tracking-[-0.045em] [--color:#606060] [--shimmering-color:#f4f4f4] [text-shadow:0_2px_0_rgba(0,0,0,0.55),0_-1px_0_rgba(255,255,255,0.08)]"
-											style={{
-												fontFamily: LEGACY_IOS_FONT_FAMILY,
-											}}
-										/>
-									)}
-							</SlideToUnlockText>
-								<SlideToUnlockHandle
-									className="top-0 left-0 h-[44px] w-[58px] overflow-hidden rounded-[11px] border-0 bg-transparent p-0 text-transparent shadow-none hover:bg-transparent active:scale-100 active:bg-transparent"
-									style={{ zIndex: 20 }}
-								>
-									<img
-										alt=""
-										src="/figma/ios-lock-screen/slider-handle.svg"
-										className="-translate-x-[2px] -translate-y-[2px] max-w-none"
-										style={{ width: 62, height: 48 }}
-										draggable="false"
+					<SlideToUnlock
+						onUnlock={onUnlock}
+						handleWidth={58}
+						className="h-full w-full overflow-hidden rounded-[13px] border-0 bg-transparent p-[3px] shadow-none ring-0"
+					>
+						<SlideToUnlockTrack className="relative h-full w-full overflow-hidden rounded-[10px]">
+							<div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#070808,#292929)]" />
+							<SlideToUnlockText
+								className="pointer-events-none absolute inset-y-0 right-0 left-[58px] z-0 flex items-center justify-center pb-[2px] pl-0 text-center"
+								style={{ marginLeft: 0 }}
+							>
+								{({ isDragging }) => (
+									<ShimmeringText
+										text="slide to unlock"
+										isStopped={isDragging}
+										duration={2.4}
+										className="font-normal text-[26px] tracking-[-0.045em] [--color:#606060] [--shimmering-color:#f4f4f4] [text-shadow:0_2px_0_rgba(0,0,0,0.55),0_-1px_0_rgba(255,255,255,0.08)]"
+										style={{
+											fontFamily: LEGACY_IOS_FONT_FAMILY,
+										}}
 									/>
-								</SlideToUnlockHandle>
+								)}
+							</SlideToUnlockText>
+							<SlideToUnlockHandle
+								className="top-0 left-0 h-[44px] w-[58px] overflow-hidden rounded-[11px] border-0 bg-transparent p-0 text-transparent shadow-none hover:bg-transparent active:scale-100 active:bg-transparent"
+								style={{ zIndex: 20 }}
+							>
+								<LockScreenChromeImage
+									alt=""
+									src="/figma/ios-lock-screen/slider-handle.svg"
+									className="max-w-none -translate-x-[2px] -translate-y-[2px]"
+									style={{ width: 62, height: 48 }}
+									draggable="false"
+								/>
+							</SlideToUnlockHandle>
 						</SlideToUnlockTrack>
 					</SlideToUnlock>
 				</div>
 
-				<img
+				<LockScreenChromeImage
 					alt=""
 					src="/figma/ios-lock-screen/camera-line.svg"
 					className="absolute top-[23px] right-[20px] h-[6px] w-[28px] max-w-none"
 				/>
-				<img
+				<LockScreenChromeImage
 					alt=""
 					src="/figma/ios-lock-screen/camera-line.svg"
 					className="absolute top-[67px] right-[20px] h-[6px] w-[28px] max-w-none"
@@ -172,7 +191,7 @@ export default function LockScreen({
 					className="absolute top-[23px] right-[20px] z-20 flex h-[50px] w-[28px] touch-none items-center justify-center active:scale-[0.98]"
 					aria-label="Open camera"
 				>
-					<img
+					<LockScreenChromeImage
 						alt=""
 						src="/figma/ios-lock-screen/camera-icon.svg"
 						className="h-[28px] w-[28px] max-w-none"

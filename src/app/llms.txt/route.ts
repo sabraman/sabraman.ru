@@ -1,22 +1,27 @@
 import {
-	getCaseStudyIndexableRoutes,
-	getComponentDocIndexableRoutes,
-	getLlmsPreferredRoutes,
+	getCaseStudyIndexableContentEntries,
+	getComponentDocIndexableContentEntries,
+	getLlmsPreferredContentEntries,
+} from "~/lib/seo/content-registry";
+import {
+	SITE_CONTACT_PATH,
 	SITE_URL,
-	toSiteUrl,
-} from "~/lib/site-discovery";
+	toAbsoluteSiteUrl,
+} from "~/lib/site-config";
 
 function formatCanonicalUrls(paths: string[]) {
-	return paths.map((path) => `- ${toSiteUrl(path)}`).join("\n");
+	return paths.map((path) => `- ${toAbsoluteSiteUrl(path)}`).join("\n");
 }
 
 export function GET() {
-	const preferredPaths = getLlmsPreferredRoutes();
-	const caseStudyPaths = getCaseStudyIndexableRoutes().map(
-		(route) => route.path,
+	const preferredPaths = getLlmsPreferredContentEntries().map(
+		(entry) => entry.pathEn,
 	);
-	const componentDocPaths = getComponentDocIndexableRoutes().map(
-		(route) => route.path,
+	const caseStudyPaths = getCaseStudyIndexableContentEntries().map(
+		(entry) => entry.pathEn,
+	);
+	const componentDocPaths = getComponentDocIndexableContentEntries().map(
+		(entry) => entry.pathEn,
 	);
 
 	const content = `# llms.txt for sabraman.ru
@@ -53,7 +58,7 @@ ${formatCanonicalUrls(componentDocPaths)}
 - Keep canonical English URLs unprefixed unless the cited page is explicitly the Russian version.
 
 ## Contact
-- contact page: ${SITE_URL}/contact
+- contact page: ${toAbsoluteSiteUrl(SITE_CONTACT_PATH)}
 `;
 
 	return new Response(content, {

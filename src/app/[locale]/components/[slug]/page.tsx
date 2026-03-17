@@ -18,9 +18,11 @@ import {
 import { LegacyComponentPageToolbar } from "~/components/legacy/LegacyComponentPageToolbar";
 import { LegacyUiLocaleProvider } from "~/components/legacy/legacy-locale-context";
 import { resolveSupportedLocale } from "~/i18n/types";
+import {
+	getComponentDocJsonLd,
+	getComponentDocMetadata,
+} from "~/lib/seo/component-doc-seo";
 import { JsonLd } from "~/lib/seo/json-ld";
-import { buildIndexableMetadata } from "~/lib/seo/metadata";
-import { createTechArticleJsonLd } from "~/lib/seo/structured-data";
 
 export function generateStaticParams() {
 	return getAllComponentDocs().map((doc) => ({
@@ -35,24 +37,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { locale, slug } = await params;
 	const resolvedLocale = resolveSupportedLocale(locale);
-	const doc = getComponentDocBySlug(slug);
+	const metadata = getComponentDocMetadata(resolvedLocale, slug);
 
-	if (!doc) {
-		return notFound();
+	if (!metadata) {
+		notFound();
 	}
 
-	const title = doc.frontmatter.title;
-	const description = doc.frontmatter.description;
-
-	return buildIndexableMetadata({
-		locale: resolvedLocale,
-		pathEn: getComponentDocPath(doc.slug, "en"),
-		routeId: "componentDoc",
-		slug: doc.slug,
-		title,
-		description,
-		openGraphType: "article",
-	});
+	return metadata;
 }
 
 export default async function ComponentDocPage({
@@ -71,19 +62,11 @@ export default async function ComponentDocPage({
 	const config = getComponentDocConfig(doc.slug);
 	const neighbours = getComponentDocNeighbours(doc.slug);
 	const sections = extractComponentDocSections(doc.content);
+	const jsonLd = getComponentDocJsonLd(resolvedLocale, doc.slug);
 
 	return (
 		<LegacyUiLocaleProvider locale={resolvedLocale}>
-			<JsonLd
-				data={createTechArticleJsonLd({
-					description: doc.frontmatter.description,
-					locale: resolvedLocale,
-					path: getComponentDocPath(doc.slug, resolvedLocale),
-					title: doc.frontmatter.title,
-					keywords: [doc.frontmatter.kicker],
-				})}
-				id={`${doc.slug}-json-ld`}
-			/>
+			{jsonLd ? <JsonLd data={jsonLd} id={`${doc.slug}-json-ld`} /> : null}
 			<main className="relative min-h-screen overflow-hidden bg-[#0d1117] pb-32 text-white selection:bg-white/20">
 				<div className="legacy-components-doc-backdrop pointer-events-none absolute inset-0" />
 				<div className="legacy-components-doc-overlay pointer-events-none absolute inset-0 opacity-90" />

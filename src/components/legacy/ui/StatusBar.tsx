@@ -37,9 +37,7 @@ export default function StatusBar({
 		>
 			<div className="flex items-center gap-[5px] opacity-75">
 				<LegacySignalBars />
-				<span className="font-bold text-[10px] tracking-[-0.03em]">
-					KRTN
-				</span>
+				<span className="font-bold text-[10px] tracking-[-0.03em]">KRTN</span>
 				<LegacyWifiBars />
 			</div>
 

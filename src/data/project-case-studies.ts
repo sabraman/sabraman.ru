@@ -28,6 +28,8 @@ export type ProjectCaseStudy = {
 	projectId: string;
 	visibility: "public" | "private";
 	status: "live" | "in_development";
+	updatedAt: string;
+	publishedAt?: string;
 	hero: {
 		badge: LocaleText;
 		summary: LocaleText;
@@ -35,6 +37,13 @@ export type ProjectCaseStudy = {
 	sections: CaseStudySection[];
 	faq: CaseStudyFaqItem[];
 	seo: CaseStudySeo;
+};
+
+type ProjectCaseStudyDraft = Omit<
+	ProjectCaseStudy,
+	"publishedAt" | "updatedAt"
+> & {
+	publishedAt?: string;
 };
 
 const section = (
@@ -46,7 +55,26 @@ const section = (
 
 const p = (en: string, ru: string): LocaleText => ({ en, ru });
 
-export const PROJECT_CASE_STUDIES: Record<ProjectSlug, ProjectCaseStudy> = {
+const CASE_STUDY_UPDATED_AT_BY_SLUG: Record<ProjectSlug, string> = {
+	"arch-taplink": "2026-03-17",
+	"florist-quiz": "2026-03-17",
+	"flower-mini-app": "2026-03-17",
+	"horny-place": "2026-03-17",
+	"plonq-ai-search": "2026-03-17",
+	"price-tag-printer": "2026-03-17",
+	"psp-book-reader": "2026-03-17",
+	"schrute-farm": "2026-03-17",
+	smbro: "2026-03-17",
+	"smo-tg-miniapp": "2026-03-17",
+	"smoky-market-loyalty-miniapp": "2026-03-17",
+	vaparshop: "2026-03-17",
+	"vape-me-fast": "2026-03-17",
+};
+
+const CASE_STUDY_PUBLISHED_AT_BY_SLUG: Partial<Record<ProjectSlug, string>> =
+	{};
+
+const PROJECT_CASE_STUDIES_BASE = {
 	vaparshop: {
 		slug: "vaparshop",
 		projectId: "vaparshop",
@@ -2063,7 +2091,24 @@ export const PROJECT_CASE_STUDIES: Record<ProjectSlug, ProjectCaseStudy> = {
 			),
 		},
 	},
-};
+} satisfies Record<ProjectSlug, ProjectCaseStudyDraft>;
+
+export const PROJECT_CASE_STUDIES: Record<ProjectSlug, ProjectCaseStudy> =
+	Object.fromEntries(
+		Object.entries(PROJECT_CASE_STUDIES_BASE).map(([slug, study]) => {
+			const projectSlug = slug as ProjectSlug;
+			const publishedAt = CASE_STUDY_PUBLISHED_AT_BY_SLUG[projectSlug];
+
+			return [
+				projectSlug,
+				{
+					...study,
+					updatedAt: CASE_STUDY_UPDATED_AT_BY_SLUG[projectSlug],
+					...(publishedAt ? { publishedAt } : {}),
+				},
+			];
+		}),
+	) as Record<ProjectSlug, ProjectCaseStudy>;
 
 export function getProjectCaseStudy(slug: string): ProjectCaseStudy | null {
 	if (!(slug in PROJECT_CASE_STUDIES)) {

@@ -13,7 +13,6 @@ import { Badge } from "~/components/ui/badge";
 import {
 	ExternalLinks,
 	FaqBlock,
-	MetaBar,
 	PageTopNav,
 	ProjectHero,
 	type ProjectPageProps,

@@ -1,5 +1,6 @@
 "use client";
 
+import type { ImgHTMLAttributes } from "react";
 import { useEffect, useId, useState } from "react";
 import { cn } from "~/lib/utils";
 
@@ -11,8 +12,22 @@ type NavigatorWithBattery = Navigator & {
 	getBattery?: () => Promise<BatteryManagerLike>;
 };
 
+type LegacyStatusIconImageProps = ImgHTMLAttributes<HTMLImageElement> & {
+	src: string;
+};
+
 export const LEGACY_IOS_FONT_FAMILY =
 	'"Helvetica Neue", "HelveticaNeue-Light", Helvetica, Arial, sans-serif';
+
+function LegacyStatusIconImage({
+	alt = "",
+	...props
+}: LegacyStatusIconImageProps) {
+	return (
+		// biome-ignore lint/performance/noImgElement: these tiny status-bar chrome assets need raw intrinsic rendering to keep the original pixel alignment.
+		<img alt={alt} aria-hidden="true" {...props} />
+	);
+}
 
 function clampBatteryLevel(level: number) {
 	return Math.max(0, Math.min(100, level));
@@ -140,17 +155,17 @@ export function LegacyWifiBars({ className }: { className?: string }) {
 			className={cn("relative h-[20px] w-[20px] opacity-75", className)}
 			aria-hidden
 		>
-			<img
+			<LegacyStatusIconImage
 				alt=""
 				src="/figma/ios-lock-screen/wifi-bar-3.svg"
 				className="absolute top-[4px] left-[2.08px] h-[5.5px] w-[15.84px] max-w-none"
 			/>
-			<img
+			<LegacyStatusIconImage
 				alt=""
 				src="/figma/ios-lock-screen/wifi-bar-2.svg"
 				className="absolute top-[8px] left-[4.97px] h-[4.73px] w-[10.06px] max-w-none"
 			/>
-			<img
+			<LegacyStatusIconImage
 				alt=""
 				src="/figma/ios-lock-screen/wifi-bar-1.svg"
 				className="absolute top-[12px] left-[7.63px] h-[3.59px] w-[4.73px] max-w-none"

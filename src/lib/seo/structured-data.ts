@@ -1,33 +1,32 @@
 import type { SupportedLocale } from "~/i18n/types";
+import {
+	SITE_LOCATION,
+	SITE_NAME,
+	SITE_OWNER_ALIASES,
+	SITE_OWNER_NAME,
+	SITE_OWNER_ROLE,
+	SITE_SOCIAL_LINKS,
+	SITE_TITLE,
+	SITE_URL,
+	toAbsoluteSiteUrl,
+} from "~/lib/site-config";
 
 export type JsonLdObject = Record<string, unknown>;
-
-const SITE_URL = "https://sabraman.ru";
-
-export function toAbsoluteUrl(path: string) {
-	return new URL(path, SITE_URL).toString();
-}
 
 export function createPersonJsonLd(): JsonLdObject {
 	return {
 		"@context": "https://schema.org",
 		"@type": "Person",
-		name: "Danya Yudin",
-		alternateName: ["Даня Юдин", "Sabraman"],
+		name: SITE_OWNER_NAME,
+		alternateName: [...SITE_OWNER_ALIASES],
 		url: SITE_URL,
 		image: `${SITE_URL}/logo.svg`,
-		sameAs: [
-			"https://t.me/sabraman",
-			"https://github.com/sabraman",
-			"https://instagram.com/sabraman",
-			"https://x.com/1sabraman",
-			"https://vk.com/sabraman",
-		],
-		jobTitle: "Creative Designer & Frontend Developer",
+		sameAs: Object.values(SITE_SOCIAL_LINKS),
+		jobTitle: SITE_OWNER_ROLE,
 		address: {
 			"@type": "PostalAddress",
-			addressLocality: "Saint Petersburg",
-			addressCountry: "RU",
+			addressLocality: SITE_LOCATION.locality,
+			addressCountry: SITE_LOCATION.country,
 		},
 		knowsAbout: [
 			"Visual Design",
@@ -45,18 +44,13 @@ export function createWebsiteJsonLd(): JsonLdObject {
 	return {
 		"@context": "https://schema.org",
 		"@type": "WebSite",
-		name: "Sabraman - Danya Yudin Portfolio",
+		name: SITE_TITLE,
 		url: SITE_URL,
 		description:
 			"Portfolio website of Danya Yudin (Даня Юдин), a creative designer and frontend developer",
 		author: {
 			"@type": "Person",
-			name: "Danya Yudin",
-		},
-		potentialAction: {
-			"@type": "SearchAction",
-			target: `${SITE_URL}/search?q={search_term_string}`,
-			"query-input": "required name=search_term_string",
+			name: SITE_OWNER_NAME,
 		},
 	};
 }
@@ -73,7 +67,7 @@ export function createBreadcrumbJsonLd({
 			"@type": "ListItem",
 			position: index + 1,
 			name: item.name,
-			item: toAbsoluteUrl(item.path),
+			item: toAbsoluteSiteUrl(item.path),
 		})),
 	};
 }
@@ -93,14 +87,14 @@ export function createCollectionPageJsonLd({
 		"@context": "https://schema.org",
 		"@type": "CollectionPage",
 		name,
-		url: toAbsoluteUrl(path),
+		url: toAbsoluteSiteUrl(path),
 		inLanguage: locale,
 		mainEntity: {
 			"@type": "ItemList",
 			itemListElement: items.map((item, index) => ({
 				"@type": "ListItem",
 				position: index + 1,
-				url: toAbsoluteUrl(item.path),
+				url: toAbsoluteSiteUrl(item.path),
 				name: item.name,
 			})),
 		},
@@ -109,11 +103,15 @@ export function createCollectionPageJsonLd({
 
 export function createCreativeWorkJsonLd({
 	about,
+	dateModified,
+	datePublished,
 	locale,
 	name,
 	path,
 }: {
 	about?: string[];
+	dateModified?: string;
+	datePublished?: string;
 	locale: SupportedLocale;
 	name: string;
 	path: string;
@@ -122,29 +120,39 @@ export function createCreativeWorkJsonLd({
 		"@context": "https://schema.org",
 		"@type": "CreativeWork",
 		name,
-		url: toAbsoluteUrl(path),
+		url: toAbsoluteSiteUrl(path),
 		inLanguage: locale,
+		mainEntityOfPage: {
+			"@type": "WebPage",
+			"@id": toAbsoluteSiteUrl(path),
+		},
 		author: {
 			"@type": "Person",
-			name: "Danya Yudin",
+			name: SITE_OWNER_NAME,
 			url: SITE_URL,
 		},
 		...(about?.length ? { about } : {}),
 		publisher: {
 			"@type": "Person",
-			name: "Danya Yudin",
+			name: SITE_OWNER_NAME,
 		},
+		...(dateModified ? { dateModified } : {}),
+		...(datePublished ? { datePublished } : {}),
 	};
 }
 
 export function createSoftwareApplicationJsonLd({
 	description,
+	dateModified,
+	datePublished,
 	keywords,
 	locale,
 	name,
 	path,
 }: {
 	description: string;
+	dateModified?: string;
+	datePublished?: string;
 	keywords?: string[];
 	locale: SupportedLocale;
 	name: string;
@@ -155,20 +163,26 @@ export function createSoftwareApplicationJsonLd({
 		"@type": "SoftwareApplication",
 		name,
 		description,
-		url: toAbsoluteUrl(path),
+		url: toAbsoluteSiteUrl(path),
 		applicationCategory: "BusinessApplication",
 		operatingSystem: "Web",
 		inLanguage: locale,
+		mainEntityOfPage: {
+			"@type": "WebPage",
+			"@id": toAbsoluteSiteUrl(path),
+		},
 		...(keywords?.length ? { keywords: keywords.join(", ") } : {}),
 		author: {
 			"@type": "Person",
-			name: "Danya Yudin",
+			name: SITE_OWNER_NAME,
 			url: SITE_URL,
 		},
 		publisher: {
 			"@type": "Person",
-			name: "Danya Yudin",
+			name: SITE_OWNER_NAME,
 		},
+		...(dateModified ? { dateModified } : {}),
+		...(datePublished ? { datePublished } : {}),
 	};
 }
 
@@ -208,15 +222,15 @@ export function createProfessionalServiceJsonLd({
 		"@context": "https://schema.org",
 		"@type": "ProfessionalService",
 		name,
-		url: toAbsoluteUrl(path),
+		url: toAbsoluteSiteUrl(path),
 		inLanguage: locale,
 		description,
 		areaServed: "Worldwide",
 		availableLanguage: ["en", "ru"],
 		provider: {
 			"@type": "Person",
-			name: "Danya Yudin",
-			alternateName: "Sabraman",
+			name: SITE_OWNER_NAME,
+			alternateName: SITE_NAME,
 			url: SITE_URL,
 		},
 		hasOfferCatalog: {
@@ -250,18 +264,22 @@ export function createWebPageJsonLd({
 		"@type": "WebPage",
 		name,
 		description,
-		url: toAbsoluteUrl(path),
+		url: toAbsoluteSiteUrl(path),
 		inLanguage: locale,
 	};
 }
 
 export function createTechArticleJsonLd({
+	dateModified,
+	datePublished,
 	description,
 	keywords,
 	locale,
 	path,
 	title,
 }: {
+	dateModified?: string;
+	datePublished?: string;
 	description: string;
 	keywords?: string[];
 	locale: SupportedLocale;
@@ -274,17 +292,23 @@ export function createTechArticleJsonLd({
 		headline: title,
 		name: title,
 		description,
-		url: toAbsoluteUrl(path),
+		url: toAbsoluteSiteUrl(path),
 		inLanguage: locale,
+		mainEntityOfPage: {
+			"@type": "WebPage",
+			"@id": toAbsoluteSiteUrl(path),
+		},
 		author: {
 			"@type": "Person",
-			name: "Danya Yudin",
+			name: SITE_OWNER_NAME,
 			url: SITE_URL,
 		},
 		publisher: {
 			"@type": "Person",
-			name: "Danya Yudin",
+			name: SITE_OWNER_NAME,
 		},
 		...(keywords?.length ? { keywords: keywords.join(", ") } : {}),
+		...(dateModified ? { dateModified } : {}),
+		...(datePublished ? { datePublished } : {}),
 	};
 }

@@ -2,7 +2,14 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+	Suspense,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 import * as THREE from "three";
 
 // Optimized particle system for background
@@ -12,7 +19,6 @@ function ParticleSystem() {
 
 	// Pre-calculate particle positions (performance optimization)
 	const particles = useMemo(() => {
-		const temp = new THREE.Object3D();
 		const positions: { x: number; y: number; z: number; speed: number }[] = [];
 
 		for (let i = 0; i < 50; i++) {
@@ -29,7 +35,7 @@ function ParticleSystem() {
 	// Reuse vector for performance (from React Three Fiber docs)
 	const tempVector = useMemo(() => new THREE.Vector3(), []);
 
-	useFrame((state) => {
+	useFrame(() => {
 		if (!meshRef.current) return;
 
 		// Animate particles efficiently
@@ -72,7 +78,7 @@ function ThreeBackground() {
 			frameloop="demand" // Only render when needed (performance)
 			dpr={[1, 1.5]} // Limit DPR for mobile performance
 			performance={{ min: 0.5 }} // Performance scaling
-			className="-z-10 absolute inset-0"
+			className="absolute inset-0 -z-10"
 			style={{ background: "transparent" }}
 		>
 			<Suspense fallback={null}>

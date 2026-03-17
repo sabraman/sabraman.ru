@@ -131,7 +131,7 @@ export function LegacyRegistryAddDialog({
 							</div>
 						</div>
 						<div className="px-3 py-3">
-							<code className="block font-mono text-[#d7deed] text-[14px] leading-[1.55] break-all sm:text-[15px]">
+							<code className="block break-all font-mono text-[#d7deed] text-[14px] leading-[1.55] sm:text-[15px]">
 								<span className="select-none text-[#9ea8c1]">$ </span>
 								{activeCommand}
 							</code>
@@ -142,7 +142,7 @@ export function LegacyRegistryAddDialog({
 				<LegacyAlertDialogFooter>
 					<LegacyAlertDialogClose asChild>
 						<LegacyAlertDialogButton
-							className="min-w-0 w-full"
+							className="w-full min-w-0"
 							variant="primary"
 						>
 							Done

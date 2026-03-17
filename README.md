@@ -1,38 +1,30 @@
 # sabraman.ru
 
-My personal website showcasing my work as a creative designer and developer. Features an interactive portfolio, case studies of recent projects.
-
-## Project overview
-
-This repository contains the source code for my portfolio website. Built with Next.js and a focus on clean typography and minimal design.
+Personal site and portfolio for Danya Yudin (Sabraman). The app combines case studies, services pages, reusable legacy UI component docs, and a localized App Router setup for English and Russian URLs.
 
 ## Stack
 
-Core technologies:
-- Next.js 15 / React 19
-- Tailwind CSS 4 
-- shadcn/ui components
-- TypeScript
+- Next.js 16.1
+- React 19
+- TypeScript 5
+- Tailwind CSS 4
+- next-intl for localized routing
+- shadcn/ui and Radix primitives
+- Motion / Framer Motion for animation
+- Biome for linting and formatting
+- Bun for package management and script execution
 
-Additional tools:
-- Zustand for state management
-- Framer Motion for animations
-- React Hook Form + Zod for forms
-- pnpm for package management
-- Biome for code quality
-
-## Local development
+## Commands
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Start development server
-pnpm dev
-
-# Build for production
-pnpm build
-
-# Run production build locally
-pnpm start
+bun install
+bun run dev
+bun run typecheck
+bun run check
 ```
+
+Additional project scripts:
+
+- `bun run og:capture` regenerates component social preview images.
+- `bun run cv:pdfs` regenerates CV PDFs from the source docs.
+- `bun run registry:build` rebuilds the component registry payloads.

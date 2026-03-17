@@ -43,12 +43,12 @@ export function LegacyWheelPickerDemo({
 	return (
 		<div className={cn("flex flex-col items-center gap-6", className)}>
 			<LegacyPickerContainer
-				className="shadow-[0px_16px_34px_0px_rgba(0,0,0,0.35)] relative overflow-hidden shrink-0 mx-auto"
+				className="relative mx-auto shrink-0 overflow-hidden shadow-[0px_16px_34px_0px_rgba(0,0,0,0.35)]"
 				frameWidth={frameWidth}
 				width={width}
 			>
 				{/* Column 1: Hours */}
-				<div className="relative z-[3] flex flex-[1.2] shrink-0 border-r border-[#000]/20 shadow-[1px_0_0_0_rgba(255,255,255,0.3)]">
+				<div className="relative z-[3] flex flex-[1.2] shrink-0 border-[#000]/20 border-r shadow-[1px_0_0_0_rgba(255,255,255,0.3)]">
 					<LegacyPickerColumn
 						align="center"
 						fontSize={25}
@@ -59,7 +59,7 @@ export function LegacyWheelPickerDemo({
 					/>
 				</div>
 				{/* Column 2: Minutes */}
-				<div className="relative z-[2] flex flex-[1] shrink-0 border-r border-[#000]/20 shadow-[1px_0_0_0_rgba(255,255,255,0.3)]">
+				<div className="relative z-[2] flex flex-[1] shrink-0 border-[#000]/20 border-r shadow-[1px_0_0_0_rgba(255,255,255,0.3)]">
 					<LegacyPickerColumn
 						align="center"
 						fontSize={25}

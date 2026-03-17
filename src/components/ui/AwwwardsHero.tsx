@@ -2,7 +2,14 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+	Suspense,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 import * as THREE from "three";
 
 // Optimized fluid particle system with instanced rendering
@@ -226,10 +233,7 @@ interface AwwwardsHeroProps {
 
 function StaticHeroBackdrop() {
 	return (
-		<div
-			className="-z-10 absolute inset-0 overflow-hidden"
-			aria-hidden="true"
-		>
+		<div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
 			<div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(120,120,250,0.18),transparent_30%),radial-gradient(circle_at_75%_30%,rgba(100,255,218,0.14),transparent_28%),radial-gradient(circle_at_50%_75%,rgba(120,120,250,0.12),transparent_32%)]" />
 			<div className="absolute inset-0 opacity-50 [background-image:linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:72px_72px]" />
 			<div className="absolute inset-x-0 bottom-[-10%] h-[45%] bg-[radial-gradient(circle_at_center,rgba(120,120,250,0.14),transparent_65%)] blur-3xl" />
@@ -304,7 +308,7 @@ export function AwwwardsHero({ children, className = "" }: AwwwardsHeroProps) {
 			canvas.removeEventListener("webglcontextlost", handleContextLoss);
 			canvas.removeEventListener("webglcontextrestored", handleContextRestore);
 		};
-	}, [handleContextLoss, handleContextRestore, isSafariBrowser]);
+	}, [handleContextLoss, handleContextRestore]);
 
 	if (!isMounted) {
 		return null;
@@ -322,7 +326,7 @@ export function AwwwardsHero({ children, className = "" }: AwwwardsHeroProps) {
 
 			{/* Advanced Three.js Background */}
 			{shouldRenderCanvas ? (
-				<div className="-z-10 absolute inset-0">
+				<div className="absolute inset-0 -z-10">
 					<Canvas
 						dpr={[1, 1.5]}
 						performance={{ min: 0.5 }}
