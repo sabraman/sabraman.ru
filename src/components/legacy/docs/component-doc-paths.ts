@@ -33,7 +33,7 @@ export function getComponentDocPath(slug: ComponentDocSlug, locale: string) {
 
 export function getComponentDocMarkdownUrl(
 	slug: ComponentDocSlug,
-	locale: string,
+	_locale: string,
 ) {
-	return `${getComponentDocPath(slug, locale)}.mdx`;
+	return `/api/component-docs/${slug}`;
 }
