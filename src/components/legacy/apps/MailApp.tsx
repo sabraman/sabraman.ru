@@ -4,12 +4,17 @@ import { ArrowUpRight, Inbox, MailOpen, Send, Sparkles } from "lucide-react";
 import { useLegacyUiLocale } from "../legacy-locale-context";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
+function buildMailtoHref(subject: string) {
+	return `mailto:sabraman@ya.ru?subject=${encodeURIComponent(subject)}`;
+}
+
 const COPY = {
 	en: {
 		header: "Inbox",
 		subline:
 			"Use email for structured briefs and Telegram for fast back-and-forth.",
 		compose: "Compose",
+		composeHref: buildMailtoHref("New project"),
 		unread: "Unread",
 		archive: "Archive",
 		rhythm: "Reply rhythm",
@@ -22,6 +27,7 @@ const COPY = {
 		subline:
 			"Почта подходит для структурных брифов, Telegram - для быстрых созвонов и уточнений.",
 		compose: "Написать",
+		composeHref: buildMailtoHref("Новый проект"),
 		unread: "Непрочит.",
 		archive: "Архив",
 		rhythm: "Ответ",
@@ -40,7 +46,7 @@ const MESSAGES = {
 				"Need a bot plus mini app flow for store operations, analytics, and reporting.",
 			time: "09:21",
 			unread: true,
-			href: "mailto:sabraman@ya.ru?subject=Telegram%20retail%20tool",
+			href: buildMailtoHref("Telegram retail tool"),
 		},
 		{
 			from: "portfolio",
@@ -78,7 +84,7 @@ const MESSAGES = {
 				"Нужен бот и mini app для операционки магазина, аналитики и отчетности.",
 			time: "09:21",
 			unread: true,
-			href: "mailto:sabraman@ya.ru?subject=Telegram-%20инструмент%20для%20ритейла",
+			href: buildMailtoHref("Telegram-инструмент для ритейла"),
 		},
 		{
 			from: "portfolio",
@@ -156,7 +162,7 @@ export default function MailApp() {
 						</p>
 					</div>
 					<a
-						href="mailto:sabraman@ya.ru?subject=New%20project"
+						href={copy.composeHref}
 						className="inline-flex h-[36px] items-center rounded-full bg-[linear-gradient(180deg,#4b90ff_0%,#2563eb_100%)] px-4 text-[12px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)]"
 						style={{ fontFamily: LEGACY_IOS_FONT_FAMILY, fontWeight: 700 }}
 					>
