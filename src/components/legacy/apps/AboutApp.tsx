@@ -3,8 +3,8 @@
 import { Plus, Search, Share2, Trash2, Undo2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
+import { useLegacyUiLocale } from "../legacy-locale-context";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
 const PAPER_TEXTURE_ASSET_PATH = "/figma/legacy-notes/paper-texture.png";
@@ -633,7 +633,7 @@ function DeleteSheet({
 }
 
 export default function AboutApp() {
-	const locale = useLocale() === "ru" ? "ru" : "en";
+	const locale = useLegacyUiLocale();
 	const copy = COPY[locale];
 	const [screen, setScreen] = useState<Screen>("list");
 	const [selectedAccount, setSelectedAccount] = useState<AccountId>("all");

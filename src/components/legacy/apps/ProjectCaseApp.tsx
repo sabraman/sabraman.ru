@@ -1,6 +1,5 @@
 "use client";
 
-import { useLocale } from "next-intl";
 import { type ReactNode, useDeferredValue, useMemo, useState } from "react";
 import { PROJECT_CASE_STUDIES } from "~/data/project-case-studies";
 import {
@@ -12,6 +11,7 @@ import {
 	type ProjectSlug,
 } from "~/data/projects";
 import { cn } from "~/lib/utils";
+import { useLegacyUiLocale } from "../legacy-locale-context";
 import { PROJECT_APP_REGISTRY } from "../project-app-registry";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
@@ -925,7 +925,7 @@ function buildPortfolioLinkRows(
 }
 
 export default function ProjectCaseApp({ slug }: { slug: ProjectSlug }) {
-	const locale = resolveLocale(useLocale());
+	const locale = resolveLocale(useLegacyUiLocale());
 	const copy = COPY[locale];
 	const project = PROJECT_BY_SLUG[slug];
 	const caseStudy = PROJECT_CASE_STUDIES[slug];

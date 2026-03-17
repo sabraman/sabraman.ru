@@ -1,24 +1,21 @@
-import type { Locale } from "~/i18n";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
+import { resolveSupportedLocale, type SupportedLocale } from "~/i18n/types";
 
 export type InlineSegment = {
 	type: "text" | "code";
 	value: string;
 };
 
-export function getLocale(locale: string): Locale {
-	return locale === "ru" ? "ru" : "en";
+export function getLocale(locale: string): SupportedLocale {
+	return resolveSupportedLocale(locale);
 }
 
-export function getLocalePrefix(locale: Locale) {
-	return locale === "ru" ? "/ru" : "";
+export function getComponentsHubPath(locale: SupportedLocale) {
+	return getLocalizedPathname(locale, "/components");
 }
 
-export function getComponentsHubPath(_locale: Locale) {
-	return `/components`;
-}
-
-export function getLegacyWheelPickerHubPath(_locale: Locale) {
-	return `/components/legacy-wheel-picker`;
+export function getLegacyWheelPickerHubPath(locale: SupportedLocale) {
+	return getLocalizedPathname(locale, "/components/legacy-wheel-picker");
 }
 
 export const LEGACY_WHEEL_PICKER_URLS = {

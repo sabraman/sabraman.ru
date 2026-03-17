@@ -3,7 +3,6 @@
 import { ArrowUpRight, BookOpen } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { useLocale } from "next-intl";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import {
@@ -46,8 +45,7 @@ function getGroupProjects(group: ProjectCategoryId) {
 	);
 }
 
-export function ProjectCatalogSection() {
-	const locale = (useLocale() === "ru" ? "ru" : "en") as SupportedLocale;
+export function ProjectCatalogSection({ locale }: { locale: SupportedLocale }) {
 	const labels = LABELS[locale];
 
 	return (
@@ -112,6 +110,10 @@ export function ProjectCatalogSection() {
 
 								<div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
 									{projects.map((project) => {
+										const caseStudyHref = getCaseStudyPath(
+											locale,
+											project.slug,
+										);
 										const externalLinks = getProjectExternalLinks(project);
 										const showInDev =
 											project.status === "in_development" &&
@@ -142,23 +144,28 @@ export function ProjectCatalogSection() {
 															: labels.public}
 													</Badge>
 												</div>
-												<p className="mb-4 text-muted-foreground text-sm leading-relaxed">
-													{project.short[locale]}
-												</p>
-												<div className="mb-4 flex flex-wrap gap-2">
-													{project.tags.slice(0, 4).map((tag) => (
-														<Badge
-															key={tag}
-															variant="secondary"
-															className="rounded-full px-2.5 py-1"
-														>
-															{tag}
-														</Badge>
-													))}
-												</div>
+												<Link
+													href={caseStudyHref}
+													className="mb-4 block rounded-2xl outline-none transition-colors focus-visible:ring-2 focus-visible:ring-accent/40"
+												>
+													<p className="text-muted-foreground text-sm leading-relaxed">
+														{project.short[locale]}
+													</p>
+													<div className="mt-4 flex flex-wrap gap-2">
+														{project.tags.slice(0, 4).map((tag) => (
+															<Badge
+																key={tag}
+																variant="secondary"
+																className="rounded-full px-2.5 py-1"
+															>
+																{tag}
+															</Badge>
+														))}
+													</div>
+												</Link>
 												<div className="mt-auto flex flex-wrap gap-2">
 													<Button asChild size="sm" className="gap-1.5">
-														<Link href={getCaseStudyPath(locale, project.slug)}>
+														<Link href={caseStudyHref}>
 															<BookOpen className="h-3.5 w-3.5" />
 															{labels.caseStudy}
 														</Link>

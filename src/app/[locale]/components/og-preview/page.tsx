@@ -1,21 +1,27 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
 import { ComponentsHubOgPreview } from "~/components/legacy/docs/component-og-preview";
+import { resolveSupportedLocale } from "~/i18n/types";
+import { buildNoIndexMetadata } from "~/lib/seo/metadata";
 
-export const metadata: Metadata = {
-	robots: {
-		index: false,
-		follow: false,
-	},
-};
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+	const { locale } = await params;
+
+	return buildNoIndexMetadata({
+		locale: resolveSupportedLocale(locale),
+		pathEn: "/components/og-preview",
+	});
+}
 
 export default async function ComponentsOgPreviewPage({
 	params,
 }: {
 	params: Promise<{ locale: string }>;
 }) {
-	const { locale } = await params;
-	setRequestLocale(locale);
+	await params;
 
 	return <ComponentsHubOgPreview />;
 }

@@ -10,17 +10,26 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
+import type { HornyPlacePageCopy } from "~/components/work/get-work-copy";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
+import type { SupportedLocale } from "~/i18n/types";
 
-export default function HornyPlacePage() {
-	const t = useTranslations("work.hornyPlace.page");
+export default function HornyPlacePage({
+	copy,
+	locale,
+}: {
+	copy: HornyPlacePageCopy;
+	locale: SupportedLocale;
+}) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
 	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
 	const [currentView, setCurrentView] = useState(0);
+	const contactHref = getLocalizedPathname(locale, "/contact");
+	const homeHref = getLocalizedPathname(locale, "/");
 
 	const setContainerRef = useCallback((node: HTMLDivElement | null) => {
 		containerRef.current = node;
@@ -54,42 +63,42 @@ export default function HornyPlacePage() {
 	const caseStudies = [
 		{
 			id: 1,
-			title: t("caseStudies.signage.title"),
-			description: t("caseStudies.signage.description"),
+			title: copy.caseStudies.signage.title,
+			description: copy.caseStudies.signage.description,
 			image: "/work/horny-place/signage.jpg",
 			skills: [
-				t("skills.3dDesign"),
-				t("skills.visualIdentity"),
-				t("skills.brandExpression"),
+				copy.skills["3dDesign"],
+				copy.skills.visualIdentity,
+				copy.skills.brandExpression,
 			],
 		},
 		{
 			id: 2,
-			title: t("caseStudies.promotional.title"),
-			description: t("caseStudies.promotional.description"),
+			title: copy.caseStudies.promotional.title,
+			description: copy.caseStudies.promotional.description,
 			image: "/work/horny-place/branded-items.jpg",
 			skills: [
-				t("skills.printDesign"),
-				t("skills.marketing"),
-				t("skills.brandConsistency"),
+				copy.skills.printDesign,
+				copy.skills.marketing,
+				copy.skills.brandConsistency,
 			],
 		},
 		{
 			id: 3,
-			title: t("caseStudies.webApp.title"),
-			description: t("caseStudies.webApp.description"),
+			title: copy.caseStudies.webApp.title,
+			description: copy.caseStudies.webApp.description,
 			image: "/work/horny-place/web-app.jpg",
-			skills: ["Next.js", t("skills.webDevelopment"), t("skills.uiuxDesign")],
+			skills: ["Next.js", copy.skills.webDevelopment, copy.skills.uiuxDesign],
 		},
 		{
 			id: 4,
-			title: t("caseStudies.brandBook.title"),
-			description: t("caseStudies.brandBook.description"),
+			title: copy.caseStudies.brandBook.title,
+			description: copy.caseStudies.brandBook.description,
 			image: "/work/horny-place/brand-book.jpg",
 			skills: [
-				t("skills.brandStrategy"),
-				t("skills.styleGuide"),
-				t("skills.designSystems"),
+				copy.skills.brandStrategy,
+				copy.skills.styleGuide,
+				copy.skills.designSystems,
 			],
 		},
 	];
@@ -121,7 +130,7 @@ export default function HornyPlacePage() {
 						className="max-w-4xl"
 					>
 						<Badge className="mb-6 rounded-full bg-accent/10 px-4 py-1.5 text-accent hover:bg-accent/20">
-							{t("badge")}
+							{copy.badge}
 						</Badge>
 
 						<h1
@@ -135,21 +144,21 @@ export default function HornyPlacePage() {
 						</h1>
 
 						<p className="mb-12 max-w-2xl text-muted-foreground text-xl md:text-3xl">
-							{t("heroDescription")}
+							{copy.heroDescription}
 						</p>
 
 						<div className="flex flex-wrap gap-4">
 							<Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
-								{t("heroSkills.branding")}
+								{copy.heroSkills.branding}
 							</Badge>
 							<Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
-								{t("heroSkills.printDesign")}
+								{copy.heroSkills.printDesign}
 							</Badge>
 							<Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
-								{t("heroSkills.webDevelopment")}
+								{copy.heroSkills.webDevelopment}
 							</Badge>
 							<Badge className="bg-accent/10 px-4 py-1.5 text-accent text-lg hover:bg-accent/20">
-								{t("skills.retailExperience")}
+								{copy.skills.retailExperience}
 							</Badge>
 						</div>
 					</motion.div>
@@ -174,16 +183,16 @@ export default function HornyPlacePage() {
 									fontVariationSettings: `'wght' 900, 'wdth' 900`,
 								}}
 							>
-								{t("sections.brandIdentity")}
+								{copy.sections.brandIdentity}
 							</h2>
 
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<p className="mb-8 text-xl md:text-2xl">
-									{t("sections.brandDescription")}
+									{copy.sections.brandDescription}
 								</p>
 
 								<p className="mb-8 text-lg text-muted-foreground md:text-xl">
-									{t("sections.brandChallenge")}
+									{copy.sections.brandChallenge}
 								</p>
 
 								<div className="mt-12 flex flex-col space-y-6">
@@ -193,10 +202,10 @@ export default function HornyPlacePage() {
 										</div>
 										<div>
 											<h3 className="font-bold text-xl">
-												{t("sections.visualDesign.title")}
+												{copy.sections.visualDesign.title}
 											</h3>
 											<p className="text-muted-foreground">
-												{t("sections.visualDesign.description")}
+												{copy.sections.visualDesign.description}
 											</p>
 										</div>
 									</div>
@@ -207,10 +216,10 @@ export default function HornyPlacePage() {
 										</div>
 										<div>
 											<h3 className="font-bold text-xl">
-												{t("sections.retailExperience.title")}
+												{copy.sections.retailExperience.title}
 											</h3>
 											<p className="text-muted-foreground">
-												{t("sections.retailExperience.description")}
+												{copy.sections.retailExperience.description}
 											</p>
 										</div>
 									</div>
@@ -221,10 +230,10 @@ export default function HornyPlacePage() {
 										</div>
 										<div>
 											<h3 className="font-bold text-xl">
-												{t("sections.digitalPlatforms.title")}
+												{copy.sections.digitalPlatforms.title}
 											</h3>
 											<p className="text-muted-foreground">
-												{t("sections.digitalPlatforms.description")}
+												{copy.sections.digitalPlatforms.description}
 											</p>
 										</div>
 									</div>
@@ -278,10 +287,10 @@ export default function HornyPlacePage() {
 								fontVariationSettings: `'wght' 900, 'wdth' 900`,
 							}}
 						>
-							{t("designJourney.title")}
+							{copy.designJourney.title}
 						</h2>
 						<p className="text-muted-foreground text-xl">
-							{t("designJourney.description")}
+							{copy.designJourney.description}
 						</p>
 					</motion.div>
 
@@ -292,29 +301,29 @@ export default function HornyPlacePage() {
 						{/* Timeline items */}
 						{[
 							{
-								phase: t("phases.discovery.title"),
-								description: t("phases.discovery.description"),
+								phase: copy.phases.discovery.title,
+								description: copy.phases.discovery.description,
 								icon: <BookOpen className="h-6 w-6" />,
 								position: "left",
 								delay: 0,
 							},
 							{
-								phase: t("phases.visualIdentity.title"),
-								description: t("phases.visualIdentity.description"),
+								phase: copy.phases.visualIdentity.title,
+								description: copy.phases.visualIdentity.description,
 								icon: <Paintbrush className="h-6 w-6" />,
 								position: "right",
 								delay: 0.1,
 							},
 							{
-								phase: t("phases.brandApplications.title"),
-								description: t("phases.brandApplications.description"),
+								phase: copy.phases.brandApplications.title,
+								description: copy.phases.brandApplications.description,
 								icon: <Store className="h-6 w-6" />,
 								position: "left",
 								delay: 0.2,
 							},
 							{
-								phase: t("phases.digitalExperience.title"),
-								description: t("phases.digitalExperience.description"),
+								phase: copy.phases.digitalExperience.title,
+								description: copy.phases.digitalExperience.description,
 								icon: <Layout className="h-6 w-6" />,
 								position: "right",
 								delay: 0.3,
@@ -350,7 +359,7 @@ export default function HornyPlacePage() {
 								>
 									<div className="flex h-40 items-center justify-center rounded-xl border bg-primary/5 md:h-60">
 										<div className="font-bold text-2xl text-primary/30">
-											{t("phases.phase")} {index + 1}
+											{copy.phases.phase} {index + 1}
 										</div>
 									</div>
 								</div>
@@ -407,10 +416,10 @@ export default function HornyPlacePage() {
 								fontVariationSettings: `'wght' 900, 'wdth' 900`,
 							}}
 						>
-							{t("keyElements.title")}
+							{copy.keyElements.title}
 						</h2>
 						<p className="mx-auto max-w-2xl text-muted-foreground text-xl">
-							{t("keyElements.description")}
+							{copy.keyElements.description}
 						</p>
 					</motion.div>
 
@@ -504,7 +513,7 @@ export default function HornyPlacePage() {
 											}
 										>
 											<ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-											{t("navigation.previous")}
+											{copy.navigation.previous}
 										</Button>
 
 										<Button
@@ -513,7 +522,7 @@ export default function HornyPlacePage() {
 												setCurrentView((currentView + 1) % caseStudies.length)
 											}
 										>
-											{t("navigation.next")}
+											{copy.navigation.next}
 											<ArrowLeft className="ml-2 h-4 w-4 rotate-180 transition-transform group-hover:translate-x-1" />
 										</Button>
 									</div>
@@ -544,28 +553,28 @@ export default function HornyPlacePage() {
 								fontVariationSettings: `'wght' 900, 'wdth' 900`,
 							}}
 						>
-							{t("projectOutcomes.title")}
+							{copy.projectOutcomes.title}
 						</h2>
 						<p className="text-muted-foreground text-xl">
-							{t("projectOutcomes.description")}
+							{copy.projectOutcomes.description}
 						</p>
 					</motion.div>
 
 					<div className="grid grid-cols-1 gap-8 md:grid-cols-3">
 						{[
 							{
-								title: t("outcomes.brandRecognition.title"),
-								description: t("outcomes.brandRecognition.description"),
+								title: copy.outcomes.brandRecognition.title,
+								description: copy.outcomes.brandRecognition.description,
 								delay: 0,
 							},
 							{
-								title: t("outcomes.customerEngagement.title"),
-								description: t("outcomes.customerEngagement.description"),
+								title: copy.outcomes.customerEngagement.title,
+								description: copy.outcomes.customerEngagement.description,
 								delay: 0.1,
 							},
 							{
-								title: t("outcomes.retailPresence.title"),
-								description: t("outcomes.retailPresence.description"),
+								title: copy.outcomes.retailPresence.title,
+								description: copy.outcomes.retailPresence.description,
 								delay: 0.2,
 							},
 						].map((result, index) => (
@@ -605,10 +614,10 @@ export default function HornyPlacePage() {
 								fontVariationSettings: `'wght' 900, 'wdth' 900`,
 							}}
 						>
-							{t("cta.title")}
+							{copy.cta.title}
 						</h2>
 						<p className="mb-12 text-muted-foreground text-xl">
-							{t("cta.description")}
+							{copy.cta.description}
 						</p>
 
 						<div className="flex flex-col justify-center gap-4 sm:flex-row">
@@ -617,8 +626,8 @@ export default function HornyPlacePage() {
 								className="group rounded-full bg-accent px-8 py-6 font-medium text-accent-foreground text-base hover:bg-accent/90"
 								asChild
 							>
-								<Link href="/contact">
-									<span>{t("cta.startProject")}</span>
+								<Link href={contactHref}>
+									<span>{copy.cta.startProject}</span>
 									<ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-[4px] group-hover:translate-y-[-4px]" />
 								</Link>
 							</Button>
@@ -629,9 +638,9 @@ export default function HornyPlacePage() {
 								className="group rounded-full px-8 py-6 font-medium text-base"
 								asChild
 							>
-								<Link href="/">
+								<Link href={homeHref}>
 									<ArrowLeft className="mr-2 h-5 w-5 transition-transform group-hover:-translate-x-1" />
-									<span>{t("cta.backToHome")}</span>
+									<span>{copy.cta.backToHome}</span>
 								</Link>
 							</Button>
 						</div>

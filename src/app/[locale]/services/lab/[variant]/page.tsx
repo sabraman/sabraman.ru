@@ -3,13 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
 	getKindLabel,
-	getLocale,
-	getLocalePrefix,
 	getStyleClasses,
 	getVariantBySlug,
 	LAB_VARIANT_CONFIG,
 	LAB_VARIANTS,
 } from "~/app/[locale]/services/lab/content";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
+import { resolveSupportedLocale } from "~/i18n/types";
+import { buildNoIndexMetadata } from "~/lib/seo/metadata";
 
 export function generateStaticParams() {
 	return LAB_VARIANTS.map((variant) => ({ variant }));
@@ -21,36 +22,24 @@ export async function generateMetadata({
 	params: Promise<{ locale: string; variant: string }>;
 }): Promise<Metadata> {
 	const { locale, variant } = await params;
-	const lang = getLocale(locale);
-	const prefix = getLocalePrefix(lang);
+	const lang = resolveSupportedLocale(locale);
 	const config = getVariantBySlug(variant);
 
 	if (!config) {
 		return {};
 	}
 
-	const localizedPath = `${prefix}/services/lab/${config.slug}`;
 	const title =
 		lang === "ru"
 			? `${config.name} - Services Lab | Sabraman`
 			: `${config.name} - Services Lab | Sabraman`;
 
-	return {
+	return buildNoIndexMetadata({
+		locale: lang,
+		pathEn: `/services/lab/${config.slug}`,
 		title,
 		description: config.content[lang].heroLead,
-		alternates: {
-			canonical: localizedPath,
-			languages: {
-				en: `/services/lab/${config.slug}`,
-				ru: `/ru/services/lab/${config.slug}`,
-				"x-default": `/services/lab/${config.slug}`,
-			},
-		},
-		robots: {
-			index: false,
-			follow: true,
-		},
-	};
+	});
 }
 
 type VariantPageProps = {
@@ -518,7 +507,7 @@ export default async function ServicesLabVariantPage({
 	params,
 }: VariantPageProps) {
 	const { locale, variant } = await params;
-	const lang = getLocale(locale);
+	const lang = resolveSupportedLocale(locale);
 	const config = getVariantBySlug(variant);
 
 	if (!config) {
@@ -527,9 +516,8 @@ export default async function ServicesLabVariantPage({
 
 	const content = config.content[lang];
 	const classes = getStyleClasses(config.styleToken);
-	const prefix = getLocalePrefix(lang);
-	const contactHref = `${prefix}/contact`;
-	const indexHref = `${prefix}/services/lab`;
+	const contactHref = getLocalizedPathname(lang, "/contact");
+	const indexHref = getLocalizedPathname(lang, "/services/lab");
 
 	return (
 		<main className={classes.container}>
@@ -583,7 +571,7 @@ export default async function ServicesLabVariantPage({
 					{LAB_VARIANT_CONFIG.map((item, index) => (
 						<li key={item.slug}>
 							<Link
-								href={`${prefix}/services/lab/${item.slug}`}
+								href={getLocalizedPathname(lang, `/services/lab/${item.slug}`)}
 								className={`block border px-2 py-2 text-center font-mono text-[11px] uppercase tracking-[0.08em] transition-colors ${
 									item.slug === config.slug
 										? "border-accent/40 bg-accent/10"

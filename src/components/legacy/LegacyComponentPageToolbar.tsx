@@ -2,11 +2,13 @@
 
 import { CheckIcon, CopyIcon } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 
 import { LegacyBarButton } from "~/components/legacy-bar-button";
-import { useRouter } from "~/i18n/navigation";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
 import { cn } from "~/lib/utils";
+import { useLegacyUiLocale } from "./legacy-locale-context";
 
 const TOOLBAR_BACKGROUND =
 	"linear-gradient(180deg, rgb(181, 196, 215) 0%, rgb(152, 171, 195) 33%, rgb(113, 137, 168) 67%, rgb(87, 114, 150) 100%)";
@@ -31,6 +33,7 @@ export function LegacyComponentPageToolbar({
 	title,
 }: LegacyComponentPageToolbarProps) {
 	const router = useRouter();
+	const locale = useLegacyUiLocale();
 	const [copyState, setCopyState] = React.useState<CopyState>("idle");
 
 	React.useEffect(() => {
@@ -95,7 +98,7 @@ export function LegacyComponentPageToolbar({
 							label="Components"
 							layout="backward"
 							onClick={() => {
-								router.push("/components");
+								router.push(getLocalizedPathname(locale, "/components"));
 							}}
 						/>
 					</div>

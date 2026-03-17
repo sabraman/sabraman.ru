@@ -1,6 +1,7 @@
 import {
 	getCaseStudyIndexableRoutes,
 	getComponentDocIndexableRoutes,
+	getLlmsPreferredRoutes,
 	SITE_URL,
 	toSiteUrl,
 } from "~/lib/site-discovery";
@@ -10,14 +11,7 @@ function formatCanonicalUrls(paths: string[]) {
 }
 
 export function GET() {
-	const preferredPaths = [
-		"/",
-		"/work",
-		"/services",
-		"/components",
-		"/iphone",
-		"/contact",
-	];
+	const preferredPaths = getLlmsPreferredRoutes();
 	const caseStudyPaths = getCaseStudyIndexableRoutes().map(
 		(route) => route.path,
 	);

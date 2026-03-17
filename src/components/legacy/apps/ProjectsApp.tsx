@@ -1,12 +1,12 @@
 "use client";
 
 import { ArrowUpRight, Camera, Film, Grid2x2, Star } from "lucide-react";
-import { useLocale } from "next-intl";
 import {
 	getCaseStudyPath,
 	PROJECT_CATEGORY_LABELS,
 	PROJECTS,
 } from "~/data/projects";
+import { useLegacyUiLocale } from "../legacy-locale-context";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
 const COPY = {
@@ -41,7 +41,7 @@ function projectGradient(index: number) {
 }
 
 export default function ProjectsApp() {
-	const locale = useLocale() === "ru" ? "ru" : "en";
+	const locale = useLegacyUiLocale();
 	const copy = COPY[locale];
 	const featured = PROJECTS.filter((project) => project.isFeaturedWork);
 	const library = PROJECTS.slice(0, 8);

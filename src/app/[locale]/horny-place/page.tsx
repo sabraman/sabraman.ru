@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
-import { getTranslations } from "next-intl/server";
+import {
+	getHornyPlacePageCopy,
+	getWorkCaseStudyMeta,
+} from "~/components/work/get-work-copy";
 import HornyPlacePageClient from "~/components/work/HornyPlacePageClient";
+import { resolveSupportedLocale } from "~/i18n/types";
+import { JsonLd } from "~/lib/seo/json-ld";
+import { buildIndexableMetadata } from "~/lib/seo/metadata";
+import { createCreativeWorkJsonLd } from "~/lib/seo/structured-data";
 
 async function getHornyPlaceJsonLd(locale: string) {
 	"use cache";
@@ -10,23 +17,12 @@ async function getHornyPlaceJsonLd(locale: string) {
 	const isRussian = locale === "ru";
 	const pagePath = isRussian ? "/ru/horny-place" : "/horny-place";
 
-	return {
-		"@context": "https://schema.org",
-		"@type": "CreativeWork",
+	return createCreativeWorkJsonLd({
+		locale: resolveSupportedLocale(locale),
 		name: "HORNY PLACE Case Study",
-		url: `https://sabraman.ru${pagePath}`,
-		inLanguage: locale,
-		author: {
-			"@type": "Person",
-			name: "Danya Yudin",
-			url: "https://sabraman.ru",
-		},
+		path: pagePath,
 		about: ["Brand Identity", "Visual Design", "Web Development", "Retail UX"],
-		publisher: {
-			"@type": "Person",
-			name: "Danya Yudin",
-		},
-	};
+	});
 }
 
 export async function generateMetadata({
@@ -35,38 +31,17 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const t = await getTranslations({ locale, namespace: "work" });
-	const isRussian = locale === "ru";
-	const path = isRussian ? "/ru/horny-place" : "/horny-place";
-	const title = `${t("hornyPlace.title")} - ${t("hornyPlace.subtitle")} - Sabraman`;
-	const description = t("hornyPlace.description");
+	const resolvedLocale = resolveSupportedLocale(locale);
+	const meta = await getWorkCaseStudyMeta(resolvedLocale, "horny-place");
 
-	return {
-		title,
-		description,
-		alternates: {
-			canonical: path,
-			languages: {
-				en: "/horny-place",
-				ru: "/ru/horny-place",
-				"x-default": "/horny-place",
-			},
-		},
-		openGraph: {
-			title,
-			description,
-			url: `https://sabraman.ru${path}`,
-			siteName: "Sabraman - Danya Yudin Portfolio",
-			locale: isRussian ? "ru_RU" : "en_US",
-			type: "article",
-		},
-		twitter: {
-			card: "summary_large_image",
-			title,
-			description,
-			images: ["/api/og"],
-		},
-	};
+	return buildIndexableMetadata({
+		locale: resolvedLocale,
+		pathEn: "/horny-place",
+		routeId: "hornyPlace",
+		title: meta.title,
+		description: meta.description,
+		openGraphType: "article",
+	});
 }
 
 export default async function HornyPlacePage({
@@ -75,15 +50,14 @@ export default async function HornyPlacePage({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
+	const resolvedLocale = resolveSupportedLocale(locale);
 	const jsonLd = await getHornyPlaceJsonLd(locale);
+	const copy = await getHornyPlacePageCopy(resolvedLocale);
 
 	return (
 		<>
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-			/>
-			<HornyPlacePageClient />
+			<JsonLd data={jsonLd} id="horny-place-json-ld" />
+			<HornyPlacePageClient locale={resolvedLocale} copy={copy} />
 		</>
 	);
 }

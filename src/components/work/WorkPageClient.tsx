@@ -2,9 +2,7 @@
 
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { useLocale } from "next-intl";
 import { Badge } from "~/components/ui/badge";
-import { Button } from "~/components/ui/button";
 import {
 	getCaseStudyPath,
 	PROJECT_CATALOG_GROUP_LABELS,
@@ -12,27 +10,15 @@ import {
 	PROJECTS,
 	type ProjectCatalogGroupId,
 } from "~/data/projects";
+import type { SupportedLocale } from "~/i18n/types";
 
-type SupportedLocale = "en" | "ru";
-
-const LABELS = {
-	en: {
-		title: "Work Hub",
-		description:
-			"Complete case-study index across all shipped products and long-term project streams.",
-		private: "Private",
-		public: "Public",
-		caseStudy: "Open case study",
-	},
-	ru: {
-		title: "Хаб кейсов",
-		description:
-			"Полный индекс кейсов по всем запущенным продуктам и долгим проектным направлениям.",
-		private: "Приватный",
-		public: "Публичный",
-		caseStudy: "Открыть кейс",
-	},
-} as const;
+export type WorkPageLabels = {
+	title: string;
+	description: string;
+	private: string;
+	public: string;
+	caseStudy: string;
+};
 
 function getGroupProjects(group: ProjectCatalogGroupId) {
 	if (group === "featured") {
@@ -44,10 +30,13 @@ function getGroupProjects(group: ProjectCatalogGroupId) {
 	);
 }
 
-export default function WorkPageClient() {
-	const locale = (useLocale() === "ru" ? "ru" : "en") as SupportedLocale;
-	const labels = LABELS[locale];
-
+export default function WorkPageClient({
+	labels,
+	locale,
+}: {
+	labels: WorkPageLabels;
+	locale: SupportedLocale;
+}) {
 	return (
 		<main className="container mx-auto max-w-6xl px-4 py-16 md:py-20">
 			<header className="mb-12">
@@ -90,54 +79,57 @@ export default function WorkPageClient() {
 							</div>
 
 							<div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-								{projects.map((project) => (
-									<article
-										key={project.id}
-										className="group flex h-full flex-col rounded-3xl border border-primary/10 bg-background/80 p-5 shadow-sm transition-all duration-300 hover:border-accent/30 hover:shadow-accent/10 hover:shadow-lg"
-									>
-										<div className="mb-3 flex items-center justify-between gap-2">
-											<h3
-												className="font-extrabold text-2xl leading-tight"
-												style={{
-													fontFamily: "Heading Now Variable",
-													fontVariationSettings: `'wght' 760, 'wdth' 860`,
-												}}
-											>
-												{project.title}
-											</h3>
-											<Badge
-												variant="outline"
-												className="rounded-full border-primary/15 px-2.5 py-1 text-[11px] uppercase tracking-wide"
-											>
-												{project.visibility === "private"
-													? labels.private
-													: labels.public}
-											</Badge>
-										</div>
-										<p className="mb-4 text-muted-foreground text-sm leading-relaxed">
-											{project.short[locale]}
-										</p>
-										<div className="mb-4 flex flex-wrap gap-2">
-											{project.tags.slice(0, 4).map((tag) => (
-												<Badge
-													key={tag}
-													variant="secondary"
-													className="rounded-full px-2.5 py-1"
+								{projects.map((project) => {
+									const caseStudyHref = getCaseStudyPath(locale, project.slug);
+
+									return (
+										<Link
+											key={project.id}
+											href={caseStudyHref}
+											className="group flex h-full flex-col rounded-3xl border border-primary/10 bg-background/80 p-5 shadow-sm transition-all duration-300 hover:border-accent/30 hover:shadow-accent/10 hover:shadow-lg"
+										>
+											<div className="mb-3 flex items-center justify-between gap-2">
+												<h3
+													className="font-extrabold text-2xl leading-tight"
+													style={{
+														fontFamily: "Heading Now Variable",
+														fontVariationSettings: `'wght' 760, 'wdth' 860`,
+													}}
 												>
-													{tag}
+													{project.title}
+												</h3>
+												<Badge
+													variant="outline"
+													className="rounded-full border-primary/15 px-2.5 py-1 text-[11px] uppercase tracking-wide"
+												>
+													{project.visibility === "private"
+														? labels.private
+														: labels.public}
 												</Badge>
-											))}
-										</div>
-										<div className="mt-auto">
-											<Button asChild size="sm" className="gap-1.5">
-												<Link href={getCaseStudyPath(locale, project.slug)}>
+											</div>
+											<p className="mb-4 text-muted-foreground text-sm leading-relaxed">
+												{project.short[locale]}
+											</p>
+											<div className="mb-4 flex flex-wrap gap-2">
+												{project.tags.slice(0, 4).map((tag) => (
+													<Badge
+														key={tag}
+														variant="secondary"
+														className="rounded-full px-2.5 py-1"
+													>
+														{tag}
+													</Badge>
+												))}
+											</div>
+											<div className="mt-auto">
+												<span className="inline-flex h-9 items-center gap-1.5 rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground text-sm">
 													{labels.caseStudy}
 													<ArrowUpRight className="h-3.5 w-3.5" />
-												</Link>
-											</Button>
-										</div>
-									</article>
-								))}
+												</span>
+											</div>
+										</Link>
+									);
+								})}
 							</div>
 						</section>
 					);

@@ -13,11 +13,11 @@ import {
 	MessageSquareText,
 	User,
 } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import type { ContactCopy } from "~/components/home/home-copy";
 import InputWithIcon from "~/components/input-with-icon";
 import { Button } from "~/components/ui/button";
 import {
@@ -27,14 +27,20 @@ import {
 	FormItem,
 	FormMessage,
 } from "~/components/ui/form";
+import type { SupportedLocale } from "~/i18n/types";
 import { getResumeAsset } from "~/lib/resume";
 
-// Custom icons
 interface IconProps {
 	className?: string;
 }
 
-const TelegramIcon: React.FC<IconProps> = ({ className }) => (
+type FormData = {
+	name: string;
+	email: string;
+	message: string;
+};
+
+const TelegramIcon = ({ className }: IconProps) => (
 	<svg
 		stroke="currentColor"
 		fill="currentColor"
@@ -50,7 +56,7 @@ const TelegramIcon: React.FC<IconProps> = ({ className }) => (
 	</svg>
 );
 
-const VKIcon: React.FC<IconProps> = ({ className }) => (
+const VKIcon = ({ className }: IconProps) => (
 	<svg
 		stroke="currentColor"
 		fill="currentColor"
@@ -66,24 +72,32 @@ const VKIcon: React.FC<IconProps> = ({ className }) => (
 	</svg>
 );
 
-// Contact form validation schema
-const formSchema = z.object({
-	name: z.string().min(2, "Name must be at least 2 characters"),
-	email: z.string().email("Please enter a valid email"),
-	message: z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type FormData = z.infer<typeof formSchema>;
-
-export default function Contact() {
-	const t = useTranslations();
-	const locale = useLocale();
+export default function Contact({
+	copy,
+	locale,
+}: {
+	copy: ContactCopy;
+	locale: SupportedLocale;
+}) {
 	const resume = getResumeAsset(locale);
 	const [formStatus, setFormStatus] = useState<
 		"idle" | "submitting" | "success" | "error"
 	>("idle");
 
-	// Contact form setup
+	const formSchema = useMemo(
+		() =>
+			z.object({
+				name: z.string().min(2, copy.form.validation.name),
+				email: z.string().email(copy.form.validation.email),
+				message: z.string().min(10, copy.form.validation.message),
+			}),
+		[
+			copy.form.validation.email,
+			copy.form.validation.message,
+			copy.form.validation.name,
+		],
+	);
+
 	const form = useForm<FormData>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -93,7 +107,6 @@ export default function Contact() {
 		},
 	});
 
-	// Contact form submission handler
 	const onSubmit = async (data: FormData) => {
 		try {
 			setFormStatus("submitting");
@@ -111,24 +124,22 @@ export default function Contact() {
 			}
 
 			setFormStatus("success");
-			toast.success(t("contact.form.success"), {
+			toast.success(copy.form.success, {
 				position: "top-center",
 				duration: 4000,
 			});
 			form.reset();
 
-			// Reset success status after 3 seconds
 			setTimeout(() => {
 				setFormStatus("idle");
 			}, 3000);
 		} catch (_error) {
 			setFormStatus("error");
-			toast.error(t("contact.form.error"), {
+			toast.error(copy.form.error, {
 				position: "top-center",
 				duration: 4000,
 			});
 
-			// Reset error status after 3 seconds
 			setTimeout(() => {
 				setFormStatus("idle");
 			}, 3000);
@@ -139,19 +150,16 @@ export default function Contact() {
 		<div className="relative">
 			<div className="mx-auto max-w-8xl">
 				<div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-					{/* Contact Form - taking 7/12 columns */}
 					<motion.div
 						initial={{ opacity: 0, y: 40 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6, delay: 0.2 }}
 						className="relative lg:col-span-7"
 					>
-						{/* Decorative elements */}
 						<div className="absolute -top-12 -right-20 h-40 w-40 rounded-full bg-primary/5 blur-3xl" />
 						<div className="absolute -bottom-12 -left-20 h-40 w-40 rounded-full bg-accent/5 blur-3xl" />
 
 						<div className="group relative h-full overflow-hidden rounded-3xl backdrop-blur-sm">
-							{/* Fancy border */}
 							<div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-accent/40 via-primary/20 to-background/0 opacity-30 transition-opacity duration-500 group-hover:opacity-50" />
 
 							<div className="relative m-[1px] flex h-full flex-col rounded-[calc(1.5rem-1px)] bg-card/95 p-8 backdrop-blur-md md:p-10">
@@ -161,7 +169,7 @@ export default function Contact() {
 									transition={{ duration: 0.5 }}
 									className="mb-8 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text font-bold text-2xl"
 								>
-									{t("contact.form.title")}
+									{copy.form.title}
 								</motion.h3>
 
 								<Form {...form}>
@@ -170,97 +178,85 @@ export default function Contact() {
 										className="flex flex-1 flex-col space-y-6"
 									>
 										<div className="flex-1 space-y-6">
-											<motion.div
-												initial={{ opacity: 0, y: 20 }}
-												animate={{ opacity: 1, y: 0 }}
-												transition={{ duration: 0.5, delay: 0.1 }}
-											>
-												<FormField
-													control={form.control}
-													name="name"
-													render={({ field }) => (
-														<FormItem>
-															<FormControl>
-																<div className="space-y-1">
-																	<InputWithIcon
-																		label={t("contact.form.name")}
-																		placeholder={t(
-																			"contact.form.namePlaceholder",
-																		)}
-																		type="text"
-																		icon={<User className="h-4 w-4" />}
-																		{...field}
-																	/>
-																	<FormMessage />
-																</div>
-															</FormControl>
-														</FormItem>
-													)}
-												/>
-											</motion.div>
-
-											<motion.div
-												initial={{ opacity: 0, y: 20 }}
-												animate={{ opacity: 1, y: 0 }}
-												transition={{ duration: 0.5, delay: 0.2 }}
-											>
-												<FormField
-													control={form.control}
-													name="email"
-													render={({ field }) => (
-														<FormItem>
-															<FormControl>
-																<div className="space-y-1">
-																	<InputWithIcon
-																		label={t("contact.form.email")}
-																		placeholder={t(
-																			"contact.form.emailPlaceholder",
-																		)}
-																		type="email"
-																		icon={<Mail className="h-4 w-4" />}
-																		{...field}
-																	/>
-																	<FormMessage />
-																</div>
-															</FormControl>
-														</FormItem>
-													)}
-												/>
-											</motion.div>
-
-											<motion.div
-												initial={{ opacity: 0, y: 20 }}
-												animate={{ opacity: 1, y: 0 }}
-												transition={{ duration: 0.5, delay: 0.3 }}
-												className="flex-1"
-											>
-												<FormField
-													control={form.control}
-													name="message"
-													render={({ field }) => (
-														<FormItem className="h-full">
-															<FormControl>
-																<div className="flex h-full flex-col space-y-1">
-																	<InputWithIcon
-																		label={t("contact.form.message")}
-																		placeholder={t(
-																			"contact.form.messagePlaceholder",
-																		)}
-																		type="text"
-																		icon={
-																			<MessageSquareText className="h-4 w-4" />
+											{[
+												{
+													delay: 0.1,
+													icon: <User className="h-4 w-4" />,
+													label: copy.form.name,
+													name: "name" as const,
+													placeholder: copy.form.namePlaceholder,
+													type: "text",
+												},
+												{
+													delay: 0.2,
+													icon: <Mail className="h-4 w-4" />,
+													label: copy.form.email,
+													name: "email" as const,
+													placeholder: copy.form.emailPlaceholder,
+													type: "email",
+												},
+												{
+													delay: 0.3,
+													icon: <MessageSquareText className="h-4 w-4" />,
+													label: copy.form.message,
+													name: "message" as const,
+													placeholder: copy.form.messagePlaceholder,
+													rows: 7,
+													type: "text",
+												},
+											].map((fieldConfig) => (
+												<motion.div
+													key={fieldConfig.name}
+													initial={{ opacity: 0, y: 20 }}
+													animate={{ opacity: 1, y: 0 }}
+													transition={{
+														duration: 0.5,
+														delay: fieldConfig.delay,
+													}}
+													className={
+														fieldConfig.name === "message"
+															? "flex-1"
+															: undefined
+													}
+												>
+													<FormField
+														control={form.control}
+														name={fieldConfig.name}
+														render={({ field }) => (
+															<FormItem
+																className={
+																	fieldConfig.name === "message"
+																		? "h-full"
+																		: undefined
+																}
+															>
+																<FormControl>
+																	<div
+																		className={
+																			fieldConfig.name === "message"
+																				? "flex h-full flex-col space-y-1"
+																				: "space-y-1"
 																		}
-																		isTextarea={true}
-																		{...field}
-																		rows={7}
-																	/>
-																	<FormMessage />
-																</div>
-															</FormControl>
-														</FormItem>
-													)}
-												/>
-											</motion.div>
+																	>
+																		<InputWithIcon
+																			label={fieldConfig.label}
+																			placeholder={fieldConfig.placeholder}
+																			type={fieldConfig.type}
+																			icon={fieldConfig.icon}
+																			isTextarea={
+																				fieldConfig.name === "message"
+																			}
+																			rows={fieldConfig.rows}
+																			{...field}
+																		/>
+																		<FormMessage />
+																	</div>
+																</FormControl>
+															</FormItem>
+														)}
+													/>
+												</motion.div>
+											))}
 										</div>
 
 										<motion.div
@@ -282,29 +278,26 @@ export default function Contact() {
 														: formStatus === "error"
 															? "bg-destructive hover:bg-destructive/90"
 															: "bg-accent hover:bg-accent/90"
-												}
-                                                `}
+												}`}
 											>
 												<span className="relative z-10 flex items-center justify-center gap-2 text-foreground">
 													{formStatus === "submitting" ? (
 														<>
 															<Loader2 className="h-5 w-5 animate-spin" />
-															<span>{t("contact.form.sending")}</span>
+															<span>{copy.form.sending}</span>
 														</>
 													) : formStatus === "success" ? (
 														<>
 															<CheckCircle2 className="h-5 w-5" />
-															<span>{t("contact.form.success")}</span>
+															<span>{copy.form.success}</span>
 														</>
 													) : (
 														<>
-															<span>{t("contact.form.submit")}</span>
+															<span>{copy.form.submit}</span>
 															<ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
 														</>
 													)}
 												</span>
-
-												{/* Animated background effect */}
 												<span className="absolute inset-0 -z-10 bg-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 											</Button>
 										</motion.div>
@@ -314,10 +307,8 @@ export default function Contact() {
 						</div>
 					</motion.div>
 
-					{/* Contact Info Bento Grid - taking 5/12 columns */}
 					<div className="lg:col-span-5">
 						<div className="grid h-full grid-cols-1 gap-6 md:grid-cols-2">
-							{/* Contact Information - spans full width on first row */}
 							<motion.div
 								initial={{ opacity: 0, y: 40 }}
 								animate={{ opacity: 1, y: 0 }}
@@ -325,13 +316,12 @@ export default function Contact() {
 								className="md:col-span-2"
 							>
 								<div className="group relative h-full overflow-hidden rounded-3xl backdrop-blur-sm">
-									{/* Fancy border */}
 									<div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/40 via-accent/20 to-background/0 opacity-30 transition-opacity duration-500 group-hover:opacity-50" />
 
 									<div className="relative m-[1px] rounded-[calc(1.5rem-1px)] bg-card/95 p-8 backdrop-blur-md md:p-10">
 										<div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 											<h3 className="bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text font-bold text-2xl">
-												{t("contact.direct.title")}
+												{copy.direct.title}
 											</h3>
 											<Button
 												asChild
@@ -339,187 +329,113 @@ export default function Contact() {
 												size="sm"
 											>
 												<a href={resume.href} download={resume.downloadName}>
-													{t("contact.direct.downloadResume")}
+													{copy.direct.downloadResume}
 													<Download className="ml-2 h-4 w-4" />
 												</a>
 											</Button>
 										</div>
 
 										<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-											<motion.div
-												className="group/item flex items-center gap-4"
-												whileHover={{ x: 5, scale: 1.01 }}
-												transition={{
-													type: "spring",
-													stiffness: 400,
-													damping: 10,
-												}}
-											>
-												<div className="rounded-xl bg-gradient-to-br from-accent/20 to-primary/20 p-3 text-accent transition-all duration-300 group-hover/item:from-accent/30 group-hover/item:to-primary/30">
-													<Mail className="h-6 w-6" />
-												</div>
-												<div>
-													<p className="text-muted-foreground text-sm">
-														{t("contact.direct.email")}
-													</p>
-													<a
-														href="mailto:sabraman@ya.ru"
-														className="font-medium transition-colors duration-300 hover:text-accent"
-													>
-														sabraman@ya.ru
-													</a>
-												</div>
-											</motion.div>
-
-											<motion.div
-												className="group/item flex items-center gap-4"
-												whileHover={{ x: 5, scale: 1.01 }}
-												transition={{
-													type: "spring",
-													stiffness: 400,
-													damping: 10,
-												}}
-											>
-												<div className="rounded-xl bg-gradient-to-br from-accent/20 to-primary/20 p-3 text-accent transition-all duration-300 group-hover/item:from-accent/30 group-hover/item:to-primary/30">
-													<TelegramIcon className="h-6 w-6" />
-												</div>
-												<div>
-													<p className="text-muted-foreground text-sm">
-														{t("contact.direct.telegram")}
-													</p>
-													<a
-														href="https://t.me/sabraman"
-														className="font-medium transition-colors duration-300 hover:text-accent"
-													>
-														@sabraman
-													</a>
-												</div>
-											</motion.div>
-
-											<motion.div
-												className="group/item flex items-center gap-4"
-												whileHover={{ x: 5, scale: 1.01 }}
-												transition={{
-													type: "spring",
-													stiffness: 400,
-													damping: 10,
-												}}
-											>
-												<div className="rounded-xl bg-gradient-to-br from-accent/20 to-primary/20 p-3 text-accent transition-all duration-300 group-hover/item:from-accent/30 group-hover/item:to-primary/30">
-													<VKIcon className="h-6 w-6" />
-												</div>
-												<div>
-													<p className="text-muted-foreground text-sm">VK</p>
-													<a
-														href="https://vk.com/sabraman"
-														className="font-medium transition-colors duration-300 hover:text-accent"
-													>
-														sabraman
-													</a>
-												</div>
-											</motion.div>
-
-											<motion.div
-												className="group/item flex items-center gap-4"
-												whileHover={{ x: 5, scale: 1.01 }}
-												transition={{
-													type: "spring",
-													stiffness: 400,
-													damping: 10,
-												}}
-											>
-												<div className="rounded-xl bg-gradient-to-br from-accent/20 to-primary/20 p-3 text-accent transition-all duration-300 group-hover/item:from-accent/30 group-hover/item:to-primary/30">
-													<Github className="h-6 w-6" />
-												</div>
-												<div>
-													<p className="text-muted-foreground text-sm">
-														{t("contact.direct.github")}
-													</p>
-													<a
-														href="https://github.com/sabraman"
-														className="font-medium transition-colors duration-300 hover:text-accent"
-													>
-														sabraman
-													</a>
-												</div>
-											</motion.div>
-
-											<motion.div
-												className="group/item flex items-center gap-4"
-												whileHover={{ x: 5, scale: 1.01 }}
-												transition={{
-													type: "spring",
-													stiffness: 400,
-													damping: 10,
-												}}
-											>
-												<div className="rounded-xl bg-gradient-to-br from-accent/20 to-primary/20 p-3 text-accent transition-all duration-300 group-hover/item:from-accent/30 group-hover/item:to-primary/30">
-													<Instagram className="h-6 w-6" />
-												</div>
-												<div>
-													<p className="text-muted-foreground text-sm">
-														{t("contact.direct.instagram")}
-													</p>
-													<a
-														href="https://instagram.com/sabraman"
-														className="font-medium transition-colors duration-300 hover:text-accent"
-													>
-														sabraman
-													</a>
-												</div>
-											</motion.div>
+											{[
+												{
+													icon: <Mail className="h-6 w-6" />,
+													label: copy.direct.email,
+													href: "mailto:sabraman@ya.ru",
+													value: "sabraman@ya.ru",
+												},
+												{
+													icon: <TelegramIcon className="h-6 w-6" />,
+													label: copy.direct.telegram,
+													href: "https://t.me/sabraman",
+													value: "@sabraman",
+												},
+												{
+													icon: <VKIcon className="h-6 w-6" />,
+													label: "VK",
+													href: "https://vk.com/sabraman",
+													value: "sabraman",
+												},
+												{
+													icon: <Github className="h-6 w-6" />,
+													label: copy.direct.github,
+													href: "https://github.com/sabraman",
+													value: "sabraman",
+												},
+												{
+													icon: <Instagram className="h-6 w-6" />,
+													label: copy.direct.instagram,
+													href: "https://instagram.com/sabraman",
+													value: "sabraman",
+												},
+											].map((directContact) => (
+												<motion.div
+													key={directContact.href}
+													className="group/item flex items-center gap-4"
+													whileHover={{ x: 5, scale: 1.01 }}
+													transition={{
+														type: "spring",
+														stiffness: 400,
+														damping: 10,
+													}}
+												>
+													<div className="rounded-xl bg-gradient-to-br from-accent/20 to-primary/20 p-3 text-accent transition-all duration-300 group-hover/item:from-accent/30 group-hover/item:to-primary/30">
+														{directContact.icon}
+													</div>
+													<div>
+														<p className="text-muted-foreground text-sm">
+															{directContact.label}
+														</p>
+														<a
+															href={directContact.href}
+															className="font-medium transition-colors duration-300 hover:text-accent"
+														>
+															{directContact.value}
+														</a>
+													</div>
+												</motion.div>
+											))}
 										</div>
 									</div>
 								</div>
 							</motion.div>
 
-							{/* Location in Saint Petersburg - first column in second row */}
-							<motion.div
-								initial={{ opacity: 0, y: 40 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.6, delay: 0.5 }}
-								className="h-full"
-							>
-								<div className="group relative h-full overflow-hidden rounded-3xl backdrop-blur-sm transition-transform duration-500 hover:scale-[1.02]">
-									{/* Fancy border */}
-									<div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-background/0 via-accent/20 to-primary/40 opacity-30 transition-opacity duration-500 group-hover:opacity-70" />
+							{[
+								{
+									copyBlock: copy.location,
+									delay: 0.5,
+									gradient: "from-background/0 via-accent/20 to-primary/40",
+								},
+								{
+									copyBlock: copy.remote,
+									delay: 0.6,
+									gradient: "from-primary/40 via-accent/20 to-background/0",
+								},
+							].map((infoCard) => (
+								<motion.div
+									key={infoCard.copyBlock.title}
+									initial={{ opacity: 0, y: 40 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.6, delay: infoCard.delay }}
+									className="h-full"
+								>
+									<div className="group relative h-full overflow-hidden rounded-3xl backdrop-blur-sm transition-transform duration-500 hover:scale-[1.02]">
+										<div
+											className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${infoCard.gradient} opacity-30 transition-opacity duration-500 group-hover:opacity-70`}
+										/>
 
-									<div className="relative m-[1px] flex h-full flex-col rounded-[calc(1.5rem-1px)] bg-card/95 p-8 backdrop-blur-md">
-										<h3 className="mb-4 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text font-bold text-2xl">
-											{t("contact.location.title")}
-										</h3>
-										<div className="flex flex-1 items-center">
-											<p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
-												{t("contact.location.description")}
-											</p>
+										<div className="relative m-[1px] flex h-full flex-col rounded-[calc(1.5rem-1px)] bg-card/95 p-8 backdrop-blur-md">
+											<h3 className="mb-4 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text font-bold text-2xl">
+												{infoCard.copyBlock.title}
+											</h3>
+											<div className="flex flex-1 items-center">
+												<p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
+													{infoCard.copyBlock.description}
+												</p>
+											</div>
 										</div>
 									</div>
-								</div>
-							</motion.div>
-
-							{/* Remote work availability - second column in second row */}
-							<motion.div
-								initial={{ opacity: 0, y: 40 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.6, delay: 0.6 }}
-								className="h-full"
-							>
-								<div className="group relative h-full overflow-hidden rounded-3xl backdrop-blur-sm transition-transform duration-500 hover:scale-[1.02]">
-									{/* Fancy border */}
-									<div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/40 via-accent/20 to-background/0 opacity-30 transition-opacity duration-500 group-hover:opacity-70" />
-
-									<div className="relative m-[1px] flex h-full flex-col rounded-[calc(1.5rem-1px)] bg-card/95 p-8 backdrop-blur-md">
-										<h3 className="mb-4 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text font-bold text-2xl">
-											{t("contact.remote.title")}
-										</h3>
-										<div className="flex flex-1 items-center">
-											<p className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80">
-												{t("contact.remote.description")}
-											</p>
-										</div>
-									</div>
-								</div>
-							</motion.div>
+								</motion.div>
+							))}
 						</div>
 					</div>
 				</div>

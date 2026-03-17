@@ -9,6 +9,7 @@ import {
 	PlusIcon,
 } from "lucide-react";
 import { motion as motionCore } from "motion/react";
+import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import * as React from "react";
 import { LegacyAlertDialogDemo } from "~/components/legacy/LegacyAlertDialogDemo";
@@ -25,8 +26,8 @@ import {
 	type LegacySegmentedControlItem,
 } from "~/components/legacy-segmented-control";
 import { TextFlip } from "~/components/text-flip/text-flip";
-import type { Locale } from "~/i18n";
-import { useRouter } from "~/i18n/navigation";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
+import type { SupportedLocale } from "~/i18n/types";
 import { cn } from "~/lib/utils";
 import { LEGACY_COMPONENT_PAGE_SHELL_CLASSNAME } from "./component-page-layout";
 import { getLegacyWheelPickerHubPath } from "./component-pages-content";
@@ -51,6 +52,10 @@ import {
 	getLegacyCodeBlockCommandHubPath,
 	LEGACY_CODE_BLOCK_COMMAND_DOCS_COPY,
 } from "./legacy-code-block-command-content";
+import {
+	LegacyUiLocaleProvider,
+	useLegacyUiLocale,
+} from "./legacy-locale-context";
 import {
 	getLegacyNotificationHubPath,
 	LEGACY_NOTIFICATION_DOCS_COPY,
@@ -401,6 +406,7 @@ function ComponentSection({
 	title,
 }: ShowcaseItem & { isLast?: boolean }) {
 	const router = useRouter();
+	const locale = useLegacyUiLocale();
 
 	return (
 		<motion.section
@@ -430,7 +436,7 @@ function ComponentSection({
 							label="View docs"
 							trailingIcon={<ExternalLink />}
 							onClick={() => {
-								router.push(href);
+								router.push(getLocalizedPathname(locale, href));
 							}}
 						></LegacyBarButton>
 					</div>
@@ -442,7 +448,7 @@ function ComponentSection({
 	);
 }
 
-function ComponentsChooserHub({ locale }: { locale: Locale }) {
+function ComponentsChooserHub({ locale }: { locale: SupportedLocale }) {
 	const [isRegistryDialogOpen, setIsRegistryDialogOpen] = React.useState(false);
 	const showcases: ShowcaseItem[] = [
 		{
@@ -456,49 +462,49 @@ function ComponentsChooserHub({ locale }: { locale: Locale }) {
 		{
 			alias: "legacy-alert-dialog",
 			description: LEGACY_ALERT_DIALOG_DOCS_COPY.summary,
-			href: getLegacyAlertDialogHubPath(),
+			href: getLocalizedPathname(locale, getLegacyAlertDialogHubPath()),
 			preview: <AlertDialogPreview />,
 			title: LEGACY_ALERT_DIALOG_DOCS_COPY.title,
 		},
 		{
 			alias: "legacy-bar-button",
 			description: LEGACY_BAR_BUTTON_DOCS_COPY.summary,
-			href: getLegacyBarButtonHubPath(),
+			href: getLocalizedPathname(locale, getLegacyBarButtonHubPath()),
 			preview: <BarButtonPreview />,
 			title: LEGACY_BAR_BUTTON_DOCS_COPY.title,
 		},
 		{
 			alias: "legacy-clock",
 			description: LEGACY_CLOCK_DOCS_COPY.summary,
-			href: getLegacyClockHubPath(),
+			href: getLocalizedPathname(locale, getLegacyClockHubPath()),
 			preview: <ClockPreview />,
 			title: LEGACY_CLOCK_DOCS_COPY.title,
 		},
 		{
 			alias: "legacy-notification",
 			description: LEGACY_NOTIFICATION_DOCS_COPY.summary,
-			href: getLegacyNotificationHubPath(),
+			href: getLocalizedPathname(locale, getLegacyNotificationHubPath()),
 			preview: <NotificationPreview />,
 			title: LEGACY_NOTIFICATION_DOCS_COPY.title,
 		},
 		{
 			alias: "legacy-switch",
 			description: LEGACY_SWITCH_DOCS_COPY.summary,
-			href: getLegacySwitchHubPath(),
+			href: getLocalizedPathname(locale, getLegacySwitchHubPath()),
 			preview: <SwitchPreview />,
 			title: LEGACY_SWITCH_DOCS_COPY.title,
 		},
 		{
 			alias: "legacy-slider",
 			description: LEGACY_SLIDER_DOCS_COPY.summary,
-			href: getLegacySliderHubPath(),
+			href: getLocalizedPathname(locale, getLegacySliderHubPath()),
 			preview: <SliderPreview />,
 			title: LEGACY_SLIDER_DOCS_COPY.title,
 		},
 		{
 			alias: "legacy-code-block-command",
 			description: LEGACY_CODE_BLOCK_COMMAND_DOCS_COPY.summary,
-			href: getLegacyCodeBlockCommandHubPath(),
+			href: getLocalizedPathname(locale, getLegacyCodeBlockCommandHubPath()),
 			preview: <CodeBlockPreview />,
 			title: LEGACY_CODE_BLOCK_COMMAND_DOCS_COPY.title,
 		},
@@ -542,6 +548,10 @@ function ComponentsChooserHub({ locale }: { locale: Locale }) {
 	);
 }
 
-export function ComponentsHub({ locale }: { locale: Locale }) {
-	return <ComponentsChooserHub locale={locale} />;
+export function ComponentsHub({ locale }: { locale: SupportedLocale }) {
+	return (
+		<LegacyUiLocaleProvider locale={locale}>
+			<ComponentsChooserHub locale={locale} />
+		</LegacyUiLocaleProvider>
+	);
 }

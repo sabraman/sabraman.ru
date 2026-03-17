@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useLocale } from "next-intl";
-import { Link, usePathname } from "~/i18n/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { getLocalizedPathname, stripLocalePrefix } from "~/i18n/locale-paths";
+import type { SupportedLocale } from "~/i18n/types";
 import { cn } from "~/lib/utils";
-
-type SupportedLocale = "en" | "ru";
 
 type DockHref = "/" | "/work" | "/components" | "/contact";
 
@@ -37,11 +37,7 @@ const DOCK_ITEMS: DockItem[] = [
 ];
 
 function normalizePathname(pathname: string) {
-	if (pathname === "/") {
-		return pathname;
-	}
-
-	return pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+	return stripLocalePrefix(pathname);
 }
 
 function isItemActive(pathname: string, href: DockHref) {
@@ -52,8 +48,7 @@ function isItemActive(pathname: string, href: DockHref) {
 	return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function FloatingDock() {
-	const locale = (useLocale() === "ru" ? "ru" : "en") as SupportedLocale;
+export function FloatingDock({ locale }: { locale: SupportedLocale }) {
 	const pathname = normalizePathname(usePathname());
 
 	return (
@@ -99,7 +94,7 @@ export function FloatingDock() {
 						return (
 							<Link
 								key={item.href}
-								href={item.href}
+								href={getLocalizedPathname(locale, item.href)}
 								scroll={false}
 								className="group relative"
 								aria-current={isActive ? "page" : undefined}

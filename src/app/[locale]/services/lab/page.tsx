@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
 	getKindLabel,
-	getLocale,
-	getLocalePrefix,
 	LAB_VARIANT_CONFIG,
 } from "~/app/[locale]/services/lab/content";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
+import { resolveSupportedLocale } from "~/i18n/types";
+import { buildNoIndexMetadata } from "~/lib/seo/metadata";
 
 export async function generateMetadata({
 	params,
@@ -13,11 +14,11 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const lang = getLocale(locale);
-	const prefix = getLocalePrefix(lang);
-	const canonicalPath = `${prefix}/services/lab`;
+	const lang = resolveSupportedLocale(locale);
 
-	return {
+	return buildNoIndexMetadata({
+		locale: lang,
+		pathEn: "/services/lab",
 		title:
 			lang === "ru"
 				? "Services Lab - 10 экспериментальных концептов"
@@ -26,19 +27,7 @@ export async function generateMetadata({
 			lang === "ru"
 				? "Лаборатория из 10 контрастных концептов страницы услуг в рамках дизайн-системы Sabraman."
 				: "A lab of 10 contrasting services-page concepts built within Sabraman design system.",
-		alternates: {
-			canonical: canonicalPath,
-			languages: {
-				en: "/services/lab",
-				ru: "/ru/services/lab",
-				"x-default": "/services/lab",
-			},
-		},
-		robots: {
-			index: false,
-			follow: true,
-		},
-	};
+	});
 }
 
 export default async function ServicesLabPage({
@@ -47,9 +36,8 @@ export default async function ServicesLabPage({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
-	const lang = getLocale(locale);
-	const prefix = getLocalePrefix(lang);
-	const contactHref = `${prefix}/contact`;
+	const lang = resolveSupportedLocale(locale);
+	const contactHref = getLocalizedPathname(lang, "/contact");
 	const headline =
 		lang === "ru"
 			? "10 контрастных вариантов страницы услуг"
@@ -106,7 +94,10 @@ export default async function ServicesLabPage({
 						</div>
 						<div className="md:col-span-4 md:text-right">
 							<Link
-								href={`${prefix}/services/lab/${variant.slug}`}
+								href={getLocalizedPathname(
+									lang,
+									`/services/lab/${variant.slug}`,
+								)}
 								className="inline-flex items-center rounded-xl bg-accent px-4 py-2 font-semibold text-accent-foreground text-sm transition-all hover:-translate-y-0.5 hover:opacity-90"
 							>
 								{lang === "ru" ? "Открыть вариант" : "Open variant"}

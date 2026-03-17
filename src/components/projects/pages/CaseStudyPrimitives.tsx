@@ -12,6 +12,7 @@ import {
 	type LocaleText,
 	type ProjectItem,
 } from "~/data/projects";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
 
 export type SupportedLocale = "en" | "ru";
 
@@ -301,7 +302,7 @@ export function PageTopNav({ locale }: { locale: SupportedLocale }) {
 	return (
 		<div className="mb-6">
 			<Link
-				href={locale === "ru" ? "/ru/work" : "/work"}
+				href={getLocalizedPathname(locale, "/work")}
 				className="inline-flex items-center rounded-full border border-primary/20 px-3 py-1.5 text-muted-foreground text-sm transition-colors hover:border-accent/30 hover:text-foreground"
 			>
 				{labels.backToWork}

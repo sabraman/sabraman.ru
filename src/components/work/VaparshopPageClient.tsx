@@ -18,7 +18,6 @@ import {
 	useTransform,
 } from "motion/react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	SiNextdotjs,
@@ -30,9 +29,19 @@ import {
 } from "react-icons/si";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
+import type { VaparshopPageCopy } from "~/components/work/get-work-copy";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
+import type { SupportedLocale } from "~/i18n/types";
 
-export default function VaparshopPage() {
-	const t = useTranslations("work");
+export default function VaparshopPage({
+	copy,
+	locale,
+}: {
+	copy: VaparshopPageCopy;
+	locale: SupportedLocale;
+}) {
+	const contactHref = getLocalizedPathname(locale, "/contact");
+	const homeHref = getLocalizedPathname(locale, "/");
 
 	// Refs for scroll animations
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -86,71 +95,40 @@ export default function VaparshopPage() {
 	}
 
 	// Get achievements as an array
-	const achievements = [
-		t("vaparshop.achievements.0"),
-		t("vaparshop.achievements.1"),
-		t("vaparshop.achievements.2"),
-		t("vaparshop.achievements.3"),
-		t("vaparshop.achievements.4"),
-		t("vaparshop.achievements.5"),
-	];
+	const achievements = Object.values(copy.achievements);
 
 	// Get tech stack as an array
-	const techStack = [
-		t("vaparshop.techStack.0"),
-		t("vaparshop.techStack.1"),
-		t("vaparshop.techStack.2"),
-		t("vaparshop.techStack.3"),
-		t("vaparshop.techStack.4"),
-		t("vaparshop.techStack.5"),
-	];
+	const techStack = Object.values(copy.techStack);
 
 	// Project details for the scrolling gallery
 	const projects = [
 		{
 			id: 1,
-			title: t("vaparshop.projects.vaparWaToTgBot.title"),
-			description: t("vaparshop.projects.vaparWaToTgBot.description"),
+			title: copy.projects.vaparWaToTgBot.title,
+			description: copy.projects.vaparWaToTgBot.description,
 			image: "/work/vaparshop/bot1.jpg",
-			tags: [
-				t("vaparshop.projects.vaparWaToTgBot.tags.0"),
-				t("vaparshop.projects.vaparWaToTgBot.tags.1"),
-				t("vaparshop.projects.vaparWaToTgBot.tags.2"),
-			],
+			tags: Object.values(copy.projects.vaparWaToTgBot.tags),
 		},
 		{
 			id: 2,
-			title: t("vaparshop.projects.vaparScannerBot.title"),
-			description: t("vaparshop.projects.vaparScannerBot.description"),
+			title: copy.projects.vaparScannerBot.title,
+			description: copy.projects.vaparScannerBot.description,
 			image: "/work/vaparshop/bot2.jpg",
-			tags: [
-				t("vaparshop.projects.vaparScannerBot.tags.0"),
-				t("vaparshop.projects.vaparScannerBot.tags.1"),
-				t("vaparshop.projects.vaparScannerBot.tags.2"),
-			],
+			tags: Object.values(copy.projects.vaparScannerBot.tags),
 		},
 		{
 			id: 3,
-			title: t("vaparshop.projects.priceTagGenerator.title"),
-			description: t("vaparshop.projects.priceTagGenerator.description"),
+			title: copy.projects.priceTagGenerator.title,
+			description: copy.projects.priceTagGenerator.description,
 			image: "/work/vaparshop/price-tag.jpg",
-			tags: [
-				t("vaparshop.projects.priceTagGenerator.tags.0"),
-				t("vaparshop.projects.priceTagGenerator.tags.1"),
-				t("vaparshop.projects.priceTagGenerator.tags.2"),
-			],
+			tags: Object.values(copy.projects.priceTagGenerator.tags),
 		},
 		{
 			id: 4,
-			title: t("vaparshop.projects.telegramMiniApp.title"),
-			description: t("vaparshop.projects.telegramMiniApp.description"),
+			title: copy.projects.telegramMiniApp.title,
+			description: copy.projects.telegramMiniApp.description,
 			image: "/work/vaparshop/mini-app.jpg",
-			tags: [
-				t("vaparshop.projects.telegramMiniApp.tags.0"),
-				t("vaparshop.projects.telegramMiniApp.tags.1"),
-				t("vaparshop.projects.telegramMiniApp.tags.2"),
-				t("vaparshop.projects.telegramMiniApp.tags.3"),
-			],
+			tags: Object.values(copy.projects.telegramMiniApp.tags),
 		},
 	];
 
@@ -225,11 +203,11 @@ export default function VaparshopPage() {
 								fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
 							}}
 						>
-							{t("vaparshop.title")}
+							{copy.title}
 						</h1>
 
 						<p className="mb-12 max-w-2xl text-muted-foreground text-xl md:text-3xl">
-							{t("vaparshop.description")}
+							{copy.description}
 						</p>
 
 						<div className="flex flex-wrap justify-center gap-4 md:gap-6">
@@ -276,14 +254,14 @@ export default function VaparshopPage() {
 									<h3 className="mb-2 font-medium text-muted-foreground text-xl">
 										TIMELINE
 									</h3>
-									<p className="text-2xl">{t("vaparshop.period")}</p>
+									<p className="text-2xl">{copy.period}</p>
 								</div>
 
 								<div>
 									<h3 className="mb-2 font-medium text-muted-foreground text-xl">
 										ROLE
 									</h3>
-									<p className="text-2xl">{t("vaparshop.subtitle")}</p>
+									<p className="text-2xl">{copy.subtitle}</p>
 								</div>
 
 								<div>
@@ -321,21 +299,17 @@ export default function VaparshopPage() {
 						>
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<p className="mb-8 text-xl leading-relaxed md:text-2xl">
-									{t("vaparshop.solutionText")}
+									{copy.solutionText}
 								</p>
 
-								<h3 className="mb-4 font-bold text-2xl">
-									{t("vaparshop.challenge")}
-								</h3>
+								<h3 className="mb-4 font-bold text-2xl">{copy.challenge}</h3>
 								<p className="mb-8 text-lg text-muted-foreground md:text-xl">
-									{t("vaparshop.challengeText")}
+									{copy.challengeText}
 								</p>
 
-								<h3 className="mb-4 font-bold text-2xl">
-									{t("vaparshop.solution")}
-								</h3>
+								<h3 className="mb-4 font-bold text-2xl">{copy.solution}</h3>
 								<p className="mb-8 text-lg text-muted-foreground md:text-xl">
-									{t("vaparshop.solutionText")}
+									{copy.solutionText}
 								</p>
 
 								<ul className="mb-8 space-y-6">
@@ -385,9 +359,7 @@ export default function VaparshopPage() {
 									</li>
 								</ul>
 
-								<h3 className="mb-4 font-bold text-2xl">
-									{t("vaparshop.results")}
-								</h3>
+								<h3 className="mb-4 font-bold text-2xl">{copy.results}</h3>
 								<div className="space-y-4">
 									{achievements.map((achievement, _index) => (
 										<p
@@ -421,7 +393,7 @@ export default function VaparshopPage() {
 								fontVariationSettings: `'wght' 800, 'wdth' 900`,
 							}}
 						>
-							{t("vaparshop.technologies")}
+							{copy.technologies}
 						</h2>
 						<p className="mx-auto max-w-3xl text-muted-foreground text-xl">
 							{techStack.join(", ")}
@@ -502,10 +474,10 @@ export default function VaparshopPage() {
 								fontVariationSettings: `'wght' 800, 'wdth' 900`,
 							}}
 						>
-							{t("vaparshop.showcase.title")}
+							{copy.showcase.title}
 						</h2>
 						<p className="text-muted-foreground text-xl">
-							{t("vaparshop.showcase.description")}
+							{copy.showcase.description}
 						</p>
 					</motion.div>
 
@@ -578,37 +550,33 @@ export default function VaparshopPage() {
 								fontVariationSettings: `'wght' 800, 'wdth' 900`,
 							}}
 						>
-							{t("vaparshop.process.title")}
+							{copy.process.title}
 						</h2>
 						<p className="text-muted-foreground text-xl">
-							{t("vaparshop.process.description")}
+							{copy.process.description}
 						</p>
 					</motion.div>
 
 					<div className="grid grid-cols-1 gap-6 md:grid-cols-4">
 						{[
 							{
-								phase: t("vaparshop.process.phases.research.title"),
-								description: t("vaparshop.process.phases.research.description"),
+								phase: copy.process.phases.research.title,
+								description: copy.process.phases.research.description,
 								delay: 0,
 							},
 							{
-								phase: t("vaparshop.process.phases.design.title"),
-								description: t("vaparshop.process.phases.design.description"),
+								phase: copy.process.phases.design.title,
+								description: copy.process.phases.design.description,
 								delay: 0.1,
 							},
 							{
-								phase: t("vaparshop.process.phases.development.title"),
-								description: t(
-									"vaparshop.process.phases.development.description",
-								),
+								phase: copy.process.phases.development.title,
+								description: copy.process.phases.development.description,
 								delay: 0.2,
 							},
 							{
-								phase: t("vaparshop.process.phases.deployment.title"),
-								description: t(
-									"vaparshop.process.phases.deployment.description",
-								),
+								phase: copy.process.phases.deployment.title,
+								description: copy.process.phases.deployment.description,
 								delay: 0.3,
 							},
 						].map((phase, index) => (
@@ -648,10 +616,10 @@ export default function VaparshopPage() {
 								fontVariationSettings: `'wght' 800, 'wdth' 900`,
 							}}
 						>
-							{t("vaparshop.cta.title")}
+							{copy.cta.title}
 						</h2>
 						<p className="mb-12 text-muted-foreground text-xl">
-							{t("vaparshop.cta.description")}
+							{copy.cta.description}
 						</p>
 
 						<div className="flex flex-col justify-center gap-4 sm:flex-row">
@@ -660,8 +628,8 @@ export default function VaparshopPage() {
 								className="group rounded-full px-8 py-6 font-medium text-base"
 								asChild
 							>
-								<Link href="/contact">
-									<span>{t("vaparshop.cta.getInTouch")}</span>
+								<Link href={contactHref}>
+									<span>{copy.cta.getInTouch}</span>
 									<ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-[4px] group-hover:translate-y-[-4px]" />
 								</Link>
 							</Button>
@@ -672,9 +640,9 @@ export default function VaparshopPage() {
 								className="group rounded-full px-8 py-6 font-medium text-base"
 								asChild
 							>
-								<Link href="/">
+								<Link href={homeHref}>
 									<ArrowLeft className="mr-2 h-5 w-5 transition-transform group-hover:-translate-x-1" />
-									<span>{t("vaparshop.cta.backToHome")}</span>
+									<span>{copy.cta.backToHome}</span>
 								</Link>
 							</Button>
 						</div>

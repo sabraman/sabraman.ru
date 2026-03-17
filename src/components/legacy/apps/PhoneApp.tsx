@@ -13,8 +13,8 @@ import {
 	Send,
 	Sparkles,
 } from "lucide-react";
-import { useLocale } from "next-intl";
 import { getResumeAsset } from "~/lib/resume";
+import { useLegacyUiLocale } from "../legacy-locale-context";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
 type Locale = "en" | "ru";
@@ -177,7 +177,7 @@ function GroupTitle({ children }: { children: string }) {
 }
 
 export default function PhoneApp() {
-	const locale: Locale = useLocale() === "ru" ? "ru" : "en";
+	const locale: Locale = useLegacyUiLocale();
 	const copy = COPY[locale];
 	const resume = getResumeAsset(locale);
 	const quickActions: QuickAction[] = [

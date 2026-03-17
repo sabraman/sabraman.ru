@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
-import { getTranslations } from "next-intl/server";
+import {
+	getVaparshopPageCopy,
+	getWorkCaseStudyMeta,
+} from "~/components/work/get-work-copy";
 import VaparshopPageClient from "~/components/work/VaparshopPageClient";
+import { resolveSupportedLocale } from "~/i18n/types";
+import { JsonLd } from "~/lib/seo/json-ld";
+import { buildIndexableMetadata } from "~/lib/seo/metadata";
+import { createCreativeWorkJsonLd } from "~/lib/seo/structured-data";
 
 async function getVaparshopJsonLd(locale: string) {
 	"use cache";
@@ -10,28 +17,17 @@ async function getVaparshopJsonLd(locale: string) {
 	const isRussian = locale === "ru";
 	const pagePath = isRussian ? "/ru/vaparshop" : "/vaparshop";
 
-	return {
-		"@context": "https://schema.org",
-		"@type": "CreativeWork",
+	return createCreativeWorkJsonLd({
+		locale: resolveSupportedLocale(locale),
 		name: "VAPARSHOP Case Study",
-		url: `https://sabraman.ru${pagePath}`,
-		inLanguage: locale,
-		author: {
-			"@type": "Person",
-			name: "Danya Yudin",
-			url: "https://sabraman.ru",
-		},
+		path: pagePath,
 		about: [
 			"Telegram Bot Development",
 			"Web Application Development",
 			"Automation",
 			"UI/UX Design",
 		],
-		publisher: {
-			"@type": "Person",
-			name: "Danya Yudin",
-		},
-	};
+	});
 }
 
 export async function generateMetadata({
@@ -40,38 +36,17 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const t = await getTranslations({ locale, namespace: "work" });
-	const isRussian = locale === "ru";
-	const path = isRussian ? "/ru/vaparshop" : "/vaparshop";
-	const title = `${t("vaparshop.title")} - ${t("vaparshop.subtitle")} - Sabraman`;
-	const description = t("vaparshop.description");
+	const resolvedLocale = resolveSupportedLocale(locale);
+	const meta = await getWorkCaseStudyMeta(resolvedLocale, "vaparshop");
 
-	return {
-		title,
-		description,
-		alternates: {
-			canonical: path,
-			languages: {
-				en: "/vaparshop",
-				ru: "/ru/vaparshop",
-				"x-default": "/vaparshop",
-			},
-		},
-		openGraph: {
-			title,
-			description,
-			url: `https://sabraman.ru${path}`,
-			siteName: "Sabraman - Danya Yudin Portfolio",
-			locale: isRussian ? "ru_RU" : "en_US",
-			type: "article",
-		},
-		twitter: {
-			card: "summary_large_image",
-			title,
-			description,
-			images: ["/api/og"],
-		},
-	};
+	return buildIndexableMetadata({
+		locale: resolvedLocale,
+		pathEn: "/vaparshop",
+		routeId: "vaparshop",
+		title: meta.title,
+		description: meta.description,
+		openGraphType: "article",
+	});
 }
 
 export default async function VaparshopPage({
@@ -80,15 +55,14 @@ export default async function VaparshopPage({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
+	const resolvedLocale = resolveSupportedLocale(locale);
 	const jsonLd = await getVaparshopJsonLd(locale);
+	const copy = await getVaparshopPageCopy(resolvedLocale);
 
 	return (
 		<>
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-			/>
-			<VaparshopPageClient />
+			<JsonLd data={jsonLd} id="vaparshop-json-ld" />
+			<VaparshopPageClient locale={resolvedLocale} copy={copy} />
 		</>
 	);
 }

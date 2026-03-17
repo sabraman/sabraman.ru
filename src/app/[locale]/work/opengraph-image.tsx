@@ -1,0 +1,27 @@
+import {
+	createPortfolioOgImageResponse,
+	PORTFOLIO_SOCIAL_IMAGE_CONTENT_TYPE,
+	PORTFOLIO_SOCIAL_IMAGE_SIZE,
+} from "~/lib/seo/og-image";
+
+export const runtime = "nodejs";
+export const alt = "Work hub social preview";
+export const size = PORTFOLIO_SOCIAL_IMAGE_SIZE;
+export const contentType = PORTFOLIO_SOCIAL_IMAGE_CONTENT_TYPE;
+
+export default async function Image({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}) {
+	const { locale } = await params;
+
+	return createPortfolioOgImageResponse({
+		title: locale === "ru" ? "Хаб кейсов" : "Case Study Hub",
+		subtitle:
+			locale === "ru"
+				? "Все проекты в одном индексе"
+				: "All projects in one index",
+		variant: "page",
+	});
+}

@@ -2,16 +2,24 @@ import "~/styles/globals.css";
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
-import { ThemeProvider } from "~/components/ThemeProvider";
+import Script from "next/script";
 import { ClientRoot } from "~/components/ui/ClientRoot";
 import { FloatingDock } from "~/components/ui/FloatingDock";
 import { LanguageSwitcher } from "~/components/ui/language-switcher";
 import { SmoothMarquee } from "~/components/ui/SmoothMarquee";
 import { Toaster } from "~/components/ui/sonner";
-import { ThemeToggle } from "~/components/ui/theme-toggle";
 import { routing } from "~/i18n/routing";
+import { resolveSupportedLocale } from "~/i18n/types";
+import { JsonLd } from "~/lib/seo/json-ld";
+import {
+	buildLocalizedAlternates,
+	getLocalizedAbsoluteUrl,
+	getLocalizedSocialImagePath,
+} from "~/lib/seo/metadata";
+import {
+	createPersonJsonLd,
+	createWebsiteJsonLd,
+} from "~/lib/seo/structured-data";
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
@@ -25,7 +33,8 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const isRussian = locale === "ru";
+	const resolvedLocale = resolveSupportedLocale(locale);
+	const isRussian = resolvedLocale === "ru";
 	const title = isRussian
 		? "Даня Юдин - Sabraman | Креативный дизайнер и разработчик"
 		: "Danya Yudin (Даня Юдин) - Sabraman | Creative Designer & Frontend Developer";
@@ -33,6 +42,8 @@ export async function generateMetadata({
 	const description = isRussian
 		? "Даня Юдин - Sabraman. Design-led frontend и product developer с сильной базой в визуальном дизайне, брендинге и разработке интерфейсов. Эксперт в Telegram-ботах, веб-приложениях и UI/UX дизайне. Базируется в Санкт-Петербурге, Россия."
 		: "Danya Yudin (Даня Юдин) - Sabraman. Design-led frontend and product developer with a strong background in visual design, branding, and interface development. Expert in Telegram bots, web applications, and UI/UX design. Based in Saint Petersburg, Russia.";
+	const socialImagePath =
+		getLocalizedSocialImagePath(resolvedLocale, "home") ?? "/opengraph-image";
 
 	return {
 		title: {
@@ -61,29 +72,29 @@ export async function generateMetadata({
 		authors: [{ name: "Danya Yudin", url: "https://sabraman.ru" }],
 		creator: "Danya Yudin",
 		publisher: "Danya Yudin",
+		applicationName: "Sabraman - Danya Yudin Portfolio",
+		appleWebApp: {
+			capable: true,
+			statusBarStyle: "default",
+			title: "Sabraman",
+		},
 		formatDetection: {
 			email: false,
 			address: false,
 			telephone: false,
 		},
 		metadataBase: new URL("https://sabraman.ru"),
-		alternates: {
-			canonical: locale === "en" ? "/" : `/${locale}`,
-			languages: {
-				"en-US": "/",
-				"ru-RU": "/ru",
-			},
-		},
+		alternates: buildLocalizedAlternates("/", resolvedLocale),
 		openGraph: {
 			type: "website",
 			locale: isRussian ? "ru_RU" : "en_US",
-			url: `https://sabraman.ru${locale === "en" ? "" : `/${locale}`}`,
+			url: getLocalizedAbsoluteUrl(resolvedLocale, "/"),
 			title,
 			description,
 			siteName: "Sabraman - Danya Yudin Portfolio",
 			images: [
 				{
-					url: "/opengraph-image",
+					url: socialImagePath,
 					width: 1200,
 					height: 630,
 					alt: "Danya Yudin - Sabraman Portfolio",
@@ -94,7 +105,7 @@ export async function generateMetadata({
 			card: "summary_large_image",
 			title,
 			description,
-			images: ["/opengraph-image"],
+			images: [socialImagePath],
 			creator: "@1sabraman",
 		},
 		robots: {
@@ -111,6 +122,10 @@ export async function generateMetadata({
 		verification: {
 			google: "google9a037a0cda852d94",
 			yandex: "yandex_9f4476abe564070b",
+		},
+		other: {
+			"mobile-web-app-capable": "yes",
+			"msapplication-TileColor": "#1a1a1a",
 		},
 		icons: [
 			{ rel: "icon", type: "image/x-icon", url: "/favicon.ico" },
@@ -206,109 +221,39 @@ export default async function RootLayout({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
+	const resolvedLocale = resolveSupportedLocale(locale);
 	const isProduction = process.env.NODE_ENV === "production";
 
-	// Ensure that the incoming `locale` is valid
 	if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
 		notFound();
 	}
 
-	// Enable static rendering
-	setRequestLocale(locale);
-
-	// Providing all messages to the client
-	const messages = await getMessages();
-
 	return (
 		<html lang={locale} className="dark" suppressHydrationWarning>
-			<head>
-				<link
-					rel="preload"
-					href="/HeadingNowVariable-Regular.ttf"
-					as="font"
-					type="font/ttf"
-					crossOrigin="anonymous"
-				/>
-				{/* Structured Data for Person */}
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify({
-							"@context": "https://schema.org",
-							"@type": "Person",
-							name: "Danya Yudin",
-							alternateName: ["Даня Юдин", "Sabraman"],
-							url: "https://sabraman.ru",
-							image: "https://sabraman.ru/logo.svg",
-							sameAs: [
-								"https://t.me/sabraman",
-								"https://github.com/sabraman",
-								"https://instagram.com/sabraman",
-								"https://x.com/1sabraman",
-								"https://vk.com/sabraman",
-							],
-							jobTitle: "Creative Designer & Frontend Developer",
-							address: {
-								"@type": "PostalAddress",
-								addressLocality: "Saint Petersburg",
-								addressCountry: "RU",
-							},
-							knowsAbout: [
-								"Visual Design",
-								"Branding",
-								"Application Development",
-								"Telegram Bots",
-								"UI/UX Design",
-								"Next.js",
-								"React",
-							],
-						}),
-					}}
-				/>
-
-				{/* Structured Data for Website */}
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify({
-							"@context": "https://schema.org",
-							"@type": "WebSite",
-							name: "Sabraman - Danya Yudin Portfolio",
-							url: "https://sabraman.ru",
-							description:
-								"Portfolio website of Danya Yudin (Даня Юдин), a creative designer and frontend developer",
-							author: {
-								"@type": "Person",
-								name: "Danya Yudin",
-							},
-							potentialAction: {
-								"@type": "SearchAction",
-								target: "https://sabraman.ru/search?q={search_term_string}",
-								"query-input": "required name=search_term_string",
-							},
-						}),
-					}}
+			<body className={jetbrainsMono.className}>
+				<JsonLd
+					id="site-structured-data"
+					data={[createPersonJsonLd(), createWebsiteJsonLd()]}
 				/>
 				{isProduction ? (
-					<>
-						{/* Yandex.Metrika counter */}
-						<script
-							type="text/javascript"
-							dangerouslySetInnerHTML={{
-								__html: `
-									(function(m,e,t,r,i,k,a){
-										m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-										m[i].l=1*new Date();
-										for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-										k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-									})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103523450', 'ym');
+					<Script id="yandex-metrica" strategy="afterInteractive">
+						{`
+							(function(m,e,t,r,i,k,a){
+								m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+								m[i].l=1*new Date();
+								for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+								k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+							})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103523450', 'ym');
 
-									ym(103523450, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
-								`,
-							}}
-						/>
+							ym(103523450, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+						`}
+					</Script>
+				) : null}
+				<ClientRoot>
+					{isProduction ? (
 						<noscript>
 							<div>
+								{/* biome-ignore lint/performance/noImgElement: Yandex Metrica noscript requires a plain tracking image. */}
 								<img
 									src="https://mc.yandex.ru/watch/103523450"
 									style={{ position: "absolute", left: "-9999px" }}
@@ -316,49 +261,15 @@ export default async function RootLayout({
 								/>
 							</div>
 						</noscript>
-					</>
-				) : null}
-			</head>
-			<body className={jetbrainsMono.className}>
-				<NextIntlClientProvider messages={messages}>
-					<ClientRoot>
-						<ThemeProvider
-							attribute="class"
-							defaultTheme="dark"
-							forcedTheme="dark"
-							enableSystem={false}
-							disableTransitionOnChange
-						>
-							{/* Additional favicon meta tags */}
-							<meta name="mobile-web-app-capable" content="yes" />
-							<meta
-								name="application-name"
-								content="Sabraman - Danya Yudin Portfolio"
-							/>
-							<meta name="apple-mobile-web-app-capable" content="yes" />
-							<meta
-								name="apple-mobile-web-app-status-bar-style"
-								content="default"
-							/>
-							<meta name="apple-mobile-web-app-title" content="Sabraman" />
-							<meta name="msapplication-TileColor" content="#1a1a1a" />
-
-							<div className="fixed top-4 right-4 z-50 flex gap-2">
-								<LanguageSwitcher />
-								<div className="hidden">
-									<ThemeToggle />
-								</div>
-							</div>
-
-							{/* Используем SmoothMarquee вместо CSS-анимации */}
-							<SmoothMarquee />
-
-							<main className="pb-24">{children}</main>
-							<FloatingDock />
-							<Toaster />
-						</ThemeProvider>
-					</ClientRoot>
-				</NextIntlClientProvider>
+					) : null}
+					<div className="fixed top-4 right-4 z-50 flex gap-2">
+						<LanguageSwitcher locale={resolvedLocale} />
+					</div>
+					<SmoothMarquee locale={resolvedLocale} />
+					<main className="pb-24">{children}</main>
+					<FloatingDock locale={resolvedLocale} />
+					<Toaster />
+				</ClientRoot>
 			</body>
 		</html>
 	);

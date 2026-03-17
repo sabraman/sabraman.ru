@@ -1,17 +1,17 @@
 import type { MetadataRoute } from "next";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
 import {
 	getAllIndexableRoutes,
 	SITE_LOCALES,
 	toSiteUrl,
-	withLocalePrefix,
 } from "~/lib/site-discovery";
 
 function getAlternates(path: string) {
 	return {
 		languages: {
-			en: toSiteUrl(withLocalePrefix("en", path)),
-			ru: toSiteUrl(withLocalePrefix("ru", path)),
-			"x-default": toSiteUrl(withLocalePrefix("en", path)),
+			en: toSiteUrl(getLocalizedPathname("en", path)),
+			ru: toSiteUrl(getLocalizedPathname("ru", path)),
+			"x-default": toSiteUrl(getLocalizedPathname("en", path)),
 		},
 	};
 }
@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		const alternates = getAlternates(route.path);
 
 		return SITE_LOCALES.map((locale) => ({
-			url: toSiteUrl(withLocalePrefix(locale, route.path)),
+			url: toSiteUrl(getLocalizedPathname(locale, route.path)),
 			changeFrequency: route.changeFrequency,
 			priority: route.priority,
 			alternates,

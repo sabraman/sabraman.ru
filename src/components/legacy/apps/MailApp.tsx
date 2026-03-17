@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, Inbox, MailOpen, Send, Sparkles } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLegacyUiLocale } from "../legacy-locale-context";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
 const COPY = {
@@ -130,7 +130,7 @@ function Metric({ label, value }: { label: string; value: string }) {
 }
 
 export default function MailApp() {
-	const locale = useLocale() === "ru" ? "ru" : "en";
+	const locale = useLegacyUiLocale();
 	const copy = COPY[locale];
 	const messages = MESSAGES[locale];
 

@@ -2,11 +2,11 @@
 
 import { animate, motion, type PanInfo, useMotionValue } from "motion/react";
 import Image from "next/image";
-import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { LegacyClock } from "~/components/legacy-clock";
 import { PROJECT_BY_SLUG } from "~/data/projects";
 import { cn } from "~/lib/utils";
+import { useLegacyUiLocale } from "./legacy-locale-context";
 import {
 	ORDERED_PROJECT_APP_ENTRIES,
 	type ProjectAppIconMeta,
@@ -720,7 +720,7 @@ export default function HomeScreen({
 }: {
 	onAppOpen: (id: string) => void;
 }) {
-	const locale = useLocale() === "ru" ? "ru" : "en";
+	const locale = useLegacyUiLocale();
 	const [activePage, setActivePage] = useState(0);
 	const [openFolderId, setOpenFolderId] = useState<FolderId | null>(null);
 	const pageCount = ALL_HOME_SCREEN_PAGES.length;

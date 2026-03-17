@@ -1,9 +1,7 @@
 "use client";
 
 import {
-	Code2,
 	Database,
-	FileDown,
 	FileText,
 	Layers,
 	Palette,
@@ -14,7 +12,8 @@ import {
 	Workflow,
 } from "lucide-react";
 import { motion } from "motion/react";
-import { useTranslations } from "next-intl";
+import Image from "next/image";
+import type { ComponentType } from "react";
 import { useEffect, useState } from "react";
 import {
 	SiJest,
@@ -25,6 +24,8 @@ import {
 	SiTailwindcss,
 } from "react-icons/si";
 import { Badge } from "~/components/ui/badge";
+import type { PriceTagPrinterPageCopy } from "~/components/work/get-work-copy";
+import type { SupportedLocale } from "~/i18n/types";
 
 const CodeWindow = ({ code }: { code: string }) => {
 	return (
@@ -45,7 +46,7 @@ const CodeWindow = ({ code }: { code: string }) => {
 };
 
 interface ArchNodeProps {
-	icon: any;
+	icon: ComponentType<{ className?: string }>;
 	title: string;
 	desc: string;
 	delay: number;
@@ -119,8 +120,13 @@ const ShadcnIcon = ({ className }: { className?: string }) => (
 	</svg>
 );
 
-export default function PriceTagPrinterPageClient() {
-	const t = useTranslations("work");
+export default function PriceTagPrinterPageClient({
+	copy,
+	locale: _locale,
+}: {
+	copy: PriceTagPrinterPageCopy;
+	locale: SupportedLocale;
+}) {
 	const [isMounted, setIsMounted] = useState(false);
 
 	useEffect(() => {
@@ -173,11 +179,11 @@ export default function PriceTagPrinterPageClient() {
 									fontVariationSettings: `'wght' 800, 'wdth' 900`,
 								}}
 							>
-								{t("priceTagPrinter.title")}
+								{copy.title}
 							</h1>
 
 							<p className="mb-8 max-w-xl text-xl text-zinc-600 leading-relaxed dark:text-zinc-400">
-								{t("priceTagPrinter.solutionText")}
+								{copy.solutionText}
 							</p>
 
 							<div className="mb-8 flex flex-wrap items-center gap-6">
@@ -264,7 +270,7 @@ export default function PriceTagPrinterPageClient() {
 									desc: "Puppeteer executes in a Node environment to snapshot high-res PDFs via /api/generate-pdf.",
 								},
 							].map((node, i) => (
-								<ArchNode key={i} {...node} delay={0.1 + i * 0.3} />
+								<ArchNode key={node.title} {...node} delay={0.1 + i * 0.3} />
 							))}
 						</div>
 					</div>
@@ -551,9 +557,11 @@ export default function PriceTagPrinterPageClient() {
 							>
 								<div className="w-full overflow-hidden rounded-2xl border border-zinc-200/50 bg-zinc-100 p-2 shadow-2xl md:w-3/5 lg:p-4 dark:border-zinc-800/50 dark:bg-zinc-900/50">
 									<div className="relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800">
-										<img
+										<Image
 											src={img.src}
 											alt={img.alt}
+											width={1600}
+											height={1000}
 											className="h-auto w-full object-cover lg:rounded-xl"
 										/>
 									</div>
@@ -580,9 +588,7 @@ export default function PriceTagPrinterPageClient() {
 				<div className="container mx-auto px-4 md:px-8">
 					<div className="flex flex-col items-center justify-between gap-12 md:flex-row">
 						<div className="max-w-md">
-							<h3 className="mb-4 font-bold text-2xl">
-								{t("priceTagPrinter.technologies")}
-							</h3>
+							<h3 className="mb-4 font-bold text-2xl">{copy.technologies}</h3>
 							<p className="text-zinc-500 dark:text-zinc-400">
 								Strictly typed, edge-ready, and highly isolated
 								responsibilities.

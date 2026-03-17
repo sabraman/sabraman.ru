@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import Link from "next/link";
-
-type Locale = "en" | "ru";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
+import { resolveSupportedLocale, type SupportedLocale } from "~/i18n/types";
+import { JsonLd } from "~/lib/seo/json-ld";
+import { buildIndexableMetadata } from "~/lib/seo/metadata";
+import { createProfessionalServiceJsonLd } from "~/lib/seo/structured-data";
 
 type ServiceCard = {
 	title: string;
@@ -25,7 +28,7 @@ type ServicePageContent = {
 	keywords: string[];
 };
 
-const contentByLocale: Record<Locale, ServicePageContent> = {
+const contentByLocale: Record<SupportedLocale, ServicePageContent> = {
 	en: {
 		title: "Services - Sabraman | Design, Telegram Bots, Web Apps",
 		description:
@@ -153,47 +156,25 @@ const contentByLocale: Record<Locale, ServicePageContent> = {
 	},
 };
 
-function withLocalePrefix(locale: Locale, path: string) {
-	return locale === "ru" ? `/ru${path}` : path;
-}
-
-async function getServicesJsonLd(locale: Locale) {
+async function getServicesJsonLd(locale: SupportedLocale) {
 	"use cache";
 	cacheLife("days");
 
-	const localizedPath = withLocalePrefix(locale, "/services");
-	const isRussian = locale === "ru";
+	const localizedPath = getLocalizedPathname(locale, "/services");
 
-	return {
-		"@context": "https://schema.org",
-		"@type": "ProfessionalService",
+	return createProfessionalServiceJsonLd({
+		locale,
 		name: "Sabraman",
-		url: `https://sabraman.ru${localizedPath}`,
-		inLanguage: locale,
-		description: isRussian
-			? "Инди-дизайнер и разработчик: брендинг, веб-приложения, Telegram-боты и mini app."
-			: "Indie designer-developer: branding, web apps, Telegram bots, and mini apps.",
-		areaServed: "Worldwide",
-		availableLanguage: ["en", "ru"],
-		provider: {
-			"@type": "Person",
-			name: "Danya Yudin",
-			alternateName: "Sabraman",
-			url: "https://sabraman.ru",
-		},
-		hasOfferCatalog: {
-			"@type": "OfferCatalog",
-			name: isRussian ? "Услуги Sabraman" : "Sabraman Services",
-			itemListElement: contentByLocale[locale].services.map((service) => ({
-				"@type": "Offer",
-				itemOffered: {
-					"@type": "Service",
-					name: service.title,
-					description: service.description,
-				},
-			})),
-		},
-	};
+		path: localizedPath,
+		description:
+			locale === "ru"
+				? "Инди-дизайнер и разработчик: брендинг, веб-приложения, Telegram-боты и mini app."
+				: "Indie designer-developer: branding, web apps, Telegram bots, and mini apps.",
+		services: contentByLocale[locale].services.map((service) => ({
+			title: service.title,
+			description: service.description,
+		})),
+	});
 }
 
 export async function generateMetadata({
@@ -202,38 +183,17 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const lang: Locale = locale === "ru" ? "ru" : "en";
-	const isRussian = lang === "ru";
-	const path = withLocalePrefix(lang, "/services");
+	const lang = resolveSupportedLocale(locale);
 	const content = contentByLocale[lang];
 
-	return {
+	return buildIndexableMetadata({
+		locale: lang,
+		pathEn: "/services",
+		routeId: "services",
 		title: content.title,
 		description: content.description,
 		keywords: content.keywords,
-		alternates: {
-			canonical: path,
-			languages: {
-				en: "/services",
-				ru: "/ru/services",
-				"x-default": "/services",
-			},
-		},
-		openGraph: {
-			title: content.title,
-			description: content.description,
-			url: `https://sabraman.ru${path}`,
-			siteName: "Sabraman - Danya Yudin Portfolio",
-			locale: isRussian ? "ru_RU" : "en_US",
-			type: "website",
-		},
-		twitter: {
-			card: "summary_large_image",
-			title: content.title,
-			description: content.description,
-			images: ["/api/og"],
-		},
-	};
+	});
 }
 
 export default async function ServicesPage({
@@ -242,17 +202,14 @@ export default async function ServicesPage({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
-	const lang: Locale = locale === "ru" ? "ru" : "en";
+	const lang = resolveSupportedLocale(locale);
 	const content = contentByLocale[lang];
 	const servicesJsonLd = await getServicesJsonLd(lang);
-	const contactHref = withLocalePrefix(lang, "/contact");
+	const contactHref = getLocalizedPathname(lang, "/contact");
 
 	return (
 		<main className="container mx-auto max-w-5xl px-4 py-16 md:py-24">
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
-			/>
+			<JsonLd data={servicesJsonLd} id="services-json-ld" />
 
 			<section className="mb-20">
 				<p className="mb-4 font-medium text-accent text-sm uppercase tracking-[0.16em]">

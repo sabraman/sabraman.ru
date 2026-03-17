@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
+import type { HomeWorkSectionCopy } from "~/components/home/home-copy";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import {
@@ -13,9 +13,9 @@ import {
 	PROJECTS,
 	type ProjectItem,
 } from "~/data/projects";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
+import type { SupportedLocale } from "~/i18n/types";
 import { cn } from "~/lib/utils";
-
-type SupportedLocale = "en" | "ru";
 
 const FEATURED_VISUALS: Partial<
 	Record<
@@ -41,32 +41,14 @@ const FEATURED_VISUALS: Partial<
 	},
 };
 
-const SECTION_LABELS = {
-	en: {
-		openHub: "Open Work Hub",
-		featureLabel: "Featured case",
-		allCaseStudies: "All case studies",
-		caseStudy: "Case Study",
-		private: "Private",
-		public: "Public",
-		links: "links",
-	},
-	ru: {
-		openHub: "Открыть хаб кейсов",
-		featureLabel: "Ключевой кейс",
-		allCaseStudies: "Все кейсы",
-		caseStudy: "Кейс",
-		private: "Приватный",
-		public: "Публичный",
-		links: "ссылки",
-	},
-} as const;
-
-export function HomeWorkSection() {
-	const locale = (useLocale() === "ru" ? "ru" : "en") as SupportedLocale;
-	const t = useTranslations("projects");
-	const copy = SECTION_LABELS[locale];
-	const workHref = locale === "ru" ? "/ru/work" : "/work";
+export function HomeWorkSection({
+	copy,
+	locale,
+}: {
+	copy: HomeWorkSectionCopy;
+	locale: SupportedLocale;
+}) {
+	const workHref = getLocalizedPathname(locale, "/work");
 
 	const featuredProjects = PROJECTS.filter((project) => project.isFeaturedWork);
 	const archiveProjects = PROJECTS.filter(
@@ -101,13 +83,13 @@ export function HomeWorkSection() {
 					>
 						<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-10">
 							<span className="absolute -inset-1 bg-accent opacity-50 blur-sm" />
-							{t("title")}
+							{copy.title}
 						</span>
-						{t("titleSecond")}
+						{copy.titleSecond}
 					</h2>
 
 					<p className="mt-8 max-w-3xl text-lg text-white/68 leading-relaxed md:text-xl">
-						{t("description")}
+						{copy.description}
 					</p>
 
 					<Button

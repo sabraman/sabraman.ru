@@ -504,21 +504,24 @@ export const PROJECT_CASE_STUDIES: Record<ProjectSlug, ProjectCaseStudy> = {
 		visibility: PROJECT_BY_SLUG["smoky-market-loyalty-miniapp"].visibility,
 		status: PROJECT_BY_SLUG["smoky-market-loyalty-miniapp"].status,
 		hero: {
-			badge: p("Loyalty + POS", "Лояльность + POS"),
+			badge: p(
+				"Loyalty + POS + Brand System",
+				"Лояльность + POS + бренд-система",
+			),
 			summary: p(
-				"A loyalty platform combining Telegram mini app experiences with web POS operations for staff.",
-				"Платформа лояльности, объединяющая Telegram mini app для клиентов и web POS для сотрудников.",
+				"A loyalty platform that combines a Telegram mini app, web POS operations, and a full visual system spanning logo, social media, and branded print surfaces.",
+				"Платформа лояльности, где я собрал Telegram mini app, web POS и полный визуальный стиль бренда: от логотипа и соцсетей до печатных материалов и шаблонов постов.",
 			),
 		},
 		sections: [
 			section("context", p("Problem and context", "Контекст и задача"), [
 				p(
-					"Loyalty actions happened across disconnected channels, making discount handling and transaction traceability inconsistent.",
-					"Действия по лояльности происходили в разрозненных каналах, из-за чего скидки и прослеживаемость транзакций были нестабильными.",
+					"The brand needed one coherent loyalty experience instead of fragmented customer touchpoints, scattered staff tools, and disconnected promotional materials.",
+					"Бренду нужен был один цельный контур лояльности вместо разрозненных клиентских точек входа, отдельных инструментов для персонала и несвязанных промо-материалов.",
 				),
 				p(
-					"The product had to support seller speed at checkout while preserving admin-level control over discount policy and shifts.",
-					"Продукт должен был поддерживать скорость работы продавца на кассе и одновременно сохранять управляемость скидочной политики и смен для админов.",
+					"The project had to stay fast at checkout while also looking consistent everywhere the brand appeared, from interfaces to print and social content.",
+					"Проект должен был оставаться быстрым на кассе и одновременно держать единый визуальный язык во всех точках контакта: от интерфейсов до печати и контента для соцсетей.",
 				),
 			]),
 			section(
@@ -526,23 +529,23 @@ export const PROJECT_CASE_STUDIES: Record<ProjectSlug, ProjectCaseStudy> = {
 				p("Architecture and implementation", "Архитектура и реализация"),
 				[
 					p(
-						"The system split responsibilities between customer-facing Telegram interactions and staff-facing POS workflows with shared transaction state.",
-						"Система разделила ответственность между клиентскими Telegram-сценариями и POS-процессами персонала на общем транзакционном состоянии.",
+						"The product layer was split between customer-facing Telegram flows and staff-facing POS workflows, while the brand layer kept typography, color, and composition rules aligned across every surface.",
+						"Продуктовый слой был разделен между клиентскими Telegram-сценариями и POS-процессами персонала, а бренд-слой удерживал единые правила типографики, цвета и композиции на всех поверхностях.",
 					),
 					p(
-						"Shift lifecycle, customer lookup, and discount validation were modeled as explicit state transitions to reduce ambiguity.",
-						"Жизненный цикл смены, поиск клиента и проверка скидок были смоделированы как явные переходы состояния для снижения неоднозначности.",
+						"Shift lifecycle, customer lookup, and discount validation were modeled as explicit state transitions, while design decisions were turned into reusable assets instead of one-off mockups.",
+						"Жизненный цикл смены, поиск клиента и проверка скидок были смоделированы как явные переходы состояния, а дизайн-решения превращались в переиспользуемые артефакты, а не в разовые макеты.",
 					),
 				],
 			),
 			section("features", p("Feature deep dive", "Ключевые функции"), [
 				p(
-					"Store operators can process QR/manual customer lookup, apply policy-safe discounts, and close shifts with exportable reporting.",
-					"Операторы точки могут искать клиента по QR/коду, применять скидки в рамках политики и закрывать смены с выгрузкой отчетов.",
+					"On the product side, store operators can process QR and manual customer lookup, apply policy-safe discounts, and close shifts with exportable reporting.",
+					"На продуктовой стороне операторы точки могут искать клиента по QR или коду, применять скидки в рамках политики и закрывать смены с выгрузкой отчетов.",
 				),
 				p(
-					"Admin views focus on transaction analytics and role governance instead of decorative dashboards.",
-					"Админские интерфейсы сфокусированы на аналитике транзакций и ролевом управлении, а не на декоративных дашбордах.",
+					"On the brand side, the scope included the logo, social media templates, communication layouts, and printed materials so the project worked as a product and as a recognizable retail identity.",
+					"На брендовой стороне в объем вошли логотип, шаблоны для соцсетей, коммуникационные макеты и печатные материалы, чтобы проект работал и как продукт, и как узнаваемая ритейл-айдентика.",
 				),
 			]),
 			section(
@@ -550,23 +553,23 @@ export const PROJECT_CASE_STUDIES: Record<ProjectSlug, ProjectCaseStudy> = {
 				p("Tooling and integrations", "Инструменты и интеграции"),
 				[
 					p(
-						"The monorepo setup keeps mini app and POS codebases aligned while sharing domain contracts.",
-						"Монорепо-подход синхронизирует mini app и POS-кодовую базу за счет общих доменных контрактов.",
+						"The monorepo setup keeps mini app and POS codebases aligned while sharing domain contracts across the operational core.",
+						"Монорепо-подход синхронизирует mini app и POS-кодовую базу за счет общих доменных контрактов в операционном ядре.",
 					),
 					p(
-						"Convex-backed data workflows support real-time operations where stale status can break checkout routines.",
-						"Data-процессы на Convex поддерживают near real-time операции, где устаревший статус ломает кассовые сценарии.",
+						"Convex-backed data workflows handled real-time product state, while the visual layer was produced as a repeatable system for digital and print outputs.",
+						"Data-процессы на Convex держали near real-time состояние продукта, а визуальный слой собирался как повторяемая система для цифровых и печатных носителей.",
 					),
 				],
 			),
 			section("outcome", p("Outcome and impact", "Результат и эффект"), [
 				p(
-					"The loyalty process became operationally explicit: staff actions, discount decisions, and shift accountability are recorded in one system.",
-					"Процесс лояльности стал операционно прозрачным: действия персонала, решения по скидкам и ответственность по сменам фиксируются в одной системе.",
+					"The loyalty flow became operationally explicit: staff actions, discount decisions, and shift accountability live in one system instead of scattered routines.",
+					"Процесс лояльности стал операционно прозрачным: действия персонала, решения по скидкам и ответственность по сменам живут в одной системе вместо разрозненной рутины.",
 				),
 				p(
-					"This reduced ad-hoc handling and improved handoff quality between store staff and management.",
-					"Это сократило ручные обходные решения и улучшило передачу контекста между продавцами и менеджментом.",
+					"The brand also received a full visual framework that scales from store materials to social templates without losing tone or recognition.",
+					"Параллельно бренд получил полный визуальный каркас, который масштабируется от материалов для точек до шаблонов соцсетей без потери характера и узнаваемости.",
 				),
 			]),
 			section(
@@ -574,12 +577,12 @@ export const PROJECT_CASE_STUDIES: Record<ProjectSlug, ProjectCaseStudy> = {
 				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
 				[
 					p(
-						"Balancing speed for checkout staff with policy enforcement requires careful UX prioritization and strict domain validation.",
-						"Баланс между скоростью на кассе и соблюдением политики требует аккуратного UX-приоритеза и строгой доменной валидации.",
+						"Balancing speed for checkout staff with policy enforcement still requires careful UX prioritization and strict domain validation.",
+						"Баланс между скоростью на кассе и соблюдением политики по-прежнему требует аккуратного UX-приоритеза и строгой доменной валидации.",
 					),
 					p(
-						"Monorepo coupling improves consistency but demands discipline in release coordination.",
-						"Монорепо повышает согласованность, но требует дисциплины в координации релизов.",
+						"A wide visual scope improves brand control, but it also raises the bar for keeping print, social, and product assets in sync.",
+						"Широкий визуальный объем усиливает контроль над брендом, но поднимает планку по синхронизации печати, соцсетей и продуктовых материалов.",
 					),
 				],
 			),
@@ -591,57 +594,57 @@ export const PROJECT_CASE_STUDIES: Record<ProjectSlug, ProjectCaseStudy> = {
 					"Это только клиентский mini app?",
 				),
 				answer: p(
-					"No. It includes a full web POS layer for sellers and admins.",
-					"Нет. В проект входит полноценный web POS слой для продавцов и админов.",
+					"No. The scope includes the customer mini app, a full web POS layer for sellers and admins, and the surrounding brand system.",
+					"Нет. В проект входят клиентский mini app, полноценный web POS слой для продавцов и админов, а также весь окружающий бренд-контур.",
 				),
 			},
 			{
 				question: p(
-					"How are discounts controlled?",
-					"Как контролируются скидки?",
+					"Who handled the visual identity?",
+					"Кто отвечал за визуальный стиль?",
 				),
 				answer: p(
-					"Through role-aware validation and explicit policy checks in transaction flow.",
-					"Через ролевую валидацию и явные проверки политики в транзакционном потоке.",
+					"I handled the full visual scope: logo, social media templates, print materials, and visual rules for the product surfaces.",
+					"Я отвечал за весь визуальный контур проекта: логотип, шаблоны для соцсетей, печатные материалы и визуальные правила для продуктовых поверхностей.",
 				),
 			},
 			{
 				question: p(
-					"What is exported to Telegram?",
-					"Что выгружается в Telegram?",
+					"Can a similar project be built for another brand?",
+					"Можно ли собрать похожий проект под другой бренд?",
 				),
 				answer: p(
-					"Operational reports and transaction summaries needed by management workflows.",
-					"Операционные отчеты и сводки транзакций, нужные в управленческих сценариях.",
+					"Yes. This format can be adapted to another retail brand with its own loyalty logic, visual style, and operational workflows.",
+					"Да. Такой формат можно адаптировать под другой ритейл-бренд с его логикой лояльности, визуальным стилем и операционными процессами.",
 				),
 			},
 		],
 		seo: {
 			title: p(
-				"Smoky Market Loyalty Miniapp Case Study - Telegram Loyalty and POS",
-				"Кейс Smoky Market Loyalty Miniapp - Telegram-лояльность и POS",
+				"Smoky Market Loyalty Miniapp Case Study - Telegram Loyalty, POS, and Brand System",
+				"Кейс Smoky Market Loyalty Miniapp - Telegram-лояльность, POS и бренд-система",
 			),
 			description: p(
-				"Detailed case study of a loyalty platform: Telegram mini app, web POS, shift lifecycle, discount control, and transaction analytics.",
-				"Подробный кейс платформы лояльности: Telegram mini app, web POS, смены, контроль скидок и аналитика транзакций.",
+				"Detailed case study of a loyalty platform: Telegram mini app, web POS, shift lifecycle, discount control, transaction analytics, and a full visual system.",
+				"Подробный кейс платформы лояльности: Telegram mini app, web POS, смены, контроль скидок, аналитика транзакций и полный визуальный стиль бренда.",
 			),
 			keywords: {
 				en: [
 					"loyalty mini app",
 					"telegram loyalty platform",
 					"web pos case study",
-					"shift lifecycle retail",
+					"retail brand system",
 				],
 				ru: [
 					"платформа лояльности кейс",
 					"telegram лояльность",
 					"web pos для розницы",
-					"смены и транзакции",
+					"бренд система для ритейла",
 				],
 			},
 			ogSubtitle: p(
-				"Loyalty workflows connected with web POS operations",
-				"Сценарии лояльности, связанные с web POS",
+				"Loyalty workflows with web POS and full brand delivery",
+				"Лояльность, web POS и полный бренд-контур",
 			),
 		},
 	},

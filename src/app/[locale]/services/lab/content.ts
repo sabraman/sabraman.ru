@@ -555,14 +555,6 @@ export const LAB_VARIANT_CONFIG: LabVariantConfig[] = [
 	},
 ];
 
-export function getLocale(locale: string): Locale {
-	return locale === "ru" ? "ru" : "en";
-}
-
-export function getLocalePrefix(locale: Locale) {
-	return locale === "ru" ? "/ru" : "";
-}
-
 export function getVariantBySlug(slug: string) {
 	return LAB_VARIANT_CONFIG.find((variant) => variant.slug === slug);
 }

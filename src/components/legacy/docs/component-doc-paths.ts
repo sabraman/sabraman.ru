@@ -1,3 +1,5 @@
+import { getLocalizedPathname } from "~/i18n/locale-paths";
+
 export const COMPONENT_DOC_SLUGS = [
 	"legacy-wheel-picker",
 	"legacy-alert-dialog",
@@ -23,9 +25,10 @@ export function resolveComponentDocSlug(
 }
 
 export function getComponentDocPath(slug: ComponentDocSlug, locale: string) {
-	const localePrefix = locale === "ru" ? "/ru" : "";
-
-	return `${localePrefix}/components/${slug}`;
+	return getLocalizedPathname(
+		locale === "ru" ? "ru" : "en",
+		`/components/${slug}`,
+	);
 }
 
 export function getComponentDocMarkdownUrl(

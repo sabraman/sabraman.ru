@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { Button } from "~/components/ui/button";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
 import {
 	ExternalLinks,
 	FaqBlock,
@@ -15,6 +18,22 @@ export function SmokyMarketLoyaltyMiniappPage({
 	caseStudy,
 	relatedProjects,
 }: ProjectPageProps) {
+	const labels = {
+		en: {
+			title: "A similar project can be adapted for your brand",
+			description:
+				"If you need the same kind of setup, I can build it around your brand and workflows: identity, Telegram mini app, POS logic, social templates, and print surfaces.",
+			cta: "Discuss project",
+		},
+		ru: {
+			title: "Похожий проект можно собрать под ваш бренд",
+			description:
+				"Если вам нужен такой же контур, я могу собрать его под ваш бренд и процессы: айдентику, Telegram mini app, POS-логику, шаблоны для соцсетей и печатные поверхности.",
+			cta: "Обсудить проект",
+		},
+	} as const;
+	const contactHref = getLocalizedPathname(locale, "/contact");
+
 	return (
 		<main className="container mx-auto max-w-6xl px-4 py-14 md:py-20">
 			<PageTopNav locale={locale} />
@@ -61,6 +80,27 @@ export function SmokyMarketLoyaltyMiniappPage({
 			<div className="mt-6">
 				<FaqBlock caseStudy={caseStudy} locale={locale} />
 			</div>
+			<section className="mt-6 rounded-3xl border border-primary/15 bg-background/70 p-6 shadow-sm md:p-8">
+				<div className="max-w-3xl">
+					<h2
+						className="mb-3 font-extrabold text-2xl leading-tight md:text-3xl"
+						style={{
+							fontFamily: "Heading Now Variable",
+							fontVariationSettings: `'wght' 840, 'wdth' 860`,
+						}}
+					>
+						{labels[locale].title}
+					</h2>
+					<p className="text-base text-foreground/90 leading-relaxed md:text-lg">
+						{labels[locale].description}
+					</p>
+				</div>
+				<div className="mt-5">
+					<Button asChild size="lg">
+						<Link href={contactHref}>{labels[locale].cta}</Link>
+					</Button>
+				</div>
+			</section>
 		</main>
 	);
 }

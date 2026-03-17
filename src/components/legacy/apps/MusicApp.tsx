@@ -10,8 +10,8 @@ import {
 	Play,
 	Radio,
 } from "lucide-react";
-import { useLocale } from "next-intl";
 import { getCaseStudyPath, PROJECTS } from "~/data/projects";
+import { useLegacyUiLocale } from "../legacy-locale-context";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
 const COPY = {
@@ -71,7 +71,7 @@ const PLAYLISTS = {
 } as const;
 
 export default function MusicApp() {
-	const locale = useLocale() === "ru" ? "ru" : "en";
+	const locale = useLegacyUiLocale();
 	const copy = COPY[locale];
 	const playlists = PLAYLISTS[locale];
 	const recentProjects = PROJECTS.slice(0, 4);

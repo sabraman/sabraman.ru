@@ -32,6 +32,10 @@ export type ProjectLink = {
 	label: LocaleText;
 };
 
+export type ProjectCaseStudyRoute = "generic" | "dedicated";
+
+export type ProjectSchemaEntityType = "CreativeWork" | "SoftwareApplication";
+
 export type ProjectItem = {
 	id: string;
 	slug: ProjectSlug;
@@ -39,6 +43,8 @@ export type ProjectItem = {
 	visibility: "public" | "private";
 	category: ProjectCategoryId;
 	isFeaturedWork: boolean;
+	caseStudyRoute: ProjectCaseStudyRoute;
+	schemaEntityType: ProjectSchemaEntityType;
 	title: string;
 	short: LocaleText;
 	details: LocaleText;
@@ -101,6 +107,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "private",
 		category: "mini_apps",
 		isFeaturedWork: true,
+		caseStudyRoute: "dedicated",
+		schemaEntityType: "CreativeWork",
 		title: "VAPARSHOP",
 		short: {
 			en: "Design and engineering portfolio of internal tools, bots, and Telegram commerce flows.",
@@ -121,6 +129,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "private",
 		category: "web_platforms",
 		isFeaturedWork: true,
+		caseStudyRoute: "dedicated",
+		schemaEntityType: "CreativeWork",
 		title: "HORNY PLACE",
 		short: {
 			en: "Brand system and digital touchpoints for a retail chain with bold visual language.",
@@ -141,6 +151,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "private",
 		category: "mini_apps",
 		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
 		title: "SMO TG Miniapp",
 		short: {
 			en: "Telegram commerce mini app for retail and wholesale ordering with role-based flows.",
@@ -167,16 +179,18 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "private",
 		category: "mini_apps",
 		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
 		title: "Smoky Market Loyalty Miniapp",
 		short: {
-			en: "Loyalty platform with Telegram mini app plus web POS for store operations.",
-			ru: "Платформа лояльности: Telegram mini-app + web POS для работы точек.",
+			en: "Loyalty platform with Telegram mini app, web POS, and a full visual system for the brand.",
+			ru: "Платформа лояльности: Telegram mini-app, web POS и полный визуальный стиль бренда.",
 		},
 		details: {
-			en: "Role-based seller/admin flows, shift lifecycle, QR/manual customer lookup, discount logic, transaction analytics, and Telegram export tooling.",
-			ru: "Ролевые потоки для продавцов и админов, смены, поиск клиента по QR/коду, скидки, аналитика транзакций и экспорт отчетов в Telegram.",
+			en: "Role-based seller/admin flows, shift lifecycle, QR/manual customer lookup, discount logic, transaction analytics, plus logo, social templates, and branded print materials.",
+			ru: "Ролевые потоки для продавцов и админов, смены, поиск клиента по QR/коду, скидки, аналитика транзакций, а также логотип, шаблоны для соцсетей и фирменные печатные материалы.",
 		},
-		tags: ["Loyalty", "POS", "Telegram", "Convex", "Monorepo"],
+		tags: ["Loyalty", "POS", "Telegram", "Brand System", "Monorepo"],
 		status: "live",
 		links: [
 			{
@@ -198,6 +212,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "private",
 		category: "mini_apps",
 		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
 		title: "PLONQ AI Search",
 		short: {
 			en: "AI product finder for PLONQ with semantic search and taste filters.",
@@ -224,6 +240,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "private",
 		category: "mini_apps",
 		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
 		title: "Flower Mini App",
 		short: {
 			en: "Telegram Mini App for flower write-off tracking, staff actions, and reporting across store locations.",
@@ -250,6 +268,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "private",
 		category: "web_platforms",
 		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
 		title: "smbro.ru",
 		short: {
 			en: "Brand platform for SMOKE ME BRO with pickup points, announcements, and admin tooling.",
@@ -276,6 +296,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "public",
 		category: "web_platforms",
 		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "CreativeWork",
 		title: "ARCH Taplink",
 		short: {
 			en: "Store landing and link hub for ARCH with catalog sections and fast contact actions.",
@@ -307,6 +329,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "private",
 		category: "web_platforms",
 		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "CreativeWork",
 		title: "Vape Me Fast Landing",
 		short: {
 			en: "Conversion-focused landing page with custom pixel-liquid motion background.",
@@ -333,6 +357,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "public",
 		category: "tools",
 		isFeaturedWork: false,
+		caseStudyRoute: "dedicated",
+		schemaEntityType: "SoftwareApplication",
 		title: "Price Tag Printer",
 		short: {
 			en: "Price-tag production tool with spreadsheet import and print-ready export.",
@@ -359,6 +385,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "public",
 		category: "tools",
 		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
 		title: "PSP Book Reader",
 		short: {
 			en: "Native EPUB reader for Sony PSP, optimized for memory and battery constraints.",
@@ -385,6 +413,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "public",
 		category: "learning_games",
 		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
 		title: "Florist Quiz",
 		short: {
 			en: "Mobile-first flower training app with quiz modes and offline support.",
@@ -416,6 +446,8 @@ export const PROJECTS: ProjectItem[] = [
 		visibility: "private",
 		category: "learning_games",
 		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
 		title: "Schrute Farm",
 		short: {
 			en: "The Office-inspired beet clicker with idle progression and minigames.",

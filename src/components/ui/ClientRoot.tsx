@@ -1,9 +1,9 @@
 "use client";
 
 import { AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { getConsoleFunction, setConsoleFunction } from "three";
-import { usePathname } from "~/i18n/navigation";
 import { FullScreenIntro } from "./FullScreenIntro";
 
 const CLOCK_DEPRECATION_MESSAGE =

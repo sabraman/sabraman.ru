@@ -1,18 +1,30 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
 import {
 	getAllComponentDocs,
 	getComponentDocBySlug,
 } from "~/components/legacy/docs/component-documents";
 import { ComponentDocOgPreview } from "~/components/legacy/docs/component-og-preview";
+import { resolveSupportedLocale } from "~/i18n/types";
+import { buildNoIndexMetadata } from "~/lib/seo/metadata";
 
-export const metadata: Metadata = {
-	robots: {
-		index: false,
-		follow: false,
-	},
-};
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+	const { locale, slug } = await params;
+	const doc = getComponentDocBySlug(slug);
+
+	if (!doc) {
+		notFound();
+	}
+
+	return buildNoIndexMetadata({
+		locale: resolveSupportedLocale(locale),
+		pathEn: `/components/${doc.slug}/og-preview`,
+	});
+}
 
 export function generateStaticParams() {
 	return getAllComponentDocs().map((doc) => ({
@@ -25,8 +37,7 @@ export default async function ComponentDocOgPreviewPage({
 }: {
 	params: Promise<{ locale: string; slug: string }>;
 }) {
-	const { locale, slug } = await params;
-	setRequestLocale(locale);
+	const { slug } = await params;
 
 	const doc = getComponentDocBySlug(slug);
 

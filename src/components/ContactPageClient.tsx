@@ -1,12 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
 import Contact from "~/components/Contact";
+import type { ContactCopy } from "~/components/home/home-copy";
+import type { SupportedLocale } from "~/i18n/types";
 
-export default function ContactPageClient() {
-	const t = useTranslations();
-
+export default function ContactPageClient({
+	copy,
+	locale,
+}: {
+	copy: ContactCopy;
+	locale: SupportedLocale;
+}) {
 	return (
 		<div className="relative">
 			<section className="py-24">
@@ -26,16 +31,16 @@ export default function ContactPageClient() {
 						>
 							<span className="relative z-0 mr-4 inline-block md:mr-8 xl:mr-10">
 								<span className="absolute -inset-1 bg-accent opacity-50 blur-sm" />
-								{t("contact.title")}
+								{copy.title}
 							</span>
-							{t("contact.titleSecond")}
+							{copy.titleSecond}
 						</h1>
 						<p className="mx-auto mt-6 max-w-2xl text-center text-muted-foreground text-xl">
-							{t("contact.description")}
+							{copy.description}
 						</p>
 					</motion.div>
 
-					<Contact />
+					<Contact locale={locale} copy={copy} />
 				</div>
 			</section>
 

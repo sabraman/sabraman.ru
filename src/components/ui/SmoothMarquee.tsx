@@ -2,14 +2,16 @@
 
 import { motion, useAnimationControls } from "framer-motion";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
+import type { SupportedLocale } from "~/i18n/types";
 
 interface MarqueeItem {
 	text: string;
 	id: string;
 }
 
-export function SmoothMarquee() {
+export function SmoothMarquee({ locale }: { locale: SupportedLocale }) {
 	const [isHovered, setIsHovered] = useState(false);
 	const animationControls = useAnimationControls();
 
@@ -32,11 +34,6 @@ export function SmoothMarquee() {
 		...items.map((item) => ({ text: item.text, id: `dup-${item.id}` })),
 	];
 
-	// Запускаем анимацию при монтировании компонента
-	useEffect(() => {
-		startAnimation(false);
-	}, []);
-
 	// Функция для запуска/обновления анимации
 	const startAnimation = (slow: boolean) => {
 		animationControls.start({
@@ -50,6 +47,19 @@ export function SmoothMarquee() {
 		});
 	};
 
+	// Запускаем анимацию при монтировании компонента
+	useEffect(() => {
+		animationControls.start({
+			x: "-50%",
+			transition: {
+				duration: 50,
+				ease: "linear",
+				repeatType: "loop",
+				repeat: Number.POSITIVE_INFINITY,
+			},
+		});
+	}, [animationControls]);
+
 	const handleMouseEnter = () => {
 		setIsHovered(true);
 		startAnimation(true); // Замедляем
@@ -61,12 +71,13 @@ export function SmoothMarquee() {
 	};
 
 	return (
-		<div
-			className="group w-full overflow-hidden whitespace-nowrap border-b py-1 transition-all duration-500"
-			onMouseEnter={handleMouseEnter}
-			onMouseLeave={handleMouseLeave}
-		>
-			<Link href="/" className="block">
+		<div className="group w-full overflow-hidden whitespace-nowrap border-b py-1 transition-all duration-500">
+			<Link
+				href={getLocalizedPathname(locale, "/")}
+				className="block"
+				onMouseEnter={handleMouseEnter}
+				onMouseLeave={handleMouseLeave}
+			>
 				<div
 					className={`marquee-container inline-block ${isHovered ? "bg-background invert" : ""}`}
 					style={{ transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)" }}

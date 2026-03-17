@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useLocale } from "next-intl";
 import {
 	type FormEvent,
 	type ReactNode,
@@ -11,6 +10,8 @@ import {
 	useState,
 } from "react";
 import { getCaseStudyPath } from "~/data/projects";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
+import { useLegacyUiLocale } from "../legacy-locale-context";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
 type Locale = "en" | "ru";
@@ -274,11 +275,7 @@ function resolveLocale(locale: string): Locale {
 }
 
 function localePath(locale: Locale, path: string) {
-	if (path === "/") {
-		return locale === "ru" ? "/ru" : "/";
-	}
-
-	return locale === "ru" ? `/ru${path}` : path;
+	return getLocalizedPathname(locale, path);
 }
 
 function isSafariInternalUrl(url: string): url is SafariInternalUrl {
@@ -1367,7 +1364,7 @@ function getActiveHistoryEntry(tab: BrowserTab | null) {
 }
 
 export default function SafariApp() {
-	const locale = resolveLocale(useLocale());
+	const locale = resolveLocale(useLegacyUiLocale());
 	const copy = COPY[locale];
 	const destinationsRef = useRef<ReturnType<typeof buildDestinations> | null>(
 		null,

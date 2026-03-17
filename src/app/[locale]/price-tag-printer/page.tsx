@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
-import { getTranslations } from "next-intl/server";
+import {
+	getPriceTagPrinterPageCopy,
+	getWorkCaseStudyMeta,
+} from "~/components/work/get-work-copy";
 import PriceTagPrinterPageClient from "~/components/work/PriceTagPrinterPageClient";
+import { resolveSupportedLocale } from "~/i18n/types";
+import { JsonLd } from "~/lib/seo/json-ld";
+import { buildIndexableMetadata } from "~/lib/seo/metadata";
+import { createSoftwareApplicationJsonLd } from "~/lib/seo/structured-data";
 
 async function getPriceTagPrinterJsonLd(locale: string) {
 	"use cache";
@@ -10,30 +17,18 @@ async function getPriceTagPrinterJsonLd(locale: string) {
 	const isRussian = locale === "ru";
 	const pagePath = isRussian ? "/ru/price-tag-printer" : "/price-tag-printer";
 
-	return {
-		"@context": "https://schema.org",
-		"@type": "SoftwareApplication",
+	return createSoftwareApplicationJsonLd({
+		description: "Price Tag Printer Case Study",
+		locale: resolveSupportedLocale(locale),
 		name: "Price Tag Printer Case Study",
-		url: `https://sabraman.ru${pagePath}`,
-		inLanguage: locale,
-		applicationCategory: "BusinessApplication",
-		operatingSystem: "Web",
-		author: {
-			"@type": "Person",
-			name: "Danya Yudin",
-			url: "https://sabraman.ru",
-		},
-		about: [
+		path: pagePath,
+		keywords: [
 			"Next.js Development",
 			"Retail Automation",
 			"PDF Generation",
 			"UI/UX Design",
 		],
-		publisher: {
-			"@type": "Person",
-			name: "Danya Yudin",
-		},
-	};
+	});
 }
 
 export async function generateMetadata({
@@ -42,38 +37,17 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const t = await getTranslations({ locale, namespace: "work" });
-	const isRussian = locale === "ru";
-	const path = isRussian ? "/ru/price-tag-printer" : "/price-tag-printer";
-	const title = `${t("priceTagPrinter.title")} - ${t("priceTagPrinter.subtitle")} - Sabraman`;
-	const description = t("priceTagPrinter.description");
+	const resolvedLocale = resolveSupportedLocale(locale);
+	const meta = await getWorkCaseStudyMeta(resolvedLocale, "price-tag-printer");
 
-	return {
-		title,
-		description,
-		alternates: {
-			canonical: path,
-			languages: {
-				en: "/price-tag-printer",
-				ru: "/ru/price-tag-printer",
-				"x-default": "/price-tag-printer",
-			},
-		},
-		openGraph: {
-			title,
-			description,
-			url: `https://sabraman.ru${path}`,
-			siteName: "Sabraman - Danya Yudin Portfolio",
-			locale: isRussian ? "ru_RU" : "en_US",
-			type: "article",
-		},
-		twitter: {
-			card: "summary_large_image",
-			title,
-			description,
-			images: ["/api/og"],
-		},
-	};
+	return buildIndexableMetadata({
+		locale: resolvedLocale,
+		pathEn: "/price-tag-printer",
+		routeId: "priceTagPrinter",
+		title: meta.title,
+		description: meta.description,
+		openGraphType: "article",
+	});
 }
 
 export default async function PriceTagPrinterRoutePage({
@@ -82,15 +56,14 @@ export default async function PriceTagPrinterRoutePage({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
+	const resolvedLocale = resolveSupportedLocale(locale);
 	const jsonLd = await getPriceTagPrinterJsonLd(locale);
+	const copy = await getPriceTagPrinterPageCopy(resolvedLocale);
 
 	return (
 		<>
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-			/>
-			<PriceTagPrinterPageClient />
+			<JsonLd data={jsonLd} id="price-tag-printer-json-ld" />
+			<PriceTagPrinterPageClient locale={resolvedLocale} copy={copy} />
 		</>
 	);
 }

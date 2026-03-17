@@ -7,7 +7,7 @@ import {
 	MapPin,
 	Sparkles,
 } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLegacyUiLocale } from "../legacy-locale-context";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
 const COPY = {
@@ -119,7 +119,7 @@ const EXPERIENCES = {
 } as const;
 
 export default function ExperienceApp() {
-	const locale = useLocale() === "ru" ? "ru" : "en";
+	const locale = useLegacyUiLocale();
 	const copy = COPY[locale];
 	const experiences = EXPERIENCES[locale];
 

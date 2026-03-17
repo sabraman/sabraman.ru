@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { ComponentsHub } from "~/components/legacy/ComponentsHub";
 import { getLocale } from "~/components/legacy/component-pages-content";
+import { getComponentDocPath } from "~/components/legacy/docs/component-doc-paths";
+import { getAllComponentDocs } from "~/components/legacy/docs/component-documents";
+import { resolveSupportedLocale } from "~/i18n/types";
+import { JsonLd } from "~/lib/seo/json-ld";
+import { buildIndexableMetadata } from "~/lib/seo/metadata";
+import { createCollectionPageJsonLd } from "~/lib/seo/structured-data";
 
 export async function generateMetadata({
 	params,
@@ -8,37 +14,18 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	const isRussian = locale === "ru";
-	const path = isRussian ? "/ru/components" : "/components";
+	const resolvedLocale = resolveSupportedLocale(locale);
 	const title = "Components";
 	const description =
 		"A collection of reusable legacy skeuomorphic components.";
 
-	return {
+	return buildIndexableMetadata({
+		locale: resolvedLocale,
+		pathEn: "/components",
+		routeId: "components",
 		title,
 		description,
-		alternates: {
-			canonical: path,
-			languages: {
-				en: "/components",
-				ru: "/ru/components",
-				"x-default": "/components",
-			},
-		},
-		openGraph: {
-			title,
-			description,
-			url: `https://sabraman.ru${path}`,
-			siteName: "Sabraman - Danya Yudin Portfolio",
-			locale: isRussian ? "ru_RU" : "en_US",
-			type: "website",
-		},
-		twitter: {
-			card: "summary_large_image",
-			title,
-			description,
-		},
-	};
+	});
 }
 
 export default async function ComponentsPage({
@@ -47,6 +34,29 @@ export default async function ComponentsPage({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
+	const resolvedLocale = resolveSupportedLocale(locale);
+	const path = resolvedLocale === "ru" ? "/ru/components" : "/components";
+	const docs = getAllComponentDocs();
+	const collectionName =
+		resolvedLocale === "ru"
+			? "Коллекция legacy компонентов"
+			: "Legacy components collection";
 
-	return <ComponentsHub locale={getLocale(locale)} />;
+	return (
+		<>
+			<JsonLd
+				data={createCollectionPageJsonLd({
+					locale: resolvedLocale,
+					name: collectionName,
+					path,
+					items: docs.map((doc) => ({
+						name: doc.frontmatter.title,
+						path: getComponentDocPath(doc.slug, resolvedLocale),
+					})),
+				})}
+				id="components-json-ld"
+			/>
+			<ComponentsHub locale={getLocale(resolvedLocale)} />
+		</>
+	);
 }
