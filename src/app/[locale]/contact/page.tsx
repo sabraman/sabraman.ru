@@ -17,11 +17,11 @@ export async function generateMetadata({
 	const isRussian = resolvedLocale === "ru";
 
 	const title = isRussian
-		? "Контакты - Даня Юдин - Sabraman"
+		? "Контакты Дани Юдина - Sabraman"
 		: "Contact - Danya Yudin (Даня Юдин) - Sabraman";
 
 	const description = isRussian
-		? "Свяжитесь с Даня Юдин - Sabraman. Design-led frontend и product developer, доступный для проектов в области визуального дизайна, брендинга и разработки интерфейсов."
+		? "Свяжитесь с Даней Юдиным (Sabraman) по вопросам дизайна, брендинга и продуктовой разработки."
 		: "Get in touch with Danya Yudin (Даня Юдин) - Sabraman. Design-led frontend and product developer available for projects in visual design, branding, and interface development.";
 
 	return buildIndexableMetadata({
