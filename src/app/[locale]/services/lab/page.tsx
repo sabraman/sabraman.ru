@@ -4,7 +4,10 @@ import {
 	getKindLabel,
 	LAB_VARIANT_CONFIG,
 } from "~/app/[locale]/services/lab/content";
-import { getLocalizedPathname } from "~/i18n/locale-paths";
+import {
+	getLocalizedHashPathname,
+	getLocalizedPathname,
+} from "~/i18n/locale-paths";
 import { resolveSupportedLocale } from "~/i18n/types";
 import { buildNoIndexMetadata } from "~/lib/seo/metadata";
 
@@ -37,15 +40,15 @@ export default async function ServicesLabPage({
 }) {
 	const { locale } = await params;
 	const lang = resolveSupportedLocale(locale);
-	const contactHref = getLocalizedPathname(lang, "/contact");
+	const contactHref = getLocalizedHashPathname(lang, "/", "contact-section");
 	const headline =
 		lang === "ru"
 			? "10 контрастных вариантов страницы услуг"
 			: "10 contrasting versions of the services page";
 	const subhead =
 		lang === "ru"
-			? "Здесь собраны longform, balanced и CTA-heavy подходы. Продовая /services пока без изменений."
-			: "This lab contains longform, balanced, and CTA-heavy approaches. Production /services is unchanged.";
+			? "Здесь собраны longform, balanced и CTA-heavy подходы к одной задаче: как упаковать предложение в отдельную страницу."
+			: "This lab collects longform, balanced, and CTA-heavy approaches to the same problem: packaging an offer into a standalone page.";
 
 	return (
 		<main className="mx-auto max-w-6xl px-4 py-12 md:px-8 md:py-20">
@@ -110,14 +113,14 @@ export default async function ServicesLabPage({
 			<section className="space-y-4 border-border/80 border-t pt-8">
 				<p className="text-muted-foreground text-sm">
 					{lang === "ru"
-						? "Нужен рабочий вариант без лаборатории? Переходите к контакту и опишите задачу."
-						: "Need a practical version, not the lab? Go to contact and share your task."}
+						? "Нужен рабочий вариант без лаборатории? Перейдите к блоку контактов на главной и опишите задачу."
+						: "Need a practical version, not the lab? Jump to the homepage contact section and share your task."}
 				</p>
 				<Link
 					href={contactHref}
 					className="inline-flex items-center rounded-xl border border-border px-4 py-2 font-semibold text-sm transition-colors hover:border-accent/40 hover:text-accent"
 				>
-					{lang === "ru" ? "Перейти к контакту" : "Go to contact"}
+					{lang === "ru" ? "Перейти к контактам" : "Go to contacts"}
 				</Link>
 			</section>
 		</main>

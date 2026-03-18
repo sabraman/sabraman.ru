@@ -11,7 +11,6 @@ export const SUPPORTED_LOCALES = [
 	"en",
 	"ru",
 ] as const satisfies readonly SupportedLocale[];
-export const SITE_CONTACT_PATH = "/contact";
 export const SITE_OWNER_ROLE = "Creative Designer & Frontend Developer";
 export const SITE_LOCATION = {
 	country: "RU",

@@ -30,7 +30,10 @@ import {
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import type { VaparshopPageCopy } from "~/components/work/get-work-copy";
-import { getLocalizedPathname } from "~/i18n/locale-paths";
+import {
+	getLocalizedHashPathname,
+	getLocalizedPathname,
+} from "~/i18n/locale-paths";
 import type { SupportedLocale } from "~/i18n/types";
 
 export default function VaparshopPage({
@@ -40,7 +43,7 @@ export default function VaparshopPage({
 	copy: VaparshopPageCopy;
 	locale: SupportedLocale;
 }) {
-	const contactHref = getLocalizedPathname(locale, "/contact");
+	const contactHref = getLocalizedHashPathname(locale, "/", "contact-section");
 	const homeHref = getLocalizedPathname(locale, "/");
 
 	// Refs for scroll animations

@@ -8,7 +8,10 @@ import {
 	LAB_VARIANT_CONFIG,
 	LAB_VARIANTS,
 } from "~/app/[locale]/services/lab/content";
-import { getLocalizedPathname } from "~/i18n/locale-paths";
+import {
+	getLocalizedHashPathname,
+	getLocalizedPathname,
+} from "~/i18n/locale-paths";
 import { resolveSupportedLocale } from "~/i18n/types";
 import { buildNoIndexMetadata } from "~/lib/seo/metadata";
 
@@ -516,7 +519,7 @@ export default async function ServicesLabVariantPage({
 
 	const content = config.content[lang];
 	const classes = getStyleClasses(config.styleToken);
-	const contactHref = getLocalizedPathname(lang, "/contact");
+	const contactHref = getLocalizedHashPathname(lang, "/", "contact-section");
 	const indexHref = getLocalizedPathname(lang, "/services/lab");
 
 	return (

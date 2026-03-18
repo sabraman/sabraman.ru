@@ -83,7 +83,6 @@ export type ContactCopy = {
 		};
 	};
 	direct: {
-		title: string;
 		downloadResume: string;
 		telegram: string;
 		email: string;

@@ -99,7 +99,7 @@
 	"contact": {
 		"title": "GET",
 		"titleSecond": "IN TOUCH",
-		"description": "Let's collaborate on your next project. Fill out the form below or reach out through any of the channels listed.",
+		"description": "Have a project in mind? Message me on Telegram or send an email and let's discuss it.",
 		"form": {
 			"title": "Send a Message",
 			"name": "Your Name",
@@ -114,7 +114,6 @@
 			"error": "Error sending message. Please try again."
 		},
 		"direct": {
-			"title": "Or reach me directly:",
 			"downloadResume": "Download Resume",
 			"telegram": "Telegram",
 			"email": "Email",

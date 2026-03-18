@@ -10,7 +10,10 @@ import {
 	useState,
 } from "react";
 import { getCaseStudyPath } from "~/data/projects";
-import { getLocalizedPathname } from "~/i18n/locale-paths";
+import {
+	getLocalizedHashPathname,
+	getLocalizedPathname,
+} from "~/i18n/locale-paths";
 import { useLegacyUiLocale } from "../legacy-locale-context";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
@@ -566,7 +569,7 @@ function buildDestinations(locale: Locale, copy: (typeof COPY)[Locale]) {
 		contact: {
 			key: "contact",
 			title: copy.contact,
-			url: localePath(locale, "/contact"),
+			url: getLocalizedHashPathname(locale, "/", "contact-section"),
 			description:
 				locale === "ru"
 					? "Контакты, каналы связи и быстрые действия."

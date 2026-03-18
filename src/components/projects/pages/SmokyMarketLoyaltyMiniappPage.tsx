@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
-import { getLocalizedPathname } from "~/i18n/locale-paths";
+import { getLocalizedHashPathname } from "~/i18n/locale-paths";
 import {
 	ExternalLinks,
 	FaqBlock,
@@ -32,7 +32,7 @@ export function SmokyMarketLoyaltyMiniappPage({
 			cta: "Обсудить проект",
 		},
 	} as const;
-	const contactHref = getLocalizedPathname(locale, "/contact");
+	const contactHref = getLocalizedHashPathname(locale, "/", "contact-section");
 
 	return (
 		<main className="container mx-auto max-w-6xl px-4 py-14 md:py-20">

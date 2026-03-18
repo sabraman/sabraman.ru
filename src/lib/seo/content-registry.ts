@@ -40,18 +40,15 @@ type StaticIndexableConfig = LocalizedContent & {
 	changeFrequency: SitemapFrequency;
 	pathEn: string;
 	priority: number;
-	routeId: Extract<
-		PublicRouteId,
-		"components" | "contact" | "home" | "iphone" | "services" | "work"
-	>;
+	routeId: Extract<PublicRouteId, "components" | "home" | "iphone" | "work">;
 };
 
 const STATIC_INDEXABLE_CONTENT: StaticIndexableConfig[] = [
 	{
 		changeFrequency: "weekly",
 		description: {
-			en: "Portfolio of Danya Yudin (Sabraman): case studies, services, reusable UI components, and experimental frontend work.",
-			ru: "Портфолио Дани Юдина (Sabraman): кейсы, услуги, переиспользуемые UI-компоненты и экспериментальный фронтенд.",
+			en: "Portfolio of Danya Yudin (Sabraman): case studies, reusable UI components, and experimental frontend work.",
+			ru: "Портфолио Дани Юдина (Sabraman): кейсы, переиспользуемые UI-компоненты и экспериментальный фронтенд.",
 		},
 		pathEn: "/",
 		priority: 1,
@@ -73,20 +70,6 @@ const STATIC_INDEXABLE_CONTENT: StaticIndexableConfig[] = [
 		title: {
 			en: "Case Studies and Product Work - Sabraman",
 			ru: "Кейсы и продуктовая работа - Sabraman",
-		},
-	},
-	{
-		changeFrequency: "monthly",
-		description: {
-			en: "Design, web product development, and Telegram automation services by Danya Yudin (Sabraman).",
-			ru: "Услуги по дизайну, веб-разработке и Telegram-автоматизации от Дани Юдина (Sabraman).",
-		},
-		pathEn: "/services",
-		priority: 0.85,
-		routeId: "services",
-		title: {
-			en: "Design and Product Services - Sabraman",
-			ru: "Услуги дизайна и разработки - Sabraman",
 		},
 	},
 	{
@@ -115,20 +98,6 @@ const STATIC_INDEXABLE_CONTENT: StaticIndexableConfig[] = [
 		title: {
 			en: "iPhone Portfolio Experience - Sabraman",
 			ru: "iPhone-портфолио Sabraman",
-		},
-	},
-	{
-		changeFrequency: "monthly",
-		description: {
-			en: "Contact Danya Yudin (Sabraman) about design, branding, and product development projects.",
-			ru: "Свяжитесь с Даней Юдиным (Sabraman) по вопросам дизайна, брендинга и продуктовой разработки.",
-		},
-		pathEn: "/contact",
-		priority: 0.7,
-		routeId: "contact",
-		title: {
-			en: "Contact Danya Yudin - Sabraman",
-			ru: "Контакты Дани Юдина - Sabraman",
 		},
 	},
 ];

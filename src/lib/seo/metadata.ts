@@ -62,12 +62,6 @@ export function getLocalizedSocialImagePath(
 		case "work":
 			basePath = "/work/opengraph-image";
 			break;
-		case "services":
-			basePath = "/services/opengraph-image";
-			break;
-		case "contact":
-			basePath = "/contact/opengraph-image";
-			break;
 		case "components":
 			basePath = "/components/opengraph-image";
 			break;

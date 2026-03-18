@@ -49,7 +49,7 @@ const MESSAGES = {
 				"Looking for a portfolio-grade landing page with stronger visual direction and motion.",
 			time: "Yesterday",
 			unread: true,
-			href: "/contact",
+			href: "/#contact-section",
 		},
 		{
 			from: "work hub",
@@ -87,7 +87,7 @@ const MESSAGES = {
 				"Нужен лендинг с сильнее выраженной визуальной подачей, движением и аккуратной версткой.",
 			time: "Вчера",
 			unread: true,
-			href: "/ru/contact",
+			href: "/ru#contact-section",
 		},
 		{
 			from: "work hub",
