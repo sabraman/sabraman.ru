@@ -1,24 +1,10 @@
-import {
-	Code,
-	Github,
-	Instagram,
-	LineChart,
-	Paintbrush,
-	Send,
-	X,
-} from "lucide-react";
+import { Github, Instagram, Send, X } from "lucide-react";
 import Link from "next/link";
 import type { HomeAboutCopy } from "./home-copy";
 
 type HomeAboutSectionProps = {
 	copy: HomeAboutCopy;
 };
-
-const EXPERTISE_ICONS = {
-	branding: LineChart,
-	"app-development": Code,
-	"visual-design": Paintbrush,
-} as const;
 
 const SOCIAL_ICONS = {
 	github: Github,
@@ -29,78 +15,53 @@ const SOCIAL_ICONS = {
 
 export function HomeAboutSection({ copy }: HomeAboutSectionProps) {
 	return (
-		<section className="relative min-h-screen bg-secondary/5 py-32" id="about">
-			<div className="container mx-auto px-4">
-				<div className="mb-20 overflow-hidden">
+		<section className="relative pt-24" id="about">
+			<div className="mx-auto max-w-2xl px-4">
+				<div className="mb-8 overflow-hidden">
 					<h2
-						className="font-extrabold text-6xl uppercase tracking-tight md:text-6xl xl:text-[12rem]"
+						className="font-extrabold text-4xl text-primary uppercase tracking-tight md:text-5xl"
 						style={{
 							fontFamily: "Heading Now Variable",
-							fontVariationSettings: `'wght' 1000, 'wdth' 1000`,
+							fontVariationSettings: `'wght' 1000, 'wdth' 880`,
 						}}
 					>
-						<span className="relative z-0 ml-4 inline-block md:ml-8 xl:ml-12">
+						<span className="relative z-0 mx-6 mr-3 inline-block text-6xl leading-none md:mr-4 md:text-7xl">
 							<span className="absolute -inset-1 bg-accent opacity-50 blur-sm" />
 							{copy.title}
 						</span>
 					</h2>
 				</div>
 
-				<div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
-					<div className="lg:col-span-2">
-						<div className="prose prose-xl dark:prose-invert max-w-none">
-							<p className="mb-8 text-2xl leading-relaxed lg:text-3xl">
-								{copy.description1}
-							</p>
+				<div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))]">
+					<div className="border-white/10 border-b bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.008))] px-5 py-4 md:px-6">
+						<div className="flex flex-wrap gap-2">
+							{copy.socialLinks.map((socialLink) => {
+								const Icon = SOCIAL_ICONS[socialLink.id];
 
-							<p className="text-muted-foreground text-xl leading-relaxed lg:text-2xl">
-								{copy.description2}
-							</p>
-
-							<div className="mt-12 flex flex-wrap gap-6">
-								{copy.socialLinks.map((socialLink) => {
-									const Icon = SOCIAL_ICONS[socialLink.id];
-
-									return (
-										<div
-											className="flex items-center gap-2"
-											key={socialLink.id}
-										>
-											<Icon className="h-6 w-6 text-primary" />
-											<Link
-												href={socialLink.href}
-												className="text-xl transition-colors hover:text-accent"
-											>
-												{socialLink.label}
-											</Link>
-										</div>
-									);
-								})}
-							</div>
+								return (
+									<Link
+										key={socialLink.id}
+										href={socialLink.href}
+										className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[0.7rem] text-white/70 uppercase tracking-[0.18em] transition-colors duration-300 hover:border-white/18 hover:bg-white/[0.06] hover:text-white"
+									>
+										<Icon className="h-3.5 w-3.5 flex-shrink-0" />
+										<span>{socialLink.label}</span>
+									</Link>
+								);
+							})}
 						</div>
 					</div>
 
-					<div className="flex flex-col gap-8">
-						<div className="rounded-xl border bg-card p-6 shadow-lg backdrop-blur-sm">
-							<h3 className="mb-4 font-bold text-2xl">{copy.expertiseAreas}</h3>
-							<ul className="space-y-4">
-								{copy.expertiseCards.map((card) => {
-									const Icon = EXPERTISE_ICONS[card.id];
+					<div className="border-white/10 border-b px-5 py-5 md:px-6 md:py-6">
+						<p className="max-w-[42rem] text-2xl text-primary leading-[1.12] md:text-[2rem] [&_strong]:font-semibold [&_strong]:text-accent">
+							{copy.description1}
+						</p>
+					</div>
 
-									return (
-										<li className="flex items-start gap-3" key={card.id}>
-											<Icon className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent" />
-											<div>
-												<h4 className="font-semibold text-xl">{card.title}</h4>
-												<p className="text-muted-foreground">
-													{card.description}
-												</p>
-											</div>
-										</li>
-									);
-								})}
-							</ul>
-						</div>
+					<div className="px-5 py-5 md:px-6 md:py-6">
+						<p className="max-w-[40rem] text-base text-muted-foreground leading-[1.65] md:text-[1.05rem] [&_strong]:font-semibold [&_strong]:text-primary">
+							{copy.description2}
+						</p>
 					</div>
 				</div>
 			</div>
