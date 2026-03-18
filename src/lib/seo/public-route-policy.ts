@@ -10,8 +10,6 @@ export type PublicRouteId =
 	| "vaparshop"
 	| "hornyPlace"
 	| "priceTagPrinter"
-	| "servicesLab"
-	| "servicesLabVariant"
 	| "componentOgPreview"
 	| "componentDocOgPreview";
 
@@ -112,18 +110,6 @@ export const PUBLIC_ROUTE_POLICIES: Record<PublicRouteId, PublicRoutePolicy> = {
 		...INDEXABLE_POLICY,
 		socialImageKind: "priceTagPrinter",
 		jsonLdKind: "projectCaseStudy",
-	},
-	servicesLab: {
-		id: "servicesLab",
-		...NOINDEX_POLICY,
-		socialImageKind: null,
-		jsonLdKind: null,
-	},
-	servicesLabVariant: {
-		id: "servicesLabVariant",
-		...NOINDEX_POLICY,
-		socialImageKind: null,
-		jsonLdKind: null,
 	},
 	componentOgPreview: {
 		id: "componentOgPreview",
