@@ -182,14 +182,14 @@ export function HomeWorkSection({
 	const archiveProjects = PROJECTS.filter((project) => !project.isFeaturedWork);
 
 	return (
-		<section id="projects" className="relative pt-24 pb-12">
+		<section id="projects" className="relative pt-7 pb-12 md:pt-16">
 			<div className="mx-auto max-w-2xl px-4">
 				<motion.div
 					initial={{ opacity: 0, y: 70 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
 					viewport={{ once: true }}
-					className="pb-10"
+					className="pb-8"
 				>
 					<h2
 						className="mx-6 font-extrabold text-4xl text-primary uppercase tracking-tight md:text-5xl"
