@@ -36,7 +36,6 @@ export function getContactCopy(
 						},
 		},
 		direct: {
-			title: messages.direct.title,
 			downloadResume: messages.direct.downloadResume,
 			telegram: messages.direct.telegram,
 			email: messages.direct.email,

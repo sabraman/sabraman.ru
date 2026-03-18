@@ -3,8 +3,6 @@ import type { ProjectSlug } from "~/data/projects";
 export type PublicRouteId =
 	| "home"
 	| "work"
-	| "services"
-	| "contact"
 	| "components"
 	| "componentDoc"
 	| "iphone"
@@ -12,8 +10,6 @@ export type PublicRouteId =
 	| "vaparshop"
 	| "hornyPlace"
 	| "priceTagPrinter"
-	| "servicesLab"
-	| "servicesLabVariant"
 	| "componentOgPreview"
 	| "componentDocOgPreview";
 
@@ -22,8 +18,6 @@ export type RouteIndexationPolicy = "index" | "noindex";
 export type PublicRouteSocialImageKind =
 	| "home"
 	| "work"
-	| "services"
-	| "contact"
 	| "components"
 	| "componentDoc"
 	| "iphone"
@@ -36,7 +30,6 @@ export type PublicRouteSocialImageKind =
 export type PublicRouteJsonLdKind =
 	| "site"
 	| "collectionPage"
-	| "professionalService"
 	| "webPage"
 	| "techArticle"
 	| "projectCaseStudy"
@@ -75,18 +68,6 @@ export const PUBLIC_ROUTE_POLICIES: Record<PublicRouteId, PublicRoutePolicy> = {
 		...INDEXABLE_POLICY,
 		socialImageKind: "work",
 		jsonLdKind: "collectionPage",
-	},
-	services: {
-		id: "services",
-		...INDEXABLE_POLICY,
-		socialImageKind: "services",
-		jsonLdKind: "professionalService",
-	},
-	contact: {
-		id: "contact",
-		...INDEXABLE_POLICY,
-		socialImageKind: "contact",
-		jsonLdKind: "webPage",
 	},
 	components: {
 		id: "components",
@@ -129,18 +110,6 @@ export const PUBLIC_ROUTE_POLICIES: Record<PublicRouteId, PublicRoutePolicy> = {
 		...INDEXABLE_POLICY,
 		socialImageKind: "priceTagPrinter",
 		jsonLdKind: "projectCaseStudy",
-	},
-	servicesLab: {
-		id: "servicesLab",
-		...NOINDEX_POLICY,
-		socialImageKind: null,
-		jsonLdKind: null,
-	},
-	servicesLabVariant: {
-		id: "servicesLabVariant",
-		...NOINDEX_POLICY,
-		socialImageKind: null,
-		jsonLdKind: null,
 	},
 	componentOgPreview: {
 		id: "componentOgPreview",

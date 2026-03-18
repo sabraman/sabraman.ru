@@ -49,6 +49,16 @@ export function getLocalizedPathname(
 	return basePathname;
 }
 
+export function getLocalizedHashPathname(
+	locale: SupportedLocale,
+	pathname: string,
+	hash: string,
+) {
+	const normalizedHash = hash.startsWith("#") ? hash.slice(1) : hash;
+
+	return `${getLocalizedPathname(locale, pathname)}#${normalizedHash}`;
+}
+
 export function isLocalizedRouteActive(pathname: string, href: string) {
 	const normalizedPathname = stripLocalePrefix(pathname);
 	const normalizedHref = stripLocalePrefix(href);

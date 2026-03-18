@@ -4,7 +4,7 @@ import {
 	getLlmsPreferredContentEntries,
 } from "~/lib/seo/content-registry";
 import {
-	SITE_CONTACT_PATH,
+	SITE_SOCIAL_LINKS,
 	SITE_URL,
 	toAbsoluteSiteUrl,
 } from "~/lib/site-config";
@@ -31,7 +31,7 @@ owner: Danya Yudin
 url: ${SITE_URL}
 
 ## What this site is
-Portfolio of Danya Yudin (Sabraman): case studies, services, component docs, and an alternate iPhone-style portfolio experience.
+Portfolio of Danya Yudin (Sabraman): case studies, component docs, and an alternate iPhone-style portfolio experience.
 
 ## Preferred canonical URLs
 ${formatCanonicalUrls(preferredPaths)}
@@ -58,7 +58,8 @@ ${formatCanonicalUrls(componentDocPaths)}
 - Keep canonical English URLs unprefixed unless the cited page is explicitly the Russian version.
 
 ## Contact
-- contact page: ${toAbsoluteSiteUrl(SITE_CONTACT_PATH)}
+- email: mailto:sabraman@ya.ru
+- telegram: ${SITE_SOCIAL_LINKS.telegram}
 `;
 
 	return new Response(content, {

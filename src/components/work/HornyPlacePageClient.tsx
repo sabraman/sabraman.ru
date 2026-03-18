@@ -14,7 +14,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import type { HornyPlacePageCopy } from "~/components/work/get-work-copy";
-import { getLocalizedPathname } from "~/i18n/locale-paths";
+import {
+	getLocalizedHashPathname,
+	getLocalizedPathname,
+} from "~/i18n/locale-paths";
 import type { SupportedLocale } from "~/i18n/types";
 
 export default function HornyPlacePage({
@@ -28,7 +31,7 @@ export default function HornyPlacePage({
 	const [isMounted, setIsMounted] = useState(false);
 	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
 	const [currentView, setCurrentView] = useState(0);
-	const contactHref = getLocalizedPathname(locale, "/contact");
+	const contactHref = getLocalizedHashPathname(locale, "/", "contact-section");
 	const homeHref = getLocalizedPathname(locale, "/");
 
 	const setContainerRef = useCallback((node: HTMLDivElement | null) => {
