@@ -1,6 +1,6 @@
 # sabraman.ru
 
-Personal site and portfolio for Danya Yudin (Sabraman). The app combines case studies, services pages, reusable legacy UI component docs, and a localized App Router setup for English and Russian URLs.
+Personal site and portfolio for Danya Yudin (Sabraman). The app combines localized case studies, a work hub, reusable legacy UI component docs, and a homepage contact section across English and Russian routes.
 
 ## Stack
 
@@ -28,3 +28,14 @@ Additional project scripts:
 - `bun run og:capture` regenerates component social preview images.
 - `bun run cv:pdfs` regenerates CV PDFs from the source docs.
 - `bun run registry:build` rebuilds the component registry payloads.
+
+## Routes
+
+- `/` and `/ru` render the localized homepage.
+- `/work` and `/ru/work` render the work hub.
+- `/components` and `/ru/components` render the legacy component docs hub.
+- Project case studies live under localized slugs such as `/ru/vaparshop`.
+
+## Environment
+
+No custom application environment variables are currently required. The repo validates only `NODE_ENV` via `src/env.js`.
