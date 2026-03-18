@@ -148,20 +148,6 @@ export default async function HomePage({ locale }: HomePageProps) {
 							location: experience.hornyPlace.location,
 							achievements: Object.values(experience.hornyPlace.achievements),
 						},
-						{
-							company: "ELYSIUM",
-							title: experience.elysium.title,
-							period: experience.elysium.period,
-							location: experience.elysium.location,
-							achievements: Object.values(experience.elysium.achievements),
-						},
-						{
-							company: "VAPE CLUB",
-							title: experience.vapeClub.title,
-							period: experience.vapeClub.period,
-							location: experience.vapeClub.location,
-							achievements: Object.values(experience.vapeClub.achievements),
-						},
 					],
 				}}
 			/>

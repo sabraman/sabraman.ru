@@ -9,7 +9,7 @@ export function HomeContactForm({ copy }: HomeContactFormProps) {
 	const contactLinks = getDirectContactLinks(copy);
 
 	return (
-		<article className="mx-auto max-w-3xl border-white/10 border-y">
+		<article className="mx-auto max-w-2xl border-white/10 border-y">
 			<div className="divide-y divide-white/10">
 				{contactLinks.map((contactLink) => (
 					<a

@@ -9,13 +9,13 @@ export function HomeContactSection({ copy }: HomeContactSectionProps) {
 	return (
 		<section
 			id="contact-section"
-			className="relative overflow-hidden py-24"
+			className="relative overflow-hidden pt-8 pb-24"
 			style={{
 				contentVisibility: "auto",
 				containIntrinsicSize: "640px",
 			}}
 		>
-			<div className="container mx-auto px-4">
+			<div className="mx-auto max-w-2xl px-4">
 				<HomeContactForm copy={copy} />
 			</div>
 		</section>
