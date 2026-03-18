@@ -16,7 +16,7 @@ export function HomeContactSection({ copy }: HomeContactSectionProps) {
 			}}
 		>
 			<div className="container mx-auto px-4">
-				<HomeContactForm copy={copy.copy} />
+				<HomeContactForm copy={copy} />
 			</div>
 		</section>
 	);

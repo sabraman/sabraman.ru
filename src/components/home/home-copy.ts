@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import type { SupportedLocale } from "~/i18n/types";
 
 export type HomeHeroCopy = {
 	title: string;
@@ -60,46 +59,13 @@ export type HomeWorkSectionCopy = {
 	links: string;
 };
 
-export type ContactCopy = {
-	title: string;
-	titleSecond: string;
-	description: string;
-	form: {
-		title: string;
-		name: string;
-		namePlaceholder: string;
-		email: string;
-		emailPlaceholder: string;
-		message: string;
-		messagePlaceholder: string;
-		submit: string;
-		sending: string;
-		success: string;
-		error: string;
-		validation: {
-			name: string;
-			email: string;
-			message: string;
-		};
-	};
+export type ContactLinkCopy = {
 	direct: {
-		downloadResume: string;
 		telegram: string;
 		email: string;
 		github: string;
 		instagram: string;
 	};
-	location: {
-		title: string;
-		description: string;
-	};
-	remote: {
-		title: string;
-		description: string;
-	};
 };
 
-export type HomeContactCopy = {
-	locale: SupportedLocale;
-	copy: ContactCopy;
-};
+export type HomeContactCopy = ContactLinkCopy;

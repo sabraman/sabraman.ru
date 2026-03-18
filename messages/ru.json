@@ -1,8 +1,7 @@
 {
 	"navigation": {
 		"home": "Главная",
-		"work": "Работы",
-		"contact": "Контакты"
+		"work": "Работы"
 	},
 	"hero": {
 		"title": "ДАНЯ ЮДИН",
@@ -97,36 +96,11 @@
 		}
 	},
 	"contact": {
-		"title": "ДАВАЙТЕ",
-		"titleSecond": "РАБОТАТЬ",
-		"description": "Есть интересный проект? Напишите в Telegram или на почту — обсудим детали.",
-		"form": {
-			"title": "Написать мне",
-			"name": "Как зовут",
-			"namePlaceholder": "Ваше имя",
-			"email": "Email",
-			"emailPlaceholder": "Куда отвечать",
-			"message": "Сообщение",
-			"messagePlaceholder": "Расскажите про проект...",
-			"submit": "Отправить",
-			"sending": "Отправляю...",
-			"success": "Сообщение отправлено!",
-			"error": "Что-то пошло не так, попробуйте еще раз"
-		},
 		"direct": {
-			"downloadResume": "Скачать резюме",
 			"telegram": "Telegram",
 			"email": "Email",
 			"github": "GitHub",
 			"instagram": "Instagram"
-		},
-		"location": {
-			"title": "Санкт-Петербург",
-			"description": "Живу и работаю в самом красивом городе - Санкт-Петербурге"
-		},
-		"remote": {
-			"title": "Удаленка",
-			"description": "Работаю с клиентами по всему миру. Созвоны в любое удобное время"
 		}
 	},
 	"work": {

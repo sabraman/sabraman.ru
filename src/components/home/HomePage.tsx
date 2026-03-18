@@ -47,7 +47,7 @@ export default async function HomePage({ locale }: HomePageProps) {
 	]);
 	const pdfResume = getResumeAsset(locale);
 	const markdownResume = getResumeAsset(locale, "markdown");
-	const contactCopy = getContactCopy(locale, contact);
+	const contactCopy = getContactCopy(contact);
 
 	return (
 		<div className="relative">
@@ -166,7 +166,7 @@ export default async function HomePage({ locale }: HomePageProps) {
 				}}
 			/>
 
-			<HomeContactSection copy={{ locale, copy: contactCopy }} />
+			<HomeContactSection copy={contactCopy} />
 		</div>
 	);
 }
