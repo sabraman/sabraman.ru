@@ -1,6 +1,6 @@
 import { Github, Instagram, Mail } from "lucide-react";
 import type { ReactNode } from "react";
-import type { ContactCopy } from "~/components/home/home-copy";
+import type { ContactLinkCopy } from "~/components/home/home-copy";
 import { SITE_SOCIAL_LINKS } from "~/lib/site-config";
 
 export const TelegramIcon = ({ className }: { className?: string }) => (
@@ -33,7 +33,9 @@ export type DirectContactLink = {
 	value: string;
 };
 
-export function getDirectContactLinks(copy: ContactCopy): DirectContactLink[] {
+export function getDirectContactLinks(
+	copy: ContactLinkCopy,
+): DirectContactLink[] {
 	return [
 		{
 			href: "mailto:sabraman@ya.ru",

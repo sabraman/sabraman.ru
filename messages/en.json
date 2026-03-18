@@ -1,8 +1,7 @@
 {
 	"navigation": {
 		"home": "Home",
-		"work": "Work",
-		"contact": "Contact"
+		"work": "Work"
 	},
 	"hero": {
 		"title": "DANYA YUDIN",
@@ -97,36 +96,11 @@
 		}
 	},
 	"contact": {
-		"title": "GET",
-		"titleSecond": "IN TOUCH",
-		"description": "Have a project in mind? Message me on Telegram or send an email and let's discuss it.",
-		"form": {
-			"title": "Send a Message",
-			"name": "Your Name",
-			"namePlaceholder": "Enter your name",
-			"email": "Your Email",
-			"emailPlaceholder": "Enter your email",
-			"message": "Message",
-			"messagePlaceholder": "Tell me about your project...",
-			"submit": "Send Message",
-			"sending": "Sending...",
-			"success": "Message sent successfully!",
-			"error": "Error sending message. Please try again."
-		},
 		"direct": {
-			"downloadResume": "Download Resume",
 			"telegram": "Telegram",
 			"email": "Email",
 			"github": "GitHub",
 			"instagram": "Instagram"
-		},
-		"location": {
-			"title": "Saint Petersburg",
-			"description": "Working from the beautiful city of Saint Petersburg, Russia"
-		},
-		"remote": {
-			"title": "Remote Work",
-			"description": "Available worldwide. Open to video meetings at your convenience"
 		}
 	},
 	"work": {

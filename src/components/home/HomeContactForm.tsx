@@ -1,8 +1,8 @@
 import { getDirectContactLinks } from "~/components/contact/contact-links";
-import type { ContactCopy } from "./home-copy";
+import type { ContactLinkCopy } from "./home-copy";
 
 type HomeContactFormProps = {
-	copy: ContactCopy;
+	copy: ContactLinkCopy;
 };
 
 export function HomeContactForm({ copy }: HomeContactFormProps) {
