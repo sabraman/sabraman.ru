@@ -58,21 +58,25 @@ if (typeof window !== "undefined" && !hasPatchedThreeConsole) {
 export function ClientRoot({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();
 	const isOgPreviewRoute = pathname.includes("/og-preview");
-	const [showIntro, setShowIntro] = useState(true);
+	const [showIntro, setShowIntro] = useState(!isOgPreviewRoute);
 	const initialScrollYRef = useRef(0);
 	const hasCapturedScrollRef = useRef(false);
 
 	// Re-enable the state change based on intro finishing
 	useEffect(() => {
-		if (isOgPreviewRoute) {
+		const nextIsOgPreviewRoute = pathname.includes("/og-preview");
+
+		if (nextIsOgPreviewRoute) {
 			setShowIntro(false);
 			return;
 		}
 
+		setShowIntro(true);
+
 		// Максимальное время для отображения интро - 5 секунд
 		const timer = setTimeout(() => setShowIntro(false), 5000);
 		return () => clearTimeout(timer);
-	}, [isOgPreviewRoute]);
+	}, [pathname]);
 
 	useLayoutEffect(() => {
 		if (typeof window === "undefined" || isOgPreviewRoute) {
@@ -115,7 +119,10 @@ export function ClientRoot({ children }: { children: React.ReactNode }) {
 			{isOgPreviewRoute ? null : (
 				<AnimatePresence>
 					{showIntro && (
-						<FullScreenIntro onFinish={() => setShowIntro(false)} />
+						<FullScreenIntro
+							key={pathname}
+							onFinish={() => setShowIntro(false)}
+						/>
 					)}
 				</AnimatePresence>
 			)}

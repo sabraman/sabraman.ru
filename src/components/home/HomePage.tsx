@@ -52,7 +52,6 @@ export default async function HomePage({ locale }: HomePageProps) {
 	return (
 		<div className="relative">
 			<HomeHeroClient
-				locale={locale}
 				copy={{
 					title: hero.title,
 					subtitle: hero.subtitle,

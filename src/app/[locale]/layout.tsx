@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import { ClientRoot } from "~/components/ui/ClientRoot";
 import { FloatingDock } from "~/components/ui/FloatingDock";
+import { HeaderBrand } from "~/components/ui/HeaderBrand";
 import { LanguageSwitcher } from "~/components/ui/language-switcher";
 import { SmoothMarquee } from "~/components/ui/SmoothMarquee";
 import { Toaster } from "~/components/ui/sonner";
@@ -268,8 +269,13 @@ export default async function RootLayout({
 							</div>
 						</noscript>
 					) : null}
-					<div className="fixed top-4 right-4 z-50 flex gap-2">
-						<LanguageSwitcher locale={resolvedLocale} />
+					<div className="fixed inset-x-0 top-4 z-50 px-4">
+						<div className="mx-auto max-w-2xl">
+							<div className="mx-6 flex items-center justify-between">
+								<HeaderBrand locale={resolvedLocale} />
+								<LanguageSwitcher locale={resolvedLocale} />
+							</div>
+						</div>
 					</div>
 					<SmoothMarquee locale={resolvedLocale} />
 					<main className="pb-24">{children}</main>
