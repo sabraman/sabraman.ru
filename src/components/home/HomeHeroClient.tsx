@@ -443,7 +443,7 @@ export function HomeHeroClient({ copy }: HomeHeroClientProps) {
 							ease: [0.22, 1, 0.36, 1],
 							delay: 0.15,
 						}}
-						className="overflow-hidden"
+						className="min-w-0 overflow-hidden"
 					>
 						<h1
 							ref={titleContainerRef}
@@ -495,7 +495,7 @@ export function HomeHeroClient({ copy }: HomeHeroClientProps) {
 							ease: [0.22, 1, 0.36, 1],
 							delay: 0.45,
 						}}
-						className="flex flex-col gap-4"
+						className="flex min-w-0 flex-col gap-4"
 					>
 						<div className="py-2">
 							<span
@@ -505,7 +505,7 @@ export function HomeHeroClient({ copy }: HomeHeroClientProps) {
 							/>
 							<div
 								ref={roleContainerRef}
-								className="w-full text-[10vw] text-white/88 uppercase leading-[0.9] tracking-[0.03em] sm:text-[1.8rem] md:text-[2rem]"
+								className="w-full min-w-0 text-[10vw] text-white/88 uppercase leading-[0.9] tracking-[0.03em] sm:text-[1.8rem] md:text-[2rem]"
 								style={{
 									fontFamily: "Heading Now Variable",
 									fontVariationSettings: `'wght' 1000, 'wdth' ${roleWdth}`,
@@ -518,8 +518,8 @@ export function HomeHeroClient({ copy }: HomeHeroClientProps) {
 							</div>
 						</div>
 
-						<div className="flex w-full flex-col items-stretch gap-3">
-							<ButtonGroup className="w-full max-w-full overflow-hidden rounded-full border border-white/10 bg-white/[0.03] text-white shadow-[0_16px_40px_rgba(0,0,0,0.18)] backdrop-blur-sm">
+						<div className="flex w-full min-w-0 flex-col items-stretch gap-3">
+							<ButtonGroup className="w-full min-w-0 max-w-full overflow-hidden rounded-full border border-white/10 bg-white/[0.03] text-white shadow-[0_16px_40px_rgba(0,0,0,0.18)] backdrop-blur-sm">
 								<Button
 									size={null}
 									variant={null}

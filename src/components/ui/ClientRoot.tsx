@@ -62,21 +62,25 @@ export function ClientRoot({ children }: { children: React.ReactNode }) {
 	const initialScrollYRef = useRef(0);
 	const hasCapturedScrollRef = useRef(false);
 
-	// Re-enable the state change based on intro finishing
+	// Reset intro visibility for each pathname change.
 	useEffect(() => {
-		const nextIsOgPreviewRoute = pathname.includes("/og-preview");
-
-		if (nextIsOgPreviewRoute) {
+		if (pathname.includes("/og-preview")) {
 			setShowIntro(false);
 			return;
 		}
 
 		setShowIntro(true);
+	}, [pathname]);
 
-		// Максимальное время для отображения интро - 5 секунд
+	// Максимальное время для отображения интро - 5 секунд
+	useEffect(() => {
+		if (isOgPreviewRoute || !showIntro) {
+			return;
+		}
+
 		const timer = setTimeout(() => setShowIntro(false), 5000);
 		return () => clearTimeout(timer);
-	}, [pathname]);
+	}, [isOgPreviewRoute, showIntro]);
 
 	useLayoutEffect(() => {
 		if (typeof window === "undefined" || isOgPreviewRoute) {
