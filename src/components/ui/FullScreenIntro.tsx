@@ -64,8 +64,7 @@ export function FullScreenIntro({ onFinish }: { onFinish?: () => void }) {
 		<motion.div
 			// Use exit animation for a smoother transition out if needed
 			// exit={{ opacity: 0, transition: { duration: 0.5 } }}
-			className="fixed relative inset-0 z-[9999] flex items-center justify-center bg-background"
-			style={{ width: "100vw", height: "100vh" }}
+			className="fixed inset-0 z-[9999] flex h-dvh w-screen items-center justify-center overflow-hidden bg-background"
 		>
 			<motion.h1
 				initial={{

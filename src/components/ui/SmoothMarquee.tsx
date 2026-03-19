@@ -2,6 +2,7 @@
 
 import { motion, useAnimationControls } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getLocalizedPathname } from "~/i18n/locale-paths";
 import type { SupportedLocale } from "~/i18n/types";
@@ -12,8 +13,11 @@ interface MarqueeItem {
 }
 
 export function SmoothMarquee({ locale }: { locale: SupportedLocale }) {
+	const pathname = usePathname();
 	const [isHovered, setIsHovered] = useState(false);
 	const animationControls = useAnimationControls();
+	const homePath = getLocalizedPathname(locale, "/");
+	const isHomePage = pathname === homePath;
 
 	// Создаем массив с текстами
 	const items: MarqueeItem[] = [
@@ -69,6 +73,10 @@ export function SmoothMarquee({ locale }: { locale: SupportedLocale }) {
 		setIsHovered(false);
 		startAnimation(false); // Нормальная скорость
 	};
+
+	if (isHomePage) {
+		return null;
+	}
 
 	return (
 		<div className="group w-full overflow-hidden whitespace-nowrap border-b py-1 transition-all duration-500">
