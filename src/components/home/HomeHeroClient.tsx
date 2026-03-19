@@ -22,8 +22,10 @@ const HERO_TITLE_TARGET_VH = 0.36;
 const HERO_TITLE_MIN_FONT_SIZE = 64;
 const HERO_TITLE_MIN_WDTH = 60;
 const HERO_TITLE_MAX_WDTH = 1000;
-const HERO_TITLE_MOBILE_INSET = 2;
+const HERO_TITLE_MOBILE_INSET = 8;
 const HERO_TITLE_DESKTOP_INSET = 6;
+const HERO_ROLE_MOBILE_INSET = 8;
+const HERO_ROLE_DESKTOP_INSET = 4;
 const HERO_RESUME_LABEL_FONT_SIZE = "0.92rem";
 
 function splitHeroTitle(title: string) {
@@ -49,9 +51,13 @@ function useFittedRoleWdth(lines: string[]) {
 		}
 
 		const calculateWdth = () => {
-			const availableWidth = container.clientWidth;
+			const availableWidth =
+				container.clientWidth -
+				(window.innerWidth < 640
+					? HERO_ROLE_MOBILE_INSET * 2
+					: HERO_ROLE_DESKTOP_INSET * 2);
 
-			if (!availableWidth) {
+			if (availableWidth <= 0) {
 				return;
 			}
 
