@@ -1,4 +1,5 @@
 import "~/styles/globals.css";
+import "~/styles/vendor/tw-animate.css";
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
