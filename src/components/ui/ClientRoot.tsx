@@ -62,15 +62,12 @@ export function ClientRoot({ children }: { children: React.ReactNode }) {
 	const initialScrollYRef = useRef(0);
 	const hasCapturedScrollRef = useRef(false);
 
-	// Reset intro visibility for each pathname change.
+	// Never show the intro on OG preview routes.
 	useEffect(() => {
-		if (pathname.includes("/og-preview")) {
+		if (isOgPreviewRoute) {
 			setShowIntro(false);
-			return;
 		}
-
-		setShowIntro(true);
-	}, [pathname]);
+	}, [isOgPreviewRoute]);
 
 	// Максимальное время для отображения интро - 5 секунд
 	useEffect(() => {
@@ -123,10 +120,7 @@ export function ClientRoot({ children }: { children: React.ReactNode }) {
 			{isOgPreviewRoute ? null : (
 				<AnimatePresence>
 					{showIntro && (
-						<FullScreenIntro
-							key={pathname}
-							onFinish={() => setShowIntro(false)}
-						/>
+						<FullScreenIntro onFinish={() => setShowIntro(false)} />
 					)}
 				</AnimatePresence>
 			)}
