@@ -19,6 +19,11 @@ type Palette = {
 };
 
 const COMPONENT_PALETTES: Record<ComponentDocSlug, Palette> = {
+	roundbit: {
+		accent: "#8bd5ff",
+		glow: "rgba(139, 213, 255, 0.18)",
+		line: "rgba(139, 213, 255, 0.24)",
+	},
 	"legacy-alert-dialog": {
 		accent: "#f2ddba",
 		glow: "rgba(242, 221, 186, 0.2)",
@@ -412,6 +417,8 @@ function getTitleSize(title: string) {
 
 function renderComponentIcon(slug: ComponentDocSlug) {
 	switch (slug) {
+		case "roundbit":
+			return renderRoundbitIcon();
 		case "legacy-alert-dialog":
 			return renderAlertDialogIcon();
 		case "legacy-bar-button":
@@ -429,6 +436,54 @@ function renderComponentIcon(slug: ComponentDocSlug) {
 		case "legacy-wheel-picker":
 			return renderWheelPickerIcon();
 	}
+}
+
+function renderRoundbitIcon() {
+	return (
+		<div style={iconStageStyle}>
+			<div
+				style={{
+					background:
+						"linear-gradient(180deg, rgba(139,213,255,0.18) 0%, rgba(34,47,79,0.85) 100%)",
+					boxShadow:
+						"0 24px 56px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.18)",
+					clipPath:
+						"polygon(0px 48px, 16px 48px, 16px 32px, 32px 32px, 32px 16px, 48px 16px, 48px 0px, 208px 0px, 208px 16px, 224px 16px, 224px 32px, 240px 32px, 240px 48px, 256px 48px, 256px 192px, 240px 192px, 240px 208px, 224px 208px, 224px 224px, 208px 224px, 208px 240px, 48px 240px, 48px 224px, 32px 224px, 32px 208px, 16px 208px, 16px 192px, 0px 192px)",
+					display: "flex",
+					height: 240,
+					position: "absolute",
+					right: 28,
+					top: 52,
+					width: 256,
+				}}
+			>
+				<div
+					style={{
+						background:
+							"linear-gradient(180deg, #0d1529 0%, #121f38 100%)",
+						clipPath:
+							"polygon(0px 32px, 16px 32px, 16px 16px, 32px 16px, 32px 0px, 176px 0px, 176px 16px, 192px 16px, 192px 32px, 208px 32px, 208px 144px, 192px 144px, 192px 160px, 176px 160px, 176px 176px, 32px 176px, 32px 160px, 16px 160px, 16px 144px, 0px 144px)",
+						inset: 24,
+						position: "absolute",
+					}}
+				/>
+				<div
+					style={{
+						background: "#8bd5ff",
+						boxShadow:
+							"0 0 0 8px rgba(139,213,255,0.18), 0 12px 24px rgba(0,0,0,0.24)",
+						clipPath:
+							"polygon(0px 24px, 8px 24px, 8px 16px, 16px 16px, 16px 8px, 24px 8px, 24px 0px, 88px 0px, 88px 8px, 96px 8px, 96px 16px, 104px 16px, 104px 24px, 112px 24px, 112px 72px, 104px 72px, 104px 80px, 96px 80px, 96px 88px, 88px 88px, 88px 96px, 24px 96px, 24px 88px, 16px 88px, 16px 80px, 8px 80px, 8px 72px, 0px 72px)",
+						height: 96,
+						left: 72,
+						position: "absolute",
+						top: 72,
+						width: 112,
+					}}
+				/>
+			</div>
+		</div>
+	);
 }
 
 const iconStageStyle: CSSProperties = {

@@ -19,6 +19,7 @@ import { ComponentDocShowcase } from "~/components/legacy/docs/component-doc-sho
 import { readRepoFileForDocs } from "~/components/legacy/docs/component-doc-source";
 import { getComponentTypeTable } from "~/components/legacy/docs/component-doc-type-table";
 import { LegacyInstallCommand } from "~/components/legacy/LegacyInstallCommand";
+import { RoundbitPlayground } from "~/components/roundbit/RoundbitPlayground";
 import { cn } from "~/lib/utils";
 
 const mdxOptions: MDXRemoteProps["options"] = {
@@ -98,6 +99,7 @@ function getMdxComponents(
 		ComponentSource: ({ src, title }: { src: string; title?: string }) => (
 			<ComponentDocSource src={src} title={title} />
 		),
+		RoundbitPlayground: () => <RoundbitPlayground />,
 		h2: ({ className, ...props }) => (
 			<ComponentDocHeading
 				className={cn(

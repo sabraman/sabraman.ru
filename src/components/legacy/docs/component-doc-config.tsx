@@ -73,8 +73,32 @@ import {
 } from "~/components/legacy/legacy-switch-content";
 import type { PackageManager } from "~/components/legacy-code-block-command";
 import { LegacySwitch } from "~/components/legacy-switch";
+import { Roundbit18pxExample } from "~/components/roundbit/examples/Roundbit18pxExample";
+import { RoundbitBlXlExample } from "~/components/roundbit/examples/RoundbitBlXlExample";
+import { RoundbitBrXlExample } from "~/components/roundbit/examples/RoundbitBrXlExample";
+import { RoundbitBXlExample } from "~/components/roundbit/examples/RoundbitBXlExample";
+import { RoundbitFrameTlXlExample } from "~/components/roundbit/examples/RoundbitFrameTlXlExample";
+import { RoundbitFrameXlExample } from "~/components/roundbit/examples/RoundbitFrameXlExample";
+import { RoundbitFrameXlStep4ImageExample } from "~/components/roundbit/examples/RoundbitFrameXlStep4ImageExample";
+import { RoundbitLXlExample } from "~/components/roundbit/examples/RoundbitLXlExample";
+import { RoundbitRXlExample } from "~/components/roundbit/examples/RoundbitRXlExample";
+import { RoundbitTlXlExample } from "~/components/roundbit/examples/RoundbitTlXlExample";
+import { RoundbitTrXlExample } from "~/components/roundbit/examples/RoundbitTrXlExample";
+import { RoundbitTXlExample } from "~/components/roundbit/examples/RoundbitTXlExample";
+import { RoundbitXlExample } from "~/components/roundbit/examples/RoundbitXlExample";
+import { RoundbitXlStep1Example } from "~/components/roundbit/examples/RoundbitXlStep1Example";
+import { RoundbitXlStep4Example } from "~/components/roundbit/examples/RoundbitXlStep4Example";
+import { RoundbitScope } from "~/components/roundbit/RoundbitScope";
+import {
+	ROUNDBIT_INSTALL_COMMANDS,
+	ROUNDBIT_URLS,
+} from "~/components/roundbit-content";
 
 type InstallCommandSet = Partial<Record<PackageManager, string>>;
+
+function renderRoundbitPreview(node: ReactNode) {
+	return <RoundbitScope>{node}</RoundbitScope>;
+}
 
 export interface ComponentDocConfig {
 	featuredPreview: ComponentDocPreviewName;
@@ -85,6 +109,17 @@ export interface ComponentDocConfig {
 }
 
 export const COMPONENT_DOC_CONFIG = {
+	roundbit: {
+		featuredPreview: "roundbit-frame-xl",
+		installCommands: ROUNDBIT_INSTALL_COMMANDS,
+		registryDirectUrl: ROUNDBIT_URLS.direct,
+		registryIndexUrl: ROUNDBIT_URLS.registry,
+		renderHeroPreview: () => (
+			<div className="relative flex justify-center">
+				<RoundbitFrameXlExample />
+			</div>
+		),
+	},
 	"legacy-alert-dialog": {
 		featuredPreview: "legacy-alert-dialog-demo",
 		installCommands: LEGACY_ALERT_DIALOG_INSTALL_COMMANDS,
@@ -189,6 +224,21 @@ export const COMPONENT_DOC_CONFIG = {
 } satisfies Record<ComponentDocSlug, ComponentDocConfig>;
 
 export type ComponentDocPreviewName =
+	| "roundbit-18px"
+	| "roundbit-b-xl"
+	| "roundbit-bl-xl"
+	| "roundbit-br-xl"
+	| "roundbit-frame-tl-xl"
+	| "roundbit-frame-xl"
+	| "roundbit-frame-xl-step-4-image"
+	| "roundbit-l-xl"
+	| "roundbit-r-xl"
+	| "roundbit-t-xl"
+	| "roundbit-tl-xl"
+	| "roundbit-tr-xl"
+	| "roundbit-xl"
+	| "roundbit-xl-step-1"
+	| "roundbit-xl-step-4"
 	| "legacy-alert-dialog-confirm"
 	| "legacy-alert-dialog-demo"
 	| "legacy-alert-dialog-destructive"
@@ -239,6 +289,82 @@ const COMPONENT_DOC_PREVIEWS: Record<
 	ComponentDocPreviewName,
 	ComponentDocPreviewConfig
 > = {
+	"roundbit-18px": {
+		codeTitle: "components/roundbit-18px-example.tsx",
+		render: () => renderRoundbitPreview(<Roundbit18pxExample />),
+		sourcePath: "src/components/roundbit/examples/Roundbit18pxExample.tsx",
+	},
+	"roundbit-b-xl": {
+		codeTitle: "components/roundbit-b-xl-example.tsx",
+		render: () => renderRoundbitPreview(<RoundbitBXlExample />),
+		sourcePath: "src/components/roundbit/examples/RoundbitBXlExample.tsx",
+	},
+	"roundbit-bl-xl": {
+		codeTitle: "components/roundbit-bl-xl-example.tsx",
+		render: () => renderRoundbitPreview(<RoundbitBlXlExample />),
+		sourcePath: "src/components/roundbit/examples/RoundbitBlXlExample.tsx",
+	},
+	"roundbit-br-xl": {
+		codeTitle: "components/roundbit-br-xl-example.tsx",
+		render: () => renderRoundbitPreview(<RoundbitBrXlExample />),
+		sourcePath: "src/components/roundbit/examples/RoundbitBrXlExample.tsx",
+	},
+	"roundbit-frame-tl-xl": {
+		codeTitle: "components/roundbit-frame-tl-xl-example.tsx",
+		render: () => <RoundbitFrameTlXlExample />,
+		sourcePath: "src/components/roundbit/examples/RoundbitFrameTlXlExample.tsx",
+	},
+	"roundbit-frame-xl": {
+		codeTitle: "components/roundbit-frame-xl-example.tsx",
+		render: () => <RoundbitFrameXlExample />,
+		sourcePath: "src/components/roundbit/examples/RoundbitFrameXlExample.tsx",
+	},
+	"roundbit-frame-xl-step-4-image": {
+		codeTitle: "components/roundbit-frame-xl-step-4-image-example.tsx",
+		render: () => <RoundbitFrameXlStep4ImageExample />,
+		sourcePath:
+			"src/components/roundbit/examples/RoundbitFrameXlStep4ImageExample.tsx",
+	},
+	"roundbit-l-xl": {
+		codeTitle: "components/roundbit-l-xl-example.tsx",
+		render: () => renderRoundbitPreview(<RoundbitLXlExample />),
+		sourcePath: "src/components/roundbit/examples/RoundbitLXlExample.tsx",
+	},
+	"roundbit-r-xl": {
+		codeTitle: "components/roundbit-r-xl-example.tsx",
+		render: () => renderRoundbitPreview(<RoundbitRXlExample />),
+		sourcePath: "src/components/roundbit/examples/RoundbitRXlExample.tsx",
+	},
+	"roundbit-t-xl": {
+		codeTitle: "components/roundbit-t-xl-example.tsx",
+		render: () => renderRoundbitPreview(<RoundbitTXlExample />),
+		sourcePath: "src/components/roundbit/examples/RoundbitTXlExample.tsx",
+	},
+	"roundbit-tl-xl": {
+		codeTitle: "components/roundbit-tl-xl-example.tsx",
+		render: () => renderRoundbitPreview(<RoundbitTlXlExample />),
+		sourcePath: "src/components/roundbit/examples/RoundbitTlXlExample.tsx",
+	},
+	"roundbit-tr-xl": {
+		codeTitle: "components/roundbit-tr-xl-example.tsx",
+		render: () => renderRoundbitPreview(<RoundbitTrXlExample />),
+		sourcePath: "src/components/roundbit/examples/RoundbitTrXlExample.tsx",
+	},
+	"roundbit-xl": {
+		codeTitle: "components/roundbit-xl-example.tsx",
+		render: () => renderRoundbitPreview(<RoundbitXlExample />),
+		sourcePath: "src/components/roundbit/examples/RoundbitXlExample.tsx",
+	},
+	"roundbit-xl-step-1": {
+		codeTitle: "components/roundbit-xl-step-1-example.tsx",
+		render: () => renderRoundbitPreview(<RoundbitXlStep1Example />),
+		sourcePath: "src/components/roundbit/examples/RoundbitXlStep1Example.tsx",
+	},
+	"roundbit-xl-step-4": {
+		codeTitle: "components/roundbit-xl-step-4-example.tsx",
+		render: () => renderRoundbitPreview(<RoundbitXlStep4Example />),
+		sourcePath: "src/components/roundbit/examples/RoundbitXlStep4Example.tsx",
+	},
 	"legacy-alert-dialog-confirm": {
 		codeTitle: "components/legacy-alert-dialog-confirm-example.tsx",
 		render: () => <LegacyAlertDialogConfirmExample />,

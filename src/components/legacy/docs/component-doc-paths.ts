@@ -1,6 +1,7 @@
 import { getLocalizedPathname } from "~/i18n/locale-paths";
 
 export const COMPONENT_DOC_SLUGS = [
+	"roundbit",
 	"legacy-wheel-picker",
 	"legacy-alert-dialog",
 	"legacy-bar-button",

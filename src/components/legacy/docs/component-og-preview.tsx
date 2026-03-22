@@ -10,6 +10,7 @@ const OG_STAGE_CLASSNAME =
 
 const COMPONENT_OG_SCALE_CLASSNAMES: Partial<Record<ComponentDocSlug, string>> =
 	{
+		roundbit: "scale-[1.08]",
 		"legacy-alert-dialog": "scale-[1.55]",
 		"legacy-bar-button": "scale-[1.3]",
 		"legacy-clock": "scale-[1.45]",

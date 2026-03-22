@@ -25,6 +25,11 @@ import {
 	LegacySegmentedControl,
 	type LegacySegmentedControlItem,
 } from "~/components/legacy-segmented-control";
+import { RoundbitFrameXlExample } from "~/components/roundbit/examples/RoundbitFrameXlExample";
+import {
+	getRoundbitHubPath,
+	ROUNDBIT_DOCS_COPY,
+} from "~/components/roundbit-content";
 import { TextFlip } from "~/components/text-flip/text-flip";
 import { getLocalizedPathname } from "~/i18n/locale-paths";
 import type { SupportedLocale } from "~/i18n/types";
@@ -398,6 +403,16 @@ function CodeBlockPreview() {
 	);
 }
 
+function RoundbitPreview() {
+	return (
+		<PreviewStage className="min-h-[280px]">
+			<div className="w-full max-w-[420px] lg:ml-auto">
+				<RoundbitFrameXlExample />
+			</div>
+		</PreviewStage>
+	);
+}
+
 function ComponentSection({
 	description,
 	href,
@@ -451,6 +466,13 @@ function ComponentSection({
 function ComponentsChooserHub({ locale }: { locale: SupportedLocale }) {
 	const [isRegistryDialogOpen, setIsRegistryDialogOpen] = React.useState(false);
 	const showcases: ShowcaseItem[] = [
+		{
+			alias: "roundbit",
+			description: ROUNDBIT_DOCS_COPY.summary,
+			href: getLocalizedPathname(locale, getRoundbitHubPath()),
+			preview: <RoundbitPreview />,
+			title: ROUNDBIT_DOCS_COPY.title,
+		},
 		{
 			alias: "legacy-wheel-picker",
 			description:
