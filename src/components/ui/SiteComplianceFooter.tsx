@@ -6,12 +6,14 @@ import { SITE_LEGAL_PROFILE } from "~/lib/site-config";
 
 const FOOTER_META: Record<SupportedLocale, string[]> = {
 	en: [
+		SITE_LEGAL_PROFILE.fullNameRu,
 		SITE_LEGAL_PROFILE.status.en,
 		`TIN ${SITE_LEGAL_PROFILE.inn}`,
 		SITE_LEGAL_PROFILE.phone,
 		SITE_LEGAL_PROFILE.address.en,
 	],
 	ru: [
+		SITE_LEGAL_PROFILE.fullNameRu,
 		SITE_LEGAL_PROFILE.status.ru,
 		`ИНН ${SITE_LEGAL_PROFILE.inn}`,
 		SITE_LEGAL_PROFILE.phone,
