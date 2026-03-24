@@ -21,7 +21,7 @@ function LegalLink({
 	return (
 		<Link
 			href={getLocalizedPathname(locale, `/legal/${slug}`)}
-			className="rounded-full border border-white/10 px-3 py-2 text-[0.68rem] text-white/58 uppercase tracking-[0.24em] transition hover:border-[#ff1979]/40 hover:text-white"
+			className="rounded-full border border-white/10 px-3 py-2 text-[0.66rem] text-white/58 uppercase tracking-[0.2em] transition hover:border-[#ff1979]/40 hover:text-white"
 		>
 			{label}
 		</Link>
@@ -33,14 +33,16 @@ export function SiteComplianceFooter({ locale }: { locale: SupportedLocale }) {
 	const legalLinks = getLegalPageLinkItems(locale);
 
 	return (
-		<footer className="border-white/10 border-t bg-[#070709] pt-10 pb-32">
-			<div className="mx-auto max-w-6xl px-4 sm:px-6">
-				<div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-					<div className="max-w-2xl">
-						<p className="text-sm text-white/36 leading-7">{meta}</p>
+		<footer className="border-white/10 border-t bg-[#070709] pt-6 pb-24">
+			<div className="mx-auto max-w-2xl px-4">
+				<div className="flex flex-col gap-4 sm:gap-5 lg:flex-row lg:items-center lg:justify-between">
+					<div className="min-w-0 flex-1">
+						<p className="text-[0.78rem] text-white/34 leading-6 sm:text-sm">
+							{meta}
+						</p>
 					</div>
 
-					<div className="flex flex-wrap gap-2">
+					<div className="flex flex-wrap gap-2 lg:max-w-[55%] lg:justify-end">
 						{legalLinks.map((item) => (
 							<LegalLink
 								key={item.slug}
