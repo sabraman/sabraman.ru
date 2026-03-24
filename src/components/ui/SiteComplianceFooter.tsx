@@ -4,20 +4,9 @@ import type { SupportedLocale } from "~/i18n/types";
 import { getLegalPageLinkItems, type LegalPageSlug } from "~/lib/legal-pages";
 import { SITE_LEGAL_PROFILE } from "~/lib/site-config";
 
-type FooterCopy = {
-	eyebrow: string;
-	meta: string;
-};
-
-const FOOTER_COPY: Record<SupportedLocale, FooterCopy> = {
-	en: {
-		eyebrow: "Legal links",
-		meta: `${SITE_LEGAL_PROFILE.status.en} · TIN ${SITE_LEGAL_PROFILE.inn} · ${SITE_LEGAL_PROFILE.phone} · ${SITE_LEGAL_PROFILE.address.en}`,
-	},
-	ru: {
-		eyebrow: "Юридические ссылки",
-		meta: `${SITE_LEGAL_PROFILE.status.ru} · ИНН ${SITE_LEGAL_PROFILE.inn} · ${SITE_LEGAL_PROFILE.phone} · ${SITE_LEGAL_PROFILE.address.ru}`,
-	},
+const FOOTER_META: Record<SupportedLocale, string> = {
+	en: `${SITE_LEGAL_PROFILE.status.en} · TIN ${SITE_LEGAL_PROFILE.inn} · ${SITE_LEGAL_PROFILE.phone} · ${SITE_LEGAL_PROFILE.address.en}`,
+	ru: `${SITE_LEGAL_PROFILE.status.ru} · ИНН ${SITE_LEGAL_PROFILE.inn} · ${SITE_LEGAL_PROFILE.phone} · ${SITE_LEGAL_PROFILE.address.ru}`,
 };
 
 function LegalLink({
@@ -40,7 +29,7 @@ function LegalLink({
 }
 
 export function SiteComplianceFooter({ locale }: { locale: SupportedLocale }) {
-	const copy = FOOTER_COPY[locale];
+	const meta = FOOTER_META[locale];
 	const legalLinks = getLegalPageLinkItems(locale);
 
 	return (
@@ -48,10 +37,7 @@ export function SiteComplianceFooter({ locale }: { locale: SupportedLocale }) {
 			<div className="mx-auto max-w-6xl px-4 sm:px-6">
 				<div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
 					<div className="max-w-2xl">
-						<p className="text-[0.68rem] text-white/32 uppercase tracking-[0.34em]">
-							{copy.eyebrow}
-						</p>
-						<p className="mt-2 text-sm text-white/36 leading-7">{copy.meta}</p>
+						<p className="text-sm text-white/36 leading-7">{meta}</p>
 					</div>
 
 					<div className="flex flex-wrap gap-2">
