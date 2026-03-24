@@ -290,7 +290,6 @@ function ContactLink({
 
 export function SiteComplianceFooter({ locale }: { locale: SupportedLocale }) {
 	const copy = FOOTER_COPY[locale];
-	const year = new Date().getFullYear();
 
 	return (
 		<footer className="relative border-white/10 border-t bg-[linear-gradient(180deg,rgba(7,8,10,0.9),rgba(6,6,8,0.98))] pt-12 pb-32">
@@ -428,7 +427,7 @@ export function SiteComplianceFooter({ locale }: { locale: SupportedLocale }) {
 					</div>
 
 					<div className="border-white/10 border-t pt-6 text-white/32 text-xs uppercase tracking-[0.22em]">
-						© {year} Sabraman
+						© Sabraman
 					</div>
 				</div>
 			</div>
