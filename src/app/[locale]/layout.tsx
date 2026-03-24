@@ -133,6 +133,7 @@ export async function generateMetadata({
 			yandex: "yandex_9f4476abe564070b",
 		},
 		other: {
+			"lava-verify": "cc4c90d6db6570a8",
 			"mobile-web-app-capable": "yes",
 			"msapplication-TileColor": "#1a1a1a",
 		},
