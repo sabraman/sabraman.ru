@@ -25,6 +25,29 @@ export const SITE_SOCIAL_LINKS = {
 	x: "https://x.com/1sabraman",
 } as const;
 
+export const SITE_LEGAL_PROFILE = {
+	fullNameRu: "Юдин Данила Русланович",
+	fullNameEn: "Danila Ruslanovich Yudin",
+	status: {
+		ru: "Самозанятый",
+		en: "Self-employed",
+	},
+	inn: "780724792304",
+	email: "sabraman@ya.ru",
+	phone: "+7 996 785-90-26",
+	phoneHref: "tel:+79967859026",
+	telegram: "@sabraman",
+	telegramHref: SITE_SOCIAL_LINKS.telegram,
+	address: {
+		ru: "Санкт-Петербург, ул. Садовая, 14",
+		en: "14 Sadovaya St, Saint Petersburg, Russia",
+	},
+	baseRate: {
+		ru: "от 1 200 ₽/час",
+		en: "from 1,200 RUB/hour",
+	},
+} as const;
+
 export function toAbsoluteSiteUrl(path: string) {
 	return new URL(path, SITE_URL).toString();
 }

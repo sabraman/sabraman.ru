@@ -8,6 +8,7 @@ import { ClientRoot } from "~/components/ui/ClientRoot";
 import { FloatingDock } from "~/components/ui/FloatingDock";
 import { HeaderBrand } from "~/components/ui/HeaderBrand";
 import { LanguageSwitcher } from "~/components/ui/language-switcher";
+import { SiteComplianceFooter } from "~/components/ui/SiteComplianceFooter";
 import { SmoothMarquee } from "~/components/ui/SmoothMarquee";
 import { Toaster } from "~/components/ui/sonner";
 import { routing } from "~/i18n/routing";
@@ -280,6 +281,7 @@ export default async function RootLayout({
 					</div>
 					<SmoothMarquee locale={resolvedLocale} />
 					<main className="pb-24">{children}</main>
+					<SiteComplianceFooter locale={resolvedLocale} />
 					<FloatingDock locale={resolvedLocale} />
 					<Toaster />
 				</ClientRoot>
