@@ -4,9 +4,19 @@ import type { SupportedLocale } from "~/i18n/types";
 import { getLegalPageLinkItems, type LegalPageSlug } from "~/lib/legal-pages";
 import { SITE_LEGAL_PROFILE } from "~/lib/site-config";
 
-const FOOTER_META: Record<SupportedLocale, string> = {
-	en: `${SITE_LEGAL_PROFILE.status.en} · TIN ${SITE_LEGAL_PROFILE.inn} · ${SITE_LEGAL_PROFILE.phone} · ${SITE_LEGAL_PROFILE.address.en}`,
-	ru: `${SITE_LEGAL_PROFILE.status.ru} · ИНН ${SITE_LEGAL_PROFILE.inn} · ${SITE_LEGAL_PROFILE.phone} · ${SITE_LEGAL_PROFILE.address.ru}`,
+const FOOTER_META: Record<SupportedLocale, string[]> = {
+	en: [
+		SITE_LEGAL_PROFILE.status.en,
+		`TIN ${SITE_LEGAL_PROFILE.inn}`,
+		SITE_LEGAL_PROFILE.phone,
+		SITE_LEGAL_PROFILE.address.en,
+	],
+	ru: [
+		SITE_LEGAL_PROFILE.status.ru,
+		`ИНН ${SITE_LEGAL_PROFILE.inn}`,
+		SITE_LEGAL_PROFILE.phone,
+		SITE_LEGAL_PROFILE.address.ru,
+	],
 };
 
 function LegalLink({
@@ -37,9 +47,11 @@ export function SiteComplianceFooter({ locale }: { locale: SupportedLocale }) {
 			<div className="mx-auto max-w-2xl px-4">
 				<div className="flex flex-col gap-4 sm:gap-5 lg:flex-row lg:items-center lg:justify-between">
 					<div className="min-w-0 flex-1">
-						<p className="text-[0.78rem] text-white/34 leading-6 sm:text-sm">
-							{meta}
-						</p>
+						<div className="space-y-1 text-[0.78rem] text-white/34 leading-6 sm:text-sm">
+							{meta.map((line) => (
+								<p key={line}>{line}</p>
+							))}
+						</div>
 					</div>
 
 					<div className="flex flex-wrap gap-2 lg:max-w-[55%] lg:justify-end">
