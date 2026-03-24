@@ -47,15 +47,7 @@ export function SiteComplianceFooter({ locale }: { locale: SupportedLocale }) {
 	return (
 		<footer className="border-white/10 border-t bg-[#070709] pt-6 pb-24">
 			<div className="mx-auto max-w-2xl px-4">
-				<div className="flex flex-col gap-4 sm:gap-5 lg:flex-row lg:items-center lg:justify-between">
-					<div className="min-w-0 flex-1">
-						<div className="space-y-1 text-[0.78rem] text-white/34 leading-6 sm:text-sm">
-							{meta.map((line) => (
-								<p key={line}>{line}</p>
-							))}
-						</div>
-					</div>
-
+				<div className="flex flex-col gap-3 sm:gap-4 lg:flex-row lg:items-start lg:justify-between">
 					<div className="flex flex-wrap gap-2 lg:max-w-[55%] lg:justify-end">
 						{legalLinks.map((item) => (
 							<LegalLink
@@ -65,6 +57,14 @@ export function SiteComplianceFooter({ locale }: { locale: SupportedLocale }) {
 								slug={item.slug}
 							/>
 						))}
+					</div>
+
+					<div className="min-w-0 flex-1">
+						<div className="space-y-1 text-[0.78rem] text-white/34 leading-6 sm:text-sm">
+							{meta.map((line) => (
+								<p key={line}>{line}</p>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
