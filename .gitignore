@@ -68,5 +68,8 @@ tmp/
 .claude/
 CLAUDE.md
 
+# reference and tool configurations
+/.reference/
+/.codex-artifacts/
+/.playwright-mcp/
 
-.gitignore
