@@ -182,7 +182,7 @@ const COPY = {
 		noItems: "Nothing here yet.",
 		noRecentSites: "Start browsing and your recent pages will show up here.",
 		clearEdit: "Done",
-		openOnTablet: "Open on Denys's iPad 2",
+		openOnTablet: "Open on Danya's iPad 2",
 		openOnLaptop: "Open on MacBook Pro",
 		work: "Work",
 		contact: "Contact",
@@ -229,7 +229,7 @@ const COPY = {
 		noRecentSites:
 			"Начни открывать страницы, и здесь появится недавняя история.",
 		clearEdit: "Готово",
-		openOnTablet: "Открыто на iPad Denys",
+		openOnTablet: "Открыто на iPad Дани",
 		openOnLaptop: "Открыто на MacBook Pro",
 		work: "Кейсы",
 		contact: "Контакты",
