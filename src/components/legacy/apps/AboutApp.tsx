@@ -764,7 +764,7 @@ export default function AboutApp() {
 		window.open(
 			`mailto:?subject=${subject}&body=${body}`,
 			"_blank",
-			"noreferrer",
+			"noopener,noreferrer",
 		);
 	};
 

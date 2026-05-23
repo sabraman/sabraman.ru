@@ -183,7 +183,7 @@ export default function MailApp() {
 							key={`${message.from}-${message.subject}`}
 							href={message.href}
 							target={message.href.startsWith("http") ? "_blank" : undefined}
-							rel={message.href.startsWith("http") ? "noreferrer" : undefined}
+							rel={message.href.startsWith("http") ? "noopener noreferrer" : undefined}
 							className={rowClassName}
 						>
 							<div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center">

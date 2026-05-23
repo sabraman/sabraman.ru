@@ -253,7 +253,7 @@ export default function PhoneApp() {
 								key={action.label}
 								href={action.href}
 								download={action.download}
-								rel={action.download ? undefined : "noreferrer"}
+								rel={action.download ? undefined : "noopener noreferrer"}
 								target={action.download ? undefined : "_blank"}
 								className="rounded-[18px] bg-white px-3 py-4 text-center shadow-[0_8px_18px_rgba(90,108,138,0.12)]"
 							>
@@ -296,7 +296,7 @@ export default function PhoneApp() {
 								key={line.label}
 								href={line.href}
 								download={line.download}
-								rel={line.download ? undefined : "noreferrer"}
+								rel={line.download ? undefined : "noopener noreferrer"}
 								target={line.download ? undefined : "_blank"}
 								className={rowClassName}
 							>
