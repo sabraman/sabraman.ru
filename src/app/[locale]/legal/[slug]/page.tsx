@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LegalInfoPage } from "~/components/legal/LegalInfoPage";
+import { routing } from "~/i18n/routing";
 import { resolveSupportedLocale } from "~/i18n/types";
 import {
 	buildLegalPageMetadata,
@@ -9,10 +10,12 @@ import {
 } from "~/lib/legal-pages";
 
 export function generateStaticParams() {
-	return LEGAL_PAGE_SLUGS.flatMap((slug) => [
-		{ locale: "en", slug },
-		{ locale: "ru", slug },
-	]);
+	return routing.locales.flatMap((locale) =>
+		LEGAL_PAGE_SLUGS.map((slug) => ({
+			locale,
+			slug,
+		})),
+	);
 }
 
 export async function generateMetadata({
