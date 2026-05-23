@@ -188,7 +188,7 @@ export function getAllIndexableContentEntries() {
 }
 
 export function getLlmsPreferredContentEntries() {
-	return getAllIndexableContentEntries().filter((entry) => entry.includeInLlms);
+	return getStaticIndexableContentEntries().filter((entry) => entry.includeInLlms);
 }
 
 export const CONTENT_REGISTRY_LOCALES = SUPPORTED_LOCALES;
