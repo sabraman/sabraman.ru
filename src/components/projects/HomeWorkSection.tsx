@@ -53,7 +53,7 @@ function FeaturedProjectCard({
 				duration: 0.75,
 				ease: [0.22, 1, 0.36, 1],
 			}}
-			viewport={{ once: true, amount: 0.25 }}
+			viewport={{ once: true, amount: 0.05 }}
 			className={cn(
 				"group relative overflow-hidden rounded-[2rem] border border-white/10",
 				visual?.surfaceClassName,
@@ -124,15 +124,7 @@ function ArchiveProjectRow({
 	const href = getCaseStudyPath(locale, project.slug);
 
 	return (
-		<motion.div
-			initial={{ opacity: 0, y: 28 }}
-			whileInView={{ opacity: 1, y: 0 }}
-			transition={{
-				duration: 0.55,
-				ease: [0.22, 1, 0.36, 1],
-			}}
-			viewport={{ once: true, amount: 0.15 }}
-		>
+		<div>
 			<Link
 				href={href}
 				className="group grid gap-4 border-white/10 border-t px-5 py-5 transition-colors duration-300 hover:bg-white/[0.035] md:grid-cols-[minmax(0,1fr)_auto] md:items-start"
@@ -166,7 +158,7 @@ function ArchiveProjectRow({
 					<ArrowUpRight className="h-4 w-4 flex-shrink-0 text-white/70 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
 				</div>
 			</Link>
-		</motion.div>
+		</div>
 	);
 }
 
@@ -220,7 +212,7 @@ export function HomeWorkSection({
 					initial={{ opacity: 0, y: 40 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-					viewport={{ once: true, amount: 0.2 }}
+					viewport={{ once: true, amount: 0.05 }}
 					className="mt-5"
 				>
 					<div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] backdrop-blur-sm">
