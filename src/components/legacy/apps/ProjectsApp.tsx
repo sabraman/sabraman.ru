@@ -86,7 +86,7 @@ export default function ProjectsApp() {
 						<a
 							href={getCaseStudyPath(locale, project.slug)}
 							target="_blank"
-							rel="noreferrer"
+							rel="noopener noreferrer"
 							key={project.slug}
 							className={`group relative min-w-[228px] overflow-hidden rounded-[24px] bg-gradient-to-br ${projectGradient(index)} p-4 text-white shadow-[0_18px_40px_rgba(67,84,122,0.18)]`}
 						>
@@ -141,7 +141,7 @@ export default function ProjectsApp() {
 						<a
 							href={getCaseStudyPath(locale, project.slug)}
 							target="_blank"
-							rel="noreferrer"
+							rel="noopener noreferrer"
 							key={project.slug}
 							className="group overflow-hidden rounded-[22px] bg-white shadow-[0_10px_24px_rgba(72,86,121,0.12)]"
 						>

@@ -180,7 +180,7 @@ export function ProjectCatalogSection({ locale }: { locale: SupportedLocale }) {
 															<Link
 																href={link.url}
 																target="_blank"
-																rel="noreferrer"
+																rel="noopener noreferrer"
 																className="gap-1.5"
 															>
 																{link.label[locale]}

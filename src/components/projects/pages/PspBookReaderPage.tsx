@@ -523,7 +523,7 @@ export function PspBookReaderPage({
 								key={doc.slug}
 								href={`https://zread.ai/sabraman/psp-book-reader/${doc.slug}`}
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 								className="group rounded-2xl border border-primary/10 bg-primary/[0.03] px-4 py-3 transition-colors hover:border-primary/30"
 							>
 								<div className="flex items-center justify-between gap-2">

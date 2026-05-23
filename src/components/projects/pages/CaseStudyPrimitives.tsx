@@ -215,7 +215,7 @@ export function ExternalLinks({
 							<Link
 								href={link.url}
 								target="_blank"
-								rel="noreferrer"
+								rel="noopener noreferrer"
 								className="gap-1.5"
 							>
 								{text(link.label, locale)}
