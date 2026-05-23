@@ -17,6 +17,7 @@ import {
 } from "~/components/legacy/docs/component-documents";
 import { LegacyComponentPageToolbar } from "~/components/legacy/LegacyComponentPageToolbar";
 import { LegacyUiLocaleProvider } from "~/components/legacy/legacy-locale-context";
+import { routing } from "~/i18n/routing";
 import { resolveSupportedLocale } from "~/i18n/types";
 import {
 	getComponentDocJsonLd,
@@ -25,9 +26,12 @@ import {
 import { JsonLd } from "~/lib/seo/json-ld";
 
 export function generateStaticParams() {
-	return getAllComponentDocs().map((doc) => ({
-		slug: doc.slug,
-	}));
+	return routing.locales.flatMap((locale) =>
+		getAllComponentDocs().map((doc) => ({
+			locale,
+			slug: doc.slug,
+		})),
+	);
 }
 
 export async function generateMetadata({

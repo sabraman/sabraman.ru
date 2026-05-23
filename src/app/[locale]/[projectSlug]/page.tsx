@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PROJECT_PAGE_COMPONENTS } from "~/components/projects/pages";
+import { routing } from "~/i18n/routing";
 import { resolveSupportedLocale } from "~/i18n/types";
 import {
 	getGenericCaseStudySlugs,
@@ -16,7 +17,12 @@ import { JsonLd } from "~/lib/seo/json-ld";
 export async function generateStaticParams() {
 	const projectSlugs = await getGenericCaseStudySlugs();
 
-	return projectSlugs.map((projectSlug) => ({ projectSlug }));
+	return routing.locales.flatMap((locale) =>
+		projectSlugs.map((projectSlug) => ({
+			locale,
+			projectSlug,
+		})),
+	);
 }
 
 export async function generateMetadata({

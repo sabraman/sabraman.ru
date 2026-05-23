@@ -5,6 +5,7 @@ import {
 	getComponentDocBySlug,
 } from "~/components/legacy/docs/component-documents";
 import { ComponentDocOgPreview } from "~/components/legacy/docs/component-og-preview";
+import { routing } from "~/i18n/routing";
 import { resolveSupportedLocale } from "~/i18n/types";
 import { buildNoIndexMetadata } from "~/lib/seo/metadata";
 
@@ -27,9 +28,12 @@ export async function generateMetadata({
 }
 
 export function generateStaticParams() {
-	return getAllComponentDocs().map((doc) => ({
-		slug: doc.slug,
-	}));
+	return routing.locales.flatMap((locale) =>
+		getAllComponentDocs().map((doc) => ({
+			locale,
+			slug: doc.slug,
+		})),
+	);
 }
 
 export default async function ComponentDocOgPreviewPage({
