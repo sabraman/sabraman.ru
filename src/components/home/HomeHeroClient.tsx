@@ -430,7 +430,7 @@ export function HomeHeroClient({ copy }: HomeHeroClientProps) {
 
 	return (
 		<section
-			className="relative overflow-hidden pt-14 pb-14 md:pt-16 md:pb-20"
+			className="relative overflow-hidden pt-14 pb-6 md:pt-16 md:pb-8"
 			id="hero"
 		>
 			<div className="relative mx-auto max-w-2xl px-4">

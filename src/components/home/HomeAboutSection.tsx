@@ -15,7 +15,7 @@ const SOCIAL_ICONS = {
 
 export function HomeAboutSection({ copy }: HomeAboutSectionProps) {
 	return (
-		<section className="relative pt-24" id="about">
+		<section className="relative pt-10 md:pt-14" id="about">
 			<div className="mx-auto max-w-2xl px-4">
 				<div className="mb-8 overflow-hidden">
 					<h2
