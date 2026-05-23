@@ -373,6 +373,7 @@
 					"7": "Обеспечили стабильность enterprise-уровня с помощью Jest Unit Testing и Error Boundaries."
 				},
 				"technologies": "Технологии",
+				"technologiesSubtitle": "Строгая типизация, готовность к edge-средам и четкое разделение ответственности.",
 				"techStack": {
 					"0": "Next.js 15 (App Router)",
 					"1": "React 19",

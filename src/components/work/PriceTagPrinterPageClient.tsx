@@ -590,8 +590,7 @@ export default function PriceTagPrinterPageClient({
 						<div className="max-w-md">
 							<h3 className="mb-4 font-bold text-2xl">{copy.technologies}</h3>
 							<p className="text-zinc-500 dark:text-zinc-400">
-								Strictly typed, edge-ready, and highly isolated
-								responsibilities.
+								{copy.technologiesSubtitle}
 							</p>
 						</div>
 

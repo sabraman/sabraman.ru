@@ -323,9 +323,7 @@ export default function VaparshopPage({
 										<div>
 											<h4 className="font-semibold text-xl">Telegram Bots</h4>
 											<p className="text-muted-foreground">
-												Automated data conversion and reporting between WhatsApp
-												and Telegram, reducing manual work and improving
-												accuracy.
+												{copy.projects.vaparWaToTgBot.description}
 											</p>
 										</div>
 									</li>
@@ -339,8 +337,7 @@ export default function VaparshopPage({
 												Web Applications
 											</h4>
 											<p className="text-muted-foreground">
-												Created a Price Tag Generator to automate the creation
-												of standardized price displays across all stores.
+												{copy.projects.priceTagGenerator.description}
 											</p>
 										</div>
 									</li>
@@ -354,9 +351,7 @@ export default function VaparshopPage({
 												Telegram Mini App
 											</h4>
 											<p className="text-muted-foreground">
-												Developed a comprehensive application integrating with
-												GetMeBack API for loyalty card management and advanced
-												reporting.
+												{copy.projects.telegramMiniApp.description}
 											</p>
 										</div>
 									</li>
