@@ -10,6 +10,7 @@ import {
 	Play,
 	Radio,
 } from "lucide-react";
+import Link from "next/link";
 import { getCaseStudyPath, PROJECTS } from "~/data/projects";
 import { useLegacyUiLocale } from "../legacy-locale-context";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
@@ -186,7 +187,7 @@ export default function MusicApp() {
 								: "flex items-center justify-between gap-3 border-b border-white/8 px-4 py-4";
 
 						return (
-							<a
+							<Link
 								key={project.slug}
 								href={getCaseStudyPath(locale, project.slug)}
 								className={rowClassName}
@@ -214,7 +215,7 @@ export default function MusicApp() {
 									</div>
 								</div>
 								<ArrowUpRight className="h-4 w-4 shrink-0 text-white/45" />
-							</a>
+							</Link>
 						);
 					})}
 				</div>
