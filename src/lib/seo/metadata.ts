@@ -34,13 +34,10 @@ function getOpenGraphLocale(locale: SupportedLocale) {
 
 export function buildLocalizedAlternates(
 	pathEn: string,
-	locale: SupportedLocale = "en",
+	locale: SupportedLocale = DEFAULT_LOCALE,
 ): Metadata["alternates"] {
 	const languages = Object.fromEntries(
-		SUPPORTED_LOCALES.map((l) => [
-			l,
-			getLocalizedPathname(l, pathEn),
-		]),
+		SUPPORTED_LOCALES.map((l) => [l, getLocalizedPathname(l, pathEn)]),
 	);
 
 	return {
