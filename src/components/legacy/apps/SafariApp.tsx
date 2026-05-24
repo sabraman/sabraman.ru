@@ -193,6 +193,9 @@ const COPY = {
 		priceTagPrinter: "Price Tag Printer",
 		archTaplink: "ARCH Taplink",
 		floristQuiz: "Florist Quiz",
+		address: "Address",
+		refresh: "Refresh",
+		search: "Search",
 	},
 	ru: {
 		searchPlaceholder: "Поиск",
@@ -240,6 +243,9 @@ const COPY = {
 		priceTagPrinter: "Price Tag Printer",
 		archTaplink: "ARCH Taplink",
 		floristQuiz: "Florist Quiz",
+		address: "Адрес",
+		refresh: "Обновить",
+		search: "Поиск",
 	},
 } as const;
 
@@ -2012,12 +2018,12 @@ export default function SafariApp() {
 							style={{ fontFamily: LEGACY_IOS_FONT_FAMILY }}
 							spellCheck={false}
 							autoCapitalize="off"
-							aria-label="Address"
+							aria-label={copy.address}
 						/>
 						<button
 							type="button"
 							onClick={handleRefresh}
-							aria-label="Refresh"
+							aria-label={copy.refresh}
 							disabled={currentIsInternal || currentEntry === null}
 							className={`flex h-5 w-5 items-center justify-center text-[#5a6574] ${
 								currentIsInternal || currentEntry === null ? "opacity-35" : ""
@@ -2040,7 +2046,7 @@ export default function SafariApp() {
 							style={{ fontFamily: LEGACY_IOS_FONT_FAMILY }}
 							spellCheck={false}
 							autoCapitalize="off"
-							aria-label="Search"
+							aria-label={copy.search}
 						/>
 					</form>
 				</div>
