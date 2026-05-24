@@ -1,5 +1,4 @@
 import { Github, Instagram, Send, X } from "lucide-react";
-import Link from "next/link";
 import type { HomeAboutCopy } from "./home-copy";
 
 type HomeAboutSectionProps = {
@@ -39,14 +38,16 @@ export function HomeAboutSection({ copy }: HomeAboutSectionProps) {
 								const Icon = SOCIAL_ICONS[socialLink.id];
 
 								return (
-									<Link
+									<a
 										key={socialLink.id}
 										href={socialLink.href}
+										target="_blank"
+										rel="noopener noreferrer"
 										className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[0.7rem] text-white/70 uppercase tracking-[0.18em] transition-colors duration-300 hover:border-white/18 hover:bg-white/[0.06] hover:text-white"
 									>
 										<Icon className="h-3.5 w-3.5 flex-shrink-0" />
 										<span>{socialLink.label}</span>
-									</Link>
+									</a>
 								);
 							})}
 						</div>
