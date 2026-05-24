@@ -22,6 +22,24 @@ import {
 	LegacyAlertDialogHeader,
 	LegacyAlertDialogTitle,
 } from "./LegacyAlertDialog";
+import { useLegacyUiLocale } from "./legacy-locale-context";
+
+const COPY = {
+	en: {
+		title: "Add Registry",
+		descriptionPre: "Run this command to add ",
+		descriptionPost: " to your project.",
+		done: "Done",
+		copyAria: "Copy registry add command",
+	},
+	ru: {
+		title: "Добавить реестр",
+		descriptionPre: "Запустите эту команду, чтобы добавить ",
+		descriptionPost: " в ваш проект.",
+		done: "Готово",
+		copyAria: "Скопировать команду добавления реестра",
+	},
+} as const;
 
 const PACKAGE_MANAGERS = ["bun", "npm", "pnpm", "yarn"] as const;
 const COPY_STATE_RESET_MS = 1800;
@@ -56,6 +74,8 @@ export function LegacyRegistryAddDialog({
 	onOpenChange: (open: boolean) => void;
 	open: boolean;
 }) {
+	const locale = useLegacyUiLocale();
+	const copy = COPY[locale];
 	const [packageManager, setPackageManager] = usePreferredPackageManager("bun");
 	const [copyState, setCopyState] = React.useState<CopyState>("idle");
 
@@ -91,11 +111,12 @@ export function LegacyRegistryAddDialog({
 			<LegacyAlertDialogContent className="w-[min(92vw,34rem)] sm:w-[min(88vw,35rem)]">
 				<LegacyAlertDialogHeader className="items-center gap-2 text-center">
 					<LegacyAlertDialogTitle className="text-[22px] sm:text-[24px]">
-						Add Registry
+						{copy.title}
 					</LegacyAlertDialogTitle>
 					<LegacyAlertDialogDescription className="max-w-[28rem] text-center text-[15px] leading-[21px] sm:text-[16px]">
-						Run this command to add <span className="font-bold">@sabraman</span>{" "}
-						to your project.
+						{copy.descriptionPre}
+						<span className="font-bold">@sabraman</span>
+						{copy.descriptionPost}
 					</LegacyAlertDialogDescription>
 				</LegacyAlertDialogHeader>
 
@@ -114,7 +135,7 @@ export function LegacyRegistryAddDialog({
 									/>
 								</div>
 								<LegacyBarButton
-									aria-label="Copy registry add command"
+									aria-label={copy.copyAria}
 									className="shrink-0"
 									icon={
 										copyState === "done" ? (
@@ -145,7 +166,7 @@ export function LegacyRegistryAddDialog({
 							className="w-full min-w-0"
 							variant="primary"
 						>
-							Done
+							{copy.done}
 						</LegacyAlertDialogButton>
 					</LegacyAlertDialogClose>
 				</LegacyAlertDialogFooter>
