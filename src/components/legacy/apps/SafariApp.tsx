@@ -76,7 +76,10 @@ type FavoriteSite = {
 	id: string;
 	title: string;
 	url: string;
-	description: string;
+	descriptionKey:
+		| "favoriteShadcnDesc"
+		| "favoriteCodropsDesc"
+		| "favoriteChanhdaiDesc";
 	accentFrom: string;
 	accentTo: string;
 	monogram: string;
@@ -196,6 +199,16 @@ const COPY = {
 		address: "Address",
 		refresh: "Refresh",
 		search: "Search",
+		back: "Back",
+		forward: "Forward",
+		share: "Share",
+		favoriteShadcnDesc: "Patterns, docs, and components.",
+		favoriteCodropsDesc: "Frontend experiments and references.",
+		favoriteChanhdaiDesc: "Editorial web inspiration.",
+		historyGithubDesc: "Repositories, code, and recent pushes.",
+		historySmbroDesc: "Store platform and operational surface.",
+		historyArchDesc: "Store landing and link hub.",
+		historyFloristDesc: "Mobile-first learning quiz and PWA.",
 	},
 	ru: {
 		searchPlaceholder: "Поиск",
@@ -246,6 +259,16 @@ const COPY = {
 		address: "Адрес",
 		refresh: "Обновить",
 		search: "Поиск",
+		back: "Назад",
+		forward: "Вперед",
+		share: "Поделиться",
+		favoriteShadcnDesc: "Шаблоны, документация и компоненты.",
+		favoriteCodropsDesc: "Фронтенд-эксперименты и справочники.",
+		favoriteChanhdaiDesc: "Вдохновение веб-дизайном.",
+		historyGithubDesc: "Репозитории, код и последние коммиты.",
+		historySmbroDesc: "Платформа магазина и панель управления.",
+		historyArchDesc: "Лендинг магазина и хаб ссылок.",
+		historyFloristDesc: "Обучающий мобильный квиз и PWA.",
 	},
 } as const;
 
@@ -254,7 +277,7 @@ const FAVORITE_SITES: FavoriteSite[] = [
 		id: "favorite-shadcn",
 		title: "shadcn/ui",
 		url: "https://ui.shadcn.com",
-		description: "Patterns, docs, and components.",
+		descriptionKey: "favoriteShadcnDesc",
 		accentFrom: "#d6d9df",
 		accentTo: "#717b89",
 		monogram: "UI",
@@ -263,7 +286,7 @@ const FAVORITE_SITES: FavoriteSite[] = [
 		id: "favorite-codrops",
 		title: "Codrops",
 		url: "https://tympanus.net/codrops/",
-		description: "Frontend experiments and references.",
+		descriptionKey: "favoriteCodropsDesc",
 		accentFrom: "#f0b572",
 		accentTo: "#ab5b1a",
 		monogram: "C",
@@ -272,7 +295,7 @@ const FAVORITE_SITES: FavoriteSite[] = [
 		id: "favorite-chanhdai",
 		title: "chanhdai.com",
 		url: "https://chanhdai.com/",
-		description: "Editorial web inspiration.",
+		descriptionKey: "favoriteChanhdaiDesc",
 		accentFrom: "#ed9ea0",
 		accentTo: "#9d334a",
 		monogram: "CD",
@@ -1222,7 +1245,12 @@ function FavoritesStartPage({
 						key={site.id}
 						onClick={() =>
 							onOpenEntry(
-								makeEntry(site.id, site.title, site.url, site.description),
+								makeEntry(
+									site.id,
+									site.title,
+									site.url,
+									copy[site.descriptionKey],
+								),
 							)
 						}
 						className="relative h-[108px] overflow-hidden rounded-[17px] border border-white/75 text-left shadow-[0_10px_16px_rgba(51,65,85,0.16)]"
@@ -1248,7 +1276,7 @@ function FavoritesStartPage({
 								className="mt-[2px] line-clamp-2 text-[11px] text-white/82 leading-[13px]"
 								style={{ fontFamily: LEGACY_IOS_FONT_FAMILY }}
 							>
-								{site.description}
+								{copy[site.descriptionKey]}
 							</p>
 						</div>
 					</button>
@@ -1412,9 +1440,9 @@ export default function SafariApp() {
 	const [activeTabId, setActiveTabId] = useState(initialTabsRef.current[0]?.id);
 	const [addressDraft, setAddressDraft] = useState("");
 	const [searchDraft, setSearchDraft] = useState("");
-	const [bookmarkEntries, setBookmarkEntries] = useState<BrowserEntry[]>(
+	const [bookmarkEntries, setBookmarkEntries] = useState<BrowserEntry[]>(() =>
 		FAVORITE_SITES.map((site) =>
-			makeEntry(site.id, site.title, site.url, site.description),
+			makeEntry(site.id, site.title, site.url, copy[site.descriptionKey]),
 		),
 	);
 	const [readingListEntries, setReadingListEntries] = useState<BrowserEntry[]>([
@@ -1437,30 +1465,30 @@ export default function SafariApp() {
 			destinations.floristQuiz.description,
 		),
 	]);
-	const [historyEntries, setHistoryEntries] = useState<BrowserEntry[]>([
+	const [historyEntries, setHistoryEntries] = useState<BrowserEntry[]>(() => [
 		makeEntry(
 			"history-github",
 			"GitHub / sabraman",
 			"https://github.com/sabraman",
-			"Repositories, code, and recent pushes.",
+			copy.historyGithubDesc,
 		),
 		makeEntry(
 			"history-smbro",
 			"smbro.ru",
 			"https://smbro.ru",
-			"Store platform and operational surface.",
+			copy.historySmbroDesc,
 		),
 		makeEntry(
 			"history-arch",
 			"archsmoke.ru",
 			"https://www.archsmoke.ru",
-			"Store landing and link hub.",
+			copy.historyArchDesc,
 		),
 		makeEntry(
 			"history-florist",
 			"Florist Quiz",
 			"https://florist-quiz.vercel.app",
-			"Mobile-first learning quiz and PWA.",
+			copy.historyFloristDesc,
 		),
 	]);
 	const [shareSheetOpen, setShareSheetOpen] = useState(false);
@@ -2093,21 +2121,21 @@ export default function SafariApp() {
 					}}
 				>
 					<ToolbarButton
-						label="Back"
+						label={copy.back}
 						onClick={handleBack}
 						disabled={!currentCanGoBack}
 					>
 						<BackGlyph />
 					</ToolbarButton>
 					<ToolbarButton
-						label="Forward"
+						label={copy.forward}
 						onClick={handleForward}
 						disabled={!currentCanGoForward}
 					>
 						<ForwardGlyph />
 					</ToolbarButton>
 					<ToolbarButton
-						label="Share"
+						label={copy.share}
 						onClick={() => setShareSheetOpen(true)}
 						disabled={currentEntry === null || currentIsInternal}
 					>

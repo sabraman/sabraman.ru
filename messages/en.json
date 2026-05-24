@@ -116,6 +116,23 @@
 			"subtitle": "Designer & Developer",
 			"period": "June 2024 – March 2025",
 			"description": "Led design and development initiatives for a growing vape retail company in Saint Petersburg.",
+			"badge": "CASE STUDY",
+			"heroTags": {
+				"telegramBots": "Telegram Bots",
+				"webApps": "Web Applications",
+				"automation": "Automation",
+				"uiuxDesign": "UI/UX Design"
+			},
+			"overviewHeading": "PROJECT OVERVIEW",
+			"timelineHeading": "TIMELINE",
+			"roleHeading": "ROLE",
+			"deliverablesHeading": "DELIVERABLES",
+			"deliverables": {
+				"telegramBots": "Telegram Bots",
+				"webApps": "Web Applications",
+				"telegramMiniApp": "Telegram Mini App",
+				"customApi": "Custom API Integrations"
+			},
 			"challenge": "The Challenge",
 			"challengeText": "VAPARSHOP needed to modernize their operations and improve efficiency across multiple business processes while maintaining their unique brand identity.",
 			"solution": "The Solution",
@@ -238,6 +255,8 @@
 			},
 			"page": {
 				"badge": "BRAND CASE STUDY",
+				"processBadge": "PROCESS",
+				"resultsBadge": "RESULTS",
 				"heroDescription": "Creating a bold and distinctive brand identity for a contemporary retail chain",
 				"heroSkills": {
 					"branding": "Branding",

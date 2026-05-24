@@ -196,7 +196,7 @@ export default function VaparshopPage({
 							variant="secondary"
 							className="mb-6 rounded-full px-4 py-1.5 text-sm"
 						>
-							CASE STUDY
+							{copy.badge}
 						</Badge>
 
 						<h1
@@ -215,16 +215,16 @@ export default function VaparshopPage({
 
 						<div className="flex flex-wrap justify-center gap-4 md:gap-6">
 							<Badge className="bg-accent px-3 py-1.5 text-accent-foreground text-base">
-								Telegram Bots
+								{copy.heroTags.telegramBots}
 							</Badge>
 							<Badge className="bg-primary/20 px-3 py-1.5 text-base text-primary">
-								Web Applications
+								{copy.heroTags.webApps}
 							</Badge>
 							<Badge className="bg-primary/20 px-3 py-1.5 text-base text-primary">
-								Automation
+								{copy.heroTags.automation}
 							</Badge>
 							<Badge className="bg-primary/20 px-3 py-1.5 text-base text-primary">
-								UI/UX Design
+								{copy.heroTags.uiuxDesign}
 							</Badge>
 						</div>
 					</motion.div>
@@ -249,44 +249,44 @@ export default function VaparshopPage({
 									fontVariationSettings: `'wght' 800, 'wdth' 900`,
 								}}
 							>
-								PROJECT OVERVIEW
+								{copy.overviewHeading}
 							</h2>
 
 							<div className="space-y-8">
 								<div>
 									<h3 className="mb-2 font-medium text-muted-foreground text-xl">
-										TIMELINE
+										{copy.timelineHeading}
 									</h3>
 									<p className="text-2xl">{copy.period}</p>
 								</div>
 
 								<div>
 									<h3 className="mb-2 font-medium text-muted-foreground text-xl">
-										ROLE
+										{copy.roleHeading}
 									</h3>
 									<p className="text-2xl">{copy.subtitle}</p>
 								</div>
 
 								<div>
 									<h3 className="mb-2 font-medium text-muted-foreground text-xl">
-										DELIVERABLES
+										{copy.deliverablesHeading}
 									</h3>
 									<ul className="space-y-2 text-xl">
 										<li className="flex items-center gap-2">
 											<MessageSquare className="h-5 w-5 text-accent" />
-											<span>Telegram Bots</span>
+											<span>{copy.deliverables.telegramBots}</span>
 										</li>
 										<li className="flex items-center gap-2">
 											<LayoutGrid className="h-5 w-5 text-accent" />
-											<span>Web Applications</span>
+											<span>{copy.deliverables.webApps}</span>
 										</li>
 										<li className="flex items-center gap-2">
 											<Smartphone className="h-5 w-5 text-accent" />
-											<span>Telegram Mini App</span>
+											<span>{copy.deliverables.telegramMiniApp}</span>
 										</li>
 										<li className="flex items-center gap-2">
 											<Braces className="h-5 w-5 text-accent" />
-											<span>Custom API Integrations</span>
+											<span>{copy.deliverables.customApi}</span>
 										</li>
 									</ul>
 								</div>
@@ -321,7 +321,9 @@ export default function VaparshopPage({
 											<MessageSquare className="h-5 w-5" />
 										</div>
 										<div>
-											<h4 className="font-semibold text-xl">Telegram Bots</h4>
+											<h4 className="font-semibold text-xl">
+												{copy.deliverables.telegramBots}
+											</h4>
 											<p className="text-muted-foreground">
 												{copy.projects.vaparWaToTgBot.description}
 											</p>
@@ -334,7 +336,7 @@ export default function VaparshopPage({
 										</div>
 										<div>
 											<h4 className="font-semibold text-xl">
-												Web Applications
+												{copy.deliverables.webApps}
 											</h4>
 											<p className="text-muted-foreground">
 												{copy.projects.priceTagGenerator.description}
@@ -348,7 +350,7 @@ export default function VaparshopPage({
 										</div>
 										<div>
 											<h4 className="font-semibold text-xl">
-												Telegram Mini App
+												{copy.deliverables.telegramMiniApp}
 											</h4>
 											<p className="text-muted-foreground">
 												{copy.projects.telegramMiniApp.description}
