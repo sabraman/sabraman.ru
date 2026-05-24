@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import IOSContainer from "~/components/legacy/IOSContainer";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
 import { resolveSupportedLocale } from "~/i18n/types";
 import { JsonLd } from "~/lib/seo/json-ld";
 import { buildIndexableMetadata } from "~/lib/seo/metadata";
@@ -36,7 +37,7 @@ export default async function IphonePage({
 }) {
 	const { locale } = await params;
 	const resolvedLocale = resolveSupportedLocale(locale);
-	const path = resolvedLocale === "ru" ? "/ru/iphone" : "/iphone";
+	const path = getLocalizedPathname(resolvedLocale, "/iphone");
 	const title =
 		resolvedLocale === "ru"
 			? "iPhone Portfolio"
