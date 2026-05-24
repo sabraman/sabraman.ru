@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import WorkPageClient from "~/components/work/WorkPageClient";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
 import { resolveSupportedLocale } from "~/i18n/types";
 import {
 	getCaseStudyIndexableContentEntries,
@@ -43,12 +44,11 @@ export default async function WorkPage({
 	const jsonLd = createCollectionPageJsonLd({
 		items: caseStudies.map((caseStudy) => ({
 			name: caseStudy.title[resolvedLocale],
-			path:
-				resolvedLocale === "ru" ? `/ru${caseStudy.pathEn}` : caseStudy.pathEn,
+			path: getLocalizedPathname(resolvedLocale, caseStudy.pathEn),
 		})),
 		locale: resolvedLocale,
 		name: entry?.title[resolvedLocale] ?? "Case studies",
-		path: resolvedLocale === "ru" ? "/ru/work" : "/work",
+		path: getLocalizedPathname(resolvedLocale, "/work"),
 	});
 
 	return (

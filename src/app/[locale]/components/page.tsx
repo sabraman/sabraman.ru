@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ComponentsHub } from "~/components/legacy/ComponentsHub";
 import { getLocale } from "~/components/legacy/component-pages-content";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
 import { resolveSupportedLocale } from "~/i18n/types";
 import {
 	getComponentDocIndexableContentEntries,
@@ -41,7 +42,7 @@ export default async function ComponentsPage({
 	const resolvedLocale = resolveSupportedLocale(locale);
 	const entry = getStaticIndexableContentEntry("components");
 	const docs = getComponentDocIndexableContentEntries();
-	const path = resolvedLocale === "ru" ? "/ru/components" : "/components";
+	const path = getLocalizedPathname(resolvedLocale, "/components");
 
 	return (
 		<>
@@ -49,7 +50,7 @@ export default async function ComponentsPage({
 				data={createCollectionPageJsonLd({
 					items: docs.map((doc) => ({
 						name: doc.title[resolvedLocale],
-						path: resolvedLocale === "ru" ? `/ru${doc.pathEn}` : doc.pathEn,
+						path: getLocalizedPathname(resolvedLocale, doc.pathEn),
 					})),
 					locale: resolvedLocale,
 					name: entry?.title[resolvedLocale] ?? "Legacy components collection",
