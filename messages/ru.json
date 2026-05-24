@@ -45,7 +45,14 @@
 			"description": "Полный брендинг и интерактивный сайт для вейп-бренда",
 			"viewProject": "Смотреть проект"
 		},
-		"moreComingSoon": "Скоро будут еще"
+		"moreComingSoon": "Скоро будут еще",
+		"openHub": "Открыть хаб кейсов",
+		"featureLabel": "Ключевой кейс",
+		"allCaseStudies": "Все кейсы",
+		"caseStudy": "Кейс",
+		"private": "Приватный",
+		"public": "Публичный",
+		"links": "ссылки"
 	},
 	"experience": {
 		"title": "ОПЫТ",

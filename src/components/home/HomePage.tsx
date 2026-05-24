@@ -118,13 +118,13 @@ export default async function HomePage({ locale }: HomePageProps) {
 					title: projects.title,
 					titleSecond: projects.titleSecond,
 					description: projects.description,
-					openHub: locale === "ru" ? "Открыть хаб кейсов" : "Open Work Hub",
-					featureLabel: locale === "ru" ? "Ключевой кейс" : "Featured case",
-					allCaseStudies: locale === "ru" ? "Все кейсы" : "All case studies",
-					caseStudy: locale === "ru" ? "Кейс" : "Case Study",
-					private: locale === "ru" ? "Приватный" : "Private",
-					public: locale === "ru" ? "Публичный" : "Public",
-					links: locale === "ru" ? "ссылки" : "links",
+					openHub: projects.openHub,
+					featureLabel: projects.featureLabel,
+					allCaseStudies: projects.allCaseStudies,
+					caseStudy: projects.caseStudy,
+					private: projects.private,
+					public: projects.public,
+					links: projects.links,
 				}}
 			/>
 
