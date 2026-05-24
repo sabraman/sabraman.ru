@@ -17,6 +17,7 @@ const COPY = {
 		open: "Open on web",
 		statusLive: "Live",
 		statusBuild: "In build",
+		appCategory: "Photos",
 	},
 	ru: {
 		header: "Фотопленка",
@@ -25,6 +26,7 @@ const COPY = {
 		open: "Открыть в вебе",
 		statusLive: "Live",
 		statusBuild: "В работе",
+		appCategory: "Фото",
 	},
 } as const;
 
@@ -55,7 +57,7 @@ export default function ProjectsApp() {
 							className="text-[#7b8797] text-[11px] uppercase tracking-[0.22em]"
 							style={{ fontFamily: LEGACY_IOS_FONT_FAMILY, fontWeight: 700 }}
 						>
-							Photos
+							{copy.appCategory}
 						</p>
 						<h2
 							className="mt-1 text-[#111827] text-[24px]"
