@@ -276,10 +276,12 @@ const ALL_HOME_SCREEN_PAGES = [
 
 function PageController({
 	activePage,
+	locale,
 	pageCount,
 	onSelectPage,
 }: {
 	activePage: number;
+	locale: "en" | "ru";
 	pageCount: number;
 	onSelectPage: (pageIndex: number) => void;
 }) {
@@ -301,7 +303,9 @@ function PageController({
 					key={`page-dot-${index + 1}`}
 					onClick={() => onSelectPage(index)}
 					className="relative flex h-[22px] w-[22px] touch-manipulation items-center justify-center transition-transform active:scale-[0.9]"
-					aria-label={`Home page ${index + 1}`}
+					aria-label={
+						locale === "ru" ? `Экран ${index + 1}` : `Home page ${index + 1}`
+					}
 				>
 					<div className="relative h-[6px] w-[6px]">
 						<Image
@@ -522,7 +526,7 @@ function IconArtwork({
 									textShadow: "0 -0.5px 0 rgba(0,0,0,0.6)",
 								}}
 							>
-								New
+								{locale === "ru" ? "Новое" : "New"}
 							</div>
 						</div>
 					</div>
@@ -866,6 +870,7 @@ export default function HomeScreen({
 			) : (
 				<PageController
 					activePage={activePage}
+					locale={locale}
 					pageCount={pageCount}
 					onSelectPage={handleSelectPage}
 				/>
