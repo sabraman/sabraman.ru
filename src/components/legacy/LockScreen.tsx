@@ -34,7 +34,26 @@ function LockScreenChromeImage({
 	);
 }
 
-function LockScreenStatusBar({ batteryLevel }: { batteryLevel: number }) {
+const LOCK_SCREEN_COPY = {
+	en: {
+		slideToUnlock: "slide to unlock",
+		openCamera: "Open camera",
+		carrier: "AT&T",
+	},
+	ru: {
+		slideToUnlock: "разблокируйте",
+		openCamera: "Открыть камеру",
+		carrier: "МТС",
+	},
+} as const;
+
+function LockScreenStatusBar({
+	batteryLevel,
+	carrier,
+}: {
+	batteryLevel: number;
+	carrier: string;
+}) {
 	return (
 		<div
 			className="absolute inset-0 overflow-hidden bg-black/60"
@@ -43,7 +62,7 @@ function LockScreenStatusBar({ batteryLevel }: { batteryLevel: number }) {
 			<div className="absolute top-1/2 left-[4px] flex -translate-y-1/2 items-center gap-[5px] opacity-75">
 				<LegacySignalBars />
 				<span className="font-bold text-[13px] leading-[17px] [text-shadow:0_-0.5px_0.5px_rgba(0,0,0,0.4)]">
-					AT&amp;T
+					{carrier}
 				</span>
 				<LegacyWifiBars />
 			</div>
@@ -76,6 +95,7 @@ export default function LockScreen({
 			locale,
 		},
 	);
+	const copy = locale === "ru" ? LOCK_SCREEN_COPY.ru : LOCK_SCREEN_COPY.en;
 
 	return (
 		<motion.div
@@ -96,7 +116,10 @@ export default function LockScreen({
 			<div className="absolute right-0 bottom-0 left-0 h-[220px] bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.8))]" />
 
 			<div className="absolute top-0 right-0 left-0 h-[20px]">
-				<LockScreenStatusBar batteryLevel={batteryLevel} />
+				<LockScreenStatusBar
+					batteryLevel={batteryLevel}
+					carrier={copy.carrier}
+				/>
 			</div>
 
 			<div className="absolute top-[20px] right-0 left-0 h-[96px] overflow-hidden bg-black/60 shadow-[0_2px_2px_rgba(0,0,0,0.2)]">
@@ -133,7 +156,7 @@ export default function LockScreen({
 							>
 								{({ isDragging }) => (
 									<ShimmeringText
-										text="slide to unlock"
+										text={copy.slideToUnlock}
 										isStopped={isDragging}
 										duration={2.4}
 										className="font-normal text-[26px] tracking-[-0.045em] [--color:#606060] [--shimmering-color:#f4f4f4] [text-shadow:0_2px_0_rgba(0,0,0,0.55),0_-1px_0_rgba(255,255,255,0.08)]"
@@ -189,7 +212,7 @@ export default function LockScreen({
 						}
 					}}
 					className="absolute top-[23px] right-[20px] z-20 flex h-[50px] w-[28px] touch-none items-center justify-center active:scale-[0.98]"
-					aria-label="Open camera"
+					aria-label={copy.openCamera}
 				>
 					<LockScreenChromeImage
 						alt=""

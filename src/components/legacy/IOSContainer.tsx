@@ -54,6 +54,9 @@ const HOME_COPY = {
 		cta: "Slide to unlock the experience on the right.",
 		homeButton: "Home",
 		placeholderApp: "App",
+		silent: "Silent",
+		ringer: "Ringer",
+		comingInIos5: "Coming in iOS 5",
 	},
 	ru: {
 		title: "Привет, я Даня Юдин.",
@@ -62,6 +65,9 @@ const HOME_COPY = {
 		cta: "Разблокируй экран справа, чтобы открыть интерфейс.",
 		homeButton: "Домой",
 		placeholderApp: "Приложение",
+		silent: "Бесшумно",
+		ringer: "Звонок",
+		comingInIos5: "Скоро в iOS 5",
 	},
 } as const;
 
@@ -444,7 +450,7 @@ export default function IOSContainer({ locale }: { locale: SupportedLocale }) {
 																					fontWeight: 700,
 																				}}
 																			>
-																				Coming in iOS 5
+																				{copy.comingInIos5}
 																			</p>
 																		</div>
 																	)}
@@ -487,7 +493,7 @@ export default function IOSContainer({ locale }: { locale: SupportedLocale }) {
 															<div className="absolute top-1/2 left-[-4px] h-[3px] w-12 -translate-y-1/2 -rotate-45 rounded-full bg-white shadow-[0_0_0_2px_rgba(0,0,0,0.4)]" />
 														</div>
 														<span className="font-bold text-white tracking-wide">
-															Silent
+															{copy.silent}
 														</span>
 													</div>
 												) : (
@@ -498,7 +504,7 @@ export default function IOSContainer({ locale }: { locale: SupportedLocale }) {
 															</div>
 														</div>
 														<span className="font-bold text-white tracking-wide">
-															Ringer
+															{copy.ringer}
 														</span>
 														<div className="flex h-3 w-full items-end justify-between gap-1">
 															{VOLUME_BAR_IDS.map((barId, index) => (
