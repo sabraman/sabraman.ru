@@ -23,7 +23,7 @@ if (typeof window !== "undefined" && !hasPatchedThreeConsole) {
 		if (
 			level === "warn" &&
 			typeof message === "string" &&
-			message === `THREE.${CLOCK_DEPRECATION_MESSAGE}`
+			message === CLOCK_DEPRECATION_MESSAGE
 		) {
 			return;
 		}
