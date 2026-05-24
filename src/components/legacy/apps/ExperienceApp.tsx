@@ -25,6 +25,8 @@ const COPY = {
 		capabilitiesTitle: "Core areas",
 		capabilities: ["Visual identity", "Frontend systems", "Product operations"],
 		experienceTitle: "Experience",
+		timelineTitle: "Timeline",
+		baseTitle: "Base",
 	},
 	ru: {
 		headline: "Креативный дизайнер и разработчик",
@@ -44,6 +46,8 @@ const COPY = {
 			"Продуктовые операции",
 		],
 		experienceTitle: "Опыт",
+		timelineTitle: "Сроки",
+		baseTitle: "Локация",
 	},
 } as const;
 
@@ -152,7 +156,7 @@ export default function ExperienceApp() {
 							className="text-[#718096] text-[10px] uppercase tracking-[0.22em]"
 							style={{ fontFamily: LEGACY_IOS_FONT_FAMILY, fontWeight: 700 }}
 						>
-							Timeline
+							{copy.timelineTitle}
 						</p>
 						<p
 							className="mt-2 text-[#111827] text-[19px]"
@@ -166,7 +170,7 @@ export default function ExperienceApp() {
 							className="text-[#718096] text-[10px] uppercase tracking-[0.22em]"
 							style={{ fontFamily: LEGACY_IOS_FONT_FAMILY, fontWeight: 700 }}
 						>
-							Base
+							{copy.baseTitle}
 						</p>
 						<div className="mt-2 flex items-start gap-2">
 							<MapPin className="mt-[2px] h-4 w-4 shrink-0 text-[#4b5563]" />
