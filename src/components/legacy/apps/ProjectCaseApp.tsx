@@ -69,6 +69,14 @@ const COPY = {
 		workingLabel: "Working mode",
 		inDevelopment: "In development",
 		live: "Live",
+		bots: "Bots",
+		telegram: "Telegram",
+		stack: "Stack",
+		opsCoverage: "Ops coverage",
+		botDensity: "Bot density",
+		releaseRhythm: "Release rhythm",
+		tone: "Tone",
+		retail: "Retail",
 	},
 	ru: {
 		applications: "Применение",
@@ -100,6 +108,14 @@ const COPY = {
 		workingLabel: "Рабочий режим",
 		inDevelopment: "В разработке",
 		live: "В продакшне",
+		bots: "Боты",
+		telegram: "Telegram",
+		stack: "Стек",
+		opsCoverage: "Покрытие процессов",
+		botDensity: "Плотность ботов",
+		releaseRhythm: "Темп релизов",
+		tone: "Тональность",
+		retail: "Ритейл",
 	},
 } as const;
 
@@ -1208,14 +1224,14 @@ export default function ProjectCaseApp({ slug }: { slug: ProjectSlug }) {
 				/>
 				<IOS6Toolbar>
 					<IOS6ToolbarChip label={copy.status} value={statusLabel} />
-					<IOS6ToolbarChip label="Bots" value="Telegram" />
-					<IOS6ToolbarChip label="Stack" value="Next.js" />
+					<IOS6ToolbarChip label={copy.bots} value={copy.telegram} />
+					<IOS6ToolbarChip label={copy.stack} value="Next.js" />
 				</IOS6Toolbar>
 				<div className="rounded-[12px] border border-[#b9c4d3] bg-white px-[12px] py-[12px] shadow-[0_1px_0_rgba(255,255,255,0.85)]">
 					<div className="space-y-[10px]">
-						<IOS6Slider label="Ops coverage" value={0.88} />
-						<IOS6Slider label="Bot density" value={0.71} />
-						<IOS6Slider label="Release rhythm" value={0.93} />
+						<IOS6Slider label={copy.opsCoverage} value={0.88} />
+						<IOS6Slider label={copy.botDensity} value={0.71} />
+						<IOS6Slider label={copy.releaseRhythm} value={0.93} />
 					</div>
 				</div>
 				{renderStandardOverview()}
@@ -1238,7 +1254,7 @@ export default function ProjectCaseApp({ slug }: { slug: ProjectSlug }) {
 				<IOS6Toolbar>
 					<IOS6ToolbarChip label={copy.category} value={categoryLabel} />
 					<IOS6ToolbarChip label={copy.visibility} value={visibilityLabel} />
-					<IOS6ToolbarChip label="Tone" value="Retail" />
+					<IOS6ToolbarChip label={copy.tone} value={copy.retail} />
 				</IOS6Toolbar>
 				<DetailCard
 					title={copy.identity}
