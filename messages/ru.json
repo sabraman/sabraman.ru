@@ -354,6 +354,7 @@
 			},
 			"priceTagPrinter": {
 				"title": "PRICE TAG PRINTER",
+				"visitProject": "Открыть живой проект",
 				"subtitle": "Full-Stack Разработчик",
 				"period": "Январь 2024 – Настоящее время",
 				"description": "Начинался как пет-проект для прошлой работы, а вырос в production-ready SaaS с API, который сейчас используют разные компании.",

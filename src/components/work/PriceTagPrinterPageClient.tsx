@@ -193,7 +193,7 @@ export default function PriceTagPrinterPageClient({
 									rel="noopener noreferrer"
 									className="inline-flex h-12 items-center justify-center rounded-md bg-accent px-8 font-medium text-sm text-white shadow transition-colors hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50"
 								>
-									Visit Live Project
+									{copy.visitProject}
 								</a>
 								<div className="flex items-center gap-3">
 									<Server className="h-5 w-5 text-accent" />

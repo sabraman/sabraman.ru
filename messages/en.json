@@ -354,6 +354,7 @@
 			},
 			"priceTagPrinter": {
 				"title": "PRICE TAG PRINTER",
+				"visitProject": "Visit Live Project",
 				"subtitle": "Full-Stack Engineer",
 				"period": "January 2024 – Present",
 				"description": "Started as a pet project for a former employer, evolving into a production-ready API-first SaaS used by multiple retail companies.",
