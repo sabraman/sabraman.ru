@@ -15,6 +15,25 @@ const TOOLBAR_BACKGROUND =
 const COPY_STATE_RESET_MS = 1800;
 const MARKDOWN_CACHE = new Map<string, string>();
 
+const TOOLBAR_COPY = {
+	en: {
+		components: "Components",
+		copied: "Copied",
+		copyPage: "Copy Page",
+		sharePage: "Share page",
+		previousComponent: "Previous component",
+		nextComponent: "Next component",
+	},
+	ru: {
+		components: "Компоненты",
+		copied: "Скопировано",
+		copyPage: "Код страницы",
+		sharePage: "Поделиться",
+		previousComponent: "Предыдущий компонент",
+		nextComponent: "Следующий компонент",
+	},
+} as const;
+
 type CopyState = "idle" | "done" | "error";
 
 interface LegacyComponentPageToolbarProps {
@@ -34,6 +53,7 @@ export function LegacyComponentPageToolbar({
 }: LegacyComponentPageToolbarProps) {
 	const router = useRouter();
 	const locale = useLegacyUiLocale();
+	const copy = TOOLBAR_COPY[locale];
 	const [copyState, setCopyState] = React.useState<CopyState>("idle");
 
 	React.useEffect(() => {
@@ -95,7 +115,7 @@ export function LegacyComponentPageToolbar({
 				<div className="relative flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
 					<div className="flex shrink-0 items-center">
 						<LegacyBarButton
-							label="Components"
+							label={copy.components}
 							layout="backward"
 							onClick={() => {
 								router.push(getLocalizedPathname(locale, "/components"));
@@ -112,14 +132,14 @@ export function LegacyComponentPageToolbar({
 									<CopyIcon />
 								)
 							}
-							label={copyState === "done" ? "Copied" : "Copy Page"}
+							label={copyState === "done" ? copy.copied : copy.copyPage}
 							layout="text-icon"
 							onClick={copyCurrentPageMarkdown}
 							variant={copyState === "error" ? "destructive" : "default"}
 						/>
 
 						<LegacyBarButton
-							aria-label="Share page"
+							aria-label={copy.sharePage}
 							icon={
 								<ToolbarAssetIcon
 									height={18}
@@ -132,7 +152,7 @@ export function LegacyComponentPageToolbar({
 						/>
 
 						<LegacyBarButton
-							aria-label="Previous component"
+							aria-label={copy.previousComponent}
 							disabled={!previousHref}
 							icon={
 								<ToolbarAssetIcon
@@ -150,7 +170,7 @@ export function LegacyComponentPageToolbar({
 						/>
 
 						<LegacyBarButton
-							aria-label="Next component"
+							aria-label={copy.nextComponent}
 							disabled={!nextHref}
 							icon={
 								<ToolbarAssetIcon

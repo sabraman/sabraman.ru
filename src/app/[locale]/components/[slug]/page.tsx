@@ -50,6 +50,11 @@ export async function generateMetadata({
 	return metadata;
 }
 
+const PAGE_COPY = {
+	en: { onThisPage: "On this page" },
+	ru: { onThisPage: "Содержание" },
+} as const;
+
 export default async function ComponentDocPage({
 	params,
 }: {
@@ -67,6 +72,7 @@ export default async function ComponentDocPage({
 	const neighbours = getComponentDocNeighbours(doc.slug);
 	const sections = extractComponentDocSections(doc.content);
 	const jsonLd = getComponentDocJsonLd(resolvedLocale, doc.slug);
+	const copy = PAGE_COPY[resolvedLocale];
 
 	return (
 		<LegacyUiLocaleProvider locale={resolvedLocale}>
@@ -114,7 +120,7 @@ export default async function ComponentDocPage({
 								<span className="flex items-center gap-3">
 									<ListIcon className="size-5 text-[#c8ccd8]" />
 									<span className="font-semibold text-[1.65rem] tracking-[-0.03em]">
-										On this page
+										{copy.onThisPage}
 									</span>
 								</span>
 								<ChevronDownIcon className="size-5 text-[#9aa3b8] transition group-open:rotate-180" />
