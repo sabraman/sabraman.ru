@@ -1,14 +1,20 @@
 import type { MetadataRoute } from "next";
 import { getLocalizedPathname } from "~/i18n/locale-paths";
-import { SUPPORTED_LOCALES } from "~/lib/site-config";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "~/lib/site-config";
 import { getAllIndexableRoutes, toSiteUrl } from "~/lib/site-discovery";
 
 function getAlternates(path: string) {
+	const languages = Object.fromEntries(
+		SUPPORTED_LOCALES.map((locale) => [
+			locale,
+			toSiteUrl(getLocalizedPathname(locale, path)),
+		]),
+	);
+
 	return {
 		languages: {
-			en: toSiteUrl(getLocalizedPathname("en", path)),
-			ru: toSiteUrl(getLocalizedPathname("ru", path)),
-			"x-default": toSiteUrl(getLocalizedPathname("en", path)),
+			...languages,
+			"x-default": toSiteUrl(getLocalizedPathname(DEFAULT_LOCALE, path)),
 		},
 	};
 }

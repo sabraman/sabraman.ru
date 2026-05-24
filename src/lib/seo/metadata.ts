@@ -3,7 +3,12 @@ import type { ComponentDocSlug } from "~/components/legacy/docs/component-doc-pa
 import type { ProjectSlug } from "~/data/projects";
 import { getLocalizedPathname } from "~/i18n/locale-paths";
 import type { SupportedLocale } from "~/i18n/types";
-import { SITE_TITLE, toAbsoluteSiteUrl } from "~/lib/site-config";
+import {
+	DEFAULT_LOCALE,
+	SITE_TITLE,
+	SUPPORTED_LOCALES,
+	toAbsoluteSiteUrl,
+} from "~/lib/site-config";
 import {
 	getPublicRoutePolicy,
 	type PublicRouteId,
@@ -31,12 +36,18 @@ export function buildLocalizedAlternates(
 	pathEn: string,
 	locale: SupportedLocale = "en",
 ): Metadata["alternates"] {
+	const languages = Object.fromEntries(
+		SUPPORTED_LOCALES.map((l) => [
+			l,
+			getLocalizedPathname(l, pathEn),
+		]),
+	);
+
 	return {
 		canonical: getLocalizedPathname(locale, pathEn),
 		languages: {
-			en: pathEn,
-			ru: getLocalizedPathname("ru", pathEn),
-			"x-default": pathEn,
+			...languages,
+			"x-default": getLocalizedPathname(DEFAULT_LOCALE, pathEn),
 		},
 	};
 }
