@@ -26,10 +26,7 @@ import {
 	type LegacySegmentedControlItem,
 } from "~/components/legacy-segmented-control";
 import { RoundbitFrameXlExample } from "~/components/roundbit/examples/RoundbitFrameXlExample";
-import {
-	getRoundbitHubPath,
-	ROUNDBIT_DOCS_COPY,
-} from "~/components/roundbit-content";
+import { getRoundbitHubPath } from "~/components/roundbit-content";
 import { TextFlip } from "~/components/text-flip/text-flip";
 import { getLocalizedPathname } from "~/i18n/locale-paths";
 import type { SupportedLocale } from "~/i18n/types";
@@ -41,44 +38,138 @@ import { LegacyRegistryAddDialog } from "./LegacyRegistryAddDialog";
 import { LegacySliderDemo } from "./LegacySliderDemo";
 import { LegacySwitchDemo } from "./LegacySwitchDemo";
 import { LegacyWheelPickerDemo } from "./LegacyWheelPickerDemo";
-import {
-	getLegacyAlertDialogHubPath,
-	LEGACY_ALERT_DIALOG_DOCS_COPY,
-} from "./legacy-alert-dialog-content";
-import {
-	getLegacyBarButtonHubPath,
-	LEGACY_BAR_BUTTON_DOCS_COPY,
-} from "./legacy-bar-button-content";
-import {
-	getLegacyClockHubPath,
-	LEGACY_CLOCK_DOCS_COPY,
-} from "./legacy-clock-content";
-import {
-	getLegacyCodeBlockCommandHubPath,
-	LEGACY_CODE_BLOCK_COMMAND_DOCS_COPY,
-} from "./legacy-code-block-command-content";
+import { getLegacyAlertDialogHubPath } from "./legacy-alert-dialog-content";
+import { getLegacyBarButtonHubPath } from "./legacy-bar-button-content";
+import { getLegacyClockHubPath } from "./legacy-clock-content";
+import { getLegacyCodeBlockCommandHubPath } from "./legacy-code-block-command-content";
 import {
 	LegacyUiLocaleProvider,
 	useLegacyUiLocale,
 } from "./legacy-locale-context";
-import {
-	getLegacyNotificationHubPath,
-	LEGACY_NOTIFICATION_DOCS_COPY,
-} from "./legacy-notification-content";
-import {
-	getLegacySliderHubPath,
-	LEGACY_SLIDER_DOCS_COPY,
-} from "./legacy-slider-content";
-import {
-	getLegacySwitchHubPath,
-	LEGACY_SWITCH_DOCS_COPY,
-} from "./legacy-switch-content";
+import { getLegacyNotificationHubPath } from "./legacy-notification-content";
+import { getLegacySliderHubPath } from "./legacy-slider-content";
+import { getLegacySwitchHubPath } from "./legacy-switch-content";
 
 const PACKAGE_MANAGERS = ["bun", "npm", "pnpm", "yarn"] as const;
 const COPY_STATE_RESET_MS = 1800;
 
 type PackageManager = (typeof PACKAGE_MANAGERS)[number];
 type CopyState = "idle" | "done" | "error";
+
+const HUB_COPY = {
+	en: {
+		title: "Components",
+		description: "A collection of reusable legacy skeuomorphic components.",
+		addLabel: "Add",
+		copyAriaLabel: "Copy install command",
+		viewDocsLabel: "View docs",
+	},
+	ru: {
+		title: "Компоненты",
+		description:
+			"Коллекция переиспользуемых классических скевоморфных компонентов.",
+		addLabel: "Добавить",
+		copyAriaLabel: "Копировать команду установки",
+		viewDocsLabel: "Документация",
+	},
+} as const;
+
+const SHOWCASES_COPY = {
+	en: {
+		roundbit: {
+			title: "Roundbit",
+			description:
+				"Pixel-stepped rounded corners inspired by pixel-corner generators, but normalized to Tailwind and CSS radius behavior.",
+		},
+		"legacy-wheel-picker": {
+			title: "Legacy Wheel Picker",
+			description:
+				"A faithful time picker recreation with deep inset gradients, crisp dividers, and the original mechanical snap.",
+		},
+		"legacy-alert-dialog": {
+			title: "Legacy Alert Dialog",
+			description:
+				"Confirmations, warnings, and blocking decisions with classic legacy chrome.",
+		},
+		"legacy-bar-button": {
+			title: "Legacy Bar Button",
+			description:
+				"Glossy action buttons, navigation triggers, and back indicators.",
+		},
+		"legacy-clock": {
+			title: "Legacy Clock",
+			description:
+				"Classic dynamic lock screen clocks with day/night variants and interactive time synchronization.",
+		},
+		"legacy-notification": {
+			title: "Legacy Notification",
+			description:
+				"Rich visual alert banners with glossy headers, detailed body text, and dynamic dismiss animations.",
+		},
+		"legacy-switch": {
+			title: "Legacy Switch",
+			description:
+				"A classic sliding switch with smooth active track transitions, dynamic labels, and realistic tactile feedback.",
+		},
+		"legacy-slider": {
+			title: "Legacy Slider",
+			description:
+				"A glossy control slider with precise custom drag handle tracking and smooth filled track overlays.",
+		},
+		"legacy-code-block-command": {
+			title: "Legacy Code Block Command",
+			description:
+				"Compact command blocks with package manager selector buttons and quick copy controls.",
+		},
+	},
+	ru: {
+		roundbit: {
+			title: "Roundbit",
+			description:
+				"Ступенчатые скруглённые углы в пиксельном стиле, адаптированные под сетку Tailwind и стандартное поведение радиуса скругления в CSS.",
+		},
+		"legacy-wheel-picker": {
+			title: "Legacy Wheel Picker",
+			description:
+				"Точное воссоздание классического барабана выбора времени с глубокими внутренними градиентами, чёткими разделителями и оригинальным механическим щелчком.",
+		},
+		"legacy-alert-dialog": {
+			title: "Legacy Alert Dialog",
+			description:
+				"Диалоговые окна подтверждения, предупреждений и важных решений в аутентичном ретро-интерфейсе.",
+		},
+		"legacy-bar-button": {
+			title: "Legacy Bar Button",
+			description:
+				"Глянцевые кнопки действий, триггеры навигации и классические стрелки возврата назад.",
+		},
+		"legacy-clock": {
+			title: "Legacy Clock",
+			description:
+				"Классические динамические часы экрана блокировки с дневным/ночным режимами и интерактивной синхронизацией времени.",
+		},
+		"legacy-notification": {
+			title: "Legacy Notification",
+			description:
+				"Информативные баннеры уведомлений с глянцевыми заголовками, подробным текстом и динамичной анимацией закрытия.",
+		},
+		"legacy-switch": {
+			title: "Legacy Switch",
+			description:
+				"Классический ползунковый переключатель с плавным движением, динамическими подписями и реалистичным тактильным откликом.",
+		},
+		"legacy-slider": {
+			title: "Legacy Slider",
+			description:
+				"Глянцевый слайдер регулировки с точным позиционированием ползунка и плавным заполнением шкалы.",
+		},
+		"legacy-code-block-command": {
+			title: "Legacy Code Block Command",
+			description:
+				"Компактные блоки команд с выбором пакетного менеджера и кнопками быстрого копирования.",
+		},
+	},
+} as const;
 
 const revealVariants: Variants = {
 	hidden: { opacity: 0, y: 28 },
@@ -138,9 +229,11 @@ function getAliasInstallCommand(
 
 function HeroInstallSurface({
 	items,
+	locale,
 	onAddRegistry,
 }: {
 	items: HeroInstallItem[];
+	locale: SupportedLocale;
 	onAddRegistry: () => void;
 }) {
 	const [packageManager, setPackageManager] = usePreferredPackageManager("bun");
@@ -197,12 +290,12 @@ function HeroInstallSurface({
 					<div className="flex items-center gap-2 self-end md:self-auto">
 						<LegacyBarButton
 							icon={<PlusIcon />}
-							label="Add"
+							label={HUB_COPY[locale].addLabel}
 							layout="text-icon"
 							onClick={onAddRegistry}
 						/>
 						<LegacyBarButton
-							aria-label="Copy install command"
+							aria-label={HUB_COPY[locale].copyAriaLabel}
 							icon={
 								copyState === "done" ? (
 									<CheckIcon strokeWidth={3} />
@@ -257,9 +350,11 @@ function HeroInstallSurface({
 
 function HubHeader({
 	items,
+	locale,
 	onAddRegistry,
 }: {
 	items: HeroInstallItem[];
+	locale: SupportedLocale;
 	onAddRegistry: () => void;
 }) {
 	return (
@@ -269,18 +364,22 @@ function HubHeader({
 					className="font-bold text-[clamp(2.7rem,6.2vw,4.25rem)] text-white tracking-[-0.06em]"
 					style={LEGACY_SANS_STYLE}
 				>
-					Components
+					{HUB_COPY[locale].title}
 				</h1>
 			</div>
 
 			<div className="px-2 py-4 md:px-0 md:py-5">
 				<p className="max-w-3xl font-mono text-[#9aa3b8] text-[clamp(0.98rem,2.2vw,1.08rem)] leading-relaxed">
-					A collection of reusable legacy skeuomorphic components.
+					{HUB_COPY[locale].description}
 				</p>
 			</div>
 
 			<div className="px-2 py-4 md:px-0 md:py-6">
-				<HeroInstallSurface items={items} onAddRegistry={onAddRegistry} />
+				<HeroInstallSurface
+					items={items}
+					locale={locale}
+					onAddRegistry={onAddRegistry}
+				/>
 			</div>
 		</header>
 	);
@@ -448,7 +547,7 @@ function ComponentSection({
 
 					<div className="flex flex-wrap items-center gap-3">
 						<LegacyBarButton
-							label="View docs"
+							label={HUB_COPY[locale].viewDocsLabel}
 							trailingIcon={<ExternalLink />}
 							onClick={() => {
 								router.push(getLocalizedPathname(locale, href));
@@ -468,67 +567,67 @@ function ComponentsChooserHub({ locale }: { locale: SupportedLocale }) {
 	const showcases: ShowcaseItem[] = [
 		{
 			alias: "roundbit",
-			description: ROUNDBIT_DOCS_COPY.summary,
+			description: SHOWCASES_COPY[locale].roundbit.description,
 			href: getLocalizedPathname(locale, getRoundbitHubPath()),
 			preview: <RoundbitPreview />,
-			title: ROUNDBIT_DOCS_COPY.title,
+			title: SHOWCASES_COPY[locale].roundbit.title,
 		},
 		{
 			alias: "legacy-wheel-picker",
-			description:
-				"A faithful time picker recreation with deep inset gradients, crisp dividers, and the original mechanical snap.",
+			description: SHOWCASES_COPY[locale]["legacy-wheel-picker"].description,
 			href: getLegacyWheelPickerHubPath(locale),
 			preview: <WheelPickerPreview />,
-			title: "Legacy Wheel Picker",
+			title: SHOWCASES_COPY[locale]["legacy-wheel-picker"].title,
 		},
 		{
 			alias: "legacy-alert-dialog",
-			description: LEGACY_ALERT_DIALOG_DOCS_COPY.summary,
+			description: SHOWCASES_COPY[locale]["legacy-alert-dialog"].description,
 			href: getLocalizedPathname(locale, getLegacyAlertDialogHubPath()),
 			preview: <AlertDialogPreview />,
-			title: LEGACY_ALERT_DIALOG_DOCS_COPY.title,
+			title: SHOWCASES_COPY[locale]["legacy-alert-dialog"].title,
 		},
 		{
 			alias: "legacy-bar-button",
-			description: LEGACY_BAR_BUTTON_DOCS_COPY.summary,
+			description: SHOWCASES_COPY[locale]["legacy-bar-button"].description,
 			href: getLocalizedPathname(locale, getLegacyBarButtonHubPath()),
 			preview: <BarButtonPreview />,
-			title: LEGACY_BAR_BUTTON_DOCS_COPY.title,
+			title: SHOWCASES_COPY[locale]["legacy-bar-button"].title,
 		},
 		{
 			alias: "legacy-clock",
-			description: LEGACY_CLOCK_DOCS_COPY.summary,
+			description: SHOWCASES_COPY[locale]["legacy-clock"].description,
 			href: getLocalizedPathname(locale, getLegacyClockHubPath()),
 			preview: <ClockPreview />,
-			title: LEGACY_CLOCK_DOCS_COPY.title,
+			title: SHOWCASES_COPY[locale]["legacy-clock"].title,
 		},
 		{
 			alias: "legacy-notification",
-			description: LEGACY_NOTIFICATION_DOCS_COPY.summary,
+			description: SHOWCASES_COPY[locale]["legacy-notification"].description,
 			href: getLocalizedPathname(locale, getLegacyNotificationHubPath()),
 			preview: <NotificationPreview />,
-			title: LEGACY_NOTIFICATION_DOCS_COPY.title,
+			title: SHOWCASES_COPY[locale]["legacy-notification"].title,
 		},
 		{
 			alias: "legacy-switch",
-			description: LEGACY_SWITCH_DOCS_COPY.summary,
+			description: SHOWCASES_COPY[locale]["legacy-switch"].description,
 			href: getLocalizedPathname(locale, getLegacySwitchHubPath()),
 			preview: <SwitchPreview />,
-			title: LEGACY_SWITCH_DOCS_COPY.title,
+			title: SHOWCASES_COPY[locale]["legacy-switch"].title,
 		},
 		{
 			alias: "legacy-slider",
-			description: LEGACY_SLIDER_DOCS_COPY.summary,
+			description: SHOWCASES_COPY[locale]["legacy-slider"].description,
 			href: getLocalizedPathname(locale, getLegacySliderHubPath()),
 			preview: <SliderPreview />,
-			title: LEGACY_SLIDER_DOCS_COPY.title,
+			title: SHOWCASES_COPY[locale]["legacy-slider"].title,
 		},
 		{
 			alias: "legacy-code-block-command",
-			description: LEGACY_CODE_BLOCK_COMMAND_DOCS_COPY.summary,
+			description:
+				SHOWCASES_COPY[locale]["legacy-code-block-command"].description,
 			href: getLocalizedPathname(locale, getLegacyCodeBlockCommandHubPath()),
 			preview: <CodeBlockPreview />,
-			title: LEGACY_CODE_BLOCK_COMMAND_DOCS_COPY.title,
+			title: SHOWCASES_COPY[locale]["legacy-code-block-command"].title,
 		},
 	];
 
@@ -546,6 +645,7 @@ function ComponentsChooserHub({ locale }: { locale: SupportedLocale }) {
 			>
 				<HubHeader
 					items={showcases}
+					locale={locale}
 					onAddRegistry={() => {
 						setIsRegistryDialogOpen(true);
 					}}
