@@ -281,7 +281,7 @@ export default function HornyPlacePage({
 						className="mb-16 max-w-3xl"
 					>
 						<Badge className="mb-6 rounded-full bg-accent px-4 py-1.5 text-accent-foreground">
-							PROCESS
+							{copy.processBadge}
 						</Badge>
 						<h2
 							className="mb-6 font-bold text-3xl md:text-5xl"
@@ -547,7 +547,7 @@ export default function HornyPlacePage({
 						className="mb-16 max-w-3xl"
 					>
 						<Badge className="mb-6 rounded-full bg-accent px-4 py-1.5 text-accent-foreground">
-							RESULTS
+							{copy.resultsBadge}
 						</Badge>
 						<h2
 							className="mb-6 font-bold text-3xl md:text-5xl"

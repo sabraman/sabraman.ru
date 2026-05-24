@@ -116,6 +116,23 @@
 			"subtitle": "Дизайнер и разработчик",
 			"period": "Июнь 2024 – Март 2025",
 			"description": "Вел дизайн и разработку для растущей вейп-компании в Санкт-Петербурге.",
+			"badge": "КЕЙС",
+			"heroTags": {
+				"telegramBots": "Telegram-боты",
+				"webApps": "Веб-приложения",
+				"automation": "Автоматизация",
+				"uiuxDesign": "UI/UX дизайн"
+			},
+			"overviewHeading": "ОБЗОР ПРОЕКТА",
+			"timelineHeading": "СРОКИ",
+			"roleHeading": "РОЛЬ",
+			"deliverablesHeading": "РЕЗУЛЬТАТЫ РАБОТЫ",
+			"deliverables": {
+				"telegramBots": "Telegram-боты",
+				"webApps": "Веб-приложения",
+				"telegramMiniApp": "Telegram Mini App",
+				"customApi": "Интеграции с API"
+			},
 			"challenge": "Задача",
 			"challengeText": "VAPARSHOP требовалось улучшить рабочие процессы и повысить эффективность, сохранив уникальный бренд.",
 			"solution": "Решение",
@@ -238,6 +255,8 @@
 			},
 			"page": {
 				"badge": "КЕЙС БРЕНДА",
+				"processBadge": "ПРОЦЕСС",
+				"resultsBadge": "РЕЗУЛЬТАТЫ",
 				"heroDescription": "Создание смелой и узнаваемой брендовой идентичности для современной розничной сети",
 				"heroSkills": {
 					"branding": "Брендинг",
