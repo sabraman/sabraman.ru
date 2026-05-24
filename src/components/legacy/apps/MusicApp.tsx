@@ -23,6 +23,9 @@ const COPY = {
 			"Telegram products, brand systems, and interfaces tuned for daily use.",
 		playlistsTitle: "Playlists",
 		recentTitle: "Recently added",
+		previous: "Previous",
+		pause: "Pause",
+		playQueue: "Play queue",
 	},
 	ru: {
 		nowPlayingLabel: "Сейчас играет",
@@ -31,6 +34,9 @@ const COPY = {
 			"Telegram-продукты, бренд-системы и интерфейсы, рассчитанные на повседневное использование.",
 		playlistsTitle: "Плейлисты",
 		recentTitle: "Недавно добавлено",
+		previous: "Предыдущий",
+		pause: "Пауза",
+		playQueue: "Очередь воспроизведения",
 	},
 } as const;
 
@@ -115,21 +121,21 @@ export default function MusicApp() {
 							<button
 								type="button"
 								className="flex h-10 w-10 items-center justify-center rounded-full bg-white/8"
-								aria-label="Previous"
+								aria-label={copy.previous}
 							>
 								<Radio className="h-4 w-4 text-white/78" />
 							</button>
 							<button
 								type="button"
 								className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#0f1219]"
-								aria-label="Pause"
+								aria-label={copy.pause}
 							>
 								<Pause className="h-5 w-5" />
 							</button>
 							<button
 								type="button"
 								className="flex h-10 w-10 items-center justify-center rounded-full bg-white/8"
-								aria-label="Play queue"
+								aria-label={copy.playQueue}
 							>
 								<Play className="h-4 w-4 text-white/78" />
 							</button>

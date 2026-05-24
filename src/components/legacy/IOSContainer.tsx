@@ -57,6 +57,10 @@ const HOME_COPY = {
 		silent: "Silent",
 		ringer: "Ringer",
 		comingInIos5: "Coming in iOS 5",
+		sleepWake: "Sleep/Wake",
+		ringSilent: "Ring/Silent Switch",
+		volumeUp: "Volume Up",
+		volumeDown: "Volume Down",
 	},
 	ru: {
 		title: "Привет, я Даня Юдин.",
@@ -68,6 +72,10 @@ const HOME_COPY = {
 		silent: "Бесшумно",
 		ringer: "Звонок",
 		comingInIos5: "Скоро в iOS 5",
+		sleepWake: "Сон/Пробуждение",
+		ringSilent: "Переключатель звонка/тишины",
+		volumeUp: "Увеличение громкости",
+		volumeDown: "Уменьшение громкости",
 	},
 } as const;
 
@@ -268,7 +276,7 @@ export default function IOSContainer({ locale }: { locale: SupportedLocale }) {
 									top: POWER_BUTTON_TOP,
 									right: POWER_BUTTON_RIGHT,
 								}}
-								aria-label="Sleep/Wake"
+								aria-label={copy.sleepWake}
 							/>
 
 							<button
@@ -285,7 +293,7 @@ export default function IOSContainer({ locale }: { locale: SupportedLocale }) {
 									top: RINGER_SWITCH_TOP,
 									left: SIDE_CONTROL_LEFT,
 								}}
-								aria-label="Ring/Silent Switch"
+								aria-label={copy.ringSilent}
 							/>
 
 							<button
@@ -302,7 +310,7 @@ export default function IOSContainer({ locale }: { locale: SupportedLocale }) {
 									top: VOLUME_UP_TOP,
 									left: SIDE_CONTROL_LEFT,
 								}}
-								aria-label="Volume Up"
+								aria-label={copy.volumeUp}
 							/>
 
 							<button
@@ -319,7 +327,7 @@ export default function IOSContainer({ locale }: { locale: SupportedLocale }) {
 									top: VOLUME_DOWN_TOP,
 									left: SIDE_CONTROL_LEFT,
 								}}
-								aria-label="Volume Down"
+								aria-label={copy.volumeDown}
 							/>
 						</div>
 
@@ -531,7 +539,7 @@ export default function IOSContainer({ locale }: { locale: SupportedLocale }) {
 							type="button"
 							onClick={handleHomeButton}
 							className="absolute bottom-[11px] left-1/2 z-40 flex h-[55px] w-[55px] -translate-x-1/2 cursor-pointer items-center justify-center rounded-full border-[#5f5f5f] border-[2px] bg-black transition-all duration-75 active:scale-[0.98]"
-							aria-label="Home"
+							aria-label={copy.homeButton}
 						>
 							<div className="pointer-events-none absolute h-[18px] w-[18px] rounded-[4px] border-[#5f5f5f] border-[2px]" />
 						</button>

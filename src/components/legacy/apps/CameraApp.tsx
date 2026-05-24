@@ -3,6 +3,7 @@
 import { animate, motion, useMotionValue } from "motion/react";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { cn } from "~/lib/utils";
+import { useLegacyUiLocale } from "../legacy-locale-context";
 
 type CameraAppProps = {
 	mode: "app" | "lockscreen";
@@ -12,14 +13,60 @@ type CameraAppProps = {
 const CLOSE_DRAG_THRESHOLD = 132;
 const CAMERA_CONTROLS_HEIGHT = 74;
 
+const COPY = {
+	en: {
+		flashAuto: "Auto",
+		flashOn: "On",
+		flashOff: "Off",
+		hdrOn: "HDR On",
+		hdrOff: "HDR Off",
+		rec: "REC",
+		lastPhoto: "Last photo",
+		takePhoto: "Take photo",
+		startRecording: "Start recording",
+		stopRecording: "Stop recording",
+		switchVideoMode: "Switch to video mode",
+		switchPhotoMode: "Switch to photo mode",
+		cameraUnavailable: "Camera unavailable",
+		enableCameraAccess: "Enable camera access",
+		videoUnavailable: "Video recording unavailable",
+		swapCamera: "Swap camera",
+		flash: "Flash",
+		videoMode: "Video mode",
+		photoMode: "Photo mode",
+	},
+	ru: {
+		flashAuto: "Авто",
+		flashOn: "Вкл.",
+		flashOff: "Выкл.",
+		hdrOn: "HDR Вкл.",
+		hdrOff: "HDR Выкл.",
+		rec: "ЗАП",
+		lastPhoto: "Последний снимок",
+		takePhoto: "Сделать фото",
+		startRecording: "Начать запись",
+		stopRecording: "Остановить запись",
+		switchVideoMode: "Переключить в режим видео",
+		switchPhotoMode: "Переключить в режим фото",
+		cameraUnavailable: "Камера недоступна",
+		enableCameraAccess: "Разрешите доступ к камере",
+		videoUnavailable: "Запись видео недоступна",
+		swapCamera: "Смена камеры",
+		flash: "Вспышка",
+		videoMode: "Режим видео",
+		photoMode: "Режим фото",
+	},
+} as const;
+
 function FlashIcon({ className }: { className?: string }) {
+	const locale = useLegacyUiLocale();
 	return (
 		<svg
 			viewBox="0 0 24 24"
 			className={cn("h-[16px] w-[16px]", className)}
 			aria-hidden
 		>
-			<title>Flash</title>
+			<title>{COPY[locale].flash}</title>
 			<path
 				d="M13.8 1.7 5.4 12.2h5.1l-1 10.1 9.2-11.3H13.5l.3-9.3Z"
 				fill="currentColor"
@@ -29,13 +76,14 @@ function FlashIcon({ className }: { className?: string }) {
 }
 
 function CameraSwapIcon({ className }: { className?: string }) {
+	const locale = useLegacyUiLocale();
 	return (
 		<svg
 			viewBox="0 0 28 24"
 			className={cn("h-[18px] w-[18px]", className)}
 			aria-hidden
 		>
-			<title>Swap camera</title>
+			<title>{COPY[locale].swapCamera}</title>
 			<path
 				d="M9.7 8.6h8.5a2 2 0 0 1 2 2v4.2a2 2 0 0 1-2 2H9.7a2 2 0 0 1-2-2v-4.2a2 2 0 0 1 2-2Z"
 				fill="currentColor"
@@ -74,6 +122,7 @@ function CameraGlyph({
 	video?: boolean;
 	className?: string;
 }) {
+	const locale = useLegacyUiLocale();
 	if (video) {
 		return (
 			<svg
@@ -81,7 +130,7 @@ function CameraGlyph({
 				className={cn("h-[18px] w-[18px]", className)}
 				aria-hidden
 			>
-				<title>Video mode</title>
+				<title>{COPY[locale].videoMode}</title>
 				<path
 					d="M4.5 7.5A2.5 2.5 0 0 1 7 5h7a2.5 2.5 0 0 1 2.5 2.5v1.1l3-2c.7-.4 1.5.1 1.5.9v9c0 .8-.8 1.3-1.5.9l-3-2V16.5A2.5 2.5 0 0 1 14 19H7a2.5 2.5 0 0 1-2.5-2.5Z"
 					fill="currentColor"
@@ -96,7 +145,7 @@ function CameraGlyph({
 			className={cn("h-[18px] w-[18px]", className)}
 			aria-hidden
 		>
-			<title>Photo mode</title>
+			<title>{COPY[locale].photoMode}</title>
 			<path
 				d="M6.3 6.4h2.2L9.8 4h4.4l1.3 2.4h2.2A2.3 2.3 0 0 1 20 8.7v8A2.3 2.3 0 0 1 17.7 19H6.3A2.3 2.3 0 0 1 4 16.7v-8a2.3 2.3 0 0 1 2.3-2.3Zm5.7 2.2a4.1 4.1 0 1 0 0 8.2 4.1 4.1 0 0 0 0-8.2Zm0 1.8a2.3 2.3 0 1 1 0 4.6 2.3 2.3 0 0 1 0-4.6Z"
 				fill="currentColor"
@@ -129,6 +178,8 @@ function CameraControlPill({
 }
 
 export default function CameraApp({ mode, onClose }: CameraAppProps) {
+	const locale = useLegacyUiLocale();
+	const copy = COPY[locale];
 	const isLockscreenMode = mode === "lockscreen";
 	const screenY = useMotionValue(0);
 	const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -172,7 +223,7 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 		};
 
 		if (!navigator.mediaDevices?.getUserMedia) {
-			setCameraError("Camera unavailable");
+			setCameraError(copy.cameraUnavailable);
 			return stopCurrentStream;
 		}
 
@@ -206,7 +257,7 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 					await videoRef.current.play().catch(() => {});
 				}
 			} catch {
-				setCameraError("Enable camera access");
+				setCameraError(copy.enableCameraAccess);
 			}
 		};
 
@@ -216,7 +267,7 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 			isCancelled = true;
 			stopCurrentStream();
 		};
-	}, [isFrontCamera]);
+	}, [isFrontCamera, copy]);
 
 	const captureCurrentFrame = () => {
 		if (!videoRef.current) {
@@ -259,7 +310,7 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 			}
 
 			if (typeof MediaRecorder === "undefined") {
-				setCameraError("Video recording unavailable");
+				setCameraError(copy.videoUnavailable);
 				return;
 			}
 
@@ -298,7 +349,7 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 				setCameraError(null);
 				setIsRecording(true);
 			} catch {
-				setCameraError("Video recording unavailable");
+				setCameraError(copy.videoUnavailable);
 			}
 			return;
 		}
@@ -313,7 +364,11 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 	};
 
 	const flashLabel =
-		flashMode === "auto" ? "Auto" : flashMode === "on" ? "On" : "Off";
+		flashMode === "auto"
+			? copy.flashAuto
+			: flashMode === "on"
+				? copy.flashOn
+				: copy.flashOff;
 
 	const handleDragEnd = () => {
 		if (!isLockscreenMode) {
@@ -402,7 +457,7 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 						className="h-[40px] w-[124px] px-4 font-semibold text-[#111113] text-[14px] tracking-[-0.03em]"
 						onClick={() => setIsHdrOn((currentState) => !currentState)}
 					>
-						HDR {isHdrOn ? "On" : "Off"}
+						{isHdrOn ? copy.hdrOn : copy.hdrOff}
 					</CameraControlPill>
 
 					<CameraControlPill
@@ -416,7 +471,7 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 				{captureMode === "video" && isRecording ? (
 					<div className="absolute top-[58px] left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/55 px-3 py-1 text-[11px] text-white shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
 						<div className="h-2 w-2 rounded-full bg-[#ff2a2a]" />
-						REC
+						{copy.rec}
 					</div>
 				) : null}
 			</div>
@@ -433,7 +488,7 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 					<button
 						type="button"
 						className="absolute top-[17px] left-[12px] h-[39px] w-[39px] overflow-hidden rounded-[4px] border border-[#4a4b4f] bg-[linear-gradient(180deg,#0a0a0a_0%,#050505_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_1px_2px_rgba(0,0,0,0.45)]"
-						aria-label="Last photo"
+						aria-label={copy.lastPhoto}
 					>
 						<div
 							className="absolute inset-[1px] rounded-[2px] bg-center bg-cover"
@@ -453,9 +508,9 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 						aria-label={
 							captureMode === "video"
 								? isRecording
-									? "Stop recording"
-									: "Start recording"
-								: "Take photo"
+									? copy.stopRecording
+									: copy.startRecording
+								: copy.takePhoto
 						}
 					>
 						<div className="absolute inset-[3px] rounded-full border border-white/42" />
@@ -505,9 +560,11 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 								setIsRecording(false);
 							}}
 							className="relative h-[23px] w-[82px] rounded-full border border-[#8f9094] bg-[linear-gradient(180deg,#c7c8cc_0%,#acafb4_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_2px_rgba(0,0,0,0.12)]"
-							aria-label={`Switch to ${
-								captureMode === "photo" ? "video" : "photo"
-							} mode`}
+							aria-label={
+								captureMode === "photo"
+									? copy.switchVideoMode
+									: copy.switchPhotoMode
+							}
 						>
 							<motion.div
 								animate={{ x: captureMode === "photo" ? 1 : 39 }}
