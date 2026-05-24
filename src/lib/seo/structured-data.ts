@@ -8,6 +8,7 @@ import {
 	SITE_SOCIAL_LINKS,
 	SITE_TITLE,
 	SITE_URL,
+	SUPPORTED_LOCALES,
 	toAbsoluteSiteUrl,
 } from "~/lib/site-config";
 
@@ -226,7 +227,7 @@ export function createProfessionalServiceJsonLd({
 		inLanguage: locale,
 		description,
 		areaServed: "Worldwide",
-		availableLanguage: ["en", "ru"],
+		availableLanguage: [...SUPPORTED_LOCALES],
 		provider: {
 			"@type": "Person",
 			name: SITE_OWNER_NAME,
