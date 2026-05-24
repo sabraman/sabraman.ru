@@ -45,7 +45,14 @@
 			"description": "Comprehensive branding and interactive web solutions",
 			"viewProject": "View Project"
 		},
-		"moreComingSoon": "More projects coming soon"
+		"moreComingSoon": "More projects coming soon",
+		"openHub": "Open Work Hub",
+		"featureLabel": "Featured case",
+		"allCaseStudies": "All case studies",
+		"caseStudy": "Case Study",
+		"private": "Private",
+		"public": "Public",
+		"links": "links"
 	},
 	"experience": {
 		"title": "WORK",
