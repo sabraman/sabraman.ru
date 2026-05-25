@@ -66,7 +66,13 @@ export function HomeExperienceSection({ copy }: HomeExperienceSectionProps) {
 					</div>
 
 					<div className="grid grid-cols-1">
-						<WorkExperience className="w-full px-0" experiences={experiences} />
+						<WorkExperience
+							className="w-full px-0"
+							experiences={experiences}
+							currentEmployerLabel={copy.currentEmployerLabel}
+							employmentTypeLabel={copy.employmentTypeLabel}
+							employmentPeriodLabel={copy.employmentPeriodLabel}
+						/>
 					</div>
 				</div>
 			</div>

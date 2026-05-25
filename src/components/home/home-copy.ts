@@ -43,6 +43,9 @@ export type HomeExperienceEntry = {
 export type HomeExperienceCopy = {
 	title: string;
 	titleSecond: string;
+	currentEmployerLabel: string;
+	employmentTypeLabel: string;
+	employmentPeriodLabel: string;
 	items: HomeExperienceEntry[];
 };
 

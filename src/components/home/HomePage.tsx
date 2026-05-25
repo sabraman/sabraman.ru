@@ -132,6 +132,9 @@ export default async function HomePage({ locale }: HomePageProps) {
 				copy={{
 					title: experience.title,
 					titleSecond: experience.titleSecond,
+					currentEmployerLabel: experience.currentEmployer,
+					employmentTypeLabel: experience.employmentType,
+					employmentPeriodLabel: experience.employmentPeriod,
 					items: [
 						{
 							company: "VAPARSHOP",

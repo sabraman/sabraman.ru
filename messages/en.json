@@ -57,6 +57,9 @@
 	"experience": {
 		"title": "WORK",
 		"titleSecond": "EXPERIENCE",
+		"currentEmployer": "Current Employer",
+		"employmentType": "Employment Type",
+		"employmentPeriod": "Employment Period",
 		"vaparshop": {
 			"title": "Designer & Developer",
 			"period": "June 2024 – March 2025",
