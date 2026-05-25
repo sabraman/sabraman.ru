@@ -29,3 +29,8 @@ export function useLegacyUiLocale() {
 
 	return locale;
 }
+
+export function useSafeLegacyUiLocale(): SupportedLocale {
+	const locale = useContext(LegacyUiLocaleContext);
+	return locale ?? "en";
+}

@@ -2,6 +2,7 @@
 
 import { XIcon } from "lucide-react";
 import * as React from "react";
+import { useSafeLegacyUiLocale } from "~/components/legacy/legacy-locale-context";
 import { cn } from "~/lib/utils";
 import {
 	Dialog,
@@ -26,6 +27,11 @@ type LegacyAlertDialogButtonVariant =
 
 const LEGACY_SANS_STYLE = {
 	fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+} as const;
+
+const CLOSE_COPY = {
+	en: "Close dialog",
+	ru: "Закрыть диалог",
 } as const;
 
 export type LegacyAlertDialogProps = React.ComponentProps<typeof Dialog>;
@@ -62,6 +68,9 @@ const LegacyAlertDialogPanel = React.forwardRef<
 	HTMLDivElement,
 	LegacyAlertDialogPanelProps
 >(({ children, className, showCloseButton = false, style, ...props }, ref) => {
+	const locale = useSafeLegacyUiLocale();
+	const closeLabel = CLOSE_COPY[locale];
+
 	return (
 		<div
 			ref={ref}
@@ -79,7 +88,7 @@ const LegacyAlertDialogPanel = React.forwardRef<
 			{showCloseButton ? (
 				<DialogClose asChild>
 					<button
-						aria-label="Close dialog"
+						aria-label={closeLabel}
 						className="absolute top-3 right-3 z-[1] inline-flex size-8 items-center justify-center rounded-full text-white/86 transition hover:bg-white/8 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35"
 						type="button"
 					>
