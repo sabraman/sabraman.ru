@@ -2,8 +2,9 @@
 
 import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getConsoleFunction, setConsoleFunction } from "three";
+import { useIsomorphicLayoutEffect } from "~/lib/hooks/use-isomorphic-layout-effect";
 import { FullScreenIntro } from "./FullScreenIntro";
 
 const CLOCK_DEPRECATION_MESSAGE =
@@ -79,7 +80,7 @@ export function ClientRoot({ children }: { children: React.ReactNode }) {
 		return () => clearTimeout(timer);
 	}, [isOgPreviewRoute, showIntro]);
 
-	useLayoutEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		if (typeof window === "undefined" || isOgPreviewRoute) {
 			return;
 		}

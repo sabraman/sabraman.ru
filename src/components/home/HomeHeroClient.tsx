@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ChevronDown, Download, FileText } from "lucide-react";
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { ButtonGroup } from "~/components/ui/button-group";
 import {
@@ -12,6 +12,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import { useIsomorphicLayoutEffect } from "~/lib/hooks/use-isomorphic-layout-effect";
 import type { HomeHeroCopy } from "./home-copy";
 
 type HomeHeroClientProps = {
@@ -42,7 +43,7 @@ function useFittedRoleWdth(lines: string[]) {
 	const measureRef = useRef<HTMLSpanElement>(null);
 	const [roleWdth, setRoleWdth] = useState(420);
 
-	useLayoutEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		const container = containerRef.current;
 		const measure = measureRef.current;
 
@@ -123,7 +124,7 @@ function useFittedResumeLabelWdth(label: string) {
 	const measureRef = useRef<HTMLSpanElement>(null);
 	const [labelWdth, setLabelWdth] = useState(430);
 
-	useLayoutEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		const container = containerRef.current;
 		const measure = measureRef.current;
 
@@ -196,7 +197,7 @@ function useFittedHeroTitle(lines: [string, string]) {
 		isReady: false,
 	});
 
-	useLayoutEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		const container = containerRef.current;
 		const firstMeasure = firstMeasureRef.current;
 		const secondMeasure = secondMeasureRef.current;
