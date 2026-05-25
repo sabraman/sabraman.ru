@@ -57,6 +57,9 @@
 	"experience": {
 		"title": "ОПЫТ",
 		"titleSecond": "РАБОТЫ",
+		"currentEmployer": "Текущий работодатель",
+		"employmentType": "Тип занятости",
+		"employmentPeriod": "Период работы",
 		"vaparshop": {
 			"title": "Дизайнер и разработчик",
 			"period": "Июнь 2024 – Март 2025",

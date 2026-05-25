@@ -38,22 +38,44 @@ export type ExperienceItemType = {
 export type WorkExperienceProps = {
 	className?: string;
 	experiences: ExperienceItemType[];
+	currentEmployerLabel?: string;
+	employmentTypeLabel?: string;
+	employmentPeriodLabel?: string;
 };
 
 export function WorkExperience({
 	className,
 	experiences,
+	currentEmployerLabel,
+	employmentTypeLabel,
+	employmentPeriodLabel,
 }: WorkExperienceProps) {
 	return (
 		<div className={cn("bg-background px-4", className)}>
 			{experiences.map((experience) => (
-				<ExperienceItem key={experience.id} experience={experience} />
+				<ExperienceItem
+					key={experience.id}
+					experience={experience}
+					currentEmployerLabel={currentEmployerLabel}
+					employmentTypeLabel={employmentTypeLabel}
+					employmentPeriodLabel={employmentPeriodLabel}
+				/>
 			))}
 		</div>
 	);
 }
 
-function ExperienceItem({ experience }: { experience: ExperienceItemType }) {
+function ExperienceItem({
+	experience,
+	currentEmployerLabel = "Current Employer",
+	employmentTypeLabel = "Employment Type",
+	employmentPeriodLabel = "Employment Period",
+}: {
+	experience: ExperienceItemType;
+	currentEmployerLabel?: string;
+	employmentTypeLabel?: string;
+	employmentPeriodLabel?: string;
+}) {
 	return (
 		<div className="space-y-4 py-4">
 			<div className="not-prose flex items-center gap-3">
@@ -82,14 +104,19 @@ function ExperienceItem({ experience }: { experience: ExperienceItemType }) {
 					<span className="relative flex items-center justify-center">
 						<span className="absolute inline-flex size-3 animate-ping rounded-full bg-accent opacity-50" />
 						<span className="relative inline-flex size-2 rounded-full bg-accent" />
-						<span className="sr-only">Current Employer</span>
+						<span className="sr-only">{currentEmployerLabel}</span>
 					</span>
 				) : null}
 			</div>
 
 			<div className="relative space-y-4 before:absolute before:left-3 before:h-full before:w-px before:bg-border">
 				{experience.positions.map((position) => (
-					<ExperiencePositionItem key={position.id} position={position} />
+					<ExperiencePositionItem
+						key={position.id}
+						position={position}
+						employmentTypeLabel={employmentTypeLabel}
+						employmentPeriodLabel={employmentPeriodLabel}
+					/>
 				))}
 			</div>
 		</div>
@@ -98,8 +125,12 @@ function ExperienceItem({ experience }: { experience: ExperienceItemType }) {
 
 function ExperiencePositionItem({
 	position,
+	employmentTypeLabel,
+	employmentPeriodLabel,
 }: {
 	position: ExperiencePositionItemType;
+	employmentTypeLabel: string;
+	employmentPeriodLabel: string;
 }) {
 	const ExperienceIcon = position.icon ?? BriefcaseBusinessIcon;
 
@@ -135,7 +166,7 @@ function ExperiencePositionItem({
 						{position.employmentType ? (
 							<>
 								<dl>
-									<dt className="sr-only">Employment Type</dt>
+									<dt className="sr-only">{employmentTypeLabel}</dt>
 									<dd>{position.employmentType}</dd>
 								</dl>
 
@@ -147,7 +178,7 @@ function ExperiencePositionItem({
 						) : null}
 
 						<dl>
-							<dt className="sr-only">Employment Period</dt>
+							<dt className="sr-only">{employmentPeriodLabel}</dt>
 							<dd>{position.employmentPeriod}</dd>
 						</dl>
 					</div>
