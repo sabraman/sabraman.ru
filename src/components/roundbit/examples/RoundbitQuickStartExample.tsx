@@ -1,13 +1,13 @@
 "use client";
 
 import * as React from "react";
-
+import { useIsomorphicLayoutEffect } from "~/lib/hooks/use-isomorphic-layout-effect";
 import { initRoundbit } from "~/lib/roundbit";
 
 export function RoundbitQuickStartExample() {
 	const scopeRef = React.useRef<HTMLDivElement | null>(null);
 
-	React.useLayoutEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		if (!scopeRef.current) {
 			return;
 		}

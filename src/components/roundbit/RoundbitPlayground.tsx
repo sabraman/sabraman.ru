@@ -4,6 +4,7 @@ import * as React from "react";
 
 import { LegacyDocCodeBlock } from "~/components/legacy/docs/component-doc-code-block";
 import { RoundbitFrame } from "~/components/roundbit";
+import { useIsomorphicLayoutEffect } from "~/lib/hooks/use-isomorphic-layout-effect";
 import { initRoundbit } from "~/lib/roundbit";
 import { cn } from "~/lib/utils";
 
@@ -72,7 +73,7 @@ export function RoundbitPlayground() {
 	const [height, setHeight] = React.useState(176);
 	const arbitrarySliderStep = mode === "frame" ? step : 1;
 
-	React.useLayoutEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		if (mode !== "direct" || !scopeRef.current) {
 			return;
 		}
