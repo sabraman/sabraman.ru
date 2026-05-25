@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { LegacySlider } from "~/components/legacy-slider";
 import { cn } from "~/lib/utils";
+import { useLegacyUiLocale } from "./legacy-locale-context";
 
 interface LegacySliderDemoProps {
 	className?: string;
@@ -25,11 +26,11 @@ interface LegacySliderRowProps {
 	withDivider?: boolean;
 }
 
-function formatBalance(value: number) {
+function formatBalance(value: number, centerLabel: string) {
 	const roundedValue = Math.round(value);
 
 	if (roundedValue === 0) {
-		return "Center";
+		return centerLabel;
 	}
 
 	if (roundedValue < 0) {
@@ -38,6 +39,27 @@ function formatBalance(value: number) {
 
 	return `R ${roundedValue}`;
 }
+
+const SLIDER_COPY = {
+	en: {
+		ringerTitle: "Ringer",
+		brightnessTitle: "Brightness",
+		balanceTitle: "Balance",
+		ringerAria: "Interactive legacy ringer slider",
+		brightnessAria: "Interactive legacy brightness slider",
+		balanceAria: "Interactive legacy balance slider",
+		center: "Center",
+	},
+	ru: {
+		ringerTitle: "Звонок",
+		brightnessTitle: "Яркость",
+		balanceTitle: "Баланс",
+		ringerAria: "Интерактивный ползунок громкости звонка",
+		brightnessAria: "Интерактивный ползунок яркости",
+		balanceAria: "Интерактивный ползунок баланса звука",
+		center: "Центр",
+	},
+} as const;
 
 export function LegacySliderRow({
 	ariaLabel,
@@ -96,6 +118,8 @@ export function LegacySliderDemo({
 	className,
 	compact = false,
 }: LegacySliderDemoProps) {
+	const locale = useLegacyUiLocale();
+	const copy = SLIDER_COPY[locale];
 	const [ringer, setRinger] = useState(68);
 	const [brightness, setBrightness] = useState(44);
 	const [balance, setBalance] = useState(12);
@@ -110,36 +134,36 @@ export function LegacySliderDemo({
 			>
 				<div className="overflow-hidden rounded-[12px] border border-[#aeb4c0] bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.95)]">
 					<LegacySliderRow
-						ariaLabel="Interactive legacy ringer slider"
+						ariaLabel={copy.ringerAria}
 						className={compact ? "gap-2.5 px-2.5 py-2.5" : undefined}
 						leftAccessory={<SpeakerIcon variant="low" />}
 						onValueChange={setRinger}
 						rightAccessory={<SpeakerIcon variant="high" />}
-						title="Ringer"
+						title={copy.ringerTitle}
 						value={ringer}
 						valueLabel={`${Math.round(ringer)}%`}
 					/>
 					<LegacySliderRow
-						ariaLabel="Interactive legacy brightness slider"
+						ariaLabel={copy.brightnessAria}
 						className={compact ? "gap-2.5 px-2.5 py-2.5" : undefined}
 						leftAccessory={<SunIcon variant="low" />}
 						onValueChange={setBrightness}
 						rightAccessory={<SunIcon variant="high" />}
-						title="Brightness"
+						title={copy.brightnessTitle}
 						value={brightness}
 						valueLabel={`${Math.round(brightness)}%`}
 					/>
 					<LegacySliderRow
-						ariaLabel="Interactive legacy balance slider"
+						ariaLabel={copy.balanceAria}
 						className={compact ? "gap-2.5 px-2.5 py-2.5" : undefined}
 						leftAccessory={<DirectionBadge>L</DirectionBadge>}
 						max={50}
 						min={-50}
 						onValueChange={setBalance}
 						rightAccessory={<DirectionBadge>R</DirectionBadge>}
-						title="Balance"
+						title={copy.balanceTitle}
 						value={balance}
-						valueLabel={formatBalance(balance)}
+						valueLabel={formatBalance(balance, copy.center)}
 						withDivider={false}
 					/>
 				</div>
