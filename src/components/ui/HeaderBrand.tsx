@@ -18,11 +18,22 @@ const LOGO_MASK_STYLE: CSSProperties = {
 	WebkitMaskPosition: "center",
 };
 
+const BRAND_COPY = {
+	en: {
+		homeAria: "Sabraman home",
+	},
+	ru: {
+		homeAria: "Главная Sabraman",
+	},
+} as const;
+
 export function HeaderBrand({ locale }: { locale: SupportedLocale }) {
+	const copy = BRAND_COPY[locale];
+
 	return (
 		<Link
 			href={locale === "ru" ? "/ru" : "/"}
-			aria-label="Sabraman home"
+			aria-label={copy.homeAria}
 			className="flex h-9 items-center"
 		>
 			<span
