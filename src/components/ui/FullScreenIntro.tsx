@@ -38,26 +38,41 @@ export function FullScreenIntro({ onFinish }: { onFinish?: () => void }) {
 			return;
 		}
 
+		let active = true;
+		let timeoutId: number | undefined;
+
 		controls
 			.start({
 				fontVariationSettings: `'wght' 1000, 'wdth' 100`,
-				// scale: 1, // Keep scale if you want it to scale down, otherwise remove if size is handled by CSS
 				transition: {
 					fontVariationSettings: {
 						duration: 1.8,
 						ease: [0.4, 0, 0.2, 1],
 						delay: 0.2,
 					},
-					// scale: { duration: 1.8, ease: [0.4, 0, 0.2, 1], delay: 0.2 },
 				},
 			})
 			.then(() => {
-				// Call onFinish after the animation completes
+				if (!active) {
+					return;
+				}
+
 				if (onFinish) {
 					// Add a slight delay before calling onFinish to let the animation visually settle
-					setTimeout(() => onFinish(), 300);
+					timeoutId = window.setTimeout(() => {
+						if (active) {
+							onFinish();
+						}
+					}, 300);
 				}
 			});
+
+		return () => {
+			active = false;
+			if (timeoutId !== undefined) {
+				window.clearTimeout(timeoutId);
+			}
+		};
 	}, [controls, isFontReady, onFinish]);
 
 	return (
