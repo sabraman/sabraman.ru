@@ -419,27 +419,26 @@ function WheelPickerPreview() {
 }
 
 function ClockPreview() {
+	const locale = useLegacyUiLocale();
+	const isRu = locale === "ru";
+	const dayLabel = isRu ? "День" : "Day";
+	const nightLabel = isRu ? "Ночь" : "Night";
+	const dayAria = isRu ? "Демо-часы (день)" : "Legacy day clock preview";
+	const nightAria = isRu ? "Демо-часы (ночь)" : "Legacy night clock preview";
+
 	return (
 		<PreviewStage>
 			<div className="flex flex-wrap items-center justify-center gap-8 sm:gap-10 lg:justify-end">
 				<div className="flex flex-col items-center gap-3">
-					<LegacyClock
-						aria-label="Legacy day clock preview"
-						size={88}
-						variant="day"
-					/>
+					<LegacyClock aria-label={dayAria} size={88} variant="day" />
 					<p className="font-mono text-[#8d97af] text-[11px] uppercase tracking-[0.24em]">
-						Day
+						{dayLabel}
 					</p>
 				</div>
 				<div className="flex flex-col items-center gap-3">
-					<LegacyClock
-						aria-label="Legacy night clock preview"
-						size={88}
-						variant="night"
-					/>
+					<LegacyClock aria-label={nightAria} size={88} variant="night" />
 					<p className="font-mono text-[#8d97af] text-[11px] uppercase tracking-[0.24em]">
-						Night
+						{nightLabel}
 					</p>
 				</div>
 			</div>

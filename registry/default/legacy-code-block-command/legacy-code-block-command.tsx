@@ -2,6 +2,7 @@
 
 import { CheckIcon, CircleXIcon, CopyIcon } from "lucide-react";
 import * as React from "react";
+import { useSafeLegacyUiLocale } from "~/components/legacy/legacy-locale-context";
 import { cn } from "~/lib/utils";
 import { LegacyBarButton } from "../legacy-bar-button/legacy-bar-button";
 import { LegacySegmentedControl } from "../legacy-segmented-control/legacy-segmented-control";
@@ -11,6 +12,17 @@ const STORAGE_KEY = "sabraman-legacy-code-block-command-package-manager";
 const STORAGE_EVENT =
 	"sabraman-legacy-code-block-command-package-manager-change";
 const COPY_STATE_RESET_MS = 1800;
+
+const COPY_COPY = {
+	en: {
+		copyAria: "Copy command",
+		copiedAria: "Command copied",
+	},
+	ru: {
+		copyAria: "Копировать команду",
+		copiedAria: "Команда скопирована",
+	},
+} as const;
 
 export type PackageManager = (typeof PACKAGE_MANAGERS)[number];
 
@@ -150,6 +162,8 @@ export function LegacyCodeBlockCommand({
 	const fallbackPackageManager =
 		availablePackageManagers[0] ?? initialPackageManager ?? "bun";
 
+	const locale = useSafeLegacyUiLocale();
+	const copy = COPY_COPY[locale];
 	const [preferredPackageManager, setPreferredPackageManager] =
 		usePreferredPackageManager(fallbackPackageManager);
 	const [copyState, setCopyState] = React.useState<CopyState>("idle");
@@ -256,7 +270,9 @@ export function LegacyCodeBlockCommand({
 					<div className="flex items-center gap-2">
 						{headerActions}
 						<LegacyBarButton
-							aria-label="Copy command"
+							aria-label={
+								copyState === "done" ? copy.copiedAria : copy.copyAria
+							}
 							className="shrink-0"
 							disabled={!activeCommand}
 							icon={
