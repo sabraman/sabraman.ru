@@ -3,6 +3,8 @@
 import { CheckIcon, CopyIcon } from "lucide-react";
 import * as React from "react";
 
+import { useLegacyUiLocale } from "~/components/legacy/legacy-locale-context";
+
 import { LegacyBarButton } from "~/components/legacy-bar-button";
 import { ScrollFadeEffect } from "~/components/scroll-fade-effect/scroll-fade-effect";
 import { cn } from "~/lib/utils";
@@ -17,10 +19,23 @@ interface LegacyDocCodeBlockProps {
 	code: string;
 }
 
+const COPY_COPY = {
+	en: {
+		copyAria: "Copy code block",
+		copiedAria: "Copied code block",
+	},
+	ru: {
+		copyAria: "Копировать код",
+		copiedAria: "Код скопирован",
+	},
+} as const;
+
 export function LegacyDocCodeBlock({
 	className,
 	code,
 }: LegacyDocCodeBlockProps) {
+	const locale = useLegacyUiLocale();
+	const copy = COPY_COPY[locale];
 	const [copyState, setCopyState] = React.useState<CopyState>("idle");
 
 	React.useEffect(() => {
@@ -56,7 +71,7 @@ export function LegacyDocCodeBlock({
 			<div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(50,86,146,0.16),transparent_48%),linear-gradient(90deg,transparent_0%,rgba(34,72,128,0.16)_35%,rgba(34,72,128,0.16)_65%,transparent_100%)]" />
 
 			<LegacyBarButton
-				aria-label="Copy code block"
+				aria-label={copyState === "done" ? copy.copiedAria : copy.copyAria}
 				className="absolute top-5 right-5 z-10 shrink-0"
 				icon={
 					copyState === "done" ? <CheckIcon strokeWidth={3} /> : <CopyIcon />
