@@ -11,6 +11,17 @@ const localeLabels = {
 	ru: "РУ",
 } as const;
 
+const localeAriaLabels = {
+	en: {
+		en: "English language active",
+		ru: "Switch language to Russian",
+	},
+	ru: {
+		en: "Переключить язык на английский",
+		ru: "Выбран русский язык",
+	},
+} as const;
+
 export function LanguageSwitcher({ locale }: { locale: SupportedLocale }) {
 	const router = useRouter();
 	const pathname = usePathname();
@@ -28,6 +39,7 @@ export function LanguageSwitcher({ locale }: { locale: SupportedLocale }) {
 						<button
 							type="button"
 							key={lng}
+							aria-label={localeAriaLabels[locale][lng as SupportedLocale]}
 							onClick={() => switchLocale(lng as SupportedLocale)}
 							className={`relative z-10 cursor-pointer px-3 py-1.5 font-medium text-xs transition-colors duration-200 ${
 								isActive
