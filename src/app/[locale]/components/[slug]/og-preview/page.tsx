@@ -5,6 +5,7 @@ import {
 	getComponentDocBySlug,
 } from "~/components/legacy/docs/component-documents";
 import { ComponentDocOgPreview } from "~/components/legacy/docs/component-og-preview";
+import { LegacyUiLocaleProvider } from "~/components/legacy/legacy-locale-context";
 import { routing } from "~/i18n/routing";
 import { resolveSupportedLocale } from "~/i18n/types";
 import { buildNoIndexMetadata } from "~/lib/seo/metadata";
@@ -41,7 +42,8 @@ export default async function ComponentDocOgPreviewPage({
 }: {
 	params: Promise<{ locale: string; slug: string }>;
 }) {
-	const { slug } = await params;
+	const { locale, slug } = await params;
+	const resolvedLocale = resolveSupportedLocale(locale);
 
 	const doc = getComponentDocBySlug(slug);
 
@@ -49,5 +51,9 @@ export default async function ComponentDocOgPreviewPage({
 		notFound();
 	}
 
-	return <ComponentDocOgPreview slug={doc.slug} />;
+	return (
+		<LegacyUiLocaleProvider locale={resolvedLocale}>
+			<ComponentDocOgPreview slug={doc.slug} />
+		</LegacyUiLocaleProvider>
+	);
 }
