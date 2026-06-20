@@ -51,14 +51,18 @@ Five workstreams. New/changed files:
 | # | Workstream | Files |
 |---|---|---|
 | 1 | Content Signals | **delete** `src/app/robots.ts`, **add** `src/app/robots.txt/route.ts` |
-| 2 | Markdown for Agents | **add** `src/middleware.ts`, **add** `src/lib/seo/markdown-for-agents.ts` |
+| 2 | Markdown for Agents | **edit** existing `src/proxy.ts` (Next.js 16 middleware convention; already runs next-intl), **add** `src/lib/seo/markdown-for-agents.ts` |
 | 3 | Agent Skills index | **add** `src/app/.well-known/agent-skills/index.json/route.ts`, **add** `src/lib/seo/agent-skills.ts` |
 | 4 | API Catalog | **add** `src/app/.well-known/api-catalog/route.ts` |
 | 5 | Documentation | **add** `docs/agent-discovery/dns-aid-runbook.md`, **add** `docs/agent-discovery/not-applicable.md` |
 
 ### `.well-known` and the `[locale]` segment
 
-App routes live under `src/app/[locale]/`, but `.well-known` endpoints **must** be at the site root (no `/en/.well-known/...`). They live at `src/app/.well-known/...` (sibling to `src/app/[locale]`), which Next.js serves at the root — correct. The middleware **must skip** all `/.well-known/` paths so they are served verbatim.
+App routes live under `src/app/[locale]/`, but `.well-known` endpoints **must** be at the site root (no `/en/.well-known/...`). They live at `src/app/.well-known/...` (sibling to `src/app/[locale]`), which Next.js serves at the root — correct. The middleware/proxy **must skip** all `/.well-known/` paths so they are served verbatim.
+
+### Middleware file: `src/proxy.ts` (Next.js 16 convention)
+
+Next.js 16 renamed `middleware.ts` → `proxy.ts`. The project already has `src/proxy.ts` running next-intl's `createMiddleware(routing)` with matcher `/((?!api|trpc|_next|_vercel|opengraph-image|.*\\..*).*)`. Markdown-for-Agents negotiation **composes with** this existing middleware — we wrap the next-intl middleware: detect `Accept: text/markdown` first and short-circuit to markdown; otherwise delegate to next-intl as before. The existing matcher already excludes `/api`, `/trpc`, `/_next`, and dotfiles, so Markdown-for-Agents only ever sees HTML content routes (the correct surface).
 
 ## 5. Workstream detail
 
@@ -80,10 +84,10 @@ Fully permissive (approved). Aligns with the existing explicit allow rules for A
 
 ### 5.2 Markdown for Agents
 
-**Negotiation** — new `src/middleware.ts`:
-1. Skip non-GET, and skip paths starting with `/api/`, `/trpc/`, `/_next/`, `/.well-known/`, plus static asset extensions.
-2. Parse the `Accept` header; if `text/markdown` is acceptable (any quality value), call the generator; otherwise pass through (HTML stays default — the core requirement).
-3. If the generator returns a body: respond `200` with markdown headers. If it returns `null` (route has no meaningful markdown): pass through to HTML.
+**Negotiation** — wrap the existing `src/proxy.ts` (Next.js 16 middleware; currently `export default createMiddleware(routing)`):
+1. The existing matcher `/((?!api|trpc|_next|_vercel|opengraph-image|.*\\..*).*)` already excludes `/api`, `/trpc`, `/_next`, dotfiles, and OG images, so the proxy only sees HTML content routes. **Add `.well-known` to the matcher exclusion** so well-known routes are served verbatim.
+2. In the proxy handler, parse the `Accept` header first. If `text/markdown` is acceptable (any quality value), call the generator; if it returns a body, respond `200` with markdown headers and short-circuit. Otherwise delegate to the next-intl middleware as before (HTML stays default — the core requirement).
+3. If the generator returns `null` (route has no meaningful markdown): delegate to next-intl → HTML.
 
 **Generator** — `src/lib/seo/markdown-for-agents.ts`, a pure function:
 
@@ -186,5 +190,6 @@ OAuth/OIDC discovery, OAuth Protected Resource Metadata, `auth.md`, MCP Server C
 ## 8. Open questions / risks
 
 - **`robots.ts` → `robots.txt/route.ts` migration:** deleting the typed convention is a deliberate trade to emit `Content-Signal`. Risk: if any tooling depends on the `robots.ts` file specifically, it must move. Mitigation: the manual route emits byte-identical rules plus the new directive; verified by curl.
+- **Composing with next-intl middleware:** Markdown-for-Agents wraps the existing `createMiddleware(routing)` in `src/proxy.ts` rather than replacing it, preserving all locale negotiation/redirect behavior. The matcher exclusion is extended by one segment (`well-known`) only. Risk: if next-intl must rewrite/redirect a path that the markdown branch short-circuits, behavior changes — but the markdown branch only fires on explicit `Accept: text/markdown`, which browsers/next-intl redirects never send, so normal traffic is unaffected.
 - **`Vary: Accept` correctness:** if the edge CDN ignores `Vary`, browsers could receive markdown. Mitigation: header is set on every markdown response; documented in the runbook as a CDN setting to verify at deploy time.
 - **Markdown is a structured-data summary, not a full render:** intentional, given the site is highly visual/interactive. A future enhancement could add richer per-case-study markdown bodies sourced from case-study data.
