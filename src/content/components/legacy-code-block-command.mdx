@@ -1,6 +1,6 @@
 ---
-title: "Legacy Code Block Command"
-description: "Use this for install snippets and command surfaces that need package-manager switching built in."
+title: "Legacy Code Block - Package Manager Selector Component"
+description: "A skeuomorphic React command block component. Best for install snippets and command surfaces that need package-manager switching built in."
 kicker: "Registry component"
 keywords:
   - "legacy code block command"
@@ -29,38 +29,38 @@ Install the component directly. It is self-contained and does not need extra tab
 For most docs pages, start with `convertNpmCommand` and let the helper generate every package-manager variant.
 
 <ComponentSource
-  src="src/components/legacy/examples/LegacyCodeBlockCommandUsageExample.tsx"
-  title="components/legacy-code-block-command-usage-example.tsx"
+	src="src/components/legacy/examples/LegacyCodeBlockCommandUsageExample.tsx"
+	title="components/legacy-code-block-command-usage-example.tsx"
 />
 
 ## Examples
 
 <ComponentPreview
-  description="Generate Bun, npm, pnpm, and Yarn commands from one npm-style install line."
-  name="legacy-code-block-command-usage"
-  size="compact"
-  title="Convert One Install Command"
+	description="Generate Bun, npm, pnpm, and Yarn commands from one npm-style install line."
+	name="legacy-code-block-command-usage"
+	size="compact"
+	title="Convert One Install Command"
 />
 
 <ComponentPreview
-  description="Pass explicit commands when each package manager needs a different install path."
-  name="legacy-code-block-command-explicit"
-  size="compact"
-  title="Explicit Commands"
+	description="Pass explicit commands when each package manager needs a different install path."
+	name="legacy-code-block-command-explicit"
+	size="compact"
+	title="Explicit Commands"
 />
 
 <ComponentPreview
-  description="Use `headerActions` to attach a secondary button without rebuilding the shell."
-  name="legacy-code-block-command-header-actions"
-  size="compact"
-  title="Header Actions"
+	description="Use `headerActions` to attach a secondary button without rebuilding the shell."
+	name="legacy-code-block-command-header-actions"
+	size="compact"
+	title="Header Actions"
 />
 
 <ComponentPreview
-  description="Set the default package manager when a page should open on pnpm, Bun, or another preferred tab."
-  name="legacy-code-block-command-initial-manager"
-  size="compact"
-  title="Custom Initial Package Manager"
+	description="Set the default package manager when a page should open on pnpm, Bun, or another preferred tab."
+	name="legacy-code-block-command-initial-manager"
+	size="compact"
+	title="Custom Initial Package Manager"
 />
 
 ## API Reference
@@ -68,8 +68,8 @@ For most docs pages, start with `convertNpmCommand` and let the helper generate 
 `LegacyCodeBlockCommandProps` covers the command values plus three behavior hooks: `initialPackageManager`, `headerActions`, and the copy success or error callbacks.
 
 <AutoTypeTable
-  path="registry/default/legacy-code-block-command/legacy-code-block-command.tsx"
-  name="LegacyCodeBlockCommandProps"
+	path="registry/default/legacy-code-block-command/legacy-code-block-command.tsx"
+	name="LegacyCodeBlockCommandProps"
 />
 
 ## Notes

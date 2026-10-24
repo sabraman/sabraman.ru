@@ -1,6 +1,6 @@
 ---
-title: "Legacy Notification"
-description: "Use this for lock-screen style Sonner toasts and static notification cards that need the original glossy legacy chrome."
+title: "Legacy Notification - React Toast Alert Component"
+description: "Skeuomorphic React notification card. Perfect for lock-screen style Sonner toasts and static alerts that need the legacy glossy iOS chrome."
 kicker: "Registry component"
 keywords:
   - "legacy notification"
@@ -28,38 +28,38 @@ Install the notification component, then keep using your existing shadcn Sonner 
 Trigger the lock-screen toast with the exported helper.
 
 <ComponentSource
-  src="src/components/legacy/examples/LegacyNotificationUsageExample.tsx"
-  title="components/legacy-notification-usage-example.tsx"
+	src="src/components/legacy/examples/LegacyNotificationUsageExample.tsx"
+	title="components/legacy-notification-usage-example.tsx"
 />
 
 ## Examples
 
 <ComponentPreview
-  description="Push the design through Sonner with the helper instead of styling a custom toast by hand."
-  name="legacy-notification-toast"
-  size="compact"
-  title="Sonner Trigger"
+	description="Push the design through Sonner with the helper instead of styling a custom toast by hand."
+	name="legacy-notification-toast"
+	size="compact"
+	title="Sonner Trigger"
 />
 
 <ComponentPreview
-  description="Render the same lock-screen card directly when you need a static example instead of a live toast."
-  name="legacy-notification-demo"
-  size="compact"
-  title="Static Card"
+	description="Render the same lock-screen card directly when you need a static example instead of a live toast."
+	name="legacy-notification-demo"
+	size="compact"
+	title="Static Card"
 />
 
 <ComponentPreview
-  description="Swap the icon content and message copy while keeping the same glossy lock-screen shell."
-  name="legacy-notification-custom-icon"
-  size="compact"
-  title="Custom Icon"
+	description="Swap the icon content and message copy while keeping the same glossy lock-screen shell."
+	name="legacy-notification-custom-icon"
+	size="compact"
+	title="Custom Icon"
 />
 
 <ComponentPreview
-  description="Hide the icon slot when the notification should read as pure text instead of an app alert."
-  name="legacy-notification-no-icon"
-  size="compact"
-  title="No Icon"
+	description="Hide the icon slot when the notification should read as pure text instead of an app alert."
+	name="legacy-notification-no-icon"
+	size="compact"
+	title="No Icon"
 />
 
 ## API Reference
@@ -67,8 +67,8 @@ Trigger the lock-screen toast with the exported helper.
 `LegacyNotificationProps` extends `React.HTMLAttributes<HTMLDivElement>` and adds `title`, `subtitle`, `body`, `time`, `showIcon`, and the visibility toggles for the subtitle and body lines.
 
 <AutoTypeTable
-  path="registry/default/legacy-notification/legacy-notification.tsx"
-  name="LegacyNotificationProps"
+	path="registry/default/legacy-notification/legacy-notification.tsx"
+	name="LegacyNotificationProps"
 />
 
 ## Notes
