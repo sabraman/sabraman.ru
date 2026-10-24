@@ -1,0 +1,97 @@
+{
+	"schemaVersion": 1,
+	"updated": "2026-10-23",
+	"claims": [
+		{
+			"id": "vapar_price_tags",
+			"claim": "Price Tag Generator: импорт товаров из Excel и Google Sheets, массовое редактирование, экспорт печатных ценников в PDF и HTML.",
+			"source": "github.com/sabraman/price-tag-printer",
+			"visibility": "public",
+			"numbers": []
+		},
+		{
+			"id": "vapar_bots",
+			"claim": "Telegram-боты для отчётности, операционных сценариев и отслеживания конверсии продаж в розничной сети.",
+			"source": "CV, VAPARSHOP",
+			"visibility": "public",
+			"numbers": []
+		},
+		{
+			"id": "vapar_miniapp",
+			"claim": "Telegram Mini App с QR-сканированием, поиском по номеру телефона, учётом смен, отчётностью и встроенным мини-LMS.",
+			"source": "CV, VAPARSHOP",
+			"visibility": "public",
+			"numbers": []
+		},
+		{
+			"id": "vapar_taplink",
+			"claim": "Альтернатива Taplink на Next.js: блог, страницы точек и интерактивные виджеты.",
+			"source": "CV, VAPARSHOP",
+			"visibility": "public",
+			"numbers": []
+		},
+		{
+			"id": "esperansa_writeoffs",
+			"claim": "Telegram Mini App для журнала списаний цветов по точкам продаж.",
+			"source": "github.com/sabraman/esperansa-mini-app",
+			"visibility": "public",
+			"numbers": []
+		},
+		{
+			"id": "smo_moysklad",
+			"claim": "Mini app для розничных и оптовых заказов с ролевыми сценариями и интеграцией с МойСклад.",
+			"source": "CV, SMO",
+			"visibility": "public",
+			"numbers": []
+		},
+		{
+			"id": "plonq_search",
+			"claim": "AI-поиск по каталогу с гибридной выдачей: семантика, ключевые слова и навигация по похожим позициям.",
+			"source": "CV, PLONQ",
+			"visibility": "public",
+			"numbers": []
+		},
+		{
+			"id": "psp_reader",
+			"claim": "EPUB-ридер для Sony PSP на C++ и SDL2 с кэшированием и навигацией по главам.",
+			"source": "github.com/sabraman/psp-book-reader",
+			"visibility": "public",
+			"numbers": ["8"]
+		},
+		{
+			"id": "kwork_parser",
+			"claim": "Монитор заказов Kwork на Rust с низким потреблением памяти, отправляет уведомления в Telegram.",
+			"source": "github.com/sabraman/kwork-parser",
+			"visibility": "public",
+			"numbers": []
+		},
+		{
+			"id": "timer_stickers",
+			"claim": "Telegram Mini App, который генерирует анимированные таймеры-стикеры в WebM/VP9 прямо на клиенте.",
+			"source": "github.com/sabraman/telegram-timer-bot",
+			"visibility": "public",
+			"numbers": []
+		},
+		{
+			"id": "freelance",
+			"claim": "Работает как фрилансер, открыт к проектам по продуктовой разработке, frontend и Telegram Mini Apps.",
+			"source": "CV",
+			"visibility": "public",
+			"numbers": []
+		},
+		{
+			"id": "daaria_audit",
+			"claim": "IT-аудит транспортной компании: инвентаризация лицензий 1С, Vaultwarden, регламент развёртывания VDI.",
+			"source": "приватный репозиторий daariatrans",
+			"visibility": "internal",
+			"numbers": []
+		},
+		{
+			"id": "kukaracha_ops",
+			"claim": "Работа в сети магазинов: операционные процессы точки и внутренняя база знаний.",
+			"source": "приватный репозиторий kukaracha",
+			"visibility": "internal",
+			"numbers": []
+		}
+	]
+}
