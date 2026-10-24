@@ -14,7 +14,7 @@ export function LegacyCodeBlockCommandDemo({
 	return (
 		<LegacyInstallCommand
 			{...convertNpmCommand(
-				"npx shadcn@latest add https://sabraman.ru/r/legacy-code-block-command.json",
+				"npx shadcn@latest add https://sabraman.art/r/legacy-code-block-command.json",
 			)}
 			className={className}
 		/>

@@ -24,7 +24,7 @@ export function GET() {
 		(entry) => entry.pathEn,
 	);
 
-	const content = `# llms.txt for sabraman.ru
+	const content = `# llms.txt for sabraman.art
 
 site: Sabraman
 owner: Danya Yudin

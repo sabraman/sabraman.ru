@@ -3,9 +3,9 @@ export function getLegacyAlertDialogHubPath() {
 }
 
 export const LEGACY_ALERT_DIALOG_URLS = {
-	direct: "https://sabraman.ru/r/legacy-alert-dialog.json",
-	registry: "https://sabraman.ru/r/registry.json",
-	docs: "https://sabraman.ru/components/legacy-alert-dialog",
+	direct: "https://sabraman.art/r/legacy-alert-dialog.json",
+	registry: "https://sabraman.art/r/registry.json",
+	docs: "https://sabraman.art/components/legacy-alert-dialog",
 } as const;
 
 export const LEGACY_ALERT_DIALOG_INSTALL_COMMANDS = {
