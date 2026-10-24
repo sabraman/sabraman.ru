@@ -15,8 +15,9 @@ export interface LegacySegmentedControlItem<T extends string = string> {
 	width?: number;
 }
 
-export interface LegacySegmentedControlProps<T extends string = string>
-	extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+export interface LegacySegmentedControlProps<
+	T extends string = string,
+> extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
 	items: readonly LegacySegmentedControlItem<T>[];
 	onValueChange: (value: T) => void;
 	value: T;

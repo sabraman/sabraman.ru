@@ -13,14 +13,14 @@ Guiding principle: **every published artifact is honest.** No fabricated OAuth e
 
 ## 2. Background — what already exists
 
-| Existing | Location | Relevance |
-|---|---|---|
-| AI-bot allow rules in robots | `src/app/robots.ts` | GPTBot/ClaudeBot/PerplexityBot already allowed |
-| `llms.txt` | `src/app/llms.txt/route.ts` | LLM-facing index; reused as a catalog entry |
-| Component docs served as markdown | `src/app/api/component-docs/[slug]/route.ts` → `text/markdown` | Reused for both Markdown-for-Agents and the skills index |
-| Content registry | `src/lib/seo/content-registry.ts` | Structured titles/descriptions/slugs/paths for all indexable content — the data source for markdown generation |
-| Blog data | `src/data/blog.ts` (`BlogBlock[]`) | Block-structured blog posts; serializable to markdown |
-| Site config | `src/lib/site-config.ts` | `SITE_URL`, social links, owner info |
+| Existing                          | Location                                                       | Relevance                                                                                                      |
+| --------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| AI-bot allow rules in robots      | `src/app/robots.ts`                                            | GPTBot/ClaudeBot/PerplexityBot already allowed                                                                 |
+| `llms.txt`                        | `src/app/llms.txt/route.ts`                                    | LLM-facing index; reused as a catalog entry                                                                    |
+| Component docs served as markdown | `src/app/api/component-docs/[slug]/route.ts` → `text/markdown` | Reused for both Markdown-for-Agents and the skills index                                                       |
+| Content registry                  | `src/lib/seo/content-registry.ts`                              | Structured titles/descriptions/slugs/paths for all indexable content — the data source for markdown generation |
+| Blog data                         | `src/data/blog.ts` (`BlogBlock[]`)                             | Block-structured blog posts; serializable to markdown                                                          |
+| Site config                       | `src/lib/site-config.ts`                                       | `SITE_URL`, social links, owner info                                                                           |
 
 No middleware exists today. No `.well-known/` routes exist. No authentication, OAuth, or MCP server.
 
@@ -48,13 +48,13 @@ Reason: these presuppose an auth server and/or a running MCP server. `sabraman.r
 
 Five workstreams. New/changed files:
 
-| # | Workstream | Files |
-|---|---|---|
-| 1 | Content Signals | **delete** `src/app/robots.ts`, **add** `src/app/robots.txt/route.ts` |
-| 2 | Markdown for Agents | **edit** existing `src/proxy.ts` (Next.js 16 middleware convention; already runs next-intl), **add** `src/lib/seo/markdown-for-agents.ts` |
-| 3 | Agent Skills index | **add** `src/app/.well-known/agent-skills/index.json/route.ts`, **add** `src/lib/seo/agent-skills.ts` |
-| 4 | API Catalog | **add** `src/app/.well-known/api-catalog/route.ts` |
-| 5 | Documentation | **add** `docs/agent-discovery/dns-aid-runbook.md`, **add** `docs/agent-discovery/not-applicable.md` |
+| #   | Workstream          | Files                                                                                                                                     |
+| --- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Content Signals     | **delete** `src/app/robots.ts`, **add** `src/app/robots.txt/route.ts`                                                                     |
+| 2   | Markdown for Agents | **edit** existing `src/proxy.ts` (Next.js 16 middleware convention; already runs next-intl), **add** `src/lib/seo/markdown-for-agents.ts` |
+| 3   | Agent Skills index  | **add** `src/app/.well-known/agent-skills/index.json/route.ts`, **add** `src/lib/seo/agent-skills.ts`                                     |
+| 4   | API Catalog         | **add** `src/app/.well-known/api-catalog/route.ts`                                                                                        |
+| 5   | Documentation       | **add** `docs/agent-discovery/dns-aid-runbook.md`, **add** `docs/agent-discovery/not-applicable.md`                                       |
 
 ### `.well-known` and the `[locale]` segment
 
@@ -85,6 +85,7 @@ Fully permissive (approved). Aligns with the existing explicit allow rules for A
 ### 5.2 Markdown for Agents
 
 **Negotiation** — wrap the existing `src/proxy.ts` (Next.js 16 middleware; currently `export default createMiddleware(routing)`):
+
 1. The existing matcher `/((?!api|trpc|_next|_vercel|opengraph-image|.*\\..*).*)` already excludes `/api`, `/trpc`, `/_next`, dotfiles, and OG images, so the proxy only sees HTML content routes. **Add `.well-known` to the matcher exclusion** so well-known routes are served verbatim.
 2. In the proxy handler, parse the `Accept` header first. If `text/markdown` is acceptable (any quality value), call the generator; if it returns a body, respond `200` with markdown headers and short-circuit. Otherwise delegate to the next-intl middleware as before (HTML stays default — the core requirement).
 3. If the generator returns `null` (route has no meaningful markdown): delegate to next-intl → HTML.
@@ -97,16 +98,17 @@ renderMarkdownForAgents(pathname: string): { body: string; tokens: number } | nu
 
 Locale resolved from the leading path segment (`/ru/...` → `ru`, unprefixed → `en`), per the existing `routing` config.
 
-| Route | Markdown source |
-|---|---|
-| `/`, `/work`, `/components`, `/blog` | Title + description + bulleted list of child links (case studies / component docs / posts) from `content-registry.ts` |
-| `/iphone` | Title + one-line summary (the simulator is non-textual) |
-| `/{caseStudy}` | Case-study summary: title, description, related-project links. Canonical case-study paths come from `getCaseStudyIndexableContentEntries().pathEn` (e.g. `/vaparshop`). Note `/work/{slug}` is a 308 redirect to `/{slug}`; the generator keys on the canonical `/{slug}` path. |
-| `/blog/{post}` | Full blog body serialized from `BlogBlock[]` → markdown (headings, paragraphs, bullets, quotes, callouts) |
-| `/components/[slug]` | **Reuse** `renderComponentDocMarkdown(doc)` from `component-doc-markdown.ts` |
-| Anything else | `null` → pass through to HTML |
+| Route                                | Markdown source                                                                                                                                                                                                                                                                 |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`, `/work`, `/components`, `/blog` | Title + description + bulleted list of child links (case studies / component docs / posts) from `content-registry.ts`                                                                                                                                                           |
+| `/iphone`                            | Title + one-line summary (the simulator is non-textual)                                                                                                                                                                                                                         |
+| `/{caseStudy}`                       | Case-study summary: title, description, related-project links. Canonical case-study paths come from `getCaseStudyIndexableContentEntries().pathEn` (e.g. `/vaparshop`). Note `/work/{slug}` is a 308 redirect to `/{slug}`; the generator keys on the canonical `/{slug}` path. |
+| `/blog/{post}`                       | Full blog body serialized from `BlogBlock[]` → markdown (headings, paragraphs, bullets, quotes, callouts)                                                                                                                                                                       |
+| `/components/[slug]`                 | **Reuse** `renderComponentDocMarkdown(doc)` from `component-doc-markdown.ts`                                                                                                                                                                                                    |
+| Anything else                        | `null` → pass through to HTML                                                                                                                                                                                                                                                   |
 
 **Response headers:**
+
 - `Content-Type: text/markdown; charset=utf-8`
 - `x-markdown-tokens: <approx>` — token estimate = `Math.round(body.length / 4)`
 - `Vary: Accept` — **critical**, so CDNs don't serve markdown to browsers
@@ -120,16 +122,16 @@ Locale resolved from the leading path segment (`/ru/...` → `ru`, unprefixed �
 
 ```json
 {
-  "$schema": "https://agentskills.io/schemas/agent-skills-index.json",
-  "skills": [
-    {
-      "name": "legacy-switch",
-      "type": "guide",
-      "description": "Install and use the legacy skeuomorphic switch component.",
-      "url": "https://sabraman.ru/components/legacy-switch.mdx",
-      "sha256": "<sha256 hex of the rendered markdown body>"
-    }
-  ]
+	"$schema": "https://agentskills.io/schemas/agent-skills-index.json",
+	"skills": [
+		{
+			"name": "legacy-switch",
+			"type": "guide",
+			"description": "Install and use the legacy skeuomorphic switch component.",
+			"url": "https://sabraman.ru/components/legacy-switch.mdx",
+			"sha256": "<sha256 hex of the rendered markdown body>"
+		}
+	]
 }
 ```
 
@@ -143,12 +145,12 @@ Locale resolved from the leading path segment (`/ru/...` → `ru`, unprefixed �
 
 **Content:** `application/linkset+json` with a `linkset` array. Each entry has an `anchor` and link relations `service-desc`, `service-doc`, and `status` **where applicable**. Entries derive from existing endpoints:
 
-| anchor | service-desc | service-doc | status |
-|---|---|---|---|
-| `https://sabraman.ru/llms.txt` | itself (`text/plain`) | `/` | omitted |
-| `https://sabraman.ru/.well-known/agent-skills/index.json` | itself | — | omitted |
-| `https://sabraman.ru/.well-known/api-catalog` | itself (self-referential, per RFC) | — | omitted |
-| `https://sabraman.ru/api/component-docs/{slug}` | itself | `/components/{slug}` | omitted |
+| anchor                                                    | service-desc                       | service-doc          | status  |
+| --------------------------------------------------------- | ---------------------------------- | -------------------- | ------- |
+| `https://sabraman.ru/llms.txt`                            | itself (`text/plain`)              | `/`                  | omitted |
+| `https://sabraman.ru/.well-known/agent-skills/index.json` | itself                             | —                    | omitted |
+| `https://sabraman.ru/.well-known/api-catalog`             | itself (self-referential, per RFC) | —                    | omitted |
+| `https://sabraman.ru/api/component-docs/{slug}`           | itself                             | `/components/{slug}` | omitted |
 
 **`status` relation:** RFC 9727 lists `status` as the health endpoint. `sabraman.ru` has none. Rather than fabricate one, the `status` relation is **omitted**. This is conformant (relations are optional) and honest; the omission is documented in `not-applicable.md`. If a health endpoint is added later, this is the single field to append.
 
@@ -171,10 +173,12 @@ Locale resolved from the leading path segment (`/ru/...` → `ru`, unprefixed �
 ## 6. Testing & verification
 
 **Unit tests** (`vitest`):
+
 - `markdown-for-agents.ts`: home (returns body with title + child links), `/components/{slug}` (delegates to existing renderer), `/blog/{post}` (serializes blocks), `/iphone` (one-line summary), `/{caseStudy}` (canonical path), an unmapped route (returns `null`), and locale resolution for `/ru/...`.
 - `agent-skills.ts`: digest is correct sha256 hex, `name` derives from slug, required fields present, non-empty for the real component docs.
 
 **Manual curl checks:**
+
 - `curl -H 'Accept: text/markdown' http://localhost:3000/work` → `200`, `Content-Type: text/markdown`, `Vary: Accept` present, `x-markdown-tokens` present.
 - `curl http://localhost:3000/work` (no Accept) → `200`, `Content-Type: text/html` (default preserved).
 - `curl http://localhost:3000/.well-known/agent-skills/index.json` → valid JSON; every entry has `name`, `type`, `description`, `url`, `sha256`.

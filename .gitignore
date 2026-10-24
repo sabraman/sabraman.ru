@@ -70,3 +70,10 @@ CLAUDE.md
 
 
 .gitignore
+.playwright-mcp/
+.codex-artifacts/
+# Personal / generated
+/job-search/
+/scratch/
+/content/
+/.reference/

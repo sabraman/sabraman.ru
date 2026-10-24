@@ -5,8 +5,9 @@ import * as React from "react";
 
 import { cn } from "~/lib/utils";
 
-export interface LegacySwitchProps
-	extends React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root> {
+export interface LegacySwitchProps extends React.ComponentPropsWithoutRef<
+	typeof SwitchPrimitive.Root
+> {
 	offLabel?: string;
 	onLabel?: string;
 }

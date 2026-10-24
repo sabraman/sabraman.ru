@@ -36,13 +36,13 @@ const CLOSE_COPY = {
 
 export type LegacyAlertDialogProps = React.ComponentProps<typeof Dialog>;
 
-export interface LegacyAlertDialogContentProps
-	extends React.ComponentProps<typeof DialogContent> {
+export interface LegacyAlertDialogContentProps extends React.ComponentProps<
+	typeof DialogContent
+> {
 	showCloseButton?: boolean;
 }
 
-export interface LegacyAlertDialogPanelProps
-	extends React.HTMLAttributes<HTMLDivElement> {
+export interface LegacyAlertDialogPanelProps extends React.HTMLAttributes<HTMLDivElement> {
 	showCloseButton?: boolean;
 }
 
@@ -55,8 +55,7 @@ export type LegacyAlertDialogDescriptionProps = React.ComponentProps<
 >;
 export type LegacyAlertDialogFooterProps = React.ComponentProps<"div">;
 
-export interface LegacyAlertDialogButtonProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface LegacyAlertDialogButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	variant?: LegacyAlertDialogButtonVariant;
 }
 

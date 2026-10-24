@@ -19,8 +19,7 @@ function getBarButtonBackground(variant: LegacyBarButtonVariant) {
 	return `linear-gradient(180deg, ${start} 0%, ${second} 33%, ${third} 67%, ${end} 100%)`;
 }
 
-export interface LegacyBarButtonProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface LegacyBarButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	icon?: React.ReactNode;
 	label?: string;
 	layout?: LegacyBarButtonLayout;

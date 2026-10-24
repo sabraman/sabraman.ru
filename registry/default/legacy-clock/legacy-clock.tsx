@@ -10,7 +10,7 @@ const FALLBACK_CLOCK_TIME = {
 	minutes: 9,
 	seconds: 30,
 } as const;
-const DEFAULT_CLOCK_ASSET_BASE_URL = "https://sabraman.ru/figma/legacy-clock";
+const DEFAULT_CLOCK_ASSET_BASE_URL = "https://sabraman.art/figma/legacy-clock";
 const INNER_CLOCK_SHADOW = "0px -0.5px 0.5px 0px rgba(0,0,0,0.5)";
 const INNER_CLOCK_HIGHLIGHT =
 	"inset 0px -0.1px 0.5px 0px rgba(255,255,255,0.8)";
