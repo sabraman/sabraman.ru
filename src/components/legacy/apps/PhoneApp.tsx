@@ -4,16 +4,15 @@ import {
 	ArrowUpRight,
 	ChevronRight,
 	FileText,
-	Github,
-	Instagram,
-	type LucideIcon,
 	Mail,
 	MapPin,
 	Phone,
 	Send,
 	Sparkles,
 } from "lucide-react";
+import type { ComponentType } from "react";
 import { getResumeAsset } from "~/lib/resume";
+import { GithubIcon, InstagramIcon } from "~/components/contact/contact-links";
 import { useLegacyUiLocale } from "../legacy-locale-context";
 import { LEGACY_IOS_FONT_FAMILY } from "../ui/legacy-status-data";
 
@@ -22,14 +21,14 @@ type QuickAction = {
 	label: string;
 	description: string;
 	href: string;
-	icon: LucideIcon;
+	icon: ComponentType<{ className?: string }>;
 	download?: string;
 };
 type ContactLine = {
 	label: string;
 	value: string;
 	href: string;
-	icon: LucideIcon;
+	icon: ComponentType<{ className?: string }>;
 	download?: string;
 };
 
@@ -85,7 +84,7 @@ const QUICK_ACTIONS: Record<Locale, QuickAction[]> = {
 			label: "GitHub",
 			description: "sabraman",
 			href: "https://github.com/sabraman",
-			icon: Github,
+			icon: GithubIcon,
 		},
 	],
 	ru: [
@@ -105,7 +104,7 @@ const QUICK_ACTIONS: Record<Locale, QuickAction[]> = {
 			label: "GitHub",
 			description: "sabraman",
 			href: "https://github.com/sabraman",
-			icon: Github,
+			icon: GithubIcon,
 		},
 	],
 };
@@ -128,13 +127,13 @@ const CONTACT_LINES: Record<Locale, ContactLine[]> = {
 			label: "GitHub",
 			value: "github.com/sabraman",
 			href: "https://github.com/sabraman",
-			icon: Github,
+			icon: GithubIcon,
 		},
 		{
 			label: "Instagram",
 			value: "instagram.com/sabraman",
 			href: "https://instagram.com/sabraman",
-			icon: Instagram,
+			icon: InstagramIcon,
 		},
 	],
 	ru: [
@@ -154,13 +153,13 @@ const CONTACT_LINES: Record<Locale, ContactLine[]> = {
 			label: "GitHub",
 			value: "github.com/sabraman",
 			href: "https://github.com/sabraman",
-			icon: Github,
+			icon: GithubIcon,
 		},
 		{
 			label: "Instagram",
 			value: "instagram.com/sabraman",
 			href: "https://instagram.com/sabraman",
-			icon: Instagram,
+			icon: InstagramIcon,
 		},
 	],
 };
