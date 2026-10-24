@@ -3,9 +3,9 @@ export function getRoundbitHubPath() {
 }
 
 export const ROUNDBIT_URLS = {
-	direct: "https://sabraman.ru/r/roundbit.json",
-	registry: "https://sabraman.ru/r/registry.json",
-	docs: "https://sabraman.ru/components/roundbit",
+	direct: "https://sabraman.art/r/roundbit.json",
+	registry: "https://sabraman.art/r/registry.json",
+	docs: "https://sabraman.art/components/roundbit",
 } as const;
 
 export const ROUNDBIT_INSTALL_COMMANDS = {

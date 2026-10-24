@@ -41,7 +41,7 @@ const LEGAL_PAGES: Record<
 			navLabel: "Contacts",
 			title: "Contacts and support",
 			description:
-				"Current contacts, support channels, and contractor details for sabraman.ru.",
+				"Current contacts, support channels, and contractor details for sabraman.art.",
 			eyebrow: "Contacts",
 			lead: "Current contact details for service requests, payment, refunds, and support.",
 			sections: [
@@ -72,7 +72,7 @@ const LEGAL_PAGES: Record<
 			navLabel: "Delivery",
 			title: "Delivery, pricing, and service regions",
 			description:
-				"Digital delivery terms, pricing baseline, and service regions for sabraman.ru.",
+				"Digital delivery terms, pricing baseline, and service regions for sabraman.art.",
 			eyebrow: "Delivery",
 			lead: "The website provides digital services only. No physical shipping is used.",
 			sections: [
@@ -102,7 +102,7 @@ const LEGAL_PAGES: Record<
 			navLabel: "Refunds",
 			title: "Refunds and payment cancellation",
 			description:
-				"Order cancellation and refund policy for sabraman.ru digital services.",
+				"Order cancellation and refund policy for sabraman.art digital services.",
 			eyebrow: "Refunds",
 			lead: "Standard cancellation and refund terms for digital services.",
 			sections: [
@@ -127,7 +127,7 @@ const LEGAL_PAGES: Record<
 		privacy: {
 			navLabel: "Privacy",
 			title: "Personal data policy",
-			description: "Personal data processing policy for sabraman.ru.",
+			description: "Personal data processing policy for sabraman.art.",
 			eyebrow: "Privacy",
 			lead: "This page describes what personal data may be processed and why.",
 			sections: [
@@ -161,7 +161,7 @@ const LEGAL_PAGES: Record<
 		offer: {
 			navLabel: "Offer",
 			title: "Public offer",
-			description: "Public offer for digital services on sabraman.ru.",
+			description: "Public offer for digital services on sabraman.art.",
 			eyebrow: "Offer",
 			lead: "Standing public offer for digital services rendered remotely.",
 			sections: [
@@ -186,7 +186,7 @@ const LEGAL_PAGES: Record<
 			navLabel: "IP Rights",
 			title: "IP rights, licenses, and trademarks",
 			description:
-				"Intellectual property, licensing, and trademark terms for sabraman.ru.",
+				"Intellectual property, licensing, and trademark terms for sabraman.art.",
 			eyebrow: "IP Rights",
 			lead: "The website sells lawful digital services, not third-party software licenses as goods.",
 			sections: [
@@ -222,7 +222,7 @@ const LEGAL_PAGES: Record<
 			navLabel: "Контакты",
 			title: "Контакты и поддержка",
 			description:
-				"Актуальные контакты, поддержка и сведения об исполнителе на sabraman.ru.",
+				"Актуальные контакты, поддержка и сведения об исполнителе на sabraman.art.",
 			eyebrow: "Контакты",
 			lead: "Актуальные контакты для связи по услугам, оплате, возвратам и сопровождению.",
 			sections: [
@@ -253,7 +253,7 @@ const LEGAL_PAGES: Record<
 			navLabel: "Доставка",
 			title: "Передача результата, цена и регионы",
 			description:
-				"Условия цифровой передачи результата, базовая цена и регионы оказания услуг на sabraman.ru.",
+				"Условия цифровой передачи результата, базовая цена и регионы оказания услуг на sabraman.art.",
 			eyebrow: "Передача результата",
 			lead: "Сайт оказывает только цифровые услуги. Физическая доставка не используется.",
 			sections: [
@@ -282,7 +282,7 @@ const LEGAL_PAGES: Record<
 		refunds: {
 			navLabel: "Возврат",
 			title: "Возврат и отмена платежа",
-			description: "Условия отмены заказа и возврата средств на sabraman.ru.",
+			description: "Условия отмены заказа и возврата средств на sabraman.art.",
 			eyebrow: "Возврат",
 			lead: "Стандартные условия отмены заказа и возврата средств для цифровых услуг.",
 			sections: [
@@ -307,7 +307,7 @@ const LEGAL_PAGES: Record<
 		privacy: {
 			navLabel: "Политика ПД",
 			title: "Политика обработки персональных данных",
-			description: "Политика обработки персональных данных сайта sabraman.ru.",
+			description: "Политика обработки персональных данных сайта sabraman.art.",
 			eyebrow: "Персональные данные",
 			lead: "На этой странице описано, какие персональные данные могут обрабатываться и зачем.",
 			sections: [
@@ -342,7 +342,7 @@ const LEGAL_PAGES: Record<
 			navLabel: "Оферта",
 			title: "Договор оферты",
 			description:
-				"Публичная оферта на оказание цифровых услуг на sabraman.ru.",
+				"Публичная оферта на оказание цифровых услуг на sabraman.art.",
 			eyebrow: "Оферта",
 			lead: "Публичная оферта на оказание цифровых услуг дистанционно.",
 			sections: [
@@ -367,7 +367,7 @@ const LEGAL_PAGES: Record<
 			navLabel: "Права",
 			title: "Права, лицензии и товарные знаки",
 			description:
-				"Условия по интеллектуальной собственности, лицензиям и товарным знакам на sabraman.ru.",
+				"Условия по интеллектуальной собственности, лицензиям и товарным знакам на sabraman.art.",
 			eyebrow: "Права",
 			lead: "Сайт оказывает законные цифровые услуги и не продает чужие лицензии как самостоятельный товар.",
 			sections: [

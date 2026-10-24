@@ -3,9 +3,9 @@ export function getLegacyCodeBlockCommandHubPath() {
 }
 
 export const LEGACY_CODE_BLOCK_COMMAND_URLS = {
-	direct: "https://sabraman.ru/r/legacy-code-block-command.json",
-	registry: "https://sabraman.ru/r/registry.json",
-	docs: "https://sabraman.ru/components/legacy-code-block-command",
+	direct: "https://sabraman.art/r/legacy-code-block-command.json",
+	registry: "https://sabraman.art/r/registry.json",
+	docs: "https://sabraman.art/components/legacy-code-block-command",
 } as const;
 
 export const LEGACY_CODE_BLOCK_COMMAND_INSTALL_COMMANDS = {
@@ -33,7 +33,7 @@ export function InstallCommandCard() {
   return (
     <LegacyCodeBlockCommand
       initialPackageManager="bun"
-      {...convertNpmCommand("npx shadcn@latest add https://sabraman.ru/r/legacy-switch.json")}
+      {...convertNpmCommand("npx shadcn@latest add https://sabraman.art/r/legacy-switch.json")}
     />
   );
 }`;

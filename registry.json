@@ -1,13 +1,13 @@
 {
 	"$schema": "https://ui.shadcn.com/schema/registry.json",
 	"name": "sabraman",
-	"homepage": "https://sabraman.ru",
+	"homepage": "https://sabraman.art",
 	"items": [
 		{
 			"name": "roundbit",
 			"type": "registry:item",
 			"title": "Roundbit",
-			"docs": "https://sabraman.ru/components/roundbit",
+			"docs": "https://sabraman.art/components/roundbit",
 			"description": "Pixel-stepped rounded corners with Tailwind-style utilities, runtime clip-path generation, and a frame primitive for shaped borders and shadows.",
 			"files": [
 				{
@@ -26,11 +26,9 @@
 			"name": "legacy-wheel-picker",
 			"type": "registry:block",
 			"title": "Legacy Wheel Picker",
-			"docs": "https://sabraman.ru/components/legacy-wheel-picker",
+			"docs": "https://sabraman.art/components/legacy-wheel-picker",
 			"description": "Legacy wheel picker component built on top of @ncdai/react-wheel-picker.",
-			"dependencies": [
-				"@ncdai/react-wheel-picker"
-			],
+			"dependencies": ["@ncdai/react-wheel-picker"],
 			"files": [
 				{
 					"path": "registry/default/legacy-wheel-picker/legacy-wheel-picker.tsx",
@@ -43,7 +41,7 @@
 			"name": "legacy-clock",
 			"type": "registry:ui",
 			"title": "Legacy Clock",
-			"docs": "https://sabraman.ru/components/legacy-clock",
+			"docs": "https://sabraman.art/components/legacy-clock",
 			"description": "Working analog clock icon with live hour, minute, and red seconds hands in day and night variants.",
 			"files": [
 				{
@@ -57,11 +55,9 @@
 			"name": "legacy-notification",
 			"type": "registry:ui",
 			"title": "Legacy Notification",
-			"docs": "https://sabraman.ru/components/legacy-notification",
+			"docs": "https://sabraman.art/components/legacy-notification",
 			"description": "Sonner-powered lock-screen notification toast with glossy legacy iOS chrome.",
-			"dependencies": [
-				"sonner"
-			],
+			"dependencies": ["sonner"],
 			"files": [
 				{
 					"path": "registry/default/legacy-notification/legacy-notification.tsx",
@@ -74,11 +70,9 @@
 			"name": "legacy-switch",
 			"type": "registry:ui",
 			"title": "Legacy Switch",
-			"docs": "https://sabraman.ru/components/legacy-switch",
+			"docs": "https://sabraman.art/components/legacy-switch",
 			"description": "Legacy toggle switch built on top of @radix-ui/react-switch.",
-			"dependencies": [
-				"@radix-ui/react-switch"
-			],
+			"dependencies": ["@radix-ui/react-switch"],
 			"files": [
 				{
 					"path": "registry/default/legacy-switch/legacy-switch.tsx",
@@ -91,11 +85,9 @@
 			"name": "legacy-slider",
 			"type": "registry:ui",
 			"title": "Legacy Slider",
-			"docs": "https://sabraman.ru/components/legacy-slider",
+			"docs": "https://sabraman.art/components/legacy-slider",
 			"description": "Glossy legacy slider control with a raised metallic thumb and silver-blue track.",
-			"dependencies": [
-				"@radix-ui/react-slider"
-			],
+			"dependencies": ["@radix-ui/react-slider"],
 			"files": [
 				{
 					"path": "registry/default/legacy-slider/legacy-slider.tsx",
@@ -108,11 +100,9 @@
 			"name": "legacy-code-block-command",
 			"type": "registry:ui",
 			"title": "Legacy Code Block Command",
-			"docs": "https://sabraman.ru/components/legacy-code-block-command",
+			"docs": "https://sabraman.art/components/legacy-code-block-command",
 			"description": "Skeuomorphic legacy command block with package-manager tabs and clipboard support.",
-			"dependencies": [
-				"lucide-react"
-			],
+			"dependencies": ["lucide-react"],
 			"files": [
 				{
 					"path": "registry/default/legacy-code-block-command/legacy-code-block-command.tsx",
@@ -135,12 +125,9 @@
 			"name": "legacy-alert-dialog",
 			"type": "registry:ui",
 			"title": "Legacy Alert Dialog",
-			"docs": "https://sabraman.ru/components/legacy-alert-dialog",
+			"docs": "https://sabraman.art/components/legacy-alert-dialog",
 			"description": "Muted navy legacy alert dialog with a silver gloss cap, white keyline, and classic confirmation buttons.",
-			"dependencies": [
-				"@radix-ui/react-dialog",
-				"lucide-react"
-			],
+			"dependencies": ["@radix-ui/react-dialog", "lucide-react"],
 			"files": [
 				{
 					"path": "registry/default/legacy-alert-dialog/legacy-alert-dialog.tsx",
@@ -158,7 +145,7 @@
 			"name": "legacy-bar-button",
 			"type": "registry:ui",
 			"title": "Legacy Bar Button",
-			"docs": "https://sabraman.ru/components/legacy-bar-button",
+			"docs": "https://sabraman.art/components/legacy-bar-button",
 			"description": "Classic legacy navigation bar button with text, icon, text-icon, backward, accent, and destructive variants.",
 			"files": [
 				{

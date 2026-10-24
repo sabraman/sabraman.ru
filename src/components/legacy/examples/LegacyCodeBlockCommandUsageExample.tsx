@@ -10,7 +10,7 @@ export function LegacyCodeBlockCommandUsageExample() {
 		<LegacyCodeBlockCommand
 			initialPackageManager="bun"
 			{...convertNpmCommand(
-				"npx shadcn@latest add https://sabraman.ru/r/legacy-switch.json",
+				"npx shadcn@latest add https://sabraman.art/r/legacy-switch.json",
 			)}
 		/>
 	);

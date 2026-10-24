@@ -10,6 +10,8 @@ export type PublicRouteId =
 	| "vaparshop"
 	| "hornyPlace"
 	| "priceTagPrinter"
+	| "blog"
+	| "blogPost"
 	| "componentOgPreview"
 	| "componentDocOgPreview";
 
@@ -25,6 +27,8 @@ export type PublicRouteSocialImageKind =
 	| "vaparshop"
 	| "hornyPlace"
 	| "priceTagPrinter"
+	| "blog"
+	| "blogPost"
 	| null;
 
 export type PublicRouteJsonLdKind =
@@ -110,6 +114,18 @@ export const PUBLIC_ROUTE_POLICIES: Record<PublicRouteId, PublicRoutePolicy> = {
 		...INDEXABLE_POLICY,
 		socialImageKind: "priceTagPrinter",
 		jsonLdKind: "projectCaseStudy",
+	},
+	blog: {
+		id: "blog",
+		...INDEXABLE_POLICY,
+		socialImageKind: "work",
+		jsonLdKind: "collectionPage",
+	},
+	blogPost: {
+		id: "blogPost",
+		...INDEXABLE_POLICY,
+		socialImageKind: null,
+		jsonLdKind: "techArticle",
 	},
 	componentOgPreview: {
 		id: "componentOgPreview",

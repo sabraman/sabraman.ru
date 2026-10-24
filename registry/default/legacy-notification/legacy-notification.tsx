@@ -8,8 +8,7 @@ import { cn } from "~/lib/utils";
 const LEGACY_NOTIFICATION_FONT_FAMILY =
 	'"Helvetica Neue", Helvetica, Arial, sans-serif';
 
-export interface LegacyNotificationProps
-	extends React.HTMLAttributes<HTMLDivElement> {
+export interface LegacyNotificationProps extends React.HTMLAttributes<HTMLDivElement> {
 	body?: string;
 	icon?: React.ReactNode;
 	showIcon?: boolean;
@@ -20,8 +19,10 @@ export interface LegacyNotificationProps
 	title?: string;
 }
 
-export interface ShowLegacyNotificationOptions
-	extends Omit<LegacyNotificationProps, "className" | "style"> {
+export interface ShowLegacyNotificationOptions extends Omit<
+	LegacyNotificationProps,
+	"className" | "style"
+> {
 	toastOptions?: ExternalToast;
 }
 

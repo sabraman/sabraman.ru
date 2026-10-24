@@ -5,8 +5,7 @@ import { useIsomorphicLayoutEffect } from "../lib/hooks/use-isomorphic-layout-ef
 import { initRoundbit } from "../lib/roundbit";
 import { cn } from "../lib/utils";
 
-export interface RoundbitFrameProps
-	extends React.HTMLAttributes<HTMLDivElement> {
+export interface RoundbitFrameProps extends React.HTMLAttributes<HTMLDivElement> {
 	contentClassName?: string;
 	contentProps?: React.HTMLAttributes<HTMLDivElement>;
 }

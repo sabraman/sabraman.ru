@@ -19,7 +19,8 @@
 		"hooks": "~/hooks"
 	},
 	"registries": {
-		"@sabraman": "https://sabraman.ru/r/{name}.json",
-		"@ncdai": "https://chanhdai.com/r/{name}.json"
+		"@sabraman": "https://sabraman.art/r/{name}.json",
+		"@ncdai": "https://chanhdai.com/r/{name}.json",
+		"@soundcn": "https://soundcn.xyz/r/{name}.json"
 	}
 }

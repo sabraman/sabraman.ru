@@ -1,6 +1,6 @@
 import type { SupportedLocale } from "~/i18n/types";
 
-export const SITE_URL = "https://sabraman.ru";
+export const SITE_URL = "https://sabraman.art";
 export const SITE_URL_OBJECT = new URL(SITE_URL);
 export const SITE_NAME = "Sabraman";
 export const SITE_TITLE = "Sabraman - Danya Yudin Portfolio";

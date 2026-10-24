@@ -3,9 +3,9 @@ export function getLegacyNotificationHubPath() {
 }
 
 export const LEGACY_NOTIFICATION_URLS = {
-	direct: "https://sabraman.ru/r/legacy-notification.json",
-	registry: "https://sabraman.ru/r/registry.json",
-	docs: "https://sabraman.ru/components/legacy-notification",
+	direct: "https://sabraman.art/r/legacy-notification.json",
+	registry: "https://sabraman.art/r/registry.json",
+	docs: "https://sabraman.art/components/legacy-notification",
 } as const;
 
 export const LEGACY_NOTIFICATION_INSTALL_COMMANDS = {

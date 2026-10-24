@@ -3,9 +3,9 @@ export function getLegacyClockHubPath() {
 }
 
 export const LEGACY_CLOCK_URLS = {
-	direct: "https://sabraman.ru/r/legacy-clock.json",
-	registry: "https://sabraman.ru/r/registry.json",
-	docs: "https://sabraman.ru/components/legacy-clock",
+	direct: "https://sabraman.art/r/legacy-clock.json",
+	registry: "https://sabraman.art/r/registry.json",
+	docs: "https://sabraman.art/components/legacy-clock",
 } as const;
 
 export const LEGACY_CLOCK_INSTALL_COMMANDS = {

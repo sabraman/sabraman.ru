@@ -7,6 +7,7 @@ import {
 	pickSection,
 	RelatedProjects,
 	SectionCard,
+	AuthorCard,
 } from "./CaseStudyPrimitives";
 
 export function PlonqAiSearchPage({
@@ -16,7 +17,7 @@ export function PlonqAiSearchPage({
 	relatedProjects,
 }: ProjectPageProps) {
 	return (
-		<main className="container mx-auto max-w-6xl px-4 py-14 md:py-20">
+		<main className="container mx-auto max-w-2xl px-4 py-14 md:py-20">
 			<PageTopNav locale={locale} />
 			<ProjectHero
 				project={project}
@@ -25,46 +26,40 @@ export function PlonqAiSearchPage({
 				accentClassName="bg-fuchsia-500/20"
 			/>
 
-			<div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-12">
-				<div className="space-y-6 lg:col-span-8">
-					<SectionCard
-						section={pickSection(caseStudy, "context")}
-						locale={locale}
-					/>
-					<SectionCard
-						section={pickSection(caseStudy, "architecture")}
-						locale={locale}
-					/>
-					<SectionCard
-						section={pickSection(caseStudy, "features")}
-						locale={locale}
-					/>
-				</div>
-				<div className="space-y-6 lg:col-span-4">
-					<SectionCard
-						section={pickSection(caseStudy, "tooling")}
-						locale={locale}
-					/>
-					<SectionCard
-						section={pickSection(caseStudy, "outcome")}
-						locale={locale}
-					/>
-					<SectionCard
-						section={pickSection(caseStudy, "tradeoffs")}
-						locale={locale}
-					/>
-				</div>
+			<div className="mt-8 space-y-6">
+				<SectionCard
+					section={pickSection(caseStudy, "context")}
+					locale={locale}
+				/>
+				<SectionCard
+					section={pickSection(caseStudy, "architecture")}
+					locale={locale}
+				/>
+				<SectionCard
+					section={pickSection(caseStudy, "features")}
+					locale={locale}
+				/>
+				<SectionCard
+					section={pickSection(caseStudy, "tooling")}
+					locale={locale}
+				/>
+				<SectionCard
+					section={pickSection(caseStudy, "outcome")}
+					locale={locale}
+				/>
+				<SectionCard
+					section={pickSection(caseStudy, "tradeoffs")}
+					locale={locale}
+				/>
 			</div>
 
-			<div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
-				<div className="lg:col-span-2">
-					<FaqBlock caseStudy={caseStudy} locale={locale} />
-				</div>
-				<div className="space-y-6">
-					<ExternalLinks project={project} locale={locale} />
-					<RelatedProjects relatedProjects={relatedProjects} locale={locale} />
-				</div>
+			<div className="mt-8 space-y-6">
+				<FaqBlock caseStudy={caseStudy} locale={locale} />
+				<ExternalLinks project={project} locale={locale} />
+				<RelatedProjects relatedProjects={relatedProjects} locale={locale} />
 			</div>
+
+			<AuthorCard locale={locale} />
 		</main>
 	);
 }

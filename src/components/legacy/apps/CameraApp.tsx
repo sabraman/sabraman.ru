@@ -223,6 +223,9 @@ export default function CameraApp({ mode, onClose }: CameraAppProps) {
 		};
 
 		if (!navigator.mediaDevices?.getUserMedia) {
+			// Camera availability is external browser state checked on mount;
+			// it can't be derived during render without hydration mismatches.
+			// oxlint-disable-next-line react/set-state-in-effect
 			setCameraError(copy.cameraUnavailable);
 			return stopCurrentStream;
 		}

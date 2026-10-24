@@ -39,13 +39,17 @@ _October 2022 – May 2024 | Saint Petersburg_
 ### Selected Projects
 
 **Price Tag Printer | Full-Stack Retail Tool**\
+
 - Built a Next.js tool for generating price tags from Excel and Google Sheets with bulk editing and export to PDF and HTML.
 
 **SMO TG Miniapp | Telegram Commerce**\
+
 - Shipped a Telegram mini app for retail and wholesale ordering with role-based flows and MoySklad integration.
 
 **PLONQ AI Search | AI Product Discovery**\
+
 - Built AI-assisted product search using hybrid semantic and keyword retrieval with similarity-based recommendations.
 
 **PSP Book Reader | Native Reader for Sony PSP**\
+
 - Developed a native EPUB reader in **C/C++** and **SDL2** with caching, chapter navigation, and power-aware performance tuning.

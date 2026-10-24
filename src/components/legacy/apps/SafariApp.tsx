@@ -6,6 +6,7 @@ import {
 	type ReactNode,
 	useEffect,
 	useEffectEvent,
+	useMemo,
 	useRef,
 	useState,
 } from "react";
@@ -194,8 +195,9 @@ const COPY = {
 		vaparshop: "VAPARSHOP",
 		hornyPlace: "HORNY PLACE",
 		priceTagPrinter: "Price Tag Printer",
+		lunariaSearchEcosystem: "Lunaria Search Ecosystem",
 		archTaplink: "ARCH Taplink",
-		floristQuiz: "Florist Quiz",
+		flowerSuite: "Flower Suite",
 		address: "Address",
 		refresh: "Refresh",
 		search: "Search",
@@ -208,7 +210,7 @@ const COPY = {
 		historyGithubDesc: "Repositories, code, and recent pushes.",
 		historySmbroDesc: "Store platform and operational surface.",
 		historyArchDesc: "Store landing and link hub.",
-		historyFloristDesc: "Mobile-first learning quiz and PWA.",
+		historyFlowerSuiteDesc: "Retail suite: write-off TMA & florist quiz PWA.",
 	},
 	ru: {
 		searchPlaceholder: "Поиск",
@@ -254,8 +256,9 @@ const COPY = {
 		vaparshop: "VAPARSHOP",
 		hornyPlace: "HORNY PLACE",
 		priceTagPrinter: "Price Tag Printer",
+		lunariaSearchEcosystem: "Lunaria Search Ecosystem",
 		archTaplink: "ARCH Taplink",
-		floristQuiz: "Florist Quiz",
+		flowerSuite: "Flower Suite",
 		address: "Адрес",
 		refresh: "Обновить",
 		search: "Поиск",
@@ -268,7 +271,7 @@ const COPY = {
 		historyGithubDesc: "Репозитории, код и последние коммиты.",
 		historySmbroDesc: "Платформа магазина и панель управления.",
 		historyArchDesc: "Лендинг магазина и хаб ссылок.",
-		historyFloristDesc: "Обучающий мобильный квиз и PWA.",
+		historyFlowerSuiteDesc: "Учет списаний в TMA и квиз-опросник в PWA.",
 	},
 } as const;
 
@@ -615,6 +618,16 @@ function buildDestinations(locale: Locale, copy: (typeof COPY)[Locale]) {
 					: "Component experiments and UI surfaces.",
 			keywords: ["components", "ui", "ios", "компоненты"],
 		},
+		blog: {
+			key: "blog",
+			title: locale === "ru" ? "Блог" : "Blog",
+			url: localePath(locale, "/blog"),
+			description:
+				locale === "ru"
+					? "Технические разборы, статьи о веб-разработке, E-E-A-T, AI-поиске и архитектурных решениях."
+					: "Technical deep-dives, articles on web dev, E-E-A-T, and AI search.",
+			keywords: ["blog", "seo", "ai", "web", "блог", "статьи"],
+		},
 		vaparshop: {
 			key: "vaparshop",
 			title: copy.vaparshop,
@@ -645,6 +658,16 @@ function buildDestinations(locale: Locale, copy: (typeof COPY)[Locale]) {
 					: "Spreadsheet-driven price tag generator.",
 			keywords: ["price tag", "printer", "tool", "retail"],
 		},
+		lunariaSearchEcosystem: {
+			key: "lunaria-search-ecosystem",
+			title: copy.lunariaSearchEcosystem,
+			url: getCaseStudyPath(locale, "lunaria-search-ecosystem"),
+			description:
+				locale === "ru"
+					? "Региональная поисковая экосистема и AI-SEO контент-движок."
+					: "Regional search ecosystem and AI-SEO content engine.",
+			keywords: ["lunaria", "seo", "search", "ai", "поиск", "экосистема"],
+		},
 		archTaplink: {
 			key: "arch-taplink",
 			title: copy.archTaplink,
@@ -655,15 +678,15 @@ function buildDestinations(locale: Locale, copy: (typeof COPY)[Locale]) {
 					: "Store landing and link hub for ARCH.",
 			keywords: ["arch", "taplink", "landing", "link hub"],
 		},
-		floristQuiz: {
-			key: "florist-quiz",
-			title: copy.floristQuiz,
-			url: getCaseStudyPath(locale, "florist-quiz"),
+		flowerSuite: {
+			key: "flower-mini-app",
+			title: copy.flowerSuite,
+			url: getCaseStudyPath(locale, "flower-mini-app"),
 			description:
 				locale === "ru"
-					? "Мобильный учебный квиз и PWA."
-					: "Mobile-first learning quiz and PWA.",
-			keywords: ["florist", "quiz", "pwa", "game"],
+					? "Розничный пакет: TMA учета списаний и квиз букетов."
+					: "Retail flower suite: write-off TMA & PWA quiz.",
+			keywords: ["flower", "retail", "suite", "quiz", "tma", "pwa", "цветы"],
 		},
 	} satisfies Record<string, Destination>;
 }
@@ -1403,41 +1426,34 @@ function getActiveHistoryEntry(tab: BrowserTab | null) {
 export default function SafariApp() {
 	const locale = resolveLocale(useLegacyUiLocale());
 	const copy = COPY[locale];
-	const destinationsRef = useRef<ReturnType<typeof buildDestinations> | null>(
-		null,
-	);
 	const nextIdRef = useRef(1);
 	const iframeRef = useRef<HTMLIFrameElement | null>(null);
 	const tabCardRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-	if (!destinationsRef.current) {
-		destinationsRef.current = buildDestinations(locale, copy);
-	}
-
-	const destinations = destinationsRef.current;
-
-	const initialTabsRef = useRef<BrowserTab[] | null>(null);
-	if (!initialTabsRef.current) {
-		initialTabsRef.current = [
-			{
-				id: "tab-favorites",
-				history: [
-					makeInternalEntry(
-						"entry-favorites",
-						copy.favorites,
-						"about:favorites",
-						copy.recentlyVisited,
-					),
-				],
-				historyIndex: 0,
-				reloadNonce: 0,
-			},
-		];
-	}
+	const destinations = useMemo(
+		() => buildDestinations(locale, copy),
+		[locale, copy],
+	);
 
 	const [view, setView] = useState<SafariView>("page");
-	const [tabs, setTabs] = useState(initialTabsRef.current);
-	const [activeTabId, setActiveTabId] = useState(initialTabsRef.current[0]?.id);
+	const [tabs, setTabs] = useState<BrowserTab[]>(() => [
+		{
+			id: "tab-favorites",
+			history: [
+				makeInternalEntry(
+					"entry-favorites",
+					copy.favorites,
+					"about:favorites",
+					copy.recentlyVisited,
+				),
+			],
+			historyIndex: 0,
+			reloadNonce: 0,
+		},
+	]);
+	const [activeTabId, setActiveTabId] = useState<string | undefined>(
+		"tab-favorites",
+	);
 	const [addressDraft, setAddressDraft] = useState("");
 	const [searchDraft, setSearchDraft] = useState("");
 	const [bookmarkEntries, setBookmarkEntries] = useState<BrowserEntry[]>(() =>
@@ -1459,10 +1475,10 @@ export default function SafariApp() {
 			destinations.priceTagPrinter.description,
 		),
 		makeEntry(
-			"reading-florist-quiz",
-			destinations.floristQuiz.title,
-			destinations.floristQuiz.url,
-			destinations.floristQuiz.description,
+			"reading-flower-suite",
+			destinations.flowerSuite.title,
+			destinations.flowerSuite.url,
+			destinations.flowerSuite.description,
 		),
 	]);
 	const [historyEntries, setHistoryEntries] = useState<BrowserEntry[]>(() => [
@@ -1485,10 +1501,10 @@ export default function SafariApp() {
 			copy.historyArchDesc,
 		),
 		makeEntry(
-			"history-florist",
-			"Florist Quiz",
+			"history-flower-suite",
+			"Flower Retail Suite",
 			"https://florist-quiz.vercel.app",
-			copy.historyFloristDesc,
+			copy.historyFlowerSuiteDesc,
 		),
 	]);
 	const [shareSheetOpen, setShareSheetOpen] = useState(false);
@@ -1516,6 +1532,43 @@ export default function SafariApp() {
 	const recentPageEntries = historyEntries.filter(
 		(entry) => !isSafariInternalUrl(entry.url),
 	);
+
+	// Adjust derived state during render (replaces set-state-in-effect).
+	const [syncedEntry, setSyncedEntry] = useState<BrowserEntry | null>(null);
+	if (currentEntry !== syncedEntry) {
+		setSyncedEntry(currentEntry);
+		if (currentEntry) {
+			setAddressDraft(formatAddressValue(currentEntry.url));
+			setSearchDraft("");
+		}
+	}
+
+	const [syncedHistoryEntry, setSyncedHistoryEntry] =
+		useState<BrowserEntry | null>(null);
+	if (
+		currentEntry &&
+		currentEntry !== syncedHistoryEntry &&
+		!isSafariInternalUrl(currentEntry.url)
+	) {
+		setSyncedHistoryEntry(currentEntry);
+		setHistoryEntries((current) =>
+			upsertRecentEntry(
+				current,
+				cloneEntry(currentEntry, `history-${currentEntry.id}`),
+			),
+		);
+	}
+
+	const [syncedView, setSyncedView] = useState<SafariView>(view);
+	if (syncedView !== view) {
+		setSyncedView(view);
+		if (view !== "bookmarks" && view !== "reading-list" && view !== "history") {
+			setEditMode(false);
+		}
+		if (view !== "page") {
+			setShareSheetOpen(false);
+		}
+	}
 
 	const icloudSections: ICloudSection[] = [
 		{
@@ -2709,26 +2762,6 @@ export default function SafariApp() {
 	}, []);
 
 	useEffect(() => {
-		if (currentEntry) {
-			setAddressDraft(formatAddressValue(currentEntry.url));
-			setSearchDraft("");
-		}
-	}, [currentEntry]);
-
-	useEffect(() => {
-		if (!currentEntry || isSafariInternalUrl(currentEntry.url)) {
-			return;
-		}
-
-		setHistoryEntries((current) =>
-			upsertRecentEntry(
-				current,
-				cloneEntry(currentEntry, `history-${currentEntry.id}`),
-			),
-		);
-	}, [currentEntry]);
-
-	useEffect(() => {
 		if (!toast) {
 			return;
 		}
@@ -2736,16 +2769,6 @@ export default function SafariApp() {
 		const timeoutId = window.setTimeout(() => setToast(null), 1600);
 		return () => window.clearTimeout(timeoutId);
 	}, [toast]);
-
-	useEffect(() => {
-		if (view !== "bookmarks" && view !== "reading-list" && view !== "history") {
-			setEditMode(false);
-		}
-
-		if (view !== "page") {
-			setShareSheetOpen(false);
-		}
-	}, [view]);
 
 	useEffect(() => {
 		if (view !== "tabs" || !activeTabId) {

@@ -4,11 +4,10 @@ import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "./ui/textarea";
 
-interface InputWithIconProps
-	extends Omit<
-		React.InputHTMLAttributes<HTMLInputElement>,
-		"onChange" | "onBlur"
-	> {
+interface InputWithIconProps extends Omit<
+	React.InputHTMLAttributes<HTMLInputElement>,
+	"onChange" | "onBlur"
+> {
 	label: string;
 	placeholder: string;
 	type: string;

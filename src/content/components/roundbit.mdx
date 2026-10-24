@@ -1,6 +1,6 @@
 ---
-title: "Roundbit"
-description: "Use this for pixel-stepped rounded corners when a plain border radius feels too smooth."
+title: "Roundbit - Pixel-Stepped Corners React Component"
+description: "A Tailwind-compatible React utility component to generate pixel-stepped rounded corners where a standard CSS border radius is too smooth."
 kicker: "Registry component"
 keywords:
   - "pixel rounded corners"
@@ -29,8 +29,8 @@ Install the registry item, then use the utility classes for direct clip mode or 
 For clip-only use cases, initialize the runtime on the nearest client subtree instead of mutating the whole document, then add `roundbit-*` classes the same way you would add `rounded-*`.
 
 <ComponentSource
-  src="src/components/roundbit/examples/RoundbitQuickStartExample.tsx"
-  title="components/roundbit-quick-start-example.tsx"
+	src="src/components/roundbit/examples/RoundbitQuickStartExample.tsx"
+	title="components/roundbit-quick-start-example.tsx"
 />
 
 ## Playground
@@ -44,129 +44,123 @@ Use the live controls to see how the same radius behaves when you change the cor
 ### Direct Radius Examples
 
 <ComponentPreview
-  description="Uniform corners with the default step grid."
-  name="roundbit-xl"
-  size="compact"
-  title="roundbit-xl"
+	description="Uniform corners with the default step grid."
+	name="roundbit-xl"
+	size="compact"
+	title="roundbit-xl"
 />
 
 <ComponentPreview
-  description="An arbitrary radius without changing the step system."
-  name="roundbit-18px"
-  size="compact"
-  title="roundbit-[18px]"
+	description="An arbitrary radius without changing the step system."
+	name="roundbit-18px"
+	size="compact"
+	title="roundbit-[18px]"
 />
 
 <ComponentPreview
-  description="A tighter stair pattern with the same radius token."
-  name="roundbit-xl-step-1"
-  size="compact"
-  title="roundbit-xl roundbit-step-1"
+	description="A tighter stair pattern with the same radius token."
+	name="roundbit-xl-step-1"
+	size="compact"
+	title="roundbit-xl roundbit-step-1"
 />
 
 <ComponentPreview
-  description="A chunkier stair pattern with the same radius token."
-  name="roundbit-xl-step-4"
-  size="compact"
-  title="roundbit-xl roundbit-step-4"
+	description="A chunkier stair pattern with the same radius token."
+	name="roundbit-xl-step-4"
+	size="compact"
+	title="roundbit-xl roundbit-step-4"
 />
 
 ### Direct Edge Examples
 
 <ComponentPreview
-  description="Only the top edge uses stepped corners."
-  name="roundbit-t-xl"
-  size="compact"
-  title="roundbit-t-xl"
+	description="Only the top edge uses stepped corners."
+	name="roundbit-t-xl"
+	size="compact"
+	title="roundbit-t-xl"
 />
 
 <ComponentPreview
-  description="Only the right edge uses stepped corners."
-  name="roundbit-r-xl"
-  size="compact"
-  title="roundbit-r-xl"
+	description="Only the right edge uses stepped corners."
+	name="roundbit-r-xl"
+	size="compact"
+	title="roundbit-r-xl"
 />
 
 <ComponentPreview
-  description="Only the bottom edge uses stepped corners."
-  name="roundbit-b-xl"
-  size="compact"
-  title="roundbit-b-xl"
+	description="Only the bottom edge uses stepped corners."
+	name="roundbit-b-xl"
+	size="compact"
+	title="roundbit-b-xl"
 />
 
 <ComponentPreview
-  description="Only the left edge uses stepped corners."
-  name="roundbit-l-xl"
-  size="compact"
-  title="roundbit-l-xl"
+	description="Only the left edge uses stepped corners."
+	name="roundbit-l-xl"
+	size="compact"
+	title="roundbit-l-xl"
 />
 
 ### Direct Corner Examples
 
 <ComponentPreview
-  description="Only the top-left corner uses the stepped radius."
-  name="roundbit-tl-xl"
-  size="compact"
-  title="roundbit-tl-xl"
+	description="Only the top-left corner uses the stepped radius."
+	name="roundbit-tl-xl"
+	size="compact"
+	title="roundbit-tl-xl"
 />
 
 <ComponentPreview
-  description="Only the top-right corner uses the stepped radius."
-  name="roundbit-tr-xl"
-  size="compact"
-  title="roundbit-tr-xl"
+	description="Only the top-right corner uses the stepped radius."
+	name="roundbit-tr-xl"
+	size="compact"
+	title="roundbit-tr-xl"
 />
 
 <ComponentPreview
-  description="Only the bottom-right corner uses the stepped radius."
-  name="roundbit-br-xl"
-  size="compact"
-  title="roundbit-br-xl"
+	description="Only the bottom-right corner uses the stepped radius."
+	name="roundbit-br-xl"
+	size="compact"
+	title="roundbit-br-xl"
 />
 
 <ComponentPreview
-  description="Only the bottom-left corner uses the stepped radius."
-  name="roundbit-bl-xl"
-  size="compact"
-  title="roundbit-bl-xl"
+	description="Only the bottom-left corner uses the stepped radius."
+	name="roundbit-bl-xl"
+	size="compact"
+	title="roundbit-bl-xl"
 />
 
 ### Frame Examples
 
 <ComponentPreview
-  description="Uniform frame corners with one stable border, outline, and shadow setup."
-  name="roundbit-frame-xl"
-  size="compact"
-  title="RoundbitFrame + roundbit-xl"
+	description="Uniform frame corners with one stable border, outline, and shadow setup."
+	name="roundbit-frame-xl"
+	size="compact"
+	title="RoundbitFrame + roundbit-xl"
 />
 
 <ComponentPreview
-  description="A frame example with only the top-left corner stepped."
-  name="roundbit-frame-tl-xl"
-  size="compact"
-  title="RoundbitFrame + roundbit-tl-xl"
+	description="A frame example with only the top-left corner stepped."
+	name="roundbit-frame-tl-xl"
+	size="compact"
+	title="RoundbitFrame + roundbit-tl-xl"
 />
 
 <ComponentPreview
-  description="A replaced-element wrapper using one outer radius pattern and a chunkier step grid."
-  name="roundbit-frame-xl-step-4-image"
-  size="compact"
-  title="RoundbitFrame + roundbit-xl roundbit-step-4"
+	description="A replaced-element wrapper using one outer radius pattern and a chunkier step grid."
+	name="roundbit-frame-xl-step-4-image"
+	size="compact"
+	title="RoundbitFrame + roundbit-xl roundbit-step-4"
 />
 
 ## API Reference
 
 `RoundbitFrameProps` gives you a wrapper with an inner `roundbit-content` surface, while `buildRoundbitPaths` and `initRoundbit` cover the utility-only runtime path.
 
-<AutoTypeTable
-  path="src/components/roundbit.tsx"
-  name="RoundbitFrameProps"
-/>
+<AutoTypeTable path="src/components/roundbit.tsx" name="RoundbitFrameProps" />
 
-<AutoTypeTable
-  path="src/lib/roundbit.ts"
-  name="RoundbitPathOptions"
-/>
+<AutoTypeTable path="src/lib/roundbit.ts" name="RoundbitPathOptions" />
 
 ## Notes
 

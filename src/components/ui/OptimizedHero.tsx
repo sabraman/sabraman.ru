@@ -1,32 +1,29 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { motion, useScroll, useTransform } from "framer-motion";
-import {
-	Suspense,
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { Suspense, useCallback, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { useIsMounted } from "~/lib/hooks/use-is-mounted";
+import { mulberry32 } from "~/lib/seeded-random";
 
 // Optimized particle system for background
 function ParticleSystem() {
 	const meshRef = useRef<THREE.InstancedMesh>(null);
 	const { viewport } = useThree();
 
-	// Pre-calculate particle positions (performance optimization)
+	// Pre-calculate particle positions (performance optimization).
+	// Seeded PRNG: stable across re-renders and hydration.
 	const particles = useMemo(() => {
+		const random = mulberry32(42);
 		const positions: { x: number; y: number; z: number; speed: number }[] = [];
 
 		for (let i = 0; i < 50; i++) {
 			positions.push({
-				x: (Math.random() - 0.5) * viewport.width * 2,
-				y: (Math.random() - 0.5) * viewport.height * 2,
-				z: (Math.random() - 0.5) * 10,
-				speed: Math.random() * 0.02 + 0.01,
+				x: (random() - 0.5) * viewport.width * 2,
+				y: (random() - 0.5) * viewport.height * 2,
+				z: (random() - 0.5) * 10,
+				speed: random() * 0.02 + 0.01,
 			});
 		}
 		return positions;
@@ -99,7 +96,7 @@ export function OptimizedHero({
 	className = "",
 }: OptimizedHeroProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
-	const [isMounted, setIsMounted] = useState(false);
+	const isMounted = useIsMounted();
 	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
 
 	const setContainerRef = useCallback((node: HTMLDivElement | null) => {
@@ -116,10 +113,6 @@ export function OptimizedHero({
 	const textScale = useTransform(scrollYProgress, [0, 0.1], [1, 1.1]);
 	const textOpacity = useTransform(scrollYProgress, [0.05, 0.15], [1, 0]);
 	const textY = useTransform(scrollYProgress, [0, 0.1], ["0%", "-30%"]);
-
-	useEffect(() => {
-		setIsMounted(true);
-	}, []);
 
 	if (!isMounted) {
 		return null;

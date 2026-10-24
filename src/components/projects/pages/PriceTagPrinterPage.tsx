@@ -106,7 +106,7 @@ export function PriceTagPrinterPage({
 	const tradeoffsSection = pickSection(caseStudy, "tradeoffs");
 
 	return (
-		<main className="container mx-auto max-w-6xl px-4 py-14 md:py-20">
+		<main className="container mx-auto max-w-2xl px-4 py-14 md:py-20">
 			<PageTopNav locale={locale} />
 
 			<ProjectHero
@@ -116,10 +116,10 @@ export function PriceTagPrinterPage({
 				accentClassName="bg-emerald-500/20"
 			/>
 
-			<div className="mt-12 grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
+			<div className="mt-12 space-y-12">
 				{/* Sticky Left Sidebar: Context */}
-				<div className="lg:sticky lg:top-24 lg:col-span-4">
-					<div className="flex flex-col space-y-8 rounded-2xl bg-zinc-50 p-6 md:p-8 dark:bg-zinc-800/40">
+				<div>
+					<div className="flex flex-col space-y-8 py-4">
 						<SectionText
 							title={contextSection.title[locale]}
 							paragraphs={contextSection.paragraphs}
@@ -138,7 +138,7 @@ export function PriceTagPrinterPage({
 				</div>
 
 				{/* Right Column: Deep Dive */}
-				<div className="flex flex-col space-y-16 lg:col-span-8">
+				<div className="flex flex-col space-y-16">
 					{/* Architecture Section */}
 					<div className="space-y-8">
 						<SectionText
@@ -149,8 +149,8 @@ export function PriceTagPrinterPage({
 						/>
 
 						{/* Custom Callout Grid */}
-						<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-							<div className="uppercase-style-container flex flex-col gap-3 rounded-xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+						<div className="grid grid-cols-1 gap-4">
+							<div className="flex flex-col gap-3 border-b border-zinc-200 dark:border-zinc-800 pb-4 last:border-b-0">
 								<div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
 									<MonitorSmartphone className="h-5 w-5" />
 									<h4 className="font-semibold text-zinc-900 dark:text-zinc-100">
@@ -161,7 +161,7 @@ export function PriceTagPrinterPage({
 									{t.architectureDesc}
 								</p>
 							</div>
-							<div className="flex flex-col gap-3 rounded-xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+							<div className="flex flex-col gap-3 border-b border-zinc-200 dark:border-zinc-800 pb-4 last:border-b-0">
 								<div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
 									<Paintbrush className="h-5 w-5" />
 									<h4 className="font-semibold text-zinc-900 dark:text-zinc-100">
@@ -172,7 +172,7 @@ export function PriceTagPrinterPage({
 									{t.themeDesc}
 								</p>
 							</div>
-							<div className="flex flex-col gap-3 rounded-xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+							<div className="flex flex-col gap-3 border-b border-zinc-200 dark:border-zinc-800 pb-4 last:border-b-0">
 								<div className="flex items-center gap-2 text-blue-600 dark:text-blue-400">
 									<Database className="h-5 w-5" />
 									<h4 className="font-semibold text-zinc-900 dark:text-zinc-100">
@@ -183,7 +183,7 @@ export function PriceTagPrinterPage({
 									{t.dataDesc}
 								</p>
 							</div>
-							<div className="flex flex-col gap-3 rounded-xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+							<div className="flex flex-col gap-3 border-b border-zinc-200 dark:border-zinc-800 pb-4 last:border-b-0">
 								<div className="flex items-center gap-2 text-purple-600 dark:text-purple-400">
 									<Printer className="h-5 w-5" />
 									<h4 className="font-semibold text-zinc-900 dark:text-zinc-100">
@@ -216,8 +216,8 @@ export function PriceTagPrinterPage({
 							icon={<Settings2 className="h-5 w-5" />}
 						/>
 
-						<div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-							<div className="flex flex-col gap-2 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/40">
+						<div className="grid grid-cols-1 gap-4">
+							<div className="flex flex-col gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-4 last:border-b-0">
 								<div className="font-semibold text-xs text-zinc-500 uppercase tracking-wider">
 									{t.frontend}
 								</div>
@@ -230,7 +230,7 @@ export function PriceTagPrinterPage({
 									<Badge variant="secondary">Framer Motion</Badge>
 								</div>
 							</div>
-							<div className="flex flex-col gap-2 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/40">
+							<div className="flex flex-col gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-4 last:border-b-0">
 								<div className="font-semibold text-xs text-zinc-500 uppercase tracking-wider">
 									{t.backend}
 								</div>
@@ -242,7 +242,7 @@ export function PriceTagPrinterPage({
 									<Badge variant="secondary">XLSX</Badge>
 								</div>
 							</div>
-							<div className="flex flex-col gap-2 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/40">
+							<div className="flex flex-col gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-4 last:border-b-0">
 								<div className="font-semibold text-xs text-zinc-500 uppercase tracking-wider">
 									{t.tools}
 								</div>
@@ -258,7 +258,7 @@ export function PriceTagPrinterPage({
 
 					{/* Tradeoffs */}
 					{tradeoffsSection && (
-						<div className="space-y-8 rounded-2xl border border-zinc-100 bg-white p-6 shadow-sm md:p-8 dark:border-zinc-800 dark:bg-zinc-900/50">
+						<div className="space-y-8 py-4">
 							<SectionText
 								title={tradeoffsSection.title[locale]}
 								paragraphs={tradeoffsSection.paragraphs}
@@ -270,8 +270,8 @@ export function PriceTagPrinterPage({
 				</div>
 			</div>
 
-			<div className="mt-16 grid grid-cols-1 gap-8 lg:mt-24 lg:grid-cols-3 lg:gap-12">
-				<div className="lg:col-span-2">
+			<div className="mt-16 space-y-8 lg:mt-24">
+				<div>
 					<FaqBlock caseStudy={caseStudy} locale={locale} />
 				</div>
 				<div className="flex flex-col space-y-8">

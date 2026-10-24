@@ -3,9 +3,9 @@ export function getLegacyBarButtonHubPath() {
 }
 
 export const LEGACY_BAR_BUTTON_URLS = {
-	direct: "https://sabraman.ru/r/legacy-bar-button.json",
-	registry: "https://sabraman.ru/r/registry.json",
-	docs: "https://sabraman.ru/components/legacy-bar-button",
+	direct: "https://sabraman.art/r/legacy-bar-button.json",
+	registry: "https://sabraman.art/r/registry.json",
+	docs: "https://sabraman.art/components/legacy-bar-button",
 } as const;
 
 export const LEGACY_BAR_BUTTON_INSTALL_COMMANDS = {

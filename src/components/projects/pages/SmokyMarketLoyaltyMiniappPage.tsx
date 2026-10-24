@@ -35,7 +35,7 @@ export function SmokyMarketLoyaltyMiniappPage({
 	const contactHref = getLocalizedHashPathname(locale, "/", "contact-section");
 
 	return (
-		<main className="container mx-auto max-w-6xl px-4 py-14 md:py-20">
+		<main className="container mx-auto max-w-2xl px-4 py-14 md:py-20">
 			<PageTopNav locale={locale} />
 			<ProjectHero
 				project={project}
@@ -44,7 +44,7 @@ export function SmokyMarketLoyaltyMiniappPage({
 				accentClassName="bg-emerald-500/20"
 			/>
 
-			<div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+			<div className="mt-8 space-y-6">
 				<SectionCard
 					section={pickSection(caseStudy, "context")}
 					locale={locale}
@@ -56,7 +56,6 @@ export function SmokyMarketLoyaltyMiniappPage({
 				<SectionCard
 					section={pickSection(caseStudy, "features")}
 					locale={locale}
-					className="md:col-span-2"
 				/>
 				<SectionCard
 					section={pickSection(caseStudy, "outcome")}
@@ -69,15 +68,12 @@ export function SmokyMarketLoyaltyMiniappPage({
 				<SectionCard
 					section={pickSection(caseStudy, "tooling")}
 					locale={locale}
-					className="md:col-span-2"
 				/>
 			</div>
 
-			<div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+			<div className="mt-8 space-y-6">
 				<ExternalLinks project={project} locale={locale} />
 				<RelatedProjects relatedProjects={relatedProjects} locale={locale} />
-			</div>
-			<div className="mt-6">
 				<FaqBlock caseStudy={caseStudy} locale={locale} />
 			</div>
 			<section className="mt-6 rounded-3xl border border-primary/15 bg-background/70 p-6 shadow-sm md:p-8">

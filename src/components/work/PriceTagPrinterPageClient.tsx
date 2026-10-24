@@ -14,7 +14,7 @@ import {
 import { motion } from "motion/react";
 import Image from "next/image";
 import type { ComponentType } from "react";
-import { useEffect, useState } from "react";
+import { useIsMounted } from "~/lib/hooks/use-is-mounted";
 import {
 	SiJest,
 	SiNextdotjs,
@@ -127,11 +127,7 @@ export default function PriceTagPrinterPageClient({
 	copy: PriceTagPrinterPageCopy;
 	locale: SupportedLocale;
 }) {
-	const [isMounted, setIsMounted] = useState(false);
-
-	useEffect(() => {
-		setIsMounted(true);
-	}, []);
+	const isMounted = useIsMounted();
 
 	if (!isMounted) return null;
 
@@ -188,7 +184,7 @@ export default function PriceTagPrinterPageClient({
 
 							<div className="mb-8 flex flex-wrap items-center gap-6">
 								<a
-									href="https://print.sabraman.ru"
+									href="https://print.sabraman.art"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="inline-flex h-12 items-center justify-center rounded-md bg-accent px-8 font-medium text-sm text-white shadow transition-colors hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50"

@@ -61,14 +61,14 @@ export function TextFlip({
 		onIndexChange?.(index);
 	});
 
-	useEffect(() => {
-		if (!itemCount) {
+	// Clamp the index when the item count changes (adjust during render).
+	if (!itemCount) {
+		if (currentIndex !== 0) {
 			setCurrentIndex(0);
-			return;
 		}
-
-		setCurrentIndex((prev) => (prev >= itemCount ? 0 : prev));
-	}, [itemCount]);
+	} else if (currentIndex >= itemCount) {
+		setCurrentIndex(0);
+	}
 
 	useEffect(() => {
 		if (itemCount <= 1) {

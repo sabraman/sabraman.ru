@@ -19,9 +19,9 @@ export function getLegacyWheelPickerHubPath(locale: SupportedLocale) {
 }
 
 export const LEGACY_WHEEL_PICKER_URLS = {
-	direct: "https://sabraman.ru/r/legacy-wheel-picker.json",
-	registry: "https://sabraman.ru/r/registry.json",
-	docs: "https://sabraman.ru/components/legacy-wheel-picker",
+	direct: "https://sabraman.art/r/legacy-wheel-picker.json",
+	registry: "https://sabraman.art/r/registry.json",
+	docs: "https://sabraman.art/components/legacy-wheel-picker",
 } as const;
 
 export const LEGACY_WHEEL_PICKER_INSTALL_COMMANDS = {
@@ -47,7 +47,7 @@ export const LEGACY_WHEEL_PICKER_DEPENDENCY_COMMANDS = {
 
 export const LEGACY_WHEEL_PICKER_COMPONENTS_JSON_SNIPPET = `{
   "registries": {
-    "@sabraman": "https://sabraman.ru/r/{name}.json"
+    "@sabraman": "https://sabraman.art/r/{name}.json"
   }
 }`;
 

@@ -245,6 +245,26 @@ export default async function RootLayout({
 					id="site-structured-data"
 					data={[createPersonJsonLd(), createWebsiteJsonLd()]}
 				/>
+				<Script
+					id="speculation-rules"
+					type="speculationrules"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify({
+							prerender: [
+								{
+									source: "document",
+									where: {
+										and: [
+											{ href_matches: "/*" },
+											{ not: { href_matches: ["/api/*", "/trpc/*"] } },
+										],
+									},
+									eagerness: "moderate",
+								},
+							],
+						}),
+					}}
+				/>
 				{isProduction ? (
 					<Script id="yandex-metrica" strategy="afterInteractive">
 						{`

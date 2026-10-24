@@ -45,58 +45,39 @@ function readStoredPackageManager() {
 	return null;
 }
 
+function subscribeToPackageManagerStorage(onStoreChange: () => void) {
+	function handleStorage(event: StorageEvent) {
+		if (event.key === STORAGE_KEY) {
+			onStoreChange();
+		}
+	}
+
+	function handlePackageManagerChange() {
+		onStoreChange();
+	}
+
+	window.addEventListener("storage", handleStorage);
+	window.addEventListener(STORAGE_EVENT, handlePackageManagerChange);
+
+	return () => {
+		window.removeEventListener("storage", handleStorage);
+		window.removeEventListener(STORAGE_EVENT, handlePackageManagerChange);
+	};
+}
+
 export function usePreferredPackageManager(
 	initialPackageManager: PackageManager = "bun",
 ) {
-	const [preferredPackageManager, setPreferredPackageManagerState] =
-		React.useState<PackageManager>(initialPackageManager);
-
-	React.useEffect(() => {
-		setPreferredPackageManagerState(
-			readStoredPackageManager() ?? initialPackageManager,
-		);
-	}, [initialPackageManager]);
-
-	React.useEffect(() => {
-		function syncPackageManager(nextPackageManager?: string | null) {
-			if (
-				nextPackageManager &&
-				PACKAGE_MANAGERS.includes(nextPackageManager as PackageManager)
-			) {
-				setPreferredPackageManagerState(nextPackageManager as PackageManager);
-				return;
-			}
-
-			setPreferredPackageManagerState(
-				readStoredPackageManager() ?? initialPackageManager,
-			);
-		}
-
-		function handleStorage(event: StorageEvent) {
-			if (event.key === STORAGE_KEY) {
-				syncPackageManager(event.newValue);
-			}
-		}
-
-		function handlePackageManagerChange(event: Event) {
-			syncPackageManager(
-				(event as CustomEvent<string | null | undefined>).detail ?? null,
-			);
-		}
-
-		window.addEventListener("storage", handleStorage);
-		window.addEventListener(STORAGE_EVENT, handlePackageManagerChange);
-
-		return () => {
-			window.removeEventListener("storage", handleStorage);
-			window.removeEventListener(STORAGE_EVENT, handlePackageManagerChange);
-		};
-	}, [initialPackageManager]);
+	// localStorage is the single source of truth; the server snapshot falls
+	// back to the initial value so hydration stays clean.
+	const preferredPackageManager = React.useSyncExternalStore(
+		subscribeToPackageManagerStorage,
+		() => readStoredPackageManager() ?? initialPackageManager,
+		() => initialPackageManager,
+	);
 
 	const setPreferredPackageManager = React.useCallback(
 		(nextPackageManager: PackageManager) => {
-			setPreferredPackageManagerState(nextPackageManager);
-
 			try {
 				window.localStorage.setItem(STORAGE_KEY, nextPackageManager);
 			} catch {}
@@ -113,8 +94,7 @@ export function usePreferredPackageManager(
 	return [preferredPackageManager, setPreferredPackageManager] as const;
 }
 
-export interface LegacyCodeBlockCommandProps
-	extends React.HTMLAttributes<HTMLDivElement> {
+export interface LegacyCodeBlockCommandProps extends React.HTMLAttributes<HTMLDivElement> {
 	bun?: string;
 	headerActions?: React.ReactNode;
 	initialPackageManager?: PackageManager;

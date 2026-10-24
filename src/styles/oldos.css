@@ -1,0 +1,158 @@
+/* OldOS design tokens + effects.
+ * Derived from zzanehip/The-OldOS-Project (iOS 4 recreation in SwiftUI),
+ * used under CC BY 4.0 — https://github.com/zzanehip/The-OldOS-Project
+ */
+
+.oldos {
+	--oldos-nav-top: #b4bfcd;
+	--oldos-nav-upper: #889bb3;
+	--oldos-nav-lower: #8095af;
+	--oldos-nav-bottom: #6e85a2;
+	--oldos-chrome-divider: #2d3033;
+
+	--oldos-toolbar-top: #a4afbf;
+	--oldos-toolbar-upper: #7c8da4;
+	--oldos-toolbar-lower: #71839c;
+	--oldos-toolbar-bottom: #70829b;
+
+	--oldos-tab-top: #4c566c;
+	--oldos-tab-bottom: #3e5383;
+
+	--oldos-toggle-blue-1: #347bf5;
+	--oldos-toggle-blue-2: #357ef7;
+	--oldos-toggle-blue-3: #5b9af7;
+	--oldos-toggle-blue-4: #65a1f9;
+
+	--oldos-toggle-orange-1: #ff8c0e;
+	--oldos-toggle-orange-2: #fda83d;
+	--oldos-toggle-orange-3: #fdb148;
+
+	--oldos-knob-top: #d0d0d0;
+	--oldos-knob-bottom: #fefefe;
+	--oldos-knob-border-top: #888787;
+	--oldos-knob-border-bottom: #b7b6b6;
+
+	--oldos-battery-green-1: #67d037;
+	--oldos-battery-green-2: #86e249;
+	--oldos-battery-green-3: #44a31d;
+	--oldos-battery-green-gloss: #d7fcb4;
+
+	--oldos-sheet-top: #edf4f7;
+	--oldos-sheet-bottom: #bfc7cb;
+	--oldos-sheet-edge: #5d6469;
+
+	--oldos-key-top: #fcfdfd;
+	--oldos-key-bottom: #e8ebf1;
+	--oldos-key-border: #858587;
+
+	--oldos-hairline: #ababab;
+	--oldos-text-muted: #535353;
+	--oldos-blue-link: #3e5383;
+}
+
+/* Chrome backgrounds */
+.oldos-navbar {
+	background: linear-gradient(
+		to bottom,
+		var(--oldos-nav-top) 0%,
+		var(--oldos-nav-upper) 49%,
+		var(--oldos-nav-lower) 49%,
+		var(--oldos-nav-bottom) 100%
+	);
+	border-bottom: 1px solid var(--oldos-chrome-divider);
+	box-shadow: inset 0 1px 0 rgb(230 230 230 / 60%);
+}
+
+.oldos-toolbar {
+	background: linear-gradient(
+		to bottom,
+		var(--oldos-toolbar-top) 0%,
+		var(--oldos-toolbar-upper) 49%,
+		var(--oldos-toolbar-lower) 49%,
+		var(--oldos-toolbar-bottom) 100%
+	);
+	border-bottom: 1px solid var(--oldos-chrome-divider);
+}
+
+.oldos-tabbar {
+	background: linear-gradient(
+		to bottom,
+		var(--oldos-tab-top) 0%,
+		var(--oldos-tab-bottom) 100%
+	);
+	border-top: 1px solid var(--oldos-chrome-divider);
+}
+
+/* iOS 4 gloss: top half highlight overlay */
+.oldos-gloss {
+	position: relative;
+}
+.oldos-gloss::before {
+	content: "";
+	position: absolute;
+	inset: 0 0 50% 0;
+	border-radius: inherit;
+	background: linear-gradient(
+		to bottom,
+		rgb(255 255 255 / 45%),
+		rgb(255 255 255 / 12%)
+	);
+	pointer-events: none;
+}
+
+/* Inner shadows translated from Common.swift ViewModifiers */
+.oldos-inset-bottom {
+	background-image: linear-gradient(to top, rgb(0 0 0 / 18%), transparent 30%);
+}
+
+.oldos-inset-top {
+	background-image: linear-gradient(
+		to bottom,
+		rgb(0 0 0 / 18%),
+		transparent 30%
+	);
+}
+
+/* Pressable chrome button */
+.oldos-btn {
+	background: linear-gradient(
+		to bottom,
+		var(--oldos-knob-top),
+		var(--oldos-knob-bottom)
+	);
+	border: 1px solid var(--oldos-knob-border-top);
+	border-bottom-color: var(--oldos-knob-border-bottom);
+	box-shadow: inset 0 1px 0 rgb(255 255 255 / 90%);
+	color: #000;
+	text-shadow: 0 1px 0 rgb(255 255 255 / 50%);
+}
+.oldos-btn:active {
+	background: linear-gradient(to bottom, #b0b0b0, #d6d6d6);
+}
+
+/* Keyboard key */
+.oldos-key {
+	background: linear-gradient(
+		to bottom,
+		var(--oldos-key-top),
+		var(--oldos-key-bottom)
+	);
+	border: 1px solid var(--oldos-key-border);
+	box-shadow: 0 1px 0 rgb(0 0 0 / 35%);
+}
+.oldos-key:active {
+	background: linear-gradient(to bottom, #aab3c2, #93a0b4);
+}
+
+/* Grouped table view */
+.oldos-group {
+	background: var(--oldos-sheet-top);
+	border: 1px solid var(--oldos-hairline);
+	border-radius: 8px;
+}
+.oldos-row {
+	border-bottom: 1px solid var(--oldos-hairline);
+}
+.oldos-row:last-child {
+	border-bottom: none;
+}

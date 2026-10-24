@@ -285,7 +285,7 @@ export async function createPortfolioOgImageResponse({
 							textTransform: "uppercase",
 						}}
 					>
-						sabraman.ru
+						sabraman.art
 					</div>
 				</div>
 			</div>

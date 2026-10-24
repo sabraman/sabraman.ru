@@ -1,13 +1,14 @@
-import { Github, Instagram, Send, X } from "lucide-react";
+import { Send, X } from "lucide-react";
 import type { HomeAboutCopy } from "./home-copy";
+import { GithubIcon, InstagramIcon } from "~/components/contact/contact-links";
 
 type HomeAboutSectionProps = {
 	copy: HomeAboutCopy;
 };
 
 const SOCIAL_ICONS = {
-	github: Github,
-	instagram: Instagram,
+	github: GithubIcon,
+	instagram: InstagramIcon,
 	telegram: Send,
 	x: X,
 } as const;

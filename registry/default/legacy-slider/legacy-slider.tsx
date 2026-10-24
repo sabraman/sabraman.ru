@@ -5,11 +5,10 @@ import type * as React from "react";
 
 import { cn } from "~/lib/utils";
 
-export interface LegacySliderProps
-	extends Omit<
-		React.ComponentProps<typeof SliderPrimitive.Root>,
-		"defaultValue" | "onValueChange" | "onValueCommit" | "value"
-	> {
+export interface LegacySliderProps extends Omit<
+	React.ComponentProps<typeof SliderPrimitive.Root>,
+	"defaultValue" | "onValueChange" | "onValueCommit" | "value"
+> {
 	defaultValue?: number;
 	onValueChange?: (value: number) => void;
 	onValueCommit?: (value: number) => void;

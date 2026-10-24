@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import {
 	Suspense,
 	useCallback,
@@ -9,8 +9,11 @@ import {
 	useMemo,
 	useRef,
 	useState,
+	useSyncExternalStore,
 } from "react";
 import * as THREE from "three";
+import { emptySubscribe, useIsMounted } from "~/lib/hooks/use-is-mounted";
+import { mulberry32 } from "~/lib/seeded-random";
 
 // Optimized fluid particle system with instanced rendering
 function FluidParticles() {
@@ -18,8 +21,10 @@ function FluidParticles() {
 	const { viewport, invalidate } = useThree();
 	const mouse = useRef({ x: 0, y: 0 });
 
-	// Pre-calculate optimized particle system
+	// Pre-calculate optimized particle system.
+	// Seeded PRNG: stable across re-renders and hydration.
 	const particles = useMemo(() => {
+		const random = mulberry32(7);
 		const count = 150;
 		const positions: Array<{
 			x: number;
@@ -32,12 +37,12 @@ function FluidParticles() {
 
 		for (let i = 0; i < count; i++) {
 			positions.push({
-				x: (Math.random() - 0.5) * viewport.width * 1.5,
-				y: (Math.random() - 0.5) * viewport.height * 1.5,
-				z: (Math.random() - 0.5) * 8,
-				vx: (Math.random() - 0.5) * 0.02,
-				vy: (Math.random() - 0.5) * 0.02,
-				phase: Math.random() * Math.PI * 2,
+				x: (random() - 0.5) * viewport.width * 1.5,
+				y: (random() - 0.5) * viewport.height * 1.5,
+				z: (random() - 0.5) * 8,
+				vx: (random() - 0.5) * 0.02,
+				vy: (random() - 0.5) * 0.02,
+				phase: random() * Math.PI * 2,
 			});
 		}
 		return positions;
@@ -244,9 +249,18 @@ function StaticHeroBackdrop() {
 export function AwwwardsHero({ children, className = "" }: AwwwardsHeroProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
-	const [isMounted, setIsMounted] = useState(false);
+	const isMounted = useIsMounted();
 	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
-	const [isSafariBrowser, setIsSafariBrowser] = useState(false);
+	const isSafariBrowser = useSyncExternalStore(
+		emptySubscribe,
+		() =>
+			typeof navigator !== "undefined" &&
+			/Safari/i.test(navigator.userAgent) &&
+			!/(Chrome|Chromium|CriOS|Edg|OPR|Firefox|FxiOS)/i.test(
+				navigator.userAgent,
+			),
+		() => false,
+	);
 	const [hasWebglContextLoss, setHasWebglContextLoss] = useState(false);
 
 	const setContainerRef = useCallback((node: HTMLDivElement | null) => {
@@ -283,17 +297,6 @@ export function AwwwardsHero({ children, className = "" }: AwwwardsHeroProps) {
 	// 3D rotation effect
 	const rotateX = useTransform(smoothProgress, [0, 0.5], [0, -15]);
 	const rotateY = useTransform(smoothProgress, [0, 0.5], [0, 5]);
-
-	useEffect(() => {
-		setIsMounted(true);
-
-		const userAgent = window.navigator.userAgent;
-		const isSafari =
-			/Safari/i.test(userAgent) &&
-			!/(Chrome|Chromium|CriOS|Edg|OPR|Firefox|FxiOS)/i.test(userAgent);
-
-		setIsSafariBrowser(isSafari);
-	}, []);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;

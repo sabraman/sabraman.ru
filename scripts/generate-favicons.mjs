@@ -18,7 +18,7 @@ const configuration = {
 	appDescription:
 		"Danya Yudin (Даня Юдин) - Sabraman - Creative Designer & Developer Portfolio",
 	developerName: "Danya Yudin",
-	developerURL: "https://sabraman.ru",
+	developerURL: "https://sabraman.art",
 	dir: "ltr",
 	lang: "en-US",
 	background: "#1a1a1a",

@@ -174,6 +174,9 @@ export default function IOSContainer({ locale }: { locale: SupportedLocale }) {
 	});
 
 	useEffect(() => {
+		// The wall clock is an external system — the first value is needed
+		// immediately (not a second after mount), so set it synchronously here.
+		// oxlint-disable-next-line react/set-state-in-effect
 		setCurrentTime(new Date());
 		const timer = setInterval(() => setCurrentTime(new Date()), 1000);
 		return () => clearInterval(timer);

@@ -7,6 +7,7 @@ import {
 	pickSection,
 	RelatedProjects,
 	SectionCard,
+	AuthorCard,
 } from "./CaseStudyPrimitives";
 
 export function HornyPlacePage({
@@ -64,6 +65,8 @@ export function HornyPlacePage({
 				<ExternalLinks project={project} locale={locale} />
 				<RelatedProjects relatedProjects={relatedProjects} locale={locale} />
 			</div>
+
+			<AuthorCard locale={locale} />
 		</main>
 	);
 }
