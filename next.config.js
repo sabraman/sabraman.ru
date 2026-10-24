@@ -11,14 +11,14 @@ const projectRoot = fileURLToPath(new URL(".", import.meta.url));
 const config = {
 	reactCompiler: true,
 	cacheComponents: true,
+	partialPrefetching: true,
 	transpilePackages: ["next-mdx-remote"],
 
 	// SEO and Performance optimizations
 	experimental: {
 		webpackMemoryOptimizations: false,
-		viewTransition: true,
 		turbopackFileSystemCacheForBuild: true,
-		optimizePackageImports: ["framer-motion", "lucide-react"],
+		optimizePackageImports: ["motion", "lucide-react"],
 	},
 
 	// Image optimization
@@ -68,35 +68,16 @@ const config = {
 				destination: "/",
 				permanent: true,
 			},
-			{
-				source: "/esperansa-mini-app",
-				destination: "/flower-mini-app",
-				permanent: true,
-			},
-			{
-				source: "/ru/esperansa-mini-app",
-				destination: "/ru/flower-mini-app",
-				permanent: true,
-			},
-			{
-				source: "/work/esperansa-mini-app",
-				destination: "/flower-mini-app",
-				permanent: true,
-			},
-			{
-				source: "/ru/work/esperansa-mini-app",
-				destination: "/ru/flower-mini-app",
-				permanent: true,
-			},
+
 			{
 				source:
-					"/work/:slug(vaparshop|horny-place|smo-tg-miniapp|smoky-market-loyalty-miniapp|plonq-ai-search|flower-mini-app|smbro|arch-taplink|vape-me-fast|price-tag-printer|psp-book-reader|florist-quiz|schrute-farm)",
+					"/work/:slug(vaparshop|horny-place|smoky-market-loyalty-miniapp|plonq-ai-search|flower-mini-app|smbro|arch-taplink|price-tag-printer|psp-book-reader|schrute-farm|sleepoff|spritefusion-pixel-snapper)",
 				destination: "/:slug",
 				permanent: true,
 			},
 			{
 				source:
-					"/ru/work/:slug(vaparshop|horny-place|smo-tg-miniapp|smoky-market-loyalty-miniapp|plonq-ai-search|flower-mini-app|smbro|arch-taplink|vape-me-fast|price-tag-printer|psp-book-reader|florist-quiz|schrute-farm)",
+					"/ru/work/:slug(vaparshop|horny-place|smoky-market-loyalty-miniapp|plonq-ai-search|flower-mini-app|smbro|arch-taplink|price-tag-printer|psp-book-reader|schrute-farm|sleepoff|spritefusion-pixel-snapper)",
 				destination: "/ru/:slug",
 				permanent: true,
 			},

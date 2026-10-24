@@ -1,4 +1,4 @@
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation } from "motion/react";
 import { useEffect, useState } from "react";
 
 export function FullScreenIntro({ onFinish }: { onFinish?: () => void }) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import type { HomeWorkSectionCopy } from "~/components/home/home-copy";
@@ -32,6 +32,12 @@ const FEATURED_VISUALS: Partial<
 			"bg-[linear-gradient(145deg,rgba(8,8,10,0.98),rgba(14,14,18,0.97)_46%,rgba(6,6,8,0.99))]",
 		topGlowClassName: "bg-white/4",
 		bottomGlowClassName: "bg-white/3",
+	},
+	"lunaria-search-ecosystem": {
+		surfaceClassName:
+			"bg-[linear-gradient(145deg,rgba(10,24,18,0.98),rgba(15,35,26,0.97)_46%,rgba(8,18,14,0.99))]",
+		topGlowClassName: "bg-emerald-500/10",
+		bottomGlowClassName: "bg-emerald-500/5",
 	},
 };
 

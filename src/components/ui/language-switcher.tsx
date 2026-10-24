@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { usePathname, useRouter } from "next/navigation";
 import { getLocalizedPathname } from "~/i18n/locale-paths";
 import { routing } from "~/i18n/routing";
