@@ -135,8 +135,8 @@ function getPolygonEdges(clipPath: string) {
 			};
 		});
 
-	return rawPoints.map((point, index) => [
-		point,
-		rawPoints[(index + 1) % rawPoints.length]!,
-	] as const);
+	return rawPoints.map(
+		(point, index) =>
+			[point, rawPoints[(index + 1) % rawPoints.length]!] as const,
+	);
 }

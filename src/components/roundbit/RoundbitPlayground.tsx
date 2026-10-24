@@ -73,6 +73,15 @@ export function RoundbitPlayground() {
 	const [height, setHeight] = React.useState(176);
 	const arbitrarySliderStep = mode === "frame" ? step : 1;
 
+	// Snap the stored value to the current step during render (instead of an
+	// effect), so the slider and the generated class never disagree.
+	if (radiusMode === "arbitrary") {
+		const snappedValue = clampToStep(arbitraryPx, arbitrarySliderStep);
+		if (snappedValue !== arbitraryPx) {
+			setArbitraryPx(snappedValue);
+		}
+	}
+
 	useIsomorphicLayoutEffect(() => {
 		if (mode !== "direct" || !scopeRef.current) {
 			return;
@@ -80,18 +89,6 @@ export function RoundbitPlayground() {
 
 		return initRoundbit(scopeRef.current).disconnect;
 	}, [mode]);
-
-	React.useEffect(() => {
-		if (radiusMode !== "arbitrary") {
-			return;
-		}
-
-		const snappedValue = clampToStep(arbitraryPx, arbitrarySliderStep);
-
-		if (snappedValue !== arbitraryPx) {
-			setArbitraryPx(snappedValue);
-		}
-	}, [arbitraryPx, arbitrarySliderStep, radiusMode]);
 
 	const utilityClass = buildUtilityClass({
 		arbitraryPx,
