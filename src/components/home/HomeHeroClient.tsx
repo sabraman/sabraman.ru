@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ChevronDown, Download, FileText } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
@@ -355,6 +355,14 @@ function useFittedHeroTitle(lines: [string, string]) {
 
 export function HomeHeroClient({ copy }: HomeHeroClientProps) {
 	const [displayName, setDisplayName] = useState(copy.title);
+	const [animatedTitle, setAnimatedTitle] = useState(copy.title);
+
+	// Reset the display name when the source title changes (locale switch) —
+	// adjust during render instead of a set-state-in-effect.
+	if (animatedTitle !== copy.title) {
+		setAnimatedTitle(copy.title);
+		setDisplayName(copy.title);
+	}
 
 	useEffect(() => {
 		const scrambleChars = "BCDEFGHJKLMNPQRSTVWXYZ";
@@ -387,7 +395,6 @@ export function HomeHeroClient({ copy }: HomeHeroClientProps) {
 			}
 		};
 
-		setDisplayName(copy.title);
 		const timeout = window.setTimeout(animate, 500);
 
 		return () => window.clearTimeout(timeout);

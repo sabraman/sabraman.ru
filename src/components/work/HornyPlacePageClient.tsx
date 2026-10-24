@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import type { HornyPlacePageCopy } from "~/components/work/get-work-copy";
@@ -19,6 +19,23 @@ import {
 	getLocalizedPathname,
 } from "~/i18n/locale-paths";
 import type { SupportedLocale } from "~/i18n/types";
+import { useIsMounted } from "~/lib/hooks/use-is-mounted";
+import { mulberry32 } from "~/lib/seeded-random";
+
+// Deterministic decorative blob configs (seeded PRNG instead of Math.random:
+// stable across re-renders and hydration).
+const BACKGROUND_BLOBS = Array.from({ length: 3 }, (_, index) => {
+	const random = mulberry32(index + 11);
+
+	return {
+		width: `${random() * 600 + 300}px`,
+		height: `${random() * 600 + 300}px`,
+		left: `${random() * 100}%`,
+		top: `${random() * 100}%`,
+		driftX: random() * 100 - 50,
+		driftY: random() * 100 - 50,
+	};
+});
 
 export default function HornyPlacePage({
 	copy,
@@ -28,7 +45,7 @@ export default function HornyPlacePage({
 	locale: SupportedLocale;
 }) {
 	const containerRef = useRef<HTMLDivElement>(null);
-	const [isMounted, setIsMounted] = useState(false);
+	const isMounted = useIsMounted();
 	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
 	const [currentView, setCurrentView] = useState(0);
 	const contactHref = getLocalizedHashPathname(locale, "/", "contact-section");
@@ -49,14 +66,6 @@ export default function HornyPlacePage({
 	const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 	const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 	const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
-	useEffect(() => {
-		setIsMounted(true);
-
-		// Next.js will automatically handle image optimization
-		// We don't need manual preloading with the browser's Image constructor
-		// The images will be loaded when the Image components render
-	}, []);
 
 	if (!isMounted) {
 		return null;
@@ -379,20 +388,20 @@ export default function HornyPlacePage({
 					<div className="absolute inset-0 bg-gradient-to-b from-background to-transparent" />
 					<div className="absolute right-0 bottom-0 left-0 h-1/3 bg-gradient-to-t from-background to-transparent" />
 
-					{Array.from({ length: 3 }).map((_, i) => (
+					{BACKGROUND_BLOBS.map((blob, i) => (
 						<motion.div
-							key={`bg-accent-blob-${i}-${Math.random().toString(36).substring(2, 7)}`}
+							key={`bg-accent-blob-${i}`}
 							className="absolute rounded-full bg-accent/10"
 							style={{
-								width: `${Math.random() * 600 + 300}px`,
-								height: `${Math.random() * 600 + 300}px`,
-								left: `${Math.random() * 100}%`,
-								top: `${Math.random() * 100}%`,
+								width: blob.width,
+								height: blob.height,
+								left: blob.left,
+								top: blob.top,
 								filter: "blur(150px)",
 							}}
 							animate={{
-								x: [0, Math.random() * 100 - 50],
-								y: [0, Math.random() * 100 - 50],
+								x: [0, blob.driftX],
+								y: [0, blob.driftY],
 							}}
 							transition={{
 								duration: 15,

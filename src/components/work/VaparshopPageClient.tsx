@@ -18,7 +18,8 @@ import {
 	useTransform,
 } from "motion/react";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
+import { useIsMounted } from "~/lib/hooks/use-is-mounted";
 import {
 	SiNextdotjs,
 	SiNodedotjs,
@@ -48,7 +49,7 @@ export default function VaparshopPage({
 
 	// Refs for scroll animations
 	const containerRef = useRef<HTMLDivElement>(null);
-	const [isMounted, setIsMounted] = useState(false);
+	const isMounted = useIsMounted();
 	const [hasHydratedTarget, setHasHydratedTarget] = useState(false);
 	const prefersReducedMotion = useReducedMotion();
 
@@ -87,10 +88,6 @@ export default function VaparshopPage({
 			delay: (index % 5) * 0.35,
 		}));
 	}, [prefersReducedMotion]);
-
-	useEffect(() => {
-		setIsMounted(true);
-	}, []);
 
 	// Skip rendering until client-side hydration is complete
 	if (!isMounted) {

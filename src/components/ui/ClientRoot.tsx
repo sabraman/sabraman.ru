@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "motion/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { getConsoleFunction, setConsoleFunction } from "three";
@@ -63,12 +63,11 @@ export function ClientRoot({ children }: { children: React.ReactNode }) {
 	const initialScrollYRef = useRef(0);
 	const hasCapturedScrollRef = useRef(false);
 
-	// Never show the intro on OG preview routes.
-	useEffect(() => {
-		if (isOgPreviewRoute) {
-			setShowIntro(false);
-		}
-	}, [isOgPreviewRoute]);
+	// Never show the intro on OG preview routes — adjust during render so this
+	// also covers client-side navigation to an OG route while the intro plays.
+	if (isOgPreviewRoute && showIntro) {
+		setShowIntro(false);
+	}
 
 	// Максимальное время для отображения интро - 5 секунд
 	useEffect(() => {
