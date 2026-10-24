@@ -6,7 +6,7 @@ import { getLocalizedPathname, stripLocalePrefix } from "~/i18n/locale-paths";
 import type { SupportedLocale } from "~/i18n/types";
 import { cn } from "~/lib/utils";
 
-type DockHref = "/" | "/work" | "/components";
+type DockHref = "/" | "/work" | "/components" | "/blog";
 
 type DockItem = {
 	href: DockHref;
@@ -28,6 +28,10 @@ const DOCK_ITEMS: DockItem[] = [
 	{
 		href: "/components",
 		label: { en: "Components", ru: "Компоненты" },
+	},
+	{
+		href: "/blog",
+		label: { en: "Blog", ru: "Блог" },
 	},
 ];
 

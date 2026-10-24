@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap");
 @import "tailwindcss";
+@import "./oldos.css";
 
 @font-face {
 	font-family: "Heading Now Variable";
