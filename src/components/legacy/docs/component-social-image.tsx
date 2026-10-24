@@ -459,8 +459,7 @@ function renderRoundbitIcon() {
 			>
 				<div
 					style={{
-						background:
-							"linear-gradient(180deg, #0d1529 0%, #121f38 100%)",
+						background: "linear-gradient(180deg, #0d1529 0%, #121f38 100%)",
 						clipPath:
 							"polygon(0px 32px, 16px 32px, 16px 16px, 32px 16px, 32px 0px, 176px 0px, 176px 16px, 192px 16px, 192px 32px, 208px 32px, 208px 144px, 192px 144px, 192px 160px, 176px 160px, 176px 176px, 32px 176px, 32px 160px, 16px 160px, 16px 144px, 0px 144px)",
 						inset: 24,

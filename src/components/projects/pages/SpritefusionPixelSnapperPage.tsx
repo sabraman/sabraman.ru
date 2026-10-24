@@ -9,35 +9,34 @@ import {
 	SectionCard,
 } from "./CaseStudyPrimitives";
 
-export function VapeMeFastPage({
+export function SpritefusionPixelSnapperPage({
 	locale,
 	project,
 	caseStudy,
 	relatedProjects,
 }: ProjectPageProps) {
 	return (
-		<main className="container mx-auto max-w-6xl px-4 py-14 md:py-20">
+		<main className="container mx-auto max-w-2xl px-4 py-14 md:py-20">
 			<PageTopNav locale={locale} />
 			<ProjectHero
 				project={project}
 				caseStudy={caseStudy}
 				locale={locale}
-				accentClassName="bg-pink-500/30"
+				accentClassName="bg-pink-500/20"
 			/>
 
-			<div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+			<div className="mt-8 space-y-6">
 				<SectionCard
 					section={pickSection(caseStudy, "context")}
 					locale={locale}
 				/>
 				<SectionCard
-					section={pickSection(caseStudy, "features")}
+					section={pickSection(caseStudy, "architecture")}
 					locale={locale}
 				/>
 				<SectionCard
-					section={pickSection(caseStudy, "architecture")}
+					section={pickSection(caseStudy, "features")}
 					locale={locale}
-					className="md:col-span-2"
 				/>
 				<SectionCard
 					section={pickSection(caseStudy, "tooling")}
@@ -50,11 +49,10 @@ export function VapeMeFastPage({
 				<SectionCard
 					section={pickSection(caseStudy, "tradeoffs")}
 					locale={locale}
-					className="md:col-span-2"
 				/>
 			</div>
 
-			<div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+			<div className="mt-8 space-y-6">
 				<ExternalLinks project={project} locale={locale} />
 				<FaqBlock caseStudy={caseStudy} locale={locale} />
 			</div>

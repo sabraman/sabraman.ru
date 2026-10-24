@@ -7,6 +7,7 @@ import {
 	pickSection,
 	RelatedProjects,
 	SectionCard,
+	AuthorCard,
 } from "./CaseStudyPrimitives";
 
 export function VaparshopPage({
@@ -63,6 +64,8 @@ export function VaparshopPage({
 			<div className="mt-6">
 				<RelatedProjects relatedProjects={relatedProjects} locale={locale} />
 			</div>
+
+			<AuthorCard locale={locale} />
 		</main>
 	);
 }

@@ -3,6 +3,7 @@ import type { ComponentDocSlug } from "~/components/legacy/docs/component-doc-pa
 import type { LocaleText, ProjectSlug } from "~/data/projects";
 import { getAllCaseStudyDiscoverabilityRecords } from "~/lib/projects/case-study-seo";
 import { SUPPORTED_LOCALES } from "~/lib/site-config";
+import { BLOG_POSTS } from "~/data/blog";
 import { getAllComponentDocDiscoverabilityRecords } from "./component-doc-seo";
 import {
 	getPublicRoutePolicy,
@@ -14,7 +15,7 @@ type SitemapFrequency = NonNullable<
 	MetadataRoute.Sitemap[number]["changeFrequency"]
 >;
 
-type ContentKind = "caseStudy" | "componentDoc" | "staticPage";
+type ContentKind = "caseStudy" | "componentDoc" | "staticPage" | "blog";
 
 type LocalizedContent = {
 	description: LocaleText;
@@ -31,7 +32,7 @@ export type IndexableContentEntry = LocalizedContent & {
 	priority: number;
 	publishedAt?: string;
 	routeId: PublicRouteId;
-	slug?: ComponentDocSlug | ProjectSlug;
+	slug?: ComponentDocSlug | ProjectSlug | string;
 	socialImageKind: PublicRouteSocialImageKind;
 	updatedAt?: string;
 };
@@ -40,15 +41,18 @@ type StaticIndexableConfig = LocalizedContent & {
 	changeFrequency: SitemapFrequency;
 	pathEn: string;
 	priority: number;
-	routeId: Extract<PublicRouteId, "components" | "home" | "iphone" | "work">;
+	routeId: Extract<
+		PublicRouteId,
+		"components" | "home" | "iphone" | "work" | "blog"
+	>;
 };
 
 const STATIC_INDEXABLE_CONTENT: StaticIndexableConfig[] = [
 	{
 		changeFrequency: "weekly",
 		description: {
-			en: "Portfolio of Danya Yudin (Sabraman): case studies, reusable UI components, and experimental frontend work.",
-			ru: "Портфолио Дани Юдина (Sabraman): кейсы, переиспользуемые UI-компоненты и экспериментальный фронтенд.",
+			en: "Explore the professional portfolio of Danya Yudin (Sabraman): technical case studies, reusable UI components, and experimental web frontend work.",
+			ru: "Профессиональное портфолио Дани Юдина (Sabraman): подробные разборы кейсов, переиспользуемые UI-компоненты и экспериментальные веб-интерфейсы.",
 		},
 		pathEn: "/",
 		priority: 1,
@@ -62,7 +66,7 @@ const STATIC_INDEXABLE_CONTENT: StaticIndexableConfig[] = [
 		changeFrequency: "weekly",
 		description: {
 			en: "Case studies spanning Telegram mini apps, web platforms, retail tooling, product design, and frontend engineering.",
-			ru: "Кейсы по Telegram mini apps, веб-платформам, retail tooling, продуктовой разработке и фронтенду.",
+			ru: "Подробные технические кейсы по разработке Telegram mini apps, веб-платформ, инструментов автоматизации ритейла и современному фронтенду.",
 		},
 		pathEn: "/work",
 		priority: 0.95,
@@ -89,15 +93,29 @@ const STATIC_INDEXABLE_CONTENT: StaticIndexableConfig[] = [
 	{
 		changeFrequency: "monthly",
 		description: {
-			en: "An alternate iPhone-style portfolio experience that explores Sabraman through a playful UI shell.",
-			ru: "Альтернативное iPhone-стилизованное портфолио с игровой UI-оболочкой Sabraman.",
+			en: "An interactive, alternative iPhone-style portfolio experience that lets you explore Danya Yudin's work through a playful iOS UI shell.",
+			ru: "Альтернативное интерактивное iPhone-портфолио с детально воссозданной игровой UI-оболочкой для исследования проектов и навыков Sabraman.",
 		},
 		pathEn: "/iphone",
 		priority: 0.65,
 		routeId: "iphone",
 		title: {
 			en: "iPhone Portfolio Experience - Sabraman",
-			ru: "iPhone-портфолио Sabraman",
+			ru: "Интерактивное iPhone-портфолио Sabraman",
+		},
+	},
+	{
+		changeFrequency: "weekly",
+		description: {
+			en: "Read technical articles and deep dives on modern web development, frontend architecture, and search engine optimization by Sabraman.",
+			ru: "Технический блог Дани Юдина (Sabraman): подробные статьи о веб-разработке, архитектуре фронтенда и поисковой оптимизации (SEO).",
+		},
+		pathEn: "/blog",
+		priority: 0.9,
+		routeId: "blog",
+		title: {
+			en: "Blog - Technical Deep Dives by Sabraman",
+			ru: "Блог - Технические разборы от Sabraman",
 		},
 	},
 ];
@@ -179,16 +197,35 @@ export function getComponentDocIndexableContentEntries() {
 	);
 }
 
+export function getBlogPostIndexableContentEntries() {
+	return BLOG_POSTS.map((post) =>
+		toIndexableEntry("blog", {
+			changeFrequency: "weekly",
+			description: post.seo.description,
+			pathEn: `/blog/${post.slug}`,
+			priority: 0.85,
+			...(post.publishedAt ? { publishedAt: post.publishedAt } : {}),
+			routeId: "blogPost",
+			slug: post.slug,
+			title: post.seo.title,
+			updatedAt: post.updatedAt,
+		}),
+	);
+}
+
 export function getAllIndexableContentEntries() {
 	return [
 		...getStaticIndexableContentEntries(),
 		...getCaseStudyIndexableContentEntries(),
 		...getComponentDocIndexableContentEntries(),
+		...getBlogPostIndexableContentEntries(),
 	];
 }
 
 export function getLlmsPreferredContentEntries() {
-	return getStaticIndexableContentEntries().filter((entry) => entry.includeInLlms);
+	return getStaticIndexableContentEntries().filter(
+		(entry) => entry.includeInLlms,
+	);
 }
 
 export const CONTENT_REGISTRY_LOCALES = SUPPORTED_LOCALES;

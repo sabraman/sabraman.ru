@@ -15,7 +15,7 @@ import {
 	type PublicRouteSocialImageKind,
 } from "./public-route-policy";
 
-type SocialImageSlug = ComponentDocSlug | ProjectSlug;
+type SocialImageSlug = ComponentDocSlug | ProjectSlug | string;
 
 type MetadataOptions = {
 	description: string;
@@ -37,14 +37,19 @@ export function buildLocalizedAlternates(
 	locale: SupportedLocale = DEFAULT_LOCALE,
 ): Metadata["alternates"] {
 	const languages = Object.fromEntries(
-		SUPPORTED_LOCALES.map((l) => [l, getLocalizedPathname(l, pathEn)]),
+		SUPPORTED_LOCALES.map((l) => [
+			l,
+			toAbsoluteSiteUrl(getLocalizedPathname(l, pathEn)),
+		]),
 	);
 
 	return {
-		canonical: getLocalizedPathname(locale, pathEn),
+		canonical: toAbsoluteSiteUrl(getLocalizedPathname(locale, pathEn)),
 		languages: {
 			...languages,
-			"x-default": getLocalizedPathname(DEFAULT_LOCALE, pathEn),
+			"x-default": toAbsoluteSiteUrl(
+				getLocalizedPathname(DEFAULT_LOCALE, pathEn),
+			),
 		},
 	};
 }

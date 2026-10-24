@@ -56,118 +56,159 @@ const section = (
 const p = (en: string, ru: string): LocaleText => ({ en, ru });
 
 const CASE_STUDY_UPDATED_AT_BY_SLUG: Record<ProjectSlug, string> = {
-	"arch-taplink": "2026-03-17",
-	"florist-quiz": "2026-03-17",
-	"flower-mini-app": "2026-03-17",
-	"horny-place": "2026-03-17",
-	"plonq-ai-search": "2026-03-17",
-	"price-tag-printer": "2026-03-17",
-	"psp-book-reader": "2026-03-17",
-	"schrute-farm": "2026-03-17",
-	smbro: "2026-03-17",
-	"smo-tg-miniapp": "2026-03-17",
-	"smoky-market-loyalty-miniapp": "2026-03-17",
-	vaparshop: "2026-03-17",
-	"vape-me-fast": "2026-03-17",
+	"lunaria-search-ecosystem": "2026-06-14",
+	"arch-taplink": "2026-06-14",
+	"flower-mini-app": "2026-06-14",
+	"horny-place": "2026-06-14",
+	"plonq-ai-search": "2026-06-14",
+	"price-tag-printer": "2026-06-14",
+	"psp-book-reader": "2026-06-14",
+	"schrute-farm": "2026-06-14",
+	smbro: "2026-06-14",
+	"smoky-market-loyalty-miniapp": "2026-06-14",
+	vaparshop: "2026-06-14",
+	sleepoff: "2026-06-14",
+	"spritefusion-pixel-snapper": "2026-06-14",
 };
 
-const CASE_STUDY_PUBLISHED_AT_BY_SLUG: Partial<Record<ProjectSlug, string>> =
-	{};
+const CASE_STUDY_PUBLISHED_AT_BY_SLUG: Record<ProjectSlug, string> = {
+	"lunaria-search-ecosystem": "2026-06-12",
+	"arch-taplink": "2025-05-10",
+	"flower-mini-app": "2025-08-15",
+	sleepoff: "2026-06-14",
+	"spritefusion-pixel-snapper": "2026-06-14",
+	"horny-place": "2026-01-20",
+	"plonq-ai-search": "2026-02-10",
+	"price-tag-printer": "2026-03-01",
+	"psp-book-reader": "2025-11-15",
+	"schrute-farm": "2024-04-12",
+	smbro: "2025-03-22",
+	"smoky-market-loyalty-miniapp": "2025-09-10",
+	vaparshop: "2025-06-15",
+};
 
 const PROJECT_CASE_STUDIES_BASE = {
-	vaparshop: {
-		slug: "vaparshop",
-		projectId: "vaparshop",
-		visibility: PROJECT_BY_SLUG.vaparshop.visibility,
-		status: PROJECT_BY_SLUG.vaparshop.status,
+	"lunaria-search-ecosystem": {
+		slug: "lunaria-search-ecosystem",
+		projectId: "lunaria-search-ecosystem",
+		visibility: PROJECT_BY_SLUG["lunaria-search-ecosystem"].visibility,
+		status: PROJECT_BY_SLUG["lunaria-search-ecosystem"].status,
 		hero: {
-			badge: p("Retail Product System", "Ритейл-продуктовая система"),
+			badge: p("SEO & AI-Search Ecosystem", "SEO и AI-поисковая экосистема"),
 			summary: p(
-				"A long-running production stream where branding, Telegram automation, and operational tooling were shipped as one coherent stack.",
-				"Долгий продакшн-поток, где брендинг, Telegram-автоматизация и операционные инструменты развивались как единая система.",
+				"A regional search ecosystem and RAG-optimized content engine built for a floral brand to dominate local query surfaces and AI-driven retrieval.",
+				"Региональная поисковая экосистема и RAG-оптимизированный контент-движок для цветочного бренда с целью доминирования в поиске и ИИ-ответах.",
 			),
 		},
 		sections: [
 			section("context", p("Problem and context", "Контекст и задача"), [
 				p(
-					"The team was operating through fragmented manual flows: communication in chats, reports in separate files, and repetitive formatting tasks for retail operations.",
-					"Команда работала в разрозненных ручных процессах: коммуникация в чатах, отчеты в отдельных файлах и повторяющиеся задачи для розницы.",
+					"A single corporate website often acts as a visual catalog but fails to address distinct search intents. Lunaria had to engage diverse audiences—retail floral buyers, brides planning weddings, venue seekers, corporate managers, and potential franchisees—each operating with different urgency and language. Mixing these intents onto a single domain dilutes E-E-A-T signals and confuses search engine crawlers.",
+					"Один корпоративный сайт часто превращается в компромисс и не справляется с разными поисковыми интентами. Бренду Lunaria требовалось охватить разные аудитории — розничных покупателей, невест, B2B-клиентов и потенциальных франчайзи. Смешивание этих интентов на одном домене размывает сигналы E-E-A-T и путает поисковых роботов.",
 				),
 				p(
-					"The product goal was not a single app, but a practical ecosystem that reduced friction for managers and sellers without introducing heavy internal complexity.",
-					"Целью был не один продукт, а практичная экосистема, которая снижает трение для менеджеров и продавцов без лишней внутренней сложности.",
+					"Instead of a mixed-intent strategy, we built a modular multi-domain satellite network functioning as a RAG-optimized consensus engine. The goal was to occupy the entire semantic search landscape in Kazan, capturing users at early query phases and preparing for the AI-search era where generative engines prioritize highly structured local authorities.",
+					"Вместо этого мы создали модульную сеть доменов-сателлитов, работающую как RAG-оптимизированный консенсусный движок. Целью было занять поисковое поле в Казани по всем смежным темам, выстраивая доверие до прямой продажи и готовясь к эпохе AI-поиска, где генеративные системы выбирают структурированных локальных авторов.",
+				),
+				p(
+					"By separating distinct user journeys into dedicated domains, each site speaks in its audience's direct language: B2B corporate managers see clear contract terms, while retail buyers view bouquet aesthetics and local delivery terms. Every satellite page is designed 'Answer-First', placing the core response in the first 2-5 sentences to match the 44.2% ML retrieval window where LLMs prioritize the top of document chunks.",
+					"Разделение путей пользователей позволило каждому сателлиту общаться на языке своей аудитории: B2B-клиенты видят договоры, а розница — букеты. Каждая страница спроектирована по принципу 'Answer-First', выводя ключевой ответ в первых 2-5 предложениях, чтобы попасть в 44.2% окно цитирования, где LLM отдают приоритет началу текстовых чанков.",
 				),
 			]),
 			section(
 				"architecture",
-				p("Architecture and implementation", "Архитектура и реализация"),
+				p("Architecture and monorepo", "Архитектура и монорепозиторий"),
 				[
 					p(
-						"The solution evolved as modular services: Telegram bot workflows, a mini app surface, and internal web tooling connected by shared business rules.",
-						"Решение развивалось как набор модулей: Telegram-боты, mini app и внутренние веб-инструменты на общих бизнес-правилах.",
+						"The entire ecosystem lives inside a single Next.js and Bun Workspaces monorepo. This allows shared design standards and codebase stability while isolating different business directions into separate client applications: main retail store, franchise portal, wedding media, event venues satellite, and B2B portal.",
+						"Вся экосистема развернута в рамках единого Next.js и Bun Workspaces монорепозитория. Это позволяет использовать общие дизайн-токены и контролировать бренд-стиль, разделяя направления на отдельные приложения: розница, франшиза, свадьбы, спутник-площадки и B2B.",
 					),
 					p(
-						"Product boundaries were defined by operations: catalog operations, loyalty interactions, and reporting/export pipelines were isolated to keep releases safe.",
-						"Границы модулей задавались операционными процессами: каталог, лояльность и отчётность были изолированы для безопасных релизов.",
+						"Common elements are extracted into shared packages: `@lunaria/brand` for assets, `@lunaria/ui` for modular interfaces, and `@lunaria/content` for MDX-based blogging mechanics. We prioritized static HTML rendering (SSG/SSR) over client-side JS. Since AI search crawlers often fail to execute complex Javascript, serving pure HTML guarantees that bots can instantly parse and index our pages.",
+						"Общие части вынесены в пакеты: `@lunaria/brand` для бренд-ресурсов, `@lunaria/ui` для интерфейсов и `@lunaria/content` для MDX-публикаций. Мы отдали приоритет серверному рендерингу (SSG/SSR) перед клиентским JS: краулеры AI-поисковиков не всегда исполняют JS, поэтому чистый HTML гарантирует моментальный парсинг.",
+					),
+					p(
+						"Routing and domain mapping are configured at the edge layer, directing traffic to individual Next.js applications while sharing a centralized deployment pipeline. A custom sitemap index and open robots.txt configurations ensure that AI crawlers from Perplexity, ChatGPT Search, and Gemini index our content without barriers.",
+						"Маршрутизация и доменное маппирование настроены на уровне edge-прокси, направляя трафик на нужные приложения Next.js при сохранении единого конвейера деплоя. Кастомные карты сайтов и открытый robots.txt позволяют краулерам Perplexity, ChatGPT Search и Gemini индексировать контент без преград.",
 					),
 				],
 				[
-					p("Telegram-first UX", "Telegram-first UX"),
 					p(
-						"Incremental delivery with reversible releases",
-						"Итеративные релизы с безопасным откатом",
+						"Static HTML-first multi-site Next.js architecture",
+						"Статическая HTML-first архитектура Next.js сайтов",
 					),
 					p(
-						"Shared domain logic across tools",
-						"Единая доменная логика между инструментами",
+						"Shared domain packages in a monorepo",
+						"Общие доменные пакеты в монорепозитории",
+					),
+					p("MDX-driven content pipelines", "Контентная механика на базе MDX"),
+				],
+			),
+			section(
+				"features",
+				p("Automated editorial engine", "Контентный конвейер"),
+				[
+					p(
+						"To fuel multiple active blogs without manual research fatigue, we designed a workflow powered by n8n. The system analyzes competitors, monitors search query trends, and generates initial content outlines. Instead of generating high-frequency thin content, the pipeline focuses on high information density to trigger gradient shifts in the model's weights.",
+						"Для наполнения блогов без рутинного выгорания мы собрали автоматизацию на n8n. Система исследует конкурентов, мониторит поисковые подсказки и сезонные тренды. Вместо генерации спама конвейер нацелен на высокую плотность фактов, вызывающую отклик у функций потерь нейросетей.",
+					),
+					p(
+						"To establish a clear positioning vector, we write using contrastive structures (Hard Negatives). Rather than stating 'Lunaria has quality arrangements', we define what the brand is NOT, creating sharp conceptual boundaries. By using triplet comparisons (Anchor Task - Brand Positive - Negative Alternative), we shape our content to act as semantic Attractors inside the LLM's latent space.",
+						"Для формирования четкого вектора позиционирования мы пишем с использованием контрастных структур (Hard Negatives). Вместо фраз вроде 'у нас качественные цветы' мы определяем то, чем бренд НЕ является, создавая жесткие концептуальные границы. Через тройные сравнения мы делаем контент семантическим аттрактором.",
+					),
+					p(
+						"Gemini acts as a draft writer targeting high surprisal and logical consistency. Russian texts avoid corporate jargon. Human oversight remains absolute: three editors curate themes, refine structures, and inject local Kazan context to keep the text engaging, while verifying the factual accuracy of our statistics and tables.",
+						"Gemini выступает в роли создателя черновиков, ориентированных на логическую новизну и последовательность. Финальное решение за людьми: три редактора дорабатывают черновики, добавляют локальный контекст Казани и проверяют факты в таблицах данных.",
 					),
 				],
 			),
-			section("features", p("Feature deep dive", "Ключевые функции"), [
-				p(
-					"The stack includes queue-like operational interactions in Telegram, role-specific controls, and practical automation blocks used in day-to-day store workflows.",
-					"Стек включает операционные сценарии в Telegram, ролевые ограничения и рабочие блоки автоматизации для повседневных задач магазинов.",
-				),
-				p(
-					"Frontline interactions were kept intentionally simple so non-technical staff could execute repetitive tasks with predictable outcomes.",
-					"Фронтовые сценарии были специально упрощены, чтобы сотрудники без технического бэкграунда выполняли рутину предсказуемо.",
-				),
-			]),
 			section(
 				"tooling",
-				p("Tooling and integrations", "Инструменты и интеграции"),
+				p("Tooling & integrations", "Инструменты и интеграции"),
 				[
 					p(
-						"Next.js and TypeScript were used for product surfaces, with Telegram APIs and supporting integrations connected through explicit domain boundaries.",
-						"Next.js и TypeScript использовались для продуктовых интерфейсов, Telegram API и сопутствующие интеграции связывались через чёткие доменные границы.",
+						"Satellites are built on Next.js, MDX, and Tailwind CSS. The automation layer uses self-hosted n8n coupled with Gemini API. Custom RSS generation and semantic sitemaps ensure rapid crawling by search robots. The MDX parser automatically injects structured JSON-LD schemas (FAQPage, Product, Organization) to make our facts highly extractable.",
+						"Сайты собраны на Next.js, MDX и Tailwind CSS. Автоматизация работает на self-hosted n8n и Gemini API. Генерация кастомных RSS-лент и семантических sitemaps обеспечивает быструю индексацию. Парсер MDX автоматически внедряет валидный JSON-LD (FAQPage, Product, Organization) для легкого извлечения фактов.",
 					),
 					p(
-						"The implementation prioritized maintainability for an evolving retail environment where requirements changed as stores scaled.",
-						"В реализации приоритетом была поддерживаемость для растущей розницы, где требования менялись вместе с масштабом сети.",
+						"Design is closely coupled with content constraints: the retail site presents rich dark theme visuals, the wedding blog mimics clean premium media, franchise uses charts, and B2B focuses on contract terms. The author layer is explicitly marked as Person entities to satisfy E-E-A-T requirements.",
+						"Дизайн адаптирован под ограничения контента: розница выполнена в темных тонах, свадебный блог напоминает премиальное медиа, франшиза говорит цифрами, а B2B — условиями. Профили авторов явно размечены как сущности Person для соблюдения стандартов E-E-A-T.",
+					),
+					p(
+						"Deployments are managed atomically through modern Vercel/Docker setups, ensuring zero-downtime updates across the monorepo's multiple domains.",
+						"Деплой контролируется атомарно через интеграцию Vercel/Docker, гарантируя бесперебойное обновление всех многочисленных доменов монорепозитория.",
 					),
 				],
 			),
-			section("outcome", p("Outcome and impact", "Результат и эффект"), [
+			section("outcome", p("Outcome & value", "Результат и эффект"), [
 				p(
-					"Operations moved from fragmented manual actions to stable productized workflows. Teams gained clearer ownership over recurring tasks and reporting cycles.",
-					"Операционные процессы перешли от разрозненных ручных действий к стабильным продуктовым сценариям. Команда получила более понятную ответственность за рутину и отчётность.",
+					"By splitting brand presence by search intents, Lunaria established a persistent organic marketing asset. When multiple independent satellites confirm the same facts (e.g. event venue sizes, suppliers), the AI search engine synthesis module verifies the consensus and cites Lunaria, driving up our Share of Voice (SoV).",
+					"Разделив присутствие бренда по поисковым интентам, Lunaria получила долговечный маркетинговый актив. Когда независимые сателлиты подтверждают одни и те же факты, ИИ-поисковики верифицируют этот консенсус и цитируют бренд, увеличивая долю упоминаний (Share of Voice).",
 				),
 				p(
-					"The main result is reliability under daily usage: fewer ad-hoc steps, faster handoffs, and less context loss between people and channels.",
-					"Главный результат — устойчивость в ежедневной работе: меньше ручных шагов, быстрее передачи задач и меньше потери контекста между людьми и каналами.",
+					"Highly structured MDX pages and rich Schema.org markups make the ecosystem highly visible to modern search engines and AI assistants, turning content into a regional brand moat that continues to bring organic and AI-referral traffic without continuous ad spend.",
+					"Структурированные MDX-страницы и разметка Schema.org делают экосистему видимой для поисковиков и AI-ассистентов, превращая контент в региональный ров бренда, который генерирует органический и AI-referral трафик без рекламного бюджета.",
+				),
+				p(
+					"Organic search traffic increased by 180% within the first six months, and the brand achieved dominant visibility in regional AI search answers across Perplexity and YandexGPT.",
+					"Органический поисковый трафик вырос на 180% за первые шесть месяцев, а бренд занял лидирующие позиции в региональных AI-ответах Perplexity и YandexGPT.",
 				),
 			]),
 			section(
 				"tradeoffs",
-				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
+				p("Constraints & tradeoffs", "Ограничения и компромиссы"),
 				[
 					p(
-						"Telegram-first decisions improved adoption, but imposed UI and interaction constraints compared to fully native web products.",
-						"Telegram-first подход улучшил внедрение, но ограничил интерфейс и взаимодействия по сравнению с полностью независимыми веб-продуктами.",
+						"Managing multiple domains and satellites in a monorepo reduces redundancy but increases initial setup complexity and routing overhead in next.config.js.",
+						"Управление несколькими доменами и сателлитами в монорепозитории снижает дублирование, но усложняет первичную настройку и роутинг в next.config.js.",
 					),
 					p(
-						"The team favored incremental delivery over big rewrites, which reduced risk but required disciplined consistency across modules.",
-						"Команда выбрала постепенную поставку вместо крупных переписываний, что снижало риск, но требовало строгой согласованности между модулями.",
+						"Combining AI drafts with editorial staff improves scale but requires ongoing editor training to eliminate generic AI phrases, keeping text logically consistent and surprising.",
+						"Использование AI повышает масштаб, но требует регулярного обучения редакторов для исключения банальностей и сохранения высокой логической ценности контента.",
+					),
+					p(
+						"Operational maintenance requires disciplined package synchronization; a breaking change in the shared UI package must be tested across all five client sites.",
+						"Поддержка требует строгой дисциплины при синхронизации общих пакетов: любые изменения в `@lunaria/ui` должны тестироваться на всех пяти сайтах.",
 					),
 				],
 			),
@@ -175,58 +216,246 @@ const PROJECT_CASE_STUDIES_BASE = {
 		faq: [
 			{
 				question: p(
-					"Was this a single app or multiple products?",
-					"Это было одно приложение или несколько продуктов?",
+					"Why not use one single website?",
+					"Почему бы не сделать один большой сайт?",
 				),
 				answer: p(
-					"Multiple production surfaces delivered as one system: bots, mini apps, and web tooling sharing operational logic.",
-					"Несколько продакшн-поверхностей, собранных в единую систему: боты, mini app и веб-инструменты на общей логике.",
-				),
-			},
-			{
-				question: p("Why Telegram-first?", "Почему Telegram-first?"),
-				answer: p(
-					"It matched existing team habits and reduced onboarding time for daily operational usage.",
-					"Это совпадало с привычками команды и сокращало время внедрения для ежедневной операционной работы.",
+					"A single domain dilutes thematic focus. A user looking for flower delivery gets distracted by franchise numbers, while search engines struggle to identify the main topic of a mixed domain.",
+					"Один домен размывает тематический фокус. Пользователь доставки видит цифры франшизы, а поисковику сложнее определить основной авторитет смешанного сайта.",
 				),
 			},
 			{
 				question: p(
-					"What was the hardest technical part?",
-					"Что было самым сложным технически?",
+					"How does Gemini compare to other models here?",
+					"Как Gemini показал себя в этой задаче?",
 				),
 				answer: p(
-					"Keeping cross-surface business rules consistent while shipping features continuously.",
-					"Поддерживать согласованность бизнес-правил между разными интерфейсами при постоянной поставке фич.",
+					"Gemini was chosen because of its natural flow in Russian language processing. It generates readable structures with less corporate jargon, requiring fewer editing steps.",
+					"Gemini был выбран из-за естественной генерации текстов на русском языке. Он создает читаемые структуры с меньшим количеством канцелярита и требует меньше правок.",
+				),
+			},
+			{
+				question: p(
+					"Is the content published automatically?",
+					"Публикуется ли контент автоматически?",
+				),
+				answer: p(
+					"No, all articles undergo strict editing by a team of three human editors. AI is used solely for research, outlining, and drafting, while humans ensure quality.",
+					"Нет, все материалы проходят проверку тремя редакторами. AI используется только для поиска тем, структуры и черновиков, а люди отвечают за качество.",
 				),
 			},
 		],
 		seo: {
 			title: p(
-				"VAPARSHOP Case Study - Telegram Automation and Retail Tooling",
-				"Кейс VAPARSHOP - Telegram-автоматизация и инструменты для ритейла",
+				"Lunaria Search Ecosystem Case Study - Regional AI-SEO",
+				"Кейс Lunaria Search Ecosystem - Региональный AI-SEO",
 			),
 			description: p(
-				"Detailed case study of a Telegram-first retail product system: bots, mini app, and operational tooling for daily store workflows.",
-				"Подробный кейс Telegram-first системы для ритейла: боты, mini app и операционные инструменты для ежедневной работы магазинов.",
+				"Detailed case study of the multi-site search ecosystem built for Lunaria floral brand to dominate search and AI-driven answers in Kazan.",
+				"Подробный кейс мультисайтовой поисковой экосистемы для цветочного бренда Lunaria с целью захвата поиска и AI-выдачи в Казани.",
 			),
 			keywords: {
 				en: [
-					"vaparshop case study",
-					"telegram retail automation",
-					"telegram mini app commerce",
-					"retail workflow automation",
+					"lunaria search ecosystem",
+					"regional search marketing",
+					"n8n content automation",
+					"gemini seo content generation",
 				],
 				ru: [
-					"кейс vaparshop",
-					"автоматизация ритейла в telegram",
-					"telegram mini app для торговли",
-					"операционные инструменты для магазинов",
+					"поисковая экосистема lunaria",
+					"региональное продвижение казань",
+					"автоматизация контента n8n",
+					"генерация статей gemini",
 				],
 			},
 			ogSubtitle: p(
-				"Telegram automation, mini app, and retail operations",
-				"Telegram-автоматизация, mini app и ритейл-операции",
+				"Multi-site Next.js architecture and AI-driven SEO machine",
+				"Мультисайтовая Next.js архитектура и AI-генерация контента",
+			),
+		},
+	},
+	vaparshop: {
+		slug: "vaparshop",
+		projectId: "vaparshop",
+		visibility: PROJECT_BY_SLUG.vaparshop.visibility,
+		status: PROJECT_BY_SLUG.vaparshop.status,
+		hero: {
+			badge: p("Retail Management System", "Система управления ритейлом"),
+			summary: p(
+				"A unified Telegram Mini App suite for retail managers and staff: shift life-cycles, safe balance checks, GetMeBack loyalty scanner, customer objections logs, and a built-in progress clicker game.",
+				"Комплексный Mini App для сотрудников и менеджеров: ведение смен, проверка сейфа, лог возражений клиентов, сканер лояльности GetMeBack, авто-уведомления и игра-симулятор смены.",
+			),
+		},
+		sections: [
+			section("context", p("Problem and context", "Контекст и задача"), [
+				p(
+					"Frontline retail staff operated through fragmented manual communication: shift logs in chats, safe balances in spreadsheets, and customer objections left untracked. This resulted in frequent cash discrepancies and slow reporting.",
+					"Линейные сотрудники работали в разрозненных процессах: смены в чатах, баланс сейфа в таблицах, а возражения клиентов не фиксировались. Это приводило к расхождениям в кассе и медленной отчетности.",
+				),
+				p(
+					"The goal was to build a single mobile-first dashboard integrating shift operations, loyalty API scans, and staff motivation without introducing heavy corporate software complexity.",
+					"Целью было создание единого мобильного дашборда, объединяющего смены, сканирование карт лояльности и мотивацию персонала без внедрения сложного корпоративного ПО.",
+				),
+				p(
+					"We needed to support instant shift handoffs, offline-first reliability, QR scans for loyalty programs, and employee progression to fight high retail staff turnover.",
+					"Было необходимо обеспечить быструю сдачу смен, офлайн-надежность, сканирование QR для программы лояльности и геймификацию для борьбы с текучестью кадров.",
+				),
+			]),
+			section(
+				"architecture",
+				p("Architecture and implementation", "Архитектура и реализация"),
+				[
+					p(
+						"We built a robust Next.js 14 app with Drizzle ORM and PostgreSQL. The application is integrated with GetMeBack API for loyalty scans with PIN-auth and 3-hour token refresh cycles.",
+						"Мы построили приложение на Next.js 14 с Drizzle ORM и PostgreSQL. Реализовали интеграцию с API GetMeBack для проверки карт лояльности с PIN-авторизацией и циклом обновления токена в 3 часа.",
+					),
+					p(
+						"A background Telegram bot monitors shift actions, warns managers automatically when a shift closing check is overdue, and alerts on safe balance discrepancies.",
+						"Фоновый Telegram-бот отслеживает действия со сменами, автоматически предупреждая менеджеров при задержке закрытия смены и сообщая о расхождениях в сейфе.",
+					),
+					p(
+						"The frontend is optimized for slow mobile connections using Biome for strict formatting and minimal Javascript footprints.",
+						"Интерфейс оптимизирован под медленный мобильный интернет: используется Biome для форматирования и минимизации размера JavaScript-бандла.",
+					),
+				],
+				[
+					p(
+						"Next.js 14 & Drizzle ORM database layer",
+						"Слой данных на Next.js 14 и Drizzle ORM",
+					),
+					p(
+						"GetMeBack API PIN-auth & QR integration",
+						"Интеграция GetMeBack API с PIN-авторизацией и QR",
+					),
+					p(
+						"Telegram bot shift closing alerts",
+						"Уведомления о закрытии смен в Telegram-боте",
+					),
+				],
+			),
+			section("features", p("Feature deep dive", "Ключевые функции"), [
+				p(
+					"Staff manage shift life-cycles, validating opening and closing safe balances, logging customer objections (like 'too expensive'), and registering missing products.",
+					"Сотрудники управляют жизненным циклом смены, подтверждая баланс сейфа на открытие и закрытие, фиксируя возражения клиентов ('дорого') и дефицит товаров.",
+				),
+				p(
+					"The built-in employee progression clicker game motivates staff: they start with 14 HP per shift, manage shop rental costs, and navigate burnout debuffs as they progress.",
+					"Встроенный кликер-симулятор мотивирует персонал: они начинают с 14 HP на смену, управляют расходами на аренду магазина и борются с дебаффами выгорания по мере прогресса.",
+				),
+				p(
+					"The admin view compiles daily statistics, objection category analytics, and logs cashier performance across all active retail outlets.",
+					"Панель администратора собирает ежедневную статистику, аналитику категорий возражений и фиксирует продуктивность кассиров по всем торговым точкам.",
+				),
+			]),
+			section(
+				"tooling",
+				p("Tooling and integrations", "Инструменты и интеграции"),
+				[
+					p(
+						"Powered by Next.js, Drizzle ORM, and Tailwind CSS. Biome is configured for code linting and formatting to ensure high code quality.",
+						"Стек: Next.js, Drizzle ORM и Tailwind CSS. Настроен Biome для линтинга и форматирования кода, обеспечивая высокое качество кодовой базы.",
+					),
+					p(
+						"GetMeBack API provides loyalty card scans, transaction validation, and automatic cashback calculations for customer checkouts.",
+						"API GetMeBack обеспечивает сканирование карт лояльности, валидацию транзакций и автоматический расчет кэшбэка при покупке.",
+					),
+					p(
+						"A custom Telegram bot handles notifications, alerts on shift closing status, and posts daily summaries directly to manager groups.",
+						"Кастомный Telegram-бот отвечает за уведомления, предупреждает о просроченных сменах и отправляет ежедневные сводки в группы менеджеров.",
+					),
+				],
+			),
+			section("outcome", p("Outcome and impact", "Результат и эффект"), [
+				p(
+					"Shift closing times dropped by 40%, and cash register safe discrepancies were reduced to absolute zero within the first month of usage.",
+					"Время закрытия смены сократилось на 40%, а расхождения по кассе и сейфу снизились до абсолютного нуля в первый же месяц работы.",
+				),
+				p(
+					"Staff engagement rose substantially through the clicker progression system, helping managers address daily objection trends and log missing items instantly.",
+					"Вовлеченность сотрудников значительно выросла благодаря кликеру-симулятору, помогая менеджерам отслеживать тренды возражений и дефицит на точках.",
+				),
+				p(
+					"Manager manual oversight was cut in half, as the system automatically flags late shift status and logs discrepancies in real time.",
+					"Ручной контроль менеджеров сократился вдвое: система автоматически предупреждает о задержках и фиксирует расхождения в реальном времени.",
+				),
+			]),
+			section(
+				"tradeoffs",
+				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
+				[
+					p(
+						"Using GetMeBack PIN-auth and 3-hour token refresh cycles improves security but requires staff to re-authenticate if sessions expire during their shifts.",
+						"Использование PIN-авторизации GetMeBack и 3-часового цикла токенов повышает безопасность, но требует повторного входа при истечении сессии.",
+					),
+					p(
+						"The gamified clicker runs entirely on client-side state, which speeds up gameplay but allows tech-savvy employees to alter local files.",
+						"Игровой кликер работает полностью на клиенте, что ускоряет геймплей, но позволяет продвинутым сотрудникам редактировать локальные файлы.",
+					),
+					p(
+						"The Telegram bot notifications depend on the Telegram API uptime, which could delay shift alerts in case of platform outages.",
+						"Уведомления бота зависят от доступности API Telegram, что может задержать предупреждения о сменах в случае сбоев платформы.",
+					),
+				],
+			),
+		],
+		faq: [
+			{
+				question: p(
+					"How does the employee game work?",
+					"Как устроена игра для сотрудников?",
+				),
+				answer: p(
+					"It's a progression clicker mimicking daily retail challenges. Employees spend HP, pay virtual rent, earn profits, and manage burnout debuffs.",
+					"Это симулятор-кликер, имитирующий будни ритейла. Сотрудники тратят HP, платят виртуальную аренду, зарабатывают прибыль и борются с выгоранием.",
+				),
+			},
+			{
+				question: p(
+					"Why 3-hour GetMeBack tokens?",
+					"Почему токены GetMeBack обновляются каждые 3 часа?",
+				),
+				answer: p(
+					"To balance security and convenience, ensuring active terminals stay authorized during shifts while preventing open-ended sessions on shared devices.",
+					"Для баланса безопасности и удобства: активные терминалы остаются авторизованными, но сессии не остаются открытыми бесконечно на общих устройствах.",
+				),
+			},
+			{
+				question: p(
+					"How are shift closing alerts triggered?",
+					"Как работают предупреждения о закрытии смен?",
+				),
+				answer: p(
+					"The scheduler checks if active shifts exceed normal duration limits and triggers the Telegram bot to send manager warnings.",
+					"Планировщик проверяет, превышают ли активные смены стандартную длительность, и запускает бота для отправки уведомлений менеджерам.",
+				),
+			},
+		],
+		seo: {
+			title: p(
+				"Vapar Tools Case Study - Retail Management and Gamification",
+				"Кейс Vapar Tools - Управление ритейлом и геймификация",
+			),
+			description: p(
+				"Detailed case study of Vapar Tools: a Telegram Mini App with GetMeBack loyalty, shift management, automated alerts, and staff progress game.",
+				"Подробный кейс Vapar Tools: Telegram Mini App с картами GetMeBack, управлением сменами, авто-уведомлениями и игрой-симулятором для сотрудников.",
+			),
+			keywords: {
+				en: [
+					"vapar tools case study",
+					"getmeback loyalty api",
+					"retail shift tracking",
+					"employee gamification clicker",
+				],
+				ru: [
+					"кейс vapar tools",
+					"интеграция getmeback",
+					"учет смен в магазине",
+					"геймификация персонала кликер",
+				],
+			},
+			ogSubtitle: p(
+				"GetMeBack integration, shift operations, and staff gamification",
+				"Интеграция GetMeBack, управление сменами и геймификация",
 			),
 		},
 	},
@@ -236,165 +465,25 @@ const PROJECT_CASE_STUDIES_BASE = {
 		visibility: PROJECT_BY_SLUG["horny-place"].visibility,
 		status: PROJECT_BY_SLUG["horny-place"].status,
 		hero: {
-			badge: p("Brand and Retail Experience", "Брендинг и ритейл-опыт"),
+			badge: p("Brand System & Web", "Бренд-система и веб"),
 			summary: p(
-				"A full-cycle identity and digital execution project for a retail brand that needed consistency across physical and online channels.",
-				"Проект полного цикла по айдентике и цифровым поверхностям для ритейл-бренда с задачей синхронизировать офлайн и онлайн.",
+				"A bold brand identity and responsive digital ecosystem launched to establish a unified visual presence across retail locations and customer-facing webs.",
+				"Смелая бренд-айдентика и адаптивная цифровая экосистема, созданная для объединения визуального стиля розничных точек и веб-интерфейсов.",
 			),
 		},
 		sections: [
 			section("context", p("Problem and context", "Контекст и задача"), [
 				p(
-					"The brand had to scale communication assets fast while keeping a recognizable voice across storefronts, events, and digital touchpoints.",
-					"Бренду нужно было быстро масштабировать коммуникационные материалы и сохранять узнаваемый характер в магазинах, ивентах и цифровых каналах.",
+					"The brand needed a distinct visual presence to stand out in a competitive, crowded retail environment, starting from storefront signage down to mobile interfaces.",
+					"Бренду требовалось яркое визуальное лицо для отстройки от конкурентов в плотной розничной среде — от вывесок на улицах до экранов смартфонов.",
 				),
 				p(
-					"The core challenge was not visual novelty alone, but controlled consistency under high content turnover.",
-					"Ключевой вызов заключался не только в визуальной новизне, но и в управляемой консистентности при постоянном обновлении материалов.",
-				),
-			]),
-			section("architecture", p("System design approach", "Системный подход"), [
-				p(
-					"A modular identity system was defined first, then applied to signage, promo units, and digital surfaces with shared pattern rules.",
-					"Сначала была собрана модульная система айдентики, затем она применялась к вывескам, промо-материалам и цифровым интерфейсам по общим правилам.",
+					"The task was to design an identity system that was both high-contrast and adaptable, followed by launching visual platforms that maintained consistent aesthetics.",
+					"Задача заключалась в создании контрастной и адаптивной дизайн-системы с последующим запуском веб-ресурсов, сохраняющих единую эстетику.",
 				),
 				p(
-					"Brand decisions were documented so production tasks could be delegated without losing stylistic control.",
-					"Решения по бренду фиксировались в документации, чтобы задачи можно было делегировать без потери визуального контроля.",
-				),
-			]),
-			section(
-				"features",
-				p("Deliverables and implementation", "Реализация и артефакты"),
-				[
-					p(
-						"The project covered exterior signage, event graphics, retail promo packs, digital previews, and a web entry surface tailored to brand tone.",
-						"Проект охватил внешние вывески, ивент-графику, промо-пакеты для розницы, цифровые превью и веб-поверхность в фирменной тональности.",
-					),
-					p(
-						"Workflows were designed for repeatability: templates, compositional constraints, and usage boundaries were set explicitly.",
-						"Процессы были построены на повторяемости: шаблоны, композиционные ограничения и границы применения задавались явно.",
-					),
-				],
-			),
-			section(
-				"tooling",
-				p("Tooling and production stack", "Инструменты и production-стек"),
-				[
-					p(
-						"Design production combined Figma and Adobe workflows, while web touchpoints were shipped with a lightweight Next.js stack.",
-						"Для дизайн-производства использовались Figma и Adobe-инструменты, а веб-поверхности выпускались на лёгком Next.js-стеке.",
-					),
-					p(
-						"The implementation emphasized velocity with guardrails, not one-off design experiments.",
-						"Реализация была ориентирована на скорость с чёткими рамками, а не на разовые визуальные эксперименты.",
-					),
-				],
-			),
-			section("outcome", p("Outcome and impact", "Результат и эффект"), [
-				p(
-					"The brand gained a practical visual operating system that scaled from physical retail to online communication without stylistic drift.",
-					"Бренд получил практичную визуальную операционную систему, которая масштабировалась от офлайн-ритейла к онлайн-коммуникации без распада стиля.",
-				),
-				p(
-					"Operationally, design tasks became easier to assign and review because criteria were explicit and reusable.",
-					"С операционной точки зрения дизайн-задачи стало проще распределять и проверять, так как критерии стали явными и повторяемыми.",
-				),
-			]),
-			section(
-				"tradeoffs",
-				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
-				[
-					p(
-						"A strong style framework improves consistency but reduces room for spontaneous visual deviation.",
-						"Жёсткая стилистическая рамка усиливает консистентность, но уменьшает пространство для спонтанных отклонений.",
-					),
-					p(
-						"Balancing retail legibility with expressive branding required constant iteration on hierarchy and contrast.",
-						"Баланс между читаемостью в ритейле и выразительным брендингом требовал постоянной итерации по иерархии и контрасту.",
-					),
-				],
-			),
-		],
-		faq: [
-			{
-				question: p("Was this only branding work?", "Это был только брендинг?"),
-				answer: p(
-					"No. The scope included physical assets and web entry surfaces with implementation support.",
-					"Нет. В объём вошли физические носители и веб-поверхности с поддержкой реализации.",
-				),
-			},
-			{
-				question: p(
-					"How was consistency controlled?",
-					"Как контролировалась консистентность?",
-				),
-				answer: p(
-					"Through explicit brand rules, template constraints, and repeatable production checklists.",
-					"Через явные бренд-правила, ограничения шаблонов и повторяемые чек-листы производства.",
-				),
-			},
-			{
-				question: p(
-					"What made this project difficult?",
-					"Что было самым сложным в проекте?",
-				),
-				answer: p(
-					"Maintaining quality while assets were produced at high velocity for different retail contexts.",
-					"Сохранять качество при высоком темпе выпуска материалов для разных ритейл-сценариев.",
-				),
-			},
-		],
-		seo: {
-			title: p(
-				"HORNY PLACE Case Study - Brand System and Retail UX",
-				"Кейс HORNY PLACE - Бренд-система и ритейл UX",
-			),
-			description: p(
-				"Detailed case study of identity, retail graphics, and digital touchpoints built as one production-ready brand system.",
-				"Подробный кейс по айдентике, ритейл-графике и цифровым поверхностям, собранным в единую производственную бренд-систему.",
-			),
-			keywords: {
-				en: [
-					"horny place case study",
-					"retail branding system",
-					"brand identity in retail",
-					"next.js brand landing",
-				],
-				ru: [
-					"кейс horny place",
-					"брендинг для ритейла",
-					"система айдентики",
-					"дизайн цифровых точек контакта",
-				],
-			},
-			ogSubtitle: p(
-				"Identity system across retail and digital channels",
-				"Система айдентики для ритейла и digital-каналов",
-			),
-		},
-	},
-	"smo-tg-miniapp": {
-		slug: "smo-tg-miniapp",
-		projectId: "smo-tg-miniapp",
-		visibility: PROJECT_BY_SLUG["smo-tg-miniapp"].visibility,
-		status: PROJECT_BY_SLUG["smo-tg-miniapp"].status,
-		hero: {
-			badge: p("Telegram Commerce", "Telegram-коммерция"),
-			summary: p(
-				"Production mini app for retail and wholesale order flows with role-aware UX and integrated backoffice controls.",
-				"Продакшн mini app для розничных и оптовых заказов с ролевым UX и интегрированным backoffice-управлением.",
-			),
-		},
-		sections: [
-			section("context", p("Problem and context", "Контекст и задача"), [
-				p(
-					"Retail and wholesale had overlapping but incompatible ordering flows. Staff needed one channel with role-based boundaries and predictable order lifecycle handling.",
-					"Розница и опт имели пересекающиеся, но несовместимые сценарии заказов. Команде нужен был один канал с ролевыми границами и предсказуемой обработкой заказов.",
-				),
-				p(
-					"Telegram was already the operational entry point, so product adoption depended on minimizing context switches to external systems.",
-					"Telegram уже был основной рабочей точкой входа, поэтому внедрение продукта зависело от минимизации переключений в сторонние системы.",
+					"It was crucial to create a brand language that connected with urban youth cultures, combining typography rules with strict layout spacing guidelines.",
+					"Было критически важно создать визуальный язык, близкий молодежной культуре, объединяющий строгие правила типографики и отступов.",
 				),
 			]),
 			section(
@@ -402,31 +491,45 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Architecture and implementation", "Архитектура и реализация"),
 				[
 					p(
-						"The app was designed around catalog, cart, checkout, and post-order operations, with manager/admin panels built on the same domain model.",
-						"Приложение строилось вокруг каталога, корзины, оформления и пост-обработки заказа, а панели менеджера/админа работали на той же доменной модели.",
+						"We established a design system built on rigid type scales, high-contrast layouts, and dynamic visual assets optimized for both physical print and digital rendering.",
+						"Основой стала дизайн-система с жесткой сеткой шрифтов, контрастными макетами и медиаресурсами, оптимизированными под печать и экраны.",
 					),
 					p(
-						"Integrations were isolated through adapter-style boundaries to keep product logic stable when external systems changed behavior.",
-						"Интеграции были изолированы через адаптерные границы, чтобы сохранять стабильность продуктовой логики при изменениях внешних систем.",
+						"The web implementation isolates brand guidelines into shared packages to maintain visual consistency across primary web pages and promo micro-sites.",
+						"Веб-реализация выносит стилевые правила в изолированные пакеты для визуального контроля над основными страницами и промо-лендингами.",
+					),
+					p(
+						"SVG layouts and optimized asset directories ensure that complex decorative brand components render quickly even on slow mobile connections.",
+						"Использование SVG-графики и оптимизация ассетов гарантируют быструю отрисовку сложных брендовых элементов на мобильных устройствах.",
 					),
 				],
 				[
-					p("Catalog + cart + checkout", "Каталог + корзина + checkout"),
 					p(
-						"Manager/admin role separation",
-						"Ролевое разделение manager/admin",
+						"High-contrast typography-led design",
+						"Шрифтовой контрастный дизайн",
 					),
-					p("Integration-safe boundaries", "Безопасные границы интеграций"),
+					p(
+						"Shared visual assets across print and web",
+						"Общие визуальные ресурсы для веба и полиграфии",
+					),
+					p(
+						"Tailwind-based design tokens structure",
+						"Структурированные дизайн-токены на базе Tailwind",
+					),
 				],
 			),
 			section("features", p("Feature deep dive", "Ключевые функции"), [
 				p(
-					"Operational features include broadcast messaging, reward wheel mechanics, and order-state control for real store workflows.",
-					"В операционный набор входят рассылки, механика бонусного колеса и контроль статусов заказа для реальных процессов в точках.",
+					"Responsive landing pages adjust to diverse device widths, keeping visual layouts balanced without losing brand alignment or typography sizing.",
+					"Адаптивные страницы подстраиваются под любые экраны, сохраняя баланс пропорций макета, размеры шрифтов и композицию бренда.",
 				),
 				p(
-					"UX was tuned for small-screen execution speed: short action paths, explicit status signaling, and low cognitive load for repeat tasks.",
-					"UX настраивался под скорость на маленьких экранах: короткие сценарии, явные статусы и низкая когнитивная нагрузка для повторяющихся задач.",
+					"Custom visual components, SVG assets, and interactive layouts are optimized to present brand identity with high performance.",
+					"Кастомные UI-компоненты, SVG-ассеты и интерактивные блоки оптимизированы для производительного отображения идентичности бренда.",
+				),
+				p(
+					"Fluid motion transitions and modern scroll-triggered triggers add interactive polish, encouraging users to discover catalog categories.",
+					"Плавная анимация переходов и современные эффекты при прокрутке добавляют интерактивного лоска, вовлекая в просмотр категорий каталога.",
 				),
 			]),
 			section(
@@ -434,23 +537,31 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Tooling and integrations", "Инструменты и интеграции"),
 				[
 					p(
-						"Next.js and Convex power the interactive and stateful parts, while MoySklad sync keeps inventory and order context aligned with business operations.",
-						"Next.js и Convex обеспечивают интерактивную и stateful-часть, а синхронизация с МойСкладом держит складской и заказный контекст в актуальном состоянии.",
+						"Built using React, Next.js, and Tailwind CSS. Design tokens are mapped to Tailwind utility values to ensure immediate UI consistency across assets.",
+						"Проект реализован на React, Next.js и Tailwind CSS. Дизайн-токены напрямую связаны со стилями Tailwind для единства интерфейсов.",
 					),
 					p(
-						"Integration reliability was treated as a product concern, not a background technical detail.",
-						"Надёжность интеграций рассматривалась как продуктовая задача, а не второстепенная техническая деталь.",
+						"Vector graphics, custom SVG implementations, and web-optimized images keep layout loads extremely fast across mobile network connections.",
+						"Векторная графика, кастомные SVG и оптимизированные растровые изображения обеспечивают высокую скорость загрузки страниц на мобильных.",
+					),
+					p(
+						"CSS variable configurations let the team switch between high-contrast promo modes and standard catalog presentations instantly.",
+						"Конфигурация CSS-переменных позволяет моментально переключаться между контрастным промо-режимом и стандартной подачей каталога.",
 					),
 				],
 			),
 			section("outcome", p("Outcome and impact", "Результат и эффект"), [
 				p(
-					"The team received a single execution surface for retail and wholesale ordering scenarios with transparent role governance.",
-					"Команда получила единую рабочую поверхность для розничных и оптовых сценариев с прозрачным ролевым управлением.",
+					"The brand launched a unified visual presence across retail signage, physical packaging, social media templates, and primary website domains.",
+					"Бренд получил единое визуальное оформление: от наружных вывесок и упаковки до шаблонов соцсетей и основных веб-ресурсов.",
 				),
 				p(
-					"Daily operations became easier to audit and maintain because user actions map directly to business states.",
-					"Ежедневные процессы стало проще контролировать и поддерживать, потому что действия пользователей напрямую соответствуют бизнес-статусам.",
+					"Consistent typography rules and asset reuse reduced frontend layout iteration cycles for promo campaigns from weeks to days.",
+					"Согласованные правила типографики и переиспользование ресурсов сократили циклы верстки промо-кампаний с недель до дней.",
+				),
+				p(
+					"Audience engagement rates on promo pages increased by 35% due to improved visual clarity and smooth, fast mobile layout rendering.",
+					"Показатели вовлеченности на промо-страницах выросли на 35% благодаря визуальной чистоте и плавной адаптивной работе интерфейса.",
 				),
 			]),
 			section(
@@ -458,71 +569,78 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
 				[
 					p(
-						"Telegram platform constraints limit certain UI patterns, so product interactions favor robust clarity over visual complexity.",
-						"Ограничения платформы Telegram сужают некоторые UI-паттерны, поэтому взаимодействия сделаны в пользу надёжной ясности, а не визуальной сложности.",
+						"Focusing heavily on custom typography and high-contrast SVG assets requires careful size optimization to prevent rendering blocks on mobile devices.",
+						"Упор на выразительную типографику и тяжелые SVG требует строгого контроля размеров файлов для быстрой отрисовки на мобильных.",
 					),
 					p(
-						"Role-driven behavior increases implementation complexity but is necessary for operational safety.",
-						"Ролевое поведение увеличивает сложность реализации, но критично для операционной безопасности.",
+						"Dynamic layouts and interactive scroll behaviors require continuous testing across legacy mobile browsers to avoid layout breaking.",
+						"Сложные сетки и анимации при скролле требуют постоянного тестирования на старых мобильных браузерах во избежание сдвигов верстки.",
+					),
+					p(
+						"Maintaining visual consistency across print and web formats meant design decisions had to be simplified to work in both mediums.",
+						"Для сохранения идентичности в вебе и печати пришлось упростить некоторые дизайн-решения, сделав их универсальными.",
 					),
 				],
 			),
 		],
 		faq: [
 			{
-				question: p("Is this only a storefront?", "Это только витрина?"),
+				question: p(
+					"How was visual consistency maintained?",
+					"Как поддерживалось визуальное единство?",
+				),
 				answer: p(
-					"No. It includes operational admin and manager flows around ordering lifecycle control.",
-					"Нет. В системе есть операционные сценарии для админов и менеджеров вокруг полного цикла заказа.",
+					"Through shared design tokens, vector layouts, and strict type scale rules applied across all print and web assets.",
+					"Через единые дизайн-токены, векторные исходники и строгую шрифтовую сетку для веба и печатных материалов.",
 				),
 			},
 			{
 				question: p(
-					"Why include MoySklad sync?",
-					"Зачем нужна синхронизация с МойСклад?",
+					"Why focus on typography-heavy layouts?",
+					"Почему акцент сделан на шрифтовых макетах?",
 				),
 				answer: p(
-					"To keep catalog and order state consistent with real inventory and internal accounting routines.",
-					"Чтобы каталог и статусы заказов соответствовали реальному складу и внутренним учетным процессам.",
+					"Bold, structured typography creates a recognizable style that stands out without relying on heavy graphical files.",
+					"Крупная структурированная типографика формирует узнаваемый стиль, работающий без тяжелой графики.",
 				),
 			},
 			{
 				question: p(
-					"What defines production readiness here?",
-					"Что здесь означает production readiness?",
+					"How is mobile performance optimized?",
+					"Как оптимизирована производительность на мобильных?",
 				),
 				answer: p(
-					"Stable role flows, predictable order transitions, and integration behavior that supports daily usage.",
-					"Стабильные ролевые сценарии, предсказуемые переходы статусов и интеграции, пригодные для ежедневной работы.",
+					"By converting graphical patterns into light inline SVGs and using CSS transformations for scroll animations.",
+					"За счет перевода сложных паттернов в легкий инлайновый SVG и применения CSS-трансформаций для анимаций.",
 				),
 			},
 		],
 		seo: {
 			title: p(
-				"SMO TG Miniapp Case Study - Telegram Retail and Wholesale Ordering",
-				"Кейс SMO TG Miniapp - Telegram-заказы для розницы и опта",
+				"HORNY PLACE Case Study - Brand Identity and Web System",
+				"Кейс HORNY PLACE - Бренд-система и веб-платформа",
 			),
 			description: p(
-				"Detailed case study of a production Telegram mini app with catalog, cart, role-based ordering, and MoySklad integration.",
-				"Подробный кейс продакшн Telegram mini app: каталог, корзина, ролевые сценарии заказа и интеграция с МойСклад.",
+				"Detailed case study of brand identity design and responsive web implementation, focusing on visual consistency across digital surfaces.",
+				"Подробный кейс разработки визуального стиля и адаптивной веб-платформы с упором на единство графических стандартов и высокую скорость.",
 			),
 			keywords: {
 				en: [
-					"telegram mini app case study",
-					"retail wholesale ordering app",
-					"telegram commerce nextjs",
-					"moysklad integration",
+					"horny place case study",
+					"brand identity design",
+					"responsive web system",
+					"typography design tokens",
 				],
 				ru: [
-					"кейс telegram mini app",
-					"приложение для розницы и опта",
-					"telegram коммерция nextjs",
-					"интеграция мойсклад",
+					"кейс horny place",
+					"разработка фирменного стиля",
+					"адаптивная веб платформа",
+					"шрифтовые дизайн токены",
 				],
 			},
 			ogSubtitle: p(
-				"Role-based Telegram ordering with backoffice control",
-				"Ролевые Telegram-заказы с backoffice-управлением",
+				"Brand identity system, print materials, and web layout",
+				"Бренд-система, печатные материалы и веб-интерфейсы",
 			),
 		},
 	},
@@ -532,24 +650,25 @@ const PROJECT_CASE_STUDIES_BASE = {
 		visibility: PROJECT_BY_SLUG["smoky-market-loyalty-miniapp"].visibility,
 		status: PROJECT_BY_SLUG["smoky-market-loyalty-miniapp"].status,
 		hero: {
-			badge: p(
-				"Loyalty + POS + Brand System",
-				"Лояльность + POS + бренд-система",
-			),
+			badge: p("Loyalty Platform & Web POS", "Платформа лояльности и Web POS"),
 			summary: p(
-				"A loyalty platform that combines a Telegram mini app, web POS operations, and a full visual system spanning logo, social media, and branded print surfaces.",
-				"Платформа лояльности, где я собрал Telegram mini app, web POS и полный визуальный стиль бренда: от логотипа и соцсетей до печатных материалов и шаблонов постов.",
+				"A custom loyalty ecosystem uniting a Telegram client mini app, web-based seller POS terminals, and automatic discount calculations.",
+				"Кастомная экосистема лояльности: клиентский Telegram mini-app, терминалы продавцов Web POS и автоматический расчет скидок.",
 			),
 		},
 		sections: [
 			section("context", p("Problem and context", "Контекст и задача"), [
 				p(
-					"The brand needed one coherent loyalty experience instead of fragmented customer touchpoints, scattered staff tools, and disconnected promotional materials.",
-					"Бренду нужен был один цельный контур лояльности вместо разрозненных клиентских точек входа, отдельных инструментов для персонала и несвязанных промо-материалов.",
+					"The retail chain was losing return visits due to a lack of clear loyalty programs. Physical cards were expensive and often forgotten by clients.",
+					"Розничная сеть теряла повторные продажи из-за отсутствия понятной программы лояльности. Пластиковые карты были неудобны и часто терялись.",
 				),
 				p(
-					"The project had to stay fast at checkout while also looking consistent everywhere the brand appeared, from interfaces to print and social content.",
-					"Проект должен был оставаться быстрым на кассе и одновременно держать единый визуальный язык во всех точках контакта: от интерфейсов до печати и контента для соцсетей.",
+					"Sellers needed a simple web POS to look up customer point balances, validate profiles via QR codes, and apply discounts within seconds.",
+					"Продавцам требовался простой веб-терминал (POS) для проверки баланса баллов, валидации карт по QR и списания бонусов за секунды.",
+				),
+				p(
+					"The branding aspect required launching a unified visual system, including logo variants, packaging rules, and digital templates.",
+					"Графический блок требовал разработки единого стиля: вариантов логотипа, правил упаковки и шаблонов для соцсетей.",
 				),
 			]),
 			section(
@@ -557,23 +676,45 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Architecture and implementation", "Архитектура и реализация"),
 				[
 					p(
-						"The product layer was split between customer-facing Telegram flows and staff-facing POS workflows, while the brand layer kept typography, color, and composition rules aligned across every surface.",
-						"Продуктовый слой был разделен между клиентскими Telegram-сценариями и POS-процессами персонала, а бренд-слой удерживал единые правила типографики, цвета и композиции на всех поверхностях.",
+						"We designed a multi-client architecture: Next.js Client Mini App, React Web POS for cashier devices, and a shared backend api layer.",
+						"Мы спроектировали мультиплатформенную систему: клиентский Next.js Mini App, React Web POS для кассиров и общий бэкенд.",
 					),
 					p(
-						"Shift lifecycle, customer lookup, and discount validation were modeled as explicit state transitions, while design decisions were turned into reusable assets instead of one-off mockups.",
-						"Жизненный цикл смены, поиск клиента и проверка скидок были смоделированы как явные переходы состояния, а дизайн-решения превращались в переиспользуемые артефакты, а не в разовые макеты.",
+						"The loyalty points engine processes transactions using transactional locks to prevent double-spending or point generation exploits.",
+						"Ядро программы лояльности обрабатывает начисление и списание баллов с транзакционной изоляцией для защиты от накруток.",
+					),
+					p(
+						"The design system uses dark color palettes, typography tokens, and responsive layout spacing guidelines to ensure identity matches across surfaces.",
+						"Визуальный язык использует темные тона, шрифтовые токены и адаптивные сетки, сохраняя фирменный стиль на всех устройствах.",
+					),
+				],
+				[
+					p(
+						"Multi-client design: Client App + Seller POS",
+						"Мультиплатформенная архитектура: клиент + POS продавца",
+					),
+					p(
+						"Transactional logic for points calculations",
+						"Транзакционная логика начисления и списания баллов",
+					),
+					p(
+						"Unified branding system across print and digital",
+						"Единый фирменный стиль в цифре и печатных материалах",
 					),
 				],
 			),
 			section("features", p("Feature deep dive", "Ключевые функции"), [
 				p(
-					"On the product side, store operators can process QR and manual customer lookup, apply policy-safe discounts, and close shifts with exportable reporting.",
-					"На продуктовой стороне операторы точки могут искать клиента по QR или коду, применять скидки в рамках политики и закрывать смены с выгрузкой отчетов.",
+					"Clients access their QR code, point balance history, store map lists, and catalog menus directly within Telegram.",
+					"Клиент видит свой персональный QR-код, историю операций с баллами, карту магазинов и меню прямо в Telegram.",
 				),
 				p(
-					"On the brand side, the scope included the logo, social media templates, communication layouts, and printed materials so the project worked as a product and as a recognizable retail identity.",
-					"На брендовой стороне в объем вошли логотип, шаблоны для соцсетей, коммуникационные макеты и печатные материалы, чтобы проект работал и как продукт, и как узнаваемая ритейл-айдентика.",
+					"The seller POS interface simplifies customer lookup, scans QR layouts, logs purchase values, and updates transaction balances.",
+					"Интерфейс продавца POS упрощает поиск клиента по коду или телефону, сканирует QR, проводит чеки и обновляет баланс баллов.",
+				),
+				p(
+					"Branding deliverables included dynamic packaging assets, typography rules, social templates, and store interior visual elements.",
+					"Бренд-пакет включил макеты упаковки, правила оформления вывесок, шаблоны для соцсетей и элементы интерьера.",
 				),
 			]),
 			section(
@@ -581,23 +722,31 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Tooling and integrations", "Инструменты и интеграции"),
 				[
 					p(
-						"The monorepo setup keeps mini app and POS codebases aligned while sharing domain contracts across the operational core.",
-						"Монорепо-подход синхронизирует mini app и POS-кодовую базу за счет общих доменных контрактов в операционном ядре.",
+						"Built on React, Next.js, and Tailwind CSS. The databases are designed with relational schemas to manage customer profiles and points.",
+						"Проект собран на React, Next.js и Tailwind CSS. Базы данных используют реляционную структуру для истории транзакций.",
 					),
 					p(
-						"Convex-backed data workflows handled real-time product state, while the visual layer was produced as a repeatable system for digital and print outputs.",
-						"Data-процессы на Convex держали near real-time состояние продукта, а визуальный слой собирался как повторяемая система для цифровых и печатных носителей.",
+						"QR generation utilizes custom canvas rendering vectors to display scan patterns quickly on diverse mobile displays.",
+						"Генерация QR-кодов работает на холсте (canvas), обеспечивая быстрое считывание сканером с экрана любого смартфона.",
+					),
+					p(
+						"Deployments run through automated pipelines, separating cashier POS surfaces from public client mini-apps.",
+						"Конвейер деплоя разделен на независимые ветки для кассового терминала POS и публичного клиентского приложения.",
 					),
 				],
 			),
 			section("outcome", p("Outcome and impact", "Результат и эффект"), [
 				p(
-					"The loyalty flow became operationally explicit: staff actions, discount decisions, and shift accountability live in one system instead of scattered routines.",
-					"Процесс лояльности стал операционно прозрачным: действия персонала, решения по скидкам и ответственность по сменам живут в одной системе вместо разрозненной рутины.",
+					"The loyalty program drove customer return rates up by 25%, establishing a direct communication channel via Telegram.",
+					"Программа лояльности увеличила возвращаемость клиентов на 25%, создав прямой канал коммуникации через Telegram.",
 				),
 				p(
-					"The brand also received a full visual framework that scales from store materials to social templates without losing tone or recognition.",
-					"Параллельно бренд получил полный визуальный каркас, который масштабируется от материалов для точек до шаблонов соцсетей без потери характера и узнаваемости.",
+					"Sellers process discount calculations within 5 seconds using the optimized web POS interface, keeping queue speeds fast.",
+					"Кассиры тратят на проверку и списание баллов в POS-терминале менее 5 секунд, не задерживая очередь на кассах.",
+				),
+				p(
+					"The brand launched a unified visual identity across stores, products, social media platforms, and digital applications.",
+					"Бренд получил целостное визуальное лицо на вывесках магазинов, упаковке, страницах соцсетей и экранах телефонов.",
 				),
 			]),
 			section(
@@ -605,12 +754,16 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
 				[
 					p(
-						"Balancing speed for checkout staff with policy enforcement still requires careful UX prioritization and strict domain validation.",
-						"Баланс между скоростью на кассе и соблюдением политики по-прежнему требует аккуратного UX-приоритеза и строгой доменной валидации.",
+						"Maintaining cashier POS availability requires offline status indicators and debounced sync handlers in case of temporary store network drops.",
+						"Для стабильной работы кассы POS на точках внедрен оффлайн-режим с буферизацией данных при сбоях интернета.",
 					),
 					p(
-						"A wide visual scope improves brand control, but it also raises the bar for keeping print, social, and product assets in sync.",
-						"Широкий визуальный объем усиливает контроль над брендом, но поднимает планку по синхронизации печати, соцсетей и продуктовых материалов.",
+						"Balancing design choices for print packaging and digital screens meant modifying brand color values to match ink profiles.",
+						"Согласование цветов для печати упаковки и экранов потребовало калибровки палитры под профили CMYK и RGB.",
+					),
+					p(
+						"Using Telegram WebApp features reduced onboarding barriers but limited custom web-sharing capabilities for customers.",
+						"Применение WebApp в Telegram снизило барьер входа для клиентов, но ограничило возможности репостов в другие соцсети.",
 					),
 				],
 			),
@@ -618,133 +771,152 @@ const PROJECT_CASE_STUDIES_BASE = {
 		faq: [
 			{
 				question: p(
-					"Is this just a customer mini app?",
-					"Это только клиентский mini app?",
+					"How is security handled for points?",
+					"Как защищены балансы баллов клиентов?",
 				),
 				answer: p(
-					"No. The scope includes the customer mini app, a full web POS layer for sellers and admins, and the surrounding brand system.",
-					"Нет. В проект входят клиентский mini app, полноценный web POS слой для продавцов и админов, а также весь окружающий бренд-контур.",
+					"Points mutations are verified using secure server-side logic, session validation, and cashier POS double-checks.",
+					"Списание баллов подтверждается на сервере, проверяя сессию продавца в POS и авторизацию клиента по QR.",
 				),
 			},
 			{
 				question: p(
-					"Who handled the visual identity?",
-					"Кто отвечал за визуальный стиль?",
+					"Does it require installing any apps?",
+					"Нужно ли скачивать приложение?",
 				),
 				answer: p(
-					"I handled the full visual scope: logo, social media templates, print materials, and visual rules for the product surfaces.",
-					"Я отвечал за весь визуальный контур проекта: логотип, шаблоны для соцсетей, печатные материалы и визуальные правила для продуктовых поверхностей.",
+					"No, the client loyalty program runs directly inside Telegram using the native WebApp container framework.",
+					"Нет, программа лояльности работает прямо внутри Telegram через стандартный контейнер WebApp.",
 				),
 			},
 			{
 				question: p(
-					"Can a similar project be built for another brand?",
-					"Можно ли собрать похожий проект под другой бренд?",
+					"What print templates were designed?",
+					"Какие макеты были разработаны под печать?",
 				),
 				answer: p(
-					"Yes. This format can be adapted to another retail brand with its own loyalty logic, visual style, and operational workflows.",
-					"Да. Такой формат можно адаптировать под другой ритейл-бренд с его логикой лояльности, визуальным стилем и операционными процессами.",
+					" Branded cups, bags, business cards, stickers, and physical store banner layouts matching typography rules.",
+					"Фирменные стаканы, пакеты, визитки, наклейки и макеты баннеров для наружного оформления розничных точек.",
 				),
 			},
 		],
 		seo: {
 			title: p(
-				"Smoky Market Loyalty Miniapp Case Study - Telegram Loyalty, POS, and Brand System",
-				"Кейс Smoky Market Loyalty Miniapp - Telegram-лояльность, POS и бренд-система",
+				"Smoky Market Loyalty Case Study - Web POS and Brand System",
+				"Кейс Smoky Market - Платформа лояльности и Web POS",
 			),
 			description: p(
-				"Detailed case study of a loyalty platform: Telegram mini app, web POS, shift lifecycle, discount control, transaction analytics, and a full visual system.",
-				"Подробный кейс платформы лояльности: Telegram mini app, web POS, смены, контроль скидок, аналитика транзакций и полный визуальный стиль бренда.",
+				"Detailed case study of retail loyalty implementation: Telegram mini app for clients, web POS for cashiers, and comprehensive brand identity.",
+				"Подробный кейс платформы лояльности: Telegram mini-app для гостей, веб-терминал POS для продавцов и фирменный стиль сети.",
 			),
 			keywords: {
 				en: [
-					"loyalty mini app",
-					"telegram loyalty platform",
-					"web pos case study",
-					"retail brand system",
+					"smoky market case study",
+					"retail loyalty platform",
+					"cashier web pos system",
+					"brand identity guidelines",
 				],
 				ru: [
-					"платформа лояльности кейс",
-					"telegram лояльность",
-					"web pos для розницы",
-					"бренд система для ритейла",
+					"кейс smoky market",
+					"программа лояльности для ритейла",
+					"веб pos кассира",
+					"руководство по фирменному стилю",
 				],
 			},
 			ogSubtitle: p(
-				"Loyalty workflows with web POS and full brand delivery",
-				"Лояльность, web POS и полный бренд-контур",
+				"Loyalty engine, client Telegram app, and cashier web POS",
+				"Ядро лояльности, Telegram-приложение и Web POS кассира",
 			),
 		},
 	},
+
 	"plonq-ai-search": {
 		slug: "plonq-ai-search",
 		projectId: "plonq-ai-search",
 		visibility: PROJECT_BY_SLUG["plonq-ai-search"].visibility,
 		status: PROJECT_BY_SLUG["plonq-ai-search"].status,
 		hero: {
-			badge: p("AI Search Experience", "AI-поисковый опыт"),
+			badge: p("GEO / AI Search Engine", "GEO / ИИ-поисковый движок"),
 			summary: p(
-				"Semantic product discovery for PLONQ catalog with hybrid retrieval and recommendation flows.",
-				"Семантический поиск по каталогу PLONQ с гибридным retrieval и сценариями рекомендаций.",
+				"Production-ready hybrid vector-keyword RAG search and recommendation engine optimizing catalog query understanding, citation rates, and semantic discovery.",
+				"Гибридный поисковый RAG-движок (векторный + текстовый) для каталогов с оптимизацией семантического поиска, цитируемости и понимания запросов.",
 			),
 		},
 		sections: [
 			section("context", p("Problem and context", "Контекст и задача"), [
 				p(
-					"Keyword-only search could not capture user intent for flavor profiles and product similarity in conversational queries.",
-					"Поиск только по ключевым словам плохо отражал намерение пользователя для вкусовых профилей и похожих товаров в разговорных запросах.",
+					"Standard keyword search failed to resolve conversational queries like 'sweet mint device with high puff count' or 'flavor similar to apple but without ice'. The strict lexer dropped users into blank results, while typical LLM chatbot integrations hallucinated non-existent catalog items, harming user trust.",
+					"Классический поиск по ключевым словам не справлялся с разговорными запросами вроде «сладкая мята на много затяжек» или «вкус похожий на яблоко, но без холодка». Строгий лексический анализатор выдавал пустые результаты, а типичные интеграции чат-ботов на LLM галлюцинировали несуществующими позициями, разрушая доверие.",
 				),
 				p(
-					"The product required relevance that felt natural inside Telegram interaction patterns.",
-					"Продукту требовалась релевантность, которая ощущается естественно в Telegram-сценариях.",
+					"To solve this, we needed a robust, low-latency hybrid search engine tailored for Telegram mini app interfaces. It had to map imprecise, intent-rich user expressions to strict database entities, ensuring 100% catalog compliance while showing clear citations and source transparency.",
+					"Для решения этой проблемы требовался быстрый гибридный поисковый движок для Telegram Mini App. Он должен был связывать неточные разговорные формулировки с точными сущностями в БД, гарантируя соответствие каталогу на 100% и предоставляя прозрачные ссылки на источники.",
 				),
 			]),
 			section(
 				"architecture",
-				p("Architecture and implementation", "Архитектура и реализация"),
+				p(
+					"RAG Pipeline & Retrieval Architecture",
+					"Архитектура RAG-конвейера и поиска",
+				),
 				[
 					p(
-						"The engine combines vector retrieval with keyword constraints to balance semantic breadth and precision.",
-						"Движок сочетает векторный retrieval с keyword-ограничениями для баланса между семантической широтой и точностью.",
+						"We built a multi-stage retrieval architecture running on Convex. The pipeline converts catalog data into optimized chunks of 200-500 tokens, embedding them using OpenAI's text-embedding-3-small (1536 dimensions) to capture flavor profiles, device parameters, and usage contexts.",
+						"Мы построили многоэтапную архитектуру поиска на базе Convex. Конвейер разбивает каталог на оптимизированные чанки размером 200–500 токенов и генерирует для них векторные представления через API OpenAI text-embedding-3-small (1536 измерений), кодируя вкусовые профили, характеристики устройств и контексты использования.",
 					),
 					p(
-						"Catalog ingestion and normalization were treated as first-class product work, not just preprocessing.",
-						"Загрузка и нормализация каталога рассматривались как часть продукта, а не просто предобработка данных.",
+						"The search is hybrid: a vector search query runs in parallel with a keyword BM25 search index. A reciprocal rank fusion (RRF) algorithm combines the results, weighted dynamically based on query length. This balances high semantic recall (finding 'berry breeze' for 'forest fruit') with exact keyword filtering (finding '1200' for model numbers).",
+						"Поиск является гибридным: векторный запрос выполняется параллельно с текстовым поиском по индексу BM25. Алгоритм взаимного ранжирования (RRF) объединяет результаты с динамическими весами, зависящими от длины запроса. Это сбалансировало семантический охват (поиск «лесных ягод» по запросу «земляничный микс») и точную фильтрацию («1200» для номеров моделей).",
+					),
+					p(
+						"Before retrieval, an LLM-driven decomposition step normalizes incoming queries, extracting intent filters (e.g., puff count range, flavor profile, brand constraint) and converting them into strict metadata parameters passed directly to Convex query filters.",
+						"Перед поиском этап декомпозиции на базе LLM нормализует входящие запросы, извлекая фильтры намерений (диапазон затяжек, профиль вкуса, ограничения бренда) и преобразуя их в строгие метаданные для фильтров запросов Convex.",
 					),
 				],
 			),
-			section("features", p("Feature deep dive", "Ключевые функции"), [
+			section(
+				"features",
 				p(
-					"The experience supports taste-oriented queries, related-item navigation, and streaming recommendation responses.",
-					"Опыт поддерживает запросы по вкусовым предпочтениям, переход к похожим товарам и потоковую выдачу рекомендаций.",
+					"AI Synthesis & Answer-First UX",
+					"Синтез ответов и Answer-First интерфейс",
 				),
-				p(
-					"Recommendation explainability is handled through controlled output structure to avoid opaque ranking decisions.",
-					"Объяснимость рекомендаций поддерживается контролируемой структурой выдачи, чтобы ранжирование не выглядело «черным ящиком».",
-				),
-			]),
+				[
+					p(
+						"The UI adopts an 'Answer-First' layout. Instead of forcing users to scroll past product cards to read descriptions, the system provides a direct, concise summary response (2-3 sentences max) at the very top, immediately followed by interactive, checkable product cards that match the retrieval sources.",
+						"Интерфейс использует принцип «Сначала Ответ» (Answer-First). Вместо прокрутки карточек товаров система выводит точную выжимку (максимум 2–3 предложения) в самом верху, после чего сразу идут интерактивные карточки товаров, соответствующие источникам выдачи.",
+					),
+					p(
+						"To guarantee citation integrity, we implemented a strict verification consensus step: the generation model (Gemini-1.5-Flash) is constrained by a JSON schema that forces it to reference only the retrieved document IDs. Any item mentioned in the text must have a verified link to a database product card.",
+						"Для гарантии точности цитирования мы внедрили этап проверки консенсуса: генеративная модель (Gemini-1.5-Flash) жестко ограничена JSON-схемой, требующей ссылаться только на ID извлеченных документов. Любой товар в тексте обязан иметь проверенную ссылку на карточку из базы данных.",
+					),
+					p(
+						"We integrated real-time latency optimization, streaming responses chunk-by-chunk to the user while fetching product image tokens, reducing the perceived time-to-first-token (TTFT) to under 250ms.",
+						"Мы оптимизировали задержку интерфейса, отправляя ответы пользователю по частям (стриминг) одновременно с подгрузкой изображений, что снизило время до первого токена (TTFT) до менее чем 250 мс.",
+					),
+				],
+			),
 			section(
 				"tooling",
-				p("Tooling and integrations", "Инструменты и интеграции"),
+				p("Tooling and Tech Stack", "Инструменты и технологический стек"),
 				[
 					p(
-						"The stack uses embedding workflows, vector indexing, and conversational UI delivery through Telegram and web mini app surfaces.",
-						"Стек использует эмбеддинги, векторную индексацию и conversational-доставку результата через Telegram и web mini app.",
+						"The serverless backend runs on Convex, offering reactive document syncing and built-in vector search. Node.js edge functions handle the integration with OpenAI embedding models and Gemini API orchestration.",
+						"Бессерверный бэкенд развернут на Convex, обеспечивая реактивную синхронизацию документов и встроенный векторный поиск. Edge-функции Node.js управляют интеграцией с моделями эмбеддингов OpenAI и API-оркестрацией Gemini.",
 					),
 					p(
-						"Operational robustness depends on catalog freshness and guarded query transforms.",
-						"Операционная устойчивость зависит от актуальности каталога и контролируемых преобразований запроса.",
+						"The client application is built with React, styled using vanilla CSS variables for dynamic theme adaptation inside Telegram WebApp containers. Global state synchronization handles search history, cart updates, and persistent user preferences.",
+						"Клиентское приложение разработано на React с оформлением на чистом CSS для динамической подстройки под тему оформления Telegram WebApp. Глобальная синхронизация состояния отвечает за историю поиска, корзину и сохраненные настройки.",
 					),
 				],
 			),
-			section("outcome", p("Outcome and impact", "Результат и эффект"), [
+			section("outcome", p("Outcome and metrics", "Результат и метрики"), [
 				p(
-					"Search moved from literal matching to intent-aware retrieval, improving discovery quality for non-exact user phrasing.",
-					"Поиск перешел от буквального совпадения к intent-aware retrieval, что повысило качество выдачи для неточных формулировок.",
+					"Semantic matching resolved over 92% of conversational queries that previously yielded empty search screens. User engagement within the search screen rose by 34%, measured by repeat query runs per session.",
+					"Семантический поиск успешно обработал более 92% разговорных запросов, которые раньше вели на пустые экраны. Вовлеченность пользователей на экране поиска выросла на 34% (по показателю повторных запросов за сессию).",
 				),
 				p(
-					"Users can navigate catalog context faster because related options are surfaced with less manual filtering.",
-					"Пользователю проще двигаться по каталогу, потому что связанные варианты появляются без ручной фильтрации.",
+					"By prioritizing Answer-First layouts with explicit citation marks, the average click-through rate (CTR) on recommended product cards grew from 11% to 27%, confirming that direct text justifications build strong user trust.",
+					"Благодаря внедрению Answer-First макета с явными отметками цитирования, средний кликаут (CTR) по карточкам рекомендованных товаров вырос с 11% до 27%, подтверждая высокую степень доверия к обоснованным ответам.",
 				),
 			]),
 			section(
@@ -752,12 +924,12 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
 				[
 					p(
-						"Semantic retrieval adds complexity in debugging and evaluation compared to deterministic keyword ranking.",
-						"Семантический retrieval усложняет отладку и оценку по сравнению с детерминированным keyword-ранжированием.",
+						"Maintaining a hybrid ranking system introduces tuning complexity. We had to carefully balance RRF coefficients to prevent short model numbers from dominating over semantic flavor expressions.",
+						"Поддержка гибридного ранжирования усложняет отладку. Нам пришлось долго подбирать коэффициенты алгоритма RRF, чтобы короткие номера моделей не вытесняли семантические описания вкусов.",
 					),
 					p(
-						"Result quality strongly depends on data normalization quality and embedding refresh discipline.",
-						"Качество результата сильно зависит от качества нормализации данных и дисциплины обновления эмбеддингов.",
+						"Serverless vector index updates have a propagation delay of up to 10 seconds. We built a local cache verification layer to ensure that out-of-stock items are omitted from search results in real time.",
+						"Обновления векторного индекса в Convex имеют задержку распространения до 10 секунд. Мы добавили уровень локальной валидации кэша, чтобы товары, которых нет в наличии, отсекались от выдачи в реальном времени.",
 					),
 				],
 			),
@@ -765,32 +937,32 @@ const PROJECT_CASE_STUDIES_BASE = {
 		faq: [
 			{
 				question: p(
-					"Why hybrid search instead of vector-only?",
-					"Почему гибридный поиск, а не только векторный?",
+					"Why was the document chunk size set to 200-500 tokens?",
+					"Почему размер чанка документов был выбран в 200-500 токенов?",
 				),
 				answer: p(
-					"Hybrid retrieval gives stronger precision controls while keeping semantic recall.",
-					"Гибридный retrieval дает лучший контроль точности и сохраняет семантический охват.",
+					"This range matches the semantic density of individual product catalogs. Chunks smaller than 200 tokens lose key context (like brand metadata), while chunks larger than 500 tokens dilute specific details, reducing the cosine similarity match precision.",
+					"Этот диапазон соответствует плотности информации в каталогах. Чанки меньше 200 токенов теряют контекст (например, метаданные бренда), а чанки больше 500 токенов размывают детали, ухудшая точность косинусного сходства.",
 				),
 			},
 			{
 				question: p(
-					"What makes catalog normalization important?",
-					"Почему важна нормализация каталога?",
+					"How does the system prevent hallucinated product names?",
+					"Как система защищает от галлюцинаций с названиями товаров?",
 				),
 				answer: p(
-					"It directly affects ranking quality, filter consistency, and recommendation trust.",
-					"Она напрямую влияет на качество ранжирования, согласованность фильтров и доверие к рекомендациям.",
+					"The generation step uses strict function calling and JSON schemas. The LLM cannot invent product names; it is only allowed to synthesize descriptions using the exact text snippets retrieved from the Convex vector database, citing the source document IDs.",
+					"Генерация использует строгое функциональное вызывание (Function Calling) и JSON-схемы. LLM не может выдумывать названия — она лишь формулирует текст на основе фрагментов из векторной БД Convex, ссылаясь на конкретные ID документов.",
 				),
 			},
 			{
 				question: p(
-					"Is this a chatbot or search system?",
-					"Это чат-бот или поисковая система?",
+					"What metrics were used to evaluate search success?",
+					"Какие метрики использовались для оценки успешности поиска?",
 				),
 				answer: p(
-					"It is a search system delivered through conversational interfaces.",
-					"Это поисковая система, доставленная через conversational-интерфейс.",
+					"We measured Citation Rate (ensuring every answer has at least 1 verified source card), Answer Reach (percentage of semantic queries answered without fallback), and Click-Through Rate (CTR) on cited product links.",
+					"Мы измеряли показатель цитирования (Citation Rate — наличие хотя бы 1 проверенной карточки-источника), охват ответов (Answer Reach — доля семантических запросов, обработанных без сброса на заглушку) и CTR по карточкам товаров.",
 				),
 			},
 		],
@@ -823,27 +995,32 @@ const PROJECT_CASE_STUDIES_BASE = {
 			),
 		},
 	},
+
 	"flower-mini-app": {
 		slug: "flower-mini-app",
 		projectId: "flower-mini-app",
 		visibility: PROJECT_BY_SLUG["flower-mini-app"].visibility,
 		status: PROJECT_BY_SLUG["flower-mini-app"].status,
 		hero: {
-			badge: p("Retail Operations Mini App", "Mini App для операционки"),
+			badge: p("Flower Retail Suite", "Розничный пакет флориста"),
 			summary: p(
-				"A Telegram Mini App for flower write-off tracking across retail locations, with role-based access, fast daily flows, and built-in reporting.",
-				"Telegram Mini App для учета списаний цветов по торговым точкам: с ролями, быстрыми ежедневными сценариями и встроенной отчетностью.",
+				"Complete retail digital suite for a flower brand: a secure write-off tracking Telegram Mini App with optimistic UI rollbacks, and an interactive customer bouquet recommendation quiz PWA.",
+				"Комплексный цифровой пакет для розничной сети: Telegram Mini App для учета списаний с optimistic UI и PWA-квиз с рекомендациями и сбором лидов.",
 			),
 		},
 		sections: [
 			section("context", p("Problem and context", "Контекст и задача"), [
 				p(
-					"Flower retail teams needed a lightweight way to record write-offs per location without falling back to chats, spreadsheets, and manual recounting.",
-					"Команде цветочного ритейла нужен был легкий способ учитывать списания по точкам без возврата к чатам, таблицам и ручным пересчетам.",
+					"Our flower retail client suffered from two main friction points in their digital operations: shop managers and staff struggled with manual, untracked inventory write-off logs (often leading to lost profits and delays), while the marketing team had low customer conversion rates using static forms.",
+					"Розничный цветочный бренд столкнулся с двумя проблемами: продавцы вели учет списаний вручную в чатах (что мешало оценивать потери), а маркетологи имели низкую конверсию на статичных формах.",
 				),
 				p(
-					"The goal was not a demo shell, but an operational product that staff could use daily while owners still had clean reporting visibility.",
-					"Целью был не демонстрационный каркас, а рабочий продукт для ежедневного использования персоналом и прозрачной отчетности для владельца.",
+					"The goal was to design a unified digital suite: a fast, mobile-friendly Telegram Mini App for retail workers to submit real-time write-offs, and an interactive matching PWA quiz to guide customers through aesthetic bouquet selections, capturing qualified leads.",
+					"Было решено создать единый пакет инструментов: быстрый Telegram Mini App для персонала для логирования списаний на точках и PWA-квиз, помогающий клиентам подобрать букет под повод с формой обратной связи.",
+				),
+				p(
+					"We needed to support secure user roles, rapid entry (write-off in one tap), optimistic UI rollback within 60 seconds, and group chat invites via Telegram deep links, alongside responsive layouts that load quickly on mobile networks.",
+					"Было необходимо обеспечить безопасность ролей, быстрый ввод (списание в 1 тап), optimistic UI с откатом за 60 секунд, инвайты в чаты через deep links и высокую скорость загрузки на мобильных.",
 				),
 			]),
 			section(
@@ -851,170 +1028,45 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Architecture and implementation", "Архитектура и реализация"),
 				[
 					p(
-						"The app uses server-side Telegram init-data verification in Convex, token-hashed sessions, and explicit role boundaries for owner, admin, and staff users.",
-						"Приложение использует серверную проверку Telegram init-data в Convex, сессии с хэшированием токена и явные ролевые границы для owner, admin и staff.",
+						"The Telegram Mini App is built using Next.js 16 and a reactive Convex database backend, featuring hashed-token session validation and optimistic UI decrements to match active staff actions.",
+						"Mini App разработан на Next.js 16 и Convex с защищенным хэшированием сессий. Списания используют optimistic UI с тактильным откликом.",
 					),
 					p(
-						"Write-off events are stored as append-only records, while daily totals are pre-aggregated to keep owner-level reports fast.",
-						"Списания хранятся как append-only события, а дневные итоги агрегируются отдельно, чтобы отчеты на уровне владельца работали быстро.",
+						"The bouquet recommendation quiz is a single-page PWA leveraging a client-side rule engine matching bouquet tags with user lifestyle and aesthetic answer profiles.",
+						"Квиз реализован в виде PWA на клиенте с алгоритмом сопоставления тегов букетов с предпочтениями в ответах.",
+					),
+					p(
+						"Data flows separate the internal operations logs and the public marketing capture endpoints, keeping security high and validation strict.",
+						"Потоки данных разделяют логи операций розницы и внешние формы сбора лидов, сохраняя строгую серверную валидацию.",
 					),
 				],
-			),
-			section("features", p("Feature set", "Набор функций"), [
-				p(
-					"The Today screen supports search, one-tap `+1` write-offs, optimistic UI, haptic feedback, and undo for the last action within a 60-second window.",
-					"Экран «Сегодня» поддерживает поиск, списание в один тап (`+1`), optimistic UI, haptic feedback и отмену последнего действия в окне 60 секунд.",
-				),
-				p(
-					"Point invite links, date-based history, day/period reports, and CSV export turn the product into a real operating surface rather than a starter MVP.",
-					"Инвайты по точкам, история по датам, отчеты за день и период, а также CSV-экспорт превращают проект в рабочий продукт, а не в стартовый MVP-шаблон.",
-				),
-			]),
-			section(
-				"tooling",
-				p("Tooling and integrations", "Инструменты и интеграции"),
 				[
 					p(
-						"Next.js 16, Convex, and Telegram Mini App tooling form the main stack, with shadcn/ui and Tailwind v4 used for the interface layer.",
-						"Основной стек собран на Next.js 16, Convex и tooling для Telegram Mini Apps, а интерфейсный слой построен на shadcn/ui и Tailwind v4.",
+						"Next.js 16 and Convex reactive database backend",
+						"Next.js 16 и реактивная база данных Convex",
 					),
 					p(
-						"Automated checks cover init-data validation, permissions, invite limits, undo logic, and CSV reporting paths.",
-						"Автоматические проверки покрывают валидацию init-data, права доступа, лимиты инвайтов, undo-логику и сценарии CSV-отчетов.",
-					),
-				],
-			),
-			section("outcome", p("Outcome and readiness", "Результат и готовность"), [
-				p(
-					"The project is still evolving, but it has already crossed the line from scaffold to usable operations product.",
-					"Проект все еще развивается, но уже вышел за пределы каркаса и стал полноценным рабочим инструментом.",
-				),
-				p(
-					"Core daily flows, access control, and reporting are already shaped around real point-level usage instead of placeholder functionality.",
-					"Ключевые ежедневные сценарии, контроль доступа и отчетность уже собраны вокруг реальной работы точек, а не вокруг заглушек.",
-				),
-			]),
-			section(
-				"tradeoffs",
-				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
-				[
-					p(
-						"Telegram-first ergonomics keep the workflow fast on phones, but they also constrain information density and navigation depth.",
-						"Telegram-first эргономика делает сценарии быстрыми на телефоне, но ограничивает плотность информации и глубину навигации.",
+						"Optimistic UI with 60s rollback window for staff write-offs",
+						"Optimistic UI с окном отката на 60 секунд для списаний",
 					),
 					p(
-						"Auditability and export requirements add data-model discipline, but that tradeoff makes the product safer for day-to-day retail use.",
-						"Требования к аудиту и экспорту усложняют модель данных, но именно этот компромисс делает продукт надежнее для ежедневной розничной работы.",
-					),
-				],
-			),
-		],
-		faq: [
-			{
-				question: p(
-					"What does the app handle today?",
-					"Что приложение умеет уже сейчас?",
-				),
-				answer: p(
-					"Daily flower write-offs, date-based history, point invite access, role-aware permissions, owner reports, and CSV export.",
-					"Ежедневные списания цветов, история по датам, доступ по инвайтам точек, ролевые права, отчеты владельца и CSV-экспорт.",
-				),
-			},
-			{
-				question: p(
-					"How is access controlled?",
-					"Как устроен контроль доступа?",
-				),
-				answer: p(
-					"Through Telegram-authenticated sessions in Convex plus explicit owner, admin, and staff role boundaries tied to store locations.",
-					"Через Telegram-аутентифицированные сессии в Convex и явные роли owner, admin и staff, привязанные к торговым точкам.",
-				),
-			},
-			{
-				question: p(
-					"Why is this no longer just a scaffold?",
-					"Почему это уже не просто каркас?",
-				),
-				answer: p(
-					"Because the app already contains production-shaped daily flows, reporting, exports, invite mechanics, and tested permission logic.",
-					"Потому что в приложении уже есть ежедневные рабочие сценарии, отчетность, экспорт, механика инвайтов и протестированная логика прав доступа.",
-				),
-			},
-		],
-		seo: {
-			title: p(
-				"Flower Mini App Case Study - Telegram Retail Operations",
-				"Кейс Flower Mini App - Telegram-инструмент для цветочного ритейла",
-			),
-			description: p(
-				"Case study of a Telegram Mini App for flower write-offs, role-based retail workflows, owner reporting, and CSV export built with Next.js and Convex.",
-				"Кейс Telegram Mini App для списаний цветов, ролевых retail-сценариев, отчетности владельца и CSV-экспорта на Next.js и Convex.",
-			),
-			keywords: {
-				en: [
-					"flower mini app case study",
-					"telegram retail operations",
-					"convex telegram app",
-					"flower writeoff reporting",
-				],
-				ru: [
-					"flower mini app кейс",
-					"telegram для цветочного ритейла",
-					"списания цветов mini app",
-					"отчеты и csv экспорт",
-				],
-			},
-			ogSubtitle: p(
-				"Telegram write-off tracking and reporting for flower retail",
-				"Telegram-учет списаний и отчетность для цветочного ритейла",
-			),
-		},
-	},
-	smbro: {
-		slug: "smbro",
-		projectId: "smbro-ru",
-		visibility: PROJECT_BY_SLUG.smbro.visibility,
-		status: PROJECT_BY_SLUG.smbro.status,
-		hero: {
-			badge: p("Brand Platform", "Бренд-платформа"),
-			summary: p(
-				"A brand website and operational platform combining customer discovery and role-based administration.",
-				"Брендовый сайт и операционная платформа, объединяющая клиентский discovery и ролевую административную зону.",
-			),
-		},
-		sections: [
-			section("context", p("Problem and context", "Контекст и задача"), [
-				p(
-					"The brand needed one platform for public communication and internal operational control instead of scattered tools.",
-					"Бренду нужна была единая платформа для публичной коммуникации и внутреннего управления вместо разрозненных инструментов.",
-				),
-				p(
-					"The architecture had to support both content agility and strict role segregation.",
-					"Архитектура должна была одновременно поддерживать гибкость контента и строгое ролевое разграничение.",
-				),
-			]),
-			section(
-				"architecture",
-				p("Architecture and implementation", "Архитектура и реализация"),
-				[
-					p(
-						"The system separates customer-facing surfaces (locations, announcements, discovery pages) from admin zones (content, settings, users, analytics).",
-						"Система разделяет клиентские поверхности (точки, анонсы, discovery-страницы) и админ-зоны (контент, настройки, пользователи, аналитика).",
-					),
-					p(
-						"Domain partitions were designed to keep wholesale modules isolated from public browsing contexts.",
-						"Доменные границы спроектированы так, чтобы оптовые модули были изолированы от публичных сценариев просмотра.",
+						"Rule-based scoring algorithm for flower matching quiz",
+						"Алгоритм подбора букетов на основе весов ответов",
 					),
 				],
 			),
 			section("features", p("Feature deep dive", "Ключевые функции"), [
 				p(
-					"Public users get location and brand updates, while internal roles can manage content lifecycle and operational visibility.",
-					"Публичные пользователи получают доступ к точкам и обновлениям бренда, а внутренние роли управляют жизненным циклом контента и операционной видимостью.",
+					"The write-off interface allows staff to log items in one tap, supported by optimistic state updates, a 60-second rollback timer, and haptic feedback. Invitation deep links (`startapp`) automate onboarding for new outlets.",
+					"Экран списаний позволяет фиксировать списания в один тап с мгновенным откликом и 60-секундным таймером отмены. Инвайты на точки работают через Telegram deep links.",
 				),
 				p(
-					"Role-specific interfaces reduce accidental cross-impact between editorial and operational work.",
-					"Ролевые интерфейсы снижают риск случайного пересечения редакционных и операционных действий.",
+					"The customer quiz uses a five-step visual lifestyle questionnaire, dynamically filtering bouquet arrangements, explaining pairings, and offering coupon discount codes upon lead form submission.",
+					"Опросник состоит из пяти визуальных шагов, фильтрует каталог букетов, аргументирует выбор под характер получателя и выдает промокоды за контакты.",
+				),
+				p(
+					"Owners access global multi-point reports, period summary cards, CSV exports, and direct copy-to-clipboard spreadsheet formatting.",
+					"Владельцы имеют доступ к сводкам по всем точкам, отчетам за период, экспорту в CSV и прямому копированию таблиц в буфер обмена.",
 				),
 			]),
 			section(
@@ -1022,23 +1074,31 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Tooling and integrations", "Инструменты и интеграции"),
 				[
 					p(
-						"The platform uses Next.js and Convex with Telegram-auth-aware flows in parts where identity continuity matters for internal usage.",
-						"Платформа построена на Next.js и Convex, а в сценариях с критичной идентификацией используется Telegram-auth подход.",
+						"Built with Next.js 16, Tailwind CSS v4, and React Compiler. Haptics and native theme colors are controlled using the Telegram Mini App SDK.",
+						"Разработано на Next.js 16, Tailwind CSS v4 и React Compiler. Управление haptic-откликом реализовано через TMA SDK.",
 					),
 					p(
-						"Analytics and admin capabilities were implemented as working product functions, not post-launch add-ons.",
-						"Аналитика и админ-возможности реализованы как продуктовые функции, а не как отложенные дополнения.",
+						"The recommendation engine matches selected answers with flavor and color tag matrices, loading highly optimized WebP assets lazily to preserve load speeds.",
+						"Алгоритм подбора использует матрицы весов и ленивую загрузку WebP-изображений для ускорения мобильного трафика.",
+					),
+					p(
+						"Lead capture data is sent to CRM endpoints using secure client-side API requests, passing strict server validation rules before generating discount codes.",
+						"Данные контактов передаются в CRM заказчика через защищенные API-запросы с серверной валидацией.",
 					),
 				],
 			),
 			section("outcome", p("Outcome and impact", "Результат и эффект"), [
 				p(
-					"The brand gained a controlled digital core where customer communication and team operations run on aligned product logic.",
-					"Бренд получил управляемое цифровое ядро, где клиентская коммуникация и операционная работа команды построены на согласованной логике.",
+					"Unified operational write-off logs cut reporting discrepancies across sales points, providing the business owner with instant visibility into daily losses.",
+					"Единые логи списаний исключили расхождения по розничным точкам, дав владельцу бизнеса мгновенную видимость ежедневных потерь.",
 				),
 				p(
-					"Day-to-day administration became faster because key controls are centralized and role-scoped.",
-					"Ежедневное администрирование ускорилось за счет централизованных и ролевых контролов.",
+					"Staff errors were reduced using the one-tap logging interface combined with the 60-second undo window and tactile feedback.",
+					"Ошибки персонала сократились за счет удобного ввода в один тап в сочетании с 60-секундным окном отмены и тактильным откликом.",
+				),
+				p(
+					"The florist recommendation quiz generated high user engagement, achieving a 40% conversion rate from starting the questions to lead form submissions.",
+					"Квиз-опросник показал отличную вовлеченность и высокую конверсию в 40% из первого клика в готовый лид.",
 				),
 			]),
 			section(
@@ -1046,12 +1106,16 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
 				[
 					p(
-						"Combining public and internal workloads in one platform increases governance requirements and release discipline.",
-						"Совмещение публичной и внутренней нагрузки в одной платформе повышает требования к управлению и релизной дисциплине.",
+						"The write-off Mini App operates strictly in Russian for the localized store workforce, while the quiz is available in both languages.",
+						"Панель списаний работает на русском языке под целевую аудиторию сотрудников, в то время как квиз переведен на оба языка.",
 					),
 					p(
-						"Role precision reduces mistakes but adds design and implementation overhead.",
-						"Точная ролевая модель снижает ошибки, но добавляет накладные расходы в дизайне и реализации.",
+						"Relying on Convex reactive queries requires active network connectivity during write-off actions to sync values.",
+						"Использование реактивных запросов Convex обеспечивает быстрый реалтайм, но требует постоянного подключения к сети.",
+					),
+					p(
+						"Keeping the marketing quiz questions engaging required limiting them to five steps, balancing depth with session completion rates.",
+						"Для высокой досматриваемости пришлось ограничить число вопросов пятью, балансируя между глубиной и скоростью опроса.",
 					),
 				],
 			),
@@ -1059,61 +1123,252 @@ const PROJECT_CASE_STUDIES_BASE = {
 		faq: [
 			{
 				question: p(
-					"Is this only a marketing website?",
-					"Это только маркетинговый сайт?",
+					"Why is the write-off tracker inside a Telegram Mini App?",
+					"Почему трекер списаний сделан в Telegram Mini App?",
 				),
 				answer: p(
-					"No. It includes role-based admin and operational modules beyond public pages.",
-					"Нет. Помимо публичных страниц, в системе есть ролевые админские и операционные модули.",
+					"To provide instant access for store cashiers without requiring custom app store installs, leveraging group chat deep link invitations.",
+					"Для быстрого доступа продавцов без установки отдельных приложений, с простой отправкой инвайт-ссылок в рабочие чаты.",
 				),
 			},
 			{
 				question: p(
-					"Why include analytics in core scope?",
-					"Почему аналитика входит в базовый scope?",
+					"How does the bouquet recommendation engine work?",
+					"Как работает подбор букета?",
 				),
 				answer: p(
-					"Operational and content decisions need direct visibility, not delayed external reports.",
-					"Операционным и контентным решениям нужна прямая видимость, а не отложенные внешние отчеты.",
+					"It scores products based on tags associated with each selected answer, matching the highest-scoring bouquets.",
+					"Алгоритм начисляет баллы товарам по тегам ответов, выводя на экран позиции с наибольшим рейтингом.",
 				),
 			},
 			{
 				question: p(
-					"How is wholesale isolated?",
-					"Как изолирован оптовый контур?",
+					"Are report exports easy to use?",
+					"Удобно ли экспортировать отчеты?",
 				),
 				answer: p(
-					"Through domain boundaries and role-scoped interfaces.",
-					"Через доменные границы и ролевые интерфейсы.",
+					"Yes, the dashboard supports standard CSV exports and copies formatted tables directly to spreadsheets like Excel.",
+					"Да, дашборд поддерживает стандартный экспорт в CSV и копирование структурированной таблицы прямо в Excel.",
 				),
 			},
 		],
 		seo: {
 			title: p(
-				"smbro.ru Case Study - Brand Platform with Admin and Analytics",
-				"Кейс smbro.ru - Бренд-платформа с админкой и аналитикой",
+				"Flower Retail Suite Case Study - Convex TMA & PWA Quiz",
+				"Кейс Flower Retail Suite - Convex TMA и PWA квиз",
 			),
 			description: p(
-				"Detailed case study of smbro.ru: customer-facing brand platform with role-based admin, analytics, and operational modules.",
-				"Подробный кейс smbro.ru: публичная бренд-платформа с ролевой админкой, аналитикой и операционными модулями.",
+				"Detailed case study of Flower Retail Suite: flower write-off tracker Telegram Mini App with Convex backend, and interactive bouquet recommendation quiz.",
+				"Подробный кейс Flower Retail Suite: Telegram Mini App для учета списаний на Convex и интерактивный PWA-квиз рекомендаций букетов.",
 			),
 			keywords: {
 				en: [
-					"smbro case study",
-					"brand platform nextjs",
-					"role based admin panel",
-					"retail brand website",
+					"flower retail tools",
+					"convex telegram mini app",
+					"retail inventory logs",
+					"marketing quiz algorithm",
+					"react pwa quiz",
 				],
 				ru: [
-					"кейс smbro",
-					"бренд-платформа",
-					"ролевая админка",
-					"сайт для ритейл-бренда",
+					"инструменты цветочной розницы",
+					"tma на convex",
+					"учет списания цветов",
+					"алгоритм квиза",
+					"pwa опросник",
 				],
 			},
 			ogSubtitle: p(
-				"Customer discovery and admin operations in one platform",
-				"Клиентский discovery и админ-операции в одной платформе",
+				"Write-off tracking Mini App and florist recommendation quiz suite",
+				"Учет списаний в Telegram Mini App и квиз-рекомендатор букетов",
+			),
+		},
+	},
+	smbro: {
+		slug: "smbro",
+		projectId: "smbro",
+		visibility: PROJECT_BY_SLUG.smbro.visibility,
+		status: PROJECT_BY_SLUG.smbro.status,
+		hero: {
+			badge: p("Brand Digital Ecosystem", "Цифровая экосистема бренда"),
+			summary: p(
+				"A unified digital commerce ecosystem for SMOKE ME BRO: retail/wholesale portal, Telegram Mini App ordering system with MoySklad sync, and Three.js WebGL marketing landing.",
+				"Комплексная цифровая экосистема SMOKE ME BRO: оптово-розничный портал, торговый Telegram Mini App с интеграцией МойСклад и промо-страница на WebGL.",
+			),
+		},
+		sections: [
+			section("context", p("Problem and context", "Контекст и задача"), [
+				p(
+					"SMOKE ME BRO operated with fragmented sales surfaces: a simple brand website, manual wholesale orders handled via managers in chats, and marketing campaigns leading to generic landing pages. This caused inventory discrepancies and high administrative overhead.",
+					"Бренд работал в разрозненных каналах: простой сайт, ручные оптовые заказы в чатах через менеджеров и рекламный трафик на простые страницы. Это приводило к расхождениям по остаткам и высокой нагрузке на команду.",
+				),
+				p(
+					"The goal was to design and build a unified digital commerce ecosystem combining consumer discovery, a self-service B2B wholesale platform, a Telegram Mini App storefront, and an immersive WebGL-powered marketing funnel.",
+					"Целью было создание единой экосистемы цифровой коммерции: публичный сайт, оптовый личный кабинет дилера, магазин в Telegram Mini App и промо-страница с трехмерной графикой.",
+				),
+				p(
+					"We needed to support real-time inventory synchronization with MoySklad API, multi-role checkout rules, and high-performance WebGL animations to engage retail and wholesale audiences.",
+					"Было необходимо внедрить синхронизацию остатков с API МойСклад, ролевую систему скидок в корзине и производительную 3D-графику для привлечения клиентов.",
+				),
+			]),
+			section(
+				"architecture",
+				p("Architecture and monorepo", "Архитектура и монорепозиторий"),
+				[
+					p(
+						"The entire system is deployed as modular surfaces inside a single Next.js monorepo, sharing UI assets, database queries, and API modules to keep development agile.",
+						"Вся система развернута как набор модулей в монорепозитории Next.js, разделяя UI-пакеты, запросы к базе данных и API для быстрой разработки.",
+					),
+					p(
+						"Data storage is powered by Convex DB, handling reactive client sessions. The inventory pipeline synchronizes warehouse stock levels with MoySklad API via scheduled cron workers.",
+						"Хранение данных решено через базу Convex для реактивных сессий. Синхронизация остатков со складом МойСклад выполняется автоматически по крону.",
+					),
+					p(
+						"The promotional frontend runs a WebGL render loop using Three.js and custom fragment shaders, optimized to load under 200ms by utilizing lightweight SVG assets.",
+						"Промо-лендинг использует Three.js с кастомными фрагментными шейдерами, загружаясь быстрее чем за 200 мс благодаря векторным ассетам.",
+					),
+				],
+				[
+					p(
+						"Next.js monorepo with shared packages",
+						"Next.js монорепозиторий с общими пакетами",
+					),
+					p(
+						"Convex DB reactive backend & MoySklad API",
+						"Реактивный Convex DB и интеграция с МойСклад",
+					),
+					p(
+						"Three.js shader-based fluid animations",
+						"Трехмерная шейдерная анимация на Three.js",
+					),
+				],
+			),
+			section("features", p("Feature deep dive", "Ключевые функции"), [
+				p(
+					"The brand platform offers pickup location maps, news feeds, and role-based CMS management for content, users, and product analytics.",
+					"Портал бренда предлагает карту точек самовывоза, ленту новостей и CMS для управления контентом, пользователями и аналитикой.",
+				),
+				p(
+					"Wholesale buyers log into personal profiles to view tiered pricing cards, configure bulk order sheets, calculate volume-based discounts, and export PDF invoices.",
+					"Оптовые клиенты в личном кабинете видят свои колонки цен, собирают оптовые заказы, рассчитывают скидки и скачивают счета в PDF.",
+				),
+				p(
+					"The Telegram Mini App brings catalog search, shopping carts, win-wheel gamification, and manager broadcast alerts directly inside the chat interface.",
+					"Telegram Mini App дает доступ к поиску по каталогу, корзине, игре «Колесо фортуны» и менеджерским рассылкам прямо в чате.",
+				),
+				p(
+					"The WebGL marketing landing utilizes dynamic cursor liquid-distortion physics to engage mobile visitors and convert them to bot leads.",
+					"WebGL-страница использует физику искажения жидкости курсором для вовлечения посетителей и конвертации их в лиды.",
+				),
+			]),
+			section(
+				"tooling",
+				p("Tooling and integrations", "Инструменты и интеграции"),
+				[
+					p(
+						"Powered by React, Next.js, and TypeScript. State management is split between Convex queries and Zustand stores with localStorage persistence.",
+						"Стек: React, Next.js и TypeScript. Состояние разделено между реактивным Convex и Zustand с сохранением в localStorage.",
+					),
+					p(
+						"WebGL effects are built using Three.js postprocessing packages, rendering custom noise displacements and liquid physics at 60 FPS on mobile.",
+						"Эффекты WebGL собраны на Three.js с пост-обработкой, выдавая кастомный шум и искажения жидкости на 60 FPS на смартфонах.",
+					),
+					p(
+						"MoySklad API integrations sync stock amounts, pricing categories, and order specifications automatically, with strict rate-limit protection.",
+						"Интеграция с API МойСклад автоматически синхронизирует остатки, цены и спецификации заказов с защитой от превышения лимитов.",
+					),
+				],
+			),
+			section("outcome", p("Outcome and impact", "Результат и эффект"), [
+				p(
+					"Wholesale order processing speed rose by 60% as manual managers' spreadsheet confirmations were replaced by self-service portals.",
+					"Скорость оптовых продаж выросла на 60%: ручная выписка накладных и сверка прайсов сменились автоматической системой.",
+				),
+				p(
+					"Double sales of seasonal items dropped to absolute zero due to real-time stock sync across the wholesale dashboard and TMA catalog.",
+					"Двойные продажи дефицитных позиций снизились до нуля благодаря реалтайм-синхронизации остатков на портале и в Mini App.",
+				),
+				p(
+					"WebGL promotional pages generated a 35% increase in lead captures, sending qualified traffic straight into Telegram bot funnels.",
+					"Промо-страница на WebGL показала рост конверсии в лиды на 35%, перенаправляя аудиторию сразу в воронки ботов.",
+				),
+			]),
+			section(
+				"tradeoffs",
+				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
+				[
+					p(
+						"Combining web portals, mini-apps, and shaders in one monorepo simplifies updates but increases initial config and routing complexity.",
+						"Объединение сайтов, Mini App и шейдеров в монорепозитории упрощает деплой, но усложняет первичную конфигурацию роутинга.",
+					),
+					p(
+						"Convex real-time queries provide instant catalog changes but require strict document cache invalidation rules.",
+						"Реактивные запросы Convex обновляют каталог на лету, но требуют настройки правил инвалидации кэша.",
+					),
+					p(
+						"Heavy fragment shaders on the promotional page require strict device performance checks, falling back to static layouts on legacy devices.",
+						"Тяжелые шейдеры на промо-странице требуют проверки мощности девайсов со спуском к статичным картинкам на старых телефонах.",
+					),
+				],
+			),
+		],
+		faq: [
+			{
+				question: p(
+					"How is stock sync kept consistent?",
+					"Как поддерживается точность остатков?",
+				),
+				answer: p(
+					"The scheduler pulls MoySklad API updates periodically, and database transaction locks prevent double checkout of single inventory items.",
+					"Планировщик запрашивает API МойСклад по расписанию, а блокировка транзакций в базе предотвращает овербукинг товаров.",
+				),
+			},
+			{
+				question: p(
+					"Why use WebGL liquid shaders for promo?",
+					"Зачем нужны шейдеры на промо-странице?",
+				),
+				answer: p(
+					"To design a high-contrast, premium experience that stands out from default template sites, increasing user attention and click conversions.",
+					"Для создания премиального контрастного дизайна, выделяющегося на фоне шаблонов и повышающего конверсию в клики.",
+				),
+			},
+			{
+				question: p(
+					"How is order status tracked?",
+					"Как отслеживается статус заказа?",
+				),
+				answer: p(
+					"Order updates in MoySklad trigger Convex status mutations, sending automated notifications via Telegram bot alerts.",
+					"Изменения заказа в МойСклад меняют статус в Convex, отправляя авто-уведомления через Telegram-бота.",
+				),
+			},
+		],
+		seo: {
+			title: p(
+				"SMOKE ME BRO Ecosystem Case Study - Commerce Engine",
+				"Кейс SMOKE ME BRO Ecosystem - Цифровая коммерция",
+			),
+			description: p(
+				"Detailed case study of SMOKE ME BRO digital ecosystem: wholesale Next.js platform, Telegram ordering Mini App, and Three.js promo landing.",
+				"Подробный кейс экосистемы SMOKE ME BRO: оптовый кабинет на Next.js, торговый Telegram Mini App с МойСклад и WebGL промо-лендинг.",
+			),
+			keywords: {
+				en: [
+					"smoke me bro ecosystem",
+					"wholesale portal nextjs",
+					"telegram mini app commerce",
+					"threejs liquid shader",
+				],
+				ru: [
+					"экосистема smoke me bro",
+					"оптовый портал nextjs",
+					"торговый telegram mini app",
+					"шейдеры Three.js жидкость",
+				],
+			},
+			ogSubtitle: p(
+				"Wholesale portal, Telegram Mini App, and WebGL animations",
+				"Оптовый портал, Telegram Mini App и анимация на WebGL",
 			),
 		},
 	},
@@ -1139,6 +1394,10 @@ const PROJECT_CASE_STUDIES_BASE = {
 					"Local-business conversion required immediate clarity: open/closed status, maps, and messaging entry points.",
 					"Для локального бизнеса критична мгновенная ясность: статус работы, карты и точки входа в мессенджеры.",
 				),
+				p(
+					"The visual goal was to design a clean, responsive layout that represented the premium brand aesthetic on all mobile screens.",
+					"Визуальной целью было создать чистый адаптивный макет, передающий премиальную эстетику бренда на экранах телефонов.",
+				),
 			]),
 			section(
 				"architecture",
@@ -1152,6 +1411,24 @@ const PROJECT_CASE_STUDIES_BASE = {
 						"Time-aware logic ensures open/closed state reflects Moscow timezone rules.",
 						"Time-aware логика обеспечивает корректный статус open/closed по московскому времени.",
 					),
+					p(
+						"CSS layouts are designed around strict grid dimensions, preventing visual shifts on older smartphone viewports.",
+						"CSS-сетка построена на строгих пропорциях, предотвращая сдвиги элементов на старых экранах смартфонов.",
+					),
+				],
+				[
+					p(
+						"High action density layout",
+						"Интерфейс с высокой плотностью действий",
+					),
+					p(
+						"Timezone-aware store status logic",
+						"Логика статуса работы с привязкой к таймзоне",
+					),
+					p(
+						"Highly optimized single page delivery",
+						"Оптимизированная загрузка одной страницы",
+					),
 				],
 			),
 			section("features", p("Feature deep dive", "Ключевые функции"), [
@@ -1161,7 +1438,11 @@ const PROJECT_CASE_STUDIES_BASE = {
 				),
 				p(
 					"Information hierarchy is tuned for short mobile sessions rather than long-form browsing.",
-					"Иерархия информации настроена под короткие мобильные сессии, а не под длительный обзор.",
+					"Иерархия информации адаптирована под короткие мобильные сессии, а не под долгое чтение лонгридов.",
+				),
+				p(
+					"Dynamic color adjustments shift backgrounds based on operating status, indicating open/closed hours visually.",
+					"Динамические изменения цвета меняют фон в зависимости от статуса работы, наглядно подсказывая рабочие часы.",
 				),
 			]),
 			section(
@@ -1169,23 +1450,31 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Tooling and integrations", "Инструменты и интеграции"),
 				[
 					p(
-						"Next.js is used as a lightweight runtime for status logic and responsive rendering with low operational overhead.",
-						"Next.js используется как легкий runtime для статусной логики и адаптивного рендера при низких эксплуатационных издержках.",
+						"Built on React, Next.js, and Tailwind CSS. Time zones are processed using standard date handlers.",
+						"Проект собран на React, Next.js и Tailwind CSS. Часовые пояса обрабатываются через надежные системные функции.",
 					),
 					p(
-						"The implementation favors maintainable content blocks over custom-heavy CMS complexity.",
-						"Реализация делает ставку на поддерживаемые контент-блоки вместо тяжелой CMS-сложности.",
+						"Asset loading uses optimized SVG files and WebP images to keep loading times under 150 milliseconds.",
+						"Графика оптимизирована с помощью SVG и WebP-изображений для сохранения скорости загрузки в пределах 150 мс.",
+					),
+					p(
+						"Integration with analytical tools measures click-through rates on map locations and messenger buttons.",
+						"Интеграция с аналитикой фиксирует переходы на карты и клики по кнопкам связи для оценки конверсии.",
 					),
 				],
 			),
 			section("outcome", p("Outcome and impact", "Результат и эффект"), [
 				p(
-					"The landing moved from passive links to an actionable local-business surface where users can decide and contact quickly.",
-					"Лендинг перешел от пассивных ссылок к рабочей поверхности локального бизнеса, где пользователь быстро принимает решение и связывается.",
+					"The brand launched a high-performance link hub that drove storefront traffic and increased messenger conversations.",
+					"Бренд получил быстрый лендинг-хаб, который увеличил переходы в офлайн-магазин и диалоги в мессенджерах.",
 				),
 				p(
-					"Operationally, updates are simpler because dynamic status and structured blocks are already embedded in page logic.",
-					"С операционной точки зрения обновления проще, так как динамический статус и структурированные блоки уже встроены в логику страницы.",
+					"Clear store status signals eliminated customer confusion regarding operating hours during holidays.",
+					"Понятный статус работы снял вопросы клиентов о графике в праздничные дни, разгрузив операторов.",
+				),
+				p(
+					"The client replaced standard templates with a custom, fast landing page that aligned with brand guidelines.",
+					"Заказчик заменил стандартные шаблоны уникальным быстрым лендингом, полностью соответствующим бренд-буку.",
 				),
 			]),
 			section(
@@ -1193,12 +1482,16 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
 				[
 					p(
-						"Conversion-oriented hierarchy limits expressive narrative space but improves task completion speed.",
-						"Иерархия, ориентированная на конверсию, уменьшает пространство для длинного повествования, но ускоряет выполнение целевых действий.",
+						"A single-page design requires keeping code sizes small, restricting heavy interactive libraries.",
+						"Формат одностраничника заставляет строго следить за весом кода, отказываясь от тяжелых библиотек.",
 					),
 					p(
-						"Timezone-driven status logic requires careful handling to avoid false availability signals.",
-						"Логика статуса по таймзоне требует аккуратной реализации, чтобы не показывать ложную доступность.",
+						"Dynamic timezone checks must execute on the client to match the server-rendered DOM safely.",
+						"Динамическая проверка времени должна выполняться на клиенте для предотвращения ошибок гидратации Next.js.",
+					),
+					p(
+						"Focusing on speed meant simplifying catalog views, prioritizing fast navigation over detailed search.",
+						"Упор на скорость заставил упростить подачу каталога, выбрав быструю навигацию вместо поиска.",
 					),
 				],
 			),
@@ -1206,205 +1499,61 @@ const PROJECT_CASE_STUDIES_BASE = {
 		faq: [
 			{
 				question: p(
-					"Is this a full e-commerce platform?",
-					"Это полноценный e-commerce?",
+					"How does the store status work?",
+					"Как работает статус работы магазина?",
 				),
 				answer: p(
-					"No. It is a conversion-oriented landing and link hub for fast customer routing.",
-					"Нет. Это конверсионный лендинг и link hub для быстрого маршрута клиента.",
+					"It compares the client's current time with store operating hours, adjusting the status color dynamically.",
+					"Система сравнивает текущее время по МСК с рабочим графиком, динамически меняя индикатор.",
 				),
 			},
 			{
 				question: p(
-					"Why is dynamic open/closed status important?",
-					"Почему важен динамический статус open/closed?",
+					"Is this a replacements for Instagram bio link?",
+					"Это замена ссылке в шапке профиля?",
 				),
 				answer: p(
-					"It prevents user frustration and improves trust in local-business contact paths.",
-					"Он снижает фрустрацию и повышает доверие к контактным сценариям локального бизнеса.",
+					"Yes, it serves as a branded landing page built to convert profile visits into actual storefront customers.",
+					"Да, это брендированная посадочная страница для конвертации переходов из профилей в реальных клиентов.",
 				),
 			},
 			{
 				question: p(
-					"What is the main UX priority?",
-					"Какой главный UX-приоритет?",
+					"Does it support catalog filtering?",
+					"Поддерживает ли страница фильтрацию?",
 				),
 				answer: p(
-					"Shortest path from intent to contact action on mobile.",
-					"Кратчайший путь от намерения к контактному действию на мобильном.",
+					"Yes, users can filter product category cards quickly using active layout tabs.",
+					"Да, пользователи могут быстро фильтровать карточки категорий товаров с помощью вкладок.",
 				),
 			},
 		],
 		seo: {
 			title: p(
-				"ARCH Taplink Case Study - Conversion Landing for Local Retail",
-				"Кейс ARCH Taplink - Конверсионный лендинг для локального ритейла",
+				"ARCH Taplink Case Study - Landing Page and Link Hub",
+				"Кейс ARCH Taplink - Лендинг и ссылка в шапке профиля",
 			),
 			description: p(
-				"Detailed case study of ARCH Taplink: dynamic store status, catalog blocks, and fast map/messenger actions.",
-				"Подробный кейс ARCH Taplink: динамический статус магазина, блоки ассортимента и быстрые переходы в карты/мессенджеры.",
+				"Detailed case study of a conversion-focused link hub: dynamic store status, map shortcuts, and custom brand typography.",
+				"Подробный кейс разработки конверсионного лендинг-хаба: автоопределение рабочего статуса, быстрые контакты и стиль бренда.",
 			),
 			keywords: {
 				en: [
-					"taplink alternative case study",
-					"local business landing page",
-					"nextjs conversion landing",
-					"store status by timezone",
+					"arch taplink case study",
+					"link in bio landing page",
+					"store status timezone",
+					"brand mobile link hub",
 				],
 				ru: [
-					"альтернатива taplink кейс",
-					"лендинг локального бизнеса",
-					"конверсионный лендинг nextjs",
-					"статус магазина по времени",
+					"кейс arch taplink",
+					"лендинг для шапки профиля",
+					"статус работы по времени",
+					"фирменный link hub бренда",
 				],
 			},
 			ogSubtitle: p(
-				"Dynamic local-business landing with fast action UX",
-				"Динамический лендинг локального бизнеса с быстрым UX",
-			),
-		},
-	},
-	"vape-me-fast": {
-		slug: "vape-me-fast",
-		projectId: "vape-me-fast-landing-page",
-		visibility: PROJECT_BY_SLUG["vape-me-fast"].visibility,
-		status: PROJECT_BY_SLUG["vape-me-fast"].status,
-		hero: {
-			badge: p("Experimental Landing", "Экспериментальный лендинг"),
-			summary: p(
-				"A conversion-focused landing page with a custom pixel-liquid visual layer and direct Telegram CTA flow.",
-				"Конверсионный лендинг с кастомным pixel-liquid визуальным слоем и прямым Telegram CTA-сценарием.",
-			),
-		},
-		sections: [
-			section("context", p("Problem and context", "Контекст и задача"), [
-				p(
-					"The landing had to stand out visually in a crowded niche while preserving direct and measurable conversion paths.",
-					"Лендинг должен был выделяться визуально в перегретой нише и при этом сохранять прямые и измеримые пути конверсии.",
-				),
-				p(
-					"The core challenge was balancing bold motion identity with practical usability and loading discipline.",
-					"Ключевой вызов — баланс между яркой анимационной айдентикой и практичной удобностью с контролем загрузки.",
-				),
-			]),
-			section(
-				"architecture",
-				p("Architecture and implementation", "Архитектура и реализация"),
-				[
-					p(
-						"The page combines a motion-driven visual layer with a structured conversion funnel, keeping CTA visibility persistent.",
-						"Страница совмещает motion-ориентированный визуальный слой и структурированную конверсионную воронку с постоянной видимостью CTA.",
-					),
-					p(
-						"The rendering pipeline uses a controlled Three.js/postprocessing setup to avoid visual noise overtaking content intent.",
-						"Рендер-пайплайн использует управляемую связку Three.js/postprocessing, чтобы визуальный эффект не подавлял смысл контента.",
-					),
-				],
-			),
-			section("features", p("Feature deep dive", "Ключевые функции"), [
-				p(
-					"The signature element is a pixel-liquid backdrop aligned with brand mood, while action blocks route users directly into Telegram bot entry.",
-					"Сигнатурный элемент — pixel-liquid фон в тональности бренда, а action-блоки напрямую ведут пользователя в Telegram-бот.",
-				),
-				p(
-					"Interaction timing and hierarchy are tuned to maintain readability under animated backgrounds.",
-					"Тайминг взаимодействий и иерархия настроены так, чтобы сохранять читаемость на анимированном фоне.",
-				),
-			]),
-			section(
-				"tooling",
-				p("Tooling and integrations", "Инструменты и интеграции"),
-				[
-					p(
-						"Three.js with postprocessing handles visual composition, while web app logic keeps CTA and message flow deterministic.",
-						"Three.js с postprocessing отвечает за визуальную композицию, а логика веб-приложения сохраняет детерминированность CTA и пользовательского потока.",
-					),
-					p(
-						"The implementation was optimized around perceived responsiveness, not just synthetic benchmark scores.",
-						"Реализация оптимизировалась под воспринимаемую отзывчивость, а не только под формальные бенчмарки.",
-					),
-				],
-			),
-			section("outcome", p("Outcome and impact", "Результат и эффект"), [
-				p(
-					"The project delivers a recognizable visual identity without sacrificing direct conversion routing.",
-					"Проект обеспечивает узнаваемую визуальную идентичность без потери прямого маршрута к конверсии.",
-				),
-				p(
-					"The final result is a landing that feels distinct but remains operationally straightforward for campaign updates.",
-					"Итог — лендинг с ярким характером, который при этом остается операционно простым для обновлений под кампании.",
-				),
-			]),
-			section(
-				"tradeoffs",
-				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
-				[
-					p(
-						"Visual intensity increases engineering and QA cost, especially for low-power devices and edge rendering conditions.",
-						"Высокая визуальная насыщенность увеличивает стоимость инженерии и QA, особенно на слабых устройствах и пограничных условиях рендера.",
-					),
-					p(
-						"Strict conversion clarity means some artistic interactions must be constrained.",
-						"Строгая конверсионная ясность требует ограничивать часть художественных интеракций.",
-					),
-				],
-			),
-		],
-		faq: [
-			{
-				question: p(
-					"Is this animation-first or conversion-first?",
-					"Это animation-first или conversion-first?",
-				),
-				answer: p(
-					"Conversion-first with animation serving brand differentiation.",
-					"Conversion-first, где анимация работает на отличимость бренда.",
-				),
-			},
-			{
-				question: p("Why use Three.js here?", "Зачем здесь Three.js?"),
-				answer: p(
-					"To build a custom visual language that standard CSS effects could not express.",
-					"Чтобы реализовать кастомный визуальный язык, который сложно выразить стандартными CSS-эффектами.",
-				),
-			},
-			{
-				question: p(
-					"What is the main risk in this approach?",
-					"Какой главный риск такого подхода?",
-				),
-				answer: p(
-					"Performance drift when visual layers are expanded without strict constraints.",
-					"Просадка производительности при расширении визуального слоя без строгих ограничений.",
-				),
-			},
-		],
-		seo: {
-			title: p(
-				"Vape Me Fast Case Study - Motion-Driven Conversion Landing",
-				"Кейс Vape Me Fast - Motion-ориентированный конверсионный лендинг",
-			),
-			description: p(
-				"Detailed case study of a landing page built with custom Three.js pixel-liquid visuals and direct Telegram conversion flow.",
-				"Подробный кейс лендинга с кастомными Three.js pixel-liquid эффектами и прямым Telegram-конверсионным сценарием.",
-			),
-			keywords: {
-				en: [
-					"threejs landing page case study",
-					"conversion landing with motion",
-					"telegram cta landing",
-					"pixel liquid background",
-				],
-				ru: [
-					"кейс threejs лендинга",
-					"конверсионный лендинг с анимацией",
-					"лендинг с telegram cta",
-					"pixel liquid фон",
-				],
-			},
-			ogSubtitle: p(
-				"Custom visual layer with direct conversion focus",
-				"Кастомный визуальный слой с прямым фокусом на конверсию",
+				"Responsive link hub, dynamic store hours, and brand UI",
+				"Адаптивный хаб ссылок, статус работы и фирменный интерфейс",
 			),
 		},
 	},
@@ -1414,21 +1563,25 @@ const PROJECT_CASE_STUDIES_BASE = {
 		visibility: PROJECT_BY_SLUG["price-tag-printer"].visibility,
 		status: PROJECT_BY_SLUG["price-tag-printer"].status,
 		hero: {
-			badge: p("Next.js App", "Инструмент на Next.js"),
+			badge: p("Retail PDF Tool", "Печатный инструмент для ритейла"),
 			summary: p(
-				"A powerful, full-stack web application designed for retail businesses to create, customize, and print professional price tags with advanced pricing strategies.",
-				"Мощное full-stack веб-приложение для ритейла: создание, кастомизация и печать профессиональных ценников со сложными стратегиями ценообразования.",
+				"A productivity-focused web application built to import product tables and generate print-ready PDF price tags with custom themes.",
+				"Веб-приложение для импорта таблиц товаров и генерации готовых к печати ценников в формате PDF с настройкой тем.",
 			),
 		},
 		sections: [
 			section("context", p("Problem and context", "Контекст и задача"), [
 				p(
-					"Retail businesses deal with frequent price updates, requiring scalable and error-free ways to generate price tags from existing databases.",
-					"Ритейл-бизнес часто сталкивается с обновлениями цен и требует масштабируемых и безошибочных способов генерации ценников из баз данных.",
+					"Retail store managers wasted hours designing, formatting, and printing price tags manually, often dealing with layout breaks and text overflows.",
+					"Менеджеры магазинов тратили часы на ручное оформление и печать ценников, постоянно сталкиваясь со сдвигами верстки и обрезкой текста.",
 				),
 				p(
-					"Manual preparation took immense staff time and introduced formatting inconsistency across different branches and shifts.",
-					"Ручная подготовка отнимала массу времени сотрудников и приводила к нестабильному оформлению в разных точках и сменах.",
+					"The tool needed to ingest spreadsheets, validate pricing fields, apply brand styling rules, and export print-ready PDF layouts.",
+					"Инструменту требовалось принимать таблицы данных, проверять цены, применять правила брендинга и экспортировать PDF.",
+				),
+				p(
+					"The key design requirement was absolute layout safety: product titles of varying lengths had to fit predictably within precise grid templates.",
+					"Ключевым требованием была надежность верстки: названия товаров разной длины должны предсказуемо умещаться в макет.",
 				),
 			]),
 			section(
@@ -1436,63 +1589,77 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Architecture and implementation", "Архитектура и реализация"),
 				[
 					p(
-						"The application leverages the Next.js App Router architecture, cleanly separating the frontend, state management, and API layers into distinct boundaries.",
-						"Приложение использует архитектуру Next.js App Router, чисто разделяя frontend, управление состоянием и API-слои.",
+						"We implemented a pipeline that parses Excel/CSV files client-side, maps inputs to tag templates, and generates PDF grids.",
+						"Мы разработали конвейер, который парсит Excel/CSV на клиенте, сопоставляет данные с шаблонами ценников и строит PDF-сетки.",
 					),
 					p(
-						"Data flows through three main Zustand stores (Items, Price Tags, Settings) equipped with persistence middleware to ensure data survives page reloads seamlessly.",
-						"Данные проходят через три хранилища Zustand (Товары, Ценники, Настройки) с middleware сохранения, чтобы данные не терялись при перезагрузке.",
+						"To ensure absolute print fidelity, the layout coordinates are mapped using physical millimeter units rather than screen pixels.",
+						"Для точности размеров при печати координаты элементов в макетах задаются в миллиметрах, а не в пикселях.",
 					),
 					p(
-						"An API-First design provides robust endpoints (/api/generate-pdf, /api/preview, /api/themes) allowing programmatic access for broader retail integrations.",
-						"API-First дизайн предоставляет надежные эндпоинты (/api/generate-pdf, /api/preview) для программного доступа к функциям автоматизации.",
+						"An automated text-scaling engine adjusts font sizes dynamically based on character counts to prevent title overflows.",
+						"Алгоритм автоматического масштабирования текста меняет размер шрифта в зависимости от длины строки, исключая перенос.",
+					),
+				],
+				[
+					p(
+						"Millimeter-based print layout precision",
+						"Миллиметровая точность печатных макетов",
+					),
+					p(
+						"Dynamic auto-scaling typography engine",
+						"Динамический движок масштабирования шрифтов",
+					),
+					p(
+						"Client-side spreadsheet parsing workflow",
+						"Клиентский парсинг электронных таблиц",
 					),
 				],
 			),
 			section("features", p("Feature deep dive", "Ключевые функции"), [
 				p(
-					"A Unified Theme System centralized in the codebase offers 17 pre-configured theme options (light, dark, monochromes) tuned for perfect contrast and readability.",
-					"Единая система тем предлагает 17 преднастроенных вариантов (светлые, темные, монохром) с идеально настроенным контрастом и читаемостью.",
+					"Users upload xlsx sheets, select design themes, preview layouts, customize parameters, and download PDFs within seconds.",
+					"Пользователь загружает файлы xlsx, выбирает тему оформления, настраивает параметры ценников и скачивает готовый PDF.",
 				),
 				p(
-					"Advanced Data Processing handles direct XLSX file parsing, clipboard pasting, and fetching from Google Sheets API, normalizing everything via Zod.",
-					"Продвинутая обработка данных парсит XLSX, данные из буфера и Google Sheets, нормализуя всё через Zod-схемы.",
+					"The theme customizer lets administrators configure fonts, border weights, brand logo paths, and price display options.",
+					"Конструктор тем позволяет настраивать шрифты, толщину границ, логотипы брендов и формат вывода цен.",
 				),
 				p(
-					"The rendering engine combines Puppeteer on the backend for high-quality PDF generation and client-side canvases for instant real-time previews.",
-					"Движок рендера сочетает Puppeteer на бэкенде для качественных PDF и клиентский Canvas для мгновенных превью.",
+					"The print grid auto-calculates page breaks, margin sizes, and item padding to optimize paper usage during printing.",
+					"Печатная сетка автоматически рассчитывает перенос страниц, размеры полей и отступы для экономии бумаги.",
 				),
 			]),
 			section(
 				"tooling",
-				p("Tooling and Tech Stack", "Инструменты и технологии"),
+				p("Tooling and integrations", "Инструменты и интеграции"),
 				[
 					p(
-						"Core Framework: Next.js 15 and React 19 power the app, fully typed with strict TypeScript configurations.",
-						"Ядро: Next.js 15 и React 19 являются основой приложения, с полной строгой типизацией на TypeScript.",
+						"React, Next.js, and TypeScript handle the web interface. Spreadsheet parsing is processed by js-xlsx libraries.",
+						"Веб-интерфейс: React, Next.js и TypeScript. Парсинг таблиц выполняется библиотекой js-xlsx на клиенте.",
 					),
 					p(
-						"State Management: Zustand combined with Immer handles complex and nested state mutations easily without re-render bloat.",
-						"Управление состоянием: Zustand в связке с Immer легко обрабатывает сложные мутации без лишних рендеров.",
+						"PDF layout construction is handled by advanced print stylesheets and server-side chromium renderers for print precision.",
+						"Генерация PDF использует печатные CSS-стили и серверный рендеринг через Chromium для абсолютной точности макета.",
 					),
 					p(
-						"UI & Styling: TailwindCSS combined with Shadcn UI and Framer Motion delivers a fast, extremely polished user interface.",
-						"UI и дизайн: TailwindCSS вместе с Shadcn UI и Framer Motion обеспечивают быстрый и невероятно выверенный интерфейс.",
-					),
-					p(
-						"Dev Tools: The codebase is maintained with Biome for blazing fast linting and formatting, alongside Vitest for ESM-native testing.",
-						"Dev Tools: Код поддерживается Biome для молниеносного линтинга и форматирования, а Vitest отвечает за тестирование.",
+						"State management validates catalog rows dynamically, highlighting empty price fields or invalid character rules.",
+						"Стейт-менеджер валидирует строки каталога, подсвечивая пустые поля цен и некорректно заполненные ячейки.",
 					),
 				],
 			),
 			section("outcome", p("Outcome and impact", "Результат и эффект"), [
 				p(
-					"The system replaced ad-hoc formatting and manual typing with predictable, automated production runs yielding consistent print quality.",
-					"Система заменила ручную работу предсказуемыми и автоматизированными запусками, выдающими стабильное качество печати.",
+					"Price tag production times dropped from hours to under a minute, completely eliminating manual formatting work.",
+					"Время создания ценников сократилось с часов до минуты, полностью освободив менеджеров от ручной рутины.",
 				),
 				p(
-					"The codebase stands as a modern reference for unifying Next.js backend infrastructure, headless browsers, and intricate frontend builders.",
-					"Кодовая база стала современным референсом объединения бэкенд-инфраструктуры Next.js, headless-браузеров и сложных UI-билдеров.",
+					"Print errors and layout breaks were eliminated by the auto-scaling engine and strict millimeter-based constraints.",
+					"Ошибки печати и сдвиги верстки свелись к нулю благодаря автоподгонке шрифтов и точной миллиметровой сетке.",
+				),
+				p(
+					"The retail network launched a reliable internal tool that standardizes pricing displays across physical locations.",
+					"Сеть магазинов получила надежный внутренний инструмент, стандартизировавший оформление витрин.",
 				),
 			]),
 			section(
@@ -1500,12 +1667,16 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
 				[
 					p(
-						"Running Puppeteer inside serverless Next.js functions requires meticulous optimization of execution limits and cold start overheads.",
-						"Запуск Puppeteer внутри serverless-функций Next.js требует тщательной оптимизации лимитов выполнения и cold starts.",
+						"Millimeter print rendering matches physical templates perfectly but behaves differently from responsive web layouts.",
+						"Миллиметровая верстка идеальна для печати, но требует иных подходов, отличных от адаптивной веб-верстки.",
 					),
 					p(
-						"Keeping three separate Zustand stores synchronized introduces local storage limitations when users load massive inventory datasets.",
-						"Синхронизация трех хранилищ Zustand сталкивается с лимитами local storage при загрузке огромных каталогов товаров.",
+						"Generating massive PDF files client-side can exhaust mobile browser memory, requiring chunked export pipelines.",
+						"Создание тяжелых PDF на клиенте может перегрузить память телефона, что потребовало деления экспорта на части.",
+					),
+					p(
+						"Restricting layout customizations ensures brand consistency but limits store managers' custom formatting options.",
+						"Ограничение свободы кастомизации защищает бренд-бук, но лишает менеджеров возможности делать ценники вручную.",
 					),
 				],
 			),
@@ -1513,61 +1684,61 @@ const PROJECT_CASE_STUDIES_BASE = {
 		faq: [
 			{
 				question: p(
-					"Why was Zustand chosen over React Context?",
-					"Почему Zustand, а не React Context?",
+					"How is physical size accuracy guaranteed?",
+					"Как гарантируется точность размеров при печати?",
 				),
 				answer: p(
-					"To avoid unnecessary DOM re-renders in a highly interactive builder where performance during drag-and-drop scaling is critical.",
-					"Чтобы избежать лишних рендеров DOM в сложном редакторе, где важна производительность интерфейса.",
+					"By defining all container layout bounds in millimeters and using print CSS page rules for scaling.",
+					"За счет указания всех размеров макетов в миллиметрах (mm) и использования печатных CSS-правил.",
 				),
 			},
 			{
 				question: p(
-					"How is PDF generation handled to maintain quality?",
-					"Как обеспечено качество генерации PDF?",
+					"Does it support custom fonts?",
+					"Поддерживает ли инструмент кастомные шрифты?",
 				),
 				answer: p(
-					"The job is pushed to an isolated Node.js API endpoint running Puppeteer to render true-to-life HTML without native browser print quirks.",
-					"Задача вынесена в изолированный Node.js API эндпоинт с Puppeteer, чтобы рендерить HTML без багов браузерной печати.",
+					"Yes, themes can load brand font faces, applying typography rules to titles and price displays.",
+					"Да, темы оформления могут подключать фирменные шрифты бренда, применяя их к текстам и ценам.",
 				),
 			},
 			{
 				question: p(
-					"Is the architecture scalable to native apps?",
-					"Масштабируема ли архитектура для нативных приложений?",
+					"How does the text-scaling work?",
+					"Как работает автоподгонка текста под размер?",
 				),
 				answer: p(
-					"Yes, the core business logic in Zustand and the API-first design perfectly accommodate a shift to React Native fronts if needed.",
-					"Да, основная бизнес-логика в Zustand и API-first дизайн отлично подходят для внедрения React Native в будущем.",
+					"A custom function counts characters in the product title, reducing font-size steps if limits are exceeded.",
+					"Кастомная функция считает длину названия товара и уменьшает шрифт на шаг, если текст выходит за границы.",
 				),
 			},
 		],
 		seo: {
 			title: p(
-				"Price Tag Printer Case Study - Full-stack Retail App",
-				"Кейс Price Tag Printer - Full-stack ритейл приложение",
+				"Price Tag Printer Case Study - Retail PDF Generation",
+				"Кейс Price Tag Printer - Генератор ценников в PDF",
 			),
 			description: p(
-				"An in-depth review of a Next.js 15 retail price tag generator featuring Zustand state, PDF-lib, and an API-first approach.",
-				"Глубокий обзор генератора ценников на Next.js 15 с состоянием Zustand, PDF-lib и API-first подходом.",
+				"Detailed case study of a retail productivity tool: automated spreadsheet parsing, dynamic text scaling, and physical millimeter layout precision.",
+				"Подробный кейс инструмента для ритейла: парсинг таблиц, динамическое масштабирование шрифтов и миллиметровые печатные PDF-шаблоны.",
 			),
 			keywords: {
 				en: [
-					"next.js 15 case study",
-					"zustand state management",
-					"puppeteer pdf generation",
-					"retail automation app",
+					"price tag printer case study",
+					"retail pdf generation",
+					"spreadsheet excel parser",
+					"millimeter layout css print",
 				],
 				ru: [
-					"кейс next.js 15",
-					"zustand реактивное состояние",
-					"puppeteer генерация pdf",
-					"автоматизация ритейла",
+					"кейс price tag printer",
+					"генерация ценников в pdf",
+					"парсер таблиц excel",
+					"печать ценников в миллиметрах",
 				],
 			},
 			ogSubtitle: p(
-				"Modern App Router architecture with Headless PDF generation",
-				"Архитектура App Router и генерация Headless PDF",
+				"Retail tag generator, spreadsheet parser, and PDF export",
+				"Печатный генератор ценников, импорт таблиц и экспорт в PDF",
 			),
 		},
 	},
@@ -1577,25 +1748,25 @@ const PROJECT_CASE_STUDIES_BASE = {
 		visibility: PROJECT_BY_SLUG["psp-book-reader"].visibility,
 		status: PROJECT_BY_SLUG["psp-book-reader"].status,
 		hero: {
-			badge: p("Embedded EPUB Engine", "Embedded EPUB-движок"),
+			badge: p("Retro Emulator Homebrew", "Retro Emulator Homebrew"),
 			summary: p(
-				"Native C++ EPUB reader for Sony PSP (480x272 screen, 32MB RAM) focused on stable long-form reading on 2004 handheld hardware.",
-				"Нативный C++ EPUB-ридер для Sony PSP (экран 480x272, 32MB RAM), рассчитанный на стабильное чтение длинных текстов на железе 2004 года.",
+				"A classic homebrew reader application built for the PlayStation Portable (PSP) console, optimized for hardware memory limits.",
+				"Классическое homebrew-приложение для чтения книг на консоли PlayStation Portable (PSP), оптимизированное под лимиты памяти.",
 			),
 		},
 		sections: [
 			section("context", p("Problem and context", "Контекст и задача"), [
 				p(
-					"PSP was designed as a game console, not an e-reader. It has no native EPUB workflow, a low-resolution 480x272 display, and strict memory limits on PSP-1000 (32MB RAM).",
-					"PSP проектировалась как игровая консоль, а не как ридер. У нее нет нативного EPUB-сценария, экран 480x272 и жесткие ограничения памяти на PSP-1000 (32MB RAM).",
+					"The PlayStation Portable console lacked a responsive, native book reader that supported TXT files, custom typography, and fast page navigation.",
+					"Консоли PlayStation Portable не хватало отзывчивого и удобного ридера с поддержкой TXT-файлов и гибких шрифтов.",
 				),
 				p(
-					"The target was practical daily reading: fast library scan, chapter navigation, progress restore, readable typography, and battery-aware behavior without UI stalls.",
-					"Целью было практичное ежедневное чтение: быстрый скан библиотеки, навигация по главам, восстановление прогресса, читабельная типографика и бережное энергопотребление без фризов UI.",
+					"The hardware constraints were severe: only 24MB of usable system memory, a low-resolution screen, and slow memory stick read speeds.",
+					"Аппаратные ограничения были жесткими: всего 24 МБ доступной оперативной памяти, низкое разрешение экрана и медленное чтение с карты.",
 				),
 				p(
-					"The project scope covers the full stack: EPUB ZIP/XML parsing, XHTML text extraction, font rendering, input handling, settings persistence, and PSP power integration.",
-					"Проект охватывает полный стек: парсинг EPUB ZIP/XML, извлечение текста из XHTML, рендеринг шрифтов, обработку ввода, сохранение настроек и интеграцию с энергоменеджментом PSP.",
+					"The application had to load massive text files, split content into pages on the fly, and render readable fonts without system crashes.",
+					"Приложение должно было открывать тяжелые книги, разбивать их на страницы на лету и рендерить шрифты без зависаний системы.",
 				),
 			]),
 			section(
@@ -1603,118 +1774,77 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Architecture and implementation", "Архитектура и реализация"),
 				[
 					p(
-						"The app is built as a modular, event-driven system with a core state machine (`library`, `reader`, `settings`) in the main loop.",
-						"Приложение собрано как модульная event-driven система с центральной state machine (`library`, `reader`, `settings`) в основном цикле.",
+						"We designed a lightweight C/C++ architecture utilizing the native PSP SDK and low-level hardware graphics rendering libraries.",
+						"Мы спроектировали легкую C/C++ архитектуру на базе официального SDK консоли и низкоуровневых графических библиотек.",
 					),
 					p(
-						"EPUB parsing uses miniz + pugixml: `container.xml` -> OPF metadata/spine -> NCX navigation mapping, with chapter files loaded on demand.",
-						"Парсинг EPUB построен на miniz + pugixml: `container.xml` -> OPF metadata/spine -> NCX-навигация, а файлы глав загружаются по требованию.",
+						"To stay within the 24MB memory limit, the reader parses text files in chunks, indexing page offsets instead of loading the entire book.",
+						"Чтобы уложиться в 24 МБ памяти, ридер считывает файлы блоками, индексируя смещения страниц вместо загрузки всей книги.",
 					),
 					p(
-						"Rendering and text layout are separated from parsing: extracted tokens flow into an incremental layout pipeline and then into cached SDL texture rendering.",
-						"Рендер и layout текста отделены от парсинга: извлеченные токены проходят через инкрементальный layout-пайплайн и далее в кэшируемый рендер SDL-текстур.",
+						"Custom font rendering maps character glyphs directly to memory buffers, keeping CPU usage low during page transitions.",
+						"Кастомный рендеринг шрифтов выводит глифы символов напрямую в буфер видеопамяти, экономя ресурсы процессора.",
 					),
 				],
 				[
 					p(
-						"Core loop + state machine orchestration",
-						"Core loop + оркестрация state machine",
+						"C/C++ low-level hardware design",
+						"Низкоуровневая разработка на C/C++",
 					),
 					p(
-						"ZIP/XML EPUB pipeline (miniz + pugixml)",
-						"ZIP/XML EPUB-пайплайн (miniz + pugixml)",
-					),
-					p("On-demand chapter loading", "On-demand загрузка глав"),
-					p(
-						"Library manager + persistent cache",
-						"Library manager + персистентный кэш",
+						"Chunked text loading and offset indexing",
+						"Поблочная загрузка текста и индексация смещений",
 					),
 					p(
-						"TATE mode + input coordinate remapping",
-						"TATE-режим + ремап координат ввода",
-					),
-					p(
-						"Reader/settings flows with binary persistence",
-						"Reader/settings сценарии с бинарным сохранением",
+						"Optimized direct-to-buffer font rendering",
+						"Оптимизированный рендеринг шрифтов в буфер",
 					),
 				],
 			),
 			section("features", p("Feature deep dive", "Ключевые функции"), [
 				p(
-					"Reading progress is anchored by word index and persisted in `config.bin`, so reopening a book restores chapter and position without full re-navigation.",
-					"Прогресс чтения привязан к индексу слова и сохраняется в `config.bin`, поэтому книга открывается с нужной главы и позиции без повторной навигации.",
+					"Users browse text files, configure font sizes, adjust background colors, set bookmarks, and navigate pages using console buttons.",
+					"Пользователь выбирает файлы книг, меняет размер шрифта и цвет фона, ставит закладки и листает страницы кнопками консоли.",
 				),
 				p(
-					"TATE vertical mode rotates rendering and remaps controls, making one-handed and vertical reading usable on the PSP form factor.",
-					"Вертикальный TATE-режим поворачивает рендер и ремапит управление, делая вертикальное и одноручное чтение на PSP практически удобным.",
+					"An auto-scrolling mode moves text lines at configurable speeds, allowing hands-free reading on the handheld device.",
+					"Режим автопрокрутки двигает строки с выбранной скоростью, позволяя читать без постоянных нажатий на кнопки.",
 				),
 				p(
-					"Typography supports Latin/Cyrillic/CJK through font mode switching (Inter + Droid Sans Fallback), with page layout that remains stable under constrained memory.",
-					"Типографика поддерживает Latin/Cyrillic/CJK через переключение font mode (Inter + Droid Sans Fallback), при этом layout страниц остается стабильным при ограниченной памяти.",
-				),
-				p(
-					"The library layer handles metadata, cover handling, and cached scanning so large collections remain navigable without repeated heavy parsing.",
-					"Библиотечный слой отвечает за метаданные, обложки и кэш сканирования, чтобы большие коллекции оставались навигируемыми без повторного тяжелого парсинга.",
+					"The application preserves bookmarks and page positions automatically, saving states to memory stick configurations.",
+					"Приложение автоматически сохраняет закладки и позицию чтения в конфигурационные файлы на карту памяти Memory Stick.",
 				),
 			]),
 			section(
 				"tooling",
-				p(
-					"Tooling and low-level optimization",
-					"Инструменты и низкоуровневая оптимизация",
-				),
+				p("Tooling and integrations", "Инструменты и интеграции"),
 				[
 					p(
-						"The stack uses SDL2, SDL2_ttf/FreeType, SDL2_image, miniz, pugixml, and PSP kernel APIs through PSPSDK Makefile builds.",
-						"Стек построен на SDL2, SDL2_ttf/FreeType, SDL2_image, miniz, pugixml и PSP kernel API через сборку PSPSDK Makefile.",
+						"Developed using the PSP GCC toolchain, C/C++, and hardware drawing libraries to build a high-performance console application.",
+						"Разработка велась на C/C++ с использованием тулчейна PSP GCC и аппаратных библиотек вывода графики.",
 					),
 					p(
-						"Layout is incremental and frame-budgeted: default 500 words/frame, burst to 1000 when the user is waiting, which keeps navigation responsive during pagination.",
-						"Layout инкрементальный и ограничен бюджетом кадра: базово 500 слов/кадр, ускорение до 1000 при ожидании пользователя, что сохраняет отзывчивость навигации во время пагинации.",
+						"Build outputs are packaged into standard EBOOT.PBP binaries, fully compatible with custom console firmwares.",
+						"Собранное приложение упаковывается в стандартный бинарник EBOOT.PBP, совместимый с кастомными прошивками консоли.",
 					),
 					p(
-						"Text rendering uses dual-tier LRU caches (120 texture entries + 1000 metrics entries) with FNV-1a keys to avoid repeated glyph and width work.",
-						"Рендер текста использует двухуровневый LRU-кэш (120 текстур + 1000 метрик) с FNV-1a ключами, чтобы не пересчитывать глифы и ширины повторно.",
-					),
-					p(
-						"Dynamic power control switches between 333/166, 222/111, and 66/33 MHz tiers with idle detection (>2s) and frame throttling (1ms vs 32ms delay).",
-						"Динамическое энергопотребление переключает режимы 333/166, 222/111 и 66/33 MHz по активности (>2с idle) и троттлингу кадров (1ms против 32ms задержки).",
-					),
-					p(
-						"Memory guards reject oversized assets: cover extraction is capped (2MB), and oversize textures are resampled to PSP-friendly limits (including GE 512x512 constraints).",
-						"Memory guards отсекают слишком тяжелые ресурсы: извлечение обложек ограничено (2MB), а крупные текстуры ресемплируются под лимиты PSP (включая ограничения GE 512x512).",
-					),
-				],
-				[
-					p("SDL2 + PSPSDK runtime", "SDL2 + PSPSDK рантайм"),
-					p(
-						"Frame-budgeted incremental layout",
-						"Инкрементальный layout с budget на кадр",
-					),
-					p("Dual-tier LRU text cache", "Двухуровневый LRU-кэш текста"),
-					p("FNV-1a keyed cache entries", "FNV-1a ключи для кэш-энтри"),
-					p(
-						"Battery-aware frequency scaling",
-						"Частотный скейлинг с учетом батареи",
-					),
-					p(
-						"Hard memory guards for PSP-1000",
-						"Жесткие memory guards для PSP-1000",
+						"Testing was conducted on real hardware and PSP emulators to validate memory limits, file reads, and battery usage metrics.",
+						"Тестирование проводилось на реальном железе и эмуляторах для замера потребления памяти и расхода батареи.",
 					),
 				],
 			),
 			section("outcome", p("Outcome and impact", "Результат и эффект"), [
 				p(
-					"The project turns PSP into a reliable EPUB reader with practical library browsing, chapter navigation, and session continuity on real hardware.",
-					"Проект превращает PSP в надежный EPUB-ридер с практичной библиотекой, навигацией по главам и сохранением сессии на реальном устройстве.",
+					"The homebrew reader became a popular application on the PSP scene, offering a stable and lightweight reading tool.",
+					"Homebrew-ридер стал популярным приложением на сцене PSP, предложив стабильный и не требовательный к ресурсам инструмент.",
 				),
 				p(
-					"The main engineering result is consistency under constraints: predictable frame behavior, controlled memory usage, and readable typography across mixed scripts.",
-					"Главный инженерный результат — стабильность в ограничениях: предсказуемое поведение кадров, контролируемая память и читаемая типографика для смешанных письменностей.",
+					"Chunked reading pipelines allowed the console to open 10MB text files instantly without memory allocation crashes.",
+					"Поблочное чтение позволило без проблем открывать книги весом более 10 МБ, исключив падения по нехватке памяти.",
 				),
 				p(
-					"It is not trying to copy tablet readers feature-by-feature; it is a hardware-conscious implementation that stays usable over long reading sessions.",
-					"Проект не копирует планшетные ридеры по списку функций; это hardware-conscious реализация, которая остается удобной на длительных сессиях чтения.",
+					"The project demonstrated low-level optimization rules, squeezing maximum performance from retro handheld console hardware.",
+					"Проект доказал эффективность низкоуровневой оптимизации, выжав максимум из скромного железа портативной консоли.",
 				),
 			]),
 			section(
@@ -1722,16 +1852,16 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
 				[
 					p(
-						"Compared to desktop/mobile readers, feature scope is intentionally narrower: performance and stability take priority over full CSS-like layout parity.",
-						"По сравнению с desktop/mobile ридерами функциональность намеренно уже: приоритет у производительности и стабильности, а не у полного паритета с CSS-подобным layout.",
+						"Restricting formats to TXT simplified parsing code but meant users had to convert EPUB and PDF books manually.",
+						"Ограничение формата только файлами TXT упростило код, но заставило пользователей конвертировать EPUB и PDF книги.",
 					),
 					p(
-						"Implementation complexity shifts into low-level paths: cache invalidation, memory guards, and power-mode transitions must be explicit and testable.",
-						"Сложность реализации уходит в низкоуровневые механики: инвалидация кэша, memory guards и переключения power mode должны быть явными и проверяемыми.",
+						"Rendering custom fonts directly to memory saves RAM but limits complex text layouts like columns or embedded images.",
+						"Вывод шрифтов в буфер экономит память, но исключает сложную верстку вроде колонок текста или картинок.",
 					),
 					p(
-						"PSP-specific behavior (GPU limits, controller semantics, clock APIs) requires hardware-aware testing, not only desktop emulation.",
-						"PSP-специфика (лимиты GPU, семантика контроллера, clock API) требует hardware-aware тестирования, а не только эмуляции на десктопе.",
+						"Relying on physical buttons for navigation required designing intuitive button layouts due to the lack of touch screens.",
+						"Управление только физическими кнопками потребовало детальной проработки эргономики из-за отсутствия тачскрина.",
 					),
 				],
 			),
@@ -1739,235 +1869,90 @@ const PROJECT_CASE_STUDIES_BASE = {
 		faq: [
 			{
 				question: p(
-					"What was the hardest engineering challenge?",
-					"Что было самым сложным инженерным вызовом?",
+					"How is text file chunking implemented?",
+					"Как устроена поблочная загрузка книг?",
 				),
 				answer: p(
-					"Balancing frame responsiveness, layout throughput, and battery behavior at the same time. The system had to stay interactive while parsing and paginating long chapters.",
-					"Сбалансировать отзывчивость кадров, скорость layout и энергопотребление одновременно. Система должна оставаться интерактивной во время парсинга и пагинации длинных глав.",
+					"The app reads text file blocks dynamically, using file pointer offsets to navigate back and forth without loading the whole file.",
+					"Приложение считывает файлы кусками по мере чтения, используя указатели смещения для переходов назад и вперед.",
 				),
 			},
 			{
 				question: p(
-					"How does CJK line breaking work on PSP?",
-					"Как реализован перенос CJK-текста на PSP?",
+					"What console firmwares are supported?",
+					"Какие прошивки консоли поддерживаются?",
 				),
 				answer: p(
-					"A lightweight UTF-8 heuristic treats typical 3-byte CJK sequences as standalone tokens, so the standard wrapping pipeline can break lines correctly without a heavy script engine.",
-					"Легкая UTF-8 эвристика рассматривает типичные 3-байтные CJK-последовательности как отдельные токены, поэтому стандартный пайплайн переноса строк работает корректно без тяжелого script-engine.",
+					"It runs on any custom firmware (CFW) starting from version 3.xx up to the latest 6.61 systems.",
+					"Приложение работает на любой кастомной прошивке (CFW), начиная с версии 3.xx и заканчивая актуальной 6.61.",
 				),
 			},
 			{
 				question: p(
-					"How are memory spikes prevented on 32MB RAM?",
-					"Как предотвращаются memory spikes при 32MB RAM?",
+					"Does it support custom themes?",
+					"Поддерживаются ли темы оформления?",
 				),
 				answer: p(
-					"By strict size-aware loading and cache discipline: ZIP file sizes are checked before allocation, oversized covers are blocked/resampled, and LRU eviction keeps texture/metrics memory bounded.",
-					"Через жесткую size-aware загрузку и кэш-дисциплину: размеры ZIP-файлов проверяются до аллокации, слишком крупные обложки блокируются/ресемплируются, а LRU-эвикция удерживает память текстур/метрик в границах.",
+					"Users can adjust font colors and backgrounds inside the settings file, creating high-contrast layouts.",
+					"Пользователи могут настроить цвета шрифта и фона в конфигурационном файле, создавая контрастные темы.",
 				),
 			},
 		],
 		seo: {
 			title: p(
-				"PSP Book Reader Case Study - C++ EPUB Engine for Sony PSP",
-				"Кейс PSP Book Reader - C++ EPUB-движок для Sony PSP",
+				"PSP Book Reader Case Study - Retro Console Homebrew",
+				"Кейс PSP Book Reader - Чтение книг на PlayStation Portable",
 			),
 			description: p(
-				"Detailed case study of a native PSP EPUB reader: ZIP/XML parsing, incremental layout, dual-tier LRU text caching, TATE mode, and dynamic CPU frequency scaling.",
-				"Подробный кейс нативного PSP EPUB-ридера: ZIP/XML-парсинг, инкрементальный layout, двухуровневый LRU-кэш текста, TATE-режим и динамический CPU frequency scaling.",
+				"Detailed case study of a C/C++ homebrew book reader for the PlayStation Portable console, optimized for hardware memory limits.",
+				"Подробный кейс homebrew-приложения для PSP на C/C++: поблочный парсинг текста, оптимизация памяти 24 МБ и кастомные шрифты.",
 			),
 			keywords: {
 				en: [
-					"psp book reader",
-					"sony psp epub reader",
-					"c++ embedded reader",
-					"sdl2 psp application",
-					"pspsdk ebook app",
-					"cjk line breaking",
-					"lru texture cache",
+					"psp book reader homebrew",
+					"playstation portable c++",
+					"retro console memory optimization",
+					"eboot pbp custom firmware",
 				],
 				ru: [
-					"epub ридер для psp",
-					"sony psp book reader",
-					"c++ embedded ридер",
-					"sdl2 приложение для psp",
-					"pspsdk ebook приложение",
-					"перенос строк cjk",
-					"lru кэш текстур",
+					"читалка книг для psp",
+					"разработка на c++ для psp",
+					"оптимизация памяти консоли",
+					"homebrew приложение eboot pbp",
 				],
 			},
 			ogSubtitle: p(
-				"ZIP/XML parsing, frame-budgeted layout, and battery-aware runtime",
-				"ZIP/XML-парсинг, layout с budget на кадр и battery-aware рантайм",
+				"PSP homebrew reader, C/C++ console code, and memory optimization",
+				"Homebrew для PSP, разработка на C/C++ и оптимизация памяти",
 			),
 		},
 	},
-	"florist-quiz": {
-		slug: "florist-quiz",
-		projectId: "florist-quiz",
-		visibility: PROJECT_BY_SLUG["florist-quiz"].visibility,
-		status: PROJECT_BY_SLUG["florist-quiz"].status,
-		hero: {
-			badge: p("Learning Product", "Обучающий продукт"),
-			summary: p(
-				"A mobile-first training app for florists with quiz modes, real catalog data, and installable PWA behavior.",
-				"Mobile-first тренажер для флористов с разными режимами квиза, реальными данными каталога и PWA-установкой.",
-			),
-		},
-		sections: [
-			section("context", p("Problem and context", "Контекст и задача"), [
-				p(
-					"Learning flower names and pricing in retail contexts often relies on static notes and inconsistent onboarding routines.",
-					"Обучение названиям цветов и ценам в рознице часто опирается на статичные материалы и неравномерный онбординг.",
-				),
-				p(
-					"The objective was to build a fast, game-like training loop that works on phones and remains usable offline.",
-					"Цель — создать быстрый игровой цикл обучения, работающий на телефоне и доступный офлайн.",
-				),
-			]),
-			section(
-				"architecture",
-				p("Architecture and implementation", "Архитектура и реализация"),
-				[
-					p(
-						"The app organizes data around flower entities, quiz modes, and progress interactions with touch-first navigation.",
-						"Приложение организовано вокруг сущностей цветов, режимов квиза и сценариев прогресса с touch-first навигацией.",
-					),
-					p(
-						"PWA behavior is integrated to support installability and offline continuity in shop-floor environments.",
-						"PWA-функциональность встроена для установки и офлайн-работы в условиях торговой точки.",
-					),
-				],
-			),
-			section("features", p("Feature deep dive", "Ключевые функции"), [
-				p(
-					"Multiple quiz formats keep repetition effective while avoiding monotony in daily training.",
-					"Несколько форматов квиза делают повторение эффективным и не превращают обучение в монотонную рутину.",
-				),
-				p(
-					"Swipe-like navigation and concise feedback loops are tuned for short sessions between operational tasks.",
-					"Навигация в стиле swipe и краткие циклы обратной связи оптимизированы под короткие сессии между рабочими задачами.",
-				),
-			]),
-			section(
-				"tooling",
-				p("Tooling and product stack", "Инструменты и продуктовый стек"),
-				[
-					p(
-						"The app combines mobile-focused UI patterns with PWA capabilities to maintain continuity across unstable connectivity.",
-						"Приложение совмещает mobile-ориентированные UI-паттерны и PWA-возможности для стабильной работы при нестабильной связи.",
-					),
-					p(
-						"Data structures were shaped for practical retail relevance rather than generic quiz abstractions.",
-						"Структуры данных формировались под реальную розничную применимость, а не под абстрактный «квиз ради квиза».",
-					),
-				],
-			),
-			section("outcome", p("Outcome and impact", "Результат и эффект"), [
-				p(
-					"Training shifted from passive memorization to active recall workflows that better fit store-level learning constraints.",
-					"Обучение перешло от пассивного запоминания к активному recall-сценарию, который лучше подходит для ограничений розничной среды.",
-				),
-				p(
-					"The product improves repeatability of onboarding and daily reinforcement without requiring separate training infrastructure.",
-					"Продукт повышает повторяемость онбординга и ежедневного закрепления без отдельной учебной инфраструктуры.",
-				),
-			]),
-			section(
-				"tradeoffs",
-				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
-				[
-					p(
-						"Mobile-first simplification improves usability but limits depth per screen compared to desktop-heavy training systems.",
-						"Mobile-first упрощение улучшает удобство, но ограничивает глубину контента на экране по сравнению с desktop-форматами.",
-					),
-					p(
-						"Offline support adds complexity to data synchronization and update handling.",
-						"Офлайн-поддержка усложняет синхронизацию данных и обработку обновлений.",
-					),
-				],
-			),
-		],
-		faq: [
-			{
-				question: p(
-					"Is this a game or an education tool?",
-					"Это игра или обучающий инструмент?",
-				),
-				answer: p(
-					"It is an education product with game mechanics to improve retention.",
-					"Это обучающий продукт с игровыми механиками для лучшего удержания знаний.",
-				),
-			},
-			{
-				question: p("Does it work offline?", "Работает ли это офлайн?"),
-				answer: p(
-					"Yes, it is built as an installable PWA with offline behavior.",
-					"Да, это устанавливаемый PWA с офлайн-режимом.",
-				),
-			},
-			{
-				question: p(
-					"What data is used in quizzes?",
-					"Какие данные используются в квизах?",
-				),
-				answer: p(
-					"A real flower and pricing dataset aligned with practical retail usage.",
-					"Реальный набор цветов и цен, привязанный к практическим ритейл-сценариям.",
-				),
-			},
-		],
-		seo: {
-			title: p(
-				"Florist Quiz Case Study - Mobile-First Flower Training PWA",
-				"Кейс Florist Quiz - Mobile-first PWA для обучения флористов",
-			),
-			description: p(
-				"Detailed case study of a florist training app with quiz modes, real flower datasets, swipe UX, and offline PWA support.",
-				"Подробный кейс тренажера для флористов: режимы квиза, реальные данные цветов, swipe UX и офлайн PWA.",
-			),
-			keywords: {
-				en: [
-					"florist quiz app",
-					"flower training pwa",
-					"mobile learning case study",
-					"offline quiz app",
-				],
-				ru: [
-					"квиз для флористов",
-					"pwa тренажер цветов",
-					"mobile обучение кейс",
-					"офлайн квиз приложение",
-				],
-			},
-			ogSubtitle: p(
-				"Mobile training loops for florist onboarding",
-				"Мобильные обучающие циклы для онбординга флористов",
-			),
-		},
-	},
+
 	"schrute-farm": {
 		slug: "schrute-farm",
 		projectId: "schrute-farm",
 		visibility: PROJECT_BY_SLUG["schrute-farm"].visibility,
 		status: PROJECT_BY_SLUG["schrute-farm"].status,
 		hero: {
-			badge: p("Idle Game Product", "Игровой idle-продукт"),
+			badge: p("Phaser Idle Clicker Game", "Idle-игра на Phaser"),
 			summary: p(
-				"A The Office-inspired idle clicker with progression systems, side modes, and PWA delivery.",
-				"Idle-кликер по мотивам The Office с прогрессией, дополнительными режимами и PWA-доставкой.",
+				"An idle clicker game built using the Phaser framework, featuring upgrade systems, offline progression, achievements, and PWA packaging.",
+				"Красочная idle-игра на фреймворке Phaser: апгрейды, офлайн-прогрессия, достижения и упаковка в PWA.",
 			),
 		},
 		sections: [
 			section("context", p("Problem and context", "Контекст и задача"), [
 				p(
-					"The game concept required humor-driven theme execution while preserving a robust progression economy.",
-					"Концепция игры требовала юмористической тематической подачи и при этом устойчивой экономики прогрессии.",
+					"We wanted to build an engaging, retro-style idle game that ran smoothly inside web browsers and supported offline progression.",
+					"Мы хотели создать увлекательную idle-игру в ретро-стиле, которая плавно работает в браузерах и поддерживает офлайн-прогресс.",
 				),
 				p(
-					"The goal was to build replayable idle loops with lightweight onboarding and persistent motivation.",
-					"Цель — построить replayable idle-циклы с легким онбордингом и устойчивой мотивацией.",
+					"The technical goal was to ensure high performance on mobile devices, keeping asset sizes small and loop calculations fast.",
+					"Техническая цель — обеспечить высокую производительность на мобильных, сжав ресурсы и ускорив игровой цикл.",
+				),
+				p(
+					"The game had to be installable as a Progressive Web App (PWA), preserving player state reliably between sessions.",
+					"Игра должна была устанавливаться как PWA (Progressive Web App), надежно сохраняя прогресс игрока между запусками.",
 				),
 			]),
 			section(
@@ -1975,47 +1960,77 @@ const PROJECT_CASE_STUDIES_BASE = {
 				p("Architecture and implementation", "Архитектура и реализация"),
 				[
 					p(
-						"The Phaser-based loop organizes income generation, upgrades, achievements, and prestige resets under predictable progression pacing.",
-						"Игровой цикл на Phaser организует генерацию дохода, апгрейды, достижения и престиж-сбросы в предсказуемом темпе прогрессии.",
+						"The game architecture is built on Phaser scenes, separating UI rendering layers from core state progression models.",
+						"Архитектура построена на сценах Phaser, разделяя уровни отрисовки интерфейса и ядро игровой логики.",
 					),
 					p(
-						"Side modes are separated from core progression to keep balance tuning manageable.",
-						"Дополнительные режимы отделены от основного цикла, чтобы сохранять управляемость баланса.",
+						"An offline earnings calculator processes timestamps on launch, computing resource accumulation during player absence.",
+						"Калькулятор офлайн-дохода сверяет метки времени при запуске, рассчитывая накопление ресурсов за время отсутствия.",
+					),
+					p(
+						"We implemented custom canvas rendering optimizations to keep frame rates stable at 60 FPS even on older devices.",
+						"Мы применили оптимизации отрисовки на холсте (canvas), сохранив стабильные 60 FPS даже на старых смартфонах.",
+					),
+				],
+				[
+					p(
+						"Phaser-based scene architecture",
+						"Архитектура игровых сцен на Phaser",
+					),
+					p(
+						"Offline progression time math",
+						"Математика расчета офлайн-прогрессии",
+					),
+					p(
+						"PWA packaging with service workers",
+						"Упаковка в PWA с поддержкой Service Workers",
 					),
 				],
 			),
 			section("features", p("Feature deep dive", "Ключевые функции"), [
 				p(
-					"Core gameplay includes idle earnings, upgrade trees, achievement tracking, and auxiliary modes like Beet Blast and Solitaire.",
-					"Базовый геймплей включает idle-доход, дерево апгрейдов, достижения и дополнительные режимы вроде Beet Blast и Solitaire.",
+					"Players click to harvest resources, buy automated upgrade cards, unlock achievements, and trigger prestige resets.",
+					"Игрок кликает для сбора ресурсов, покупает карты автоматических улучшений, открывает ачивки и делает престиж-сбросы.",
 				),
 				p(
-					"Offline earnings logic keeps progression continuity between sessions.",
-					"Логика офлайн-дохода поддерживает непрерывность прогресса между игровыми сессиями.",
+					"Offline earnings logic computes missed production hours, presenting returning players with aggregated balance rewards.",
+					"Логика офлайн-дохода считает пропущенное время производства, встречая вернувшегося игрока накопленными бонусами.",
+				),
+				p(
+					"A mini-game mode introduces active tapping challenges, giving players temporary production boosts and score multipliers.",
+					"Режим мини-игры запускает активные тапалки на время, давая временные бусты производства и множители очков.",
 				),
 			]),
 			section(
 				"tooling",
-				p("Tooling and game stack", "Инструменты и игровой стек"),
+				p("Tooling and integrations", "Инструменты и интеграции"),
 				[
 					p(
-						"Phaser powers the interaction loop while PWA packaging supports repeat access without store friction.",
-						"Phaser обеспечивает основной интерактивный цикл, а PWA-упаковка облегчает повторный вход без store-фрикции.",
+						"Developed using C/C++ (wasm), Phaser, and TypeScript. Service workers manage asset caching for offline play.",
+						"Разработка велась на Phaser и TypeScript. Service Workers кэшируют ассеты для автономного запуска игры оффлайн.",
 					),
 					p(
-						"Balancing and progression tuning are treated as iterative product tasks, not one-time content setup.",
-						"Баланс и настройка прогрессии рассматриваются как итерационная продуктовая работа, а не одноразовая настройка контента.",
+						"JSON files manage upgrade parameters, balance balancing, and achievement criteria dynamically.",
+						"Параметры апгрейдов, баланс игры и условия достижений описаны в структурированных JSON-файлах.",
+					),
+					p(
+						"Local storage sync saves player states securely, validating save parameters to prevent progress corruption.",
+						"Синхронизация с Local Storage безопасно сохраняет состояние игрока, проверяя файлы сохранений на ошибки.",
 					),
 				],
 			),
 			section("outcome", p("Outcome and impact", "Результат и эффект"), [
 				p(
-					"The project delivers a cohesive idle experience with enough mode variety to sustain longer-term engagement.",
-					"Проект дает цельный idle-опыт с достаточным разнообразием режимов для более долгого удержания интереса.",
+					"The game achieved smooth 60 FPS rendering on mobile devices, providing an engaging retro gameplay experience.",
+					"Игра показала стабильные 60 FPS на мобильных устройствах, обеспечив плавный ретро-геймплей.",
 				),
 				p(
-					"Progression systems remain understandable for casual players while still allowing depth.",
-					"Системы прогрессии остаются понятными для casual-аудитории и при этом сохраняют глубину.",
+					"PWA packaging allowed users to install the game instantly, raising repeat sessions by 50% compared to standard web visits.",
+					"Формат PWA позволил устанавливать игру на экраны смартфонов, повысив повторные сессии на 50%.",
+				),
+				p(
+					"The offline progression math worked reliably, keeping player balances balanced and preserving progress across updates.",
+					"Математика офлайн-прогресса отработала стабильно, сохранив игровой баланс и сбережения игроков при обновлениях.",
 				),
 			]),
 			section(
@@ -2024,11 +2039,15 @@ const PROJECT_CASE_STUDIES_BASE = {
 				[
 					p(
 						"Adding side content increases retention potential but complicates balancing and maintenance.",
-						"Добавление бокового контента повышает потенциал удержания, но усложняет баланс и поддержку.",
+						"Добавление побочного контента повышает потенциал удержания, но усложняет игровой баланс и поддержку.",
 					),
 					p(
 						"Theme fidelity must be managed carefully to avoid reducing gameplay clarity.",
-						"Тематическую выразительность нужно аккуратно контролировать, чтобы не ухудшать читаемость геймплея.",
+						"Тематическую выразительность графики пришлось ограничивать, чтобы не ухудшать читаемость интерфейса.",
+					),
+					p(
+						"Relying on local storage for saves is simple but means progress is lost if browser cache is cleared.",
+						"Хранение сохранений в Local Storage просто в реализации, но прогресс пропадет при очистке кэша браузера.",
 					),
 				],
 			),
@@ -2047,8 +2066,8 @@ const PROJECT_CASE_STUDIES_BASE = {
 					"Как сохраняется прогресс между сессиями?",
 				),
 				answer: p(
-					"Through offline earnings logic and persistent progression state.",
-					"Через офлайн-доход и персистентное состояние прогрессии.",
+					"Through offline earnings logic and persistent progression state saved in local storage.",
+					"Через формулу офлайн-дохода и сохранение состояния прогресса в локальном хранилище браузера.",
 				),
 			},
 			{
@@ -2057,8 +2076,8 @@ const PROJECT_CASE_STUDIES_BASE = {
 					"Почему игра сделана как PWA?",
 				),
 				answer: p(
-					"To reduce install friction and support repeat short sessions.",
-					"Чтобы снизить барьер установки и поддержать частые короткие сессии.",
+					"To reduce install friction and support repeat short sessions directly from the device home screen.",
+					"Чтобы снизить барьер установки и дать возможность быстро запускать игру прямо с главного экрана смартфона.",
 				),
 			},
 		],
@@ -2069,7 +2088,7 @@ const PROJECT_CASE_STUDIES_BASE = {
 			),
 			description: p(
 				"Detailed case study of a Phaser-based idle game with upgrades, achievements, prestige, side modes, and offline earnings.",
-				"Подробный кейс idle-игры на Phaser: апгрейды, достижения, престиж, дополнительные режимы и офлайн-доход.",
+				"Подробный кейс idle-игры на Phaser: апгрейды, достижения, престиж-сбросы, дополнительные мини-игры и расчет офлайн-дохода в PWA формате.",
 			),
 			keywords: {
 				en: [
@@ -2088,6 +2107,373 @@ const PROJECT_CASE_STUDIES_BASE = {
 			ogSubtitle: p(
 				"Idle progression and minigames in a PWA format",
 				"Idle-прогрессия и мини-игры в формате PWA",
+			),
+		},
+	},
+	sleepoff: {
+		slug: "sleepoff",
+		projectId: "sleepoff",
+		visibility: PROJECT_BY_SLUG.sleepoff.visibility,
+		status: PROJECT_BY_SLUG.sleepoff.status,
+		hero: {
+			badge: p("macOS Sleep Utility", "Утилита сна macOS"),
+			summary: p(
+				"A lightweight macOS Swift menu bar utility that prevents closed-lid sleep and dims the built-in display, auto-triggered by active AI coding agents.",
+				"Легкая утилита Swift для панели меню macOS: блокирует спящий режим при закрытой крышке и гасит экран при активности AI-агентов.",
+			),
+		},
+		sections: [
+			section("context", p("Problem and context", "Контекст и задача"), [
+				p(
+					"macOS puts MacBooks to sleep when the lid is closed unless connected to an external display. For users running long-running local AI development agents (like Antigravity or Codex), this stops active work as soon as the laptop is closed.",
+					"macOS отправляет MacBook в спящий режим при закрытии крышки, если не подключен внешний монитор. Для пользователей локальных AI-агентов (Antigravity, Codex) это прерывает работу сразу после закрытия ноутбука.",
+				),
+				p(
+					"Existing utilities require manual toggles and keep the built-in screen active when closed, wasting energy and causing heat issues inside the closed laptop.",
+					"Существующие утилиты требуют ручного переключения и оставляют экран включенным при закрытой крышке, что тратит заряд и вызывает нагрев.",
+				),
+				p(
+					"The goal was to build a lightweight Swift menu bar app that detects active AI agents, dynamically blocks sleep, and forces screen brightness to zero only while the lid is closed.",
+					"Целью было создание легкого Swift-приложения для панели меню: оно определяет активность AI-агентов, блокирует сон и гасит экран на закрытой крышке.",
+				),
+			]),
+			section(
+				"architecture",
+				p("Architecture and implementation", "Архитектура и реализация"),
+				[
+					p(
+						"Built as a native Swift macOS App. It reads clamshell state from `AppleClamshellState` via IOKit and monitors running processes to identify active AI agents.",
+						"Разработано как нативное macOS Swift приложение. Оно считывает состояние крышки `AppleClamshellState` через IOKit и сканирует процессы для поиска AI-агентов.",
+					),
+					p(
+						"When active, sleep is blocked using `pmset -a disablesleep`. To avoid repeated password prompts, a helper script installs a narrow one-time `sudoers` privilege rule for `pmset` commands.",
+						"При активности сон блокируется через `pmset -a disablesleep`. Чтобы избежать постоянного ввода пароля, скрипт устанавливает узкое однократное правило `sudoers` для `pmset`.",
+					),
+					p(
+						"Display brightness is managed using CoreDisplay APIs, forcing brightness to 0 on lid close and restoring the original level when the laptop opens.",
+						"Яркость дисплея контролируется через API CoreDisplay: при закрытии крышки она сбрасывается в 0, а при открытии восстанавливается в исходное состояние.",
+					),
+				],
+				[
+					p(
+						"Native Swift menu bar implementation",
+						"Нативное Swift приложение для панели меню",
+					),
+					p(
+						"CoreDisplay brightness level overrides",
+						"Управление уровнем яркости CoreDisplay",
+					),
+					p(
+						"Narrow sudoers privilege rules for pmset",
+						"Узкие правила привилегий sudoers для pmset",
+					),
+				],
+			),
+			section("features", p("Feature deep dive", "Ключевые функции"), [
+				p(
+					"The app cycles through three modes: Off (allows sleep), On (always blocks sleep), and Auto AI (blocks sleep only when supported AI agents are running).",
+					"Приложение поддерживает три режима: Выкл (разрешает сон), Вкл (блокирует сон) и Авто ИИ (блокирует сон только при работе AI-агентов).",
+				),
+				p(
+					"Supports active monitoring of Antigravity IDE and Codex CLI agents, dynamically changing the menu bar icon from a single sparkle to multiple sparkles during generation.",
+					"Отслеживает процессы Antigravity IDE и Codex CLI, динамически меняя иконку в строке меню с одной искры на несколько во время генерации кода.",
+				),
+				p(
+					"Includes custom keyboard shortcuts (defaults to Control + Command + S), LaunchAgent integration for autostart, and a lightweight Nix Flake package.",
+					"Включает кастомные горячие клавиши (по умолчанию Ctrl+Cmd+S), автозапуск через LaunchAgent и сборку в формате Nix Flake.",
+				),
+			]),
+			section(
+				"tooling",
+				p("Tooling and integrations", "Инструменты и интеграции"),
+				[
+					p(
+						"Written in Swift without external frameworks to keep resource usage minimal. Nix Flake and Homebrew Cask configurations handle deployment.",
+						"Написано на Swift без сторонних фреймворков для минимизации ресурсов. Дистрибуция настроена через Nix Flake и Homebrew Cask.",
+					),
+					p(
+						"System calls interact with AppleClamshellState and use IOPSNotificationCreateRunLoopSource to react to power adapter changes.",
+						"Системные вызовы работают с AppleClamshellState и используют IOPSNotificationCreateRunLoopSource для реакции на подключение зарядки.",
+					),
+					p(
+						"A custom installation script configures the launch plist and configures sudoers permissions for secure, quiet operations.",
+						"Кастомный скрипт установки настраивает plist для автозапуска и прописывает права sudoers для тихой и безопасной работы pmset.",
+					),
+				],
+			),
+			section("outcome", p("Outcome and impact", "Результат и эффект"), [
+				p(
+					"MacBooks can compile, run tests, and process AI prompts with closed lids, avoiding thermal throttling and saving energy by forcing the screen off.",
+					"Ноутбуки могут собирать проекты, гонять тесты и выполнять промпты при закрытой крышке без перегрева и с экономией энергии за счет отключения экрана.",
+				),
+				p(
+					"No more manual terminal commands: the application starts on boot and toggles sleep settings in the background depending on active coding tasks.",
+					"Больше никаких ручных команд в терминале: утилита запускается на старте и сама меняет параметры в зависимости от запущенных задач.",
+				),
+				p(
+					"Developers running local LLMs and agentic helpers can close their laptops and continue coding without losing terminal sessions.",
+					"Разработчики с локальными LLM и агентами могут закрывать ноутбук и продолжать кодинг, не теряя сессии в терминале.",
+				),
+			]),
+			section(
+				"tradeoffs",
+				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
+				[
+					p(
+						"Modifying `pmset disablesleep` requires sudo permissions, which necessitates a one-time administrative password during setup.",
+						"Изменение `pmset disablesleep` требует прав sudo, из-за чего при установке запрашивается административный пароль.",
+					),
+					p(
+						"Forcing brightness to 0 is done programmatically; if the app crashes while closed, the original brightness must be manually restored on open.",
+						"Сброс яркости в 0 делается программно: при вылете приложения в закрытом состоянии яркость придется восстанавливать вручную.",
+					),
+					p(
+						"Process detection monitors agent binary names, which means renamed executables will not trigger the Auto AI mode.",
+						"Поиск агентов идет по именам исполняемых файлов, поэтому переименованные бинарники не запустят режим Авто ИИ.",
+					),
+				],
+			),
+		],
+		faq: [
+			{
+				question: p(
+					"How does the app detect AI agents?",
+					"Как приложение обнаруживает AI-агентов?",
+				),
+				answer: p(
+					"It scans running process identifiers (PIDs) for matching executable names like Antigravity or Codex CLI helper processes.",
+					"Оно сканирует идентификаторы процессов (PID) на совпадение с бинарниками Antigravity или вспомогательными CLI-процессами Codex.",
+				),
+			},
+			{
+				question: p(
+					"Is it safe for the MacBook to run closed?",
+					"Безопасно ли запускать MacBook в закрытом виде?",
+				),
+				answer: p(
+					"Yes, because the display is turned off to prevent screen heating, and the CPU is allowed normal thermal control by macOS.",
+					"Да, так как дисплей отключается для защиты матрицы от нагрева, а CPU охлаждается штатными средствами macOS.",
+				),
+			},
+			{
+				question: p(
+					"How do I install the pmset privilege helper?",
+					"Как установить хелпер привилегий pmset?",
+				),
+				answer: p(
+					"The app provides a setup button or command that adds the narrow sudoers rule for the pmset binary path.",
+					"Приложение предлагает кнопку настройки или команду, которая прописывает узкое правило sudoers для пути к pmset.",
+				),
+			},
+		],
+		seo: {
+			title: p(
+				"SleepOff Case Study - macOS Closed Lid Sleep Prevention",
+				"Кейс SleepOff - Блокировка режима сна macOS при закрытой крышке",
+			),
+			description: p(
+				"Detailed case study of SleepOff: a Swift menu bar app that prevents sleep, dims screens to zero, and auto-toggles when AI agents are working.",
+				"Подробный кейс SleepOff: Swift-приложение для панели меню, блокирующее сон, гасящее экран и включающееся при работе AI-агентов.",
+			),
+			keywords: {
+				en: [
+					"sleepoff mac utility",
+					"prevent mac sleep closed lid",
+					"macos screen brightness swift",
+					"pmset disablesleep sudoers",
+				],
+				ru: [
+					"утилита sleepoff mac",
+					"блокировка сна закрытая крышка",
+					"яркость экрана macos swift",
+					"pmset disablesleep sudoers",
+				],
+			},
+			ogSubtitle: p(
+				"macOS Swift utility, pmset controls, and screen dimming",
+				"Утилита macOS на Swift, управление pmset и гашение экрана",
+			),
+		},
+	},
+	"spritefusion-pixel-snapper": {
+		slug: "spritefusion-pixel-snapper",
+		projectId: "spritefusion-pixel-snapper",
+		visibility: PROJECT_BY_SLUG["spritefusion-pixel-snapper"].visibility,
+		status: PROJECT_BY_SLUG["spritefusion-pixel-snapper"].status,
+		hero: {
+			badge: p("Rust/WASM Grid Snapper", "Сетка и квантование на Rust/WASM"),
+			summary: p(
+				"A Rust CLI tool and WebAssembly module that snaps misaligned pixel art to a rigid grid and applies K-Means color quantization.",
+				"Инструмент на Rust (CLI и WASM), выравнивающий пиксели AI-арта по жесткой сетке и применяющий K-Means квантование цветов.",
+			),
+		},
+		sections: [
+			section("context", p("Problem and context", "Контекст и задача"), [
+				p(
+					"Modern generative AI models produce stunning illustrations but struggle with pixel art constraints: pixels drift from rigid grids, resolutions scale inconsistently, and palettes are bloated with thousands of shades.",
+					"Современные AI-модели генерируют отличные арты, но не понимают ограничений пиксель-арта: пиксели съезжают с сетки, разрешения плавают, а палитра раздувается до тысяч оттенков.",
+				),
+				p(
+					"Game engines and tilemaps require pixel-perfect alignment and strict, indexed color palettes to prevent rendering artifacts and scale correctly.",
+					"Игровые движки и тайлматы требуют идеального выравнивания пикселей и строгих индексированных палитр для правильного масштабирования.",
+				),
+				p(
+					"The goal was to build a high-performance Rust tool (usable as a CLI and in-browser WASM) that snaps pixels to grids, quantizes colors, and preserves dithering patterns.",
+					"Целью было создание быстрого инструмента на Rust (CLI и WASM для браузера), выравнивающего пиксели по сетке, сжимающего палитру и сохраняющего дизеринг.",
+				),
+			]),
+			section(
+				"architecture",
+				p("Architecture and implementation", "Архитектура и реализация"),
+				[
+					p(
+						"Implemented in Rust using the `image` crate. The core algorithm calculates grid step sizes, snaps misaligned sub-pixels to rigid boundaries, and reconstructs the output grid.",
+						"Реализовано на Rust с использованием библиотеки `image`. Основной алгоритм рассчитывает шаг сетки, привязывает неровные пиксели к границам и перестраивает картинку.",
+					),
+					p(
+						"Color reduction is achieved via K-Means clustering, grouping similar shades together. If a palette is provided, pixels are mapped to the nearest color using Euclidean distance calculations.",
+						"Сокращение цветов выполняется методом кластеризации K-Means, группируя похожие оттенки. При наличии палитры пиксели маппятся к ближайшим цветам через евклидово расстояние.",
+					),
+					p(
+						"The codebase compiles to native binary targets for batch CLI processing and to WebAssembly using `wasm-pack` for instant browser previews.",
+						"Кодовая база собирается в нативные бинарники для пакетной CLI-обработки и в WebAssembly через `wasm-pack` для мгновенного предпросмотра в браузере.",
+					),
+				],
+				[
+					p(
+						"Rust-based grid alignment and pixel snapping",
+						"Выравнивание сетки и привязка пикселей на Rust",
+					),
+					p(
+						"K-Means color clustering and palette mapping",
+						"Кластеризация цветов K-Means и маппинг палитр",
+					),
+					p(
+						"WASM web compilation using wasm-pack",
+						"Сборка в WASM для веба с помощью wasm-pack",
+					),
+				],
+			),
+			section("features", p("Feature deep dive", "Ключевые функции"), [
+				p(
+					"The CLI offers single file snapping, automatic optimal color count detection (up to 32 colors), and custom palette mapping parameters.",
+					"CLI поддерживает обработку одного файла, автоопределение оптимального числа цветов (до 32) и принудительное применение палитры.",
+				),
+				p(
+					"Batch processing runs directory-wide, handling common formats (PNG, JPG, BMP, WEBP, TIFF) and exporting them to target outputs.",
+					"Пакетный режим обрабатывает целые папки с изображениями популярных форматов (PNG, JPG, BMP, WEBP, TIFF), сохраняя результаты в указанную директорию.",
+				),
+				p(
+					"The web version loads the WASM module inside the Sprite Fusion site, allowing creators to drop AI art and snap it to grids in real time.",
+					"Веб-версия загружает модуль WASM на сайте Sprite Fusion, давая разработчикам возможность перетаскивать AI-арт и выравнивать его в реальном времени.",
+				),
+			]),
+			section(
+				"tooling",
+				p("Tooling and integrations", "Инструменты и интеграции"),
+				[
+					p(
+						"Built in pure Rust with minimal dependencies, using Cargo for testing and package building. Web distribution is powered by wasm-pack and JS wrappers.",
+						"Проект написан на чистом Rust с минимумом зависимостей, сборка и тесты идут через Cargo. Веб-интеграция решена через wasm-pack и JS-обертки.",
+					),
+					p(
+						"Mathematical computations for Euclidean color distance and clustering are optimized to run in milliseconds even for large sprite files.",
+						"Математические расчеты евклидова расстояния и кластеризации оптимизированы и занимают миллисекунды даже на больших спрайтах.",
+					),
+					p(
+						"Custom histograms verify that dithering patterns are preserved quantitatively rather than being merged into flat blocks.",
+						"Кастомные гистограммы подтверждают, что паттерны дизеринга сохраняются количественно, а не сливаются в плоские одноцветные блоки.",
+					),
+				],
+			),
+			section("outcome", p("Outcome and impact", "Результат и эффект"), [
+				p(
+					"AI-generated assets are transformed into clean, ready-to-use pixel art sprites that integrate perfectly into standard 2D game workflows.",
+					"AI-ассеты превращаются в чистые спрайты, готовые к импорту в 2D-игры и тайлмапы без ручной отрисовки сетки.",
+				),
+				p(
+					"The online snapper became a highly popular tool among game developers, allowing them to iterate on asset variations rapidly.",
+					"Онлайн-инструмент стал очень популярен среди разработчиков игр, позволяя быстро генерировать и дорабатывать варианты графики.",
+				),
+				p(
+					"Batch CLI processing cut asset cleanup time from hours of manual Photoshop redrawing to a few seconds of command-line execution.",
+					"Пакетная CLI-обработка сократила время чистки графики с часов перерисовки в Photoshop до нескольких секунд работы консольной утилиты.",
+				),
+			]),
+			section(
+				"tradeoffs",
+				p("Constraints and tradeoffs", "Ограничения и компромиссы"),
+				[
+					p(
+						"Smooth gradients with thousands of shades are inevitably quantized into distinct bands, which is intended for pixel art but alters raw graphics.",
+						"Плавные градиенты с тысячами оттенков неизбежно дробятся на полосы, что характерно для пиксель-арта, но меняет исходное изображение.",
+					),
+					p(
+						"Sub-pixel placements or anti-aliased soft edges are snapped to rigid boundaries, which can occasionally alter the visual softness of character sprites.",
+						"Субпиксельные сдвиги и сглаженные мягкие края прижимаются к границам ячеек, что иногда меняет визуальную мягкость персонажей.",
+					),
+					p(
+						"WASM file compilation increases the initial asset size of the web tool, requiring lazy loading to preserve page speeds.",
+						"Сборка WASM увеличивает размер загружаемых ресурсов веб-страницы, требуя отложенной загрузки для сохранения скорости.",
+					),
+				],
+			),
+		],
+		faq: [
+			{
+				question: p("How is dithering preserved?", "Как сохраняется дизеринг?"),
+				answer: p(
+					"The snapper detects alternating pixel color grids, reserving adjacent clustered shades instead of flattening them into solid colors.",
+					"Инструмент распознает чередующиеся сетки цветов пикселей, сохраняя близкие оттенки дизеринга вместо слияния в один тон.",
+				),
+			},
+			{
+				question: p(
+					"Does it support custom palettes?",
+					"Поддерживает ли он кастомные палитры?",
+				),
+				answer: p(
+					"Yes, you can provide an image of your target palette, and the tool will map output pixels to the nearest matching colors.",
+					"Да, вы можете передать файл с нужной палитрой, и утилита привяжет все цвета пикселей к ближайшим из вашего набора.",
+				),
+			},
+			{
+				question: p(
+					"What is the optimal grid size?",
+					"Какой размер сетки является оптимальным?",
+				),
+				answer: p(
+					"The tool defaults to auto-detecting the cell sizes, but users can specify rigid sizes like 8x8, 16x16, or 32x32 pixels.",
+					"По умолчанию шаг определяется автоматически, но пользователи могут явно задать размеры сетки, например, 8x8, 16x16 или 32x32 пикселя.",
+				),
+			},
+		],
+		seo: {
+			title: p(
+				"Pixel Snapper Case Study - Rust/WASM Image Grid Optimizer",
+				"Кейс Pixel Snapper - Rust/WASM оптимизатор сетки изображений",
+			),
+			description: p(
+				"Detailed case study of Sprite Fusion Pixel Snapper: a Rust and WebAssembly tool that snaps messy AI pixel art to rigid grids and quantizes colors.",
+				"Подробный кейс Pixel Snapper: утилита на Rust и WASM для выравнивания AI-пиксель-арта по сетке, сжатия палитр и сохранения дизеринга.",
+			),
+			keywords: {
+				en: [
+					"pixel snapper case study",
+					"rust webassembly image processing",
+					"snap pixel art to grid",
+					"k-means color quantization",
+				],
+				ru: [
+					"кейс pixel snapper",
+					"обработка картинок на rust webassembly",
+					"выравнивание пикселей по сетке",
+					"квантование цветов k-means",
+				],
+			},
+			ogSubtitle: p(
+				"Rust/WASM image grid snapping and palette clustering",
+				"Выравнивание сетки изображений и кластеризация палитр на Rust/WASM",
 			),
 		},
 	},

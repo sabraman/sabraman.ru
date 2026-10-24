@@ -6,17 +6,17 @@ export type LocaleText = {
 export type ProjectSlug =
 	| "vaparshop"
 	| "horny-place"
-	| "smo-tg-miniapp"
 	| "smoky-market-loyalty-miniapp"
 	| "plonq-ai-search"
 	| "flower-mini-app"
 	| "smbro"
 	| "arch-taplink"
-	| "vape-me-fast"
 	| "price-tag-printer"
 	| "psp-book-reader"
-	| "florist-quiz"
-	| "schrute-farm";
+	| "schrute-farm"
+	| "lunaria-search-ecosystem"
+	| "sleepoff"
+	| "spritefusion-pixel-snapper";
 
 export type ProjectCategoryId =
 	| "mini_apps"
@@ -101,24 +101,58 @@ const GITHUB_LINK: LocaleText = { en: "GitHub", ru: "GitHub" };
 
 export const PROJECTS: ProjectItem[] = [
 	{
+		id: "lunaria-search-ecosystem",
+		slug: "lunaria-search-ecosystem",
+		repo: "lunaria-search-ecosystem",
+		visibility: "private",
+		category: "web_platforms",
+		isFeaturedWork: true,
+		caseStudyRoute: "generic",
+		schemaEntityType: "CreativeWork",
+		title: "Lunaria Search Ecosystem",
+		short: {
+			en: "A regional search ecosystem and AI-SEO content engine built to dominate search surfaces.",
+			ru: "Региональная поисковая экосистема и AI-SEO контент-движок для доминирования в выдаче.",
+		},
+		details: {
+			en: "Multi-site Next.js architecture integrated with n8n and Gemini pipelines to power local search and AI retrieval in Kazan.",
+			ru: "Мультисайтовая Next.js архитектура, интегрированная с конвейерами n8n и Gemini для захвата локального поиска и AI-ответов в Казани.",
+		},
+		tags: [
+			"Next.js",
+			"Monorepo",
+			"n8n Automation",
+			"Gemini AI",
+			"SEO / AI-Search",
+		],
+		status: "live",
+		links: [],
+	},
+	{
 		id: "vaparshop",
 		slug: "vaparshop",
-		repo: "vaparshop",
+		repo: "vapar-scanner",
 		visibility: "private",
 		category: "mini_apps",
 		isFeaturedWork: true,
 		caseStudyRoute: "dedicated",
 		schemaEntityType: "CreativeWork",
-		title: "VAPARSHOP",
+		title: "Vapar Tools",
 		short: {
-			en: "Design and engineering portfolio of internal tools, bots, and Telegram commerce flows.",
-			ru: "Кейс по дизайну и разработке внутренних инструментов, ботов и Telegram-коммерции.",
+			en: "Retail management dashboard & gamified salesman workspace with GetMeBack loyalty, shift stats, and Telegram bots.",
+			ru: "Система управления ритейлом и геймифицированное рабочее пространство продавца с интеграцией GetMeBack, сменами и ботами.",
 		},
 		details: {
-			en: "A multi-product case covering Telegram bots, backoffice tooling, brand assets, and operational automations for retail teams.",
-			ru: "Комплексный кейс: Telegram-боты, backoffice-инструменты, брендовые материалы и автоматизация операционной работы сети.",
+			en: "A comprehensive Mini App suite for retail managers and staff: shift life-cycles, safe balance checks, customer objections tracking, GetMeBack QR scanner, automatic Telegram alerts, and employee progress game.",
+			ru: "Комплексный Mini App для сотрудников и менеджеров: ведение смен, проверка сейфа, лог возражений клиентов, QR-сканер лояльности GetMeBack, авто-уведомления в Telegram и игра-симулятор смены.",
 		},
-		tags: ["Telegram Bots", "Internal Tools", "Next.js", "Automation"],
+		tags: [
+			"Next.js 14",
+			"Drizzle ORM",
+			"GetMeBack API",
+			"Telegram Mini App",
+			"Employee Gamification",
+		],
 		status: "live",
 		links: [],
 	},
@@ -144,34 +178,7 @@ export const PROJECTS: ProjectItem[] = [
 		status: "live",
 		links: [],
 	},
-	{
-		id: "smo-tg-miniapp",
-		slug: "smo-tg-miniapp",
-		repo: "smo-tg-miniapp",
-		visibility: "private",
-		category: "mini_apps",
-		isFeaturedWork: false,
-		caseStudyRoute: "generic",
-		schemaEntityType: "SoftwareApplication",
-		title: "SMO TG Miniapp",
-		short: {
-			en: "Telegram commerce mini app for retail and wholesale ordering with role-based flows.",
-			ru: "Telegram mini-app для розничных и оптовых заказов с ролевыми сценариями.",
-		},
-		details: {
-			en: "Production-grade mini app with catalog, cart, order pipeline, manager/admin panels, wheel rewards, broadcasts, and MoySklad sync.",
-			ru: "Продакшн mini-app: каталог, корзина, оформление заказов, панели менеджера/админа, колесо бонусов, рассылки и синхронизация с МойСклад.",
-		},
-		tags: ["Telegram Mini App", "Next.js", "Convex", "MoySklad", "Admin Panel"],
-		status: "live",
-		links: [
-			{
-				kind: "live",
-				url: "https://opt.smbro.ru",
-				label: LIVE_LINK,
-			},
-		],
-	},
+
 	{
 		id: "smoky-market-loyalty-miniapp",
 		slug: "smoky-market-loyalty-miniapp",
@@ -236,30 +243,42 @@ export const PROJECTS: ProjectItem[] = [
 	{
 		id: "flower-mini-app",
 		slug: "flower-mini-app",
-		repo: "esperansa-mini-app",
+		repo: "flower-mini-app",
 		visibility: "private",
 		category: "mini_apps",
 		isFeaturedWork: false,
 		caseStudyRoute: "generic",
 		schemaEntityType: "SoftwareApplication",
-		title: "Flower Mini App",
+		title: "Flower Retail Suite",
 		short: {
-			en: "Telegram Mini App for flower write-off tracking, staff actions, and reporting across store locations.",
-			ru: "Telegram Mini App для списания цветов, работы команды и отчетности по торговым точкам.",
+			en: "Complete retail digital suite for a flower brand: write-off tracking Telegram Mini App & interactive customer quiz.",
+			ru: "Цифровой розничный пакет для цветочного бренда: Telegram Mini App для учета списаний и интерактивный квиз подбора букетов.",
 		},
 		details: {
-			en: "Role-based flower operations app with Telegram auth, point invites, daily write-off flows, owner reports, and CSV export.",
-			ru: "Ролевое mini-app решение для цветочного ритейла: Telegram-авторизация, инвайты по точкам, списания, отчеты владельца и CSV-экспорт.",
+			en: "A retail flower ecosystem featuring a Telegram Mini App with a reactive Convex backend for staff write-off audits, and a mobile-first PWA quiz with a rule-based matching engine and CRM forms.",
+			ru: "Экосистема цветочной розницы: Telegram Mini App на Convex для учета списаний сотрудниками и мобильный PWA-квиз с логикой подбора букетов и формами сбора лидов.",
 		},
 		tags: [
 			"Telegram Mini App",
+			"Next.js 16",
 			"Convex",
-			"Reports",
-			"CSV Export",
-			"Role-Based Access",
+			"React Compiler",
+			"PWA",
+			"EdTech",
 		],
-		status: "in_development",
-		links: [],
+		status: "live",
+		links: [
+			{
+				kind: "live",
+				url: "https://florist-quiz.vercel.app",
+				label: { en: "Florist Quiz", ru: "Тест флориста" },
+			},
+			{
+				kind: "github",
+				url: "https://github.com/sabraman/florist-quiz",
+				label: { en: "GitHub", ru: "GitHub" },
+			},
+		],
 	},
 	{
 		id: "smbro-ru",
@@ -267,25 +286,41 @@ export const PROJECTS: ProjectItem[] = [
 		repo: "smbro.ru",
 		visibility: "private",
 		category: "web_platforms",
-		isFeaturedWork: false,
+		isFeaturedWork: true,
 		caseStudyRoute: "generic",
 		schemaEntityType: "SoftwareApplication",
-		title: "smbro.ru",
+		title: "SMOKE ME BRO Ecosystem",
 		short: {
-			en: "Brand platform for SMOKE ME BRO with pickup points, announcements, and admin tooling.",
-			ru: "Бренд-платформа SMOKE ME BRO с точками самовывоза, объявлениями и админкой.",
+			en: "Comprehensive digital commerce ecosystem for SMOKE ME BRO: retail/wholesale platform, ordering Telegram Mini App, and WebGL landing.",
+			ru: "Цифровая экосистема коммерции SMOKE ME BRO: оптово-розничная Next.js платформа, торговый Telegram Mini App и промо-лендинг на WebGL.",
 		},
 		details: {
-			en: "Customer-facing discovery pages plus role-based management for content, settings, users, analytics, and wholesale modules.",
-			ru: "Публичный сайт с точками и анонсами + ролевое управление контентом, настройками, пользователями, аналитикой и оптовыми модулями.",
+			en: "A production-ready retail and wholesale ecosystem featuring a dynamic React storefront with Convex, a checkout cart, automated MoySklad inventory sync, and custom Three.js WebGL shaders.",
+			ru: "Коммерческая экосистема бренда: динамический веб-каталог на Next.js с Convex, оптовая корзина с ролями, автоматическая интеграция с МойСклад и трехмерная анимация на Three.js.",
 		},
-		tags: ["Next.js", "Convex", "Telegram Auth", "Admin CMS", "Analytics"],
+		tags: [
+			"Next.js",
+			"Convex DB",
+			"MoySklad API",
+			"Three.js WebGL",
+			"Telegram Mini App",
+		],
 		status: "live",
 		links: [
 			{
 				kind: "live",
 				url: "https://smbro.ru",
 				label: LIVE_LINK,
+			},
+			{
+				kind: "live",
+				url: "https://opt.smbro.ru",
+				label: { en: "Wholesale", ru: "Опт" },
+			},
+			{
+				kind: "live",
+				url: "https://vapemefast.ru",
+				label: { en: "WebGL Promo", ru: "Промо" },
 			},
 		],
 	},
@@ -322,34 +357,7 @@ export const PROJECTS: ProjectItem[] = [
 			},
 		],
 	},
-	{
-		id: "vape-me-fast-landing-page",
-		slug: "vape-me-fast",
-		repo: "vape-me-fast-landing-page",
-		visibility: "private",
-		category: "web_platforms",
-		isFeaturedWork: false,
-		caseStudyRoute: "generic",
-		schemaEntityType: "CreativeWork",
-		title: "Vape Me Fast Landing",
-		short: {
-			en: "Conversion-focused landing page with custom pixel-liquid motion background.",
-			ru: "Конверсионный лендинг с кастомным pixel-liquid анимированным фоном.",
-		},
-		details: {
-			en: "Three.js/postprocessing visual layer with gothic-pixel style and direct Telegram bot entry CTA.",
-			ru: "Визуальный слой на Three.js/postprocessing, gothic-pixel стилистика и прямой CTA в Telegram-бота.",
-		},
-		tags: ["Landing", "Three.js", "Motion", "Telegram CTA"],
-		status: "live",
-		links: [
-			{
-				kind: "live",
-				url: "https://vapemefast.ru",
-				label: LIVE_LINK,
-			},
-		],
-	},
+
 	{
 		id: "price-tag-printer",
 		slug: "price-tag-printer",
@@ -406,39 +414,7 @@ export const PROJECTS: ProjectItem[] = [
 			},
 		],
 	},
-	{
-		id: "florist-quiz",
-		slug: "florist-quiz",
-		repo: "florist-quiz",
-		visibility: "public",
-		category: "learning_games",
-		isFeaturedWork: false,
-		caseStudyRoute: "generic",
-		schemaEntityType: "SoftwareApplication",
-		title: "Florist Quiz",
-		short: {
-			en: "Mobile-first flower training app with quiz modes and offline support.",
-			ru: "Mobile-first тренажер для флористов с игровыми режимами и офлайном.",
-		},
-		details: {
-			en: "Multiple quiz formats, real flower/price dataset, iOS-like swipe navigation, and installable PWA behavior.",
-			ru: "Несколько форматов квиза, реальный набор цветов и цен, навигация в стиле iOS и режим PWA с офлайн-поддержкой.",
-		},
-		tags: ["EdTech", "PWA", "Mobile UX", "Quiz"],
-		status: "live",
-		links: [
-			{
-				kind: "live",
-				url: "https://florist-quiz.vercel.app",
-				label: LIVE_LINK,
-			},
-			{
-				kind: "github",
-				url: "https://github.com/sabraman/florist-quiz",
-				label: GITHUB_LINK,
-			},
-		],
-	},
+
 	{
 		id: "schrute-farm",
 		slug: "schrute-farm",
@@ -464,6 +440,67 @@ export const PROJECTS: ProjectItem[] = [
 				kind: "live",
 				url: "https://schrute-farm.vercel.app",
 				label: LIVE_LINK,
+			},
+		],
+	},
+	{
+		id: "sleepoff",
+		slug: "sleepoff",
+		repo: "sleepoff",
+		visibility: "public",
+		category: "tools",
+		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
+		title: "SleepOff",
+		short: {
+			en: "Lightweight macOS menu bar utility that prevents closed-lid sleep and auto-dims the screen.",
+			ru: "Легкая утилита для macOS, предотвращающая спящий режим при закрытой крышке и гасящая экран.",
+		},
+		details: {
+			en: "Mac menu bar app built in Swift that monitors active AI agents (Antigravity, Codex) to dynamically disable sleep, force dim built-in display to 0 on lid close, and auto-install narrow sudoers rules for pmset.",
+			ru: "Приложение Swift для панели меню macOS, отслеживающее активных AI-агентов (Antigravity, Codex) для динамического блокирования сна, отключения встроенного дисплея при закрытой крышке через узкие правила sudoers для pmset.",
+		},
+		tags: ["Swift", "macOS", "pmset", "Automation", "Nix Flake"],
+		status: "live",
+		links: [
+			{
+				kind: "github",
+				url: "https://github.com/sabraman/sleepoff",
+				label: GITHUB_LINK,
+			},
+		],
+	},
+	{
+		id: "spritefusion-pixel-snapper",
+		slug: "spritefusion-pixel-snapper",
+		repo: "spritefusion-pixel-snapper",
+		visibility: "public",
+		category: "tools",
+		isFeaturedWork: false,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
+		title: "Pixel Snapper",
+		short: {
+			en: "Rust/WASM grid snapper and color quantizer designed to fix messy AI-generated pixel art.",
+			ru: "Rust/WASM инструмент для привязки пикселей к сетке и квантования цветов в AI-пиксель-арте.",
+		},
+		details: {
+			en: "Methodical image optimizer written in Rust (CLI and WebAssembly modules) that snaps misaligned pixels to rigid grids, applies K-Means color quantization, maps palettes, and respects dithering.",
+			ru: "Методичный оптимизатор изображений на Rust (CLI и WebAssembly): привязка пикселей к жесткой сетке, K-Means квантование цветов, сопоставление палитр и сохранение дизеринга.",
+		},
+		tags: ["Rust", "WebAssembly", "Quantization", "CLI Tool", "Game Dev"],
+		status: "live",
+		links: [
+			{
+				kind: "live",
+				url: "https://spritefusion.com/pixel-snapper",
+				label: LIVE_LINK,
+			},
+			{
+				kind: "github",
+				url: "https://github.com/sabraman/spritefusion-pixel-snapper",
+				label: GITHUB_LINK,
 			},
 		],
 	},

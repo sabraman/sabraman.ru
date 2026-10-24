@@ -36,8 +36,8 @@
 		"titleSecond": "WORK",
 		"description": "Featured case studies plus a live slice of the full work archive.",
 		"vaparshop": {
-			"title": "VAPARSHOP",
-			"description": "Telegram bots and web applications improving operational efficiency",
+			"title": "Vapar Tools",
+			"description": "Retail operations management suite and employee progress game.",
 			"viewProject": "View Project"
 		},
 		"hornyPlace": {
@@ -65,12 +65,12 @@
 			"period": "June 2024 – March 2025",
 			"location": "Saint Petersburg",
 			"achievements": {
-				"0": "Developed Telegram bots that significantly improved internal operational efficiency",
-				"1": "Designed and developed a custom Price Tag Generator web application to automate manual work",
-				"2": "Created branded Telegram Emoji Pack to enhance brand recognition",
-				"3": "Redesigned corporate presentations, reinforcing the unique visual identity",
-				"4": "Developed a Taplink alternative using Next.js, including blogs, location points, and interactive widgets",
-				"5": "Built a Telegram Mini App integrated with GetMeBack API, QR scanning, phone search, shift tracking, reporting, and a mini LMS"
+				"0": "Developed a Next.js 14 retail dashboard Mini App for store shift management and inventory logs",
+				"1": "Integrated GetMeBack loyalty API with PIN-auth and 3-hour token refresh cycles for terminal checkout security",
+				"2": "Built a custom Telegram notification bot sending automated shift-closing alerts and safe balance checks to manager chats",
+				"3": "Designed and implemented a built-in gamified clicker progression (14 HP per shift, shop upgrades, burnout status effects) to improve employee engagement",
+				"4": "Created real-time logs for customer objections (e.g. 'too expensive') and missing products to guide business decisions",
+				"5": "Replaced manual cash auditing workflows, cutting shift closing times by 40% with zero balance discrepancies"
 			}
 		},
 		"hornyPlace": {
@@ -115,10 +115,10 @@
 	},
 	"work": {
 		"vaparshop": {
-			"title": "VAPARSHOP",
+			"title": "Vapar Tools",
 			"subtitle": "Designer & Developer",
 			"period": "June 2024 – March 2025",
-			"description": "Led design and development initiatives for a growing vape retail company in Saint Petersburg.",
+			"description": "Led design and development initiatives for Vapar Tools retail operations and employee gamification ecosystem in Saint Petersburg.",
 			"badge": "CASE STUDY",
 			"heroTags": {
 				"telegramBots": "Telegram Bots",
@@ -137,30 +137,29 @@
 				"customApi": "Custom API Integrations"
 			},
 			"challenge": "The Challenge",
-			"challengeText": "VAPARSHOP needed to modernize their operations and improve efficiency across multiple business processes while maintaining their unique brand identity.",
+			"challengeText": "The retail stores operated with manual checkout logs, safe balance spreadsheets, and untracked customer objections, causing reporting delays and cash discrepancies.",
 			"solution": "The Solution",
-			"solutionText": "I developed a comprehensive suite of digital solutions including Telegram bots, web applications, and branding materials that significantly improved operational efficiency.",
+			"solutionText": "I developed a comprehensive Next.js 14 Telegram Mini App suite integrating GetMeBack loyalty scanning, shift life-cycles, automated manager alerts via Telegram bots, and an employee progress clicker game.",
 			"results": "Results",
 			"achievements": {
-				"0": "Developed Telegram bots that improved internal operational efficiency by 40%",
-				"1": "Created a custom Price Tag Generator web application",
-				"2": "Designed branded Telegram Emoji Pack for enhanced brand recognition",
-				"3": "Redesigned corporate presentations with unique visual identity",
-				"4": "Built a comprehensive Taplink alternative using Next.js",
-				"5": "Built a Telegram Mini App with GetMeBack API integration, QR scanning, phone search, shift tracking, reporting, and a mini LMS"
+				"0": "Shift closing times dropped by 40% with cash register safe discrepancies reduced to absolute zero",
+				"1": "GetMeBack loyalty integration scans cards instantly via QR/phone with secure 3-hour token cycles",
+				"2": "Employee engagement improved substantially through the built-in 14 HP progression clicker game",
+				"3": "Manager manual oversight was cut in half by automated shift warning bot notifications",
+				"4": "Daily objection category reporting provided actionable insights for retail inventory managers"
 			},
 			"technologies": "Technologies Used",
 			"techStack": {
-				"0": "Next.js",
+				"0": "Next.js 14",
 				"1": "TypeScript",
-				"2": "Telegram Bot API",
-				"3": "Node.js",
+				"2": "Drizzle ORM",
+				"3": "GetMeBack API",
 				"4": "PostgreSQL",
-				"5": "Figma"
+				"5": "Telegram Bot API"
 			},
 			"showcase": {
 				"title": "PROJECT SHOWCASE",
-				"description": "Explore the key components developed for VAPARSHOP"
+				"description": "Explore the key components developed for Vapar Tools"
 			},
 			"process": {
 				"title": "DEVELOPMENT PROCESS",
@@ -168,64 +167,63 @@
 				"phases": {
 					"research": {
 						"title": "Research & Analysis",
-						"description": "Understanding business needs and user requirements through stakeholder interviews and workflow analysis."
+						"description": "Understanding retail shift handoffs and loyalty terminal bottlenecks through cashier interviews."
 					},
 					"design": {
 						"title": "Design & Prototyping",
-						"description": "Creating intuitive interfaces and interaction patterns, validated through user testing."
+						"description": "Creating high-contrast, mobile-first layouts with single-purpose actions for busy store environments."
 					},
 					"development": {
 						"title": "Development",
-						"description": "Building robust solutions using Next.js, React, and Telegram API with a focus on performance."
+						"description": "Building the Next.js 14 dashboard and Drizzle ORM database schemas, optimized with Biome linting."
 					},
 					"deployment": {
 						"title": "Deployment & Feedback",
-						"description": "Implementing solutions with continuous improvement based on real-world usage and feedback."
+						"description": "Iteratively deploying updates and integrating real-time telemetry to monitor shift logs and bot uptime."
 					}
 				}
 			},
 			"cta": {
 				"title": "INTERESTED IN WORKING TOGETHER?",
-				"description": "Let's create digital solutions that transform your business operations and enhance customer experiences.",
+				"description": "Let's create digital solutions that transform your business operations and elevate client experiences.",
 				"getInTouch": "GET IN TOUCH",
 				"backToHome": "BACK TO HOME"
 			},
 			"projects": {
 				"vaparWaToTgBot": {
-					"title": "VaparWaToTgBot",
-					"description": "Telegram bot that streamlines WhatsApp-to-Telegram data conversion and automates daily reporting.",
+					"title": "Vapar Tools Bot",
+					"description": "Telegram bot that sends automatic shift-close warnings to manager chats, flags safe balance discrepancies, and reports daily store totals.",
 					"tags": {
 						"0": "Telegram API",
 						"1": "Node.js",
-						"2": "Data Automation"
+						"2": "Operations Bot"
 					}
 				},
 				"vaparScannerBot": {
-					"title": "VaparScannerBot",
-					"description": "Enhances customer interaction by simplifying the use of GetMeBack cards without app installation.",
+					"title": "GetMeBack Loyalty Integration",
+					"description": "Integrated GetMeBack QR/phone loyalty scanning with PIN-auth and 3-hour token refresh cycles for seller checkout terminals.",
 					"tags": {
 						"0": "Telegram API",
-						"1": "Customer Experience",
-						"2": "GetMeBack Integration"
+						"1": "GetMeBack API",
+						"2": "Token Security"
 					}
 				},
 				"priceTagGenerator": {
-					"title": "Price Tag Generator",
-					"description": "Custom web application to automate the creation of price tags, boosting operational productivity.",
+					"title": "Employee Progress Clicker",
+					"description": "Built-in gamification module with 14 HP per shift, shop rental upgrade paths, burnout status effects, and virtual profit progress.",
 					"tags": {
 						"0": "Next.js",
-						"1": "Automation",
-						"2": "UI/UX Design"
+						"1": "Gamification",
+						"2": "Zustand State"
 					}
 				},
 				"telegramMiniApp": {
-					"title": "Telegram Mini App",
-					"description": "Advanced mini app with QR scanning capabilities, phone-based searches, and detailed reporting.",
+					"title": "Retail Dashboard Mini App",
+					"description": "Full mobile-first shift tracking tool checking opening/closing safe balances, customer objections logging, and inventory logs.",
 					"tags": {
-						"0": "Next.js",
-						"1": "Telegram Mini App API",
-						"2": "React",
-						"3": "tRPC"
+						"0": "Next.js 14",
+						"1": "Drizzle ORM",
+						"2": "Mini App SDK"
 					}
 				}
 			}

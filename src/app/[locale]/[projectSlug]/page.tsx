@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PROJECT_PAGE_COMPONENTS } from "~/components/projects/pages";
+import { CaseStudyCTA } from "~/components/projects/pages/CaseStudyPrimitives";
+import { getLocalizedPathname } from "~/i18n/locale-paths";
 import { routing } from "~/i18n/routing";
 import { resolveSupportedLocale } from "~/i18n/types";
 import {
@@ -79,6 +81,11 @@ export default async function ProjectCaseStudyPage({
 				project={record.project}
 				caseStudy={record.caseStudy}
 				relatedProjects={relatedProjects}
+			/>
+			<CaseStudyCTA
+				locale={lang}
+				backHref={getLocalizedPathname(lang, "/work")}
+				backLabel={lang === "ru" ? "Назад в хаб кейсов" : "Back to work hub"}
 			/>
 		</>
 	);

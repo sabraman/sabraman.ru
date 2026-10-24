@@ -232,13 +232,10 @@ export function PspBookReaderPage({
 
 	return (
 		<main className="relative overflow-hidden py-14 md:py-20">
-			<div className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(circle_at_20%_0%,rgba(16,185,129,0.18),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(56,189,248,0.14),transparent_48%)]" />
-			<div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)] [background-size:26px_26px]" />
-
-			<div className="container mx-auto max-w-6xl px-4">
+			<div className="container mx-auto max-w-2xl px-4">
 				<PageTopNav locale={locale} />
 
-				<section className="relative overflow-hidden rounded-3xl border border-primary/20 bg-background/80 p-6 shadow-sm backdrop-blur-sm md:p-10">
+				<section className="relative py-4">
 					<div className="pointer-events-none absolute -top-20 -right-20 h-52 w-52 rounded-full bg-emerald-400/15 blur-3xl" />
 					<div className="pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-sky-500/15 blur-3xl" />
 					<div className="relative">
@@ -268,16 +265,14 @@ export function PspBookReaderPage({
 					</div>
 				</section>
 
-				<div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-5">
-					<div className="lg:col-span-3">
-						<SectionText
-							title={labels.contextTitle}
-							paragraphs={context.paragraphs}
-							locale={locale}
-							icon={<BookOpenText className="h-4 w-4" />}
-						/>
-					</div>
-					<aside className="rounded-3xl border border-primary/15 bg-background/75 p-6 shadow-sm backdrop-blur-sm lg:col-span-2">
+				<div className="mt-8 space-y-6">
+					<SectionText
+						title={labels.contextTitle}
+						paragraphs={context.paragraphs}
+						locale={locale}
+						icon={<BookOpenText className="h-4 w-4" />}
+					/>
+					<aside className="py-4">
 						<h2
 							className="mb-4 font-extrabold text-2xl md:text-3xl"
 							style={{
@@ -287,20 +282,20 @@ export function PspBookReaderPage({
 						>
 							{labels.hardwareTitle}
 						</h2>
-						<div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1">
-							<div className="rounded-2xl border border-primary/10 bg-primary/5 p-3">
+						<div className="grid grid-cols-1 gap-3">
+							<div className="border-b border-primary/10 pb-3 last:border-b-0">
 								<p className="text-muted-foreground text-xs uppercase tracking-wide">
 									{labels.display}
 								</p>
 								<p className="mt-1 font-semibold text-lg">480 x 272</p>
 							</div>
-							<div className="rounded-2xl border border-primary/10 bg-primary/5 p-3">
+							<div className="border-b border-primary/10 pb-3 last:border-b-0">
 								<p className="text-muted-foreground text-xs uppercase tracking-wide">
 									{labels.memory}
 								</p>
 								<p className="mt-1 font-semibold text-lg">32MB RAM</p>
 							</div>
-							<div className="rounded-2xl border border-primary/10 bg-primary/5 p-3">
+							<div className="border-b border-primary/10 pb-3 last:border-b-0">
 								<p className="text-muted-foreground text-xs uppercase tracking-wide">
 									{labels.target}
 								</p>
@@ -310,8 +305,8 @@ export function PspBookReaderPage({
 					</aside>
 				</div>
 
-				<div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-5">
-					<section className="rounded-3xl border border-primary/15 bg-background/75 p-6 shadow-sm backdrop-blur-sm lg:col-span-3">
+				<div className="mt-6 space-y-6">
+					<section className="py-4">
 						<h2
 							className="mb-2 flex items-center gap-2 font-extrabold text-2xl md:text-3xl"
 							style={{
@@ -323,11 +318,11 @@ export function PspBookReaderPage({
 							{labels.pipelineTitle}
 						</h2>
 						<p className="mb-4 text-muted-foreground">{labels.pipelineDesc}</p>
-						<div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+						<div className="grid grid-cols-1 gap-3">
 							{pipelineSteps.map((step, index) => (
 								<div
 									key={step}
-									className="rounded-2xl border border-primary/10 bg-primary/[0.03] p-3"
+									className="border-b border-primary/10 pb-3 last:border-b-0"
 								>
 									<p className="font-mono text-muted-foreground text-xs">
 										0{index + 1}
@@ -337,7 +332,7 @@ export function PspBookReaderPage({
 							))}
 						</div>
 					</section>
-					<section className="rounded-3xl border border-primary/15 bg-background/75 p-6 shadow-sm backdrop-blur-sm lg:col-span-2">
+					<section className="py-4">
 						<h2
 							className="mb-4 flex items-center gap-2 font-extrabold text-2xl md:text-3xl"
 							style={{
@@ -352,7 +347,7 @@ export function PspBookReaderPage({
 							{runtimeModes.map((item) => (
 								<div
 									key={item.mode}
-									className="rounded-2xl border border-primary/10 bg-primary/[0.03] p-3"
+									className="border-b border-primary/10 pb-3 last:border-b-0"
 								>
 									<div className="mb-1 flex items-center justify-between gap-2">
 										<p className="font-semibold text-sm">{item.mode}</p>
@@ -364,7 +359,7 @@ export function PspBookReaderPage({
 								</div>
 							))}
 						</div>
-						<div className="mt-3 grid grid-cols-3 gap-2 rounded-2xl border border-primary/10 p-2 text-center text-xs">
+						<div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
 							<div>
 								<p className="text-muted-foreground">{labels.mode}</p>
 							</div>
@@ -378,7 +373,7 @@ export function PspBookReaderPage({
 					</section>
 				</div>
 
-				<div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+				<div className="mt-6 space-y-6">
 					<SectionText
 						title={labels.architectureTitle}
 						paragraphs={architecture.paragraphs}
@@ -393,7 +388,7 @@ export function PspBookReaderPage({
 					/>
 				</div>
 
-				<div className="mt-6 rounded-3xl border border-primary/15 bg-background/75 p-6 shadow-sm backdrop-blur-sm">
+				<div className="mt-6 py-4">
 					<h2
 						className="mb-4 flex items-center gap-2 font-extrabold text-2xl md:text-3xl"
 						style={{
@@ -404,26 +399,26 @@ export function PspBookReaderPage({
 						<Gauge className="h-5 w-5 text-primary" />
 						{labels.metricsTitle}
 					</h2>
-					<div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-						<div className="rounded-2xl border border-primary/10 bg-primary/[0.03] p-4">
+					<div className="grid grid-cols-1 gap-3">
+						<div className="border-b border-primary/10 pb-3 last:border-b-0">
 							<p className="font-medium text-sm">{labels.layoutMetric}</p>
 							<p className="mt-1 font-semibold text-base">
 								{labels.layoutMetricDetail}
 							</p>
 						</div>
-						<div className="rounded-2xl border border-primary/10 bg-primary/[0.03] p-4">
+						<div className="border-b border-primary/10 pb-3 last:border-b-0">
 							<p className="font-medium text-sm">{labels.cacheMetric}</p>
 							<p className="mt-1 font-semibold text-base">
 								{labels.cacheMetricDetail}
 							</p>
 						</div>
-						<div className="rounded-2xl border border-primary/10 bg-primary/[0.03] p-4">
+						<div className="border-b border-primary/10 pb-3 last:border-b-0">
 							<p className="font-medium text-sm">{labels.progressMetric}</p>
 							<p className="mt-1 font-semibold text-base">
 								{labels.progressMetricDetail}
 							</p>
 						</div>
-						<div className="rounded-2xl border border-primary/10 bg-primary/[0.03] p-4">
+						<div className="border-b border-primary/10 pb-3 last:border-b-0">
 							<p className="font-medium text-sm">{labels.guardMetric}</p>
 							<p className="mt-1 font-semibold text-base">
 								{labels.guardMetricDetail}
@@ -432,8 +427,8 @@ export function PspBookReaderPage({
 					</div>
 				</div>
 
-				<div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
-					<article className="rounded-3xl border border-primary/15 bg-background/75 p-6 shadow-sm backdrop-blur-sm lg:col-span-2">
+				<div className="mt-6 space-y-6">
+					<article className="py-4">
 						<h2
 							className="mb-4 flex items-center gap-2 font-extrabold text-2xl md:text-3xl"
 							style={{
@@ -455,7 +450,7 @@ export function PspBookReaderPage({
 							))}
 						</div>
 					</article>
-					<section className="rounded-3xl border border-primary/15 bg-background/75 p-6 shadow-sm backdrop-blur-sm">
+					<section className="py-4">
 						<h2
 							className="mb-4 flex items-center gap-2 font-extrabold text-2xl md:text-3xl"
 							style={{
@@ -467,22 +462,22 @@ export function PspBookReaderPage({
 							{labels.optimizationTitle}
 						</h2>
 						<ul className="space-y-2">
-							<li className="rounded-xl border border-primary/10 bg-primary/[0.03] px-3 py-2 text-sm">
+							<li className="border-b border-primary/10 pb-2 last:border-b-0 text-sm list-none">
 								{locale === "ru"
 									? "Инкрементальная пагинация вместо блокирующего full-layout"
 									: "Incremental pagination instead of blocking full-chapter layout"}
 							</li>
-							<li className="rounded-xl border border-primary/10 bg-primary/[0.03] px-3 py-2 text-sm">
+							<li className="border-b border-primary/10 pb-2 last:border-b-0 text-sm list-none">
 								{locale === "ru"
 									? "Стабильная эвикция LRU без memory spikes"
 									: "Stable LRU eviction without memory spikes"}
 							</li>
-							<li className="rounded-xl border border-primary/10 bg-primary/[0.03] px-3 py-2 text-sm">
+							<li className="border-b border-primary/10 pb-2 last:border-b-0 text-sm list-none">
 								{locale === "ru"
 									? "Частотные профили CPU/ME под активность пользователя"
 									: "CPU/ME frequency profiles tied to user activity"}
 							</li>
-							<li className="rounded-xl border border-primary/10 bg-primary/[0.03] px-3 py-2 text-sm">
+							<li className="border-b border-primary/10 pb-2 last:border-b-0 text-sm list-none">
 								{locale === "ru"
 									? "CJK line-break эвристика без тяжелого script engine"
 									: "CJK line-break heuristic without a heavy script engine"}
@@ -491,7 +486,7 @@ export function PspBookReaderPage({
 					</section>
 				</div>
 
-				<div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+				<div className="mt-6 space-y-6">
 					<SectionText
 						title={labels.outcomeTitle}
 						paragraphs={outcome.paragraphs}
@@ -506,7 +501,7 @@ export function PspBookReaderPage({
 					/>
 				</div>
 
-				<section className="mt-6 rounded-3xl border border-primary/15 bg-background/75 p-6 shadow-sm backdrop-blur-sm">
+				<section className="mt-6 py-4">
 					<h2
 						className="mb-2 font-extrabold text-2xl md:text-3xl"
 						style={{
@@ -517,14 +512,14 @@ export function PspBookReaderPage({
 						{labels.docsTitle}
 					</h2>
 					<p className="mb-4 text-muted-foreground">{labels.docsDesc}</p>
-					<div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+					<div className="grid grid-cols-1 gap-3">
 						{ZREAD_DOCS.map((doc) => (
 							<Link
 								key={doc.slug}
 								href={`https://zread.ai/sabraman/psp-book-reader/${doc.slug}`}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="group rounded-2xl border border-primary/10 bg-primary/[0.03] px-4 py-3 transition-colors hover:border-primary/30"
+								className="group border-b border-primary/10 pb-3 last:border-b-0 block transition-colors hover:text-accent"
 							>
 								<div className="flex items-center justify-between gap-2">
 									<p className="text-sm leading-relaxed">
@@ -537,7 +532,7 @@ export function PspBookReaderPage({
 					</div>
 				</section>
 
-				<div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+				<div className="mt-8 space-y-6">
 					<FaqBlock caseStudy={caseStudy} locale={locale} />
 					<ExternalLinks project={project} locale={locale} />
 				</div>
