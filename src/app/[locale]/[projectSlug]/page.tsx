@@ -16,6 +16,8 @@ import {
 } from "~/lib/projects/case-study-seo";
 import { JsonLd } from "~/lib/seo/json-ld";
 
+export const instant = false;
+
 export async function generateStaticParams() {
 	const projectSlugs = await getGenericCaseStudySlugs();
 

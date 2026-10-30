@@ -17,8 +17,8 @@ Implementation is ordered so each step is independently verifiable and the highe
 - New file `src/app/robots.txt/route.ts` exporting a `GET` handler.
 - Body text reproduces the **exact** rules currently in `src/app/robots.ts` (user agents: `*`, `Yandex`, `Googlebot`, `Bingbot`, `YandexBot`, `GPTBot`, `ClaudeBot`, `PerplexityBot`; `User-agent: *` allows `/` and disallows `/api/`, `/trpc/`; `Yandex` gets `Crawl-delay: 1`), then appends:
   - An empty line separator, then `Content-Signal: ai-train=yes, search=yes, ai-input=yes`
-  - `Host: https://sabraman.ru`
-  - `Sitemap: https://sabraman.ru/sitemap.xml`
+  - `Host: https://sabraman.art`
+  - `Sitemap: https://sabraman.art/sitemap.xml`
 - Use `SITE_URL` from `~/lib/site-config` for `Host`/`Sitemap` (do not hardcode).
 - Headers: `Content-Type: text/plain; charset=utf-8`, `Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400`.
 
@@ -64,7 +64,7 @@ Implementation is ordered so each step is independently verifiable and the highe
   | `/blog/{post}` | Serialize `BlogBlock[]` → markdown: `heading`→`#`/`##`, `paragraph`→text, `bullets`→`- `, `quote`→`> `, `callout`→`> **{kind}**: ...` |
   | `/components/{slug}` | **Reuse** `renderComponentDocMarkdown(doc)` from `~/components/legacy/docs/component-doc-markdown`. Resolve doc via `getComponentDocBySlug`. |
   | anything else | `null` |
-- Links use the requested locale's path (prepend `/ru` for Russian). Bodies include an H1 title and a footer line: `_Source: sabraman.ru — markdown rendering for agents. HTML is the canonical version._`.
+- Links use the requested locale's path (prepend `/ru` for Russian). Bodies include an H1 title and a footer line: `_Source: sabraman.art — markdown rendering for agents. HTML is the canonical version._`.
 - `tokens = Math.round(body.length / 4)`.
 
 ### Step 2.2 — Unit-test the generator (`vitest`)
@@ -174,39 +174,39 @@ Implementation is ordered so each step is independently verifiable and the highe
   {
   	"linkset": [
   		{
-  			"anchor": "https://sabraman.ru/llms.txt",
+  			"anchor": "https://sabraman.art/llms.txt",
   			"service-desc": [
-  				{ "href": "https://sabraman.ru/llms.txt", "type": "text/plain" }
+  				{ "href": "https://sabraman.art/llms.txt", "type": "text/plain" }
   			],
-  			"service-doc": [{ "href": "https://sabraman.ru/" }]
+  			"service-doc": [{ "href": "https://sabraman.art/" }]
   		},
   		{
-  			"anchor": "https://sabraman.ru/.well-known/agent-skills/index.json",
+  			"anchor": "https://sabraman.art/.well-known/agent-skills/index.json",
   			"service-desc": [
   				{
-  					"href": "https://sabraman.ru/.well-known/agent-skills/index.json",
+  					"href": "https://sabraman.art/.well-known/agent-skills/index.json",
   					"type": "application/json"
   				}
   			]
   		},
   		{
-  			"anchor": "https://sabraman.ru/.well-known/api-catalog",
+  			"anchor": "https://sabraman.art/.well-known/api-catalog",
   			"service-desc": [
   				{
-  					"href": "https://sabraman.ru/.well-known/api-catalog",
+  					"href": "https://sabraman.art/.well-known/api-catalog",
   					"type": "application/linkset+json"
   				}
   			]
   		},
   		{
-  			"anchor": "https://sabraman.ru/api/component-docs/{slug}",
+  			"anchor": "https://sabraman.art/api/component-docs/{slug}",
   			"service-desc": [
   				{
-  					"href": "https://sabraman.ru/api/component-docs/{slug}",
+  					"href": "https://sabraman.art/api/component-docs/{slug}",
   					"type": "text/markdown"
   				}
   			],
-  			"service-doc": [{ "href": "https://sabraman.ru/components/{slug}" }]
+  			"service-doc": [{ "href": "https://sabraman.art/components/{slug}" }]
   		}
   	]
   }

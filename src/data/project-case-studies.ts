@@ -56,6 +56,8 @@ const section = (
 const p = (en: string, ru: string): LocaleText => ({ en, ru });
 
 const CASE_STUDY_UPDATED_AT_BY_SLUG: Record<ProjectSlug, string> = {
+	kukaracha: "2026-10-24",
+	daariatrans: "2026-10-24",
 	"lunaria-search-ecosystem": "2026-06-14",
 	"arch-taplink": "2026-06-14",
 	"flower-mini-app": "2026-06-14",
@@ -72,6 +74,8 @@ const CASE_STUDY_UPDATED_AT_BY_SLUG: Record<ProjectSlug, string> = {
 };
 
 const CASE_STUDY_PUBLISHED_AT_BY_SLUG: Record<ProjectSlug, string> = {
+	kukaracha: "2026-10-22",
+	daariatrans: "2026-10-12",
 	"lunaria-search-ecosystem": "2026-06-12",
 	"arch-taplink": "2025-05-10",
 	"flower-mini-app": "2025-08-15",
@@ -88,6 +92,460 @@ const CASE_STUDY_PUBLISHED_AT_BY_SLUG: Record<ProjectSlug, string> = {
 };
 
 const PROJECT_CASE_STUDIES_BASE = {
+	kukaracha: {
+		slug: "kukaracha",
+		projectId: "kukaracha",
+		visibility: PROJECT_BY_SLUG.kukaracha.visibility,
+		status: PROJECT_BY_SLUG.kukaracha.status,
+		hero: {
+			badge: p(
+				"Retail Operations OS & AI Automation",
+				"Операционная система ритейла и AI-автоматизация",
+			),
+			summary: p(
+				"Unified retail OS for Kukaracha and Runduk: Astro + React B2B portal, SQLite expiration tracker, interactive staff LMS, and Whisper-powered cashier bot.",
+				"Комплексная операционная платформа торговой сети «Кукарача» и «Рундук»: B2B-портал на Astro и React, база сроков годности на SQLite, интерактивная база знаний персонала и кассовый Telegram-бот с Whisper STT.",
+			),
+		},
+		sections: [
+			section(
+				"context",
+				p(
+					"Problem and retail operations context",
+					"Контекст и проблемы розничной сети",
+				),
+				[
+					p(
+						"A fast-growing multi-brand regional retail network across Murmansk («Кукарача» — Asian delicacies and food market, «Рундук» — Arctic souvenirs and northern delicacies, 13+ retail points) faced escalating operational friction on the retail floor.",
+						"Быстрорастущая мультибрендовая розничная сеть в Мурманске («Кукарача» — азиатские деликатесы и маркет, «Рундук» — арктические сувениры и северная гастрономия, 13+ точек) столкнулась с нарастающим трением в ежедневных операциях торговых залов.",
+					),
+					p(
+						"Point-of-sale restock requests for house-brand products were lost in chaotic Telegram chats; cashier review rewards required tedious manual counting; store clerks lacked quick on-shift guidance for airport liquid rules, 11:00-21:00 alcohol regulations, and foreign tourist interactions.",
+						"Заявки на дозаказ позиций СТМ «По Северу» тонули в общих чатах; расчет мотивационных выплат за отзывы требовал вечерней ручной проверки менеджерами; у продавцов на смене не было быстрого доступа к регламентам провоза жидкостей в аэропорту, закону об алкоголе 11:00–21:00 и работе с туристами.",
+					),
+					p(
+						"Additionally, product margins and expiration dates across thousands of SKUs were difficult to track consistently without a lightweight, mobile-first floor interface tailored to retail staff smartphones.",
+						"Кроме того, контроль маржинальности и сроков годности по тысячам позиций требовал простого mobile-first интерфейса, рассчитанного на реальные условия работы персонала на смартфоне.",
+					),
+				],
+			),
+			section(
+				"architecture",
+				p(
+					"Edge portal and serverless data architecture",
+					"Edge-архитектура портала и слой данных",
+				),
+				[
+					p(
+						"We built Severu CRM as a high-performance edge web platform on Astro, React, TypeScript, and shadcn/ui, deployed directly to Cloudflare Pages for ultra-low latency mobile access.",
+						"Мы спроектировали и разработали единый портал Severu CRM на стеке Astro, React, TypeScript и shadcn/ui с деплоем на Cloudflare Pages для минимальной задержки при загрузке на мобильных устройствах продавцов.",
+					),
+					p(
+						"A lightweight SQLite database engine (`sroki.db` / `server-sroki.ts`) handles store expiration tracking and B2B ordering catalogs, providing instant client filtering with zero monthly hosting overhead.",
+						"Легковесный слой данных на SQLite (`sroki.db` / `server-sroki.ts`) обеспечивает ведение сроков годности и каталог позиций для дозаказа, гарантируя мгновенную фильтрацию без затрат на инфраструктуру.",
+					),
+					p(
+						"The Telegram cashier assistant is built with Python and Cloudflare Workers, integrating faster-whisper / Deepgram voice transcription, YuNet face detection for review verification, and direct SBIS POS lookup endpoints.",
+						"Кассовый Telegram-бот построен на Python и Cloudflare Workers, объединяя голосовую транскрипцию через faster-whisper / Deepgram, детекцию лиц YuNet для подтверждения отзывов и интеграцию со СБИС.",
+					),
+				],
+				[
+					p(
+						"Astro + React + shadcn/ui edge portal on Cloudflare Pages",
+						"Edge-портал на Astro, React и shadcn/ui на Cloudflare Pages",
+					),
+					p(
+						"SQLite-backed expiration tracking and B2B ordering",
+						"Учёт сроков годности и B2B-заказник на SQLite",
+					),
+					p(
+						"Cashier Telegram assistant with voice-to-lead STT and SBIS POS sync",
+						"Кассовый бот с голосовой фиксацией упущенных продаж и синхронизацией СБИС",
+					),
+				],
+			),
+			section(
+				"features",
+				p(
+					"B2B ordering, interactive LMS, and cashier bot",
+					"B2B-заказник, интерактивная база знаний и кассовый бот",
+				),
+				[
+					p(
+						"1-Click Store Restocking: Branch staff can browse the proprietary 'По Северу' catalog by SKU and submit verified replenishment orders instantly, eliminating text-based order confusion.",
+						"Заказ СТМ в 1 клик: продавцы формируют дозаказ фирменной линейки «По Северу» по артикулам в один клик без ручной переписки в чатах.",
+					),
+					p(
+						"Interactive Knowledge Base & LMS: Dedicated guides for Runduk (16 artisan souvenir masters, 100ml air travel restrictions), Kukaracha (tap beverages, draft noodles), and tourist communication, complete with on-shift compliance quizzes.",
+						"Интерактивная база знаний и LMS: регламенты под бренды «Рундук» (крафт 16 мастеров, авиаправила 100 мл), «Кукарача» (краны, рамёны, закон 11:00–21:00) и правила для туристов с проверочными тестами.",
+					),
+					p(
+						"Cashier Motivation & Voice Lost Sales: Automated validation for customer Google/Yandex 5-star reviews with selfie verification (+100 ₽ bonus counter), 2-second tour-guide SBIS cashback lookup (15%), and instant voice-memo capture of out-of-stock customer requests.",
+						"Мотивация кассиров и голосовой фикс: автоматический подсчет бонусов за отзывы с селфи (+100 ₽ к смене), поиск гидов в СБИС (15% кэшбэк) за 2 секунды и голосовая фиксация упущенного спроса.",
+					),
+				],
+			),
+			section(
+				"tooling",
+				p(
+					"Data analysis, invoice processing, and E2E testing",
+					"Анализ накладных, обработка данных и E2E-тесты",
+				),
+				[
+					p(
+						"We processed 156+ supplier invoices representing 18,500+ SKUs using custom Python data pipelines. The audit calculated weighted markup multipliers (2.74x overall, 4.9–6.4x on proprietary northern products) and mapped monthly sales seasonality.",
+						"С помощью кастомных Python-скриптов обработали 156+ накладных поставщиков (18 500+ позиций). Анализ выявил среднюю наценку 2.74x (4.9–6.4x на собственную линейку «По Северу») и сезонный профиль сети.",
+					),
+					p(
+						"Automated end-to-end testing with Playwright scripts (`ui_e2e.py`, `e2e_flow.py`) validates cart interactions, catalog searches, and mobile layout rendering across device viewports.",
+						"Автоматизированные E2E-тесты на Playwright (`ui_e2e.py`, `e2e_flow.py`) гарантируют безошибочную работу корзины, каталога и адаптивной верстки на мобильных экранах.",
+					),
+				],
+			),
+			section(
+				"outcome",
+				p(
+					"Operational impact and business results",
+					"Результаты и операционный эффект",
+				),
+				[
+					p(
+						"Reduced daily store replenishment ordering overhead from 25 minutes to under 2 minutes per point, eliminating incorrect SKU shipments.",
+						"Сократили время оформления ежедневного дозаказа с 25 до 2 минут на точку, полностью исключив ошибки в отгрузках артикулов.",
+					),
+					p(
+						"Automated review reward auditing, supporting continuous 5.0-star customer ratings across 2GIS and Yandex Maps across all branches with zero manual managerial effort.",
+						"Автоматизировали учет бонусов за отзывы покупателей, поддержав рейтинг 5.0 на 2ГИС и Яндекс Картах по всем филиалам сети.",
+					),
+					p(
+						"Accelerated floor clerk onboarding via interactive training modules and real-time regulatory compliance checks.",
+						"Ускорили стажировку новых продавцов через интерактивные тесты и мгновенный доступ к правилам обслуживания.",
+					),
+				],
+			),
+			section(
+				"tradeoffs",
+				p(
+					"Architecture decisions and constraints",
+					"Инженерные решения и компромиссы",
+				),
+				[
+					p(
+						"Selected Astro with partial hydration instead of a client-heavy SPA to ensure instant first contentful paint inside basement retail stores with weak 4G reception.",
+						"Выбрали Astro с точечной гидратацией вместо тяжелого SPA, обеспечив мгновенное открытие каталога и регламентов даже в цокольных помещениях с плохой связью.",
+					),
+					p(
+						"Opted for an embedded SQLite database for expiration tracking rather than an external managed SQL service, keeping operating infrastructure costs at zero while ensuring instant query response times.",
+						"Использовали SQLite для базы сроков годности вместо внешнего платного SQL-кластера, сохранив нулевую стоимость хостинга при субмиллисекундном отклике.",
+					),
+				],
+			),
+		],
+		faq: [
+			{
+				question: p(
+					"How does the cashier bot calculate review motivation?",
+					"Как бот кассира начисляет бонусы за отзывы?",
+				),
+				answer: p(
+					"Cashiers submit photos of customer reviews and selfies; the bot validates the entry, adds +100 ₽ to the shift report, and eliminates manual managerial auditing.",
+					"Кассир отправляет фото отзыва покупателя и селфи; бот валидирует заявку, начисляет +100 ₽ в смену и формирует прозрачную сводку без ручной проверки управляющим.",
+				),
+			},
+			{
+				question: p(
+					"Why deploy the portal on Cloudflare Pages with Astro?",
+					"Почему для портала были выбраны Astro и Cloudflare Pages?",
+				),
+				answer: p(
+					"Astro delivers zero-JS static HTML for content pages and hydrates only interactive order buttons, guaranteeing fast performance on retail floor smartphones.",
+					"Astro отдает чистый HTML для базы знаний и гидрирует только интерактивную корзину, обеспечивая максимальную скорость на смартфонах продавцов.",
+				),
+			},
+			{
+				question: p(
+					"How does voice-driven lost sales tracking work?",
+					"Как работает фиксация упущенных продаж голосом?",
+				),
+				answer: p(
+					"When an item is unavailable, the clerk dictates a 5-second voice note. The bot transcribes it via Whisper, extracts the SKU, and routes it to procurement analytics.",
+					"При отсутствии нужного товара продавец надиктовывает короткое голосовое сообщение. Бот транскрибирует аудио через Whisper, извлекает наименование и передает в отдел закупок.",
+				),
+			},
+		],
+		seo: {
+			title: p(
+				"Severu Retail Suite & Kukaracha Retail OS - Case Study",
+				"Severu Retail Suite: Операционная система ритейла «Кукарача» - Кейс",
+			),
+			description: p(
+				"Technical case study: Astro + React retail portal, SQLite expiration tracking, cashier Telegram assistant with Whisper STT, and invoice big data analytics.",
+				"Технический разбор: B2B-портал на Astro и React, учёт сроков годности на SQLite, кассовый Telegram-бот с Whisper STT и анализ накладных сети «Кукарача».",
+			),
+			keywords: {
+				en: [
+					"retail OS",
+					"Astro",
+					"React",
+					"Telegram Bot",
+					"Whisper STT",
+					"Cloudflare Pages",
+					"Kukaracha",
+					"Runduk",
+				],
+				ru: [
+					"ритейл",
+					"Astro",
+					"React",
+					"Telegram бот",
+					"Whisper STT",
+					"Cloudflare Pages",
+					"Кукарача",
+					"Рундук",
+				],
+			},
+			ogSubtitle: p(
+				"Retail operations portal, 1-click B2B restocking, and AI cashier Telegram assistant.",
+				"Операционный портал розничной сети, B2B-заказник в 1 клик и кассовый AI-ассистент.",
+			),
+		},
+	},
+	daariatrans: {
+		slug: "daariatrans",
+		projectId: "daariatrans",
+		visibility: PROJECT_BY_SLUG.daariatrans.visibility,
+		status: PROJECT_BY_SLUG.daariatrans.status,
+		hero: {
+			badge: p(
+				"Enterprise Logistics OS & Operational Analytics",
+				"Операционная система логистики и аналитика скрытой маржи",
+			),
+			summary: p(
+				"Mission-critical transport platform for an interregional freight carrier: reverse-engineered legacy Delphi SOAP TMS, 10,000+ flight audit uncovering systemic margin variance, sub-30ms DuckDB OLAP engine, combinatorial backhaul consolidation achieving a 4.9% freight procurement reduction, and resilient Proxmox VDI infrastructure.",
+				"Отказоустойчивая IT-экосистема крупного межрегионального грузоперевозчика: реверс-инжиниринг Delphi SOAP TMS, аудит 10 000+ рейсов с выявлением скрытой асимметрии маржи до ~40%, sub-30ms DuckDB OLAP-движок, комбинаторная склейка обратки со снижением затрат на закупку на 4.9% и VDI-инфраструктура на Proxmox.",
+			),
+		},
+		sections: [
+			section(
+				"context",
+				p(
+					"Legacy TMS constraints, harsh geography, and hidden margin erosion",
+					"Контекст логистики, невидимая утечка маржи и ограничения legacy TMS",
+				),
+				[
+					p(
+						"A major interregional freight and heavy transport carrier operating across Northwest and Arctic logistics corridors (handling consolidated LTL, oversized equipment, industrial machinery, and regulated contracts) relied on a legacy Delphi desktop TMS with hundreds of database tables and no open APIs.",
+						"Крупный межрегиональный грузоперевозчик на Северо-Западном и Арктическом направлениях (сборные грузы LTL, негабаритное промышленное оборудование, спецперевозки) работал на закрытом настольном Delphi-комплексе TMS с сотнями таблиц базы данных и полным отсутствием открытых API.",
+					),
+					p(
+						"While nominal management reports claimed a healthy gross margin of ~27%, actual bank cash flows lagged behind. Data fragmented across multiple corporate mailboxes, dozens of freight exchanges, and phone negotiations obscured heavy empty return mileage and unmonitored intermediary deductions.",
+						"В то время как управленческие отчёты рапортовали о номинальной марже около 27%, реальные остатки на счетах систематически отставали. Разрозненность данных между корпоративными ящиками, десятками бирж и телефонными переговорами скрывала высокий порожний пробег и неконтролируемые посреднические вычеты.",
+					),
+					p(
+						"Strict operational constraints ruled out conventional enterprise ERP replacements: active dispatchers could not tolerate system downtime during peak shipping cycles, drivers could not be burdened with intrusive tracking apps during an industry-wide driver shortage, and the project required maximizing capital efficiency on top of existing software assets.",
+						"Жёсткие производственные рамки исключали замену системы «в лоб»: диспетчеры не могли прерывать работу на время внедрения тяжёлых ERP, водителей нельзя было перегружать сложными мобильными трекерами под риском схода машин с линии, а решение должно было обеспечить максимальную отдачу без раздувания бюджета на софт.",
+					),
+				],
+			),
+			section(
+				"architecture",
+				p(
+					"SOAP DataSnap reverse-engineering and dual-core analytical engine",
+					"Реверс-инжиниринг SOAP DataSnap и двухконтурная аналитическая архитектура",
+				),
+				[
+					p(
+						"Rather than attempting a disruptive, multi-million enterprise ERP replacement, we non-invasively reverse-engineered the proprietary Delphi SOAP / DataSnap architecture of the TMS server. Extracted and mapped ~90 private RPC methods, enabling direct automated delta writes into the core database provider, route geocoding, exchange deal synchronization, and state electronic consignment note integration (ЭТрН / ГИС ЭПД under federal regulations).",
+						"Вместо рискованной и дорогостоящей замены ядра мы применили неинвазивный реверс-инжиниринг проприетарной архитектуры Delphi SOAP / DataSnap сервера TMS. Декомпилировали и задокументировали ~90 RPC-методов, открыв прямую запись дельт в ядро базы данных, геокодирование, синхронизацию биржевых торгов и титулов государственных электронных накладных (ЭТрН / ГИС ЭПД).",
+					),
+					p(
+						"Built a high-performance in-memory DuckDB OLAP engine running sub-30ms analytical aggregations over 10,000+ flights. An AST-validated Natural Language-to-SQL compiler enables non-technical leadership to ask arbitrary business questions, generating verifiable SQL and downloadable .xlsx workbooks with live Excel SUM formulas.",
+						"Развернули аналитический in-memory OLAP-движок DuckDB, выполняющий сложные многомерные агрегации по 10 000+ рейсам за 1–30 мс. Компилятор естественных запросов со строгой валидацией AST позволяет руководству формулировать вопросы на естественном языке, получая верифицируемый SQL и скачиваемый Excel с живыми формулами SUM.",
+					),
+					p(
+						"Zero-driver-friction telematics bridge: integrated cellular triangulation and courier tracking webhooks, automatically pinpointing cargo transit milestones and tracking physical waybill delivery between regional logistics hubs without installing mobile apps on driver phones.",
+						"Телематический мост без участия водителей: связали сотовую триангуляцию оператора и вебхуки курьерских служб, обеспечив сквозной трекинг движения автопоездов и контроль оригиналов документов между региональными терминалами без установки мобильных приложений водителям.",
+					),
+				],
+				[
+					p(
+						"Delphi SOAP / DataSnap reverse-engineering (~90 RPC methods mapped)",
+						"Реверс-инжиниринг Delphi SOAP / DataSnap (~90 методов API)",
+					),
+					p(
+						"In-memory DuckDB OLAP engine with sub-30ms execution and Excel formula exporter",
+						"In-memory OLAP-движок DuckDB с откликом 1–30 мс и генерацией формул Excel",
+					),
+					p(
+						"Zero-driver-friction telematics bridge and document lifecycle watchdog",
+						"Телематический мост без приложений водителям и автоматический контроль первички",
+					),
+				],
+			),
+			section(
+				"features",
+				p(
+					"Margin leakage forensics, backhaul consolidator, and order conveyor",
+					"Форензик утечки маржи, алгоритмическая склейка рейсов и конвейер заявок",
+				),
+				[
+					p(
+						"Margin Leakage Forensic Audit: Analyzed tens of thousands of underlying calculation events across 10,000+ historical dispatches. Identified that nominal ~27% gross margin was eroded down to ~17% net operating margin due to asymmetric VAT structures (charging OSNO corporate clients with 20% VAT while paying non-VAT subcontractor carriers) and unclassified intermediary commissions.",
+						"Форензик утечки маржинальности: исследовали десятки тысяч расчётных проводок по 10 000+ рейсам. Выявили, что номинальная маржа ~27% снижалась до ~17% чистой операционной маржи из-за асимметрии НДС (клиенты на ОСНО с 20% НДС против привлечённых перевозчиков без НДС) и скрытых посреднических комиссий.",
+					),
+					p(
+						"Combinatorial Backhaul Consolidator: Measured actual empty-haul patterns across thousands of paired vehicle runs, identifying a 74% empty mileage ratio on northern return legs. Built a combinatorial multi-drop engine that clusters compatible LTL shipments, respecting temperature regimes, driver rest limits, and route detour caps to deliver a 4.9% freight procurement reduction.",
+						"Алгоритмическая склейка рейсов: измерили реальный порожний пробег по тысячам спаренных рейсов, выявив коэффициент порожняка до 74% на обратном плече. Разработали алгоритм склейки, формирующий цепочки догрузов с учётом температурных режимов, правил режима труда и лимитов отклонения от трассы, обеспечив стабильное снижение затрат на закупку на 4.9%.",
+					),
+					p(
+						"Multi-Mailbox NLP Conveyor: Automated ingestion pipeline aggregating incoming requests across corporate inboxes. Parses unstructured emails, extracts cargo specifications, dimensions, and tender deadlines, and compiles them directly into structured transport orders.",
+						"Почтовый NLP-конвейер: единый шлюз сбора входящих запросов по корпоративным ящикам. Обрабатывает входящую почту, извлекает спецификации груза, плечи и дедлайны торгов, автоматически формируя структурированные карточки заявок для логистов.",
+					),
+				],
+			),
+			section(
+				"tooling",
+				p(
+					"Full-stack engineering, Proxmox VDI, and 4-tier disaster recovery",
+					"Инженерный стек, Proxmox VDI и четырёхуровневый контур резервирования",
+				),
+				[
+					p(
+						"Modern Web & Analytics: Next.js 15 App Router, React 19, TypeScript, DuckDB-Wasm, TailwindCSS, and TanStack Table delivering sub-second query performance across large freight portfolios.",
+						"Веб-ядро и аналитика: Next.js 15 App Router, React 19, TypeScript, DuckDB-Wasm, TailwindCSS и TanStack Table, обеспечивающие мгновенный отклик при фильтрации многотысячных реестров рейсов.",
+					),
+					p(
+						"Enterprise Virtualization: Proxmox VE hypervisor hosting a master Windows Server VM alongside isolated dispatcher VDI workstations cloned from a standardized Golden Image template, reducing dispatcher workstation provisioning from 4 hours to 15 minutes.",
+						"Виртуализация Proxmox VE: выделенная мастер-ВМ Windows Server и изолированные рабочие места VDI, клонируемые из эталонного Golden Image, что сократило развёртывание рабочего места диспетчера с 4 часов до 15 минут.",
+					),
+					p(
+						"Automated 4-Tier Disaster Recovery: 3-hour Volume Shadow Copy (VSS) filesystem snapshots, bi-daily automated database backups via PowerShell, nightly hypervisor-level vzdump images, and offsite secret vault synchronization.",
+						"Четырёхуровневое резервирование: 3-часовые теневые копии томов VSS, автоматический экспорт баз данных дважды в сутки через PowerShell, ночные vzdump-снимки на уровне гипервизора и защищённое хранилище секретов.",
+					),
+				],
+			),
+			section(
+				"outcome",
+				p(
+					"Audited business outcomes and operational velocity",
+					"Подтверждённый бизнес-эффект, защищённый капитал и скорость",
+				),
+				[
+					p(
+						"Eliminated systemic margin variance and equipped executive leadership with granular profitability matrices across commodity types (proving packaging and industrial cargo deliver 38% margin, while bulk furniture yields only ~11%).",
+						"Ликвидировали системную асимметрию маржинальности и вооружили руководство точной юнит-экономикой по типам грузов (показав, что тара и промышленное оборудование дают 38% маржи, а сборная мебель — лишь ~11%).",
+					),
+					p(
+						"Backhaul consolidation model unlocked a 4.9% reduction in freight procurement costs by systematically converting empty return trips into paid multi-drop corridors.",
+						"Модель склейки рейсов обеспечила снижение затрат на наёмный транспорт на 4.9% за счёт системной ликвидации холостых пробегов на ключевых магистралях.",
+					),
+					p(
+						"Accelerated order intake response latency by over 60%, standardized dispatcher workstation onboarding to 15 minutes, and ensured zero-downtime operational resilience across all freight operations.",
+						"Сократили время реакции на входящие заявки более чем на 60%, стандартизировали ввод диспетчеров до 15 минут и обеспечили 100% готовность к аварийному восстановлению данных без остановки перевозок.",
+					),
+				],
+			),
+			section(
+				"tradeoffs",
+				p(
+					"Engineering tradeoffs and pragmatic architecture",
+					"Инженерные компромиссы и прагматизм архитектуры",
+				),
+				[
+					p(
+						"Reverse-Engineering vs Monolithic Replacement: Commercial monolithic TMS or ERP licenses would require massive CapEx plus heavy recurring SaaS fees. Reverse-engineering Delphi SOAP delivered modern automation on top of an existing proven system with zero staff retraining downtime.",
+						"Реверс-инжиниринг против замены TMS: покупка тяжёлых ERP потребовала бы огромного бюджета и месяцев адаптации персонала. Реверс-инжиниринг Delphi SOAP дал современную автоматизацию поверх проверенной системы с нулевым простоем логистов.",
+					),
+					p(
+						"In-Memory DuckDB vs Cloud Data Warehouse: Rather than maintaining a costly managed cloud cluster, DuckDB operates in-memory directly alongside the application layer, executing analytical queries in single-digit milliseconds at zero cloud infrastructure cost.",
+						"In-memory DuckDB вместо облачного хранилища: вместо аренды дорогостоящих облачных кластеров DuckDB работает прямо в памяти процесса, выполняя аналитику за единицы миллисекунд с нулевыми расходами на внешнюю инфраструктуру.",
+					),
+					p(
+						"Cellular Triangulation vs Driver Mobile App: In a severe national driver shortage, demanding drivers install tracking apps leads to driver turnover. Tapping into cellular carrier telematics eliminated 80% of routine check-in calls with zero driver friction.",
+						"Сотовая триангуляция вместо приложений водителям: в условиях дефицита кадров водители саботируют установку стороннего софта. Интеграция с сотовой телематикой сняла 80% рутинных звонков диспетчера без единого требования к водителям.",
+					),
+				],
+			),
+		],
+		faq: [
+			{
+				question: p(
+					"How was legacy Delphi SOAP TMS reverse-engineered without documentation?",
+					"Как был выполнен реверс-инжиниринг Delphi SOAP TMS без документации?",
+				),
+				answer: p(
+					"We analyzed the TMS service binaries and DataSnap protocol structure, mapping ~90 RPC methods across server interfaces. Analyzing live SOAP envelopes allowed replicating automated delta updates directly into the core database provider, exchange deals, and state electronic freight notes (ЭТрН).",
+					"Мы исследовали бинарные файлы службы TMS и структуру протокола DataSnap, составив карту ~90 RPC-методов. Анализ SOAP-пакетов позволил воспроизвести запись дельт в провайдер базы данных, синхронизацию бирж и титулов электронных транспортных накладных (ЭТрН).",
+				),
+			},
+			{
+				question: p(
+					"How did margin leakage analytics reveal the gap between nominal and net margin?",
+					"Как аналитика маржинальности вскрыла разрыв между номинальной и чистой маржой?",
+				),
+				answer: p(
+					"Standard reports calculate gross margin as (Customer Price - Carrier Price). Our audit extracted tens of thousands of underlying ledger events, exposing unhedged VAT differentials (charging 20% VAT to clients while paying non-VAT subcontractors) and unclassified commissions that slashed effective operating margins from ~27% down to ~17%.",
+					"Стандартные отчёты считали маржу как «ставка заказчика минус ставка перевозчику». Анализ детальных проводок вскрыл скрытые перекосы НДС (клиенты с 20% НДС против перевозчиков без НДС) и неклассифицированные комиссии, снижавшие реальную маржу с ~27% до ~17%.",
+				),
+			},
+			{
+				question: p(
+					"How does the Backhaul Consolidator algorithm achieve a 4.9% procurement cost reduction?",
+					"За счёт чего алгоритм склейки рейсов снижает затраты на закупку транспорта на 4.9%?",
+				),
+				answer: p(
+					"The corridor historically suffered from high empty mileage on return runs. The engine clusters multi-drop backhaul routing matching cargo temperature requirements, driver rest constraints, and maximum detour limits, turning unprofitable empty runs into paid consolidated legs.",
+					"Магистраль исторически страдала от высокого порожнего пробега на обратном плече. Алгоритм склейки рассчитывает цепочки догрузов с соблюдением температурных режимов, правил отдыха водителей и лимитов отклонения от трассы, превращая пустые пробеги в оплачиваемые сборные рейсы.",
+				),
+			},
+			{
+				question: p(
+					"What comprises the 4-tier disaster recovery architecture?",
+					"Как устроена 4-уровневая архитектура резервирования?",
+				),
+				answer: p(
+					"Tier 1: 3-hour VSS filesystem shadow copies for instant rollback. Tier 2: Bi-daily automated PowerShell database backups. Tier 3: Nightly hypervisor vzdump full VM snapshots on Proxmox VE. Tier 4: Encrypted credential and secret synchronization.",
+					"Уровень 1: 3-часовые теневые копии томов VSS для мгновенного отката файлов. Уровень 2: выгрузка баз данных дважды в сутки через PowerShell. Уровень 3: ночные полные vzdump-образы виртуальных машин на Proxmox VE. Уровень 4: защищённая синхронизация учётных данных.",
+				),
+			},
+		],
+		seo: {
+			title: p(
+				"Daaria Logistics Platform: Enterprise TMS & Analytics Architecture - Case Study",
+				"Daaria Logistics Platform: Архитектура корпоративной TMS и аналитика маржи - Кейс",
+			),
+			description: p(
+				"Enterprise case study: reverse-engineering Delphi SOAP TMS, 10,000+ flight audit uncovering margin leakage, sub-30ms DuckDB OLAP engine, combinatorial backhaul consolidation, and Proxmox VDI infrastructure.",
+				"Корпоративный кейс: реверс-инжиниринг Delphi SOAP TMS, аудит 10 000+ рейсов с устранением утечки маржи, sub-30ms DuckDB OLAP-движок, склейка рейсов и VDI-инфраструктура на Proxmox.",
+			),
+			keywords: {
+				en: [
+					"enterprise logistics",
+					"TMS architecture",
+					"Delphi SOAP reverse engineering",
+					"DuckDB OLAP",
+					"margin leakage audit",
+					"Proxmox VDI",
+					"backhaul consolidation",
+					"freight operations",
+				],
+				ru: [
+					"корпоративная логистика",
+					"архитектура TMS",
+					"реверс-инжиниринг Delphi SOAP",
+					"DuckDB OLAP",
+					"аудит маржинальности",
+					"склейка рейсов",
+					"Proxmox VDI",
+					"грузоперевозки",
+				],
+			},
+			ogSubtitle: p(
+				"Enterprise logistics OS: Delphi SOAP TMS reverse-engineering, margin audit, DuckDB OLAP, and Proxmox VDI.",
+				"Платформа логистики: реверс-инжиниринг Delphi SOAP, аудит маржи, DuckDB OLAP и Proxmox VDI.",
+			),
+		},
+	},
 	"lunaria-search-ecosystem": {
 		slug: "lunaria-search-ecosystem",
 		projectId: "lunaria-search-ecosystem",

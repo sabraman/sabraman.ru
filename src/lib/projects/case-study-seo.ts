@@ -65,7 +65,7 @@ export function getCaseStudyDiscoverabilityRecord(
 ): CaseStudyDiscoverabilityRecord | null {
 	const record = getCaseStudySeoRecord(slug);
 
-	if (!record) {
+	if (!record || record.project.hidden) {
 		return null;
 	}
 

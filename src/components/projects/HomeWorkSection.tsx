@@ -21,6 +21,18 @@ const FEATURED_VISUALS: Partial<
 		}
 	>
 > = {
+	kukaracha: {
+		surfaceClassName:
+			"bg-[linear-gradient(145deg,rgba(26,16,10,0.98),rgba(38,22,14,0.97)_46%,rgba(18,11,8,0.99))]",
+		topGlowClassName: "bg-amber-500/12",
+		bottomGlowClassName: "bg-orange-500/6",
+	},
+	daariatrans: {
+		surfaceClassName:
+			"bg-[linear-gradient(145deg,rgba(10,18,32,0.98),rgba(15,26,46,0.97)_46%,rgba(8,14,26,0.99))]",
+		topGlowClassName: "bg-blue-500/12",
+		bottomGlowClassName: "bg-cyan-500/6",
+	},
 	vaparshop: {
 		surfaceClassName:
 			"bg-[linear-gradient(145deg,rgba(8,8,10,0.98),rgba(14,14,18,0.97)_46%,rgba(6,6,8,0.99))]",
@@ -176,8 +188,12 @@ export function HomeWorkSection({
 	locale: SupportedLocale;
 }) {
 	const workHref = getLocalizedPathname(locale, "/work");
-	const featuredProjects = PROJECTS.filter((project) => project.isFeaturedWork);
-	const archiveProjects = PROJECTS.filter((project) => !project.isFeaturedWork);
+	const featuredProjects = PROJECTS.filter(
+		(project) => project.isFeaturedWork && !project.hidden,
+	);
+	const archiveProjects = PROJECTS.filter(
+		(project) => !project.isFeaturedWork && !project.hidden,
+	);
 
 	return (
 		<section id="projects" className="relative pt-7 pb-12 md:pt-16">

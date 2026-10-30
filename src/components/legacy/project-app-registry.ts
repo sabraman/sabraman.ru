@@ -34,6 +34,22 @@ export type ProjectAppRegistryEntry = {
 };
 
 const PROJECT_ICON_META: Record<ProjectSlug, ProjectAppIconMeta> = {
+	daariatrans: {
+		accentFrom: "#4a7bb0",
+		accentTo: "#16325c",
+		glow: "#dbe8ff",
+		badge: "TMS",
+		symbol: "DT",
+		motif: "bars",
+	},
+	kukaracha: {
+		accentFrom: "#e69c3a",
+		accentTo: "#874512",
+		glow: "#fff0d4",
+		badge: "RETAIL",
+		symbol: "KUK",
+		motif: "grid",
+	},
 	"arch-taplink": {
 		accentFrom: "#c2a165",
 		accentTo: "#7e4e18",
@@ -145,10 +161,13 @@ export function toProjectAppId(slug: ProjectSlug): ProjectAppId {
 }
 
 const orderedProjects = [
-	...PROJECTS.filter((project) => project.isFeaturedWork),
+	...PROJECTS.filter((project) => project.isFeaturedWork && !project.hidden),
 	...PROJECT_CATEGORY_ORDER.flatMap((category) =>
 		PROJECTS.filter(
-			(project) => !project.isFeaturedWork && project.category === category,
+			(project) =>
+				!project.isFeaturedWork &&
+				project.category === category &&
+				!project.hidden,
 		),
 	),
 ];

@@ -41,7 +41,8 @@ const LABELS = {
 
 function getGroupProjects(group: ProjectCategoryId) {
 	return PROJECTS.filter(
-		(project) => project.category === group && !project.isFeaturedWork,
+		(project) =>
+			project.category === group && !project.isFeaturedWork && !project.hidden,
 	);
 }
 

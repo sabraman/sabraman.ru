@@ -1,13 +1,13 @@
 # Agent Discovery & Markdown-for-Agents — Design
 
 - **Date:** 2026-06-20
-- **Site:** sabraman.ru (Next.js 16 / React 19, `next-intl`, locales `en`/`ru`, no auth, static-exportable marketing/portfolio)
+- **Site:** sabraman.art (Next.js 16 / React 19, `next-intl`, locales `en`/`ru`, no auth, static-exportable marketing/portfolio)
 - **Status:** Approved design (pending implementation)
 - **Scope approved:** "Recommended set" — Group A (code) + Group B (DNS runbook). Group C documented as intentionally N/A. Group D (WebMCP) deferred.
 
 ## 1. Goal
 
-Make `sabraman.ru` discoverable and consumable by AI agents. Implement the checklist items that genuinely apply to a static portfolio, and honestly document the ones that presuppose infrastructure this site does not have (an auth server, an MCP server).
+Make `sabraman.art` discoverable and consumable by AI agents. Implement the checklist items that genuinely apply to a static portfolio, and honestly document the ones that presuppose infrastructure this site does not have (an auth server, an MCP server).
 
 Guiding principle: **every published artifact is honest.** No fabricated OAuth endpoints, no invented MCP server, no lossy HTML scraping. Markdown, skills, and the catalog all derive from data that already exists in the codebase.
 
@@ -42,7 +42,7 @@ No middleware exists today. No `.well-known/` routes exist. No authentication, O
 - MCP Server Card (`/.well-known/mcp/server-card.json`)
 - WebMCP (`navigator.modelContext.*`)
 
-Reason: these presuppose an auth server and/or a running MCP server. `sabraman.ru` has neither. Publishing them would mean fabricating `token_endpoint`, `jwks_uri`, `authorization_servers`, MCP `serverInfo`, etc. — a correctness and anti-phishing hazard. See §8 for the documented rationale and upgrade path.
+Reason: these presuppose an auth server and/or a running MCP server. `sabraman.art` has neither. Publishing them would mean fabricating `token_endpoint`, `jwks_uri`, `authorization_servers`, MCP `serverInfo`, etc. — a correctness and anti-phishing hazard. See §8 for the documented rationale and upgrade path.
 
 ## 4. Architecture
 
@@ -128,7 +128,7 @@ Locale resolved from the leading path segment (`/ru/...` → `ru`, unprefixed �
 			"name": "legacy-switch",
 			"type": "guide",
 			"description": "Install and use the legacy skeuomorphic switch component.",
-			"url": "https://sabraman.ru/components/legacy-switch.mdx",
+			"url": "https://sabraman.art/components/legacy-switch.mdx",
 			"sha256": "<sha256 hex of the rendered markdown body>"
 		}
 	]
@@ -145,14 +145,14 @@ Locale resolved from the leading path segment (`/ru/...` → `ru`, unprefixed �
 
 **Content:** `application/linkset+json` with a `linkset` array. Each entry has an `anchor` and link relations `service-desc`, `service-doc`, and `status` **where applicable**. Entries derive from existing endpoints:
 
-| anchor                                                    | service-desc                       | service-doc          | status  |
-| --------------------------------------------------------- | ---------------------------------- | -------------------- | ------- |
-| `https://sabraman.ru/llms.txt`                            | itself (`text/plain`)              | `/`                  | omitted |
-| `https://sabraman.ru/.well-known/agent-skills/index.json` | itself                             | —                    | omitted |
-| `https://sabraman.ru/.well-known/api-catalog`             | itself (self-referential, per RFC) | —                    | omitted |
-| `https://sabraman.ru/api/component-docs/{slug}`           | itself                             | `/components/{slug}` | omitted |
+| anchor                                                     | service-desc                       | service-doc          | status  |
+| ---------------------------------------------------------- | ---------------------------------- | -------------------- | ------- |
+| `https://sabraman.art/llms.txt`                            | itself (`text/plain`)              | `/`                  | omitted |
+| `https://sabraman.art/.well-known/agent-skills/index.json` | itself                             | —                    | omitted |
+| `https://sabraman.art/.well-known/api-catalog`             | itself (self-referential, per RFC) | —                    | omitted |
+| `https://sabraman.art/api/component-docs/{slug}`           | itself                             | `/components/{slug}` | omitted |
 
-**`status` relation:** RFC 9727 lists `status` as the health endpoint. `sabraman.ru` has none. Rather than fabricate one, the `status` relation is **omitted**. This is conformant (relations are optional) and honest; the omission is documented in `not-applicable.md`. If a health endpoint is added later, this is the single field to append.
+**`status` relation:** RFC 9727 lists `status` as the health endpoint. `sabraman.art` has none. Rather than fabricate one, the `status` relation is **omitted**. This is conformant (relations are optional) and honest; the omission is documented in `not-applicable.md`. If a health endpoint is added later, this is the single field to append.
 
 **Headers:** `Content-Type: application/linkset+json; charset=utf-8`, `Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400`.
 
@@ -161,11 +161,11 @@ Locale resolved from the leading path segment (`/ru/...` → `ru`, unprefixed �
 **`docs/agent-discovery/dns-aid-runbook.md`** — DNS records live outside the repo. A copy-pasteable runbook to apply at the DNS provider:
 
 1. **SVCB/HTTPS records** (RFC 9460), ServiceMode, with `alpn` and `endpoint` params:
-   - `_index._agents.sabraman.ru.  HTTPS 1 . alpn=h2 endpoint=https://sabraman.ru/.well-known/agent-skills/index.json`
-   - `_a2a._agents.sabraman.ru.  HTTPS 1 . alpn=h2 endpoint=https://sabraman.ru/`
+   - `_index._agents.sabraman.art.  HTTPS 1 . alpn=h2 endpoint=https://sabraman.art/.well-known/agent-skills/index.json`
+   - `_a2a._agents.sabraman.art.  HTTPS 1 . alpn=h2 endpoint=https://sabraman.art/`
    - Field explanations: priority `1`; target name; ServiceMode vs AliasMode; `alpn=h2`; `endpoint` param carrying the agent entrypoint URL.
 2. **DNSSEC** — enable at the registrar, publish the DS record, verify. Provider-specific notes for common registrars (Reg.ru, Beget, Cloudflare).
-3. **Verification commands:** `dig HTTPS _index._agents.sabraman.ru +short`, `dig +dnssec sabraman.ru DS`, `delv`.
+3. **Verification commands:** `dig HTTPS _index._agents.sabraman.art +short`, `dig +dnssec sabraman.art DS`, `delv`.
 4. Plain statement that these are DNS/infrastructure records the Next.js app cannot publish.
 
 **`docs/agent-discovery/not-applicable.md`** — for each out-of-scope item (OAuth/OIDC discovery, OAuth Protected Resource Metadata, `auth.md`, MCP Server Card, WebMCP): the checklist's own fix text presupposes an auth server or MCP server; the site has neither; fabricating discovery metadata is a hazard; upgrade path (the exact endpoints to create + RFC links: 8414, 9728, SEP-1649, WorkOS auth.md, WebMCP spec) when the prerequisite infrastructure is added.

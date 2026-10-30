@@ -1,4 +1,4 @@
-# sabraman.ru
+# sabraman.art
 
 Personal site and portfolio for Danya Yudin (Sabraman). The app combines localized case studies, a work hub, a blog, reusable legacy UI component docs, an interactive iOS showcase, and a homepage contact section across English and Russian routes.
 

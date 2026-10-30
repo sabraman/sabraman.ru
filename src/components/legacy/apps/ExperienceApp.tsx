@@ -54,6 +54,23 @@ const COPY = {
 const EXPERIENCES = {
 	en: [
 		{
+			company: "KUKARACHA & RUNDUK",
+			role: "Lead Developer & Automation Architect",
+			period: "Oct 2026 - Present",
+			location: "Murmansk (Remote)",
+			details:
+				"Severu CRM B2B portal, SQLite expiration tracker, staff training LMS, cashier motivation bot with Whisper STT.",
+			hidden: true,
+		},
+		{
+			company: "DAARIA TRANS",
+			role: "Lead Systems Architect & IT Consultant",
+			period: "Sep 2026 - Oct 2026",
+			location: "Murmansk / SPb (Remote)",
+			details:
+				"TMS Logister reverse-engineering, automated mail order conveyor, margin leakage analytics, Proxmox VDI infrastructure.",
+		},
+		{
 			company: "VAPARSHOP",
 			role: "Designer & Developer",
 			period: "Jun 2024 - Mar 2025",
@@ -87,6 +104,23 @@ const EXPERIENCES = {
 		},
 	],
 	ru: [
+		{
+			company: "КУКАРАЧА И РУНДУК",
+			role: "Ведущий разработчик и архитектор автоматизации",
+			period: "окт 2026 - настоящее время",
+			location: "Мурманск (удаленно)",
+			details:
+				"B2B-портал Severu CRM, база сроков годности на SQLite, LMS-регламенты и кассовый Telegram-бот с Whisper STT.",
+			hidden: true,
+		},
+		{
+			company: "ДААРИЯ-ТРАНС",
+			role: "Ведущий системный архитектор и IT-консультант",
+			period: "сен 2026 - окт 2026",
+			location: "Мурманск / СПб (удаленно)",
+			details:
+				"Реверс-инжиниринг TMS Logister, почтовый конвейер заявок, аналитика утечки маржи и VDI-инфраструктура на Proxmox.",
+		},
 		{
 			company: "VAPARSHOP",
 			role: "Дизайнер и разработчик",
@@ -125,7 +159,9 @@ const EXPERIENCES = {
 export default function ExperienceApp() {
 	const locale = useLegacyUiLocale();
 	const copy = COPY[locale];
-	const experiences = EXPERIENCES[locale];
+	const experiences = EXPERIENCES[locale].filter(
+		(item) => !("hidden" in item && item.hidden),
+	);
 
 	return (
 		<div className="h-full overflow-y-auto bg-[#ececf3] px-4 pt-5 pb-10 text-black">

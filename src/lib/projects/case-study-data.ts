@@ -72,14 +72,16 @@ export async function getRelatedProjectsForSlug(
 
 	const sameCategoryProjects = PROJECTS.filter(
 		(project) =>
-			project.slug !== slug && project.category === currentProject.category,
+			!project.hidden &&
+			project.slug !== slug &&
+			project.category === currentProject.category,
 	);
 
 	const seenSlugs = new Set(
 		sameCategoryProjects.map((project) => project.slug),
 	);
 	const featuredProjects = PROJECTS.filter((project) => {
-		if (project.slug === slug || !project.isFeaturedWork) {
+		if (project.hidden || project.slug === slug || !project.isFeaturedWork) {
 			return false;
 		}
 

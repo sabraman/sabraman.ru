@@ -196,6 +196,8 @@ const COPY = {
 		hornyPlace: "HORNY PLACE",
 		priceTagPrinter: "Price Tag Printer",
 		lunariaSearchEcosystem: "Lunaria Search Ecosystem",
+		daariatrans: "Daaria Trans TMS",
+		kukaracha: "Severu Retail Suite",
 		archTaplink: "ARCH Taplink",
 		flowerSuite: "Flower Suite",
 		address: "Address",
@@ -257,6 +259,8 @@ const COPY = {
 		hornyPlace: "HORNY PLACE",
 		priceTagPrinter: "Price Tag Printer",
 		lunariaSearchEcosystem: "Lunaria Search Ecosystem",
+		daariatrans: "Daaria Trans TMS",
+		kukaracha: "Severu Retail Suite",
 		archTaplink: "ARCH Taplink",
 		flowerSuite: "Flower Suite",
 		address: "Адрес",
@@ -667,6 +671,16 @@ function buildDestinations(locale: Locale, copy: (typeof COPY)[Locale]) {
 					? "Региональная поисковая экосистема и AI-SEO контент-движок."
 					: "Regional search ecosystem and AI-SEO content engine.",
 			keywords: ["lunaria", "seo", "search", "ai", "поиск", "экосистема"],
+		},
+		daariatrans: {
+			key: "daariatrans",
+			title: copy.daariatrans,
+			url: getCaseStudyPath(locale, "daariatrans"),
+			description:
+				locale === "ru"
+					? "Корпоративная TMS-платформа, почтовый конвейер и VDI."
+					: "Enterprise TMS platform, mail conveyor, and VDI.",
+			keywords: ["daariatrans", "логистика", "logistics", "tms", "vdi"],
 		},
 		archTaplink: {
 			key: "arch-taplink",

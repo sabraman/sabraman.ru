@@ -81,7 +81,10 @@ export default function MusicApp() {
 	const locale = useLegacyUiLocale();
 	const copy = COPY[locale];
 	const playlists = PLAYLISTS[locale];
-	const recentProjects = PROJECTS.slice(0, 4);
+	const recentProjects = PROJECTS.filter((project) => !project.hidden).slice(
+		0,
+		4,
+	);
 
 	return (
 		<div className="h-full overflow-y-auto bg-[#12151d] px-4 pt-5 pb-10 text-white">

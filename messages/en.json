@@ -60,6 +60,32 @@
 		"currentEmployer": "Current Employer",
 		"employmentType": "Employment Type",
 		"employmentPeriod": "Employment Period",
+		"kukaracha": {
+			"title": "Lead Developer & Automation Architect",
+			"period": "October 2026 – Present",
+			"location": "Murmansk (Remote)",
+			"achievements": {
+				"0": "Architected and shipped the Severu CRM B2B portal using Astro, React, and shadcn/ui for 1-click restocking across 13+ stores",
+				"1": "Built an embedded SQLite expiration tracker, dramatically reducing product waste with instant shop-floor visibility",
+				"2": "Created an interactive multi-brand LMS and regulatory compliance knowledge base with on-shift testing for Kukaracha and Runduk",
+				"3": "Engineered a Telegram cashier assistant automating review rewards and executing 2-second SBIS POS guide cashback verification",
+				"4": "Deployed voice-to-lead lost sales capture using faster-whisper and Deepgram STT directly on retail floors",
+				"5": "Conducted deep data analytics on 156+ supplier invoices (18,500+ SKUs), establishing markup multiples (2.74x) and demand seasonality"
+			}
+		},
+		"daariatrans": {
+			"title": "Lead Systems Architect & IT Consultant",
+			"period": "September 2026 – October 2026",
+			"location": "Murmansk / Saint Petersburg (Remote)",
+			"achievements": {
+				"0": "Reverse-engineered proprietary TMS Logister SOAP protocol and internal web APIs without disrupting live freight operations",
+				"1": "Built an automated email order ingestion conveyor, parsing transport requests and cutting processing latency by over 60%",
+				"2": "Engineered margin leakage analytics identifying empty deadhead runs and rate imbalances between Murmansk and national hubs",
+				"3": "Architected high-availability Proxmox VE 8.2 hypervisor hosting dispatcher VDI workstations provisioned via Golden Image templates",
+				"4": "Implemented 4-tier 'Self-Preservation' disaster recovery: 3-hour VSS snapshots, PowerShell DB exports, and nightly vzdump images",
+				"5": "Deployed private Vaultwarden password management and secured RDP access across remote and branch terminals"
+			}
+		},
 		"vaparshop": {
 			"title": "Designer & Developer",
 			"period": "June 2024 – March 2025",

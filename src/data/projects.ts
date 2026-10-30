@@ -4,6 +4,8 @@ export type LocaleText = {
 };
 
 export type ProjectSlug =
+	| "daariatrans"
+	| "kukaracha"
 	| "vaparshop"
 	| "horny-place"
 	| "smoky-market-loyalty-miniapp"
@@ -51,6 +53,7 @@ export type ProjectItem = {
 	tags: string[];
 	status: "live" | "in_development";
 	links: ProjectLink[];
+	hidden?: boolean;
 };
 
 export const PROJECT_CATEGORY_ORDER: ProjectCategoryId[] = [
@@ -100,6 +103,76 @@ const LIVE_SECONDARY_LINK: LocaleText = { en: "POS", ru: "POS" };
 const GITHUB_LINK: LocaleText = { en: "GitHub", ru: "GitHub" };
 
 export const PROJECTS: ProjectItem[] = [
+	{
+		id: "kukaracha",
+		slug: "kukaracha",
+		repo: "kukaracha",
+		visibility: "public",
+		category: "web_platforms",
+		isFeaturedWork: true,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
+		title: "Severu Retail Suite",
+		short: {
+			en: "A multi-brand retail operations portal, 1-click B2B restocking catalog, and AI cashier Telegram bot.",
+			ru: "Операционный портал розничной сети, B2B-заказник в 1 клик и кассовый AI Telegram-бот.",
+		},
+		details: {
+			en: "Unified retail automation platform for Kukaracha and Runduk: Astro + React B2B portal, SQLite expiration tracker, interactive staff LMS, and Whisper-powered cashier bot.",
+			ru: "Комплексная автоматизация торговой сети «Кукарача» и «Рундук»: B2B-портал на Astro и React, трекер сроков годности, LMS-регламенты и кассовый бот с распознаванием голоса.",
+		},
+		tags: [
+			"Astro",
+			"React",
+			"TypeScript",
+			"Telegram Bot",
+			"Whisper STT",
+			"Cloudflare Pages",
+		],
+		status: "live",
+		hidden: true,
+		links: [
+			{
+				kind: "live",
+				url: "https://severu-crm.pages.dev",
+				label: { en: "Portal", ru: "Портал" },
+			},
+			{
+				kind: "live_secondary",
+				url: "https://t.me/kuk_storozh_demo_bot",
+				label: { en: "Telegram Bot", ru: "Telegram-бот" },
+			},
+		],
+	},
+	{
+		id: "daariatrans",
+		slug: "daariatrans",
+		repo: "daariatrans",
+		visibility: "private",
+		category: "web_platforms",
+		isFeaturedWork: true,
+		caseStudyRoute: "generic",
+		schemaEntityType: "SoftwareApplication",
+		title: "Daaria Trans Logistics OS",
+		short: {
+			en: "Enterprise freight logistics platform: reverse-engineered Delphi SOAP TMS, systemic margin leakage audit, and DuckDB OLAP engine.",
+			ru: "Корпоративная платформа логистики: реверс-инжиниринг Delphi SOAP TMS, аудит системных утечек маржинальности и DuckDB OLAP-движок.",
+		},
+		details: {
+			en: "Deep engineering overhaul for an Arctic freight carrier: reverse-engineered Logister TMS (~90 SOAP endpoints), 10,000+ flight audit uncovering hidden deductions & VAT asymmetry, in-memory DuckDB natural language query engine, combinatorial backhaul consolidation, and Proxmox VDI infrastructure.",
+			ru: "Комплексная модернизация IT-контура арктического грузоперевозчика: реверс-инжиниринг TMS Logister (~90 SOAP-методов), аудит 10 000+ рейсов с вскрытием скрытых вычетов и перекосов НДС, in-memory DuckDB OLAP-движок естественных запросов, комбинаторная склейка рейсов и VDI-инфраструктура на Proxmox.",
+		},
+		tags: [
+			"Next.js",
+			"DuckDB OLAP",
+			"Delphi SOAP / TMS",
+			"MS SQL (183 tables)",
+			"Proxmox VDI",
+			"Python / Analytics",
+		],
+		status: "live",
+		links: [],
+	},
 	{
 		id: "lunaria-search-ecosystem",
 		slug: "lunaria-search-ecosystem",

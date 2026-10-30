@@ -1,8 +1,10 @@
 import type { ProjectSlug } from "~/data/projects";
 import { ArchTaplinkPage } from "./ArchTaplinkPage";
 import type { ProjectPageProps } from "./CaseStudyPrimitives";
+import { DaariatransPage } from "./DaariatransPage";
 import { FlowerMiniAppPage } from "./FlowerMiniAppPage";
 import { HornyPlacePage } from "./HornyPlacePage";
+import { KukarachaPage } from "./KukarachaPage";
 import { LunariaSearchEcosystemPage } from "./LunariaSearchEcosystemPage";
 import { PlonqAiSearchPage } from "./PlonqAiSearchPage";
 import { PriceTagPrinterPage } from "./PriceTagPrinterPage";
@@ -20,6 +22,8 @@ export const PROJECT_PAGE_COMPONENTS: Record<
 	ProjectSlug,
 	ProjectPageComponent
 > = {
+	daariatrans: DaariatransPage,
+	kukaracha: KukarachaPage,
 	"arch-taplink": ArchTaplinkPage,
 	"flower-mini-app": FlowerMiniAppPage,
 	"horny-place": HornyPlacePage,

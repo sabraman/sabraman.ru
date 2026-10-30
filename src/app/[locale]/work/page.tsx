@@ -9,6 +9,13 @@ import {
 import { JsonLd } from "~/lib/seo/json-ld";
 import { buildIndexableMetadata } from "~/lib/seo/metadata";
 import { createCollectionPageJsonLd } from "~/lib/seo/structured-data";
+import { routing } from "~/i18n/routing";
+
+export const instant = false;
+
+export function generateStaticParams() {
+	return routing.locales.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({
 	params,

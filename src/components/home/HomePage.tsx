@@ -137,6 +137,21 @@ export default async function HomePage({ locale }: HomePageProps) {
 					employmentPeriodLabel: experience.employmentPeriod,
 					items: [
 						{
+							company: "KUKARACHA",
+							title: experience.kukaracha.title,
+							period: experience.kukaracha.period,
+							location: experience.kukaracha.location,
+							achievements: Object.values(experience.kukaracha.achievements),
+							hidden: true,
+						},
+						{
+							company: "DAARIA TRANS",
+							title: experience.daariatrans.title,
+							period: experience.daariatrans.period,
+							location: experience.daariatrans.location,
+							achievements: Object.values(experience.daariatrans.achievements),
+						},
+						{
 							company: "VAPARSHOP",
 							title: experience.vaparshop.title,
 							period: experience.vaparshop.period,

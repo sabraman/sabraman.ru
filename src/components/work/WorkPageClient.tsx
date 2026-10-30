@@ -22,11 +22,14 @@ export type WorkPageLabels = {
 
 function getGroupProjects(group: ProjectCatalogGroupId) {
 	if (group === "featured") {
-		return PROJECTS.filter((project) => project.isFeaturedWork);
+		return PROJECTS.filter(
+			(project) => project.isFeaturedWork && !project.hidden,
+		);
 	}
 
 	return PROJECTS.filter(
-		(project) => project.category === group && !project.isFeaturedWork,
+		(project) =>
+			project.category === group && !project.isFeaturedWork && !project.hidden,
 	);
 }
 

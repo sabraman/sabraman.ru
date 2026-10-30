@@ -71,13 +71,13 @@ const config = {
 
 			{
 				source:
-					"/work/:slug(vaparshop|horny-place|smoky-market-loyalty-miniapp|plonq-ai-search|flower-mini-app|smbro|arch-taplink|price-tag-printer|psp-book-reader|schrute-farm|sleepoff|spritefusion-pixel-snapper)",
+					"/work/:slug(daariatrans|kukaracha|vaparshop|horny-place|smoky-market-loyalty-miniapp|plonq-ai-search|flower-mini-app|smbro|arch-taplink|price-tag-printer|psp-book-reader|schrute-farm|sleepoff|spritefusion-pixel-snapper)",
 				destination: "/:slug",
 				permanent: true,
 			},
 			{
 				source:
-					"/ru/work/:slug(vaparshop|horny-place|smoky-market-loyalty-miniapp|plonq-ai-search|flower-mini-app|smbro|arch-taplink|price-tag-printer|psp-book-reader|schrute-farm|sleepoff|spritefusion-pixel-snapper)",
+					"/ru/work/:slug(daariatrans|kukaracha|vaparshop|horny-place|smoky-market-loyalty-miniapp|plonq-ai-search|flower-mini-app|smbro|arch-taplink|price-tag-printer|psp-book-reader|schrute-farm|sleepoff|spritefusion-pixel-snapper)",
 				destination: "/ru/:slug",
 				permanent: true,
 			},

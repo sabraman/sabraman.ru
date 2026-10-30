@@ -38,6 +38,7 @@ export type HomeExperienceEntry = {
 	period: string;
 	location: string;
 	achievements: string[];
+	hidden?: boolean;
 };
 
 export type HomeExperienceCopy = {

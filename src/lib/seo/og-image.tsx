@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { getHeadingNowFont, HEADING_NOW_FONT_NAME } from "./og-fonts";
+import { HEADING_NOW_FONT_NAME } from "./og-fonts";
 
 export type OgImageVariant = "site" | "page" | "project";
 
@@ -81,7 +81,6 @@ export async function createPortfolioOgImageResponse({
 	variant,
 }: PortfolioOgImageOptions) {
 	const accentColor = getAccentColor(variant);
-	const fontData = await getHeadingNowFont();
 
 	if (variant === "site") {
 		return new ImageResponse(
@@ -149,9 +148,6 @@ export async function createPortfolioOgImageResponse({
 			</div>,
 			{
 				...PORTFOLIO_SOCIAL_IMAGE_SIZE,
-				fonts: [
-					{ name: HEADING_NOW_FONT_NAME, data: fontData, style: "normal" },
-				],
 			},
 		);
 	}
@@ -292,7 +288,6 @@ export async function createPortfolioOgImageResponse({
 		</div>,
 		{
 			...PORTFOLIO_SOCIAL_IMAGE_SIZE,
-			fonts: [{ name: HEADING_NOW_FONT_NAME, data: fontData, style: "normal" }],
 		},
 	);
 }

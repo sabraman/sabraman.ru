@@ -11,10 +11,12 @@ type HomeExperienceSectionProps = {
 	copy: HomeExperienceCopy;
 };
 
-const COMPANY_LOGOS = {
+const COMPANY_LOGOS: Record<string, string> = {
+	KUKARACHA: "/Kukaracha-logo.svg",
+	"DAARIA TRANS": "/Daariatrans-logo.svg",
 	"HORNY PLACE": "/Hornyplace-logo.png",
 	VAPARSHOP: "/Vaparshop-logo.png",
-} as const;
+};
 
 function slugifyCompany(company: string) {
 	return company.toLowerCase().replace(/\s+/g, "-");
@@ -25,25 +27,23 @@ function toMarkdownBulletList(items: string[]) {
 }
 
 export function HomeExperienceSection({ copy }: HomeExperienceSectionProps) {
-	const experiences: ExperienceItemType[] = copy.items
-		.filter(
-			(item) => item.company === "VAPARSHOP" || item.company === "HORNY PLACE",
-		)
-		.map((item, index) => ({
-			id: slugifyCompany(item.company),
-			companyName: item.company,
-			companyLogo: COMPANY_LOGOS[item.company as keyof typeof COMPANY_LOGOS],
-			positions: [
-				{
-					id: `${slugifyCompany(item.company)}-role`,
-					title: item.title,
-					employmentPeriod: `${item.period} · ${item.location}`,
-					description: toMarkdownBulletList(item.achievements),
-					icon: index === 0 ? CodeXmlIcon : PaletteIcon,
-					isExpanded: true,
-				},
-			],
-		}));
+	const visibleItems = copy.items.filter((item) => !item.hidden);
+	const experiences: ExperienceItemType[] = visibleItems.map((item, index) => ({
+		id: slugifyCompany(item.company),
+		companyName: item.company,
+		companyLogo: COMPANY_LOGOS[item.company],
+		isCurrentEmployer: index === 0,
+		positions: [
+			{
+				id: `${slugifyCompany(item.company)}-role`,
+				title: item.title,
+				employmentPeriod: `${item.period} · ${item.location}`,
+				description: toMarkdownBulletList(item.achievements),
+				icon: item.company === "HORNY PLACE" ? PaletteIcon : CodeXmlIcon,
+				isExpanded: index < 2,
+			},
+		],
+	}));
 
 	return (
 		<section className="relative pt-24 pb-8" id="experience">

@@ -45,8 +45,9 @@ function projectGradient(index: number) {
 export default function ProjectsApp() {
 	const locale = useLegacyUiLocale();
 	const copy = COPY[locale];
-	const featured = PROJECTS.filter((project) => project.isFeaturedWork);
-	const library = PROJECTS.slice(0, 8);
+	const visibleProjects = PROJECTS.filter((project) => !project.hidden);
+	const featured = visibleProjects.filter((project) => project.isFeaturedWork);
+	const library = visibleProjects.slice(0, 8);
 
 	return (
 		<div className="h-full overflow-y-auto bg-[#f6f7fb] text-black">
