@@ -1,6 +1,6 @@
 #set page(
   paper: "a4",
-  margin: (x: 16mm, top: 12mm, bottom: 12mm),
+  margin: (x: 15mm, top: 11mm, bottom: 11mm),
 )
 
 #set text(
@@ -12,52 +12,52 @@
 )
 
 #set par(
-  leading: 0.52em,
+  leading: 0.51em,
   justify: false,
 )
 
 // Brand colors
 #let primary = rgb("#0f172a")
-#let secondary = rgb("#475569")
+#let secondary = rgb("#334155")
 #let muted = rgb("#64748b")
-#let border = rgb("#e2e8f0")
+#let border = rgb("#cbd5e1")
 #let accent = rgb("#0369a1")
 
 #show link: it => text(fill: accent)[#it.body]
 
 // Section header component
 #let section(title) = {
-  v(7pt)
-  text(size: 9pt, weight: "bold", fill: primary, tracking: 1.2pt)[#upper(title)]
-  v(-2pt)
-  line(length: 100%, stroke: 0.5pt + border)
-  v(3pt)
+  v(8pt)
+  text(size: 8.8pt, weight: "bold", fill: primary, tracking: 1.2pt)[#upper(title)]
+  v(2.5pt)
+  line(length: 100%, stroke: 0.5pt + rgb("#e2e8f0"))
+  v(4.5pt)
 }
 
-// Entry header (Company / Project)
-#let entry(title, subtitle, location_or_stack, period) = {
-  block(width: 100%, spacing: 4pt)[
-    #grid(
-      columns: (1fr, auto),
-      gutter: 8pt,
-      [
-        #text(weight: "bold", fill: primary)[#title]
-        #if subtitle != "" [ #text(fill: muted)[--] #text(weight: "medium", fill: secondary)[#subtitle] ]
-        #if location_or_stack != "" [ #text(fill: border)[|] #text(size: 8.5pt, fill: muted)[#location_or_stack] ]
-      ],
-      [
-        #text(size: 8.5pt, fill: muted)[#period]
-      ]
-    )
-  ]
+// Entry header (Company / Role / Location / Date)
+#let entry(title, subtitle, location, period) = {
+  grid(
+    columns: (1fr, auto),
+    gutter: 10pt,
+    [
+      #text(weight: "bold", size: 9.2pt, fill: primary)[#title]
+      #text(fill: border)[ — ]
+      #text(weight: "medium", size: 8.8pt, fill: secondary)[#subtitle]
+      #if location != "" [ #text(fill: border)[ | ] #text(size: 8.3pt, fill: muted)[#location] ]
+    ],
+    [
+      #text(size: 8.4pt, fill: muted)[#period]
+    ]
+  )
+  v(3pt)
 }
 
 // Custom bullet list
 #set list(
-  marker: text(fill: rgb("#94a3b8"), size: 7pt)[#circle(radius: 1.8pt, fill: rgb("#94a3b8"))],
-  spacing: 3.2pt,
-  indent: 4pt,
-  body-indent: 6pt,
+  marker: text(fill: rgb("#94a3b8"), size: 6.5pt)[•],
+  spacing: 3.1pt,
+  indent: 1pt,
+  body-indent: 5pt,
 )
 
 // Header
@@ -68,21 +68,21 @@
   #text(size: 10pt, weight: "medium", fill: secondary)[Full-Stack & Systems Engineer]
   #text(size: 9pt, fill: muted)[ (TypeScript · Rust · Next.js · C/C++)]
   
-  #v(4pt)
+  #v(3.5pt)
   #text(size: 8.5pt, fill: muted)[
     Saint Petersburg, Russia
-    #text(fill: rgb("#cbd5e1"))[ #h(4pt) • #h(4pt) ]
+    #text(fill: border)[ #h(4pt) • #h(4pt) ]
     #link("mailto:sabraman@ya.ru")[sabraman\@ya.ru]
-    #text(fill: rgb("#cbd5e1"))[ #h(4pt) • #h(4pt) ]
+    #text(fill: border)[ #h(4pt) • #h(4pt) ]
     #link("https://t.me/sabraman")[Telegram \@sabraman]
-    #text(fill: rgb("#cbd5e1"))[ #h(4pt) • #h(4pt) ]
+    #text(fill: border)[ #h(4pt) • #h(4pt) ]
     #link("https://github.com/sabraman")[github.com/sabraman]
-    #text(fill: rgb("#cbd5e1"))[ #h(4pt) • #h(4pt) ]
+    #text(fill: border)[ #h(4pt) • #h(4pt) ]
     #link("https://sabraman.art/work")[sabraman.art/work]
   ]
 ]
 
-#v(2pt)
+#v(1pt)
 
 // Profile
 #section("Profile")
@@ -91,34 +91,35 @@ Full-stack and systems engineer building high-craft user interfaces, developer t
 // Technical Skills
 #section("Technical Skills")
 #grid(
-  columns: (110pt, 1fr),
-  row-gutter: 4pt,
+  columns: (auto, 1fr),
+  column-gutter: 14pt,
+  row-gutter: 4.5pt,
   text(weight: "bold", fill: secondary)[Languages], [TypeScript, JavaScript, Rust, C++, C, Swift, Python, SQL],
-  text(weight: "bold", fill: secondary)[Web & Interfaces], [Next.js, React, Tailwind CSS, custom Tailwind plugins, Motion, Radix UI, Canvas, Vite],
+  text(weight: "bold", fill: secondary)[Web & Interfaces], [Next.js, React, Tailwind CSS, custom plugins, Motion, Radix UI, Canvas, Vite],
   text(weight: "bold", fill: secondary)[Systems & Hardware], [Rust (Frankenstein, Ureq, Rusqlite), C++ (SDL2, MIPS), C (E-paper / Embedded), Swift (macOS)],
   text(weight: "bold", fill: secondary)[Data & Backends], [Node.js, Bun, DuckDB (OLAP), PostgreSQL, SQLite, MS SQL, Redis, REST & SOAP APIs],
-  text(weight: "bold", fill: secondary)[Tooling & Protocols], [WebCodecs, WebAssembly (Wasm), BLE Reverse Engineering, Telegram Mini Apps, Docker, Proxmox VE],
+  text(weight: "bold", fill: secondary)[Tooling & Dev], [WebCodecs, WebAssembly (Wasm), BLE Reverse Engineering, Telegram Mini Apps, Docker, Proxmox VE],
 )
 
 // Work Experience
 #section("Work Experience")
 
-#entry("DAARIA TRANS", "Lead Systems Architect & IT Consultant", "Murmansk / Saint Petersburg (Remote)", "09/2026 -- 10/2026")
-- Reverse-engineered proprietary #strong[TMS Logister] SOAP protocol (~90 RPC endpoints) without disrupting live freight dispatches.
+#entry("DAARIA TRANS", "Lead Systems Architect & IT Consultant", "Remote", "09/2026 – 10/2026")
+- Reverse-engineered proprietary #strong[TMS Logister] SOAP protocol (\~90 RPC endpoints) without disrupting live freight dispatches.
 - Built automated email order ingestion pipeline, extracting transport parameters and cutting booking latency by 60%.
 - Modeled combinatorial backhaul consolidation, achieving 4.9% freight procurement cost reduction on northern return legs.
 - Architected high-availability #strong[Proxmox VE] cluster hosting dispatcher VDI workstations provisioned via Golden Image in 15 minutes.
 - Implemented 4-tier disaster recovery: 3-hour VSS snapshots, automated DB dumps, nightly vzdump images, and Vaultwarden.
 
-#v(2pt)
-#entry("VAPARSHOP", "Full-Stack Developer & Product Designer", "Saint Petersburg", "06/2024 -- 03/2025")
+#v(5pt)
+#entry("VAPARSHOP", "Full-Stack Developer & Product Designer", "Saint Petersburg", "06/2024 – 03/2025")
 - Shipped #strong[Telegram Mini App] on Next.js integrating GetMeBack loyalty API, QR verification, shift logging, and gamified staff onboarding.
 - Built #strong[Price Tag Printer] web tool with Excel/Google Sheets parsing, bulk editing, and instant print/PDF export for 1,000+ SKUs.
 - Automated cash drawer reconciliation and shift handoffs via Telegram bots, eliminating manual managerial audits and safe variances.
 - Developed an in-house Taplink CMS alternative in #strong[Next.js] with dynamic blogs, interactive retail map widgets, and SEO optimization.
 
-#v(2pt)
-#entry("HORNY PLACE", "Visual Designer & Frontend Developer", "Saint Petersburg", "10/2022 -- 05/2024")
+#v(5pt)
+#entry("HORNY PLACE", "Visual Designer & Frontend Developer", "Saint Petersburg", "10/2022 – 05/2024")
 - Engineered high-conversion event landing page on #strong[Next.js] with seamless #strong[Ticketscloud] ticketing widget integration.
 - Designed comprehensive retail brand system and guidelines covering digital UI, offline touchpoints, and print collateral.
 - Built reusable modular component library in Figma translated directly into clean CSS/Tailwind frontend primitives.
