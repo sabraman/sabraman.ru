@@ -150,6 +150,7 @@ export default async function HomePage({ locale }: HomePageProps) {
 							period: experience.daariatrans.period,
 							location: experience.daariatrans.location,
 							achievements: Object.values(experience.daariatrans.achievements),
+							hidden: true,
 						},
 						{
 							company: "VAPARSHOP",

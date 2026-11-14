@@ -171,6 +171,7 @@ export const PROJECTS: ProjectItem[] = [
 			"Python / Analytics",
 		],
 		status: "live",
+		hidden: true,
 		links: [],
 	},
 	{

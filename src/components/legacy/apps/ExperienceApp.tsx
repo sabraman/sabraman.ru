@@ -69,6 +69,7 @@ const EXPERIENCES = {
 			location: "Murmansk / SPb (Remote)",
 			details:
 				"TMS Logister reverse-engineering, automated mail order conveyor, margin leakage analytics, Proxmox VDI infrastructure.",
+			hidden: true,
 		},
 		{
 			company: "VAPARSHOP",
@@ -120,6 +121,7 @@ const EXPERIENCES = {
 			location: "Мурманск / СПб (удаленно)",
 			details:
 				"Реверс-инжиниринг TMS Logister, почтовый конвейер заявок, аналитика утечки маржи и VDI-инфраструктура на Proxmox.",
+			hidden: true,
 		},
 		{
 			company: "VAPARSHOP",
