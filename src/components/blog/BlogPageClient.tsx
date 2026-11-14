@@ -92,6 +92,8 @@ export default function BlogPageClient({
 							return (
 								<button
 									key={cat}
+									type="button"
+									aria-pressed={isActive}
 									onClick={() => setSelectedCategory(cat)}
 									className={`rounded-full px-4 py-2 text-xs uppercase tracking-wider transition-all duration-200 ${
 										isActive

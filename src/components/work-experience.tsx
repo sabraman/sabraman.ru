@@ -83,12 +83,12 @@ function ExperienceItem({
 					{experience.companyLogo ? (
 						<Image
 							src={experience.companyLogo}
-							alt={experience.companyName}
+							alt=""
 							width={24}
 							height={24}
 							quality={100}
 							className="rounded-full"
-							aria-hidden
+							aria-hidden="true"
 							unoptimized
 						/>
 					) : (

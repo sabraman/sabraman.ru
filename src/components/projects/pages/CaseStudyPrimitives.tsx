@@ -318,6 +318,8 @@ export function AuthorCard({ locale }: { locale: SupportedLocale }) {
 						src="/logo.svg"
 						className="h-10 w-10 object-contain brightness-0 invert"
 						alt="Sabraman Logo"
+						width={40}
+						height={40}
 					/>
 				</div>
 				<div>

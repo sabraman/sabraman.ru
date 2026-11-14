@@ -69,7 +69,7 @@ export function ClientRoot({ children }: { children: React.ReactNode }) {
 		setShowIntro(false);
 	}
 
-	// Максимальное время для отображения интро - 5 секунд
+	// Cap intro at 5s
 	useEffect(() => {
 		if (isOgPreviewRoute || !showIntro) {
 			return;
